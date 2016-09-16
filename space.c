@@ -17,7 +17,7 @@ struct _Space {
 Space* space_create(Id id) {
 
     Space *newSpace = NULL;
-
+    /*¿No tendríamos que mirar que el id no sea repetido?*/
     if (id == NO_ID)
         return NULL;
 
