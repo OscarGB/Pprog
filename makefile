@@ -21,4 +21,4 @@ clean:
 	rm -f  *.exe oca *.o
 
 dist:
-	tar –cvzf s1-cod_OcaBasicaIni-v1.0.tgz codigo/
+	tar cvzf s1-cod_OcaBasicaIni-v1.0.tgz codigo/
