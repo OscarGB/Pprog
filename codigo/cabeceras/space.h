@@ -1,12 +1,18 @@
-/** 
- * @brief It defines a space
- * 
- * @file space.h
- * @author Profesores PPROG
- * @version 1.0 
- * @date 13-01-2015
- * @copyright GNU Public License
- */
+/* ===================================================================
+File: command.h
+
+Version: 1.0
+
+Date: 23/09/2016
+
+Author: Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It defines the game interface for each command 
+
+Revision history: none
+
+=================================================================== */
+
 
 #ifndef SPACE_H
 #define SPACE_H

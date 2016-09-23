@@ -1,12 +1,17 @@
-/** 
- * @brief It defines the game interface for each command
- * 
- * @file game.h
- * @author Óscar Gómez, Jose Ignacio Gómez
- * @version 1.0 
- * @date 13-01-2015 
- * @copyright GNU Public License
- */
+/* ===================================================================
+File: command.c
+
+Version: 1.0
+
+Date: 23/09/2016
+
+Author: Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It defines the game interface for each command 
+
+Revision history: none
+
+=================================================================== */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -50,6 +55,20 @@ Space* space_create(Id id) {
     return newSpace;
 }
 
+/* --------------------------------------------------------------------
+Function: space_destroy();
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: destroys a non-empty space
+
+Input: space* space (the space that is gonna be destroyed)
+
+Output: a STATUS return: OK if the space was destroyed, ERROR if it wasn't
+
+------------------------------------------------------------------- */
 STATUS space_destroy(Space* space) {
     if (!space) {
         return ERROR;
@@ -105,6 +124,21 @@ STATUS space_set_west(Space* space, Id id) {
     return OK;
 }
 
+/* --------------------------------------------------------------------
+Function: space_set_object()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: it defines if a given space has an object inside
+
+Input:  Space* space (the space we want to know about)
+        BOOL value (TRUE if there's an object inside, FALSE if not)
+
+Output: a STATUS return: OK if everything went well, ERROR if it wasn't
+
+------------------------------------------------------------------- */
 STATUS space_set_object(Space* space, BOOL value) {
     if (!space) {
         return ERROR;
@@ -113,6 +147,20 @@ STATUS space_set_object(Space* space, BOOL value) {
     return OK;
 }
 
+/* --------------------------------------------------------------------
+Function: space_get_name()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: it returns the name of a given space
+
+Input: Space* space (the space we want to know about)
+
+Output: char* (the name of the space)
+
+------------------------------------------------------------------- */
 const char * space_get_name(Space* space) {
     if (!space) {
         return NULL;
@@ -120,6 +168,20 @@ const char * space_get_name(Space* space) {
     return space->name;
 }
 
+/* --------------------------------------------------------------------
+Function: space_get_id()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: it returns the Id of a given space
+
+Input: Space* space (the space we want to know about)
+
+Output: Id (the Id of the space)
+
+------------------------------------------------------------------- */
 Id space_get_id(Space* space) {
     if (!space) {
         return NO_ID;
@@ -155,6 +217,20 @@ Id space_get_west(Space* space) {
     return space->west;
 }
 
+/* --------------------------------------------------------------------
+Function: space_get_object()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: it returns TRUE if there's an object in the space
+
+Input: Space* space (the space we want to know about)
+
+Output: BOOL (TRUE if there's an object, FALSE it there isn't)
+
+------------------------------------------------------------------- */
 BOOL space_get_object(Space* space) {
     if (!space) {
         return FALSE;
