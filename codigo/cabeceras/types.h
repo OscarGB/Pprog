@@ -2,9 +2,9 @@
  * @brief It defines common types
  * 
  * @file types.h
- * @author Profesores PPROG
+ * @author Óscar Gómez, Jose Ignacio Gómez
  * @version 1.0 
- * @date 13-01-2015
+ * @date 23/09/2016
  * @copyright GNU Public License
  */
 

@@ -2,15 +2,31 @@
  * @brief It defines the game loop 
  * 
  * @file game_loop.c
- * @author Profesores PPROG
+ * @author Óscar Gómez, Jose Ignacio Gómez
  * @version 1.0 
- * @date 13-01-2015 
+ * @date 23/09/2016
  * @copyright GNU Public License
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "game.h"
+
+/* --------------------------------------------------------------------
+Function: main()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: function main for the program, runs the game.
+
+Input: 	int argc (number of arguments)
+		char *[argv] (number of arguments)
+
+Output: int 1 if ERROR, 0 if OK
+
+------------------------------------------------------------------- */
 
 int main(int argc, char *argv[]){
   	Game game;

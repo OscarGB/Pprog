@@ -24,6 +24,21 @@ struct _Space {
     BOOL object;
 };
 
+/* --------------------------------------------------------------------
+Function: space_create()
+
+Date: 23/09/2016   
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Creates a new space for the game
+
+Input: Id id (The id for the new space)
+
+Output: Space* (The created space)
+
+------------------------------------------------------------------- */
+
 Space* space_create(Id id) {
 
     Space *newSpace = NULL;
@@ -61,6 +76,21 @@ STATUS space_destroy(Space* space) {
     return OK;
 }
 
+/* --------------------------------------------------------------------
+Function: space_set_name()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Sets the name of a space
+
+Input: Space* space (The space that has to be changed)
+
+Output: STATUS (OK if everything went well, ERROR if something went wrong)
+
+------------------------------------------------------------------- */
+
 STATUS space_set_name(Space* space, char* name) {
     if (!space || !name) {
         return ERROR;
@@ -73,6 +103,22 @@ STATUS space_set_name(Space* space, char* name) {
     return OK;
 }
 
+/* --------------------------------------------------------------------
+Function: space_set_north()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Sets the north space for the given one
+
+Input:  Space* Space (The space which need to be set)
+        Id id (The id of the space located at the north)
+
+Output: STATUS (OK if everything went well, ERROR if something went wrong)
+
+------------------------------------------------------------------- */
+
 STATUS space_set_north(Space* space, Id id) {
     if (!space || id == NO_ID) {
         return ERROR;
@@ -80,6 +126,22 @@ STATUS space_set_north(Space* space, Id id) {
     space->north = id;
     return OK;
 }
+
+/* --------------------------------------------------------------------
+Function: space_set_south()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Sets the south space for the given one
+
+Input:  Space* Space (The space which need to be set)
+        Id id (The id of the space located at the south)
+
+Output: STATUS (OK if everything went well, ERROR if something went wrong)
+
+------------------------------------------------------------------- */
 
 STATUS space_set_south(Space* space, Id id) {
     if (!space || id == NO_ID) {
@@ -89,6 +151,22 @@ STATUS space_set_south(Space* space, Id id) {
     return OK;
 }
 
+/* --------------------------------------------------------------------
+Function: space_set_east()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Sets the east space for the given one
+
+Input:  Space* Space (The space which need to be set)
+        Id id (The id of the space located at the east)
+
+Output: STATUS (OK if everything went well, ERROR if something went wrong)
+
+------------------------------------------------------------------- */
+
 STATUS space_set_east(Space* space, Id id) {
     if (!space || id == NO_ID) {
         return ERROR;
@@ -96,6 +174,22 @@ STATUS space_set_east(Space* space, Id id) {
     space->east = id;
     return OK;
 }
+
+/* --------------------------------------------------------------------
+Function: space_set_west()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Sets the west space for the given one
+
+Input:  Space* Space (The space which need to be set)
+        Id id (The id of the space located at the west)
+
+Output: STATUS (OK if everything went well, ERROR if something went wrong)
+
+------------------------------------------------------------------- */
 
 STATUS space_set_west(Space* space, Id id) {
     if (!space || id == NO_ID) {
@@ -127,12 +221,42 @@ Id space_get_id(Space* space) {
     return space->id;
 }
 
+/* --------------------------------------------------------------------
+Function: space_get_north()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Gets the id of the north space for the given one
+
+Input:  Space* Space (The space to evaluate)
+
+Output: Id id (The id of the space located at the north)
+
+------------------------------------------------------------------- */
+
 Id space_get_north(Space* space) {
     if (!space) {
         return NO_ID;
     }
     return space->north;
 }
+
+/* --------------------------------------------------------------------
+Function: space_get_south()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Gets the id of the south space for the given one
+
+Input:  Space* Space (The space to evaluate)
+
+Output: Id id (The id of the space located at the south)
+
+------------------------------------------------------------------- */
 
 Id space_get_south(Space* space) {
     if (!space) {
@@ -141,12 +265,42 @@ Id space_get_south(Space* space) {
     return space->south;
 }
 
+/* --------------------------------------------------------------------
+Function: space_get_east()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Gets the id of the east space for the given one
+
+Input:  Space* Space (The space to evaluate)
+
+Output: Id id (The id of the space located at the east)
+
+------------------------------------------------------------------- */
+
 Id space_get_east(Space* space) {
     if (!space) {
         return NO_ID;
     }
     return space->east;
 }
+
+/* --------------------------------------------------------------------
+Function: space_get_west()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Gets the id of the west space for the given one
+
+Input:  Space* Space (The space to evaluate)
+
+Output: Id id (The id of the space located at the west)
+
+------------------------------------------------------------------- */
 
 Id space_get_west(Space* space) {
     if (!space) {
@@ -155,12 +309,28 @@ Id space_get_west(Space* space) {
     return space->west;
 }
 
+
+
 BOOL space_get_object(Space* space) {
     if (!space) {
         return FALSE;
     }
     return space->object;
 }
+
+/* --------------------------------------------------------------------
+Function: space_print
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: prints the given space in the standard output
+
+Input: Space *space (The space to be printed)
+
+Output STATUS (OK if everything went well, ERROR if something went wrong)
+------------------------------------------------------------------- */
 
 STATUS space_print(Space* space) {
     Id idaux = NO_ID;
