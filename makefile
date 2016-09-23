@@ -1,20 +1,20 @@
-CFLAGS = -g -Wall -pedantic -ansi
+CFLAGS = -g -Wall -pedantic -ansi -I codigo/cabeceras
 
 all: oca 
 
 oca: game_loop.o game.o space.o command.o
 	gcc $(CFLAGS) -o oca game_loop.o game.o space.o command.o
 
-command.o: codigo/command/command.c codigo/command/command.h
+command.o: codigo/command/command.c
 	gcc $(CFLAGS) -c codigo/command/command.c
 
-game.o: codigo/game/game.c codigo/game/game.h codigo/command/command.h codigo/space/space.h
+game.o: codigo/game/game.c
 	gcc $(CFLAGS) -c codigo/game/game.c
 
-game_loop.o: codigo/game_loop.c codigo/game/game.h codigo/command/command.h codigo/space/space.h
+game_loop.o: codigo/game_loop.c 
 	gcc $(CFLAGS) -c codigo/game_loop.c
 
-space.o: codigo/space/space.c codigo/space/space.h codigo/types.h
+space.o: codigo/space/space.c
 	gcc $(CFLAGS) -c codigo/space/space.c
 
 clean:

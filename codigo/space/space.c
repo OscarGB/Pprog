@@ -1,3 +1,13 @@
+/** 
+ * @brief It defines the game interface for each command
+ * 
+ * @file game.h
+ * @author Óscar Gómez, Jose Ignacio Gómez
+ * @version 1.0 
+ * @date 13-01-2015 
+ * @copyright GNU Public License
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

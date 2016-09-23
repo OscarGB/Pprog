@@ -3,7 +3,7 @@
  * for each command
  * 
  * @file game.c
- * @author Profesores PPROG
+ * @author Óscar Gómez, Jose Ignacio Gómez
  * @version 1.0 
  * @date 13-01-2015 
  * @copyright GNU Public License
@@ -137,12 +137,12 @@ STATUS game_set_player_location(Game* game, Id id) {
     }
 
     game->player_location = id;
-
+    return OK; /*Linea cambiada debido a warning durante compilación*/
 }
 
 STATUS game_set_object_location(Game* game, Id id) {
   
-    int i = 0;
+    /*int i = 0;*//*¿Sobra?*/
 
     if (id == NO_ID) {
         return ERROR;
