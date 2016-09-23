@@ -1,12 +1,17 @@
-/** 
- * @brief It defines the game loop 
- * 
- * @file game_loop.c
- * @author Óscar Gómez, Jose Ignacio Gómez
- * @version 1.0 
- * @date 23/09/2016
- * @copyright GNU Public License
- */
+/* ===================================================================
+File: game_loop.c
+
+Version: 1.0
+
+Date: 23/09/2016
+
+Author: Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It defines the game loop
+
+Revision history: none
+
+=================================================================== */
 
 #include <stdio.h>
 #include <stdlib.h>
