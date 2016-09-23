@@ -1,12 +1,17 @@
-/** 
- * @brief It defines common types
- * 
- * @file types.h
- * @author Profesores PPROG
- * @version 1.0 
- * @date 13-01-2015
- * @copyright GNU Public License
- */
+/* ===================================================================
+File: types.h
+
+Version: 1.0
+
+Date: 23/09/2016
+
+Author: Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It defines common types
+
+Revision history: none
+
+=================================================================== */
 
 #ifndef TYPES_H
 #define TYPES_H
