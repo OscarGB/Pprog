@@ -33,3 +33,5 @@ ocabas
 *.dSYM/
 *.su
 
+# Compressed files
+*.tgz
