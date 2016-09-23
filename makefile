@@ -1,9 +1,9 @@
 CFLAGS = -g -Wall -pedantic -ansi -I codigo/cabeceras
 
-all: oca 
+all: ocabas
 
-oca: game_loop.o game.o space.o command.o
-	gcc $(CFLAGS) -o oca game_loop.o game.o space.o command.o
+ocabas: game_loop.o game.o space.o command.o
+	gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o
 
 command.o: codigo/command/command.c
 	gcc $(CFLAGS) -c codigo/command/command.c
@@ -19,3 +19,6 @@ space.o: codigo/space/space.c
 
 clean:
 	rm -f  *.exe oca *.o
+
+dist:
+	tar –cvzf s1-cod_OcaBasicaIni-v1.0.tgz codigo/
