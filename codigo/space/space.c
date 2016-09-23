@@ -371,7 +371,6 @@ Id space_get_west(Space* space) {
     return space->west;
 }
 
-<<<<<<< HEAD
 /* --------------------------------------------------------------------
 Function: space_get_object()
 
@@ -386,10 +385,7 @@ Input: Space* space (the space we want to know about)
 Output: BOOL (TRUE if there's an object, FALSE it there isn't)
 
 ------------------------------------------------------------------- */
-=======
 
-
->>>>>>> 9f81556577068dbca2e9b15f1255747de8aa445b
 BOOL space_get_object(Space* space) {
     if (!space) {
         return FALSE;
