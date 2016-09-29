@@ -1,4 +1,4 @@
-CFLAGS = -g -Wall -pedantic -ansi -I codigo/cabeceras
+	CFLAGS = -g -Wall -pedantic -ansi -I codigo/cabeceras
 
 all: ocabas
 
@@ -18,7 +18,7 @@ space.o: codigo/space/space.c
 	gcc $(CFLAGS) -c codigo/space/space.c
 
 clean:
-	rm -f *.exe oca *.o
+	rm -f *.exe ocabas *.o *.tgz
 
 dist:
-	tar cvzf s1-cod_OcaBasicaIni-v1.0.tgz codigo/
+	tar cvzf s1-cod_OcaBasicaIni-v1.0.tgz codigo/ makefile
