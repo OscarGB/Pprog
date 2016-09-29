@@ -26,6 +26,21 @@ typedef enum enum_Command {
   BACK
 } T_Command; 
 
+
+/* --------------------------------------------------------------------
+Function: get_user_input()
+
+Date: 23/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: reads from keyboard in search of a valid command to execute
+
+Input: none
+
+Output: T_Command (returns the command that has been written by the user)
+
+------------------------------------------------------------------- */
 T_Command get_user_input();
 
 #endif
