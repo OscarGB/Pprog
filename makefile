@@ -18,7 +18,7 @@ space.o: codigo/space/space.c
 	gcc $(CFLAGS) -c codigo/space/space.c
 
 clean:
-	rm -f  *.exe oca *.o
+	rm -f *.exe oca *.o
 
 dist:
 	tar cvzf s1-cod_OcaBasicaIni-v1.0.tgz codigo/
