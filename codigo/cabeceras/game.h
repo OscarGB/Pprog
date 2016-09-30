@@ -141,4 +141,21 @@ Output: void
 ------------------------------------------------------------------- */
 void   game_print_data(Game* game);
 
+
+/* --------------------------------------------------------------------
+Function: game_add_space()
+
+Date: 30/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: adds spaces to the game table
+
+Input: Game* and Space* (adding space)
+
+Output: OK if the space was successfuly added
+
+------------------------------------------------------------------- */
+STATUS game_add_space(Game* game, Space* space);
+
 #endif
