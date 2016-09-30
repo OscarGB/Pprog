@@ -1,5 +1,5 @@
 /* ===================================================================
-File: command.h
+File: space.h
 
 Version: 1.0
 
@@ -7,7 +7,7 @@ Date: 23/09/2016
 
 Author: Óscar Gómez, Jose Ignacio Gómez.
 
-Description: It defines the game interface for each command 
+Description: It defines the game spaces for each command 
 
 Revision history: none
 
