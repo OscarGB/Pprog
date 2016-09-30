@@ -12,3 +12,9 @@ Description: It implements the functionality of the objects
 Revision history: none
 
 =================================================================== */
+
+struct _Object{
+	Id id;
+	char name[WORD_SIZE + 1];
+	
+}
