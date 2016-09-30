@@ -51,8 +51,6 @@ Id     game_get_object_location(Game* game);
 STATUS game_init(Game* game) {
   int i;
   
-  game_destroy(game); /*Just in case the game has been initialized*/
-
   for (i = 0; i < MAX_SPACES; i++) {
     game->spaces[i] = NULL;
   }
