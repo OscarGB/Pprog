@@ -463,12 +463,12 @@ STATUS game_load_spaces(Game* game, char* filename) {
 #endif
       space = space_create(id);
       if (space != NULL) {
-	space_set_name(space, name);
-	space_set_north(space, north);
-	space_set_east(space, east);
-	space_set_south(space, south);
-	space_set_west(space, west);
-	game_add_space(game, space);
+      	space_set_name(space, name);
+      	space_set_north(space, north);
+      	space_set_east(space, east);
+      	space_set_south(space, south);
+      	space_set_west(space, west);
+      	game_add_space(game, space);
       }
     }
   }
