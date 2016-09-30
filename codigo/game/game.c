@@ -207,11 +207,11 @@ STATUS game_set_object_location(Game* game, Id id) {
 }
 
 Id game_get_player_location(Game* game) {
-    return game->player_location;
+    return player_get_location(game->player);
 }
 
 Id game_get_object_location(Game* game) {
-    return game->object_location;
+    return object_get_location(game->object);
 }
 
 /* --------------------------------------------------------------------
@@ -276,8 +276,8 @@ void game_print_data(Game* game) {
     space_print(game->spaces[i]);
   }
   
-  printf("=> Object location: %d\n", (int) game->object_location);    
-  printf("=> Player location: %d\n", (int) game->player_location);
+  printf("=> Object location: %d\n", (int) game_get_object_location(game));    
+  printf("=> Player location: %d\n", (int) game_get_player_location(game));
   printf("prompt:> ");
 }
 
@@ -313,7 +313,7 @@ void game_print_screen(Game* game){
   if(system(CLEAR))
   	 return; 
   
-  if (game->object_location == id_back) 
+  if (game_get_object_location(game) == id_back) 
     obj='*';
   else 
     obj=' ';
@@ -325,7 +325,7 @@ void game_print_screen(Game* game){
     printf("      ^\n");
   }
   
-  if (game->object_location == id_act)
+  if (game_get_object_location(game) == id_act)
     obj='*';
   else 
     obj=' ';
@@ -337,7 +337,7 @@ void game_print_screen(Game* game){
     printf("+-----------+\n");
   }
   
-  if (game->object_location == id_next)
+  if (game_get_object_location(game) == id_next)
     obj='*';
   else 
     obj=' ';
@@ -349,8 +349,8 @@ void game_print_screen(Game* game){
     printf("|     %c     |\n",obj);
   }
   
-  if (game->object_location != NO_ID)
-    printf ("\nOject location:%d", (int)game->object_location);
+  if (game_get_object_location(game) != NO_ID)
+    printf ("\nOject location:%d", (int)game_get_object_location(game));
 
   printf("\n[commands: next or n, back or b, or quit or q]");
   printf("\nprompt:> ");
