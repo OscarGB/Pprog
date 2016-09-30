@@ -76,8 +76,8 @@ STATUS game_init(Game* game) {
     game->spaces[i] = NULL;
   }
   
-  game->player_location = NO_ID;
-  game->object_location = NO_ID;
+  game->player = NULL;
+  game->object = NULL;
   
   return OK;
 }
@@ -130,6 +130,14 @@ STATUS game_destroy(Game* game) {
 
     for (i = 0; (i < MAX_SPACES) && (game->spaces[i] != NULL); i++) {
       space_destroy(game->spaces[i]);
+    }
+
+    if(game->player != NULL){
+      player_destroy(game->player);
+    }
+
+    if(game->object != NULL){
+      object_destroy(game->object);
     }
         
     return OK;
@@ -186,21 +194,16 @@ STATUS game_set_player_location(Game* game, Id id) {
         return ERROR;
     }
 
-    game->player_location = id;
-    return OK; /*Linea cambiada debido a warning durante compilación*/
+    return player_set_location(game->player, id);
 }
 
 STATUS game_set_object_location(Game* game, Id id) {
-  
-    /*int i = 0;*//*¿Sobra?*/
 
     if (id == NO_ID) {
         return ERROR;
     }
 
-    game->object_location = id;
-
-    return OK;
+    return object_set_location(game->object, id);
 }
 
 Id game_get_player_location(Game* game) {

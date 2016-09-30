@@ -20,8 +20,8 @@ Revision history: none
 #include "space.h"
 
 typedef struct _Game{
-  Id player_location;
-  Id object_location;
+  Player* player;
+  Object* object;
   Space* spaces[MAX_SPACES + 1];
 } Game;
 

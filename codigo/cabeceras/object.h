@@ -87,6 +87,23 @@ Output:STATUS (OK if everything went well, ERROR if didn't)
 STATUS object_set_symbol(Object* object, char symbol);
 
 /* --------------------------------------------------------------------
+Function:object_set_location()
+
+Date:30/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It sets the symbol of the given object
+
+Input:Object* object(the object to change)
+	  char symbol(the symbol of the object)
+
+Output:STATUS (OK if everything went well, ERROR if didn't)
+
+------------------------------------------------------------------- */
+STATUS object_set_location(Object* object, Id id);
+
+/* --------------------------------------------------------------------
 Function:object_get_symbol()
 
 Date:30/09/2016
@@ -133,6 +150,22 @@ Output: Id (the Id of the object)
 
 ------------------------------------------------------------------- */
 Id object_get_id(Object* object);
+
+/* --------------------------------------------------------------------
+Function:object_get_location()
+
+Date: 30/19/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It gets the location of the object
+
+Input: Object* object(the object)
+
+Output: Id (the Id of the location)
+
+------------------------------------------------------------------- */
+Id object_get_location(Object* object);
 
 /* --------------------------------------------------------------------
 Function: object_print()
