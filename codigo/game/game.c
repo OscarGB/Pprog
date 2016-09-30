@@ -18,6 +18,8 @@ Revision history: none
 #include <stdlib.h>
 #include <string.h>
 #include "game.h"
+#include "player.h"
+#include "object.h"
 
 #ifdef __WINDOWS_BUILD__
 #define CLEAR "cls"

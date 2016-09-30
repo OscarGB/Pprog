@@ -18,6 +18,8 @@ Revision history: none
 
 #include "command.h"
 #include "space.h"
+#include "player.h"
+#include "object.h"
 
 typedef struct _Game{
   Player* player;
