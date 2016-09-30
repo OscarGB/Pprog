@@ -1,13 +1,18 @@
-/** 
- * @brief It implements the game interface and all the associated callbacks
- * for each command
- * 
- * @file game.c
- * @author Óscar Gómez, Jose Ignacio Gómez
- * @version 1.0 
- * @date 23/09/2016
- * @copyright GNU Public License
- */
+/* ===================================================================
+File: game.h
+
+Version: 1.0
+
+Date: 23/09/2016
+
+Author: Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It implements the game interface for each command 
+
+Revision history: none
+
+=================================================================== */
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,6 +53,22 @@ Id     game_get_object_location(Game* game);
    Game interface implementation
  */
 
+/* --------------------------------------------------------------------
+Function: game_init()
+
+Date: 29/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: it creates an empty game table with no player/object location
+if the game pointer has been already initialized, we have decided to destroy 
+the previous game
+
+Input: Game* (game pointer)
+
+Output: OK if the game has been successfuly initialized, ERROR if not
+
+------------------------------------------------------------------- */
 STATUS game_init(Game* game) {
   int i;
   
@@ -61,6 +82,21 @@ STATUS game_init(Game* game) {
   return OK;
 }
 
+/* --------------------------------------------------------------------
+Function: game_init_from_file()
+
+Date: 29/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: it creates a game table loading spaces from a file
+
+Input: Game* (game pointer) and char* filename (the name of the 
+read file)
+
+Output: OK if the game has been successfuly initialized
+
+------------------------------------------------------------------- */
 STATUS game_init_from_file(Game* game, char* filename) {
 
   if (game_init(game) == ERROR)
@@ -75,6 +111,20 @@ STATUS game_init_from_file(Game* game, char* filename) {
   return OK;
 }
 
+/* --------------------------------------------------------------------
+Function: game_destroy()
+
+Date: 29/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: it destroys a given game
+
+Input: Game*
+
+Output: OK if the game was successfuly destroyed
+
+------------------------------------------------------------------- */
 STATUS game_destroy(Game* game) {
     int i = 0;
 
@@ -161,6 +211,20 @@ Id game_get_object_location(Game* game) {
     return game->object_location;
 }
 
+/* --------------------------------------------------------------------
+Function: game_update
+
+Date: 29/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: it calls different callbacks depending on the written command
+
+Input: Game* and a command (cmd)
+
+Output: OK if everything went OK
+
+------------------------------------------------------------------- */
 STATUS game_update(Game* game, T_Command cmd) {
 
   switch (cmd) {
@@ -185,6 +249,20 @@ STATUS game_update(Game* game, T_Command cmd) {
   return OK;
 }
 
+/* --------------------------------------------------------------------
+Function: game_print_data()
+
+Date: 29/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: prints on screen the actual game state
+
+Input: Game*
+
+Output: void
+
+------------------------------------------------------------------- */
 void game_print_data(Game* game) {
   int i = 0;
   
@@ -200,6 +278,20 @@ void game_print_data(Game* game) {
   printf("prompt:> ");
 }
 
+/* --------------------------------------------------------------------
+Function: game_print_screen()
+
+Date: 29/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: prints on screen the data of the game (player/object situation)
+
+Input: Game*
+
+Output: void
+
+------------------------------------------------------------------- */
 void game_print_screen(Game* game){
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID;
   Space* space_act = NULL;
@@ -261,6 +353,20 @@ void game_print_screen(Game* game){
   printf("\nprompt:> ");
 }
 
+/* --------------------------------------------------------------------
+Function: game_is_over()
+
+Date: 29/09/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: ends the game
+
+Input: Game*
+
+Output: -
+
+------------------------------------------------------------------- */
 BOOL game_is_over(Game* game) {
   return FALSE;
 }
