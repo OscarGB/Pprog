@@ -156,6 +156,6 @@ Input: Game* and Space* (adding space)
 Output: OK if the space was successfuly added
 
 ------------------------------------------------------------------- */
-STATUS game_add_space(Game* game, Space* space);
+STATUS game_add_space(Game* game, Space* space); 
 
 #endif
