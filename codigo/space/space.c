@@ -26,7 +26,7 @@ struct _Space {
     Id south;
     Id east;
     Id west;
-    BOOL object;
+    Id object;
 };
 
 /* --------------------------------------------------------------------
@@ -65,7 +65,7 @@ Space* space_create(Id id) {
     newSpace->east = NO_ID;
     newSpace->west = NO_ID;
 
-    newSpace->object = FALSE;
+    newSpace->object = NO_ID;
 
     return newSpace;
 }
@@ -233,8 +233,8 @@ Input:  Space* space (the space we want to know about)
 Output: a STATUS return: OK if everything went well, ERROR if it wasn't
 
 ------------------------------------------------------------------- */
-STATUS space_set_object(Space* space, BOOL value) {
-    if (!space) {
+STATUS space_set_object(Space* space, Id value) {
+    if (!space || value == NO_ID) {
         return ERROR;
     }
     space->object = value;
@@ -386,7 +386,7 @@ Output: BOOL (TRUE if there's an object, FALSE it there isn't)
 
 ------------------------------------------------------------------- */
 
-BOOL space_get_object(Space* space) {
+Id space_get_object(Space* space) {
     if (!space) {
         return FALSE;
     }
@@ -444,7 +444,7 @@ STATUS space_print(Space* space) {
         fprintf(stdout, "---> No west link.\n");
     }
     
-   if (space_get_object(space)) {
+   if (space_get_object(space) != NO_ID) {
         fprintf(stdout, "---> Object in the space.\n");
     } else {
         fprintf(stdout, "---> No object in the space.\n");
