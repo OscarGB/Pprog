@@ -1,12 +1,17 @@
-/** 
- * @brief It defines the game interface for each command
- * 
- * @file game.h
- * @author Óscar Gómez, Jose Ignacio Gómez
- * @version 1.0 
- * @date 13-01-2015 
- * @copyright GNU Public License
- */
+/* ===================================================================
+File: game.h
+
+Version: 1.0
+
+Date: 23/09/2016
+
+Author: Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It defines the game interface for each command 
+
+Revision history: none
+
+=================================================================== */
 
 #ifndef GAME_H
 #define GAME_H
@@ -79,59 +84,59 @@ Date: 29/09/2016
 
 Author:Óscar Gómez, Jose Ignacio Gómez.
 
-Description: it destroys a given gam
+Description: it destroys a given game
 
-Input:
+Input: Game*
 
-Output:
+Output: OK if the game was successfuly destroyed
 
 ------------------------------------------------------------------- */
 STATUS game_destroy(Game* game);
 
 /* --------------------------------------------------------------------
-Function:
+Function: game_is_over()
 
-Date:
+Date: 29/09/2016
 
 Author:Óscar Gómez, Jose Ignacio Gómez.
 
-Description:
+Description: ends the game
 
-Input:
+Input: Game*
 
-Output:
+Output: -
 
 ------------------------------------------------------------------- */
 BOOL   game_is_over(Game* game);
 
 /* --------------------------------------------------------------------
-Function:
+Function: game_print_screen()
 
-Date:
+Date: 29/09/2016
 
 Author:Óscar Gómez, Jose Ignacio Gómez.
 
-Description:
+Description: prints on screen the data of the game (player/object situation)
 
-Input:
+Input: Game*
 
-Output:
+Output: void
 
 ------------------------------------------------------------------- */
 void   game_print_screen(Game* game);
 
 /* --------------------------------------------------------------------
-Function:
+Function: game_print_data()
 
-Date:
+Date: 29/09/2016
 
 Author:Óscar Gómez, Jose Ignacio Gómez.
 
-Description:
+Description: prints on screen the actual game state
 
-Input:
+Input: Game*
 
-Output:
+Output: void
 
 ------------------------------------------------------------------- */
 void   game_print_data(Game* game);
