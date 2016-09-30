@@ -21,16 +21,106 @@ Revision history: none
 
 typedef struct _Player Player;
 
+
+/* --------------------------------------------------------------------
+Function: player_create()
+
+Date: 01/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: creates a new player
+
+Input: the id of the player
+
+Output: OK if the player was successfuly created
+
+------------------------------------------------------------------- */
 BOOL player_crete(Id id);
 
+
+/* --------------------------------------------------------------------
+Function: player_destroy()
+
+Date: 01/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: destroys a player
+
+Input: Player*
+
+Output: OK if the player was successfuly destroyed
+
+------------------------------------------------------------------- */
 BOOL player_destroy(Player* player);
 
+
+/* --------------------------------------------------------------------
+Function: player_set_name()
+
+Date: 01/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: sets the player's name
+
+Input: Player* and char* (player's name)
+
+Output: OK if the name was successfuly set
+
+------------------------------------------------------------------- */
 STATUS player_set_name(Player* player, char* name);
 
+
+/* --------------------------------------------------------------------
+Function: player_set_location()
+
+Date: 01/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: sets the location of the player
+
+Input: Player* and the location id
+
+Output: OK if the location was successfuly created
+
+------------------------------------------------------------------- */
 STATUS player_set_location(Player* player, Id location);
 
+
+/* --------------------------------------------------------------------
+Function: player_get_name()
+
+Date: 01/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: gets the name of the player
+
+Input: Player*
+
+Output: char* (player's name)
+
+------------------------------------------------------------------- */
 const char* player_get_name(Player *player);
 
+
+/* --------------------------------------------------------------------
+Function: player_get_location()
+
+Date: 01/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: gets the location of the player
+
+Input: Player*
+
+Output: location id
+
+------------------------------------------------------------------- */
 const Id player_get_location(Player *player);
 
 
