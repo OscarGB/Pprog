@@ -42,10 +42,10 @@ Description: creates a new player
 
 Input: the id of the player
 
-Output: OK if the player was successfuly created
+Output: Player* (created player)
 
 ------------------------------------------------------------------- */
-BOOL player_create(Id id){
+Player* player_create(Id id){
 
 	Player *newPlayer = NULL;
 
@@ -54,7 +54,7 @@ BOOL player_create(Id id){
 
 	newPlayer = (Player *) malloc (sizeof(Player));
 
-	if(!newplayer) {
+	if(!newPlayer) {
 		return NULL;
 	}
 
