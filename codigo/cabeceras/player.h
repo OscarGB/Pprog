@@ -158,6 +158,6 @@ Input: Player*, Object* (the picked object)
 Output: TRUE if the object was picked
 
 ------------------------------------------------------------------- */
-BOOL player_drop_object(Player *player, Object* object);
+BOOL player_pick_object(Player *player, Object* object);
 
 #endif
