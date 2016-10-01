@@ -469,9 +469,9 @@ void callback_PICK(Game* game){
 
   object = game->object; 
   object_set_location(object, NO_ID) 
-  if(player_pick_object(game->player, object) != ERROR){
+  if(player_pick_object(game->player, object) != FALSE){
     game->object = NULL;
   }
-  
+
   return;
 }
