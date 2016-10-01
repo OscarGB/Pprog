@@ -18,6 +18,8 @@ Revision history: none
 
 #define CHAR_ERROR ¡ /*We decided to use ¡ as an error for the symbol*/
 
+#include "types.h"
+
 typedef struct _Object Object;
 
 /* --------------------------------------------------------------------
@@ -50,7 +52,7 @@ Input: Object* object(a pointer to the object)
 Output: STATUS (OK if everything went well, ERROR if didn't)
 
 ------------------------------------------------------------------- */
-STATUS object_destroy(Object *object);
+STATUS object_destroy(Object* object);
 
 /* --------------------------------------------------------------------
 Function: object_set_name()

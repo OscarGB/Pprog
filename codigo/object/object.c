@@ -17,6 +17,7 @@ Revision history: none
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "types.h"
 
 struct _Object{
 	Id id;

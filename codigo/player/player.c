@@ -18,6 +18,8 @@ Revision history: none
 #include <string.h>
 #include "types.h"
 #include "space.h"
+#include "player.h"
+#include "object.h"
 
 struct _Player {
 	Id id;
