@@ -18,6 +18,8 @@ Revision history: none
 #include <stdlib.h>
 #include <string.h>
 #include "game.h"
+#include "player.h"
+#include "object.h"
 
 #ifdef __WINDOWS_BUILD__
 #define CLEAR "cls"
@@ -33,6 +35,9 @@ void callback_UNKNOWN(Game* game);
 void callback_QUIT(Game* game);
 void callback_NEXT(Game* game);
 void callback_BACK(Game* game);
+void callback_DROP(Game* game);
+void callback_PICK(Game* game);
+
 
 /**
    Private functions
@@ -243,6 +248,12 @@ STATUS game_update(Game* game, T_Command cmd) {
   case BACK:
     callback_BACK(game);
     break;
+  case PICK:
+    callback_PICK(game);
+    break;
+  case DROP:
+    callback_DROP(game);
+    break;
   case NO_CMD:
     break;
   default: /* We must never arrive here*/
@@ -427,4 +438,40 @@ void callback_BACK(Game* game) {
       return;
     }
   }
+}
+
+void callback_DROP(Game* game){
+  Object* object;
+  Id current_id;
+
+  object = player_drop_object(game->player)
+  if(!object){
+    return;
+  }
+  current_id = game_get_player_location(game);
+
+  game->object = object;
+
+  game_set_object_location(game, current_id);
+  return;
+}
+
+void callback_PICK(Game* game){
+  Object* object
+  Id player_id, object_id;
+
+  player_id = game_get_player_location(game);
+  object_id = game_get_object_location(game);
+
+  if(player_id != object_id || player_id == NO_ID || object_id==NO_ID){
+    return;
+  }
+
+  object = game->object; 
+  object_set_location(object, NO_ID) 
+  if(player_pick_object(game->player, object) != FALSE){
+    game->object = NULL;
+  }
+
+  return;
 }

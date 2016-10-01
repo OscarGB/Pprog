@@ -151,7 +151,7 @@ Output:STATUS (OK if everything went well, ERROR if didn't)
 
 ------------------------------------------------------------------- */
 STATUS object_set_location(Object* object, Id id){
-	if(!object || id == NO_ID){
+	if(!object){
 		return ERROR;
 	}
 
