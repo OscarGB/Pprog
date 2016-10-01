@@ -16,7 +16,7 @@ Revision history: none
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#define CHAR_ERROR '!' /*We decided to use ¡ as an error for the symbol*/
+#define CHAR_ERROR '!' /*We decided to use ! as an error for the symbol*/
 
 #include "types.h"
 
