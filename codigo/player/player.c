@@ -28,7 +28,7 @@ struct _Player {
 	Object *object[MAX_OBJECTS]; /*We've set MAX_OBJECTS
 								as 1, in order to prepare 
 								the bag creation*/
-}
+};
 
 
 /* --------------------------------------------------------------------
