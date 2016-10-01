@@ -18,6 +18,7 @@ Revision history: none
 #define MAX_OBJECTS 1 /*Used to know the bag size*/
 
 #include "types.h"
+#include "object.h"
 
 typedef struct _Player Player;
 
