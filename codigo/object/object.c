@@ -177,6 +177,7 @@ Output:char (the symbol of the object)
 ------------------------------------------------------------------- */
 char object_get_symbol(Object* object){
 	if(!object){
+		
 		return CHAR_ERROR; 
 	}
 	return object->symbol;
