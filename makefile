@@ -2,8 +2,8 @@
 
 all: ocabas
 
-ocabas: game_loop.o game.o space.o command.o game_reader.o player.o objects.o
-	gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o
+ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o
+	gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o object.o
 
 command.o: codigo/command/command.c
 	gcc $(CFLAGS) -c codigo/command/command.c
