@@ -186,7 +186,7 @@ Output: location id
 ------------------------------------------------------------------- */
 const Id player_get_location (Player* player) {
 	if (!player){
-		return NULL;
+		return NO_ID;
 	}
 
 	return player->location;
