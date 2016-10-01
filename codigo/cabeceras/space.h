@@ -251,7 +251,7 @@ Input:  Space* space (the space we want to know about)
 Output: a STATUS return: OK if everything went well, ERROR if it wasn't
 
 ------------------------------------------------------------------- */
-STATUS space_set_object(Space* space, BOOL value);
+STATUS space_set_object(Space* space, Id value);
 
 /* --------------------------------------------------------------------
 Function: space_get_object()
@@ -267,7 +267,7 @@ Input: Space* space (the space we want to know about)
 Output: BOOL (TRUE if there's an object, FALSE it there isn't)
 
 ------------------------------------------------------------------- */
-BOOL space_get_object(Space* space);
+Id space_get_object(Space* space);
 
 /* --------------------------------------------------------------------
 Function: space_print
