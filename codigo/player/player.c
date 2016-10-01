@@ -64,7 +64,7 @@ Player* player_create(Id id){
 
 	newPlayer->location = NO_ID;
 
-	newPlayer->object = NULL;
+	newPlayer->object[0] = NULL;
 
 	return newPlayer;
 }
