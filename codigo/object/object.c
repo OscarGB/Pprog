@@ -24,7 +24,7 @@ struct _Object{
 	char name[WORD_SIZE + 1];
 	char symbol;
 	Id location;
-}
+};
 
 /* --------------------------------------------------------------------
 Function: object_create()

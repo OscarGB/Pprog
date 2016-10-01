@@ -11,7 +11,7 @@ Description: It implements the functionality of the players
 
 Revision history: none
 
-=================================================================== */-
+=================================================================== */
 
 #ifndef PLAYER_H
 #define PLAYER_H
