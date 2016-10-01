@@ -444,7 +444,7 @@ void callback_DROP(Game* game){
   Object* object;
   Id current_id;
 
-  object = player_drop_object(game->player)
+  object = player_drop_object(game->player);
   if(!object){
     return;
   }
