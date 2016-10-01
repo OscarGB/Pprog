@@ -189,3 +189,32 @@ const Id player_get_location (Player* player) {
 
 	return player->location;
 }
+
+
+/* --------------------------------------------------------------------
+Function: player_drop_object()
+
+Date: 01/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: it points the player object to NULL and return
+the object
+
+Input: Player*
+
+Output: Object* (the dropped object)
+
+------------------------------------------------------------------- */
+Object* player_drop_object (Player* player){
+	Object *obj = NULL;
+
+	if (!player || !player->object[0]){
+		return NULL;
+	}
+
+	obj = player->object[0];
+	player->object[0] = NULL;
+
+	return obj;
+}

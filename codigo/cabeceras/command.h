@@ -23,7 +23,9 @@ typedef enum enum_Command {
   UNKNOWN, 
   QUIT, 
   NEXT, 
-  BACK
+  BACK,
+  PICK,
+  DROP
 } T_Command; 
 
 
