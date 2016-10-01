@@ -2,8 +2,8 @@
 
 all: ocabas
 
-ocabas: game_loop.o game.o space.o command.o game_reader.o
-	gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o
+ocabas: game_loop.o game.o space.o command.o game_reader.o player.o objects.o
+	gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o
 
 command.o: codigo/command/command.c
 	gcc $(CFLAGS) -c codigo/command/command.c
@@ -17,8 +17,14 @@ game_loop.o: codigo/game_loop.c
 space.o: codigo/space/space.c
 	gcc $(CFLAGS) -c codigo/space/space.c
 
-game_reader.o:codigo/game_reader/game_reader.c
+game_reader.o: codigo/game_reader/game_reader.c
 	gcc $(CFLAGS) -c codigo/game_reader/game_reader.c
+
+player.o: codigo/player/player.c
+	gcc $(CFLAGS) -c codigo/player/player.c
+
+object.o: codigo/object/object.c
+	gcc $(CFLAGS) -c codigo/object/object.c
 
 clean:
 	rm -f *.exe ocabas *.o *.tgz
