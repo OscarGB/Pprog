@@ -246,7 +246,7 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 Description: it defines if a given space has an object inside
 
 Input:  Space* space (the space we want to know about)
-        BOOL value (TRUE if there's an object inside, FALSE if not)
+        Id id (the id of the object)
 
 Output: a STATUS return: OK if everything went well, ERROR if it wasn't
 
@@ -264,7 +264,7 @@ Description: it returns TRUE if there's an object in the space
 
 Input: Space* space (the space we want to know about)
 
-Output: BOOL (TRUE if there's an object, FALSE it there isn't)
+Output: Id (The Id of the object)
 
 ------------------------------------------------------------------- */
 Id space_get_object(Space* space);
