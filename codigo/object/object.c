@@ -198,7 +198,7 @@ Output:char* (the symbol of the object)
 ------------------------------------------------------------------- */
 char* object_get_name(Object* object){
 	if(!object){
-		return "\0"
+		return "\0";
 	}
 
 	return object->name;
