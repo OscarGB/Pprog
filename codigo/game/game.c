@@ -457,7 +457,7 @@ void callback_DROP(Game* game){
 }
 
 void callback_PICK(Game* game){
-  Object* object
+  Object* object;
   Id player_id, object_id;
 
   player_id = game_get_player_location(game);
@@ -468,7 +468,7 @@ void callback_PICK(Game* game){
   }
 
   object = game->object; 
-  object_set_location(object, NO_ID) 
+  object_set_location(object, NO_ID); 
   if(player_pick_object(game->player, object) != FALSE){
     game->object = NULL;
   }
