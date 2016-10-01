@@ -139,7 +139,24 @@ Input: Player*
 Output: Object* (the dropped object)
 
 ------------------------------------------------------------------- */
-
 Object* player_drop_object(Player *player);
+
+
+/* --------------------------------------------------------------------
+Function: player_pick_object()
+
+Date: 01/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: if the bag isn't full, it places an object
+in the bag
+
+Input: Player*, Object* (the picked object)
+
+Output: TRUE if the object was picked
+
+------------------------------------------------------------------- */
+BOOL player_drop_object(Player *player, Object* object);
 
 #endif

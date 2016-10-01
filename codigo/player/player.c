@@ -218,3 +218,16 @@ Object* player_drop_object (Player* player){
 
 	return obj;
 }
+
+BOOL player_pick_object (Player* player, Object* object){
+	int i;
+
+	for (i = 0; i < MAX_OBJECTS; i++){
+		if (player->object[i] == NULL){
+			player->object[i] = object;
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
