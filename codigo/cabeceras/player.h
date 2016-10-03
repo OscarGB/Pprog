@@ -37,7 +37,7 @@ Input: the id of the player
 Output: OK if the player was successfuly created
 
 ------------------------------------------------------------------- */
-BOOL player_crete(Id id);
+Player* player_create(Id id);
 
 
 /* --------------------------------------------------------------------
@@ -54,7 +54,7 @@ Input: Player*
 Output: OK if the player was successfuly destroyed
 
 ------------------------------------------------------------------- */
-BOOL player_destroy(Player* player);
+STATUS player_destroy(Player* player);
 
 
 /* --------------------------------------------------------------------

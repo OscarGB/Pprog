@@ -199,6 +199,14 @@ STATUS game_set_player_location(Game* game, Id id) {
         return ERROR;
     }
 
+    if(!game->player){/*Check if a player exists*/
+      game->player = player_create(id);
+      if(game->player){
+        return OK;
+      }
+      return ERROR;
+    }
+
     return player_set_location(game->player, id);
 }
 
@@ -206,6 +214,14 @@ STATUS game_set_object_location(Game* game, Id id) {
 
     if (id == NO_ID) {
         return ERROR;
+    }
+
+    if(!game->object){
+      game->object = object_create(id);
+      if(game->object){
+        return OK;
+      }
+      return ERROR;
     }
 
     return object_set_location(game->object, id);
