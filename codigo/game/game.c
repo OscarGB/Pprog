@@ -82,7 +82,15 @@ STATUS game_init(Game* game) {
   }
   
   game->player = player_create(1);
+  if(!game->player){
+    game_destroy(game);
+    return ERROR;
+  }
   game->object = object_create(1);
+  if(!game->object){
+    game_destroy(game);
+    return ERROR;
+  }
   
   return OK;
 }
