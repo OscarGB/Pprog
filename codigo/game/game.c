@@ -381,7 +381,7 @@ void game_print_screen(Game* game){
   if (game_get_object_location(game) != NO_ID)
     printf ("\nOject location:%d", (int)game_get_object_location(game));
 
-  printf("\n[commands: next or n, back or b, or quit or q]");
+  printf("\n[commands: next or n, back or b, quit or q, drop or d, pick or p]");
   printf("\nprompt:> ");
 }
 
