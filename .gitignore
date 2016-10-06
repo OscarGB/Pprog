@@ -35,4 +35,4 @@ ocabas
 
 # Compressed files
 *.tgz
-!s1-cod_OcaBasicaIni-v1.0.tgz
+!iteraciones/*.tgz
