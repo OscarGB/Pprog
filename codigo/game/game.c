@@ -81,8 +81,8 @@ STATUS game_init(Game* game) {
     game->spaces[i] = NULL;
   }
   
-  game->player = NULL;
-  game->object = NULL;
+  game->player = player_create(1);
+  game->object = object_create(1);
   
   return OK;
 }
@@ -195,17 +195,8 @@ Space* game_get_space(Game* game, Id id){
 
 STATUS game_set_player_location(Game* game, Id id) {
     
-    if (id == NO_ID) {
+    if (id == NO_ID || !game) {
         return ERROR;
-    }
-
-    if(!game->player){/*Check if the player exists*/
-      game->player = player_create(1);
-      if(game->player){
-        player_set_location(game->player, id);
-        return OK;
-      }
-      return ERROR;
     }
 
     return player_set_location(game->player, id);
@@ -213,17 +204,8 @@ STATUS game_set_player_location(Game* game, Id id) {
 
 STATUS game_set_object_location(Game* game, Id id) {
 
-    if (id == NO_ID) {
+    if (id == NO_ID || !game) {
         return ERROR;
-    }
-
-    if(!game->object){ /*Check if the object exists*/
-      game->object = object_create(1);
-      if(game->object){
-        object_set_location(game->object, id);
-        return OK;
-      }
-      return ERROR;
     }
 
     return object_set_location(game->object, id);
