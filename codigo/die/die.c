@@ -16,6 +16,7 @@ Revision history: none
 #include <stdlib.h>
 #include <stdio.h>
 #include "die.h"
+#include "types.h"
 
 struct _Die{
 	Id id;

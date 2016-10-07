@@ -16,7 +16,7 @@ Revision history: none
 #define DIE_H
 
 #include <stdio.h>
-#include <types.h>
+#include "types.h"
 
 typedef struct _Die Die;
 
