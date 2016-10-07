@@ -7,7 +7,7 @@ Date: 23/09/2016
 
 Author: Óscar Gómez, Jose Ignacio Gómez.
 
-Description: It implements the command interpreter
+Description: It defines the command interpreter
 
 Revision history: none
 
