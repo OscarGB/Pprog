@@ -79,7 +79,7 @@ Die* die_create(Id id){
 	}
 
 	die->id = id;
-	die->last = -1;
+	die->last = NOT_ROLLED;
 
 	return die;
 }
@@ -151,7 +151,7 @@ Output: int (The value of the last roll)
 ------------------------------------------------------------------- */
 int die_get_last_roll(Die* die){
 	if(!die){
-		return -1;
+		return NOT_ROLLED;
 	}
 	return die->last;
 }

@@ -317,6 +317,8 @@ Output: void
 void game_print_screen(Game* game){
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID;
   Space* space_act = NULL;
+  Space* space_back = NULL;
+  Space* space_next = NULL;
   char obj='\0';
   
   id_act = game_get_player_location(game);
@@ -328,6 +330,8 @@ void game_print_screen(Game* game){
   space_act = game_get_space(game, id_act);
   id_back = space_get_north(space_act);
   id_next = space_get_south(space_act);
+  space_back = game_get_space(game, id_back);
+  space_next = game_get_space(game, id_next);
   
   if(system(CLEAR))
   	 return; 
@@ -338,7 +342,12 @@ void game_print_screen(Game* game){
     obj=' ';
   
   if (id_back != NO_ID) {
-    printf("|         %2d|\n",(int) id_back);
+    if(space_get_east(space_back) != NO_ID){
+      printf("|         %2d|>\n",(int) id_back);
+    }
+    else{
+      printf("|         %2d|\n",(int) id_back);
+    }    
     printf("|     %c     |\n",obj);
     printf("+-----------+\n");
     printf("      ^\n");
@@ -351,7 +360,12 @@ void game_print_screen(Game* game){
   
   if (id_act != NO_ID) {
     printf("+-----------+\n");
-    printf("| 8D      %2d|\n",(int)id_act);
+    if(space_get_east(space_act) != NO_ID){
+      printf("| 8D      %2d|>\n",(int) id_act);
+    }
+    else{
+      printf("| 8D      %2d|\n",(int) id_act);
+    }
     printf("|     %c     |\n",obj);
     printf("+-----------+\n");
   }
@@ -364,7 +378,12 @@ void game_print_screen(Game* game){
   if (id_next != NO_ID) {
     printf("      v\n");
     printf("+-----------+\n");
-    printf("|         %2d|\n",(int)id_next);
+    if(space_get_east(space_next) != NO_ID){
+      printf("|         %2d|>\n",(int) id_next);
+    }
+    else{
+      printf("|         %2d|\n",(int) id_next);
+    } 
     printf("|     %c     |\n",obj);
   }
   

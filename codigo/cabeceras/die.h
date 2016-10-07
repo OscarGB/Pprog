@@ -18,6 +18,8 @@ Revision history: none
 #include <stdio.h>
 #include "types.h"
 
+#define NOT_ROLLED -1
+
 typedef struct _Die Die;
 
 /* --------------------------------------------------------------------
