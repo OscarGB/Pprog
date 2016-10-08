@@ -22,7 +22,8 @@ typedef enum enum_Command {
   NO_CMD = -2, 
   UNKNOWN, 
   QUIT, 
-  NEXT, 
+  NEXT,
+  JUMP, 
   BACK,
   PICK,
   DROP

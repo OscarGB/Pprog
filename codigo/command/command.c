@@ -47,6 +47,9 @@ T_Command get_user_input(){
 		else if (!strcmp(input, "b") || !strcmp(input, "back")){
 			cmd = BACK;
 		}
+		else if (!strcmp(input, "j") || !strcmp(input, "jump")){
+			cmd = JUMP;
+		}
 		else if (!strcmp(input, "p") || !strcmp(input, "pick")){
 			cmd = PICK;
 		}

@@ -55,6 +55,22 @@ int set_where_is_id(Set* set, Id id) {
 
 
 /*Public functions*/
+
+
+/* --------------------------------------------------------------------
+Function: set_create()
+
+Date: 07/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: creates a new set
+
+Input: 
+
+Output: Set* (created set)
+
+------------------------------------------------------------------- */
 Set* set_create() {
 	int i;
 
@@ -72,6 +88,21 @@ Set* set_create() {
 	return set;
 }
 
+
+/* --------------------------------------------------------------------
+Function: set_destroy()
+
+Date: 07/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: destroys a set
+
+Input: Set* 
+
+Output: OK if it was successfuly destroyed
+
+------------------------------------------------------------------- */
 STATUS set_destroy(Set* set) {
 	if(!set) return ERROR;
 
@@ -79,6 +110,21 @@ STATUS set_destroy(Set* set) {
 	return OK;
 }
 
+
+/* --------------------------------------------------------------------
+Function: set_add()
+
+Date: 07/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: adds something to a given set
+
+Input: Set* , Id (the id of the thing we want to add)
+
+Output: OK if it was successfuly added
+
+------------------------------------------------------------------- */
 STATUS set_add(Set* set, Id id) {
 
 	if(!set || id == NO_ID || set_is_full(set) == TRUE){
@@ -91,6 +137,21 @@ STATUS set_add(Set* set, Id id) {
 	return OK;
 }
 
+
+/* --------------------------------------------------------------------
+Function: set_delete()
+
+Date: 07/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: deletes the id from the set if it's inside
+
+Input: Set* , Id (the id of the thing we want to delete)
+
+Output: OK if it was successfuly deleted
+
+------------------------------------------------------------------- */
 STATUS set_delete(Set* set, Id id) {
 	int position;
 
@@ -107,6 +168,21 @@ STATUS set_delete(Set* set, Id id) {
 	set->num_ids--;
 }
 
+
+/* --------------------------------------------------------------------
+Function: set_print()
+
+Date: 07/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: prints the set's array
+
+Input: Set*
+
+Output: OK if it was successfuly printed
+
+------------------------------------------------------------------- */
 STATUS set_print(Set* set) {
 	int i;
 
@@ -123,6 +199,21 @@ STATUS set_print(Set* set) {
 	return OK;
 }
 
+
+/* --------------------------------------------------------------------
+Function: set_get_num_ids()
+
+Date: 07/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: gives the number of stored ids
+
+Input: Set*
+
+Output: the number of stored ids
+
+------------------------------------------------------------------- */
 int set_get_num_ids(Set* set) {
 	if(!set) return NOT_FOUND;
 

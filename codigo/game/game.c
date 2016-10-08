@@ -35,6 +35,7 @@ void callback_UNKNOWN(Game* game);
 void callback_QUIT(Game* game);
 void callback_NEXT(Game* game);
 void callback_BACK(Game* game);
+void callback_JUMP(Game* game);
 void callback_DROP(Game* game);
 void callback_PICK(Game* game);
 
@@ -256,6 +257,9 @@ STATUS game_update(Game* game, T_Command cmd) {
   case BACK:
     callback_BACK(game);
     break;
+  case JUMP:
+    callback_JUMP(game);
+    break;
   case PICK:
     callback_PICK(game);
     break;
@@ -390,7 +394,7 @@ void game_print_screen(Game* game){
   if (game_get_object_location(game) != NO_ID)
     printf ("\nOject location:%d", (int)game_get_object_location(game));
 
-  printf("\n[commands: next or n, back or b, quit or q, drop or d, pick or p]");
+  printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p]");
   printf("\nprompt:> ");
 }
 
@@ -461,6 +465,28 @@ void callback_BACK(Game* game) {
       current_id = space_get_north(game->spaces[i]);
       if (current_id != NO_ID) {
 	game_set_player_location(game, current_id);
+      }
+      return;
+    }
+  }
+}
+
+void callback_JUMP(Game* game){
+  int i = 0;
+  Id current_id = NO_ID;
+  Id space_id = NO_ID;
+  
+  space_id = game_get_player_location(game);
+  if (space_id == NO_ID) {
+    return;
+  }
+  
+  for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
+    current_id = space_get_id(game->spaces[i]);
+    if (current_id == space_id) {
+      current_id = space_get_east(game->spaces[i]);
+      if (current_id != NO_ID) {
+        game_set_player_location(game, current_id);
       }
       return;
     }
