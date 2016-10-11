@@ -36,3 +36,7 @@ ocabas
 # Compressed files
 *.tgz
 !iteraciones/*.tgz
+
+# Temporal files
+*~
+~*
