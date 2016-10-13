@@ -30,4 +30,4 @@ clean:
 	rm -f *.exe ocabas *.o *.tgz
 
 dist:
-	tar cvzf s1-cod_OcaBasicaIni-v1.0.tgz codigo/ makefile spaces.dat spaces2.dat
+	tar cvzf s1-cod_OcaBasicaIni-v2.0.tgz codigo/ makefile spaces.dat spaces2.dat
