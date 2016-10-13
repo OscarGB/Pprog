@@ -17,6 +17,7 @@ Revision history: none
 #ifndef SPACE_H
 #define SPACE_H
 
+#include "set.h"
 #include "types.h"
 
 typedef struct _Space Space;
@@ -267,7 +268,7 @@ Input: Space* space (the space we want to know about)
 Output: Id (The Id of the object)
 
 ------------------------------------------------------------------- */
-Id space_get_object(Space* space);
+Set* space_get_object(Space* space);
 
 /* --------------------------------------------------------------------
 Function: space_print
