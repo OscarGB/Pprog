@@ -1,9 +1,13 @@
-	CFLAGS = -g -Wall -pedantic -ansi -I codigo/cabeceras
+	CFLAGS = -g -Wall -pedantic -ansi -I codigo/cabeceras 
 
 all: ocabas
 
-ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o
-	gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o
+debug: CFLAGS += -DDEBUG
+debug: ocabas 
+
+
+ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o
+	gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o
 
 command.o: codigo/command/command.c
 	gcc $(CFLAGS) -c codigo/command/command.c
@@ -26,8 +30,11 @@ player.o: codigo/player/player.c
 object.o: codigo/object/object.c
 	gcc $(CFLAGS) -c codigo/object/object.c
 
-set.o: codigo/set/set.o
+set.o: codigo/set/set.c
 	gcc $(CFLAGS) -c codigo/set/set.c
+
+die.o: codigo/die/die.c
+	gcc $(CFLAGS) -c codigo/die/die.c
 
 clean:
 	rm -f *.exe ocabas *.o *.tgz

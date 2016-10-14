@@ -129,7 +129,7 @@ STATUS die_print(Die* die){
 		return ERROR;
 	}
 
-	fprintf(stdout, "-->Die (Id: %d)", die_get_id(die));
+	fprintf(stdout, "-->Die (Id: %ld)", die_get_id(die));
 	fprintf(stdout, "--->Last value: %d", die_get_last_roll(die));
 
 	return OK;
