@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>	
 #include "set.h"
 #include "types.h"
 
@@ -121,7 +122,7 @@ int main() {
 
 	/*Destroying the current set and creating a new one in order to
 	test the set_delete() function over an empty set*/
-	set_detroy(set);
+	set_destroy(set);
 	set = set_create();
 
 	fprintf(stdout, "Deleting Id from an empty set:\n");
@@ -149,5 +150,7 @@ int main() {
 	}
 	else fprintf(stdout, "OK\n");
 
+	fprintf(stdout, "TESTING FINISHED\n");
 
+	return 0;
 }
