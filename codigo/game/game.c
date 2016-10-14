@@ -92,6 +92,7 @@ STATUS game_init(Game* game) {
     game_destroy(game);
     return ERROR;
   }
+  object_set_symbol(game->object, '*');
   
   return OK;
 }
@@ -341,7 +342,7 @@ void game_print_screen(Game* game){
   	 return; 
   
   if (game_get_object_location(game) == id_back) 
-    obj='*';
+    obj= object_get_symbol(game->object);
   else 
     obj=' ';
   
@@ -358,7 +359,7 @@ void game_print_screen(Game* game){
   }
   
   if (game_get_object_location(game) == id_act)
-    obj='*';
+    obj=object_get_symbol(game->object);
   else 
     obj=' ';
   
@@ -375,7 +376,7 @@ void game_print_screen(Game* game){
   }
   
   if (game_get_object_location(game) == id_next)
-    obj='*';
+    obj=object_get_symbol(game->object);
   else 
     obj=' ';
   

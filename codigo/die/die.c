@@ -17,6 +17,7 @@ Revision history: none
 #include <stdio.h>
 #include "die.h"
 #include "types.h"
+#include <time.h>
 
 struct _Die{
 	Id id;
@@ -43,7 +44,7 @@ int die_roll(Die* die, int inf, int sup){
 	if(inf < 0 || sup < 0 || sup < inf || !die){
 		return -1; /*ERROR*/
 	}
-
+	srand(clock());
 	random = rand();
 	random /= RAND_MAX;
 	random *= (sup-inf+1);
@@ -51,8 +52,8 @@ int die_roll(Die* die, int inf, int sup){
 	if(random > sup){
 		random = sup;
 	}
-	die->last = (int)random;
-	return die->last;
+	die->last = random;
+	return (int)random;
 }
 
 /* --------------------------------------------------------------------
@@ -129,8 +130,8 @@ STATUS die_print(Die* die){
 		return ERROR;
 	}
 
-	fprintf(stdout, "-->Die (Id: %d)", die_get_id(die));
-	fprintf(stdout, "--->Last value: %d", die_get_last_roll(die));
+	fprintf(stdout, "-->Die (Id: %ld)\n", die_get_id(die));
+	fprintf(stdout, "--->Last value: %d\n", die_get_last_roll(die));
 
 	return OK;
 }

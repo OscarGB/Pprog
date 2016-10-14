@@ -25,9 +25,10 @@ Revision history: none
 struct _Set {
 	Id id[MAX_IDS];
 	int num_ids;
-}
+};
 
 /*Private functions*/
+
 int set_where_is_id(Set* set, Id id) {
 	int i;
 
@@ -55,9 +56,8 @@ Output: TRUE if the set is full
 
 ------------------------------------------------------------------- */
 BOOL set_is_full(Set* set) {
-	int i;
 	
-	if(set->num_ids = MAX_IDS){
+	if(set->num_ids == MAX_IDS){
 		return TRUE;
 	}
 
@@ -190,10 +190,11 @@ STATUS set_delete(Set* set, Id id) {
 	position = set_where_is_id(set, id);
 	if(position == NOT_FOUND) return ERROR;
 
-	set->id[position] = set->id[num_ids-1];
-	set->id[num_ids-1] = NO_ID;
+	set->id[position] = set->id[set->num_ids-1];
+	set->id[set->num_ids-1] = NO_ID;
 
 	set->num_ids--;
+	return OK;
 }
 
 
@@ -218,9 +219,9 @@ STATUS set_print(Set* set) {
 	if(set_is_empty(set) == TRUE) return OK;
 
 	fprintf(stdout, "[");
-	fprintf(stdout, "%d", set->id[0])
+	fprintf(stdout, "%ld", set->id[0]);
 	for(i = 1; i < set->num_ids; i++){
-		fprintf(stdout, ", %d", set->id[i]);
+		fprintf(stdout, ", %ld", set->id[i]);
 	}
 	fprintf(stdout, "]\n");
 
