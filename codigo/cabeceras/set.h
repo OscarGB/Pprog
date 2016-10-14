@@ -126,4 +126,53 @@ Output: the number of stored ids
 ------------------------------------------------------------------- */
 int set_get_num_ids(Set* set);
 
+/* --------------------------------------------------------------------
+Function: set_is_full()
+
+Date: 14/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: checks if the set is full
+
+Input: Set*
+
+Output: TRUE if the set is full
+
+------------------------------------------------------------------- */
+BOOL set_is_full(Set* set);
+
+
+/* --------------------------------------------------------------------
+Function: set_is_empty()
+
+Date: 14/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: checks if the set is empty
+
+Input: Set*
+
+Output: TRUE if the set is full
+
+------------------------------------------------------------------- */
+BOOL set_is_empty(Set* set);
+
+/* --------------------------------------------------------------------
+Function: set_is_id()
+
+Date: 14/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: returns TRUE if the id is inside the set
+
+Input: Set*, Id
+
+Output: TRUE if the Id is inside the set
+
+------------------------------------------------------------------- */
+BOOL set_is_id(Set* set, Id id);
+
 #endif
