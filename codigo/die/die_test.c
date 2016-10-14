@@ -16,6 +16,7 @@ int main(){
 		#endif
 		return 1;
 	}
+	fprintf(stdout, "OK\n");
 	die_print(die);
 
 	fprintf(stdout, "Destroying the die\n");
@@ -25,6 +26,7 @@ int main(){
 		#endif
 		return 1;
 	}
+	fprintf(stdout, "OK\n");
 	die=NULL;
 
 	fprintf(stdout, "Destroying an uncreated die\n");
@@ -34,6 +36,7 @@ int main(){
 		#endif
 		return 1;
 	}
+	fprintf(stdout, "OK\n");
 
 	fprintf(stdout, "Rolling and uncreated die\n");
 	if(die_roll(die, 1, 6) != -1){
@@ -42,6 +45,7 @@ int main(){
 		#endif
 		return 1;
 	}
+	fprintf(stdout, "OK\n");
 
 	fprintf(stdout, "Creating the die\n");
 	die = die_create(1);
@@ -51,6 +55,7 @@ int main(){
 		#endif
 		return 1;
 	}
+	fprintf(stdout, "OK\n");
 	die_print(die);
 
 	fprintf(stdout, "Getting last roll\n");
@@ -60,6 +65,7 @@ int main(){
 		#endif
 		return 1;
 	}
+	fprintf(stdout, "OK\n");
 
 	fprintf(stdout, "Rolling the die\n");
 	roll = die_roll(die, 1, 6);
@@ -69,6 +75,7 @@ int main(){
 		#endif
 		return 1;
 	}
+	fprintf(stdout, "OK\n");
 	die_print(die);
 
 	fprintf(stdout, "Getting last roll\n");
@@ -77,7 +84,8 @@ int main(){
 		fprintf(stderr, "ERROR DEBUGING: RETURNING WRONG LAST ROLL\n");
 		#endif
 		return 1;
-	}	
+	}
+	fprintf(stdout, "OK\n");	
 
 	fprintf(stdout, "Getting die id\n");
 	if(die_get_id(die) != 1){
@@ -86,6 +94,8 @@ int main(){
 		#endif
 		return 1;	
 	}
+	fprintf(stdout, "OK\n");
+	fprintf(stdout, "TESTING FINISHED\n");
 
 	die_destroy(die);
 	return 0;
