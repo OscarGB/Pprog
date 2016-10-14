@@ -27,22 +27,7 @@ struct _Set {
 	int num_ids;
 }
 
-/*Private function*/
-BOOL set_is_full(Set* set) {
-	int i;
-	
-	if(set->num_ids = MAX_IDS){
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-BOOL set_is_empty(Set* set) {
-	if(set->num_ids == 0) return TRUE;
-	else return FALSE;
-}
-
+/*Private functions*/
 int set_where_is_id(Set* set, Id id) {
 	int i;
 
@@ -53,8 +38,51 @@ int set_where_is_id(Set* set, Id id) {
 	return NOT_FOUND;
 }
 
-
 /*Public functions*/
+
+/* --------------------------------------------------------------------
+Function: set_is_full()
+
+Date: 14/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: checks if the set is full
+
+Input: Set*
+
+Output: TRUE if the set is full
+
+------------------------------------------------------------------- */
+BOOL set_is_full(Set* set) {
+	int i;
+	
+	if(set->num_ids = MAX_IDS){
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+
+/* --------------------------------------------------------------------
+Function: set_is_empty()
+
+Date: 14/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: checks if the set is empty
+
+Input: Set*
+
+Output: TRUE if the set is full
+
+------------------------------------------------------------------- */
+BOOL set_is_empty(Set* set) {
+	if(set->num_ids == 0) return TRUE;
+	else return FALSE;
+}
 
 
 /* --------------------------------------------------------------------
@@ -127,7 +155,7 @@ Output: OK if it was successfuly added
 ------------------------------------------------------------------- */
 STATUS set_add(Set* set, Id id) {
 
-	if(!set || id == NO_ID || set_is_full(set) == TRUE){
+	if(set_where_is_id(set, id) != NOT_FOUND || !set || id == NO_ID || set_is_full(set) == TRUE){
 		return ERROR;
 	}
 
@@ -218,4 +246,26 @@ int set_get_num_ids(Set* set) {
 	if(!set) return NOT_FOUND;
 
 	return set->num_ids;
+}
+
+/* --------------------------------------------------------------------
+Function: set_is_id()
+
+Date: 14/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: returns TRUE if the id is inside the set
+
+Input: Set*, Id
+
+Output: TRUE if the Id is inside the set
+
+------------------------------------------------------------------- */
+BOOL set_is_id(Set* set, Id id){
+	if(set_where_is_id(set, id) == NOT_FOUND){
+		return FALSE;
+	}
+
+	return TRUE;
 }
