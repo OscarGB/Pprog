@@ -3,8 +3,19 @@
 all: ocabas
 
 debug: CFLAGS += -DDEBUG
-debug: ocabas 
+debug: ocabas die_test set_test
 
+die_test: die_test.o die.o
+	gcc $(CFLAGS) -o die_test die_test.o die.o
+
+set_test: set_test.o set.o
+	gcc $(CFLAGS) -o set_test set_test.o set.o
+
+die_test.o: codigo/die/die_test.c
+	gcc $(CFLAGS) -c codigo/die/die_test.c
+
+set_test.o: codigo/set/set_test.c
+	gcc $(CFLAGS) -c codigo/set/set_test.c
 
 ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o
 	gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o
