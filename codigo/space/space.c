@@ -473,7 +473,7 @@ STATUS space_print(Space* space) {
         fprintf(stdout, "---> No west link.\n");
     }
     
-   if (space_get_object(space) != NULL) {
+   if (set_is_empty(space_get_object(space)) == FALSE) {
         fprintf(stdout, "---> Object in the space.\n");
     } else {
         fprintf(stdout, "---> No object in the space.\n");
