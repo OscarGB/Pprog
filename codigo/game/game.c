@@ -37,7 +37,7 @@ void callback_NEXT(Game* game);
 void callback_BACK(Game* game);
 void callback_JUMP(Game* game);
 void callback_DROP(Game* game);
-void callback_PICK(Game* game);
+void callback_PICK(Game* game, char symbol);
 
 
 /**
@@ -329,7 +329,7 @@ void game_print_data(Game* game) {
   
   printf("=> Object locations:");
   for(i = 0; i < game->num_objects; i++){
-    printf(" %d", object_get_location(game->object[i]));
+    printf(" %d", (int)object_get_location(game->object[i]));
   }    
   printf("\n");
   printf("=> Player location: %d\n", (int) game_get_player_location(game));
@@ -356,6 +356,7 @@ void game_print_screen(Game* game){
   Space* space_back = NULL;
   Space* space_next = NULL;
   char obj[WORD_SIZE];
+  char aux[WORD_SIZE];
   int i;
 
   obj[0] = '\0'; /*Set to empty*/
@@ -377,7 +378,9 @@ void game_print_screen(Game* game){
   
   for(i = 0; i < game->num_objects; i++){
     if (object_get_location(game->object[i]) == id_back){
-      strcat(obj,object_get_symbol(game->object[i])); /*add the symbol*/
+      aux[0] = object_get_symbol(game->object[i]);
+      aux[1] = '\0';
+      strcat(obj,aux); /*add the symbol*/
     }
   }
 
@@ -393,9 +396,13 @@ void game_print_screen(Game* game){
     printf("      ^\n");
   }
   
+  obj[0] = '\0'; /*Set to empty*/
+
   for(i = 0; i < game->num_objects; i++){
     if (object_get_location(game->object[i]) == id_act) {
-      strcat(obj,object_get_symbol(game->object[i])); /*add the symbol*/
+      aux[0] = object_get_symbol(game->object[i]);
+      aux[1] = '\0';
+      strcat(obj,aux); /*add the symbol*/
     }
   }
   
@@ -410,10 +417,14 @@ void game_print_screen(Game* game){
     printf("|     %c     |\n",obj);
     printf("+-----------+\n");
   }
+
+  obj[0] = '\0'; /*Set to empty*/
   
    for(i = 0; i < game->num_objects; i++){
     if (object_get_location(game->object[i]) == id_next) {
-      strcat(obj,object_get_symbol(game->object[i])); /*add the symbol*/
+      aux[0] = object_get_symbol(game->object[i]);
+      aux[1] = '\0';
+      strcat(obj,aux); /*add the symbol*/
     }
   }
   
@@ -429,10 +440,13 @@ void game_print_screen(Game* game){
     printf("|     %c     |\n",obj);
   }
   
-  if (game_get_object_location(game) != NO_ID)
-    printf ("\nOject location:%d", (int)game_get_object_location(game));
+  printf("=> Object locations:");
+  for(i = 0; i < game->num_objects; i++){
+    printf(" %d", (int)object_get_location(game->object[i]));
+  }    
+  printf("\n");
 
-  printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p]");
+  printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p, roll or r]");
   printf("\nprompt:> ");
 }
 
@@ -551,6 +565,7 @@ void callback_DROP(Game* game){
 void callback_PICK(Game* game, char symbol){
   Object* object;
   Id player_id, object_id;
+  int i;
 
   player_id = game_get_player_location(game);
 
@@ -560,7 +575,7 @@ void callback_PICK(Game* game, char symbol){
     return;
   }
 
-  for(i = 0; i < num_objects; i++){
+  for(i = 0; i < game->num_objects; i++){
 
     if(object_get_symbol(game->object[i]) == symbol){
       object = game->object[i];
@@ -568,6 +583,7 @@ void callback_PICK(Game* game, char symbol){
       if(player_pick_object(game->player, object) != FALSE){
         object_set_location(object, NO_ID); 
         game->object[i] = game->object[game->num_objects-1]; /*Reorder the table*/
+        game->object[game->num_objects -1] = NULL; /*Preventing errors*/
         game->num_objects--; 
       }
     }  
