@@ -52,8 +52,8 @@ Id     game_get_space_id_at(Game* game, int position);
 STATUS game_set_player_location(Game* game, Id id);
 Id     game_get_player_location(Game* game);
 
-STATUS game_set_object_location(Game* game, Id id);
-Id     game_get_object_location(Game* game);
+STATUS game_set_object_location(Game* game, Id id_s, Id id_o);
+Id     game_get_object_location(Game* game, char symbol);
 
 /**
    Game interface implementation
@@ -87,13 +87,22 @@ STATUS game_init(Game* game) {
     game_destroy(game);
     return ERROR;
   }
-  game->object = object_create(1);
+
+  game->object = NULL;
+  /*
+  for( i = 0; i < MAX_IDS; i++){
+    game->object = object_create(i);
+  }
+  
   if(!game->object){
     game_destroy(game);
     return ERROR;
   }
-  object_set_symbol(game->object, '*');
-  
+
+  for( i = 0; i < MAX_IDS; i++){
+    object_set_symbol(game->object, (char) (i + 48));
+  }
+*/
   return OK;
 }
 
@@ -120,9 +129,11 @@ STATUS game_init_from_file(Game* game, char* filename) {
   if (game_load_spaces(game, filename) == ERROR)
     return ERROR;
 
-  game_set_player_location(game, game_get_space_id_at(game, 0));
+  if (game_load_objects(game, filename) == ERROR)
+    return ERROR;
+  /*game_set_player_location(game, game_get_space_id_at(game, 0));
   game_set_object_location(game, game_get_space_id_at(game, 0));
-
+  */
   return OK;
 }
 
@@ -152,7 +163,10 @@ STATUS game_destroy(Game* game) {
     }
 
     if(game->object != NULL){
-      object_destroy(game->object);
+      for (i = 0; i < game->num_objects; i++){
+        object_destroy(game->object[i]);
+      }
+      free(game->object);
     }
         
     return OK;
@@ -212,21 +226,34 @@ STATUS game_set_player_location(Game* game, Id id) {
     return player_set_location(game->player, id);
 }
 
-STATUS game_set_object_location(Game* game, Id id) {
+STATUS game_set_object_location(Game* game, Id id_s, Id id_o) {
 
-    if (id == NO_ID || !game) {
+    int i;
+
+    if (id_s == NO_ID || id_o == NO_ID || !game) {
         return ERROR;
     }
 
-    return object_set_location(game->object, id);
+    for( i = 0; i < game->num_objects; i++){
+      if(object_get_id(game->object[i]) == id_o){
+        return object_set_location(game->object[i], id_s);
+      }
+    }
+    return ERROR;
 }
 
 Id game_get_player_location(Game* game) {
     return player_get_location(game->player);
 }
 
-Id game_get_object_location(Game* game) {
-    return object_get_location(game->object);
+Id game_get_object_location(Game* game, char symbol) {
+    int i;
+    for(i = 0; i < game->num_objects; i++){
+      if(object_get_symbol(game->object[i]) == symbol){
+        return object_get_location(game->object[i]);
+      }
+    }
+    return NO_ID;
 }
 
 /* --------------------------------------------------------------------
@@ -300,7 +327,11 @@ void game_print_data(Game* game) {
     space_print(game->spaces[i]);
   }
   
-  printf("=> Object location: %d\n", (int) game_get_object_location(game));    
+  printf("=> Object locations:");
+  for(i = 0; i < game->num_objects; i++){
+    printf(" %d", object_get_location(game->object[i]));
+  }    
+  printf("\n");
   printf("=> Player location: %d\n", (int) game_get_player_location(game));
   printf("prompt:> ");
 }
@@ -324,7 +355,10 @@ void game_print_screen(Game* game){
   Space* space_act = NULL;
   Space* space_back = NULL;
   Space* space_next = NULL;
-  char obj='\0';
+  char obj[WORD_SIZE];
+  int i;
+
+  obj[0] = '\0'; /*Set to empty*/
   
   id_act = game_get_player_location(game);
   
@@ -341,11 +375,12 @@ void game_print_screen(Game* game){
   if(system(CLEAR))
   	 return; 
   
-  if (game_get_object_location(game) == id_back) 
-    obj= object_get_symbol(game->object);
-  else 
-    obj=' ';
-  
+  for(i = 0; i < game->num_objects; i++){
+    if (object_get_location(game->object[i]) == id_back){
+      strcat(obj,object_get_symbol(game->object[i])); /*add the symbol*/
+    }
+  }
+
   if (id_back != NO_ID) {
     if(space_get_east(space_back) != NO_ID){
       printf("|         %2d|>\n",(int) id_back);
@@ -358,10 +393,11 @@ void game_print_screen(Game* game){
     printf("      ^\n");
   }
   
-  if (game_get_object_location(game) == id_act)
-    obj=object_get_symbol(game->object);
-  else 
-    obj=' ';
+  for(i = 0; i < game->num_objects; i++){
+    if (object_get_location(game->object[i]) == id_act) {
+      strcat(obj,object_get_symbol(game->object[i])); /*add the symbol*/
+    }
+  }
   
   if (id_act != NO_ID) {
     printf("+-----------+\n");
@@ -375,10 +411,11 @@ void game_print_screen(Game* game){
     printf("+-----------+\n");
   }
   
-  if (game_get_object_location(game) == id_next)
-    obj=object_get_symbol(game->object);
-  else 
-    obj=' ';
+   for(i = 0; i < game->num_objects; i++){
+    if (object_get_location(game->object[i]) == id_next) {
+      strcat(obj,object_get_symbol(game->object[i])); /*add the symbol*/
+    }
+  }
   
   if (id_next != NO_ID) {
     printf("      v\n");
@@ -504,27 +541,36 @@ void callback_DROP(Game* game){
   }
   current_id = game_get_player_location(game);
 
-  game->object = object;
+  game->object[game->num_objects] = object;
+  game->num_objects++;
 
-  game_set_object_location(game, current_id);
+  game_set_object_location(game, current_id, object_get_id(object));
   return;
 }
 
-void callback_PICK(Game* game){
+void callback_PICK(Game* game, char symbol){
   Object* object;
   Id player_id, object_id;
 
   player_id = game_get_player_location(game);
-  object_id = game_get_object_location(game);
 
-  if(player_id != object_id || player_id == NO_ID || object_id==NO_ID){
+  object_id = game_get_object_location(game, symbol);
+
+  if(player_id != object_id || player_id == NO_ID || object_id == NO_ID){
     return;
   }
 
-  object = game->object; 
-  object_set_location(object, NO_ID); 
-  if(player_pick_object(game->player, object) != FALSE){
-    game->object = NULL;
+  for(i = 0; i < num_objects; i++){
+
+    if(object_get_symbol(game->object[i]) == symbol){
+      object = game->object[i];
+
+      if(player_pick_object(game->player, object) != FALSE){
+        object_set_location(object, NO_ID); 
+        game->object[i] = game->object[game->num_objects-1]; /*Reorder the table*/
+        game->num_objects--; 
+      }
+    }  
   }
 
   return;

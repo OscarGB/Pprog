@@ -224,7 +224,7 @@ STATUS space_set_west(Space* space, Id id) {
 }
 
 /* --------------------------------------------------------------------
-Function: space_set_object()
+Function: space_add_object()
 
 Date: 23/09/2016
 
@@ -238,7 +238,7 @@ Input:  Space* space (the space we want to know about)
 Output: a STATUS return: OK if everything went well, ERROR if it wasn't
 
 ------------------------------------------------------------------- */
-STATUS space_set_object(Space* space, Id id) {
+STATUS space_add_object(Space* space, Id id) {
     if (!space || id == NO_ID) {
         return ERROR;
     }
@@ -400,6 +400,29 @@ Set* space_get_object(Space* space) {
 }
 
 /* --------------------------------------------------------------------
+Function: space_is_object_in()
+
+Date: 14/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Checks if the object is in the given space
+
+Input: Space* (The space to check)
+       Id (The id to find)
+
+Output: BOOL (TRUE if its in the space, FALSE if error or isn't in the space)
+
+------------------------------------------------------------------- */
+
+BOOL space_is_object_in(Space* space, Id id){
+    if(!space || id == NO_ID){
+        return FALSE;
+    }
+    return set_is_id(space->object, id);
+}
+
+/* --------------------------------------------------------------------
 Function: space_print
 
 Date: 23/09/2016
@@ -450,7 +473,7 @@ STATUS space_print(Space* space) {
         fprintf(stdout, "---> No west link.\n");
     }
     
-   if (space_get_object(space) != NULL) {
+   if (set_is_empty(space_get_object(space)) == FALSE) {
         fprintf(stdout, "---> Object in the space.\n");
     } else {
         fprintf(stdout, "---> No object in the space.\n");

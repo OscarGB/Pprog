@@ -238,7 +238,7 @@ Output: Id id (The id of the space located at the west)
 Id space_get_west(Space* space);
 
 /* --------------------------------------------------------------------
-Function: space_set_object()
+Function: space_add_object()
 
 Date: 23/09/2016
 
@@ -252,7 +252,7 @@ Input:  Space* space (the space we want to know about)
 Output: a STATUS return: OK if everything went well, ERROR if it wasn't
 
 ------------------------------------------------------------------- */
-STATUS space_set_object(Space* space, Id value);
+STATUS space_add_object(Space* space, Id value);
 
 /* --------------------------------------------------------------------
 Function: space_get_object()
@@ -284,5 +284,22 @@ Input: Space *space (The space to be printed)
 Output STATUS (OK if everything went well, ERROR if something went wrong)
 ------------------------------------------------------------------- */
 STATUS space_print(Space* space);
+
+/* --------------------------------------------------------------------
+Function: space_is_object_in()
+
+Date: 14/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Checks if the object is in the given space
+
+Input: Space* (The space to check)
+       Id (The id to find)
+
+Output: BOOL (TRUE if its in the space, FALSE if error or isn't in the space)
+
+------------------------------------------------------------------- */
+BOOL space_is_object_in(Space* space, Id id);
 
 #endif

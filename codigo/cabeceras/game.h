@@ -20,10 +20,12 @@ Revision history: none
 #include "space.h"
 #include "player.h"
 #include "object.h"
+#include "set.h"
 
 typedef struct _Game{
   Player* player;
-  Object* object;
+  Object** object;
+  int num_objects;
   Space* spaces[MAX_SPACES + 1];
 } Game;
 
