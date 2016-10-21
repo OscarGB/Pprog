@@ -89,6 +89,13 @@ STATUS game_init(Game* game) {
   }
 
   game->object = NULL;
+
+  game->die = die_create(1);
+  if(!game->die){
+    player_destroy(game->player);
+    game_destroy(game);
+    return ERROR;
+  }
   /*
   for( i = 0; i < MAX_IDS; i++){
     game->object = object_create(i);
@@ -167,6 +174,10 @@ STATUS game_destroy(Game* game) {
         object_destroy(game->object[i]);
       }
       free(game->object);
+    }
+
+    if(game->die != NULL){
+      die_destroy(game->die);
     }
         
     return OK;
@@ -293,6 +304,9 @@ STATUS game_update(Game* game, T_Command cmd) {
     break;
   case DROP:
     callback_DROP(game);
+    break;
+  case ROLL:
+    callback_ROLL(game);
     break;
   case NO_CMD:
     break;
@@ -574,4 +588,13 @@ void callback_PICK(Game* game, char symbol){
   }
 
   return;
+}
+
+void callback_ROLL(Game* game){
+    int res;
+
+    res = die_roll(game->die, 1, 6);
+    if(res < 1 || res > 6) return;
+
+    return res;
 }

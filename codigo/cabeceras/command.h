@@ -26,7 +26,8 @@ typedef enum enum_Command {
   JUMP, 
   BACK,
   PICK,
-  DROP
+  DROP,
+  ROLL
 } T_Command; 
 
 
