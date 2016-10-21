@@ -15,6 +15,7 @@ Revision history: none
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "command.h"
 
 #define CMD_LENGHT 30
@@ -40,9 +41,9 @@ Output: Command (returns the command that has been written by the user)
 
 ------------------------------------------------------------------- */
 
-T_Command get_user_input(){
+Command* get_user_input(){
 	Command *cmd = NULL;
-	char input[CMD_LENGHT] = "";
+	char input[CMD_LENGHT];
 	char symbol; 
 
 	cmd = command_create();
@@ -50,7 +51,7 @@ T_Command get_user_input(){
 		return NULL;
 	} 
 
-	if (scanf("%s %c", input, symbol) > 0){
+	if (scanf("%s %c", input, &symbol) > 0){
 		if (!strcmp(input, "q") || !strcmp(input, "quit")){
 			cmd->cmd = QUIT;
 		}
@@ -101,7 +102,8 @@ Command* command_create(){
 		return NULL;
 	}
 	newcom->cmd = UNKNOWN;
-	newcom->symbol = '';
+	newcom->symbol = 'E';
+	return newcom;
 }
 
 /* --------------------------------------------------------------------

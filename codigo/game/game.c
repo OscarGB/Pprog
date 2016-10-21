@@ -54,6 +54,7 @@ Id     game_get_space_id_at(Game* game, int position);
 STATUS game_set_player_location(Game* game, Id id);
 Id     game_get_player_location(Game* game);
 
+STATUS game_add_object(Game* game, Object* object);
 STATUS game_set_object_location(Game* game, Id id_s, Id id_o);
 Id     game_get_object_location(Game* game, char symbol);
 
@@ -201,6 +202,22 @@ STATUS game_add_space(Game* game, Space* space) {
     }
 
     game->spaces[i] = space;
+
+    return OK;
+}
+
+STATUS game_add_object(Game* game, Object* object) {
+
+    if (object == NULL) {
+        return ERROR;
+    }
+
+    if(game->num_objects >= MAX_IDS){
+      return ERROR;
+    }
+
+    game->object[game->num_objects] = object;
+    game->num_objects++;
 
     return OK;
 }
@@ -407,7 +424,7 @@ void game_print_screen(Game* game){
     else{
       printf("|         %2d|\n",(int) id_back);
     }    
-    printf("|     %c     |\n",obj);
+    printf("|     %s     |\n",obj);
     printf("+-----------+\n");
     printf("      ^\n");
   }
@@ -430,7 +447,7 @@ void game_print_screen(Game* game){
     else{
       printf("| 8D      %2d|\n",(int) id_act);
     }
-    printf("|     %c     |\n",obj);
+    printf("|     %s     |\n",obj);
     printf("+-----------+\n");
   }
 
@@ -453,7 +470,7 @@ void game_print_screen(Game* game){
     else{
       printf("|         %2d|\n",(int) id_next);
     } 
-    printf("|     %c     |\n",obj);
+    printf("|     %s     |\n",obj);
   }
   
   printf("=> Object locations:");
