@@ -5,8 +5,6 @@
 #include "game_reader.h"
 #include "game.h"
 
-
-
 /* --------------------------------------------------------------------
 Function: game_load_spaces()
 
@@ -75,4 +73,71 @@ STATUS game_load_spaces(Game* game, char* filename) {
   fclose(file);
   
   return status;
+}
+
+
+/* --------------------------------------------------------------------
+Function: game_load_objects()
+
+Date: 21/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: reads the objects from a file
+
+Input: Game* and a char* (filename)
+
+Output: OK if the objects were successfuly read
+
+------------------------------------------------------------------- */
+STATUS game_load_objects(Game* game, char* filename) {
+  FILE* file = NULL;
+  char line[WORD_SIZE] = "";
+  char symbol = '';
+  char* toks = NULL;
+  Id object_id = NO_ID, space_id = NO_ID;
+  Object* object = NULL;
+  STATUS status = OK;
+  int num_objects = 0;
+
+  if (!filename) {
+    return ERROR;
+  }
+  
+  file = fopen(filename, "r");
+  if (file == NULL) {
+    return ERROR;
+  }
+  
+  while (fgets(line, WORD_SIZE, file) && num_objects < 4) {
+    if (strncmp("#o:", line, 3) == 0) {
+      toks = strtok(line + 3, "|");
+      object_id = atol(toks);
+      toks = strtok(NULL, "|");
+      space_id = atol(toks);
+      toks = strtok(NULL, "|");
+      symbol = toks[0];
+      
+#ifdef DEBUG 
+      printf("Leido: %ld|%ld|%c", object_id, space_id, symbol);
+#endif
+      object = object_create(object_id);
+      if (object != NULL) {
+        object_set_symbol(object, symbol);
+        obejct_set_location(object, space_id);
+        game_add_object(game, object);
+      }
+
+      num_objects++;
+    }
+  }
+  
+  if (ferror(file)) {
+    status = ERROR;
+  }
+  
+  fclose(file);
+  
+  
+return status;
 }

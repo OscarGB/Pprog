@@ -21,12 +21,14 @@ Revision history: none
 #include "player.h"
 #include "object.h"
 #include "set.h"
+#include "die.h"
 
 typedef struct _Game{
   Player* player;
   Object** object;
   int num_objects;
   Space* spaces[MAX_SPACES + 1];
+  Die* die;
 } Game;
 
 

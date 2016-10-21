@@ -56,6 +56,9 @@ T_Command get_user_input(){
 		else if (!strcmp(input, "d") || !strcmp(input, "drop")){
 			cmd = DROP;
 		}
+		else if (!strcmp(input, "r") || !strcmp(input, "roll")){
+			cmd = ROLL;
+		}
 		else{
 			cmd = UNKNOWN;
 		}
