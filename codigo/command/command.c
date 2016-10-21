@@ -19,6 +19,11 @@ Revision history: none
 
 #define CMD_LENGHT 30
 
+struct _Command{
+	T_Command cmd;
+	char symbol;
+};
+
 /* --------------------------------------------------------------------
 Function: get_user_input()
 
@@ -27,41 +32,137 @@ Date: 23/09/2016
 Author:Óscar Gómez, Jose Ignacio Gómez.
 
 Description: reads from keyboard in search of a valid command to execute
+			it creates the command inside
 
 Input: none
 
-Output: T_Command (returns the command that has been written by the user)
+Output: Command (returns the command that has been written by the user)
 
 ------------------------------------------------------------------- */
 
 T_Command get_user_input(){
-	T_Command cmd = NO_CMD;
-	char input[CMD_LENGHT] = "";  
-	if (scanf("%s", input) > 0){
+	Command *cmd = NULL;
+	char input[CMD_LENGHT] = "";
+	char symbol; 
+
+	cmd = command_create();
+	if(!cmd){
+		return NULL;
+	} 
+
+	if (scanf("%s %c", input, symbol) > 0){
 		if (!strcmp(input, "q") || !strcmp(input, "quit")){
-			cmd = QUIT;
+			cmd->cmd = QUIT;
 		}
 		else if (!strcmp(input, "n") || !strcmp(input, "next")){
-			cmd = NEXT;
+			cmd->cmd = NEXT;
 		}
 		else if (!strcmp(input, "b") || !strcmp(input, "back")){
-			cmd = BACK;
+			cmd->cmd = BACK;
 		}
 		else if (!strcmp(input, "j") || !strcmp(input, "jump")){
-			cmd = JUMP;
+			cmd->cmd = JUMP;
 		}
 		else if (!strcmp(input, "p") || !strcmp(input, "pick")){
-			cmd = PICK;
+			cmd->cmd = PICK;
+			cmd->symbol = symbol;
 		}
 		else if (!strcmp(input, "d") || !strcmp(input, "drop")){
-			cmd = DROP;
+			cmd->cmd = DROP;
 		}
 		else if (!strcmp(input, "r") || !strcmp(input, "roll")){
-			cmd = ROLL;
+			cmd->cmd = ROLL;
 		}
 		else{
-			cmd = UNKNOWN;
+			cmd->cmd = UNKNOWN;
 		}
 	}
 	return cmd;
+}
+
+/* --------------------------------------------------------------------
+Function: command_create()
+
+Date: 21/10/2016 
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It creates a command, defining its atributes tu UNKNOWN and ''
+
+Input: none
+
+Output: Command* (The created command)
+
+------------------------------------------------------------------- */
+Command* command_create(){
+	Command* newcom;
+	newcom = (Command *) malloc (sizeof(Command));
+	if(!newcom){
+		return NULL;
+	}
+	newcom->cmd = UNKNOWN;
+	newcom->symbol = '';
+}
+
+/* --------------------------------------------------------------------
+Function: command_destroy()
+
+Date: 21/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It destroys a command, freeing all the memory
+
+Input: Command* (The command to destroy)
+
+Output: void
+
+------------------------------------------------------------------- */
+void command_destroy(Command *com){
+	if(!com){
+		return;
+	}
+	free(com);
+}
+
+/* --------------------------------------------------------------------
+Function: command_get_cmd()
+
+Date: 21/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It gives the value of the T_Command inside Command
+
+Input: Command* (The command to inspect)
+
+Output: T_Command (The T_Command inside the given Command)
+
+------------------------------------------------------------------- */
+T_Command command_get_cmd(Command *com){
+	if(!com){
+		return UNKNOWN;
+	}
+	return com->cmd;
+}
+
+/* --------------------------------------------------------------------
+Function: command_get_symbol()
+
+Date: 21/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: IT gives the value of the symbol inside Command
+
+Input: Command* (The command to inspect)
+
+Output: char (The symbol inside the given Command)
+
+------------------------------------------------------------------- */
+char command_get_symbol(Command *com){
+	if(!com){
+		return UNKNOWN;
+	}
+	return com->symbol;
 }

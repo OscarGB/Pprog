@@ -20,6 +20,7 @@ Revision history: none
 #include "game.h"
 #include "player.h"
 #include "object.h"
+#include "game_reader.h"
 
 #ifdef __WINDOWS_BUILD__
 #define CLEAR "cls"
@@ -38,6 +39,7 @@ void callback_BACK(Game* game);
 void callback_JUMP(Game* game);
 void callback_DROP(Game* game);
 void callback_PICK(Game* game, char symbol);
+void callback_ROLL(Game* game);
 
 
 /**
@@ -276,14 +278,14 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 
 Description: it calls different callbacks depending on the written command
 
-Input: Game* and a command (cmd)
+Input: Game* and a Command (cmd)
 
 Output: OK if everything went OK
 
 ------------------------------------------------------------------- */
-STATUS game_update(Game* game, T_Command cmd) {
+STATUS game_update(Game* game, Command *cmd) {
 
-  switch (cmd) {
+  switch (command_get_cmd(cmd)) {
   case UNKNOWN:
     callback_UNKNOWN(game);
     break;
@@ -300,7 +302,7 @@ STATUS game_update(Game* game, T_Command cmd) {
     callback_JUMP(game);
     break;
   case PICK:
-    callback_PICK(game);
+    callback_PICK(game, command_get_symbol(cmd));
     break;
   case DROP:
     callback_DROP(game);
@@ -612,5 +614,5 @@ void callback_ROLL(Game* game){
     res = die_roll(game->die, 1, 6);
     if(res < 1 || res > 6) return;
 
-    return res;
+    return;
 }

@@ -76,12 +76,12 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 
 Description: it calls different callbacks depending on the written command
 
-Input: Game* and a command (cmd)
+Input: Game* and a Command (cmd)
 
 Output: OK if everything went OK
 
 ------------------------------------------------------------------- */
-STATUS game_update(Game* game, T_Command cmd);
+STATUS game_update(Game* game, Command *cmd);
 
 /* --------------------------------------------------------------------
 Function: game_destroy()
