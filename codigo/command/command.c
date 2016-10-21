@@ -26,7 +26,7 @@ struct _Command{
 };
 
 /* --------------------------------------------------------------------
-Function: get_user_input()
+Function: get_user_action()
 
 Date: 23/09/2016
 
@@ -35,50 +35,64 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 Description: reads from keyboard in search of a valid command to execute
 			it creates the command inside
 
-Input: none
+action: none
 
 Output: Command (returns the command that has been written by the user)
 
 ------------------------------------------------------------------- */
 
-Command* get_user_input(){
-	Command *cmd = NULL;
+STATUS get_user_input(Command* command){
+	char action[CMD_LENGHT];
 	char input[CMD_LENGHT];
 	char symbol; 
+	char* toks = NULL;
 
-	cmd = command_create();
-	if(!cmd){
-		return NULL;
-	} 
-
-	if (scanf("%s %c", input, &symbol) > 0){
-		if (!strcmp(input, "q") || !strcmp(input, "quit")){
-			cmd->cmd = QUIT;
-		}
-		else if (!strcmp(input, "n") || !strcmp(input, "next")){
-			cmd->cmd = NEXT;
-		}
-		else if (!strcmp(input, "b") || !strcmp(input, "back")){
-			cmd->cmd = BACK;
-		}
-		else if (!strcmp(input, "j") || !strcmp(input, "jump")){
-			cmd->cmd = JUMP;
-		}
-		else if (!strcmp(input, "p") || !strcmp(input, "pick")){
-			cmd->cmd = PICK;
-			cmd->symbol = symbol;
-		}
-		else if (!strcmp(input, "d") || !strcmp(input, "drop")){
-			cmd->cmd = DROP;
-		}
-		else if (!strcmp(input, "r") || !strcmp(input, "roll")){
-			cmd->cmd = ROLL;
+	if(command == NULL){
+		return ERROR;
+	}
+	if (fgets (input, WORD_SIZE, stdin) != NULL){
+		toks = strtok(input, " \n");
+		strcpy(action, toks);
+		toks = strtok(NULL, " \n");
+		if(toks != NULL){
+			symbol = toks[0];
 		}
 		else{
-			cmd->cmd = UNKNOWN;
+			symbol = E;
+			command->symbol = E;
+		}
+
+		#ifdef DEBUG
+			printf("Leido: %s\n", input);
+		#endif
+		if (!strcmp(action, "q") || !strcmp(action, "quit")){
+			command->cmd = QUIT;
+		}
+		else if (!strcmp(action, "n") || !strcmp(action, "next")){
+			command->cmd = NEXT;
+		}
+		else if (!strcmp(action, "b") || !strcmp(action, "back")){
+			command->cmd = BACK;
+		}
+		else if (!strcmp(action, "j") || !strcmp(action, "jump")){
+			command->cmd = JUMP;
+		}
+		else if (!strcmp(action, "p") || !strcmp(action, "pick")){
+			command->cmd = PICK;
+
+			command->symbol = symbol;
+		}
+		else if (!strcmp(action, "d") || !strcmp(action, "drop")){
+			command->cmd = DROP;
+		}
+		else if (!strcmp(action, "r") || !strcmp(action, "roll")){
+			command->cmd = ROLL;
+		}
+		else{
+			command->cmd = UNKNOWN;
 		}
 	}
-	return cmd;
+	return OK;
 }
 
 /* --------------------------------------------------------------------
@@ -90,7 +104,7 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 
 Description: It creates a command, defining its atributes tu UNKNOWN and ''
 
-Input: none
+action: none
 
 Output: Command* (The created command)
 
@@ -115,7 +129,7 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 
 Description: It destroys a command, freeing all the memory
 
-Input: Command* (The command to destroy)
+action: Command* (The command to destroy)
 
 Output: void
 
@@ -136,7 +150,7 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 
 Description: It gives the value of the T_Command inside Command
 
-Input: Command* (The command to inspect)
+action: Command* (The command to inspect)
 
 Output: T_Command (The T_Command inside the given Command)
 
@@ -157,7 +171,7 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 
 Description: IT gives the value of the symbol inside Command
 
-Input: Command* (The command to inspect)
+action: Command* (The command to inspect)
 
 Output: char (The symbol inside the given Command)
 

@@ -25,7 +25,7 @@ Revision history: none
 
 typedef struct _Game{
   Player* player;
-  Object** object;
+  Object* object[MAX_IDS];
   int num_objects;
   Space* spaces[MAX_SPACES + 1];
   Die* die;

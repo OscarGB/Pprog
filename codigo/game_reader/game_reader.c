@@ -4,6 +4,7 @@
 #include <string.h>
 #include "game_reader.h"
 #include "game.h"
+#include "object.h"
 
 /* --------------------------------------------------------------------
 Function: game_load_spaces()
@@ -21,6 +22,7 @@ Output: OK if the table was successfuly read
 ------------------------------------------------------------------- */
 STATUS game_load_spaces(Game* game, char* filename) {
   FILE* file = NULL;
+  int i;
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
   char gdesc[3][7];
@@ -140,12 +142,12 @@ STATUS game_load_objects(Game* game, char* filename) {
       symbol = toks[0];
       
 #ifdef DEBUG 
-      printf("Leido: %ld|%ld|%c", object_id, space_id, symbol);
+      printf("Leido: %ld|%ld|%c\n", object_id, space_id, symbol);
 #endif
       object = object_create(object_id);
       if (object != NULL) {
         object_set_symbol(object, symbol);
-        obejct_set_location(object, space_id);
+        object_set_location(object, space_id);
         game_add_object(game, object);
       }
 

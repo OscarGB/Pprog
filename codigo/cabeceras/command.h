@@ -17,6 +17,8 @@ Revision history: none
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include "types.h"
+
 /*Enumeration of valid commands*/
 typedef enum enum_Command { 
   NO_CMD = -2, 
@@ -48,7 +50,7 @@ Input: none
 Output: Command (returns the command that has been written by the user)
 
 ------------------------------------------------------------------- */
-Command* get_user_input();
+STATUS get_user_input();
 
 /* --------------------------------------------------------------------
 Function: command_create()

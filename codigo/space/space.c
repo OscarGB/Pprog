@@ -75,7 +75,7 @@ Space* space_create(Id id) {
     }
 
     for(i = 0; i <= 2; i++){
-        newspace->gdesc[i] = "";
+        newSpace->gdesc[i] = "";
     }
 
     return newSpace;

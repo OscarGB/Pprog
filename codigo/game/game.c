@@ -91,7 +91,8 @@ STATUS game_init(Game* game) {
     return ERROR;
   }
 
-  game->object = NULL;
+  game->object;
+  game->num_objects = 0;
 
   game->die = die_create(1);
   if(!game->die){
@@ -136,14 +137,15 @@ STATUS game_init_from_file(Game* game, char* filename) {
   if (game_init(game) == ERROR)
     return ERROR;
 
-  if (game_load_spaces(game, filename) == ERROR)
-    return ERROR;
 
   if (game_load_objects(game, filename) == ERROR)
     return ERROR;
-  /*game_set_player_location(game, game_get_space_id_at(game, 0));
-  game_set_object_location(game, game_get_space_id_at(game, 0));
-  */
+
+  if (game_load_spaces(game, filename) == ERROR)
+    return ERROR;
+  game_set_player_location(game, game_get_space_id_at(game, 0));
+  /*game_set_object_location(game, game_get_space_id_at(game, 0));*/
+  
   return OK;
 }
 
@@ -176,7 +178,6 @@ STATUS game_destroy(Game* game) {
       for (i = 0; i < game->num_objects; i++){
         object_destroy(game->object[i]);
       }
-      free(game->object);
     }
 
     if(game->die != NULL){
@@ -396,6 +397,7 @@ void game_print_screen(Game* game){
   
   id_act = game_get_player_location(game);
   
+
   if (id_act == NO_ID){
     return;
   }
@@ -404,11 +406,10 @@ void game_print_screen(Game* game){
   id_back = space_get_north(space_act);
   id_next = space_get_south(space_act);
   space_back = game_get_space(game, id_back);
-  space_next = game_get_space(game, id_next);
+  space_next = game_get_space(game, id_next);  
   
   if(system(CLEAR))
   	 return; 
-  
   for(i = 0; i < game->num_objects; i++){
     if (object_get_location(game->object[i]) == id_back){
       aux[0] = object_get_symbol(game->object[i]);
@@ -424,7 +425,7 @@ void game_print_screen(Game* game){
     else{
       printf("|         %2d|\n",(int) id_back);
     }    
-    printf("|     %s     |\n",obj);
+    printf("|  %-3s      |\n",obj);
     printf("+-----------+\n");
     printf("      ^\n");
   }
@@ -447,7 +448,7 @@ void game_print_screen(Game* game){
     else{
       printf("| 8D      %2d|\n",(int) id_act);
     }
-    printf("|     %s     |\n",obj);
+    printf("|  %-3s      |\n",obj);
     printf("+-----------+\n");
   }
 
@@ -470,7 +471,7 @@ void game_print_screen(Game* game){
     else{
       printf("|         %2d|\n",(int) id_next);
     } 
-    printf("|     %s     |\n",obj);
+    printf("|  %-3s      |\n",obj);
   }
   
   printf("=> Object locations:");
@@ -599,6 +600,10 @@ void callback_PICK(Game* game, char symbol){
   Object* object;
   Id player_id, object_id;
   int i;
+
+  if(symbol == E){
+    return;
+  }
 
   player_id = game_get_player_location(game);
 

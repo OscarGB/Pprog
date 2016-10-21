@@ -37,6 +37,7 @@ Output: int 1 if ERROR, 0 if OK
 int main(int argc, char *argv[]){
   	Game game;
   	Command *command = NULL;
+
 	if (argc < 2){
 	fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
 	return 1;
@@ -45,12 +46,17 @@ int main(int argc, char *argv[]){
 		fprintf(stderr, "Error while initializing game.\n");
 		return 1;
 	}
-	while ((command != QUIT) && !game_is_over(&game)){
+
+	command = command_create();
+	if(!command){
+		fprintf(stderr, "Command couldnt be created\n");
+	}
+	while ((command_get_cmd(command) != QUIT) && !game_is_over(&game)){
 		 game_print_screen(&game);
-		 command = get_user_input();
+		 get_user_input(command);
 		 game_update(&game, command);
-		 command_destroy(command);
 		}
 	game_destroy(&game);
+	command_destroy(command);
 	return 0;
 }
