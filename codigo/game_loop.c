@@ -16,6 +16,7 @@ Revision history: none
 #include <stdio.h>
 #include <stdlib.h>
 #include "game.h"
+#include "command.h"
 
 /* --------------------------------------------------------------------
 Function: main()
@@ -35,7 +36,7 @@ Output: int 1 if ERROR, 0 if OK
 
 int main(int argc, char *argv[]){
   	Game game;
-  	T_Command command = NO_CMD;
+  	Command *command = NULL;
 	if (argc < 2){
 	fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
 	return 1;
@@ -48,6 +49,7 @@ int main(int argc, char *argv[]){
 		 game_print_screen(&game);
 		 command = get_user_input();
 		 game_update(&game, command);
+		 command_destroy(command);
 		}
 	game_destroy(&game);
 	return 0;

@@ -20,6 +20,7 @@ Revision history: none
 #include "game.h"
 #include "player.h"
 #include "object.h"
+#include "game_reader.h"
 
 #ifdef __WINDOWS_BUILD__
 #define CLEAR "cls"
@@ -38,6 +39,7 @@ void callback_BACK(Game* game);
 void callback_JUMP(Game* game);
 void callback_DROP(Game* game);
 void callback_PICK(Game* game, char symbol);
+void callback_ROLL(Game* game);
 
 
 /**
@@ -52,6 +54,7 @@ Id     game_get_space_id_at(Game* game, int position);
 STATUS game_set_player_location(Game* game, Id id);
 Id     game_get_player_location(Game* game);
 
+STATUS game_add_object(Game* game, Object* object);
 STATUS game_set_object_location(Game* game, Id id_s, Id id_o);
 Id     game_get_object_location(Game* game, char symbol);
 
@@ -203,6 +206,22 @@ STATUS game_add_space(Game* game, Space* space) {
     return OK;
 }
 
+STATUS game_add_object(Game* game, Object* object) {
+
+    if (object == NULL) {
+        return ERROR;
+    }
+
+    if(game->num_objects >= MAX_IDS){
+      return ERROR;
+    }
+
+    game->object[game->num_objects] = object;
+    game->num_objects++;
+
+    return OK;
+}
+
 Id game_get_space_id_at(Game* game, int position) {
 
     if (position < 0 || position >= MAX_SPACES) {
@@ -276,14 +295,14 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 
 Description: it calls different callbacks depending on the written command
 
-Input: Game* and a command (cmd)
+Input: Game* and a Command (cmd)
 
 Output: OK if everything went OK
 
 ------------------------------------------------------------------- */
-STATUS game_update(Game* game, T_Command cmd) {
+STATUS game_update(Game* game, Command *cmd) {
 
-  switch (cmd) {
+  switch (command_get_cmd(cmd)) {
   case UNKNOWN:
     callback_UNKNOWN(game);
     break;
@@ -300,7 +319,7 @@ STATUS game_update(Game* game, T_Command cmd) {
     callback_JUMP(game);
     break;
   case PICK:
-    callback_PICK(game);
+    callback_PICK(game, command_get_symbol(cmd));
     break;
   case DROP:
     callback_DROP(game);
@@ -405,7 +424,7 @@ void game_print_screen(Game* game){
     else{
       printf("|         %2d|\n",(int) id_back);
     }    
-    printf("|     %c     |\n",obj);
+    printf("|     %s     |\n",obj);
     printf("+-----------+\n");
     printf("      ^\n");
   }
@@ -428,7 +447,7 @@ void game_print_screen(Game* game){
     else{
       printf("| 8D      %2d|\n",(int) id_act);
     }
-    printf("|     %c     |\n",obj);
+    printf("|     %s     |\n",obj);
     printf("+-----------+\n");
   }
 
@@ -451,7 +470,7 @@ void game_print_screen(Game* game){
     else{
       printf("|         %2d|\n",(int) id_next);
     } 
-    printf("|     %c     |\n",obj);
+    printf("|     %s     |\n",obj);
   }
   
   printf("=> Object locations:");
@@ -612,5 +631,5 @@ void callback_ROLL(Game* game){
     res = die_roll(game->die, 1, 6);
     if(res < 1 || res > 6) return;
 
-    return res;
+    return;
 }
