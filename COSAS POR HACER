@@ -1,6 +1,1 @@
-Cambiar game para object:
-game_get_object_location
-terminar pick, bucle para buscar posicion de array y tocar con eso
-
-
-game_add_object
+Acabar space_set_gdesc, comprobar todo lo relacionado con gdesc

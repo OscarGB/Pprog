@@ -28,6 +28,7 @@ struct _Space {
     Id east;
     Id west;
     Set *object;
+    char gdesc[3][7];
 };
 
 /* --------------------------------------------------------------------
@@ -46,6 +47,7 @@ Output: Space* (The created space)
 ------------------------------------------------------------------- */
 
 Space* space_create(Id id) {
+    int i;
 
     Space *newSpace = NULL;
 
@@ -70,6 +72,10 @@ Space* space_create(Id id) {
     if(!newSpace->object){
         space_destroy(newSpace);
         return NULL;
+    }
+
+    for(i = 0; i <= 2; i++){
+        newspace->gdesc[i] = "";
     }
 
     return newSpace;
@@ -438,6 +444,7 @@ Output STATUS (OK if everything went well, ERROR if something went wrong)
 
 STATUS space_print(Space* space) {
     Id idaux = NO_ID;
+    int i;
   
     if (!space) {
         return ERROR;
@@ -479,6 +486,14 @@ STATUS space_print(Space* space) {
         fprintf(stdout, "---> No object in the space.\n");
     }
 
+    for(i = 0; i <= 2; i++){
+        fprintf(stdout, "%s\n", space->gdesc[i]);
+    }
+
     return OK;
+}
+
+BOOL space_set_gdesc(Space* space, char* str, int line){
+    /*Acabar función*/
 }
 
