@@ -391,7 +391,8 @@ void game_print_screen(Game* game){
   Space* space_next = NULL;
   char obj[WORD_SIZE];
   char aux[WORD_SIZE];
-  int i;
+  int i, last;
+  char symbol;
 
   obj[0] = '\0'; /*Set to empty*/
   
@@ -474,11 +475,23 @@ void game_print_screen(Game* game){
     printf("|  %-3s      |\n",obj);
   }
   
-  printf("=> Object locations:");
+  printf("Object locations:");
   for(i = 0; i < game->num_objects; i++){
-    printf(" %d", (int)object_get_location(game->object[i]));
+    printf(" %c:%d", object_get_symbol(game->object[i]), (int)object_get_location(game->object[i]));
   }    
   printf("\n");
+
+  symbol = player_get_object_symbol(player);
+  printf("Player objects:");
+  if(symbol != CHAR_ERROR){
+    printf("%c", symbol);
+  }
+  printf("\n");
+
+  last = dia_get_last_roll(die);
+  if(last != -1){
+    printf("Last die value: %d\n", last);
+  }
 
   printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p, roll or r]");
   printf("\nprompt:> ");
