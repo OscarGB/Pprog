@@ -302,4 +302,36 @@ Output: BOOL (TRUE if its in the space, FALSE if error or isn't in the space)
 ------------------------------------------------------------------- */
 BOOL space_is_object_in(Space* space, Id id);
 
+/* --------------------------------------------------------------------
+Function: space_set_gdesc()
+
+Date: 27/10/16
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: returns OK if the gdesc has been successfuly set
+
+Input: Space* , char** the gdesc
+
+Output: OK if it was successfuly set
+
+------------------------------------------------------------------- */
+STATUS space_set_gdesc(Space* space, char** gdesc);
+
+/* --------------------------------------------------------------------
+Function: space_set_gdesc()
+
+Date: 27/10/16
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: returns OK if the gdesc has been successfuly set
+
+Input: Space* , char** the gdesc
+
+Output: OK if it was successfuly set
+
+------------------------------------------------------------------- */
+STATUS space_set_gdesc(Space* space, char** gdesc);
+
 #endif
