@@ -164,4 +164,21 @@ Output: OK if the space was successfuly added
 ------------------------------------------------------------------- */
 STATUS game_add_space(Game* game, Space* space); 
 
+/* --------------------------------------------------------------------
+Function: game_add_object
+
+Date: 27/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: Adds an object to the game
+
+Input: Game* (The game to change)
+       Object* (The object to add)
+
+Output: STATUS (OK if everything went well, ERROR if something went wrong)
+
+------------------------------------------------------------------- */
+STATUS game_add_object(Game* game, Object* object);
+
 #endif

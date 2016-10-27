@@ -37,7 +37,6 @@ Output: OK if the table was successfuly read
 ------------------------------------------------------------------- */
 STATUS game_load_spaces(Game* game, char* filename) {
   FILE* file = NULL;
-  int i;
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
   char gdesc[3][7];
