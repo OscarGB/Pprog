@@ -1,3 +1,17 @@
+/* ===================================================================
+File: game_reader.c
+
+Version: 2.0
+
+Date: 22/09/2016
+
+Author: Óscar Gómez, Jose Ignacio Gómez.
+
+Description: implementation of the rutine that reads a file to preapre the game
+
+Revision history: 2.0 included reader for objects
+
+=================================================================== */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,6 +19,7 @@
 #include "game_reader.h"
 #include "game.h"
 #include "object.h"
+#include "space.h"
 
 /* --------------------------------------------------------------------
 Function: game_load_spaces()
