@@ -80,9 +80,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
       	space_set_south(space, south);
       	space_set_west(space, west);
         if(flag == 1){  
-          for(i = 0; i <= 2; i++){
-            space_set_gdesc(space, gdesc[i], i);
-          }
+            space_set_gdesc(space, gdesc);
         }
       	game_add_space(game, space);
       }
