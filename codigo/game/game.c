@@ -484,7 +484,7 @@ void game_print_screen(Game* game){
   }
   printf("\n");
 
-  last = dia_get_last_roll(game->die);
+  last = die_get_last_roll(game->die);
   if(last != -1){
     printf("Last die value: %d\n", last);
   }
