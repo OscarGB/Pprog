@@ -58,16 +58,16 @@ STATUS game_load_spaces(Game* game, char* filename) {
       west = atol(toks);
       toks = strtok(NULL, "|");
       if(!toks){
-        gdesc[0] = toks;
+        strcpy(gdesc[0], toks);
         flag = 1;
       }
       toks = strtok(NULL, "|");
       if(!toks){
-        gdesc[1] = toks;
+        strcpy(gdesc[1], toks);
       }
       toks = strtok(NULL, "|");
       if(!toks){
-        gdesc[2] = toks;
+        strcpy(gdesc[2], toks):
       }
 #ifdef DEBUG 
       printf("Leido: %ld|%s|%ld|%ld|%ld|%ld\n", id, name, north, east, south, west);
