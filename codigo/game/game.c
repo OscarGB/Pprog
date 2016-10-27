@@ -21,6 +21,7 @@ Revision history: none
 #include "player.h"
 #include "object.h"
 #include "game_reader.h"
+#include "die.h"
 
 #ifdef __WINDOWS_BUILD__
 #define CLEAR "cls"
@@ -91,7 +92,6 @@ STATUS game_init(Game* game) {
     return ERROR;
   }
 
-  game->object;
   game->num_objects = 0;
 
   game->die = die_create(1);
@@ -100,9 +100,9 @@ STATUS game_init(Game* game) {
     game_destroy(game);
     return ERROR;
   }
-  /*
+  
   for( i = 0; i < MAX_IDS; i++){
-    game->object = object_create(i);
+    game->object[i] = object_create(i);
   }
   
   if(!game->object){
@@ -110,10 +110,6 @@ STATUS game_init(Game* game) {
     return ERROR;
   }
 
-  for( i = 0; i < MAX_IDS; i++){
-    object_set_symbol(game->object, (char) (i + 48));
-  }
-*/
   return OK;
 }
 
@@ -481,14 +477,14 @@ void game_print_screen(Game* game){
   }    
   printf("\n");
 
-  symbol = player_get_object_symbol(player);
+  symbol = player_get_object_symbol(game->player);
   printf("Player objects:");
   if(symbol != CHAR_ERROR){
     printf("%c", symbol);
   }
   printf("\n");
 
-  last = dia_get_last_roll(die);
+  last = dia_get_last_roll(game->die);
   if(last != -1){
     printf("Last die value: %d\n", last);
   }
