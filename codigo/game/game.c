@@ -513,7 +513,7 @@ BOOL game_is_over(Game* game) {
 
 
 /*
-  
+  Private callbacks
 */
 void callback_UNKNOWN(Game* game) {
 }
