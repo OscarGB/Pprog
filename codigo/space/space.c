@@ -507,3 +507,11 @@ STATUS space_set_gdesc(Space* space, char** gdesc){
     return OK;
 }
 
+char** space_get_gdesc(Space* space){
+    if(!space){
+        return NULL;
+    }
+
+    return space->gdesc;
+}
+
