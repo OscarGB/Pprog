@@ -239,6 +239,10 @@ Output: TRUE if the object was picked
 BOOL player_pick_object (Player* player, Object* object){
 	int i;
 
+	if(player == NULL || object == NULL){
+		return FALSE;
+	}
+
 	for (i = 0; i < MAX_OBJECTS; i++){
 		if (player->object[i] == NULL){
 			player->object[i] = object;
@@ -247,4 +251,25 @@ BOOL player_pick_object (Player* player, Object* object){
 	}
 
 	return FALSE;
+}
+
+/* --------------------------------------------------------------------
+Function: player_get_object_symbol()
+
+Date: 23/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It return the symbol of the Object that the player has
+
+Input: Player* (The player to inspect)
+
+Output: char (The symbol, if an error ocurs it return CHAR_ERROR)
+
+------------------------------------------------------------------- */
+char player_get_object_symbol (Player* player){
+	if(player == NULL || player->object[0] == NULL){
+		return CHAR_ERROR;
+	}
+	return object_get_symbol(player->object[0]);
 }

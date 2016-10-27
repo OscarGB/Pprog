@@ -160,4 +160,20 @@ Output: TRUE if the object was picked
 ------------------------------------------------------------------- */
 BOOL player_pick_object(Player *player, Object* object);
 
+/* --------------------------------------------------------------------
+Function: player_get_object_symbol()
+
+Date: 23/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: It return the symbol of the Object that the player has
+
+Input: Player* (The player to inspect)
+
+Output: char (The symbol, if an error ocurs it return CHAR_ERROR)
+
+------------------------------------------------------------------- */
+char player_get_object_symbol (Player* player);
+
 #endif
