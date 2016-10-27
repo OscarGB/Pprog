@@ -493,7 +493,17 @@ STATUS space_print(Space* space) {
     return OK;
 }
 
-BOOL space_set_gdesc(Space* space, char* str, int line){
-    /*Acabar función*/
+STATUS space_set_gdesc(Space* space, char** gdesc){
+    int i;
+
+    if(!space || !gdesc){
+        return ERROR;
+    }
+
+    for(i = 0; i < 3; i++){
+        strcpy(space->gdesc[i], gdesc[i]);
+    }
+
+    return OK;
 }
 
