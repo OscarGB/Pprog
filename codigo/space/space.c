@@ -28,7 +28,7 @@ struct _Space {
     Id east;
     Id west;
     Set *object;
-    char gdesc[3][7];
+    char gdesc[3][8];
 };
 
 /* --------------------------------------------------------------------
@@ -492,7 +492,20 @@ STATUS space_print(Space* space) {
 
     return OK;
 }
+/* --------------------------------------------------------------------
+Function: space_set_gdesc()
 
+Date: 27/10/16
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: returns OK if the gdesc has been successfuly set
+
+Input: Space* , char** the gdesc
+
+Output: OK if it was successfuly set
+
+------------------------------------------------------------------- */
 STATUS space_set_gdesc(Space* space, char** gdesc){
     int i;
  
@@ -506,7 +519,22 @@ STATUS space_set_gdesc(Space* space, char** gdesc){
 
     return OK;
 }
- 
+
+
+/* --------------------------------------------------------------------
+Function: space_get_gdesc()
+
+Date: 27/10/16
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: returns the gdesc
+
+Input: Space*
+
+Output: gdesc
+
+------------------------------------------------------------------- */ 
 char** space_get_gdesc(Space* space){
     if(!space){
         return NULL;
