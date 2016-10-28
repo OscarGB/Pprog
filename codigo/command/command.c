@@ -93,7 +93,9 @@ STATUS get_user_input(Command* command){
 				command->cmd = UNKNOWN;
 			}
 		}
-		
+		else{
+			command->cmd = NO_CMD;
+		}
 	}
 	return OK;
 }
