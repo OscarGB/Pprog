@@ -391,6 +391,7 @@ void game_print_screen(Game* game){
   char aux[WORD_SIZE];
   int i, last;
   char symbol;
+  int obj_size; /*Control of the number of objects to print*/
 
   obj[0] = '\0'; /*Set to empty*/
   
@@ -409,12 +410,21 @@ void game_print_screen(Game* game){
   
   if(system(CLEAR))
   	 return; 
+  obj_size = 0;
+
   for(i = 0; i < game->num_objects; i++){
     if (object_get_location(game->object[i]) == id_back){
       aux[0] = object_get_symbol(game->object[i]);
       aux[1] = '\0';
       strcat(obj,aux); /*add the symbol*/
+      obj_size++; 
     }
+  }
+  if(obj_size > 3){
+    obj[3] = '.';
+    obj[4] = '.';
+    obj[5] = '.';
+    obj[6] = '\0';
   }
 
   if (id_back != NO_ID) {
@@ -426,21 +436,29 @@ void game_print_screen(Game* game){
     }    
     printf("%s", space_get_gdesc(space_back));
     printf("|           |\n");
-    printf("|  %-3s      |\n",obj);
+    printf("| %-6s    |\n",obj);
     printf("+-----------+\n");
     printf("      ^\n");
   }
   
   obj[0] = '\0'; /*Set to empty*/
+  obj_size = 0;
 
   for(i = 0; i < game->num_objects; i++){
     if (object_get_location(game->object[i]) == id_act) {
       aux[0] = object_get_symbol(game->object[i]);
       aux[1] = '\0';
       strcat(obj,aux); /*add the symbol*/
+      obj_size++;
     }
   }
-  
+  if(obj_size > 3){
+    obj[3] = '.';
+    obj[4] = '.';
+    obj[5] = '.';
+    obj[6] = '\0';
+  }
+
   if (id_act != NO_ID) {
     printf("+-----------+\n");
     if(space_get_east(space_act) != NO_ID){
@@ -451,18 +469,26 @@ void game_print_screen(Game* game){
     }
     printf("%s", space_get_gdesc(space_act));
     printf("|           |\n");
-    printf("|  %-3s      |\n",obj);
+    printf("| %-6s    |\n",obj);
     printf("+-----------+\n");
   }
 
   obj[0] = '\0'; /*Set to empty*/
-  
+  obj_size = 0;
+
    for(i = 0; i < game->num_objects; i++){
     if (object_get_location(game->object[i]) == id_next) {
       aux[0] = object_get_symbol(game->object[i]);
       aux[1] = '\0';
       strcat(obj,aux); /*add the symbol*/
+      obj_size++;
     }
+  }
+  if(obj_size > 3){
+    obj[3] = '.';
+    obj[4] = '.';
+    obj[5] = '.';
+    obj[6] = '\0';
   }
   
   if (id_next != NO_ID) {
@@ -476,7 +502,7 @@ void game_print_screen(Game* game){
     } 
     printf("%s", space_get_gdesc(space_next));
     printf("|           |\n");
-    printf("|  %-3s      |\n",obj);
+    printf("|  %-6s   |\n",obj);
   }
   
   printf("Object locations:");
