@@ -28,6 +28,8 @@ struct _Player {
 	Object *object[MAX_OBJECTS]; /*We've set MAX_OBJECTS
 								as 1, in order to prepare 
 								the bag creation*/
+								/*We left it this way because in the I3 we will use
+								the inventory*/
 };
 
 
