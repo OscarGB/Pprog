@@ -1,3 +1,4 @@
-Acabar space_set_gdesc, comprobar todo lo relacionado con gdesc
-El gdesc se va a la kk
-gdesc se vuelve a hacer como una sola linea intercalando \n
+hay mas objetos de los que permite la casilla
+hay que controlar el tamaño de pantalla
+hacer algo al llegar a la casilla de salida
+¿Regular el número de jumps seguidos?
