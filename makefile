@@ -1,6 +1,6 @@
 CFLAGS = -g -Wall -pedantic -ansi
 
-DEPS = codigo/command/command.h codigo/die/die.h ./game/game.h codigo/game_reader/game_reader.h codigo/object/object.h codigo/player/player.h codigo/set/set.h codigo/space/space.h codigo/generic/types.h
+DEPS = codigo/command/command.h codigo/die/die.h codigo/game/game.h codigo/game_reader/game_reader.h codigo/object/object.h codigo/player/player.h codigo/set/set.h codigo/space/space.h codigo/generic/types.h
 
 all: ocabas
 
@@ -28,8 +28,8 @@ command.o: codigo/command/command.c $(DEPS)
 game.o: codigo/game/game.c $(DEPS)
 	gcc $(CFLAGS) -c codigo/game/game.c
 
-game_loop.o: codigo/game_loop.c $(DEPS)
-	gcc $(CFLAGS) -c codigo/game_loop.c
+game_loop.o: codigo/game_loop/game_loop.c $(DEPS)
+	gcc $(CFLAGS) -c codigo/game_loop/game_loop.c
 
 space.o: codigo/space/space.c $(DEPS)
 	gcc $(CFLAGS) -c codigo/space/space.c
