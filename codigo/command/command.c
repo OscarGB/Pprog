@@ -52,44 +52,49 @@ STATUS get_user_input(Command* command){
 	}
 	if (fgets (input, WORD_SIZE, stdin) != NULL){
 		toks = strtok(input, " \n");
-		strcpy(action, toks);
-		toks = strtok(NULL, " \n");
 		if(toks != NULL){
-			symbol = toks[0];
+			strcpy(action, toks);
+			toks = strtok(NULL, " \n");
+			if(toks != NULL){
+				symbol = toks[0];
+			}
+			else{
+				symbol = E;
+				command->symbol = E;
+			}
+
+			#ifdef DEBUG
+				printf("Leido: %s\n", input);
+			#endif
+			if (!strcmp(action, "q") || !strcmp(action, "quit")){
+				command->cmd = QUIT;
+			}
+			else if (!strcmp(action, "n") || !strcmp(action, "next")){
+				command->cmd = NEXT;
+			}
+			else if (!strcmp(action, "b") || !strcmp(action, "back")){
+				command->cmd = BACK;
+			}
+			else if (!strcmp(action, "j") || !strcmp(action, "jump")){
+				command->cmd = JUMP;
+			}
+			else if (!strcmp(action, "p") || !strcmp(action, "pick")){
+				command->cmd = PICK;
+
+				command->symbol = symbol;
+			}
+			else if (!strcmp(action, "d") || !strcmp(action, "drop")){
+				command->cmd = DROP;
+			}
+			else if (!strcmp(action, "r") || !strcmp(action, "roll")){
+				command->cmd = ROLL;
+			}
+			else{
+				command->cmd = UNKNOWN;
+			}
 		}
 		else{
-			symbol = E;
-			command->symbol = E;
-		}
-
-		#ifdef DEBUG
-			printf("Leido: %s\n", input);
-		#endif
-		if (!strcmp(action, "q") || !strcmp(action, "quit")){
-			command->cmd = QUIT;
-		}
-		else if (!strcmp(action, "n") || !strcmp(action, "next")){
-			command->cmd = NEXT;
-		}
-		else if (!strcmp(action, "b") || !strcmp(action, "back")){
-			command->cmd = BACK;
-		}
-		else if (!strcmp(action, "j") || !strcmp(action, "jump")){
-			command->cmd = JUMP;
-		}
-		else if (!strcmp(action, "p") || !strcmp(action, "pick")){
-			command->cmd = PICK;
-
-			command->symbol = symbol;
-		}
-		else if (!strcmp(action, "d") || !strcmp(action, "drop")){
-			command->cmd = DROP;
-		}
-		else if (!strcmp(action, "r") || !strcmp(action, "roll")){
-			command->cmd = ROLL;
-		}
-		else{
-			command->cmd = UNKNOWN;
+			command->cmd = NO_CMD;
 		}
 	}
 	return OK;

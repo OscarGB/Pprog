@@ -48,7 +48,7 @@ die.o: codigo/die/die.c
 	gcc $(CFLAGS) -c codigo/die/die.c
 
 clean:
-	rm -f *.exe ocabas *.o *.tgz
+	rm -f *.exe ocabas *.o *.tgz *.log
 
 dist:
-	tar cvzf s1-cod_OcaBasicaIni-v2.0.tgz codigo/ makefile spaces.dat spaces2.dat
+	tar cvzf s1-cod_OcaBasicaIni-v2.1.tgz codigo/ makefile spaces.dat spaces2.dat

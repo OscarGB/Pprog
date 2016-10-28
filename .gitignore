@@ -41,3 +41,6 @@ ocabas
 # Temporal files
 *~
 ~*
+
+# Log file
+*.log

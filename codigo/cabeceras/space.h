@@ -24,6 +24,7 @@ typedef struct _Space Space;
 
 #define MAX_SPACES 100
 #define FIRST_SPACE 1
+#define MAX_GDESC 42
 
 /* --------------------------------------------------------------------
 Function: space_create()
@@ -302,7 +303,6 @@ Output: BOOL (TRUE if its in the space, FALSE if error or isn't in the space)
 ------------------------------------------------------------------- */
 BOOL space_is_object_in(Space* space, Id id);
 
-
 /* --------------------------------------------------------------------
 Function: space_set_gdesc()
 
@@ -312,14 +312,13 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 
 Description: returns OK if the gdesc has been successfuly set
 
-Input: Space* , char** the gdesc
+Input: Space* , char* the gdesc
 
 Output: OK if it was successfuly set
 
 ------------------------------------------------------------------- */
-STATUS space_set_gdesc(Space* space, char** gdesc);
 
-
+STATUS space_set_gdesc(Space* space, char* gdesc);
 /* --------------------------------------------------------------------
 Function: space_get_gdesc()
 
@@ -334,5 +333,6 @@ Input: Space*
 Output: gdesc
 
 ------------------------------------------------------------------- */ 
-char** space_get_gdesc(Space* space);
+char* space_get_gdesc(Space* space);
+
 #endif

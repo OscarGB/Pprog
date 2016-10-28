@@ -21,6 +21,7 @@ Revision history: 2.0 included reader for objects
 #include "object.h"
 #include "space.h"
 
+
 /* --------------------------------------------------------------------
 Function: game_load_spaces()
 
@@ -37,15 +38,13 @@ Output: OK if the table was successfuly read
 ------------------------------------------------------------------- */
 STATUS game_load_spaces(Game* game, char* filename) {
   FILE* file = NULL;
-  int i;
   char line[WORD_SIZE] = "";
   char name[WORD_SIZE] = "";
-  char gdesc[3][8];
+  char gdesc[MAX_GDESC];
   char* toks = NULL;
   Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
   Space* space = NULL;
   STATUS status = OK;
-  int flag;
   
   if (!filename) {
     return ERROR;
@@ -57,7 +56,6 @@ STATUS game_load_spaces(Game* game, char* filename) {
   }
   
   while (fgets(line, WORD_SIZE, file)) {
-    flag = 0; /*If flag == 1, a gdesc has been read*/
     if (strncmp("#s:", line, 3) == 0) {
       toks = strtok(line + 3, "|");
       id = atol(toks);
@@ -72,20 +70,21 @@ STATUS game_load_spaces(Game* game, char* filename) {
       toks = strtok(NULL, "|");
       west = atol(toks);
       toks = strtok(NULL, "|");
-      if(!toks){
-        strcpy(gdesc[0], toks);
-        flag = 1;
-      }
+      strcpy(gdesc, "|");
+      strcat(gdesc, toks);
+      strcat(gdesc, "|\n");
       toks = strtok(NULL, "|");
-      if(!toks){
-        strcpy(gdesc[1], toks);
-      }
+      strcat(gdesc, "|");
+      strcat(gdesc, toks);
+      strcat(gdesc, "|\n");
       toks = strtok(NULL, "|");
-      if(!toks){
-        strcpy(gdesc[2], toks);
-      }
+      strcat(gdesc, "|");
+      strcat(gdesc, toks);
+      strcat(gdesc, "|\n");
+      strcat(gdesc, "\0");
+      
 #ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld\n", id, name, north, east, south, west);
+      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld\nGdesc:\n%s\n", id, name, north, east, south, west, gdesc);
 #endif
       space = space_create(id);
       if (space != NULL) {
@@ -94,9 +93,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
       	space_set_east(space, east);
       	space_set_south(space, south);
       	space_set_west(space, west);
-        if(flag == 1){  
-            space_set_gdesc(space, gdesc);
-        }
+        space_set_gdesc(space, gdesc);
       	game_add_space(game, space);
       }
     }
