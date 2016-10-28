@@ -1,17 +1,10 @@
-/* ===================================================================
-File: game.h
-
-Version: 1.0
-
-Date: 23/09/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It implements the game interface for each command 
-
-Revision history: none
-
-=================================================================== */
+/**
+ * @brief It implements the game interface for each command
+ * @file game.c
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 1.0
+ * @date 23/09/2016
+ */
 
 
 #include <stdio.h>
@@ -30,7 +23,7 @@ Revision history: none
 #endif
 
 /**
-   List of callbacks for each command in the game 
+* @brief List of callbacks for each command in the game 
 */
 
 STATUS callback_UNKNOWN(Game* game);
@@ -44,7 +37,7 @@ STATUS callback_ROLL(Game* game);
 
 
 /**
-   Private functions
+* @brief Private functions
 */
 
 STATUS game_load_spaces(Game* game, char* filename);
@@ -60,25 +53,18 @@ STATUS game_set_object_location(Game* game, Id id_s, Id id_o);
 Id     game_get_object_location(Game* game, char symbol);
 
 /**
-   Game interface implementation
+ * @brief Game interface implementation
  */
 
-/* --------------------------------------------------------------------
-Function: game_init()
-
-Date: 29/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: it creates an empty game table with no player/object location
-if the game pointer has been already initialized, we have decided to destroy 
-the previous game
-
-Input: Game* (game pointer)
-
-Output: OK if the game has been successfuly initialized, ERROR if not
-
-------------------------------------------------------------------- */
+/**
+* @brief it creates an empty game table with no player/object location
+* if the game pointer has been already initialized, we have decided to destroy 
+* the previous game
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return OK if it was successfuly initialized
+*/
 STATUS game_init(Game* game) {
   int i;
   
@@ -109,21 +95,13 @@ STATUS game_init(Game* game) {
   return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: game_init_from_file()
-
-Date: 29/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: it creates a game table loading spaces from a file
-
-Input: Game* (game pointer) and char* filename (the name of the 
-read file)
-
-Output: OK if the game has been successfuly initialized
-
-------------------------------------------------------------------- */
+/**
+* @brief it creates a game table loading spaces from a file
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer and a filename
+* @return OK if it was successfuly initialized
+*/
 STATUS game_init_from_file(Game* game, char* filename) {
 
   if (game_init(game) == ERROR)
@@ -141,20 +119,13 @@ STATUS game_init_from_file(Game* game, char* filename) {
   return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: game_destroy()
-
-Date: 29/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: it destroys a given game
-
-Input: Game*
-
-Output: OK if the game was successfuly destroyed
-
-------------------------------------------------------------------- */
+/**
+* @brief it destroys a given game
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer 
+* @return OK if the game was successfuly destroyed
+*/
 STATUS game_destroy(Game* game) {
     int i = 0;
 
@@ -179,6 +150,15 @@ STATUS game_destroy(Game* game) {
     return OK;
 }
 
+
+/**
+* @brief it adds an space to the game
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @param space pointer (added space)
+* @return OK if it was added
+*/
 STATUS game_add_space(Game* game, Space* space) {
     int i = 0;
 
@@ -199,21 +179,14 @@ STATUS game_add_space(Game* game, Space* space) {
     return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: game_add_object
-
-Date: 27/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Adds an object to the game
-
-Input: Game* (The game to change)
-       Object* (The object to add)
-
-Output: STATUS (OK if everything went well, ERROR if something went wrong)
-
-------------------------------------------------------------------- */
+/**
+* @brief Adds an object to the game
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 27/10/2016
+* @param game pointer
+* @param object pointer (added)
+* @return OK if it was added
+*/
 STATUS game_add_object(Game* game, Object* object) {
 
     if (object == NULL) {
@@ -230,6 +203,15 @@ STATUS game_add_object(Game* game, Object* object) {
     return OK;
 }
 
+
+/**
+* @brief It gets the id of a given position
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @param int position
+* @return The id of the space
+*/
 Id game_get_space_id_at(Game* game, int position) {
 
     if (position < 0 || position >= MAX_SPACES) {
@@ -239,6 +221,14 @@ Id game_get_space_id_at(Game* game, int position) {
     return space_get_id(game->spaces[position]);
 }
 
+
+/**
+* @brief It gets the space from a given id
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 
+* @param 
+* @return 
+*/
 Space* game_get_space(Game* game, Id id){
     int i = 0;
 
@@ -255,6 +245,15 @@ Space* game_get_space(Game* game, Id id){
     return NULL;
 }
 
+
+/**
+* @brief Sets the player location at a given id
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @param the id of the location
+* @return OK if it was set
+*/
 STATUS game_set_player_location(Game* game, Id id) {
     
     if (id == NO_ID || !game) {
@@ -264,6 +263,15 @@ STATUS game_set_player_location(Game* game, Id id) {
     return player_set_location(game->player, id);
 }
 
+
+/**
+* @brief Sets the object location at a given id
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @param the id of the location
+* @return OK if it was set
+*/
 STATUS game_set_object_location(Game* game, Id id_s, Id id_o) {
 
     int i;
@@ -280,10 +288,27 @@ STATUS game_set_object_location(Game* game, Id id_s, Id id_o) {
     return ERROR;
 }
 
+
+/**
+* @brief Gets the location of the playes
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return The id of the player location
+*/
 Id game_get_player_location(Game* game) {
     return player_get_location(game->player);
 }
 
+
+/**
+* @brief Gets the location of an object
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @param the symbol of the object
+* @return The id of the object location
+*/
 Id game_get_object_location(Game* game, char symbol) {
     int i;
     for(i = 0; i < game->num_objects; i++){
@@ -294,20 +319,16 @@ Id game_get_object_location(Game* game, char symbol) {
     return NO_ID;
 }
 
-/* --------------------------------------------------------------------
-Function: game_update
 
-Date: 29/09/2016
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: it calls different callbacks depending on the written command
-
-Input: Game* and a Command (cmd)
-
-Output: OK if everything went OK
-
-------------------------------------------------------------------- */
+/**
+* @brief it calls different callbacks depending on the written command
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @param Command cmd
+* @return OK if it was updated
+*/
 STATUS game_update(Game* game, Command *cmd) {
 
   switch (command_get_cmd(cmd)) {
@@ -329,26 +350,21 @@ STATUS game_update(Game* game, Command *cmd) {
     return callback_ROLL(game);
   case NO_CMD:
     break;
-  default: /* We must never arrive here*/
+  default: /* !< We must never arrive here*/
     return ERROR;
   }
   return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: game_print_data()
 
-Date: 29/09/2016
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: prints on screen the actual game state
-
-Input: Game*
-
-Output: void
-
-------------------------------------------------------------------- */
+/**
+* @brief Prints on screen the actual game state
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return void
+*/
 void game_print_data(Game* game) {
   int i = 0;
   
@@ -368,20 +384,15 @@ void game_print_data(Game* game) {
   printf("prompt:> ");
 }
 
-/* --------------------------------------------------------------------
-Function: game_print_screen()
 
-Date: 29/09/2016
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: prints on screen the data of the game (player/object situation)
-
-Input: Game*
-
-Output: void
-
-------------------------------------------------------------------- */
+/**
+* @brief prints on screen the data of the game
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return void
+*/
 void game_print_screen(Game* game){
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID;
   Space* space_act = NULL;
@@ -391,9 +402,9 @@ void game_print_screen(Game* game){
   char aux[WORD_SIZE];
   int i, last;
   char symbol;
-  int obj_size; /*Control of the number of objects to print*/
+  int obj_size; /* !< Control of the number of objects to print*/
 
-  obj[0] = '\0'; /*Set to empty*/
+  obj[0] = '\0'; /* !< Set to empty*/
   
   id_act = game_get_player_location(game);
   
@@ -416,7 +427,7 @@ void game_print_screen(Game* game){
     if (object_get_location(game->object[i]) == id_back){
       aux[0] = object_get_symbol(game->object[i]);
       aux[1] = '\0';
-      strcat(obj,aux); /*add the symbol*/
+      strcat(obj,aux); /* !< add the symbol*/
       obj_size++; 
     }
   }
@@ -441,14 +452,14 @@ void game_print_screen(Game* game){
     printf("      ^\n");
   }
   
-  obj[0] = '\0'; /*Set to empty*/
+  obj[0] = '\0'; /* !< Set to empty*/
   obj_size = 0;
 
   for(i = 0; i < game->num_objects; i++){
     if (object_get_location(game->object[i]) == id_act) {
       aux[0] = object_get_symbol(game->object[i]);
       aux[1] = '\0';
-      strcat(obj,aux); /*add the symbol*/
+      strcat(obj,aux); /* !< add the symbol*/
       obj_size++;
     }
   }
@@ -473,14 +484,14 @@ void game_print_screen(Game* game){
     printf("+-----------+\n");
   }
 
-  obj[0] = '\0'; /*Set to empty*/
+  obj[0] = '\0'; /* !< Set to empty*/
   obj_size = 0;
 
    for(i = 0; i < game->num_objects; i++){
     if (object_get_location(game->object[i]) == id_next) {
       aux[0] = object_get_symbol(game->object[i]);
       aux[1] = '\0';
-      strcat(obj,aux); /*add the symbol*/
+      strcat(obj,aux); /* !< add the symbol*/
       obj_size++;
     }
   }
@@ -527,36 +538,55 @@ void game_print_screen(Game* game){
   printf("\nprompt:> ");
 }
 
-/* --------------------------------------------------------------------
-Function: game_is_over()
 
-Date: 29/09/2016
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: ends the game
-
-Input: Game*
-
-Output: -
-
-------------------------------------------------------------------- */
+/**
+* @brief ends the game
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return FALSE
+*/
 BOOL game_is_over(Game* game) {
   return FALSE;
 }
 
 
 /*
-  Private callbacks
+* @brief Private callbacks
+*/
+
+/**
+* @brief callbac
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return OK if it went ok
 */
 STATUS callback_UNKNOWN(Game* game) {
   return OK;
 }
 
+
+/**
+* @brief callbac
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return OK if it went ok
+*/
 STATUS callback_QUIT(Game* game) {
   return OK;
 }
 
+
+/**
+* @brief callbac
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return OK if it went ok
+*/
 STATUS callback_NEXT(Game* game) {
   int i = 0;
   Id current_id = NO_ID;
@@ -582,6 +612,14 @@ STATUS callback_NEXT(Game* game) {
   return ERROR;
 }
 
+
+/**
+* @brief callbac
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return OK if it went ok
+*/
 STATUS callback_BACK(Game* game) {
   int i = 0;
   Id current_id = NO_ID;
@@ -608,6 +646,14 @@ STATUS callback_BACK(Game* game) {
   return ERROR;
 }
 
+
+/**
+* @brief callbac
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return OK if it went ok
+*/
 STATUS callback_JUMP(Game* game){
   int i = 0;
   Id current_id = NO_ID;
@@ -633,6 +679,14 @@ STATUS callback_JUMP(Game* game){
   return ERROR;
 }
 
+
+/**
+* @brief callbac
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return OK if it went ok
+*/
 STATUS callback_DROP(Game* game){
   Object* object;
   Id current_id;
@@ -649,6 +703,15 @@ STATUS callback_DROP(Game* game){
   return game_set_object_location(game, current_id, object_get_id(object));
 }
 
+
+/**
+* @brief callbac
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @param the symbol to pick
+* @return OK if it went ok
+*/
 STATUS callback_PICK(Game* game, char symbol){
   Object* object;
   Id player_id, object_id;
@@ -684,6 +747,14 @@ STATUS callback_PICK(Game* game, char symbol){
   return ERROR;;
 }
 
+
+/**
+* @brief callbac
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return OK if it went ok
+*/
 STATUS callback_ROLL(Game* game){
     int res;
 
