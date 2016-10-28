@@ -33,14 +33,14 @@ Revision history: none
    List of callbacks for each command in the game 
 */
 
-void callback_UNKNOWN(Game* game);
-void callback_QUIT(Game* game);
-void callback_NEXT(Game* game);
-void callback_BACK(Game* game);
-void callback_JUMP(Game* game);
-void callback_DROP(Game* game);
-void callback_PICK(Game* game, char symbol);
-void callback_ROLL(Game* game);
+STATUS callback_UNKNOWN(Game* game);
+STATUS callback_QUIT(Game* game);
+STATUS callback_NEXT(Game* game);
+STATUS callback_BACK(Game* game);
+STATUS callback_JUMP(Game* game);
+STATUS callback_DROP(Game* game);
+STATUS callback_PICK(Game* game, char symbol);
+STATUS callback_ROLL(Game* game);
 
 
 /**
@@ -99,10 +99,6 @@ STATUS game_init(Game* game) {
     player_destroy(game->player);
     game_destroy(game);
     return ERROR;
-  }
-  
-  for( i = 0; i < MAX_IDS; i++){
-    game->object[i] = object_create(i);
   }
   
   if(!game->object){
@@ -316,35 +312,26 @@ STATUS game_update(Game* game, Command *cmd) {
 
   switch (command_get_cmd(cmd)) {
   case UNKNOWN:
-    callback_UNKNOWN(game);
-    break;
+    return callback_UNKNOWN(game);
   case QUIT:
-    callback_QUIT(game);
-    break;
+    return callback_QUIT(game);
   case NEXT:
-    callback_NEXT(game);
-    break;
+    return callback_NEXT(game);
   case BACK:
-    callback_BACK(game);
-    break;
+    return callback_BACK(game);
   case JUMP:
-    callback_JUMP(game);
-    break;
+    return callback_JUMP(game);
   case PICK:
-    callback_PICK(game, command_get_symbol(cmd));
-    break;
+    return callback_PICK(game, command_get_symbol(cmd));
   case DROP:
-    callback_DROP(game);
-    break;
+    return callback_DROP(game);
   case ROLL:
-    callback_ROLL(game);
-    break;
+    return callback_ROLL(game);
   case NO_CMD:
     break;
   default: /* We must never arrive here*/
     return ERROR;
   }
-
   return OK;
 }
 
@@ -437,6 +424,8 @@ void game_print_screen(Game* game){
     else{
       printf("|         %2d|\n",(int) id_back);
     }    
+    printf("%s", space_get_gdesc(space_back));
+    printf("|           |\n");
     printf("|  %-3s      |\n",obj);
     printf("+-----------+\n");
     printf("      ^\n");
@@ -460,6 +449,8 @@ void game_print_screen(Game* game){
     else{
       printf("| 8D      %2d|\n",(int) id_act);
     }
+    printf("%s", space_get_gdesc(space_act));
+    printf("|           |\n");
     printf("|  %-3s      |\n",obj);
     printf("+-----------+\n");
   }
@@ -483,6 +474,8 @@ void game_print_screen(Game* game){
     else{
       printf("|         %2d|\n",(int) id_next);
     } 
+    printf("%s", space_get_gdesc(space_next));
+    printf("|           |\n");
     printf("|  %-3s      |\n",obj);
   }
   
@@ -530,20 +523,22 @@ BOOL game_is_over(Game* game) {
 /*
   Private callbacks
 */
-void callback_UNKNOWN(Game* game) {
+STATUS callback_UNKNOWN(Game* game) {
+  return OK;
 }
 
-void callback_QUIT(Game* game) {
+STATUS callback_QUIT(Game* game) {
+  return OK;
 }
 
-void callback_NEXT(Game* game) {
+STATUS callback_NEXT(Game* game) {
   int i = 0;
   Id current_id = NO_ID;
   Id space_id = NO_ID;
   
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
-    return;
+    return ERROR;
   }
   
   for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
@@ -551,14 +546,17 @@ void callback_NEXT(Game* game) {
     if (current_id == space_id) {
       current_id = space_get_south(game->spaces[i]);
       if (current_id != NO_ID) {
-  game_set_player_location(game, current_id);
+        return game_set_player_location(game, current_id);
       }
-      return;
+      else{
+        return ERROR;
+      }
     }
   }
+  return ERROR;
 }
 
-void callback_BACK(Game* game) {
+STATUS callback_BACK(Game* game) {
   int i = 0;
   Id current_id = NO_ID;
   Id space_id = NO_ID;
@@ -566,7 +564,7 @@ void callback_BACK(Game* game) {
   space_id = game_get_player_location(game);
   
   if (NO_ID == space_id) {
-    return;
+    return ERROR;
   }
   
   for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
@@ -574,21 +572,24 @@ void callback_BACK(Game* game) {
     if (current_id == space_id) {
       current_id = space_get_north(game->spaces[i]);
       if (current_id != NO_ID) {
-  game_set_player_location(game, current_id);
+        return game_set_player_location(game, current_id);
       }
-      return;
+      else{
+        return ERROR;
+      }
     }
   }
+  return ERROR;
 }
 
-void callback_JUMP(Game* game){
+STATUS callback_JUMP(Game* game){
   int i = 0;
   Id current_id = NO_ID;
   Id space_id = NO_ID;
   
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
-    return;
+    return ERROR;
   }
   
   for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
@@ -596,37 +597,39 @@ void callback_JUMP(Game* game){
     if (current_id == space_id) {
       current_id = space_get_east(game->spaces[i]);
       if (current_id != NO_ID) {
-        game_set_player_location(game, current_id);
+        return game_set_player_location(game, current_id);
       }
-      return;
+      else{
+        return ERROR;
+      }      
     }
   }
+  return ERROR;
 }
 
-void callback_DROP(Game* game){
+STATUS callback_DROP(Game* game){
   Object* object;
   Id current_id;
 
   object = player_drop_object(game->player);
   if(!object){
-    return;
+    return ERROR;
   }
   current_id = game_get_player_location(game);
 
   game->object[game->num_objects] = object;
   game->num_objects++;
 
-  game_set_object_location(game, current_id, object_get_id(object));
-  return;
+  return game_set_object_location(game, current_id, object_get_id(object));
 }
 
-void callback_PICK(Game* game, char symbol){
+STATUS callback_PICK(Game* game, char symbol){
   Object* object;
   Id player_id, object_id;
   int i;
 
   if(symbol == E){
-    return;
+    return ERROR;
   }
 
   player_id = game_get_player_location(game);
@@ -634,7 +637,7 @@ void callback_PICK(Game* game, char symbol){
   object_id = game_get_object_location(game, symbol);
 
   if(player_id != object_id || player_id == NO_ID || object_id == NO_ID){
-    return;
+    return ERROR;
   }
 
   for(i = 0; i < game->num_objects; i++){
@@ -647,18 +650,19 @@ void callback_PICK(Game* game, char symbol){
         game->object[i] = game->object[game->num_objects-1]; /*Reorder the table*/
         game->object[game->num_objects -1] = NULL; /*Preventing errors*/
         game->num_objects--; 
+        return OK;
       }
     }  
   }
 
-  return;
+  return ERROR;;
 }
 
-void callback_ROLL(Game* game){
+STATUS callback_ROLL(Game* game){
     int res;
 
     res = die_roll(game->die, 1, 6);
-    if(res < 1 || res > 6) return;
+    if(res < 1 || res > 6) return ERROR;
 
-    return;
+    return OK;
 }

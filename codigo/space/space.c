@@ -28,7 +28,7 @@ struct _Space {
     Id east;
     Id west;
     Set *object;
-    char gdesc[3][8];
+    char gdesc[MAX_GDESC];
 };
 
 /* --------------------------------------------------------------------
@@ -47,7 +47,6 @@ Output: Space* (The created space)
 ------------------------------------------------------------------- */
 
 Space* space_create(Id id) {
-    int i;
 
     Space *newSpace = NULL;
 
@@ -74,9 +73,7 @@ Space* space_create(Id id) {
         return NULL;
     }
 
-    for(i = 0; i <= 2; i++){
-        strcpy(newSpace->gdesc[i],"");
-    }
+    strcpy(newSpace->gdesc,"");
 
     return newSpace;
 }
@@ -444,7 +441,6 @@ Output STATUS (OK if everything went well, ERROR if something went wrong)
 
 STATUS space_print(Space* space) {
     Id idaux = NO_ID;
-    int i;
   
     if (!space) {
         return ERROR;
@@ -486,9 +482,7 @@ STATUS space_print(Space* space) {
         fprintf(stdout, "---> No object in the space.\n");
     }
 
-    for(i = 0; i <= 2; i++){
-        fprintf(stdout, "%s\n", space->gdesc[i]);
-    }
+    fprintf(stdout, "%s\n", space->gdesc);
 
     return OK;
 }
@@ -506,16 +500,13 @@ Input: Space* , char** the gdesc
 Output: OK if it was successfuly set
 
 ------------------------------------------------------------------- */
-STATUS space_set_gdesc(Space* space, char** gdesc){
-    int i;
+STATUS space_set_gdesc(Space* space, char* gdesc){
  
     if(!space || !gdesc){
         return ERROR;
     }
 
-    for(i = 0; i < 3; i++){
-        strcpy(space->gdesc[i], gdesc[i]);
-    }
+    strcpy(space->gdesc, gdesc);
 
     return OK;
 }
@@ -535,7 +526,7 @@ Input: Space*
 Output: gdesc
 
 ------------------------------------------------------------------- */ 
-char** space_get_gdesc(Space* space){
+char* space_get_gdesc(Space* space){
     if(!space){
         return NULL;
     }

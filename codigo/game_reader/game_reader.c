@@ -21,7 +21,6 @@ Revision history: 2.0 included reader for objects
 #include "object.h"
 #include "space.h"
 
-#define MAX_GDESC 32
 
 /* --------------------------------------------------------------------
 Function: game_load_spaces()
@@ -46,7 +45,6 @@ STATUS game_load_spaces(Game* game, char* filename) {
   Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
   Space* space = NULL;
   STATUS status = OK;
-  int flag;
   
   if (!filename) {
     return ERROR;
@@ -58,7 +56,6 @@ STATUS game_load_spaces(Game* game, char* filename) {
   }
   
   while (fgets(line, WORD_SIZE, file)) {
-    flag = 0; /*If flag == 1, a gdesc has been read*/
     if (strncmp("#s:", line, 3) == 0) {
       toks = strtok(line + 3, "|");
       id = atol(toks);
@@ -73,7 +70,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
       toks = strtok(NULL, "|");
       west = atol(toks);
       toks = strtok(NULL, "|");
-      strcat(gdesc, "|");
+      strcpy(gdesc, "|");
       strcat(gdesc, toks);
       strcat(gdesc, "|\n");
       toks = strtok(NULL, "|");
@@ -84,9 +81,10 @@ STATUS game_load_spaces(Game* game, char* filename) {
       strcat(gdesc, "|");
       strcat(gdesc, toks);
       strcat(gdesc, "|\n");
+      strcat(gdesc, "\0");
       
 #ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld\n Gdesc: %s", id, name, north, east, south, west);
+      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld\nGdesc:\n%s\n", id, name, north, east, south, west, gdesc);
 #endif
       space = space_create(id);
       if (space != NULL) {
@@ -94,7 +92,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
       	space_set_north(space, north);
       	space_set_east(space, east);
       	space_set_south(space, south);
-      	space_set_west(space, west);  
+      	space_set_west(space, west);
         space_set_gdesc(space, gdesc);
       	game_add_space(game, space);
       }
