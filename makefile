@@ -55,7 +55,7 @@ die.o: codigo/die/die.c
 	gcc $(CFLAGS) -c codigo/die/die.c
 
 clean:
-	rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG)	#Borrado de todos los ejecutables, inlcuyendo los test
+	rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG)	#Borrado de todos los ejecutables, incluyendo los test
 
 dist:
 	tar cvzf s1-cod_OcaBasicaIni-v2.1.tgz codigo/ makefile *.dat
