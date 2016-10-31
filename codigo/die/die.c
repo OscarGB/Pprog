@@ -20,8 +20,8 @@ Revision history: none
 #include <time.h>
 
 struct _Die{
-	Id id;
-	int last;
+	Id id; /*Die's id*/
+	int last; /*Last rolled value*/
 };
 
 /* --------------------------------------------------------------------
@@ -39,20 +39,20 @@ Output: int (the random number)
 
 ------------------------------------------------------------------- */
 int die_roll(Die* die, int inf, int sup){
-	float random;
+	float random; /*The rolled value*/
 
 	if(inf < 0 || sup < 0 || sup < inf || !die){
 		return -1; /*ERROR*/
 	}
-	srand(clock());
-	random = rand();
-	random /= RAND_MAX;
-	random *= (sup-inf+1);
-	random += inf;
-	if(random > sup){
-		random = sup;
+	srand(clock()); /*seed*/
+	random = rand(); /*random number between 0 and RAND_MAX*/
+	random /= RAND_MAX; /*random number between 0 and 1*/
+	random *= (sup-inf+1); /*random number between 0 and (sup -inf +1)*/
+	random += inf; /*randome number between inf and (sup + 1)*/
+	if(random > sup){ /*in case is (sup + 1)*/
+		random = sup; /*We set it to sup*/
 	}
-	die->last = random;
+	die->last = (int)random; /*Set last to the rolled value*/
 	return (int)random;
 }
 
@@ -71,7 +71,7 @@ Output: Die* (A pointer to the created die)
 
 ------------------------------------------------------------------- */
 Die* die_create(Id id){
-	Die *die = NULL;
+	Die *die = NULL; /*New pointer for die*/
 
 	die = (Die *)malloc(sizeof(Die));
 
@@ -79,6 +79,7 @@ Die* die_create(Id id){
 		return NULL;
 	}
 
+	/*Default values*/
 	die->id = id;
 	die->last = NOT_ROLLED;
 
@@ -105,6 +106,7 @@ STATUS die_destroy(Die* die){
 		return ERROR;
 	}
 
+	/*Free the memory*/
 	free(die);
 	die = NULL;
 
@@ -130,6 +132,7 @@ STATUS die_print(Die* die){
 		return ERROR;
 	}
 
+	/*Print the values of the die*/
 	fprintf(stdout, "-->Die (Id: %ld)\n", die_get_id(die));
 	fprintf(stdout, "--->Last value: %d\n", die_get_last_roll(die));
 
@@ -154,6 +157,7 @@ int die_get_last_roll(Die* die){
 	if(!die){
 		return NOT_ROLLED;
 	}
+	/*We return the last rolled value*/
 	return die->last;
 }
 
@@ -175,5 +179,6 @@ Id die_get_id(Die* die){
 	if(!die){
 		return NO_ID;
 	}
+	/*Get the Id fo the die*/
 	return die->id;
 }

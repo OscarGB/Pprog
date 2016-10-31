@@ -20,10 +20,10 @@ Revision history: none
 #include "types.h"
 
 struct _Object{
-	Id id;
-	char name[WORD_SIZE + 1];
-	char symbol;
-	Id location;
+	Id id; /*Id of the object*/
+	char name[WORD_SIZE + 1]; /*Name of the object*/
+	char symbol; /*symbol of the object*/
+	Id location; /*Location in the game*/
 };
 
 /* --------------------------------------------------------------------
@@ -41,7 +41,7 @@ Output: Object* (a pointer to the object)
 
 ------------------------------------------------------------------- */
 Object* object_create(Id id){
-	Object *newObject = NULL;
+	Object *newObject = NULL; /*New object to create*/
 
 	if (id  == NO_ID)
 		return NULL;
@@ -52,6 +52,7 @@ Object* object_create(Id id){
 		return NULL;
 	}
 
+	/*Default values*/
 	newObject->id = id;
 	newObject->name[0]='\0';
 	newObject->symbol = CHAR_ERROR;

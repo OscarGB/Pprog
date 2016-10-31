@@ -21,8 +21,8 @@ Revision history: none
 #define CMD_LENGHT 30
 
 struct _Command{
-	T_Command cmd;
-	char symbol;
+	T_Command cmd; /*The command*/
+	char symbol; /*A symbol for TAKE and DROP commands*/
 };
 
 /* --------------------------------------------------------------------
@@ -42,30 +42,32 @@ Output: Command (returns the command that has been written by the user)
 ------------------------------------------------------------------- */
 
 STATUS get_user_input(Command* command){
-	char action[CMD_LENGHT];
-	char input[CMD_LENGHT];
-	char symbol; 
-	char* toks = NULL;
+	char action[CMD_LENGHT]; /*The action written*/
+	char input[CMD_LENGHT]; /*The real input*/
+	char symbol; /*The character for TAKE and DROP*/
+	char* toks = NULL; /*String for tokenization*/
 
 	if(command == NULL){
 		return ERROR;
 	}
 	if (fgets (input, WORD_SIZE, stdin) != NULL){
 		toks = strtok(input, " \n");
-		if(toks != NULL){
+		if(toks != NULL){/*If theres nothing written -> NO_CMD*/
 			strcpy(action, toks);
 			toks = strtok(NULL, " \n");
-			if(toks != NULL){
+			if(toks != NULL){ /*If there is a symbol -> set the symbol to the introduced valor*/
 				symbol = toks[0];
 			}
-			else{
+			else{/*If there's not a symbol we set to E*/
 				symbol = E;
 				command->symbol = E;
 			}
 
 			#ifdef DEBUG
-				printf("Leido: %s\n", input);
+				printf("Leido: %s\n", input); /*Debug case*/
 			#endif
+
+			/*Detecting what command was written*/
 			if (!strcmp(action, "q") || !strcmp(action, "quit")){
 				command->cmd = QUIT;
 			}
@@ -85,6 +87,8 @@ STATUS get_user_input(Command* command){
 			}
 			else if (!strcmp(action, "d") || !strcmp(action, "drop")){
 				command->cmd = DROP;
+
+				command->symbol = symbol;
 			}
 			else if (!strcmp(action, "r") || !strcmp(action, "roll")){
 				command->cmd = ROLL;
@@ -115,11 +119,12 @@ Output: Command* (The created command)
 
 ------------------------------------------------------------------- */
 Command* command_create(){
-	Command* newcom;
+	Command* newcom; /*The new command*/
 	newcom = (Command *) malloc (sizeof(Command));
 	if(!newcom){
 		return NULL;
 	}
+	/*Default values*/
 	newcom->cmd = UNKNOWN;
 	newcom->symbol = 'E';
 	return newcom;
@@ -144,6 +149,7 @@ void command_destroy(Command *com){
 		return;
 	}
 	free(com);
+	return;
 }
 
 /* --------------------------------------------------------------------

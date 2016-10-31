@@ -37,14 +37,14 @@ Output: OK if the table was successfuly read
 
 ------------------------------------------------------------------- */
 STATUS game_load_spaces(Game* game, char* filename) {
-  FILE* file = NULL;
-  char line[WORD_SIZE] = "";
-  char name[WORD_SIZE] = "";
-  char gdesc[MAX_GDESC];
-  char* toks = NULL;
-  Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
-  Space* space = NULL;
-  STATUS status = OK;
+  FILE* file = NULL; /*File to read*/
+  char line[WORD_SIZE] = ""; /*Line read*/
+  char name[WORD_SIZE] = ""; /*Name of the space read*/
+  char gdesc[MAX_GDESC]; /*Gdesc (drawing of the space)*/
+  char* toks = NULL; /*String for tokenization*/
+  Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID; /*Group of Ids for the space*/
+  Space* space = NULL; /*Space pointer*/
+  STATUS status = OK; /*Status set to OK*/
   
   if (!filename) {
     return ERROR;
@@ -55,6 +55,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
     return ERROR;
   }
   
+  /*Reading of the file*/
   while (fgets(line, WORD_SIZE, file)) {
     if (strncmp("#s:", line, 3) == 0) {
       toks = strtok(line + 3, "|");
@@ -86,6 +87,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
 #ifdef DEBUG 
       printf("Leido: %ld|%s|%ld|%ld|%ld|%ld\nGdesc:\n%s\n", id, name, north, east, south, west, gdesc);
 #endif
+
       space = space_create(id);
       if (space != NULL) {
       	space_set_name(space, name);
@@ -99,6 +101,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
     }
   }
   
+  /*We make this to prevent exiting without closing the file*/
   if (ferror(file)) {
     status = ERROR;
   }
@@ -124,14 +127,14 @@ Output: OK if the objects were successfuly read
 
 ------------------------------------------------------------------- */
 STATUS game_load_objects(Game* game, char* filename) {
-  FILE* file = NULL;
-  char line[WORD_SIZE] = "";
-  char symbol = 'E';
-  char* toks = NULL;
-  Id object_id = NO_ID, space_id = NO_ID;
-  Object* object = NULL;
-  STATUS status = OK;
-  int num_objects = 0;
+  FILE* file = NULL; /*File to read*/
+  char line[WORD_SIZE] = ""; /*Line read*/
+  char symbol = 'E'; /*Symbol of the objects*/
+  char* toks = NULL; /*String for tokenization*/
+  Id object_id = NO_ID, space_id = NO_ID; /*Ids for the object*/
+  Object* object = NULL; /*Object pointer*/
+  STATUS status = OK; /*Status set to OK*/
+  int num_objects = 0; /*Number of objects read*/
 
   if (!filename) {
     return ERROR;
@@ -165,6 +168,7 @@ STATUS game_load_objects(Game* game, char* filename) {
     }
   }
   
+  /*We make this to prevent exiting without closing the file*/
   if (ferror(file)) {
     status = ERROR;
   }

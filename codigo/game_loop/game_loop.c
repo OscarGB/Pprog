@@ -36,16 +36,17 @@ Output: int 1 if ERROR, 0 if OK
 ------------------------------------------------------------------- */
 
 int main(int argc, char *argv[]){
-  	Game game;
-  	Command *command = NULL;
-  	FILE *f = NULL;
-  	int flag = 0;
-  	STATUS log;
+  	Game game; /*Game pointer*/
+  	Command *command = NULL; /*Command pointer*/
+  	FILE *f = NULL; /*Log file*/
+  	int flag = 0; /*Flag if its on log mode*/
+  	STATUS log; /*Variable for the creation of log file*/
 
 	if (argc < 2){
 	fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
 	return 1;
 	}
+	/*Log mode*/
 	if(argc == 4){
 		if(strcmp(argv[2], "-l") == 0){
 			f = fopen(argv[3], "w");
@@ -69,6 +70,7 @@ int main(int argc, char *argv[]){
 		 game_print_screen(&game);
 		 get_user_input(command);
 		 log = game_update(&game, command);
+		 /*Log mode*/
 		 if(flag == 1){
 		 	switch (command_get_cmd(command)) {
 			  case UNKNOWN:
@@ -145,6 +147,7 @@ int main(int argc, char *argv[]){
 		}
 	game_destroy(&game);
 	command_destroy(command);
+	/*Log mode*/
 	if(flag == 1){
 		fclose(f);
 	}

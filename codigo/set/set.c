@@ -29,8 +29,24 @@ struct _Set {
 
 /*Private functions*/
 
+
+/* --------------------------------------------------------------------
+Function: set_where_is_id()
+
+Date: 14/10/2016
+
+Author:Óscar Gómez, Jose Ignacio Gómez.
+
+Description: checks in which position is a certain Id
+
+Input: Set* (the set to inspect)
+	   Id (the Id to search)
+
+Output: int (the position in the set)
+
+------------------------------------------------------------------- */
 int set_where_is_id(Set* set, Id id) {
-	int i;
+	int i; /*Variable used for loops and searching value*/
 
 	for(i = 0; i < set->num_ids; i++){
 		if(set->id[i] == id) return i;
@@ -50,7 +66,7 @@ Author:Óscar Gómez, Jose Ignacio Gómez.
 
 Description: checks if the set is full
 
-Input: Set*
+Input: Set* (the set to inspect)
 
 Output: TRUE if the set is full
 
@@ -100,12 +116,14 @@ Output: Set* (created set)
 
 ------------------------------------------------------------------- */
 Set* set_create() {
-	int i;
+	int i; /*Variable used for loops*/
 
 	Set* set = NULL;
 
 	set = (Set*) malloc (sizeof(Set));
 	if(!set) return NULL;
+
+	/*Default values*/
 
 	for(i = 0; i < MAX_IDS; i++) {
 		set->id[i] = NO_ID;

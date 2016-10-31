@@ -16,7 +16,7 @@
 #include "game_reader.h"
 #include "die.h"
 
-#ifdef __WINDOWS_BUILD__
+#ifdef __WINDOWS_BUILD__ /*In case we are working on Windows*/
 #define CLEAR "cls"
 #else
 #define CLEAR "clear"
@@ -31,7 +31,7 @@ STATUS callback_QUIT(Game* game);
 STATUS callback_NEXT(Game* game);
 STATUS callback_BACK(Game* game);
 STATUS callback_JUMP(Game* game);
-STATUS callback_DROP(Game* game);
+STATUS callback_DROP(Game* game, char symbol);
 STATUS callback_PICK(Game* game, char symbol);
 STATUS callback_ROLL(Game* game);
 
@@ -66,12 +66,13 @@ Id     game_get_object_location(Game* game, char symbol);
 * @return OK if it was successfuly initialized
 */
 STATUS game_init(Game* game) {
-  int i;
+  int i; /*<!Variable used for loops*/
   
   for (i = 0; i < MAX_SPACES; i++) {
     game->spaces[i] = NULL;
   }
   
+  /*Creating player*/
   game->player = player_create(1);
   if(!game->player){
     game_destroy(game);
@@ -80,14 +81,10 @@ STATUS game_init(Game* game) {
 
   game->num_objects = 0;
 
+  /*Creating die*/
   game->die = die_create(1);
-  if(!game->die){
+  if(!game->die){ /*Error case*/
     player_destroy(game->player);
-    game_destroy(game);
-    return ERROR;
-  }
-  
-  if(!game->object){
     game_destroy(game);
     return ERROR;
   }
@@ -103,18 +100,19 @@ STATUS game_init(Game* game) {
 * @return OK if it was successfuly initialized
 */
 STATUS game_init_from_file(Game* game, char* filename) {
-
+  /*Init the game*/
   if (game_init(game) == ERROR)
     return ERROR;
 
-
+  /*Load objects from file*/
   if (game_load_objects(game, filename) == ERROR)
     return ERROR;
-
+  /*Load spaces from file*/
   if (game_load_spaces(game, filename) == ERROR)
     return ERROR;
+
+  /*Set player in the initial position*/
   game_set_player_location(game, game_get_space_id_at(game, 0));
-  /*game_set_object_location(game, game_get_space_id_at(game, 0));*/
   
   return OK;
 }
@@ -127,22 +125,26 @@ STATUS game_init_from_file(Game* game, char* filename) {
 * @return OK if the game was successfuly destroyed
 */
 STATUS game_destroy(Game* game) {
-    int i = 0;
+    int i = 0; /*Variable used for loops*/
 
+    /*Destroy all the spaces*/
     for (i = 0; (i < MAX_SPACES) && (game->spaces[i] != NULL); i++) {
       space_destroy(game->spaces[i]);
     }
 
+    /*Destroy the player*/
     if(game->player != NULL){
       player_destroy(game->player);
     }
 
+    /*Destroy all the objects*/
     if(game->object != NULL){
       for (i = 0; i < game->num_objects; i++){
         object_destroy(game->object[i]);
       }
     }
 
+    /*Destroy the die*/
     if(game->die != NULL){
       die_destroy(game->die);
     }
@@ -160,20 +162,23 @@ STATUS game_destroy(Game* game) {
 * @return OK if it was added
 */
 STATUS game_add_space(Game* game, Space* space) {
-    int i = 0;
+    int i = 0; /*Variable used for loops*/
 
     if (space == NULL) {
         return ERROR;
     }
 
+    /*Check the first empty position*/
     while ( (i < MAX_SPACES) && (game->spaces[i] != NULL)){
         i++;
     }
 
+    /*check if there are more spaces than positions*/
     if (i >= MAX_SPACES) {
         return ERROR;
     }
 
+    /*Set the space to the proper position*/
     game->spaces[i] = space;
 
     return OK;
@@ -193,10 +198,12 @@ STATUS game_add_object(Game* game, Object* object) {
         return ERROR;
     }
 
+    /*Checks if there are too much objects*/
     if(game->num_objects >= MAX_IDS){
       return ERROR;
     }
 
+    /*Sets the object*/
     game->object[game->num_objects] = object;
     game->num_objects++;
 
@@ -225,23 +232,26 @@ Id game_get_space_id_at(Game* game, int position) {
 /**
 * @brief It gets the space from a given id
 * @author José Ignacio Gómez, Óscar Gómez
-* @date 
-* @param 
-* @return 
+* @date 29/09/2016
+* @param game pointer
+* @param Id space id
+* @return Space pointer with that id
 */
 Space* game_get_space(Game* game, Id id){
-    int i = 0;
+    int i = 0; /*Variable used for loops*/
 
     if (id == NO_ID) {
       return NULL;
     }
     
+    /*Checks all the positions for the space*/
     for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
       if (id == space_get_id(game->spaces[i])){
       	return game->spaces[i];
       }
     }
     
+    /*If theres no space with the given Id*/
     return NULL;
 }
 
@@ -270,15 +280,17 @@ STATUS game_set_player_location(Game* game, Id id) {
 * @date 29/09/2016
 * @param game pointer
 * @param the id of the location
+* @param the id of the object
 * @return OK if it was set
 */
 STATUS game_set_object_location(Game* game, Id id_s, Id id_o) {
 
-    int i;
+    int i; /*Variable used for loops*/
 
     if (id_s == NO_ID || id_o == NO_ID || !game) {
         return ERROR;
     }
+
 
     for( i = 0; i < game->num_objects; i++){
       if(object_get_id(game->object[i]) == id_o){
@@ -290,7 +302,7 @@ STATUS game_set_object_location(Game* game, Id id_s, Id id_o) {
 
 
 /**
-* @brief Gets the location of the playes
+* @brief Gets the location of the player
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
@@ -310,12 +322,14 @@ Id game_get_player_location(Game* game) {
 * @return The id of the object location
 */
 Id game_get_object_location(Game* game, char symbol) {
-    int i;
+    int i; /*Variable used for loops*/
+
     for(i = 0; i < game->num_objects; i++){
       if(object_get_symbol(game->object[i]) == symbol){
         return object_get_location(game->object[i]);
       }
     }
+    /*If theres no object with that symbol*/
     return NO_ID;
 }
 
@@ -331,7 +345,7 @@ Id game_get_object_location(Game* game, char symbol) {
 */
 STATUS game_update(Game* game, Command *cmd) {
 
-  switch (command_get_cmd(cmd)) {
+  switch (command_get_cmd(cmd)) { /*Switch for the command value*/
   case UNKNOWN:
     return callback_UNKNOWN(game);
   case QUIT:
@@ -345,7 +359,7 @@ STATUS game_update(Game* game, Command *cmd) {
   case PICK:
     return callback_PICK(game, command_get_symbol(cmd));
   case DROP:
-    return callback_DROP(game);
+    return callback_DROP(game, command_get_symbol(cmd));
   case ROLL:
     return callback_ROLL(game);
   case NO_CMD:
@@ -366,7 +380,7 @@ STATUS game_update(Game* game, Command *cmd) {
 * @return void
 */
 void game_print_data(Game* game) {
-  int i = 0;
+  int i = 0; /*Variable used for loops*/
   
   printf("\n\n-------------\n\n");
   
@@ -394,14 +408,14 @@ void game_print_data(Game* game) {
 * @return void
 */
 void game_print_screen(Game* game){
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID;
-  Space* space_act = NULL;
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID; /*Ids for locations*/
+  Space* space_act = NULL; /*Poiters to spaces needed to print the game*/
   Space* space_back = NULL;
   Space* space_next = NULL;
-  char obj[WORD_SIZE];
-  char aux[WORD_SIZE];
-  int i, last;
-  char symbol;
+  char obj[WORD_SIZE]; /*String with the objects*/
+  char aux[WORD_SIZE]; /*Axiliar for reading object values*/
+  int i, last; /*loops, last rolled value*/
+  char symbol; /*symbol of the player's objects*/
   int obj_size; /* !< Control of the number of objects to print*/
 
   obj[0] = '\0'; /* !< Set to empty*/
@@ -431,6 +445,7 @@ void game_print_screen(Game* game){
       obj_size++; 
     }
   }
+  /*In case there are more than 3 objects*/
   if(obj_size > 3){
     obj[3] = '.';
     obj[4] = '.';
@@ -463,6 +478,7 @@ void game_print_screen(Game* game){
       obj_size++;
     }
   }
+  /*In case there are more than 3 objects*/
   if(obj_size > 3){
     obj[3] = '.';
     obj[4] = '.';
@@ -495,6 +511,7 @@ void game_print_screen(Game* game){
       obj_size++;
     }
   }
+  /*In case there are more than 3 objects*/
   if(obj_size > 3){
     obj[3] = '.';
     obj[4] = '.';
@@ -557,7 +574,7 @@ BOOL game_is_over(Game* game) {
 */
 
 /**
-* @brief callbac
+* @brief callback for an unknown parameter
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
@@ -569,7 +586,7 @@ STATUS callback_UNKNOWN(Game* game) {
 
 
 /**
-* @brief callbac
+* @brief callback for quitting the game
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
@@ -581,16 +598,16 @@ STATUS callback_QUIT(Game* game) {
 
 
 /**
-* @brief callbac
+* @brief callback for "next" instruction
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
 * @return OK if it went ok
 */
 STATUS callback_NEXT(Game* game) {
-  int i = 0;
-  Id current_id = NO_ID;
-  Id space_id = NO_ID;
+  int i = 0; /*Variable used for loops*/
+  Id current_id = NO_ID; /*Current space id*/
+  Id space_id = NO_ID; /*Id of the next space*/
   
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
@@ -614,16 +631,16 @@ STATUS callback_NEXT(Game* game) {
 
 
 /**
-* @brief callbac
+* @brief callbac for "back" instruction
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
 * @return OK if it went ok
 */
 STATUS callback_BACK(Game* game) {
-  int i = 0;
-  Id current_id = NO_ID;
-  Id space_id = NO_ID;
+  int i = 0; /*Variable used for loops*/
+  Id current_id = NO_ID; /*Current space id*/
+  Id space_id = NO_ID; /*Id of the previous space*/
   
   space_id = game_get_player_location(game);
   
@@ -648,16 +665,16 @@ STATUS callback_BACK(Game* game) {
 
 
 /**
-* @brief callbac
+* @brief callback for "jump" instruction
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
 * @return OK if it went ok
 */
 STATUS callback_JUMP(Game* game){
-  int i = 0;
-  Id current_id = NO_ID;
-  Id space_id = NO_ID;
+  int i = 0; /*Variable used for loops*/
+  Id current_id = NO_ID; /*Current space id*/
+  Id space_id = NO_ID; /*Id of the space to jump*/
   
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
@@ -681,18 +698,23 @@ STATUS callback_JUMP(Game* game){
 
 
 /**
-* @brief callbac
+* @brief callback for "drop" instruction
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
+* @param the symbol to drop
 * @return OK if it went ok
 */
-STATUS callback_DROP(Game* game){
-  Object* object;
-  Id current_id;
+STATUS callback_DROP(Game* game, char symbol){
+  Object* object; /*Object that will be dropped*/
+  Id current_id; /*Id of the current space*/
 
   object = player_drop_object(game->player);
   if(!object){
+    return ERROR;
+  }
+  if(object_get_symbol(object) != symbol){
+    player_pick_object(game->player, object);
     return ERROR;
   }
   current_id = game_get_player_location(game);
@@ -705,7 +727,7 @@ STATUS callback_DROP(Game* game){
 
 
 /**
-* @brief callbac
+* @brief callback for "pick" instruction
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
@@ -713,9 +735,9 @@ STATUS callback_DROP(Game* game){
 * @return OK if it went ok
 */
 STATUS callback_PICK(Game* game, char symbol){
-  Object* object;
-  Id player_id, object_id;
-  int i;
+  Object* object; /*Object that will be picked*/
+  Id player_id, object_id; /*Ids of the player and object*/
+  int i; /*Variable used for loops*/
 
   if(symbol == E){
     return ERROR;
@@ -749,14 +771,14 @@ STATUS callback_PICK(Game* game, char symbol){
 
 
 /**
-* @brief callbac
+* @brief callback for "roll" instruction
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
 * @return OK if it went ok
 */
 STATUS callback_ROLL(Game* game){
-    int res;
+    int res; /*Result of the rolled die*/
 
     res = die_roll(game->die, 1, 6);
     if(res < 1 || res > 6) return ERROR;

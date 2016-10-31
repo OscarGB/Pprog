@@ -21,14 +21,14 @@ Revision history: none
 #include "set.h"
 
 struct _Space {
-    Id id;
-    char name[WORD_SIZE + 1];
-    Id north;
-    Id south;
-    Id east;
-    Id west;
-    Set *object;
-    char gdesc[MAX_GDESC];
+    Id id; /*The id of the space*/
+    char name[WORD_SIZE + 1]; /*the name of the space*/
+    Id north; /*The id of the space located at the north*/
+    Id south; /*The id of the space located at the south*/
+    Id east; /*The id of the space located at the east*/
+    Id west; /*The id of the space located at the west*/
+    Set *object; /*The objects in the space*/
+    char gdesc[MAX_GDESC]; /*The gdesc of the space (The drawing)*/
 };
 
 /* --------------------------------------------------------------------
@@ -48,7 +48,7 @@ Output: Space* (The created space)
 
 Space* space_create(Id id) {
 
-    Space *newSpace = NULL;
+    Space *newSpace = NULL; /*The new space to create*/
 
     if (id == NO_ID)
         return NULL;
@@ -59,6 +59,8 @@ Space* space_create(Id id) {
         return NULL;
     }
     newSpace->id = id;
+
+    /*Default values*/
 
     newSpace->name[0] = '\0';
 

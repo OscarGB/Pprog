@@ -22,9 +22,9 @@ Revision history: none
 #include "object.h"
 
 struct _Player {
-	Id id;
-	char name[WORD_SIZE +1];
-	Id location;
+	Id id; /*Id of the player*/
+	char name[WORD_SIZE +1]; /*Name of the player*/
+	Id location; /*Location in the game*/
 	Object *object[MAX_OBJECTS]; /*We've set MAX_OBJECTS
 								as 1, in order to prepare 
 								the bag creation*/
@@ -49,7 +49,7 @@ Output: Player* (created player)
 ------------------------------------------------------------------- */
 Player* player_create(Id id){
 
-	Player *newPlayer = NULL;
+	Player *newPlayer = NULL; /*New player to create*/
 
 	if(id == NO_ID)
 		return NULL;
@@ -60,13 +60,15 @@ Player* player_create(Id id){
 		return NULL;
 	}
 
+	/*Default values*/
+
 	newPlayer->id = id;
 
 	newPlayer->name[0] = '\0';
 
 	newPlayer->location = NO_ID;
 
-	newPlayer->object[0] = NULL;
+	newPlayer->object[0] = NULL; /*We set only the first one because we havent done the bag yet*/
 
 	return newPlayer;
 }
