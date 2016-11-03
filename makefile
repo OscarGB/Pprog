@@ -78,4 +78,4 @@ clean:
 
 dist:
 	@echo "--->Creando tgz para la distribución del programa"
-	@tar cvzf s1-cod_OcaBasicaIni-v2.1.tgz codigo/ makefile *.dat
+	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ makefile *.dat
