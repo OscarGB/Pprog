@@ -25,4 +25,13 @@ typedef enum enum_link{
 */
 Link* link_create(Id id);
 
+/**
+* @brief Destroys a Link, freeing all the memory
+* @author Óscar Gómez
+* @date 3/11/2016
+* @param Link* (The Link to destroy)
+* @return STATUS (OK if the space was destroyed, ERROR if it wasn't)
+*/
+STATUS link_destroy(Link *deslink);
+
  #endif
