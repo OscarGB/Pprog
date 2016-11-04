@@ -24,6 +24,7 @@ struct _Object{
 	char name[WORD_SIZE + 1]; /*Name of the object*/
 	char symbol; /*symbol of the object*/
 	Id location; /*Location in the game*/
+	char desc[WORD_SIZE+1]; /*Written description of the object*/
 };
 
 /* --------------------------------------------------------------------
@@ -56,6 +57,7 @@ Object* object_create(Id id){
 	newObject->id = id;
 	newObject->name[0]='\0';
 	newObject->symbol = CHAR_ERROR;
+	newObject->desc[0] = '\0';
 
 	return newObject;
 }
@@ -247,6 +249,7 @@ Id object_get_location(Object* object){
 	}
 	return object->location;
 }
+
 
 /* --------------------------------------------------------------------
 Function: object_print()

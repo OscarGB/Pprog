@@ -169,6 +169,7 @@ Output: Id (the Id of the location)
 ------------------------------------------------------------------- */
 Id object_get_location(Object* object);
 
+
 /* --------------------------------------------------------------------
 Function: object_print()
 

@@ -29,6 +29,7 @@ typedef struct _Game{
   int num_objects;
   Space* spaces[MAX_SPACES + 1];
   Die* die;
+  char desc[WORD_SIZE+1];
 } Game;
 
 
