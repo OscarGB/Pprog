@@ -30,6 +30,7 @@ struct _Game{
   Space* spaces[MAX_SPACES + 1];
   Die* die;
   Link *links[(4*MAX_SPACES) + 1];
+  char desc[WORD_SIZE+1];
 };
 
 /**
@@ -107,6 +108,8 @@ STATUS game_init(Game* game) {
     game->links[i] = NULL;
   }
 
+  game->desc[0]='\0';
+
   return OK;
 }
 
@@ -129,8 +132,8 @@ STATUS game_init_from_file(Game* game, char* filename) {
   if (game_load_spaces(game, filename) == ERROR)
     return ERROR;
   /*Load links from file*/
-  if(game_load_links(game, filename) == ERROR)
-    return ERROR;
+  /*if(game_load_links(game, filename) == ERROR)
+    return ERROR;*/
   /*Set player in the initial position*/
   game_set_player_location(game, game_get_space_id_at(game, 0));
   
