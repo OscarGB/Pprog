@@ -93,6 +93,11 @@ STATUS get_user_input(Command* command){
 			else if (!strcmp(action, "r") || !strcmp(action, "roll")){
 				command->cmd = ROLL;
 			}
+			else if (!strcmp(action, "i") || !strcmp(action, "inspect")){
+				command->cmd = INSPECT;
+
+				command->symbol = symbol;
+			}
 			else{
 				command->cmd = UNKNOWN;
 			}

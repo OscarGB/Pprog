@@ -29,7 +29,8 @@ typedef enum enum_Command {
   BACK,
   PICK,
   DROP,
-  ROLL
+  ROLL,
+  INSPECT
 } T_Command; 
 
 typedef struct _Command Command;

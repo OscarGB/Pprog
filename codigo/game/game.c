@@ -35,6 +35,7 @@ STATUS callback_JUMP(Game* game);
 STATUS callback_DROP(Game* game, char symbol);
 STATUS callback_PICK(Game* game, char symbol);
 STATUS callback_ROLL(Game* game);
+STATUS callback_INSPECT(Game* game, char symbol);
 
 
 /**
@@ -374,6 +375,8 @@ STATUS game_update(Game* game, Command *cmd) {
     return callback_DROP(game, command_get_symbol(cmd));
   case ROLL:
     return callback_ROLL(game);
+  case INSPECT:
+    return callback_INSPECT(game, command_get_symbol(cmd));
   case NO_CMD:
     break;
   default: /*We must never arrive here*/
@@ -599,6 +602,12 @@ void game_print_screen(Game* game){
   if(last != -1){
     printf("Last die value: %d\n", last);
   }
+
+  if(strlen(game->desc) != 0){
+	printf("Description: %s\n", game->desc);
+  }
+  game->desc[0] = '\0';
+
 
   printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p, roll or r]");
   printf("\nprompt:> ");
@@ -880,4 +889,40 @@ STATUS callback_ROLL(Game* game){
     if(res < 1 || res > 6) return ERROR;
 
     return OK;
+}
+
+/**
+* @brief callback for "inspect" instruction
+* @author Óscar Pinto
+* @date 04/11/2016
+* @param game pointer
+* @param symbol to inspect
+* @return OK if it went ok
+*/
+STATUS callback_INSPECT(Game* game, char symbol){
+
+    int i;/* !< Variable used for loops*/
+
+    Id player_location = NO_ID, object_location= NO_ID; /* !< Locations of the player and object*/
+
+    if(!game) return ERROR;
+    if(symbol==E) return ERROR;
+
+    player_location = game_get_player_location(game);
+    if(player_location == NO_ID) return ERROR;
+
+    object_location = game_get_object_location(game, symbol);
+
+    if(!(object_location==player_location || object_location==NO_ID)) return ERROR;
+
+    for(i = 0; i < game->num_objects; i++){
+
+    	if(object_get_symbol(game->object[i]) == symbol){
+
+	      	strcpy(game->desc, object_get_name(game->object[i]));
+		return OK;
+    	}  
+    }
+
+return ERROR;
 }

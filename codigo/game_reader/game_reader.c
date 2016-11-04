@@ -135,6 +135,7 @@ STATUS game_load_objects(Game* game, char* filename) {
   Object* object = NULL; /*Object pointer*/
   STATUS status = OK; /*Status set to OK*/
   int num_objects = 0; /*Number of objects read*/
+  char desc[WORD_SIZE+1]= ""; /*Description of the object"*/
 
   if (!filename) {
     return ERROR;
@@ -153,7 +154,8 @@ STATUS game_load_objects(Game* game, char* filename) {
       space_id = atol(toks);
       toks = strtok(NULL, "|");
       symbol = toks[0];
-      
+      toks = strtok(NULL, "|");
+      strcpy(desc, toks);
 #ifdef DEBUG 
       printf("Leido: %ld|%ld|%c\n", object_id, space_id, symbol);
 #endif
@@ -161,7 +163,9 @@ STATUS game_load_objects(Game* game, char* filename) {
       if (object != NULL) {
         object_set_symbol(object, symbol);
         object_set_location(object, space_id);
+	object_set_name(object, desc);
         game_add_object(game, object);
+
       }
 
       num_objects++;

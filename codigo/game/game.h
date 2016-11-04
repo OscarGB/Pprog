@@ -30,7 +30,7 @@ typedef struct _Game{
   int num_objects;
   Space* spaces[MAX_SPACES + 1];
   Die* die;
-  Link* links[(4 * MAX_SPACES)+1];
+
 } Game;
 
 

@@ -137,6 +137,14 @@ int main(int argc, char *argv[]){
 			  		fprintf(f, "ROLL : ERROR\n");
 			  	}
 			  	break;
+			  case INSPECT:
+			    if(log == OK){
+			  		fprintf(f, "INSPECT : OK\n");
+			  	}
+			  	else{
+			  		fprintf(f, "INSPECT : ERROR\n");
+			  	}
+			  	break;
 			  case NO_CMD:
 			  	fprintf(f, "NO_CMD\n");
 			    break;
