@@ -163,7 +163,7 @@ STATUS game_load_objects(Game* game, char* filename) {
       if (object != NULL) {
         object_set_symbol(object, symbol);
         object_set_location(object, space_id);
-	object_set_name(object, desc);
+        object_set_name(object, desc);
         game_add_object(game, object);
 
       }
@@ -202,7 +202,7 @@ STATUS game_load_links(Game* game, char* filename){
     return ERROR;
   }
   
-  while (fgets(line, WORD_SIZE, file) && num_objects < 4) {
+  while (fgets(line, WORD_SIZE, file)) {
     if (strncmp("#l:", line, 3) == 0) {
       toks = strtok(line + 3, "|");
       link_id = atol(toks);

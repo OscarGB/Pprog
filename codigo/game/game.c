@@ -107,7 +107,6 @@ STATUS game_init(Game* game) {
   for (i = 0; i < (4*MAX_SPACES); i++){
     game->links[i] = NULL;
   }
-
   game->desc[0]='\0';
 
   return OK;
@@ -197,7 +196,7 @@ STATUS game_destroy(Game* game) {
 STATUS game_add_space(Game* game, Space* space) {
     int i = 0; /* !< Variable used for loops*/
 
-    if (space == NULL) {
+    if (game == NULL || space == NULL) {
         return ERROR;
     }
 
@@ -206,7 +205,7 @@ STATUS game_add_space(Game* game, Space* space) {
         i++;
     }
 
-    /*check if there are more spaces than positions*/
+    /*Check if there are more spaces than positions*/
     if (i >= MAX_SPACES) {
         return ERROR;
     }
@@ -215,6 +214,29 @@ STATUS game_add_space(Game* game, Space* space) {
     game->spaces[i] = space;
 
     return OK;
+}
+
+STATUS game_add_link(Game *game, Link* link){
+  int i = 0; /* !<Variable used for loops*/
+
+  if(game == NULL || link == NULL){
+    return ERROR;
+  }
+
+  /*Check the first empty position*/
+  while((i < (4 * MAX_SPACES)) && (game->links[i] != NULL)){
+    i++;
+  }
+
+  /*Check if there are more links than positions*/
+  if(i >= (4 * MAX_SPACES)){
+    return ERROR;
+  }
+
+  /*Set the link to the proper position*/
+  game->links[i] = link;
+
+  return OK;
 }
 
 /**
