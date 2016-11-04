@@ -182,3 +182,56 @@ STATUS game_load_objects(Game* game, char* filename) {
   
 return status;
 }
+
+STATUS game_load_links(Game* game, char* filename){
+  FILE* file = NULL; /*File to read*/
+  char line[WORD_SIZE] = ""; /*Line read*/
+  Id link_id = NO_ID; /*Id for the link*/
+  Id con1_id = NO_ID, con2_id = NO_ID; /*Id for the conections*/
+  char* toks = NULL; /*String for tokenization*/
+  Link* link = NULL; /*Link pointer*/
+  STATUS status = OK; /*Status set to OK*/
+  char desc[WORD_SIZE+1]= ""; /*Name of the link*/
+
+  if (!filename) {
+    return ERROR;
+  }
+  
+  file = fopen(filename, "r");
+  if (file == NULL) {
+    return ERROR;
+  }
+  
+  while (fgets(line, WORD_SIZE, file) && num_objects < 4) {
+    if (strncmp("#l:", line, 3) == 0) {
+      toks = strtok(line + 3, "|");
+      link_id = atol(toks);
+      toks = strtok(NULL, "|");
+      strcpy(desc, toks);
+      toks = strtok(NULL, "|");
+      con1_id = atol(toks);
+      toks = strtok(NULL, "|");
+      con2_id = atol(toks);
+#ifdef DEBUG 
+      printf("Leido: %ld|%s|%ld|%ld\n", link_id, desc, con1_id, con2_id);
+#endif
+      link = link_create(link_id);
+      if (link != NULL) {
+        link_set_name(link, desc);
+        link_set_conection1(link, con1_id);
+        link_set_conection2(link, con2_id);
+        game_add_link(game, link);
+      }
+    }
+  }
+  
+  /*We make this to prevent exiting without closing the file*/
+  if (ferror(file)) {
+    status = ERROR;
+  }
+  
+  fclose(file);
+  
+  
+return status;
+}
