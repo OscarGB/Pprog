@@ -11,7 +11,7 @@
  #include "link.h"
 
  int main(){
- 	Link *link = NULL; /*<!Link pointer for checks*/
+ 	Link *link = NULL; /*!<Link pointer for checks*/
 
  	fprintf(stdout, "TESTING LINK MODULE\n");
  	/*Test the link_create*/

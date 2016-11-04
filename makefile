@@ -36,14 +36,14 @@ link_test.o: codigo/link/link_test.c
 	@echo "--->Generando link_test.o"
 	@gcc $(CFLAGS) -c codigo/link/link_test.c
 
-ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o
+ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o
 	@echo "--->Creando el ejecutable ocabas"
-	@gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o
+	@gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o
 
 command.o: codigo/command/command.c 
 	@echo "--->Generando command.o"
 	@gcc $(CFLAGS) -c codigo/command/command.c
-
+ 
 game.o: codigo/game/game.c 
 	@echo "--->Generando game.o"
 	@gcc $(CFLAGS) -c codigo/game/game.c

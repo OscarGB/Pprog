@@ -14,12 +14,12 @@
 #include <string.h>
 
 struct _Link{
-	Id id; /*<!The id of the Link*/
-	char name[WORD_SIZE + 1]; /*<!The name of the link*/
-	Id conection1; /*<!One of the conections of the link*/
-	Id conection2; /*<!The other conection of the link*/
-	State state; /*<!The state (open or closed)*/
-};/*<!Link structure*/
+	Id id; /*!<The id of the Link*/
+	char name[WORD_SIZE + 1]; /*!<The name of the link*/
+	Id conection1; /*!<One of the conections of the link*/
+	Id conection2; /*!<The other conection of the link*/
+	State state; /*!<The state (open or closed)*/
+};/*!<Link structure*/
 
 /**
 * @brief Creates a Link, it reserves memory and set values to default
@@ -29,7 +29,7 @@ struct _Link{
 * @return Link* (The created link)
 */
 Link* link_create(Id id){
-	Link *newlink = NULL; /*<!The pointer to link that we are going to create*/
+	Link *newlink = NULL; /*!<The pointer to link that we are going to create*/
 
 	if(id == NO_ID){
 		return NULL;

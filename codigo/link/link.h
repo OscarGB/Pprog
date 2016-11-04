@@ -11,12 +11,12 @@
 
 #include "types.h"
 
-typedef struct _Link Link; /*<!Definition of the Link structure*/
+typedef struct _Link Link; /*!<Definition of the Link structure*/
 
 typedef enum enum_link{
 	CLOSED = 0,
 	OPEN
-} State; /*<!Definition of the State enumeration (controling an open or closed link)*/
+} State; /*!<Definition of the State enumeration (controling an open or closed link)*/
 
 /**
 * @brief Creates a Link, it reserves memory and set values to default

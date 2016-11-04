@@ -22,6 +22,8 @@ Revision history: none
 #include "object.h"
 #include "set.h"
 #include "die.h"
+#include "link.h"
+
 
 typedef struct _Game Game;
 
