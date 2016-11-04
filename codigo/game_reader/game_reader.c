@@ -145,7 +145,6 @@ STATUS game_load_objects(Game* game, char* filename) {
   if (file == NULL) {
     return ERROR;
   }
-  
   while (fgets(line, WORD_SIZE, file) && num_objects < 4) {
     if (strncmp("#o:", line, 3) == 0) {
       toks = strtok(line + 3, "|");
@@ -156,16 +155,17 @@ STATUS game_load_objects(Game* game, char* filename) {
       symbol = toks[0];
       toks = strtok(NULL, "|");
       strcpy(desc, toks);
+
 #ifdef DEBUG 
       printf("Leido: %ld|%ld|%c\n", object_id, space_id, symbol);
 #endif
+
       object = object_create(object_id);
       if (object != NULL) {
         object_set_symbol(object, symbol);
         object_set_location(object, space_id);
         object_set_name(object, desc);
         game_add_object(game, object);
-
       }
 
       num_objects++;
@@ -176,7 +176,6 @@ STATUS game_load_objects(Game* game, char* filename) {
   if (ferror(file)) {
     status = ERROR;
   }
-  
   fclose(file);
   
   

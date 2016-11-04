@@ -25,7 +25,7 @@
 
 struct _Game{
   Player* player;
-  Object* object[MAX_IDS];
+  Object* object[MAX_IDS + 1];
   int num_objects;
   Space* spaces[MAX_SPACES + 1];
   Die* die;
@@ -94,6 +94,10 @@ STATUS game_init(Game* game) {
     return ERROR;
   }
 
+  for (i = 0; i < MAX_IDS; i++){
+    game->object[i] = NULL;
+  }
+
   game->num_objects = 0;
 
   /*Creating die*/
@@ -123,7 +127,6 @@ STATUS game_init_from_file(Game* game, char* filename) {
   /*Init the game*/
   if (game_init(game) == ERROR)
     return ERROR;
-
   /*Load objects from file*/
   if (game_load_objects(game, filename) == ERROR)
     return ERROR;
@@ -131,11 +134,10 @@ STATUS game_init_from_file(Game* game, char* filename) {
   if (game_load_spaces(game, filename) == ERROR)
     return ERROR;
   /*Load links from file*/
-  /*if(game_load_links(game, filename) == ERROR)
-    return ERROR;*/
+  if(game_load_links(game, filename) == ERROR)
+    return ERROR;
   /*Set player in the initial position*/
   game_set_player_location(game, game_get_space_id_at(game, 0));
-  
   return OK;
 }
 
@@ -216,6 +218,14 @@ STATUS game_add_space(Game* game, Space* space) {
     return OK;
 }
 
+/**
+* @brief Adds a link to the game
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Game *game (The game to change)
+* @param Link *link (The link to add)
+* @return Status (OK if it was added, ERROR if wasn't)
+*/
 STATUS game_add_link(Game *game, Link* link){
   int i = 0; /* !<Variable used for loops*/
 
@@ -248,15 +258,16 @@ STATUS game_add_link(Game *game, Link* link){
 * @return OK if it was added
 */
 STATUS game_add_object(Game* game, Object* object) {
-
-    if (object == NULL) {
+    if (object == NULL || game == NULL) {
         return ERROR;
     }
+    
 
     /*Checks if there are too much objects*/
     if(game->num_objects >= MAX_IDS){
       return ERROR;
     }
+
 
     /*Sets the object*/
     game->object[game->num_objects] = object;
@@ -279,7 +290,7 @@ Id game_get_space_id_at(Game* game, int position) {
     if (position < 0 || position >= MAX_SPACES) {
         return NO_ID;
     }
-
+    
     return space_get_id(game->spaces[position]);
 }
 
@@ -324,7 +335,6 @@ STATUS game_set_player_location(Game* game, Id id) {
     if (id == NO_ID || !game) {
         return ERROR;
     }
-
     return player_set_location(game->player, id);
 }
 

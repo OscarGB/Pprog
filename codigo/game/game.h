@@ -176,4 +176,14 @@ Output: STATUS (OK if everything went well, ERROR if something went wrong)
 ------------------------------------------------------------------- */
 STATUS game_add_object(Game* game, Object* object);
 
+/**
+* @brief Adds a link to the game
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Game *game (The game to change)
+* @param Link *link (The link to add)
+* @return Status (OK if it was added, ERROR if wasn't)
+*/
+STATUS game_add_link(Game *game, Link* link);
+
 #endif
