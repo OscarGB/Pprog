@@ -22,6 +22,14 @@
 #define CLEAR "clear"
 #endif
 
+struct _Game{
+  Player* player;
+  Object* object[MAX_IDS];
+  int num_objects;
+  Space* spaces[MAX_SPACES + 1];
+  Die* die;
+};
+
 /**
 * @brief List of callbacks for each command in the game 
 */
@@ -67,7 +75,10 @@ Id     game_get_object_location(Game* game, char symbol);
 */
 STATUS game_init(Game* game) {
   int i; /* <! Variable used for loops*/
-  
+
+  game = (Game *) malloc (sizeof(Game));
+  if(!game) return ERROR;
+
   for (i = 0; i < MAX_SPACES; i++) {
     game->spaces[i] = NULL;
   }
@@ -148,6 +159,8 @@ STATUS game_destroy(Game* game) {
     if(game->die != NULL){
       die_destroy(game->die);
     }
+
+    free(game);
         
     return OK;
 }

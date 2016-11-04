@@ -23,14 +23,7 @@ Revision history: none
 #include "set.h"
 #include "die.h"
 
-typedef struct _Game{
-  Player* player;
-  Object* object[MAX_IDS];
-  int num_objects;
-  Space* spaces[MAX_SPACES + 1];
-  Die* die;
-} Game;
-
+typedef struct _Game Game;
 
 /* --------------------------------------------------------------------
 Function: game_init()

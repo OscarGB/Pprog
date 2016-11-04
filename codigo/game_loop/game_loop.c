@@ -36,7 +36,7 @@ Output: int 1 if ERROR, 0 if OK
 ------------------------------------------------------------------- */
 
 int main(int argc, char *argv[]){
-  	Game game; /*Game pointer*/
+  	Game * game = NULL; /*Game pointer*/
   	Command *command = NULL; /*Command pointer*/
   	FILE *f = NULL; /*Log file*/
   	int flag = 0; /*Flag if its on log mode*/
@@ -46,6 +46,7 @@ int main(int argc, char *argv[]){
 	fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
 	return 1;
 	}
+
 	/*Log mode*/
 	if(argc == 4){
 		if(strcmp(argv[2], "-l") == 0){
@@ -57,7 +58,7 @@ int main(int argc, char *argv[]){
 			flag = 1;
 		}
 	}
-	if (game_init_from_file(&game, argv[1]) == ERROR){
+	if (game_init_from_file(game, argv[1]) == ERROR){
 		fprintf(stderr, "Error while initializing game.\n");
 		return 1;
 	}
@@ -66,10 +67,10 @@ int main(int argc, char *argv[]){
 	if(!command){
 		fprintf(stderr, "Command couldnt be created\n");
 	}
-	while ((command_get_cmd(command) != QUIT) && !game_is_over(&game)){
-		 game_print_screen(&game);
+	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
+		 game_print_screen(game);
 		 get_user_input(command);
-		 log = game_update(&game, command);
+		 log = game_update(game, command);
 		 /*Log mode*/
 		 if(flag == 1){
 		 	switch (command_get_cmd(command)) {
@@ -145,7 +146,7 @@ int main(int argc, char *argv[]){
 			  }
 		 	}
 		}
-	game_destroy(&game);
+	game_destroy(game);
 	command_destroy(command);
 	/*Log mode*/
 	if(flag == 1){
