@@ -1,4 +1,4 @@
-DEPS = game command generic space set player object die game_reader	#Nombre de las carpetas de los módulos
+DEPS = game command generic space set player object die game_reader link	#Nombre de las carpetas de los módulos
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefijo de -I para la inclusión de las carpetas en la compilación
 
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
@@ -68,10 +68,14 @@ die.o: codigo/die/die.c
 	@echo "--->Generando die.o"
 	@gcc $(CFLAGS) -c codigo/die/die.c
 
+link.o: codigo/link/link.c
+	@echo "--->Generando link.o"
+	@gcc $(CFLAGS) -c codigo/link/link.c
+
 clean:
 	@echo "--->Borrando todos los ejecutables, incluyendo los test y el log"
 	@rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG)
 
 dist:
 	@echo "--->Creando tgz para la distribución del programa"
-	@tar cvzf s1-cod_OcaBasicaIni-v2.1.tgz codigo/ makefile *.dat
+	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ makefile *.dat
