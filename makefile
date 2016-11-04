@@ -5,7 +5,7 @@ CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
 
 ALL = ocabas 	#Ejecutables a generar si se llama a make
 
-ALL_DEBUG = $(ALL) die_test set_test	#Ejecutables a generar si se llama a make debug
+ALL_DEBUG = $(ALL) die_test set_test link_test	#Ejecutables a generar si se llama a make debug
 
 all: $(ALL)
 
@@ -20,6 +20,10 @@ set_test: set_test.o set.o
 	@echo "--->Creando el ejecutable set_test"
 	@gcc $(CFLAGS) -o set_test set_test.o set.o
 
+link_test: link_test.o link.o
+	@echo "--->Creando el ejecutable link_test"
+	@gcc $(CFLAGS) -o link_test link_test.o link.o
+
 die_test.o: codigo/die/die_test.c 
 	@echo "--->Generando die_test.o"
 	@gcc $(CFLAGS) -c codigo/die/die_test.c
@@ -27,6 +31,10 @@ die_test.o: codigo/die/die_test.c
 set_test.o: codigo/set/set_test.c 
 	@echo "--->Generando set_test.o"
 	@gcc $(CFLAGS) -c codigo/set/set_test.c
+
+link_test.o: codigo/link/link_test.c
+	@echo "--->Generando link_test.o"
+	@gcc $(CFLAGS) -c codigo/link/link_test.c
 
 ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o
 	@echo "--->Creando el ejecutable ocabas"
