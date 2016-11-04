@@ -1,17 +1,11 @@
-/* ===================================================================
-File: space.c
+/**
+ * @brief It implements the game spaces
+ * @file space.c
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 2.0
+ * @date 4/11/2016
+ */
 
-Version: 1.0
-
-Date: 23/09/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It implements the game spaces for each command 
-
-Revision history: none
-
-=================================================================== */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,34 +15,26 @@ Revision history: none
 #include "set.h"
 
 struct _Space {
-    Id id; /*The id of the space*/
-    char name[WORD_SIZE + 1]; /*the name of the space*/
-    Id north; /*The id of the space located at the north*/
-    Id south; /*The id of the space located at the south*/
-    Id east; /*The id of the space located at the east*/
-    Id west; /*The id of the space located at the west*/
-    Set *object; /*The objects in the space*/
-    char gdesc[MAX_GDESC]; /*The gdesc of the space (The drawing)*/
+    Id id; /*<!The id of the space*/
+    char name[WORD_SIZE + 1]; /*<!the name of the space*/
+    Id north; /*<!The id of the link located at the north*/
+    Id south; /*<!The id of the link located at the south*/
+    Id east; /*<!The id of the link located at the east*/
+    Id west; /*<!The id of the link located at the west*/
+    Set *object; /*<!The objects in the space*/
+    char gdesc[MAX_GDESC]; /*<!The gdesc of the space (The drawing)*/
 };
 
-/* --------------------------------------------------------------------
-Function: space_create()
-
-Date: 23/09/2016   
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Creates a new space for the game
-
-Input: Id id (The id for the new space)
-
-Output: Space* (The created space)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Creates a new space for the game
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Id id(The id for the new space)
+* @return Space* (The created space)
+*/
 Space* space_create(Id id) {
 
-    Space *newSpace = NULL; /*The new space to create*/
+    Space *newSpace = NULL; /*<!The new space to create*/
 
     if (id == NO_ID)
         return NULL;
@@ -80,20 +66,13 @@ Space* space_create(Id id) {
     return newSpace;
 }
 
-/* --------------------------------------------------------------------
-Function: space_destroy();
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: destroys a non-empty space
-
-Input: space* space (the space that is gonna be destroyed)
-
-Output: a STATUS return: OK if the space was destroyed, ERROR if it wasn't
-
-------------------------------------------------------------------- */
+/**
+* @brief destroys a non-empty space
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* space (the space that is going to be destroyed) 
+* @return STATUS (OK if the space was destroyed, ERROR if it wasn't)
+*/
 STATUS space_destroy(Space* space) {
     if (!space) {
         return ERROR;
@@ -105,21 +84,14 @@ STATUS space_destroy(Space* space) {
     return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: space_set_name()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Sets the name of a space
-
-Input: Space* space (The space that has to be changed)
-
-Output: STATUS (OK if everything went well, ERROR if something went wrong)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Sets the name of a Space
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* space (the space that has to be changed)
+* @param char* name (The new name for the space)
+* @return STATUS (OK if everything went well, ERROR if something went wrong)
+*/
 STATUS space_set_name(Space* space, char* name) {
     if (!space || !name) {
         return ERROR;
@@ -132,22 +104,14 @@ STATUS space_set_name(Space* space, char* name) {
     return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: space_set_north()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Sets the north space for the given one
-
-Input:  Space* Space (The space which need to be set)
-        Id id (The id of the space located at the north)
-
-Output: STATUS (OK if everything went well, ERROR if something went wrong)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Sets the Id of the nort Link
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* Space (The space which need to be set)
+* @param Id id (The id of the Link located at the north)
+* @return STATUS (OK if everything went well, ERROR if something went wrong)
+*/
 STATUS space_set_north(Space* space, Id id) {
     if (!space || id == NO_ID) {
         return ERROR;
@@ -156,22 +120,14 @@ STATUS space_set_north(Space* space, Id id) {
     return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: space_set_south()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Sets the south space for the given one
-
-Input:  Space* Space (The space which need to be set)
-        Id id (The id of the space located at the south)
-
-Output: STATUS (OK if everything went well, ERROR if something went wrong)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Sets the Id of the south Link
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* Space (The space which need to be set)
+* @param Id id (The id of the Link located at the south)
+* @return STATUS (OK if everything went well, ERROR if something went wrong)
+*/
 STATUS space_set_south(Space* space, Id id) {
     if (!space || id == NO_ID) {
         return ERROR;
@@ -180,22 +136,14 @@ STATUS space_set_south(Space* space, Id id) {
     return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: space_set_east()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Sets the east space for the given one
-
-Input:  Space* Space (The space which need to be set)
-        Id id (The id of the space located at the east)
-
-Output: STATUS (OK if everything went well, ERROR if something went wrong)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Sets the Id of the east Link
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* Space (The space which need to be set)
+* @param Id id (The id of the Link located at the east)
+* @return STATUS (OK if everything went well, ERROR if something went wrong)
+*/
 STATUS space_set_east(Space* space, Id id) {
     if (!space || id == NO_ID) {
         return ERROR;
@@ -204,22 +152,14 @@ STATUS space_set_east(Space* space, Id id) {
     return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: space_set_west()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Sets the west space for the given one
-
-Input:  Space* Space (The space which need to be set)
-        Id id (The id of the space located at the west)
-
-Output: STATUS (OK if everything went well, ERROR if something went wrong)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Sets the Id of the west Link
+* @author JÓscar Gómez
+* @date 4/11/2016
+* @param Space* Space (The space which need to be set)
+* @param Id id (The id of the Link located at the west)
+* @return STATUS (OK if everything went well, ERROR if something went wrong)
+*/
 STATUS space_set_west(Space* space, Id id) {
     if (!space || id == NO_ID) {
         return ERROR;
@@ -228,21 +168,14 @@ STATUS space_set_west(Space* space, Id id) {
     return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: space_add_object()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: it defines if a given space has an object inside
-
-Input:  Space* space (the space we want to know about)
-        Id id (the id of the object)
-
-Output: a STATUS return: OK if everything went well, ERROR if it wasn't
-
-------------------------------------------------------------------- */
+/**
+* @brief Adds an object to the space
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* space (the space we want to know about)
+* @param Id id (the id of the object)
+* @return STATUS (OK if everything went well, ERROR if it wasn't)
+*/
 STATUS space_add_object(Space* space, Id id) {
     if (!space || id == NO_ID) {
         return ERROR;
@@ -251,20 +184,13 @@ STATUS space_add_object(Space* space, Id id) {
     return set_add(space->object, id);
 }
 
-/* --------------------------------------------------------------------
-Function: space_get_name()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: it returns the name of a given space
-
-Input: Space* space (the space we want to know about)
-
-Output: char* (the name of the space)
-
-------------------------------------------------------------------- */
+/**
+* @brief it returns the name of a given space
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* space (the space we want to know about)
+* @return char* (the name of the space)
+*/
 const char * space_get_name(Space* space) {
     if (!space) {
         return NULL;
@@ -272,20 +198,13 @@ const char * space_get_name(Space* space) {
     return space->name;
 }
 
-/* --------------------------------------------------------------------
-Function: space_get_id()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: it returns the Id of a given space
-
-Input: Space* space (the space we want to know about)
-
-Output: Id (the Id of the space)
-
-------------------------------------------------------------------- */
+/**
+* @brief It returns the Id of a given space
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 4/11/2016
+* @param Space* space (the space we want to know about)
+* @return Id (the Id of the space)
+*/
 Id space_get_id(Space* space) {
     if (!space) {
         return NO_ID;
@@ -293,21 +212,13 @@ Id space_get_id(Space* space) {
     return space->id;
 }
 
-/* --------------------------------------------------------------------
-Function: space_get_north()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Gets the id of the north space for the given one
-
-Input:  Space* Space (The space to evaluate)
-
-Output: Id id (The id of the space located at the north)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Gets the id of the Link in the north
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* Space (The space to evaluate)
+* @return Id id (The id of the link located at the north)
+*/
 Id space_get_north(Space* space) {
     if (!space) {
         return NO_ID;
@@ -315,21 +226,13 @@ Id space_get_north(Space* space) {
     return space->north;
 }
 
-/* --------------------------------------------------------------------
-Function: space_get_south()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Gets the id of the south space for the given one
-
-Input:  Space* Space (The space to evaluate)
-
-Output: Id id (The id of the space located at the south)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Gets the id of the Link in the south
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* Space (The space to evaluate)
+* @return Id id (The id of the link located at the south)
+*/
 Id space_get_south(Space* space) {
     if (!space) {
         return NO_ID;
@@ -337,21 +240,13 @@ Id space_get_south(Space* space) {
     return space->south;
 }
 
-/* --------------------------------------------------------------------
-Function: space_get_east()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Gets the id of the east space for the given one
-
-Input:  Space* Space (The space to evaluate)
-
-Output: Id id (The id of the space located at the east)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Gets the id of the Link in the east
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* Space (The space to evaluate)
+* @return Id id (The id of the link located at the east)
+*/
 Id space_get_east(Space* space) {
     if (!space) {
         return NO_ID;
@@ -359,21 +254,13 @@ Id space_get_east(Space* space) {
     return space->east;
 }
 
-/* --------------------------------------------------------------------
-Function: space_get_west()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Gets the id of the west space for the given one
-
-Input:  Space* Space (The space to evaluate)
-
-Output: Id id (The id of the space located at the west)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Gets the id of the Link in the west
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* Space (The space to evaluate)
+* @return Id id (The id of the link located at the west)
+*/
 Id space_get_west(Space* space) {
     if (!space) {
         return NO_ID;
@@ -381,21 +268,13 @@ Id space_get_west(Space* space) {
     return space->west;
 }
 
-/* --------------------------------------------------------------------
-Function: space_get_object()
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: it returns TRUE if there's an object in the space
-
-Input: Space* space (the space we want to know about)
-
-Output: Id (The Id of the object)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief It returns the Set of objects inside the Space
+* @author Óscar Gómez
+* @date 4/11/2106
+* @param Space* space (the space we want to know about)
+* @return Set* (The set inside the Space)
+*/
 Set* space_get_object(Space* space) {
     if (!space) {
         return FALSE;
@@ -404,22 +283,14 @@ Set* space_get_object(Space* space) {
     return space->object;
 }
 
-/* --------------------------------------------------------------------
-Function: space_is_object_in()
-
-Date: 14/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: Checks if the object is in the given space
-
-Input: Space* (The space to check)
-       Id (The id to find)
-
-Output: BOOL (TRUE if its in the space, FALSE if error or isn't in the space)
-
-------------------------------------------------------------------- */
-
+/**
+* @brief Checks if the object is in the given space
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space* (The space to check)
+* @param Id (The id to find)
+* @return BOOL (TRUE if its in the space, FALSE if error or isn't in the space)
+*/
 BOOL space_is_object_in(Space* space, Id id){
     if(!space || id == NO_ID){
         return FALSE;
@@ -427,22 +298,15 @@ BOOL space_is_object_in(Space* space, Id id){
     return set_is_id(space->object, id);
 }
 
-/* --------------------------------------------------------------------
-Function: space_print
-
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: prints the given space in the standard output
-
-Input: Space *space (The space to be printed)
-
-Output STATUS (OK if everything went well, ERROR if something went wrong)
-------------------------------------------------------------------- */
-
+/**
+* @brief Prints the given space in the standard output
+* @author Óscar Gómez
+* @date 4/11/2016
+* @param Space *space (The space to be printed)
+* @return STATUS (OK if everything went well, ERROR if something went wrong)
+*/
 STATUS space_print(Space* space) {
-    Id idaux = NO_ID;
+    Id idaux = NO_ID; /*<!Auxiliar Id*/
   
     if (!space) {
         return ERROR;
@@ -488,20 +352,15 @@ STATUS space_print(Space* space) {
 
     return OK;
 }
-/* --------------------------------------------------------------------
-Function: space_set_gdesc()
 
-Date: 27/10/16
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: returns OK if the gdesc has been successfuly set
-
-Input: Space* , char** the gdesc
-
-Output: OK if it was successfuly set
-
-------------------------------------------------------------------- */
+/**
+* @brief Sets the gdesc of a Space
+* @author José Ignacio Gómez
+* @date 4/11/2016
+* @param Space* space (The space to modify)
+* @param char* gdesc (The new gdesc)
+* @return STATUS (OK if it was successfuly set)
+*/
 STATUS space_set_gdesc(Space* space, char* gdesc){
  
     if(!space || !gdesc){
@@ -513,21 +372,13 @@ STATUS space_set_gdesc(Space* space, char* gdesc){
     return OK;
 }
 
-
-/* --------------------------------------------------------------------
-Function: space_get_gdesc()
-
-Date: 27/10/16
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: returns the gdesc
-
-Input: Space*
-
-Output: gdesc
-
-------------------------------------------------------------------- */ 
+/**
+* @brief Returns the gdesc of a space
+* @author José Ignacio Gómez
+* @date 4/11/2016
+* @param Space* space (The space to inspect)
+* @return char* (The gdesc inside the Space)
+*/
 char* space_get_gdesc(Space* space){
     if(!space){
         return NULL;
