@@ -7,7 +7,7 @@ int main(){
 	int roll; /*Variable used to check the rolled values*/
 
 	fprintf(stdout, "TESTING DIE MODULE\n");
-	/*Test the die create*/
+	/*Test the die_create*/
 	fprintf(stdout, "Creating the die\n");
 	die = die_create(1);
 	if(!die){

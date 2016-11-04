@@ -1,11 +1,11 @@
-DEPS = game command generic space set player object die game_reader	#Nombre de las carpetas de los módulos
+DEPS = game command generic space set player object die game_reader link	#Nombre de las carpetas de los módulos
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefijo de -I para la inclusión de las carpetas en la compilación
 
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
 
 ALL = ocabas 	#Ejecutables a generar si se llama a make
 
-ALL_DEBUG = $(ALL) die_test set_test	#Ejecutables a generar si se llama a make debug
+ALL_DEBUG = $(ALL) die_test set_test link_test	#Ejecutables a generar si se llama a make debug
 
 all: $(ALL)
 
@@ -20,6 +20,10 @@ set_test: set_test.o set.o
 	@echo "--->Creando el ejecutable set_test"
 	@gcc $(CFLAGS) -o set_test set_test.o set.o
 
+link_test: link_test.o link.o
+	@echo "--->Creando el ejecutable link_test"
+	@gcc $(CFLAGS) -o link_test link_test.o link.o
+
 die_test.o: codigo/die/die_test.c 
 	@echo "--->Generando die_test.o"
 	@gcc $(CFLAGS) -c codigo/die/die_test.c
@@ -27,6 +31,10 @@ die_test.o: codigo/die/die_test.c
 set_test.o: codigo/set/set_test.c 
 	@echo "--->Generando set_test.o"
 	@gcc $(CFLAGS) -c codigo/set/set_test.c
+
+link_test.o: codigo/link/link_test.c
+	@echo "--->Generando link_test.o"
+	@gcc $(CFLAGS) -c codigo/link/link_test.c
 
 ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o
 	@echo "--->Creando el ejecutable ocabas"
@@ -68,10 +76,14 @@ die.o: codigo/die/die.c
 	@echo "--->Generando die.o"
 	@gcc $(CFLAGS) -c codigo/die/die.c
 
+link.o: codigo/link/link.c
+	@echo "--->Generando link.o"
+	@gcc $(CFLAGS) -c codigo/link/link.c
+
 clean:
 	@echo "--->Borrando todos los ejecutables, incluyendo los test y el log"
 	@rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG)
 
 dist:
 	@echo "--->Creando tgz para la distribución del programa"
-	@tar cvzf s1-cod_OcaBasicaIni-v2.1.tgz codigo/ makefile *.dat
+	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ makefile *.dat
