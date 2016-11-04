@@ -22,6 +22,7 @@ Revision history: none
 #include "object.h"
 #include "set.h"
 #include "die.h"
+#include "link.h"
 
 typedef struct _Game{
   Player* player;
@@ -29,6 +30,7 @@ typedef struct _Game{
   int num_objects;
   Space* spaces[MAX_SPACES + 1];
   Die* die;
+  Link* links[(4 * MAX_SPACES)+1];
 } Game;
 
 

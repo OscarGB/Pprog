@@ -15,6 +15,7 @@
 #include "object.h"
 #include "game_reader.h"
 #include "die.h"
+#include "link.h"
 
 #ifdef __WINDOWS_BUILD__ /*In case we are working on Windows*/
 #define CLEAR "cls"
@@ -89,6 +90,10 @@ STATUS game_init(Game* game) {
     return ERROR;
   }
 
+  for (i = 0; i < (4*MAX_SPACES); i++){
+    game->links[i] = NULL;
+  }
+
   return OK;
 }
 
@@ -110,7 +115,9 @@ STATUS game_init_from_file(Game* game, char* filename) {
   /*Load spaces from file*/
   if (game_load_spaces(game, filename) == ERROR)
     return ERROR;
-
+  /*Load links from file*/
+  if(game_load_links(game, filename) == ERROR)
+    return ERROR;
   /*Set player in the initial position*/
   game_set_player_location(game, game_get_space_id_at(game, 0));
   
@@ -147,6 +154,11 @@ STATUS game_destroy(Game* game) {
     /*Destroy the die*/
     if(game->die != NULL){
       die_destroy(game->die);
+    }
+
+    /*Destroy all the links*/
+    for(i=0; i < (4 * MAX_SPACES); i++){
+      link_destroy(game->links[i]);
     }
         
     return OK;
@@ -409,10 +421,11 @@ void game_print_data(Game* game) {
 */
 void game_print_screen(Game* game){
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID; /* !< Ids for locations*/
+  Id id_l_back = NO_ID, id_l_next = NO_ID; /*<! Ids of the links*/
   Space* space_act = NULL; /* !< Pointers to spaces needed to print the game*/
   Space* space_back = NULL;
   Space* space_next = NULL;
-  char obj[WORD_SIZE]; /* !< String with the objects*/
+   char obj[WORD_SIZE]; /* !< String with the objects*/
   char aux[WORD_SIZE]; /* !< Axiliar for reading object values*/
   int i, last; /* !< loops, last rolled value*/
   char symbol; /* !< symbol of the player's objects*/
@@ -428,8 +441,43 @@ void game_print_screen(Game* game){
   }
   
   space_act = game_get_space(game, id_act);
-  id_back = space_get_north(space_act);
-  id_next = space_get_south(space_act);
+  id_l_back = space_get_north(space_act);
+  id_l_next = space_get_south(space_act);
+
+  /*Search for the id of the back space*/
+  for(i=0; i<(4*MAX_SPACES); i++){
+    if(link_get_id(game->links[i]) == id_l_back){
+      if(link_get_conection1(game->links[i]) == id_act){
+        id_back = link_get_conection1(game->links[i]);
+        break;
+      }
+      else{
+        id_back = link_get_conection2(game->links[i]);
+        break;
+      }
+    }
+    else{
+      id_back = NO_ID;
+    }
+  }
+
+  /*Search for the id of the next space*/
+  for(i=0; i<(4*MAX_SPACES); i++){
+    if(link_get_id(game->links[i]) == id_l_next){
+      if(link_get_conection1(game->links[i]) == id_act){
+        id_next = link_get_conection1(game->links[i]);
+        break;
+      }
+      else{
+        id_next = link_get_conection2(game->links[i]);
+        break;
+      }
+    }
+    else{
+      id_next = NO_ID;
+    }
+  }
+
   space_back = game_get_space(game, id_back);
   space_next = game_get_space(game, id_next);  
   
@@ -454,6 +502,7 @@ void game_print_screen(Game* game){
   }
 
   if (id_back != NO_ID) {
+
     if(space_get_east(space_back) != NO_ID){
       printf("|         %2d|>\n",(int) id_back);
     }
@@ -605,8 +654,9 @@ STATUS callback_QUIT(Game* game) {
 * @return OK if it went ok
 */
 STATUS callback_NEXT(Game* game) {
-  int i = 0; /* !< Variable used for loops*/
-  Id current_id = NO_ID; /* !< Current space id*/
+  int i = 0, j = 0; /* !< Variables used for loops*/
+  Id current_id = NO_ID, south_id = NO_ID; /* !< Current space id and sout id*/
+  Id link_id = NO_ID; /* !< Link id*/
   Id space_id = NO_ID; /* !< Id of the next space*/
   
   space_id = game_get_player_location(game);
@@ -617,9 +667,24 @@ STATUS callback_NEXT(Game* game) {
   for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
     current_id = space_get_id(game->spaces[i]);
     if (current_id == space_id) {
-      current_id = space_get_south(game->spaces[i]);
-      if (current_id != NO_ID) {
-        return game_set_player_location(game, current_id);
+      link_id = space_get_south(game->spaces[i]);
+      for(j = 0; j < (4 * MAX_SPACES); j++){
+        if(link_get_id(game->links[j]) == link_id){
+          if(link_get_conection1(game->links[j]) == current_id){
+            south_id = link_get_conection2(game->links[j]);
+            break;
+          }
+          else{
+            south_id = link_get_conection1(game->links[j]);
+            break;
+          }
+        }
+        else{
+          south_id = NO_ID;
+        }
+      }
+      if (south_id != NO_ID) {
+        return game_set_player_location(game, south_id);
       }
       else{
         return ERROR;
@@ -638,22 +703,37 @@ STATUS callback_NEXT(Game* game) {
 * @return OK if it went ok
 */
 STATUS callback_BACK(Game* game) {
-  int i = 0; /* !< Variable used for loops*/
-  Id current_id = NO_ID; /* !< Current space id*/
-  Id space_id = NO_ID; /* !< Id of the previous space*/
+  int i = 0, j = 0; /* !< Variables used for loops*/
+  Id current_id = NO_ID, north_id = NO_ID; /* !< Current space id and sout id*/
+  Id link_id = NO_ID; /* !< Link id*/
+  Id space_id = NO_ID; /* !< Id of the next space*/
   
   space_id = game_get_player_location(game);
-  
-  if (NO_ID == space_id) {
+  if (space_id == NO_ID) {
     return ERROR;
   }
   
   for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
     current_id = space_get_id(game->spaces[i]);
     if (current_id == space_id) {
-      current_id = space_get_north(game->spaces[i]);
-      if (current_id != NO_ID) {
-        return game_set_player_location(game, current_id);
+      link_id = space_get_north(game->spaces[i]);
+      for(j = 0; j < (4 * MAX_SPACES); j++){
+        if(link_get_id(game->links[j]) == link_id){
+          if(link_get_conection1(game->links[j]) == current_id){
+            north_id = link_get_conection2(game->links[j]);
+            break;
+          }
+          else{
+            north_id = link_get_conection1(game->links[j]);
+            break;
+          }
+        }
+        else{
+          north_id = NO_ID;
+        }
+      }
+      if (north_id != NO_ID) {
+        return game_set_player_location(game, north_id);
       }
       else{
         return ERROR;
@@ -672,9 +752,10 @@ STATUS callback_BACK(Game* game) {
 * @return OK if it went ok
 */
 STATUS callback_JUMP(Game* game){
-  int i = 0; /* !< Variable used for loops*/
-  Id current_id = NO_ID; /* !< Current space id*/
-  Id space_id = NO_ID; /* !< Id of the space to jump*/
+  int i = 0, j = 0; /* !< Variables used for loops*/
+  Id current_id = NO_ID, east_id = NO_ID; /* !< Current space id and sout id*/
+  Id link_id = NO_ID; /* !< Link id*/
+  Id space_id = NO_ID; /* !< Id of the next space*/
   
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
@@ -684,13 +765,28 @@ STATUS callback_JUMP(Game* game){
   for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
     current_id = space_get_id(game->spaces[i]);
     if (current_id == space_id) {
-      current_id = space_get_east(game->spaces[i]);
-      if (current_id != NO_ID) {
-        return game_set_player_location(game, current_id);
+      link_id = space_get_east(game->spaces[i]);
+      for(j = 0; j < (4 * MAX_SPACES); j++){
+        if(link_get_id(game->links[j]) == link_id){
+          if(link_get_conection1(game->links[j]) == current_id){
+            east_id = link_get_conection2(game->links[j]);
+            break;
+          }
+          else{
+            east_id = link_get_conection1(game->links[j]);
+            break;
+          }
+        }
+        else{
+          east_id = NO_ID;
+        }
+      }
+      if (east_id != NO_ID) {
+        return game_set_player_location(game, east_id);
       }
       else{
         return ERROR;
-      }      
+      }
     }
   }
   return ERROR;
