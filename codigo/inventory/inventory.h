@@ -85,3 +85,5 @@ STATUS inventory_set_size(Inventory* bag, int size);
 * @return STATUS
 */
 STATUS inventory_print(Inventory* bag);
+
+#endif

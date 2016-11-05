@@ -10,6 +10,8 @@
  #include <stdlib.h>
  #include <string.h>
  #include "types.h"
+ #include "set.h"
+ #include "inventory.h"
 
  struct _Inventory {
  	Set *set;
@@ -19,7 +21,7 @@
 /* !< Private functions*/
 
 BOOL inventory_is_full(Inventory* bag) {
-	if (set_get_num_ids(bag->set) == size){
+	if (set_get_num_ids(bag->set) == bag->size){
 		return TRUE;
 	}
 	else {
@@ -74,7 +76,7 @@ Inventory* inventory_create(Set* set, int size) {
 * @return STATUS
 */
 STATUS inventory_destroy(Inventory* bag) {
-	if (!space) {
+	if (!bag) {
 		return ERROR;
 	}
 

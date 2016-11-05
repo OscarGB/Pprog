@@ -1,4 +1,4 @@
-DEPS = game command generic space set player object die game_reader link	#Nombre de las carpetas de los módulos
+DEPS = game command generic space set player object die game_reader link inventory	#Nombre de las carpetas de los módulos
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefijo de -I para la inclusión de las carpetas en la compilación
 
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
@@ -24,6 +24,10 @@ link_test: link_test.o link.o
 	@echo "--->Creando el ejecutable link_test"
 	@gcc $(CFLAGS) -o link_test link_test.o link.o
 
+inventory_test: inventory_test.o inventory.o
+	@echo "--->Creando el ejecutable inventory_test"
+	@gcc $(CFLAGS) -o inventory_test inventory_test.o inventory.o
+
 die_test.o: codigo/die/die_test.c 
 	@echo "--->Generando die_test.o"
 	@gcc $(CFLAGS) -c codigo/die/die_test.c
@@ -36,9 +40,13 @@ link_test.o: codigo/link/link_test.c
 	@echo "--->Generando link_test.o"
 	@gcc $(CFLAGS) -c codigo/link/link_test.c
 
-ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o
+inventory_test.o: codigo/inventory/inventory_test.c
+	@echo "--->Generando inventory_test.o"
+	@gcc $(CFLAGS) -c codigo/inventory/inventory_test.c
+
+ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creando el ejecutable ocabas"
-	@gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o
+	@gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 
 command.o: codigo/command/command.c 
 	@echo "--->Generando command.o"
@@ -79,6 +87,10 @@ die.o: codigo/die/die.c
 link.o: codigo/link/link.c
 	@echo "--->Generando link.o"
 	@gcc $(CFLAGS) -c codigo/link/link.c
+
+inventory.o: codigo/inventory/inventory.c
+	@echo "--->Generandp inventory.o"
+	@gcc $(CFLAGS) -c codigo/inventory/inventory.c
 
 clean:
 	@echo "--->Borrando todos los ejecutables, incluyendo los test y el log"
