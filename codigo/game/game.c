@@ -124,20 +124,28 @@ STATUS game_init(Game* game) {
 * @return OK if it was successfuly initialized
 */
 STATUS game_init_from_file(Game* game, char* filename) {
+  Id aux;
   /*Init the game*/
-  if (game_init(game) == ERROR)
+  if (game_init(game) == ERROR){
     return ERROR;
+  }
   /*Load objects from file*/
-  if (game_load_objects(game, filename) == ERROR)
+  if (game_load_objects(game, filename) == ERROR) {
     return ERROR;
+  }
   /*Load spaces from file*/
-  if (game_load_spaces(game, filename) == ERROR)
+  if (game_load_spaces(game, filename) == ERROR) {
     return ERROR;
+  }
   /*Load links from file*/
-  if(game_load_links(game, filename) == ERROR)
+  if(game_load_links(game, filename) == ERROR) {
     return ERROR;
+  }
   /*Set player in the initial position*/
-  game_set_player_location(game, game_get_space_id_at(game, 0));
+  printf("Control Previo\n");
+  aux = game_get_space_id_at(game, 0);
+  printf("Control\n");
+  game_set_player_location(game, aux);
   return OK;
 }
 
