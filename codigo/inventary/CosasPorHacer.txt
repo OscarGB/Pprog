@@ -1,0 +1,2 @@
+Añadir inventory al makefile
+Módulo de prueba para inventory

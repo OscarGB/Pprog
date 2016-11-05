@@ -16,6 +16,27 @@
  	int size;
  };
 
+/* !< Private functions*/
+
+BOOL inventory_is_full(Inventory* bag) {
+	if (set_get_num_ids(bag->set) == size){
+		return TRUE;
+	}
+	else {
+		return FALSE;
+	}
+}
+
+BOOL inventory_is_empty(Inventory* bag) {
+	if (set_get_num_ids(bag->set) == 0){
+		return TRUE;
+	}
+	else {
+		return FALSE;
+	}
+}
+
+/* !< Public functions*/
 
 /**
 * @brief Creates a new inventory for the game
@@ -52,7 +73,6 @@ Inventory* inventory_create(Set* set, int size) {
 * @param Inventory*
 * @return STATUS
 */
-
 STATUS inventory_destroy(Inventory* bag) {
 	if (!space) {
 		return ERROR;
@@ -65,3 +85,105 @@ STATUS inventory_destroy(Inventory* bag) {
 	return OK;
 }
 
+/**
+* @brief Adds an item to the inventory
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*, Id (of the item) 
+* @return STATUS
+*/
+STATUS inventory_add_item(Inventory* bag, Id id) {
+
+	if (!bag || id == NO_ID) {
+		return ERROR;
+	}
+	if (inventory_is_full(bag) == TRUE) {
+		return ERROR;
+	}
+
+	return set_add(bag->set, id);
+}
+
+/**
+* @brief Deletes an item from the inventory
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*, Id (item Id)
+* @return STATUS
+*/
+STATUS inventory_delete_item(Inventory* bag, Id id) {
+
+	if (!bag || id == NO_ID) {
+		return ERROR;
+	}
+	if (inventory_is_empty(bag) == TRUE) {
+		return ERROR;
+	}
+
+	return set_delete(bag->set, id);
+}
+
+/**
+* @brief Gets the set of items from the inventory
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*
+* @return Set*
+*/
+Set* inventory_get_set(Inventory* bag) {
+
+	if (!bag) return NULL;
+
+	return bag->set;
+}
+
+/**
+* @brief Gets the size of the inventory
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*
+* @return int size
+*/
+int inventory_get_size(Inventory* bag) {
+
+	if(!bag) return NULL;
+
+	return bag->size;
+}
+
+/**
+* @brief Sets the size of the inventory
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*, int size
+* @return STATUS
+*/
+STATUS inventory_set_size(Inventory* bag, int size) {
+
+	if (!bag || size < 0) {
+		return ERROR;
+	}
+	if (size < set_get_num_ids(bag->set)){
+		return ERROR;
+	}
+
+	bag->size = size;
+}
+
+/**
+* @brief Prints the inventory
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*
+* @return STATUS
+*/
+STATUS inventory_print(Inventory* bag) {
+
+	if(!bag) return ERROR;
+
+	fprintf(stdout, "Inventory size: %d\n", bag->set);
+
+	set_print(bag->set);
+
+	return OK;
+}
