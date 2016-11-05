@@ -298,6 +298,15 @@ Id game_get_space_id_at(Game* game, int position) {
     if (position < 0 || position >= MAX_SPACES) {
         return NO_ID;
     }
+    if(!game){
+      fprintf(stderr, "game es null \n");
+    }
+    if(!game->spaces){
+      fprintf(stderr, "game->spaces es null \n");
+    }
+    if(!game->spaces[position]){
+      fprintf(stderr, "game->spaces[pos] es null \n");
+    }
     /*AQUI ES DONDE FALLA (NO PUEDE ENTRAR A GAME->SPACES[POSITION])*/
     return space_get_id(game->spaces[position]);
 }

@@ -157,7 +157,7 @@ STATUS game_load_objects(Game* game, char* filename) {
       strcpy(desc, toks);
 
 #ifdef DEBUG 
-      printf("Leido: %ld|%ld|%c\n", object_id, space_id, symbol);
+      printf("Leido: %ld|%ld|%c|%s\n", object_id, space_id, symbol, desc);
 #endif
 
       object = object_create(object_id);

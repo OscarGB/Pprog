@@ -43,8 +43,8 @@ int main(int argc, char *argv[]){
   	STATUS log; /*Variable for the creation of log file*/
 
 	if (argc < 2){
-	fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
-	return 1;
+		fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
+		return 1;
 	}
 
 	/*Log mode*/
