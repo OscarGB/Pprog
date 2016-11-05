@@ -27,10 +27,10 @@ struct _Game{
   Player* player;
   Object* object[MAX_IDS + 1];
   int num_objects;
-  Space* spaces[MAX_SPACES + 1];
+  Space* spaces[MAX_SPACES];
   Die* die;
-  Link *links[(4*MAX_SPACES) + 1];
-  char desc[WORD_SIZE+1];
+  Link *links[MAX_LINKS];
+  char desc[WORD_SIZE+1]; /* !< For inspect command*/
 };
 
 /**
@@ -81,7 +81,8 @@ STATUS game_init(Game* game) {
   int i; /* <! Variable used for loops*/
 
   game = (Game *) malloc (sizeof(Game));
-  if(!game) return ERROR;
+  if(!game)
+    return ERROR;
 
   for (i = 0; i < MAX_SPACES; i++) {
     game->spaces[i] = NULL;
@@ -108,9 +109,10 @@ STATUS game_init(Game* game) {
     return ERROR;
   }
 
-  for (i = 0; i < (4*MAX_SPACES); i++){
+  for (i = 0; i < MAX_LINKS; i++){
     game->links[i] = NULL;
   }
+
   game->desc[0]='\0';
 
   return OK;
@@ -180,9 +182,6 @@ STATUS game_destroy(Game* game) {
     if(game->die != NULL){
       die_destroy(game->die);
     }
-
-
-    free(game);
 
     /*Destroy all the links*/
     for(i=0; i < (4 * MAX_SPACES); i++){

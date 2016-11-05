@@ -112,6 +112,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
 }
 
 
+
 /* --------------------------------------------------------------------
 Function: game_load_objects()
 
@@ -135,7 +136,7 @@ STATUS game_load_objects(Game* game, char* filename) {
   Object* object = NULL; /*Object pointer*/
   STATUS status = OK; /*Status set to OK*/
   int num_objects = 0; /*Number of objects read*/
-  char desc[WORD_SIZE+1]= ""; /*Description of the object"*/
+  char desc[WORD_SIZE+1]= ""; /*Description of the object*/
 
   if (!filename) {
     return ERROR;

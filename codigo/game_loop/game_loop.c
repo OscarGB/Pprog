@@ -66,6 +66,7 @@ int main(int argc, char *argv[]){
 	command = command_create();
 	if(!command){
 		fprintf(stderr, "Command couldnt be created\n");
+		game_destroy(game);
 	}
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
 		 game_print_screen(game);
