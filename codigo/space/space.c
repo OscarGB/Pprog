@@ -209,6 +209,7 @@ Id space_get_id(Space* space) {
     if (!space) {
         return NO_ID;
     }
+
     return space->id;
 }
 

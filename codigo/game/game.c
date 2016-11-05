@@ -290,7 +290,7 @@ Id game_get_space_id_at(Game* game, int position) {
     if (position < 0 || position >= MAX_SPACES) {
         return NO_ID;
     }
-    
+    /*AQUI ES DONDE FALLA (NO PUEDE ENTRAR A GAME->SPACES[POSITION])*/
     return space_get_id(game->spaces[position]);
 }
 
