@@ -1,0 +1,2 @@
+A la hora de crear un inventory, como entrada recibimos un set. Este set va a tener que ser creado antes o después, ya que necesitamos meterle un set a la mochila. Por ello asumimos que ese set se crea fuera, por tanto no necesitamos una función set_set (ya que la asignación del set* la hacemos en el create).
+La función set_set queda sustituida por la función add_item, que llamará a set_object (del módulo set), y que añadirá un item a la mochila modificando el set*
