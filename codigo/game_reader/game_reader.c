@@ -112,6 +112,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
 }
 
 
+
 /* --------------------------------------------------------------------
 Function: game_load_objects()
 

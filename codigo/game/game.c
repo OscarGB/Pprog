@@ -183,9 +183,6 @@ STATUS game_destroy(Game* game) {
       die_destroy(game->die);
     }
 
-
-    free(game);
-
     /*Destroy all the links*/
     for(i=0; i < (4 * MAX_SPACES); i++){
       link_destroy(game->links[i]);
