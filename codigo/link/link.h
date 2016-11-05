@@ -11,6 +11,8 @@
 
 #include "types.h"
 
+#define MAX_LINKS 400
+
 typedef struct _Link Link; /*!<Definition of the Link structure*/
 
 typedef enum enum_link{
