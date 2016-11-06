@@ -38,7 +38,7 @@
  	fprintf(stdout, "OK\n");
 
  	/*Creating an invalid inventory size < 0*/
- 	fprintf(stdout, "Creating an inventory\n");
+ 	fprintf(stdout, "Creating an inventory with invalid size\n");
  	bag = inventory_create(-1); /*Invalid size inventory*/
  	if(bag != NULL){
  		#ifdef DEBUG
@@ -49,8 +49,15 @@
  	fprintf(stdout, "OK\n");
 
  	/*Testing inventory_add_item*/
- 	fprintf(stdout, "Creating inventory for testing");
+ 	fprintf(stdout, "Creating inventory for testing\n");
  	bag = inventory_create(1);
+ 	if(!bag){
+ 		#ifdef DEBUG
+ 		fprintf(stderr, "ERROR DEBUGING: CREATING THE INVENTORY\n");
+ 		#endif
+ 		return 1;
+ 	}
+ 	fprintf(stdout, "OK\n");
 
  	fprintf(stdout, "Adding item to an empty inventory\n");
  	if(inventory_add_item(bag, 2) == ERROR){
@@ -115,6 +122,16 @@
  	}
  	fprintf(stdout, "OK\n");
 
+ 	/*Testing inventory_print*/
+ 	fprintf(stdout, "Printing inventory with one item\n");
+ 	if(inventory_print(bag) == ERROR){
+ 		#ifdef DEBUG
+ 		fprintf(stderr, "ERROR DEBUGING: PRINTING INVENTORY\n");
+ 		#endif
+ 		return 1;
+ 	}
+ 	fprintf(stdout, "OK\n");
+
  	/*Testing inventory_get_set*/
  	fprintf(stdout, "Testing inventory_get_set()\n");
  	if(inventory_get_set(bag) == NULL){
@@ -158,7 +175,7 @@
 
 
  	/*Testing inventory_print*/
- 	fprintf(stdout, "Printing inventory\n");
+ 	fprintf(stdout, "Printing empty inventory\n");
  	if(inventory_print(bag) == ERROR){
  		#ifdef DEBUG
  		fprintf(stderr, "ERROR DEBUGING: PRINTING INVENTORY\n");
@@ -167,4 +184,5 @@
  	}
  	fprintf(stdout, "OK\n");
 
+ 	return 0;
  }

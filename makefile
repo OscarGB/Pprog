@@ -24,7 +24,7 @@ link_test: link_test.o link.o
 	@echo "--->Creando el ejecutable link_test"
 	@gcc $(CFLAGS) -o link_test link_test.o link.o
 
-inventory_test: inventory_test.o inventory.o set-o
+inventory_test: inventory_test.o inventory.o set.o
 	@echo "--->Creando el ejecutable inventory_test"
 	@gcc $(CFLAGS) -o inventory_test inventory_test.o inventory.o set.o
 
