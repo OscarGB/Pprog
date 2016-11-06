@@ -511,11 +511,11 @@ void game_print_screen(Game* game){
   for(i=0; i<(4*MAX_SPACES); i++){
     if(link_get_id(game->links[i]) == id_l_back){
       if(link_get_conection1(game->links[i]) == id_act){
-        id_back = link_get_conection1(game->links[i]);
+        id_back = link_get_conection2(game->links[i]);
         break;
       }
       else{
-        id_back = link_get_conection2(game->links[i]);
+        id_back = link_get_conection1(game->links[i]);
         break;
       }
     }
@@ -528,11 +528,11 @@ void game_print_screen(Game* game){
   for(i=0; i<(4*MAX_SPACES); i++){
     if(link_get_id(game->links[i]) == id_l_next){
       if(link_get_conection1(game->links[i]) == id_act){
-        id_next = link_get_conection1(game->links[i]);
+        id_next = link_get_conection2(game->links[i]);
         break;
       }
       else{
-        id_next = link_get_conection2(game->links[i]);
+        id_next = link_get_conection1(game->links[i]);
         break;
       }
     }
@@ -669,7 +669,7 @@ void game_print_screen(Game* game){
   game->desc[0] = '\0';
 
 
-  printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p, roll or r]");
+  printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p, roll or r, inspect or i]");
   printf("\nprompt:> ");
 }
 
