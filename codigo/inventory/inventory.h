@@ -21,7 +21,7 @@ typedef struct _Inventory Inventory; /* !< Definition of the Inventory structure
 * @param None
 * @return Inventory* (The created Inventory)
 */
-Inventory* inventory_create(Set* set, int size);
+Inventory* inventory_create(int size);
 
 /**
 * @brief Destroyes an inventory
@@ -76,6 +76,15 @@ int inventory_get_size(Inventory* bag);
 * @return STATUS
 */
 STATUS inventory_set_size(Inventory* bag, int size);
+
+/**
+* @brief Gets the number of items in the inventory
+* @author José Ignacio Gómez
+* @date 6/11/2016
+* @param Inventory*
+* @return STATUS
+*/
+int inventory_get_num_items(Inventory* bag);
 
 /**
 * @brief Prints the inventory

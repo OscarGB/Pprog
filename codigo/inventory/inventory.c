@@ -47,10 +47,10 @@ BOOL inventory_is_empty(Inventory* bag) {
 * @param None
 * @return Inventory* (The created Inventory)
 */
-Inventory* inventory_create(Set* set, int size) {
+Inventory* inventory_create(int size) {
 	Inventory* bag = NULL;
 
-	if (!set || size <= 0 || set_get_num_ids(set) > size) {
+	if (size < 0) {
 		return NULL;
 	}
 
@@ -59,7 +59,9 @@ Inventory* inventory_create(Set* set, int size) {
 		return NULL;
 	}
 
-	bag->set = set;
+	bag->set = set_create();
+	if (!bag->set) return NULL;
+
 	bag->size = size; /* !< the size of the bag
 						will be set outside the inventory
 						module in order to modify the size
@@ -80,7 +82,10 @@ STATUS inventory_destroy(Inventory* bag) {
 		return ERROR;
 	}
 
-	set_destroy(bag->set);
+	if (bag->set != NULL) {
+		set_destroy(bag->set);
+	}
+
 	free(bag);
 	bag = NULL;
 
@@ -126,6 +131,28 @@ STATUS inventory_delete_item(Inventory* bag, Id id) {
 }
 
 /**
+* @brief Sets the set of items of the inventory
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*, Set*
+* @return STATUS
+*/
+STATUS inventory_set_set(Inventory* bag, Set* set) {
+
+	if (!bag || !set || set_get_num_ids(set) > bag->size) {
+		return ERROR;
+	}
+
+	if (bag->set != NULL) {
+		set_destroy(bag->set); /*Destroying the previous set*/
+	}
+
+	bag->set = set;
+
+	return OK;
+}
+
+/**
 * @brief Gets the set of items from the inventory
 * @author José Ignacio Gómez
 * @date 5/11/2016
@@ -148,7 +175,7 @@ Set* inventory_get_set(Inventory* bag) {
 */
 int inventory_get_size(Inventory* bag) {
 
-	if(!bag) return NULL;
+	if(!bag) return -1;
 
 	return bag->size;
 }
@@ -167,9 +194,26 @@ STATUS inventory_set_size(Inventory* bag, int size) {
 	}
 	if (size < set_get_num_ids(bag->set)){
 		return ERROR;
-	}
+	} /*We will be able tu change the size of the bag
+		if th new size is >= number of items in the set*/
 
 	bag->size = size;
+
+	return OK;
+}
+
+/**
+* @brief Gets the number of items in the inventory
+* @author José Ignacio Gómez
+* @date 6/11/2016
+* @param Inventory*
+* @return STATUS
+*/
+int inventory_get_num_items(Inventory* bag) {
+
+	if (!bag) return -1;
+
+	return set_get_num_ids(bag->set);
 }
 
 /**
@@ -183,7 +227,7 @@ STATUS inventory_print(Inventory* bag) {
 
 	if(!bag) return ERROR;
 
-	fprintf(stdout, "Inventory size: %d\n", bag->set);
+	fprintf(stdout, "Inventory size: %d\n", bag->size);
 
 	set_print(bag->set);
 

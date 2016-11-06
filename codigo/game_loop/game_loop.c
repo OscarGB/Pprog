@@ -63,6 +63,7 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
+/*-------------------------------------------*/
 	command = command_create();
 	if(!command){
 		fprintf(stderr, "Command couldnt be created\n");

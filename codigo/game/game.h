@@ -43,7 +43,7 @@ Input: Game* (game pointer)
 Output: OK if the game has been successfuly initialized, ERROR if not
 
 ------------------------------------------------------------------- */
-STATUS game_init(Game* game);
+Game* game_init(Game* game);
 
 /* --------------------------------------------------------------------
 Function: game_init_from_file()
