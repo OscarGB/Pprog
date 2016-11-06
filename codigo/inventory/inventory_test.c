@@ -8,6 +8,7 @@
 
  #include <stdio.h>
  #include "inventory.h"
+ #include "set.h"
 
  int main() {
  	Inventory *bag = NULL; /* !< Bag pointer*/
@@ -147,7 +148,7 @@
  	/*Now, the inventory is empty*/
  	/*Deleting from an empty inventory*/
  	fprintf(stdout, "Deleting item from an empty inventory\n");
- 	if(inventory_dlete_item(bag, 2) != ERROR){
+ 	if(inventory_delete_item(bag, 2) != ERROR){
  		#ifdef DEBUG
  		fprintf(stderr, "ERROR DEBUGING: AN ITEM HAS BEEN REMOVED FROM AN EMPTY INVENTORY\n");
  		#endif

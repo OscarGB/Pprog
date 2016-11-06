@@ -5,7 +5,7 @@ CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
 
 ALL = ocabas 	#Ejecutables a generar si se llama a make
 
-ALL_DEBUG = $(ALL) die_test set_test link_test	#Ejecutables a generar si se llama a make debug
+ALL_DEBUG = $(ALL) die_test set_test link_test inventory_test	#Ejecutables a generar si se llama a make debug
 
 all: $(ALL)
 

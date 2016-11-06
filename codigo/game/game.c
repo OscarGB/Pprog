@@ -131,40 +131,25 @@ STATUS game_init_from_file(Game* game, char* filename) {
   /*if (game_init(game) == ERROR){
     return ERROR;
   }*/
-  game = game_init(game);
-if(!game){
-  fprintf(stderr, "game es null en init\n");
-}
+
   /*Load objects from file*/
   if (game_load_objects(game, filename) == ERROR) {
     return ERROR;
   }
-if(!game){
-  fprintf(stderr, "game es null en load objects \n");
-}
 
   /*Load spaces from file*/
   if (game_load_spaces(game, filename) == ERROR) {
     return ERROR;
   }
-if(!game){
-  fprintf(stderr, "game es null en load spaces\n");
-}
 
   /*Load links from file*/
   if(game_load_links(game, filename) == ERROR) {
     return ERROR;
   }
-if(!game){
-  fprintf(stderr, "game es null en load links\n");
-}
 
   /*Set player in the initial position*/
-  printf("Control Previo\n");
   aux = game_get_space_id_at(game, 0);
-  printf("Control\n");
   game_set_player_location(game, aux);
-  printf("Control2\n");
   return OK;
 }
 
@@ -314,10 +299,6 @@ Id game_get_space_id_at(Game* game, int position) {
     if (position < 0 || position >= MAX_SPACES) {
         return NO_ID;
     }
-    if(!game){
-      fprintf(stderr, "game es null \n");
-    }
-    /*AQUI ES DONDE FALLA (NO PUEDE ENTRAR A GAME->SPACES[POSITION])*/
     return space_get_id(game->spaces[position]);
 }
 
@@ -401,9 +382,6 @@ STATUS game_set_object_location(Game* game, Id id_s, Id id_o) {
 * @return The id of the player location
 */
 Id game_get_player_location(Game* game) {
-  if(game->player == NULL){
-    fprintf(stderr, "player NULL\n");
-  }
 
     return player_get_location(game->player);
 }
@@ -511,7 +489,7 @@ void game_print_screen(Game* game){
   Space* space_act = NULL; /* !< Pointers to spaces needed to print the game*/
   Space* space_back = NULL;
   Space* space_next = NULL;
-   char obj[WORD_SIZE]; /* !< String with the objects*/
+  char obj[WORD_SIZE]; /* !< String with the objects*/
   char aux[WORD_SIZE]; /* !< Axiliar for reading object values*/
   int i, last; /* !< loops, last rolled value*/
   char symbol; /* !< symbol of the player's objects*/
@@ -520,7 +498,6 @@ void game_print_screen(Game* game){
   obj[0] = '\0'; /* !< Set to empty*/
   
   id_act = game_get_player_location(game);
-  
 
   if (id_act == NO_ID){
     return;

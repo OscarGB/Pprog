@@ -58,12 +58,18 @@ int main(int argc, char *argv[]){
 			flag = 1;
 		}
 	}
+
+	game = game_init(game);
+	if(!game){
+		return ERROR;
+	}
+
+
 	if (game_init_from_file(game, argv[1]) == ERROR){
 		fprintf(stderr, "Error while initializing game.\n");
 		return 1;
 	}
 
-/*-------------------------------------------*/
 	command = command_create();
 	if(!command){
 		fprintf(stderr, "Command couldnt be created\n");
