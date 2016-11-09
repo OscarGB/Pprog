@@ -969,31 +969,41 @@ STATUS callback_INSPECT(Game* game, char symbol){
     if(!game) return ERROR;
     if(symbol==E) return ERROR;
 
-        obj=player_drop_object(game->player);	
-    if(object_get_symbol(obj)==symbol){
-	strcpy(game->desc, object_get_name(obj));
-	player_pick_object(game->player, obj);
-	return OK;
-    }
-    player_pick_object(game->player, obj);
-
-
     player_location = game_get_player_location(game);
     if(player_location == NO_ID) return ERROR;
 
-    object_location = game_get_object_location(game, symbol);
 
-    if(object_location!=player_location) return ERROR;
-
-    for(i = 0; i < game->num_objects; i++){
-
-    	if(object_get_symbol(game->object[i]) == symbol){
-
-	      	strcpy(game->desc, object_get_name(game->object[i]));
+    if(symbol=='s' || symbol=='S'){
+	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
+		if(player_location==space_get_id(game->spaces[i])){
+		strcpy(game->desc, space_get_name(game->spaces[i]));
+		return OK;	
+		}
+	}
+    return ERROR;
+    }else{
+	    obj=player_drop_object(game->player);	
+	    if(object_get_symbol(obj)==symbol){
+		strcpy(game->desc, object_get_name(obj));
+		player_pick_object(game->player, obj);
 		return OK;
-    	}  
-    }
+	    }
+	    player_pick_object(game->player, obj);
 
+	    object_location = game_get_object_location(game, symbol);
+
+	    if(object_location!=player_location) return ERROR;
+
+	    for(i = 0; i < game->num_objects; i++){
+
+	    	if(object_get_symbol(game->object[i]) == symbol){
+
+		      	strcpy(game->desc, object_get_name(game->object[i]));
+			return OK;
+	    	}  
+	    }
+	return ERROR;
+    }
 
 return ERROR;
 }
