@@ -15,7 +15,7 @@
 
  	fprintf(stdout, "TESTING LINK MODULE\n");
  	/*Test the link_create*/
- 	fprintf(stdout, "Creating the die\n");
+ 	fprintf(stdout, "Creating the link\n");
  	link = link_create(2);
  	if(!link){
  		#ifdef DEBUG

@@ -98,6 +98,11 @@ STATUS get_user_input(Command* command){
 
 				command->symbol = symbol;
 			}
+			else if (!strcmp(action, "g") || !strcmp(action, "go")){
+				command->cmd = GO;
+
+				command->symbol = symbol;
+			}
 			else{
 				command->cmd = UNKNOWN;
 			}

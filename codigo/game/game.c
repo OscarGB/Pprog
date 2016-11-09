@@ -46,6 +46,7 @@ STATUS callback_DROP(Game* game, char symbol);
 STATUS callback_PICK(Game* game, char symbol);
 STATUS callback_ROLL(Game* game);
 STATUS callback_INSPECT(Game* game, char symbol);
+STATUS callback_GO(Game* game, char symbol);
 
 
 /**
@@ -438,6 +439,8 @@ STATUS game_update(Game* game, Command *cmd) {
     return callback_ROLL(game);
   case INSPECT:
     return callback_INSPECT(game, command_get_symbol(cmd));
+  case GO:
+    return callback_GO(game, command_get_symbol(cmd));
   case NO_CMD:
     break;
   default: /*We must never arrive here*/
@@ -669,7 +672,7 @@ void game_print_screen(Game* game){
   game->desc[0] = '\0';
 
 
-  printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p, roll or r, inspect or i]");
+  printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p, roll or r, inspect or i, go or g]");
   printf("\nprompt:> ");
 }
 
@@ -1006,4 +1009,80 @@ STATUS callback_INSPECT(Game* game, char symbol){
     }
 
 return ERROR;
+}
+
+/**
+* @brief callback for "go" instruction
+* @author Andrea Ruiz
+* @date 08/11/2016
+* @param game pointer
+* @param symbol to inspect (direction)
+* @return OK if it went ok
+*/
+
+STATUS callback_GO(Game* game, char symbol){
+
+    int i = 0, j = 0; /* !< Variables used for loops*/
+    Id current_id = NO_ID, west_id = NO_ID; /* !< Current space id and sout id*/
+    Id link_id = NO_ID; /* !< Link id*/
+    Id space_id = NO_ID; /* !< Id of the next space*/
+
+
+    if(!game) return ERROR;
+
+    space_id = game_get_player_location(game);
+    if (space_id == NO_ID) {
+	return ERROR;
+    }
+
+    if(symbol == 'n'){ /* Go north */ 
+	callback_BACK(game);
+    }
+
+    if(symbol == 's'){ /* Go south */ 
+	callback_NEXT(game);
+    }
+
+    if(symbol == 'e'){ /* Go east */ 
+	callback_JUMP(game);
+    }
+
+    if(symbol == 'w'){ /* Go west */
+
+	for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
+		current_id = space_get_id(game->spaces[i]);
+	    	if (current_id == space_id) {
+      			link_id = space_get_west(game->spaces[i]);
+	        	for(j = 0; j < (4 * MAX_SPACES); j++){
+        			if(link_get_id(game->links[j]) == link_id){
+	        			if(link_get_conection1(game->links[j]) == current_id){
+            					west_id = link_get_conection2(game->links[j]);
+            					break;
+          				}
+          				else{
+            					west_id = link_get_conection1(game->links[j]);
+            					break;
+          				}
+        			}
+        			else{
+				        west_id = NO_ID;
+        			}
+      			}	
+	      		if (west_id != NO_ID) {
+
+			        return game_set_player_location(game, west_id);
+      			}
+			else{
+			        return ERROR;
+      			}
+        	}
+  	}	
+
+    }
+
+    return ERROR;
+
+
+
+
 }

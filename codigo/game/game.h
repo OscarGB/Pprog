@@ -186,4 +186,5 @@ STATUS game_add_object(Game* game, Object* object);
 */
 STATUS game_add_link(Game *game, Link* link);
 
+
 #endif
