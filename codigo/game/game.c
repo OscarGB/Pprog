@@ -962,18 +962,28 @@ STATUS callback_ROLL(Game* game){
 STATUS callback_INSPECT(Game* game, char symbol){
 
     int i;/* !< Variable used for loops*/
+    Object *obj; /* !<Variable used for storing the player's object*/
 
     Id player_location = NO_ID, object_location= NO_ID; /* !< Locations of the player and object*/
 
     if(!game) return ERROR;
     if(symbol==E) return ERROR;
 
+        obj=player_drop_object(game->player);	
+    if(object_get_symbol(obj)==symbol){
+	strcpy(game->desc, object_get_name(obj));
+	player_pick_object(game->player, obj);
+	return OK;
+    }
+    player_pick_object(game->player, obj);
+
+
     player_location = game_get_player_location(game);
     if(player_location == NO_ID) return ERROR;
 
     object_location = game_get_object_location(game, symbol);
 
-    if(!(object_location==player_location || object_location==NO_ID)) return ERROR;
+    if(object_location!=player_location) return ERROR;
 
     for(i = 0; i < game->num_objects; i++){
 
@@ -983,6 +993,7 @@ STATUS callback_INSPECT(Game* game, char symbol){
 		return OK;
     	}  
     }
+
 
 return ERROR;
 }

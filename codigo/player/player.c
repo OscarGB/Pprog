@@ -36,9 +36,9 @@ struct _Player {
 /* --------------------------------------------------------------------
 Function: player_create()
 
-Date: 01/10/2016
+Date: 01/10/2016 (modified 08/11/2016)
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
+Author:Óscar Gómez, Jose Ignacio Gómez, Óscar Pinto.
 
 Description: creates a new player
 
@@ -48,6 +48,7 @@ Output: Player* (created player)
 
 ------------------------------------------------------------------- */
 Player* player_create(Id id){
+	int i;
 
 	Player *newPlayer = NULL; /*New player to create*/
 
@@ -68,17 +69,19 @@ Player* player_create(Id id){
 
 	newPlayer->location = NO_ID;
 
-	newPlayer->object[0] = NULL; /*We set only the first one because we havent done the bag yet*/
+	for(i=0; i<MAX_OBJECTS; i++){
+		newPlayer->object[i]=NULL; 
+	} /*We set all for free() compatibility (avoid double free) the first one because we havent done the bag yet*/
 
 	return newPlayer;
 }
 
 /* --------------------------------------------------------------------
-Function: player_destroy()
+Function: player_destroy() (modified 08/11/2016)
 
 Date: 01/10/2016
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
+Author:Óscar Gómez, Jose Ignacio Gómez, Óscar Pinto.
 
 Description: destroys a player
 
@@ -88,10 +91,14 @@ Output: OK if the player was successfuly destroyed
 
 ------------------------------------------------------------------- */
 STATUS player_destroy(Player* player){
+	int i;
 	if(!player) {
 		return ERROR;
 	}
-
+	
+	for(i=0; i<MAX_OBJECTS; i++){
+		if(player->object[i]) free(player->object[i]); /*This objects are not freed in game.c*/
+	}
 	free(player);
 	player = NULL;
 
