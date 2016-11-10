@@ -37,85 +37,59 @@ typedef enum enum_Command {
 typedef struct _Command Command;
 
 
-/* --------------------------------------------------------------------
-Function: get_user_input()
+/*
+* @brief reads from keyboard in search of a valid command to execute
+* it creates the command inside
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 23/09/2016
+* @param command pointer
+* @return OK if command is changed with user's input
+*/
 
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: reads from keyboard in search of a valid command to execute
-			it creates the command inside
-
-Input: none
-
-Output: Command (returns the command that has been written by the user)
-
-------------------------------------------------------------------- */
 STATUS get_user_input();
 
-/* --------------------------------------------------------------------
-Function: command_create()
 
-Date: 21/10/2016 
+/*
+* @brief It creates a command, defining its atributes to UNKNOWN and ''
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 21/10/2016
+* @param none
+* @return pointer to the created command
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It creates a command, defining its atributes tu UNKNOWN and ''
-
-Input: none
-
-Output: Command* (The created command)
-
-------------------------------------------------------------------- */
 Command* command_create();
 
-/* --------------------------------------------------------------------
-Function: command_destroy()
 
-Date: 21/10/2016
+/*
+* @brief It destroys a command, freeing all the memory
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 21/10/2016
+* @param pointer to command (to destroy)
+* @return none
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It destroys a command, freeing all the memory
-
-Input: Command* (The command to destroy)
-
-Output: void
-
-------------------------------------------------------------------- */
 void command_destroy(Command *com);
 
-/* --------------------------------------------------------------------
-Function: command_get_cmd()
 
-Date: 21/10/2016
+/*
+* @brief It gives the value of the T_Command inside Command
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 21/10/2016
+* @param command pointer
+* @return T_Command (The T_Command inside the given Command)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It gives the value of the T_Command inside Command
-
-Input: Command* (The command to inspect)
-
-Output: T_Command (The T_Command inside the given Command)
-
-------------------------------------------------------------------- */
 T_Command command_get_cmd(Command *com);
 
-/* --------------------------------------------------------------------
-Function: command_get_symbol()
 
-Date: 21/10/2016
+/*
+* @brief It gives the value of the symbol inside Command
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 21/10/2016
+* @param command pointer
+* @return char (The symbol inside the given Command)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: IT gives the value of the symbol inside Command
-
-Input: Command* (The command to inspect)
-
-Output: char (The symbol inside the given Command)
-
-------------------------------------------------------------------- */
 char command_get_symbol(Command *com);
 
 #endif

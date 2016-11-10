@@ -27,20 +27,14 @@ struct _Object{
 	char desc[WORD_SIZE+1]; /*Written description of the object*/
 };
 
-/* --------------------------------------------------------------------
-Function: object_create()
- 
-Date: 30/09/2016
+/*
+* @brief it creates an object, setting all the fields to error
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param Id id(The id of the object to create)
+* @return Object* (a pointer to the object)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It creates an object, setting all the fields to error
-
-Input: Id id(The id of the object to create)
-
-Output: Object* (a pointer to the object)
-
-------------------------------------------------------------------- */
 Object* object_create(Id id){
 	Object *newObject = NULL; /*New object to create*/
 

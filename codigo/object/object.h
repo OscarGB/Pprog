@@ -22,20 +22,15 @@ Revision history: none
 
 typedef struct _Object Object;
 
-/* --------------------------------------------------------------------
-Function: object_create()
- 
-Date: 30/09/2016
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
+/*
+* @brief it creates an object, setting all the fields to error
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param Id id(The id of the object to create)
+* @return Object* (a pointer to the object)
+*/
 
-Description: It creates an object, setting all the fields to error
-
-Input: Id id(The id of the object to create)
-
-Output: Object* (a pointer to the object)
-
-------------------------------------------------------------------- */
 Object* object_create(Id id);
 
 /* --------------------------------------------------------------------

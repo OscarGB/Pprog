@@ -25,21 +25,15 @@ struct _Command{
 	char symbol; /*A symbol for TAKE and DROP commands*/
 };
 
-/* --------------------------------------------------------------------
-Function: get_user_action()
 
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: reads from keyboard in search of a valid command to execute
-			it creates the command inside
-
-action: none
-
-Output: Command (returns the command that has been written by the user)
-
-------------------------------------------------------------------- */
+/*
+* @brief reads from keyboard in search of a valid command to execute
+* it creates the command inside
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 23/09/2016
+* @param command pointer
+* @return OK if command is changed with user's input
+*/
 
 STATUS get_user_input(Command* command){
 	char action[CMD_LENGHT]; /*The action written*/
@@ -114,20 +108,15 @@ STATUS get_user_input(Command* command){
 	return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: command_create()
 
-Date: 21/10/2016 
+/*
+* @brief It creates a command, defining its atributes to UNKNOWN and ''
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 21/10/2016
+* @param none
+* @return pointer to the created command
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It creates a command, defining its atributes tu UNKNOWN and ''
-
-action: none
-
-Output: Command* (The created command)
-
-------------------------------------------------------------------- */
 Command* command_create(){
 	Command* newcom; /*The new command*/
 	newcom = (Command *) malloc (sizeof(Command));
@@ -140,20 +129,14 @@ Command* command_create(){
 	return newcom;
 }
 
-/* --------------------------------------------------------------------
-Function: command_destroy()
+/*
+* @brief It destroys a command, freeing all the memory
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 21/10/2016
+* @param pointer to command (to destroy)
+* @return none
+*/
 
-Date: 21/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It destroys a command, freeing all the memory
-
-action: Command* (The command to destroy)
-
-Output: void
-
-------------------------------------------------------------------- */
 void command_destroy(Command *com){
 	if(!com){
 		return;
@@ -162,20 +145,15 @@ void command_destroy(Command *com){
 	return;
 }
 
-/* --------------------------------------------------------------------
-Function: command_get_cmd()
 
-Date: 21/10/2016
+/*
+* @brief It gives the value of the T_Command inside Command
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 21/10/2016
+* @param command pointer
+* @return T_Command (The T_Command inside the given Command)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It gives the value of the T_Command inside Command
-
-action: Command* (The command to inspect)
-
-Output: T_Command (The T_Command inside the given Command)
-
-------------------------------------------------------------------- */
 T_Command command_get_cmd(Command *com){
 	if(!com){
 		return UNKNOWN;
@@ -183,20 +161,15 @@ T_Command command_get_cmd(Command *com){
 	return com->cmd;
 }
 
-/* --------------------------------------------------------------------
-Function: command_get_symbol()
 
-Date: 21/10/2016
+/*
+* @brief It gives the value of the symbol inside Command
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 21/10/2016
+* @param command pointer
+* @return char (The symbol inside the given Command)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: IT gives the value of the symbol inside Command
-
-action: Command* (The command to inspect)
-
-Output: char (The symbol inside the given Command)
-
-------------------------------------------------------------------- */
 char command_get_symbol(Command *com){
 	if(!com){
 		return UNKNOWN;

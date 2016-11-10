@@ -22,20 +22,14 @@ Revision history: 2.0 included reader for objects
 #include "space.h"
 
 
-/* --------------------------------------------------------------------
-Function: game_load_spaces()
+/*
+* @brief reads the game table from a file
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 30/09/2016
+* @param Game* and a char* (filename)
+* @return OK if the table was successfuly read
+*/
 
-Date: 30/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: reads the game table from a file
-
-Input: Game* and a char* (filename)
-
-Output: OK if the table was successfuly read
-
-------------------------------------------------------------------- */
 STATUS game_load_spaces(Game* game, char* filename) {
   FILE* file = NULL; /*File to read*/
   char line[WORD_SIZE] = ""; /*Line read*/
@@ -112,21 +106,14 @@ STATUS game_load_spaces(Game* game, char* filename) {
 }
 
 
+/*
+* @brief reads the objects from a file
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 21/10/2016
+* @param Game* and a char* (filename)
+* @return OK if the objects were successfuly read
+*/
 
-/* --------------------------------------------------------------------
-Function: game_load_objects()
-
-Date: 21/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: reads the objects from a file
-
-Input: Game* and a char* (filename)
-
-Output: OK if the objects were successfuly read
-
-------------------------------------------------------------------- */
 STATUS game_load_objects(Game* game, char* filename) {
   FILE* file = NULL; /*File to read*/
   char line[WORD_SIZE] = ""; /*Line read*/
@@ -182,6 +169,15 @@ STATUS game_load_objects(Game* game, char* filename) {
   
 return status;
 }
+
+
+/*
+* @brief reads the links from a file
+* @author 
+* @date 08/10/2016
+* @param Game* and a char* (filename)
+* @return OK if the links were successfuly read
+*/
 
 STATUS game_load_links(Game* game, char* filename){
   FILE* file = NULL; /*File to read*/
