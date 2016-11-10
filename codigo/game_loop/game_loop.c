@@ -38,9 +38,10 @@ Output: int 1 if ERROR, 0 if OK
 int main(int argc, char *argv[]){
   	Game * game = NULL; /*Game pointer*/
   	Command *command = NULL; /*Command pointer*/
-  	FILE *f = NULL; /*Log file*/
+  	FILE *l = NULL; /*Log file*/
   	int flag = 0; /*Flag if its on log mode*/
   	STATUS log; /*Variable for the creation of log file*/
+	int nvflag = 0; /*Variable for the no verbose mode*/
 
 	if (argc < 2){
 		fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
@@ -50,8 +51,8 @@ int main(int argc, char *argv[]){
 	/*Log mode*/
 	if(argc == 4){
 		if(strcmp(argv[2], "-l") == 0){
-			f = fopen(argv[3], "w");
-			if(f == NULL){
+			l = fopen(argv[3], "w");
+			if(l == NULL){
 				fprintf(stderr, "Error initializing log file\n");
 				return 1;
 			}
@@ -76,7 +77,10 @@ int main(int argc, char *argv[]){
 		game_destroy(game);
 	}
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
-		 game_print_screen(game);
+		 if (nvflag == 0){
+		 	game_print_screen(game);
+		 	/*get_file_input(command, file);*/
+		 }
 		 get_user_input(command);
 		 log = game_update(game, command);
 		 /*Log mode*/
@@ -84,81 +88,81 @@ int main(int argc, char *argv[]){
 		 	switch (command_get_cmd(command)) {
 			  case UNKNOWN:
 			  	if(log == OK){
-			  		fprintf(f, "UNKNOWN : OK\n");
+			  		fprintf(l, "UNKNOWN : OK\n");
 			  	}
 			  	else{
-			  		fprintf(f, "UNKNOWN : ERROR\n");
+			  		fprintf(l, "UNKNOWN : ERROR\n");
 			  	}
 			  	break;
 			  case QUIT:
 			  	if(log == OK){
-			  		fprintf(f, "QUIT : OK\n");
+			  		fprintf(l, "QUIT : OK\n");
 			  	}
 			  	else{
-			  		fprintf(f, "QUIT : ERROR\n");
+			  		fprintf(l, "QUIT : ERROR\n");
 			  	}
 			  	break;
 			  case NEXT:
 			    if(log == OK){
-			  		fprintf(f, "NEXT : OK\n");
+			  		fprintf(l, "NEXT : OK\n");
 			  	}
 			  	else{
-			  		fprintf(f,"NEXT : ERROR\n");
+			  		fprintf(l,"NEXT : ERROR\n");
 			  	}
 			  	break;
 			  case BACK:
 			    if(log == OK){
-			  		fprintf(f, "BACK : OK\n");
+			  		fprintf(l, "BACK : OK\n");
 			  	}
 			  	else{
-			  		fprintf(f, "BACK : ERROR\n");
+			  		fprintf(l, "BACK : ERROR\n");
 			  	}
 			  	break;
 			  case JUMP:
 			    if(log == OK){
-			  		fprintf(f, "JUMP : OK\n");
+			  		fprintf(l, "JUMP : OK\n");
 			  	}
 			  	else{
-			  		fprintf(f, "JUMP : ERROR\n");
+			  		fprintf(l, "JUMP : ERROR\n");
 			  	}
 			  	break;
 			  case PICK:
 			    if(log == OK){
-			  		fprintf(f, "PICK : OK\n");
+			  		fprintf(l, "PICK : OK\n");
 			  	}
 			  	else{
-			  		fprintf(f, "PICK : ERROR\n");
+			  		fprintf(l, "PICK : ERROR\n");
 			  	}
 			  	break;
 			  case DROP:
 			    if(log == OK){
-			  		fprintf(f, "DROP : OK\n");
+			  		fprintf(l, "DROP : OK\n");
 			  	}
 			  	else{
-			  		fprintf(f, "DROP : ERROR\n");
+			  		fprintf(l, "DROP : ERROR\n");
 			  	}
 			  	break;
 			  case ROLL:
 			    if(log == OK){
-			  		fprintf(f, "ROLL : OK\n");
+			  		fprintf(l, "ROLL : OK\n");
 			  	}
 			  	else{
-			  		fprintf(f, "ROLL : ERROR\n");
+			  		fprintf(l, "ROLL : ERROR\n");
 			  	}
 			  	break;
 			  case INSPECT:
 			    if(log == OK){
-			  		fprintf(f, "INSPECT : OK\n");
+			  		fprintf(l, "INSPECT : OK\n");
 			  	}
 			  	else{
-			  		fprintf(f, "INSPECT : ERROR\n");
+			  		fprintf(l, "INSPECT : ERROR\n");
 			  	}
 			  	break;
 			  case NO_CMD:
-			  	fprintf(f, "NO_CMD\n");
+			  	fprintf(l, "NO_CMD\n");
 			    break;
 			  default: /* We must never arrive here*/
-			    fprintf(f, "ERROR\n");
+			    fprintf(l, "ERROR\n");
 			  }
 		 	}
 		}
@@ -166,7 +170,7 @@ int main(int argc, char *argv[]){
 	command_destroy(command);
 	/*Log mode*/
 	if(flag == 1){
-		fclose(f);
+		fclose(l);
 	}
 	return 0;
 }
