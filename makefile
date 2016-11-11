@@ -4,10 +4,13 @@ IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefijo de -I para la inclusión de las
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
 
 ALL = ocabas 	#Ejecutables a generar si se llama a make
-
-ALL_DEBUG = $(ALL) die_test set_test link_test inventory_test space_test	#Ejecutables a generar si se llama a make debug
+TEST = die_test set_test link_test inventory_test space_test	#Ejecutables a generar si se llama a make debug o make test
+ALL_DEBUG = $(ALL) $(TEST)
 
 all: $(ALL)
+
+test: CFLAGS += -DDEBUG	#Se añade el flag -DDEBUG a la compilación
+test: $(TEST)
 
 debug: CFLAGS += -DDEBUG	#Se añade el flag -DDEBUG a la compilación
 debug: $(ALL_DEBUG)
