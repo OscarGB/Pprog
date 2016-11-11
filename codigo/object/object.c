@@ -1,17 +1,11 @@
-/* ===================================================================
-File: object.c
-
-Version: 1.0
-
-Date: 30/09/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It implements the functionality of the objects
-
-Revision history: none
-
-=================================================================== */
+/**
+ * @brief It implements the functionality of the objects
+ * @file object.c
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 1.0
+ * @date 30/09/2016
+ * @revision_history none
+ */
 
 #include "object.h"
 #include <stdlib.h>
@@ -20,11 +14,11 @@ Revision history: none
 #include "types.h"
 
 struct _Object{
-	Id id; /*Id of the object*/
-	char name[WORD_SIZE + 1]; /*Name of the object*/
-	char symbol; /*symbol of the object*/
-	Id location; /*Location in the game*/
-	char desc[WORD_SIZE+1]; /*Written description of the object*/
+	Id id; /*<!Id of the object*/
+	char name[WORD_SIZE + 1]; /*<!Name of the object*/
+	char symbol; /*<!symbol of the object*/
+	Id location; /*<!Location in the game*/
+	char desc[WORD_SIZE+1]; /*<!Written description of the object*/
 };
 
 /*
@@ -56,20 +50,15 @@ Object* object_create(Id id){
 	return newObject;
 }
 
-/* --------------------------------------------------------------------
-Function: object_destroy()
- 
-Date: 30/09/2016
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
+/*
+* @brief It destroys an object, freeing all the memory
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param object pointer
+* @return STATUS (OK if everything went well, ERROR if didn't)
+*/
 
-Description: It destroys an object, freeing all the memory
-
-Input: Object* object(a pointer to the object)
-
-Output: STATUS (OK if everything went well, ERROR if didn't)
-
-------------------------------------------------------------------- */
 STATUS object_destroy(Object *object){
 	if(!object){
 		return ERROR;
@@ -81,21 +70,16 @@ STATUS object_destroy(Object *object){
 	return OK;
 }
 
-/* --------------------------------------------------------------------
-Function: object_set_name()
 
-Date: 30/09/2016
+/*
+* @brief It sets the name of the given object
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param Object* object(the object to change)
+	 char* name(the name of the object)
+* @return STATUS (OK if everything went well, ERROR if didn't)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It sets the name of the given object
-
-Input:Object* object(the object to change)
-	  char* name(the name of the object)
-
-Output: STATUS (OK if everything went well, ERROR if didn't)
-
-------------------------------------------------------------------- */
 STATUS object_set_name(Object* object, char* name){
 	if(!object || !name){
 		return ERROR;
@@ -108,21 +92,16 @@ STATUS object_set_name(Object* object, char* name){
 	return OK;
 }
 
-/* --------------------------------------------------------------------
-Function:object_set_symbol()
 
-Date:30/09/2016
+/*
+* @brief It sets the symbol of the given object
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param Object* object(the object to change)
+	 char symbol(the symbol of the object)
+* @return STATUS (OK if everything went well, ERROR if didn't)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It sets the symbol of the given object
-
-Input:Object* object(the object to change)
-	  char symbol(the symbol of the object)
-
-Output:STATUS (OK if everything went well, ERROR if didn't)
-
-------------------------------------------------------------------- */
 STATUS object_set_symbol(Object* object, char symbol){
 	if(!object){
 		return ERROR;
@@ -133,21 +112,16 @@ STATUS object_set_symbol(Object* object, char symbol){
 	return OK;
 }
 
-/* --------------------------------------------------------------------
-Function:object_set_location()
 
-Date:30/09/2016
+/*
+* @brief It sets the location of the given object
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param Object* object(the object to change)
+	 Id id(the location of the object)
+* @return STATUS (OK if everything went well, ERROR if didn't)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It sets the symbol of the given object
-
-Input:Object* object(the object to change)
-	  char symbol(the symbol of the object)
-
-Output:STATUS (OK if everything went well, ERROR if didn't)
-
-------------------------------------------------------------------- */
 STATUS object_set_location(Object* object, Id id){
 	if(!object){
 		return ERROR;
@@ -158,20 +132,15 @@ STATUS object_set_location(Object* object, Id id){
 	return OK;
 }
 
-/* --------------------------------------------------------------------
-Function:object_get_symbol()
 
-Date:30/09/2016
+/*
+* @brief It gets the symbol of the given object
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param Object pointer
+* @return char (the symbol of the object)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It gets the symbol of the given object
-
-Input:Object* object(the object)
-
-Output:char (the symbol of the object)
-
-------------------------------------------------------------------- */
 char object_get_symbol(Object* object){
 	if(!object){
 		
@@ -180,20 +149,15 @@ char object_get_symbol(Object* object){
 	return object->symbol;
 }
 
-/* --------------------------------------------------------------------
-Function: object_get_name()
 
-Date: 30/09/2016
+/*
+* @brief It gets the name of the given object
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param Object pointer
+* @return char* (the name of the object)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It gets the name of the given object
-
-Input:Object* object(the object)
-
-Output:char* (the symbol of the object)
-
-------------------------------------------------------------------- */
 char* object_get_name(Object* object){
 	if(!object){
 		return "\0";
@@ -202,20 +166,15 @@ char* object_get_name(Object* object){
 	return object->name;
 }
 
-/* --------------------------------------------------------------------
-Function:object_get_id()
 
-Date: 30/19/2016
+/*
+* @brief It gets the id of the given object
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param Object pointer
+* @return Id (the id of the object)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It gets the id of the object
-
-Input: Object* object(the object)
-
-Output: Id (the Id of the object)
-
-------------------------------------------------------------------- */
 Id object_get_id(Object* object){
 	if(!object){
 		return NO_ID;
@@ -223,20 +182,15 @@ Id object_get_id(Object* object){
 	return object->id;
 }
 
-/* --------------------------------------------------------------------
-Function:object_get_location()
 
-Date: 30/19/2016
+/*
+* @brief It gets the location of the given object
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param Object pointer
+* @return Id (the location of the object)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It gets the location of the object
-
-Input: Object* object(the object)
-
-Output: Id (the Id of the location)
-
-------------------------------------------------------------------- */
 Id object_get_location(Object* object){
 	if(!object){
 		return NO_ID;
@@ -245,20 +199,14 @@ Id object_get_location(Object* object){
 }
 
 
-/* --------------------------------------------------------------------
-Function: object_print()
+/*
+* @brief It prints the atributes of the given object
+* @author Óscar Gómez, Jose Ignacio Gómez.
+* @date 30/09/2016
+* @param Object pointer
+* @return STATUS (OK if everything went well, ERROR if didn't)
+*/
 
-Date: 30/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It prints the atributes of the given object
-
-Input: Object* object (the object)
-
-Output:STATUS (OK if everything went well, ERROR if didn't)
-
-------------------------------------------------------------------- */
 STATUS object_print(Object* object){
 	if(!object){
 		return ERROR;

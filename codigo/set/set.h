@@ -1,178 +1,118 @@
-/* ===================================================================
-File: set.h
-
-Version: 1.0
-
-Date: 30/09/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It implements the capability of store sets
-of things
-
-Revision history: none
-
-=================================================================== */
+/**
+ * @brief It defines the capability of store sets of things
+ * @file set.h
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 1.0
+ * @date 07/10/2016
+ * @revision_history none
+ */
 
 #ifndef SET_H
 #define SET_H
 
-#define MAX_IDS 4 /*We assume the max amount of players
-					is 4*/
+#define MAX_IDS 4 /*! The max amount of players	is 4*/
 
 #include "types.h"
 
-typedef struct _Set Set;
+typedef struct _Set Set; /*!<Definition of the Set structure*/
 
 
-/* --------------------------------------------------------------------
-Function: set_create()
+/*
+* @brief creates a new set
+* @author Óscar Gómez, Jose Ignacio Gómez
+* @date 07/10/2016
+* @param none
+* @return Set* (created set)
+*/
 
-Date: 07/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: creates a new set
-
-Input: 
-
-Output: Set* (created set)
-
-------------------------------------------------------------------- */
 Set* set_create();
 
 
-/* --------------------------------------------------------------------
-Function: set_destroy()
+/*
+* @brief destroys a set
+* @author Óscar Gómez, Jose Ignacio Gómez
+* @date 07/10/2016
+* @param set pointer (set to destroy)
+* @return STATUS (OK if it was successfuly destroyed)
+*/
 
-Date: 07/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: destroys a set
-
-Input: Set* 
-
-Output: OK if it was successfuly destroyed
-
-------------------------------------------------------------------- */
 STATUS set_destroy(Set* set);
 
 
-/* --------------------------------------------------------------------
-Function: set_add()
+/*
+* @brief adds something to a given set
+* @author Óscar Gómez, Jose Ignacio Gómez
+* @date 07/10/2016
+* @param Set* , Id (the id of the thing we want to add)
+* @return STATUS (OK if it was successfuly added)
+*/
 
-Date: 07/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: adds something to a given set
-
-Input: Set* , Id (the id of the thing we want to add)
-
-Output: OK if it was successfuly added
-
-------------------------------------------------------------------- */
 STATUS set_add(Set* set, Id id);
 
 
-/* --------------------------------------------------------------------
-Function: set_delete()
+/*
+* @brief deletes the id from the set if it's inside
+* @author Óscar Gómez, Jose Ignacio Gómez
+* @date 07/10/2016
+* @param Set* , Id (the id of the thing we want to delete)
+* @return STATUS (OK if it was successfuly deleted)
+*/
 
-Date: 07/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: deletes the id from the set if it's inside
-
-Input: Set* , Id (the id of the thing we want to delete)
-
-Output: OK if it was successfuly deleted
-
-------------------------------------------------------------------- */
 STATUS set_delete(Set* set, Id id);
 
 
-/* --------------------------------------------------------------------
-Function: set_print()
+/*
+* @brief prints the set's array
+* @author Óscar Gómez, Jose Ignacio Gómez
+* @date 07/10/2016
+* @param set pointer
+* @return STATUS (OK if it was successfuly printed)
+*/
 
-Date: 07/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: prints the set's array
-
-Input: Set*
-
-Output: OK if it was successfuly printed
-
-------------------------------------------------------------------- */
 STATUS set_print(Set* set);
 
 
-/* --------------------------------------------------------------------
-Function: set_get_num_ids()
+/*
+* @brief gives the number of stored ids
+* @author Óscar Gómez, Jose Ignacio Gómez
+* @date 07/10/2016
+* @param set pointer
+* @return the number of stored ids
+*/
 
-Date: 07/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: gives the number of stored ids
-
-Input: Set*
-
-Output: the number of stored ids
-
-------------------------------------------------------------------- */
 int set_get_num_ids(Set* set);
 
-/* --------------------------------------------------------------------
-Function: set_is_full()
 
-Date: 14/10/2016
+/*
+* @brief checks if the set is full
+* @author Óscar Gómez, Jose Ignacio Gómez
+* @date 14/10/2016
+* @param Set* (the set to inspect)
+* @return BOOL (TRUE if the set is full)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: checks if the set is full
-
-Input: Set*
-
-Output: TRUE if the set is full
-
-------------------------------------------------------------------- */
 BOOL set_is_full(Set* set);
 
 
-/* --------------------------------------------------------------------
-Function: set_is_empty()
+/*
+* @brief checks if the set is empty
+* @author Óscar Gómez, Jose Ignacio Gómez
+* @date 14/10/2016
+* @param Set* (the set to inspect)
+* @return BOOL (TRUE if the set is empty)
+*/
 
-Date: 14/10/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: checks if the set is empty
-
-Input: Set*
-
-Output: TRUE if the set is full
-
-------------------------------------------------------------------- */
 BOOL set_is_empty(Set* set);
 
-/* --------------------------------------------------------------------
-Function: set_is_id()
 
-Date: 14/10/2016
+/*
+* @brief gives the number of stored ids
+* @author Óscar Gómez, Jose Ignacio Gómez
+* @date 14/10/2016
+* @param set pointer, id
+* @return BOOL (returns TRUE if the id is inside the set)
+*/
 
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: returns TRUE if the id is inside the set
-
-Input: Set*, Id
-
-Output: TRUE if the Id is inside the set
-
-------------------------------------------------------------------- */
 BOOL set_is_id(Set* set, Id id);
 
 #endif

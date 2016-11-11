@@ -1,17 +1,11 @@
-/* ===================================================================
-File: game_reader.c
-
-Version: 2.0
-
-Date: 22/09/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: implementation of the rutine that reads a file to preapre the game
-
-Revision history: 2.0 included reader for objects
-
-=================================================================== */
+/**
+ * @brief It implements the rutine that reads a file to prepare the game
+ * @file game_reader.c
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 2.0
+ * @date 22/09/2016
+ * @revision_history 2.0 included reader for objects
+ */
 
 #include <stdio.h>
 #include <stdlib.h>

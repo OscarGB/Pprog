@@ -1,17 +1,11 @@
-/* ===================================================================
-File: command.h
-
-Version: 1.0
-
-Date: 23/09/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It defines the command interpreter
-
-Revision history: none
-
-=================================================================== */
+/**
+ * @brief It defines the command interpreter
+ * @file command.h
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 1.0
+ * @date 23/09/2016
+ * @revision_history none
+ */
 
 
 #ifndef COMMAND_H
@@ -34,7 +28,7 @@ typedef enum enum_Command {
   GO
 } T_Command; 
 
-typedef struct _Command Command;
+typedef struct _Command Command; /*<! Definition of Command structure */
 
 
 /*

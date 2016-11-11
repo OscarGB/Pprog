@@ -1,17 +1,11 @@
-/* ===================================================================
-File: command.c
-
-Version: 1.0
-
-Date: 23/09/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It implements the command interpreter
-
-Revision history: none
-
-=================================================================== */
+/**
+ * @brief It implements the command interpreter
+ * @file command.c
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 1.0
+ * @date 23/09/2016
+ * @revision_history none
+ */
 
 #include <stdio.h>
 #include <string.h>
@@ -21,8 +15,8 @@ Revision history: none
 #define CMD_LENGHT 30
 
 struct _Command{
-	T_Command cmd; /*The command*/
-	char symbol; /*A symbol for TAKE and DROP commands*/
+	T_Command cmd; /*<!The command*/
+	char symbol; /*<!A symbol for TAKE and DROP commands*/
 };
 
 

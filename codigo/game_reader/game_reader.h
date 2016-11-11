@@ -1,17 +1,11 @@
-/* ===================================================================
-File: game_reader.h
-
-Version: 1.0
-
-Date: 30/09/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It defines the reading game module 
-
-Revision history: none
-
-=================================================================== */
+/**
+ * @brief It implements the rutine that reads a file to prepare the game
+ * @file game_reader.h
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 1.0
+ * @date 30/09/2016
+ * @revision_history none
+ */
 
 #ifndef GAME_READER_H
 #define GAME_READER_H

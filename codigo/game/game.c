@@ -1,9 +1,9 @@
 /**
  * @brief It implements the game interface for each command
  * @file game.c
- * @author Óscar Gómez, José Ignacio Gómez
+ * @author Óscar Gómez, José Ignacio Gómez, Óscar Pinto, Andrea Ruiz
  * @version 1.0
- * @date 23/09/2016
+ * @date 09/11/2016
  */
 
 
@@ -24,12 +24,12 @@
 #endif
 
 struct _Game{
-  Player* player;
-  Object* object[MAX_IDS + 1];
-  int num_objects;
-  Space* spaces[MAX_SPACES];
-  Die* die;
-  Link *links[MAX_LINKS];
+  Player* player; /*<! Pointer to Player Structure */
+  Object* object[MAX_IDS + 1]; /*<! Array of pointers to Object Structure */
+  int num_objects; /*<! Number of objects of the Game */
+  Space* spaces[MAX_SPACES]; /*<! Array of pointers to Space Structure */
+  Die* die; /*<! Pointer to Die Structure */
+  Link *links[MAX_LINKS]; /*<! Array of pointers to Link Structure */
   char desc[WORD_SIZE+1]; /* !< For inspect command*/
 };
 
