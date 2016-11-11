@@ -1,17 +1,12 @@
-/* ===================================================================
-File: die.c
+/**
+ * @brief It implements the die's commands
+ * @file die.c
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 1.0
+ * @date 07/10/2016
+ * @revision_history none
+ */
 
-Version: 1.0
-
-Date: 07/10/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It implements the die's commands
-
-Revision history: none
-
-=================================================================== */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -20,8 +15,8 @@ Revision history: none
 #include <time.h>
 
 struct _Die{
-	Id id; /*Die's id*/
-	int last; /*Last rolled value*/
+	Id id; /*<!Die's id*/
+	int last; /*<!Last rolled value*/
 };
 
 /*

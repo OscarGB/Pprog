@@ -14,8 +14,8 @@
  #include "inventory.h"
 
  struct _Inventory {
- 	Set *set;
- 	int size;
+ 	Set *set; /*<! Pointer to set structure */
+ 	int size; /*<! Size of the inventory */
  };
 
 /* !< Private functions*/

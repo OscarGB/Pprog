@@ -1,17 +1,12 @@
-/* ===================================================================
-File: die.h
+/**
+ * @brief It defines the die's commands
+ * @file die.h
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 1.0
+ * @date 07/10/2016
+ * @revision_history none
+ */
 
-Version: 1.0
-
-Date: 07/10/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It defines the die's commands
-
-Revision history: none
-
-=================================================================== */
 #ifndef DIE_H
 #define DIE_H
 
@@ -20,7 +15,7 @@ Revision history: none
 
 #define NOT_ROLLED -1
 
-typedef struct _Die Die;
+typedef struct _Die Die; /*<! Definition of the Die structure */
 
 
 /*

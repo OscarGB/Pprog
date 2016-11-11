@@ -1,17 +1,11 @@
-/* ===================================================================
-File: game_loop.c
-
-Version: 1.0
-
-Date: 23/09/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It defines the game loop
-
-Revision history: none
-
-=================================================================== */
+/**
+ * @brief It defines the game loop
+ * @file game_loop.c
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 1.0
+ * @date 23/09/2016
+ * @revision_history none
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,21 +13,16 @@ Revision history: none
 #include "game.h"
 #include "command.h"
 
-/* --------------------------------------------------------------------
-Function: main()
 
-Date: 23/09/2016
-
-Author:Óscar Gómez, Jose Ignacio Gómez.
-
-Description: function main for the program, runs the game.
-
-Input: 	int argc (number of arguments)
-		char *[argv] (number of arguments)
-
-Output: int 1 if ERROR, 0 if OK
-
-------------------------------------------------------------------- */
+/*
+* @brief function main for the program, runs the game.
+* it creates the command inside
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 23/09/2016
+* @param int argc (number of arguments)
+         char *[argv] (number of arguments)
+* @return int 1 if ERROR, 0 if OK
+*/
 
 int main(int argc, char *argv[]){
   	Game * game = NULL; /*Game pointer*/
