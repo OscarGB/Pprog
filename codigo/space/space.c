@@ -349,7 +349,11 @@ STATUS space_print(Space* space) {
         fprintf(stdout, "---> No object in the space.\n");
     }
 
-    fprintf(stdout, "%s\n", space->gdesc);
+    if(strcmp(space->gdesc, "") == 0){
+        fprintf(stdout, "---> No gdesc\n");
+        return OK;
+    }
+    fprintf(stdout, "---> Gdesc: %s\n", space->gdesc);
 
     return OK;
 }

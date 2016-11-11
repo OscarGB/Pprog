@@ -5,7 +5,7 @@ CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
 
 ALL = ocabas 	#Ejecutables a generar si se llama a make
 
-ALL_DEBUG = $(ALL) die_test set_test link_test inventory_test	#Ejecutables a generar si se llama a make debug
+ALL_DEBUG = $(ALL) die_test set_test link_test inventory_test space_test	#Ejecutables a generar si se llama a make debug
 
 all: $(ALL)
 
@@ -28,6 +28,10 @@ inventory_test: inventory_test.o inventory.o set.o
 	@echo "--->Creando el ejecutable inventory_test"
 	@gcc $(CFLAGS) -o inventory_test inventory_test.o inventory.o set.o
 
+space_test: space_test.o space.o set.o
+	@echo "--->Creando el ejecutable space_test"
+	@gcc $(CFLAGS) -o space_test space_test.o space.o set.o
+
 die_test.o: codigo/die/die_test.c 
 	@echo "--->Generando die_test.o"
 	@gcc $(CFLAGS) -c codigo/die/die_test.c
@@ -43,6 +47,10 @@ link_test.o: codigo/link/link_test.c
 inventory_test.o: codigo/inventory/inventory_test.c
 	@echo "--->Generando inventory_test.o"
 	@gcc $(CFLAGS) -c codigo/inventory/inventory_test.c
+
+space_test.o: codigo/space/space_test.c
+	@echo "--->Generando space_test.o"
+	@gcc $(CFLAGS) -c codigo/space/space_test.c
 
 ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creando el ejecutable ocabas"

@@ -6,6 +6,10 @@
  * @date 10/11/2016
  */
 
+#include <stdio.h>
+#include <string.h>
+#include "space.h"
+#include "set.h"
 
 
 int main(){
@@ -24,8 +28,10 @@ int main(){
 		return 1;
  	}
  	fprintf(stdout, "OK\n");
+ 	space_print(space);
 
  	/*Test get_id*/
+ 	fprintf(stdout, "Testing if the id of the space was correctly set\n");
  	if(space_get_id(space) != 2){
  		#ifdef DEBUG
 		fprintf(stderr, "ERROR DEBUGING: GETTING THE ID\n");
@@ -115,6 +121,7 @@ int main(){
  	fprintf(stdout, "OK\n");
 
  	/*Test add_object, get_object, is_object_in*/
+ 	fprintf(stdout, "Testing object functions\n");
  	if(space_add_object(space, 3) == ERROR){
  		#ifdef DEBUG
 		fprintf(stderr, "ERROR DEBUGING: ADDING AN OBJECT\n");
@@ -149,22 +156,24 @@ int main(){
  	fprintf(stdout, "OK\n");
 
  	/*Test set_gdesc and get_gdesc*/
+ 	fprintf(stdout, "Testing gdesc functions\n");
  	if(space_set_gdesc(space, "Testing") == ERROR){
  		#ifdef DEBUG
 		fprintf(stderr, "ERROR DEBUGING: SETTING THE GDESC\n");
 		#endif
 		return 1;
  	}
- 	if(strcmp(space_Get_gdesc(space), "Testing")){
+ 	if(strcmp(space_get_gdesc(space), "Testing")){
  		#ifdef DEBUG
 		fprintf(stderr, "ERROR DEBUGING: GETTING THE GDESC\n");
 		#endif
 		return 1;
  	}
+ 	fprintf(stdout, "OK\n");
+ 	space_print(space);
 
  	space_destroy(space);
-
-
+ 	space = NULL;
 
 	return 0;
 }
