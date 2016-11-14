@@ -1,16 +1,6 @@
 #include "space_test.h"
 #include "space.h"
 
-int main(void){
-	Id id=350;
-	Space* space;
-
-	space=test1_space_create(id);
-	SPACE_TEST_PRINT(test1_space_get_id(space));
-	SPACE_TEST_PRINT(space_get_id(test1_space_create(id))==id);
-	SPACE_TEST_PRINT(test1_space_destroy(space));
-return 0;
-}
 
 Space* test1_space_create(Id id){
 	Space* space;
@@ -90,6 +80,14 @@ BOOL test1_space_set/get_gdesc(Space* space, char * gdesc){
 	return (!strcmp(gdesc, space_get_gdesc(space));
 }
 
+int main(void){
+	Id id=350;
+	Space* space;
 
-
+	space=test1_space_create(id);
+	SPACE_TEST_PRINT(test1_space_get_id(space));
+	SPACE_TEST_PRINT(space_get_id(test1_space_create(id))==id);
+	SPACE_TEST_PRINT(test1_space_destroy(space));
+return 0;
+}
 
