@@ -104,12 +104,12 @@ inventory.o: codigo/inventory/inventory.c
 	@gcc $(CFLAGS) -c codigo/inventory/inventory.c
 
 clean:
-	@echo "--->Borrando todos los ejecutables, incluyendo los test y el log"
+	@echo "--->Borrando todos los ejecutables y los ficheros de distribución, incluyendo los test y el log"
 	@rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG)
 
 dist:
 	@echo "--->Creando tgz para la distribución del programa"
-	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ makefile *.dat
+	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ reuniones/ makefile *.dat
 
 doc:
 	@echo "--->Generando documentación mediante Doxygen"
