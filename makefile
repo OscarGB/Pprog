@@ -1,3 +1,8 @@
+#--------------------------------------------#
+# Makefile v2.0                              #
+# Author: Óscar Gómez Borzdynski             #
+#--------------------------------------------#
+
 DEPS = game command generic space set player object die game_reader link inventory	#Nombre de las carpetas de los módulos
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefijo de -I para la inclusión de las carpetas en la compilación
 
