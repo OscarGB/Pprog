@@ -17,12 +17,12 @@
 #endif
 
 
-#define SPACE_TEST_PRINT(x) (\
+#define SPACE_TEST_PRINT(x) do{\
 pass= (x);\
 test_passed = (pass)? test_passed=1 : test_passed;\
 printf(YELLOW "%s " RESET "line " "%d " BLUE "%s: " , __FILE__, __LINE__, __FUNCTION__);\
 printf(RESET "%s\n", (pass)? GREEN "PASS" RESET : RED "ERROR" RESET);\
-)
+}while(0)
 
 static int test_passed=0;
 static int pass=0;
