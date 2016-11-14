@@ -110,11 +110,11 @@ inventory.o: codigo/inventory/inventory.c
 
 clean: #Comando de limpieza del directorio raiz
 	@echo "--->Borrando todos los ejecutables y los ficheros de distribución, incluyendo los test y el log"
-	@rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG)
+	@rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG) *.out
 
 dist: #Comando de generación de un comprimido para la distribución del programa
 	@echo "--->Creando tgz para la distribución del programa"
-	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ reuniones/ html/ makefile *.dat
+	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ reuniones/ html/ makefile *.dat Doxyfile
 
 doc: #Comando de generación de la documentación
 	@echo "--->Generando documentación mediante Doxygen"
