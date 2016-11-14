@@ -44,3 +44,8 @@ ocabas
 
 # Log file
 *.log
+*.out
+
+#Documentation
+html/
+latex/

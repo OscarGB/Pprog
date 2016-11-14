@@ -7,13 +7,13 @@ ALL = ocabas 	#Ejecutables a generar si se llama a make
 TEST = die_test set_test link_test inventory_test space_test	#Ejecutables a generar si se llama a make debug o make test
 ALL_DEBUG = $(ALL) $(TEST)
 
-all: $(ALL)
+all: $(ALL) #Genera únicamente el juego
 
 test: CFLAGS += -DDEBUG	#Se añade el flag -DDEBUG a la compilación
-test: $(TEST)
+test: $(TEST) #Crea todos los tests
 
 debug: CFLAGS += -DDEBUG	#Se añade el flag -DDEBUG a la compilación
-debug: $(ALL_DEBUG)
+debug: $(ALL_DEBUG) #Crea los tests y el ejecutable del juego
 
 die_test: die_test.o die.o 
 	@echo "--->Creando el ejecutable die_test"
@@ -103,14 +103,16 @@ inventory.o: codigo/inventory/inventory.c
 	@echo "--->Generandp inventory.o"
 	@gcc $(CFLAGS) -c codigo/inventory/inventory.c
 
-clean:
+clean: #Comando de limpieza del directorio raiz
 	@echo "--->Borrando todos los ejecutables y los ficheros de distribución, incluyendo los test y el log"
 	@rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG)
 
-dist:
+dist: #Comando de generación de un comprimido para la distribución del programa
 	@echo "--->Creando tgz para la distribución del programa"
-	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ reuniones/ makefile *.dat
+	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ reuniones/ html/ makefile *.dat
 
-doc:
+doc: #Comando de generación de la documentación
 	@echo "--->Generando documentación mediante Doxygen"
-	@doxygen Doxyfile
+	@nohup doxygen Doxyfile
+	@echo "--->Abriendo documentación"
+	@firefox html/index.html
