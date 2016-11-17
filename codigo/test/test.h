@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#pragma GCC diagnostic ignored "-Wsequence-point"
+#pragma GCC diagnostic ignored "-Wpedantic"
+
 #ifndef NO_COLORS
 #define RED "\x1B[31m"
 #define BLUE "\x1B[34m"
@@ -31,7 +34,7 @@ printf(YELLOW "%s " RESET "line " "%d " BLUE "%s: " , __FILE__, __LINE__, __FUNC
 printf(RESET "%s\n", (pass)? GREEN "PASS" RESET : RED "ERROR" RESET);\
 }while(0)
 
-#define PRINT_RESULTS(x) do{\
+#define PRINT_RESULTS() do{\
 	if(test_counter == number_test_passed){\
 		printf(GREEN "ALL TESTS PASSED\n");\
 	}\
