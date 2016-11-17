@@ -9,7 +9,7 @@ IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefijo de -I para la inclusión de las
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
 
 ALL = ocabas 	#Ejecutables a generar si se llama a make
-TEST = space_test #die_test set_test link_test inventory_test 	#Ejecutables a generar si se llama a make debug o make test
+TEST = space_test link_test #die_test set_test link_test inventory_test 	#Ejecutables a generar si se llama a make debug o make test
 ALL_DEBUG = $(ALL) $(TEST)
 
 all: $(ALL) #Genera únicamente el juego
@@ -48,9 +48,9 @@ set_test.o: codigo/set/set_test.c
 	@echo "--->Generando set_test.o"
 	@gcc $(CFLAGS) -c codigo/set/set_test.c
 
-link_test.o: codigo/link/link_test.c
+link_test.o: codigo/test/link_test.c
 	@echo "--->Generando link_test.o"
-	@gcc $(CFLAGS) -c codigo/link/link_test.c
+	@gcc $(CFLAGS) -c codigo/test/link_test.c
 
 inventory_test.o: codigo/inventory/inventory_test.c
 	@echo "--->Generando inventory_test.o"
