@@ -17,7 +17,7 @@
 #endif
 
 
-#define SPACE_TEST_PRINT(x) do{\
+#define TEST_PRINT(x) do{\
 pass= (x);\
 test_counter++;\
 test_passed = (pass)? test_passed=1 : test_passed;\
