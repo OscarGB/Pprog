@@ -28,7 +28,7 @@
 *.x86_64
 *.hex
 ocabas
-*test
+*_test
 
 # Debug files
 *.dSYM/
@@ -44,3 +44,8 @@ ocabas
 
 # Log file
 *.log
+*.out
+
+#Documentation
+html/
+latex/

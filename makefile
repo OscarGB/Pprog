@@ -1,19 +1,24 @@
+#--------------------------------------------#
+# Makefile v2.0                              #
+# Author: Óscar Gómez Borzdynski             #
+#--------------------------------------------#
+
 DEPS = game command generic space set player object die game_reader link inventory	#Nombre de las carpetas de los módulos
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefijo de -I para la inclusión de las carpetas en la compilación
 
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
 
 ALL = ocabas 	#Ejecutables a generar si se llama a make
-TEST = die_test set_test link_test inventory_test space_test	#Ejecutables a generar si se llama a make debug o make test
+TEST = space_test #die_test set_test link_test inventory_test 	#Ejecutables a generar si se llama a make debug o make test
 ALL_DEBUG = $(ALL) $(TEST)
 
-all: $(ALL)
+all: $(ALL) #Genera únicamente el juego
 
 test: CFLAGS += -DDEBUG	#Se añade el flag -DDEBUG a la compilación
-test: $(TEST)
+test: $(TEST) #Crea todos los tests
 
 debug: CFLAGS += -DDEBUG	#Se añade el flag -DDEBUG a la compilación
-debug: $(ALL_DEBUG)
+debug: $(ALL_DEBUG) #Crea los tests y el ejecutable del juego
 
 die_test: die_test.o die.o 
 	@echo "--->Creando el ejecutable die_test"
@@ -51,9 +56,9 @@ inventory_test.o: codigo/inventory/inventory_test.c
 	@echo "--->Generando inventory_test.o"
 	@gcc $(CFLAGS) -c codigo/inventory/inventory_test.c
 
-space_test.o: codigo/space/space_test.c
+space_test.o: codigo/test/space_test.c
 	@echo "--->Generando space_test.o"
-	@gcc $(CFLAGS) -c codigo/space/space_test.c
+	@gcc $(CFLAGS) -c codigo/test/space_test.c
 
 ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creando el ejecutable ocabas"
@@ -103,10 +108,16 @@ inventory.o: codigo/inventory/inventory.c
 	@echo "--->Generandp inventory.o"
 	@gcc $(CFLAGS) -c codigo/inventory/inventory.c
 
-clean:
-	@echo "--->Borrando todos los ejecutables, incluyendo los test y el log"
-	@rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG)
+clean: #Comando de limpieza del directorio raiz
+	@echo "--->Borrando todos los ejecutables y los ficheros de distribución, incluyendo los test y el log"
+	@rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG) *.out
 
-dist:
+dist: #Comando de generación de un comprimido para la distribución del programa
 	@echo "--->Creando tgz para la distribución del programa"
-	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ makefile *.dat
+	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ reuniones/ html/ makefile *.dat Doxyfile
+
+doc: #Comando de generación de la documentación
+	@echo "--->Generando documentación mediante Doxygen"
+	@nohup doxygen Doxyfile
+	@echo "--->Abriendo documentación"
+	@firefox html/index.html
