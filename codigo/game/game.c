@@ -870,7 +870,7 @@ STATUS callback_JUMP(Game* game){
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
-* @param the symbol to drop
+* @param char symbol to drop
 * @return OK if it went ok
 */
 STATUS callback_DROP(Game* game, char symbol){
