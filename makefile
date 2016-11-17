@@ -114,7 +114,7 @@ clean: #Comando de limpieza del directorio raiz
 
 dist: #Comando de generación de un comprimido para la distribución del programa
 	@echo "--->Creando tgz para la distribución del programa"
-	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ reuniones/ html/ makefile *.dat Doxyfile
+	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ reuniones/ html/ makefile *.dat Doxyfile *.oca
 
 doc: #Comando de generación de la documentación
 	@echo "--->Generando documentación mediante Doxygen"
