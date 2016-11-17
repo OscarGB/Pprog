@@ -30,7 +30,6 @@ int main(int argc, char *argv[]){
   	FILE *l = NULL; /*Log file*/
   	int flag = 0; /*Flag if its on log mode*/
   	STATUS log; /*Variable for the creation of log file*/
-	int nvflag = 0; /*Variable for the no verbose mode*/
 
 	if (argc < 2){
 		fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
@@ -66,10 +65,7 @@ int main(int argc, char *argv[]){
 		game_destroy(game);
 	}
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
-		 if (nvflag == 0){
-		 	game_print_screen(game);
-		 	/*get_file_input(command, file);*/
-		 }
+		 game_print_screen(game);
 		 get_user_input(command);
 		 log = game_update(game, command);
 		 /*Log mode*/

@@ -1,7 +1,7 @@
 /**
  * @brief Declaration of struct game and functions in game.c
- * @file game.h
- * @author Óscar Gómez, José Ignacio Gómez, Óscar pinto, Andrea Ruiz
+ * @file game.c
+ * @author Óscar Gómez, José Ignacio Gómez, Óscar pinto
  * @version 1.0
  * @date 9/11/2016
  */
@@ -18,7 +18,7 @@
 #include "link.h"
 
 
-typedef struct _Game Game; /*<! Definition of the Game structure */
+typedef struct _Game Game;
 
 /**
 * @brief it creates an empty game table with no player/object location
