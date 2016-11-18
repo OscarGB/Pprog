@@ -427,12 +427,6 @@ STATUS game_update(Game* game, Command *cmd) {
     return callback_UNKNOWN(game);
   case QUIT:
     return callback_QUIT(game);
-  case NEXT:
-    return callback_NEXT(game);
-  case BACK:
-    return callback_BACK(game);
-  case JUMP:
-    return callback_JUMP(game);
   case PICK:
     return callback_PICK(game, command_get_symbol(cmd));
   case DROP:
@@ -678,7 +672,7 @@ void game_print_screen(Game* game){
   game->desc[0] = '\0';
 
 
-  printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p, roll or r, inspect or i, go or g]");
+  printf("\n[commands: quit or q, drop or d, pick or p, roll or r, inspect or i, go or g]");
   printf("\nprompt:> ");
 }
 
