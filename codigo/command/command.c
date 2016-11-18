@@ -16,7 +16,7 @@
 
 struct _Command{
 	T_Command cmd; /*<!The command*/
-	char symbol; /*<!A symbol for TAKE and DROP commands*/
+	char symbol[50]; /*<!A symbol for TAKE and DROP and INSPECTcommands*/
 };
 
 
@@ -32,7 +32,7 @@ struct _Command{
 STATUS get_user_input(Command* command){
 	char action[CMD_LENGHT]; /*The action written*/
 	char input[CMD_LENGHT]; /*The real input*/
-	char symbol; /*The character for TAKE and DROP*/
+	char symbol[50]; /*The character for TAKE and DROP*/
 	char* toks = NULL; /*String for tokenization*/
 
 	if(command == NULL){
@@ -44,11 +44,11 @@ STATUS get_user_input(Command* command){
 			strcpy(action, toks);
 			toks = strtok(NULL, " \n");
 			if(toks != NULL){ /*If there is a symbol -> set the symbol to the introduced valor*/
-				symbol = toks[0];
+				strcpy(symbol, toks);
 			}
 			else{/*If there's not a symbol we set to E*/
-				symbol = E;
-				command->symbol = E;
+				symbol = "\0";
+				command->symbol = symbol;
 			}
 
 			#ifdef DEBUG
@@ -71,12 +71,12 @@ STATUS get_user_input(Command* command){
 			else if (!strcmp(action, "p") || !strcmp(action, "pick")){
 				command->cmd = PICK;
 
-				command->symbol = symbol;
+				strcpy(command->symbol, symbol);
 			}
 			else if (!strcmp(action, "d") || !strcmp(action, "drop")){
 				command->cmd = DROP;
 
-				command->symbol = symbol;
+				strcpy(command->symbol, symbol);
 			}
 			else if (!strcmp(action, "r") || !strcmp(action, "roll")){
 				command->cmd = ROLL;
@@ -84,12 +84,12 @@ STATUS get_user_input(Command* command){
 			else if (!strcmp(action, "i") || !strcmp(action, "inspect")){
 				command->cmd = INSPECT;
 
-				command->symbol = symbol;
+				strcpy(command->symbol, symbol);
 			}
 			else if (!strcmp(action, "g") || !strcmp(action, "go")){
 				command->cmd = GO;
 
-				command->symbol = symbol;
+				strcpy(command->symbol, symbol);
 			}
 			else{
 				command->cmd = UNKNOWN;
@@ -119,7 +119,7 @@ Command* command_create(){
 	}
 	/*Default values*/
 	newcom->cmd = UNKNOWN;
-	newcom->symbol = 'E';
+	newcom->symbol = "\0";
 	return newcom;
 }
 
@@ -164,7 +164,7 @@ T_Command command_get_cmd(Command *com){
 * @return char (The symbol inside the given Command)
 */
 
-char command_get_symbol(Command *com){
+const char *command_get_symbol(Command *com){
 	if(!com){
 		return UNKNOWN;
 	}
