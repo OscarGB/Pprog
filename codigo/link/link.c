@@ -211,6 +211,9 @@ STATUS link_set_state(Link* link, State state){
 	if(!link){
 		return ERROR;
 	}
+	if(!(state == OPEN || state == CLOSED)){
+		return ERROR;
+	}
 
 	link->state = state;
 

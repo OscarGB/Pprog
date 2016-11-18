@@ -57,6 +57,10 @@ int die_roll(Die* die, int inf, int sup){
 Die* die_create(Id id){
 	Die *die = NULL; /*New pointer for die*/
 
+	if(id == NO_ID){
+		return NULL;
+	}
+
 	die = (Die *)malloc(sizeof(Die));
 
 	if(!die){

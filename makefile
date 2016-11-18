@@ -3,13 +3,13 @@
 # Author: Óscar Gómez Borzdynski             #
 #--------------------------------------------#
 
-DEPS = game command generic space set player object die game_reader link inventory	#Nombre de las carpetas de los módulos
+DEPS = game command generic space set player object die game_reader link inventory test	#Nombre de las carpetas de los módulos
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefijo de -I para la inclusión de las carpetas en la compilación
 
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
 
 ALL = ocabas 	#Ejecutables a generar si se llama a make
-TEST = space_test link_test #die_test set_test link_test inventory_test 	#Ejecutables a generar si se llama a make debug o make test
+TEST = link_test die_test #set_test link_test inventory_test space_test	#Ejecutables a generar si se llama a make debug o make test
 ALL_DEBUG = $(ALL) $(TEST)
 
 all: $(ALL) #Genera únicamente el juego
@@ -40,9 +40,9 @@ space_test: space_test.o space.o set.o
 	@echo "--->Creando el ejecutable space_test"
 	@gcc $(CFLAGS) -o space_test space_test.o space.o set.o
 
-die_test.o: codigo/die/die_test.c 
+die_test.o: codigo/test/die_test.c 
 	@echo "--->Generando die_test.o"
-	@gcc $(CFLAGS) -c codigo/die/die_test.c
+	@gcc $(CFLAGS) -c codigo/test/die_test.c
 
 set_test.o: codigo/set/set_test.c 
 	@echo "--->Generando set_test.o"
