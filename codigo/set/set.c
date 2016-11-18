@@ -20,6 +20,7 @@ struct _Set {
 	int num_ids; /*<!The number of elements that the set has*/
 };
 
+	
 /*Private functions*/
 
 

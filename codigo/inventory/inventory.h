@@ -14,6 +14,9 @@
 
 typedef struct _Inventory Inventory; /* !< Definition of the Inventory structure */
 
+BOOL inventory_is_full(Inventory* bag);
+BOOL inventory_is_empty(Inventory* bag);
+
 /**
 * @brief Creates a new inventory for the game
 * @author José Ignacio Gómez

@@ -9,7 +9,7 @@
 
 #ifndef PLAYER_H
 #define PLAYER_H
-#define MAX_OBJECTS 1 /*Used to know the bag size*/
+#define MAX_OBJECTS 10 /*Used to know the bag size*/
 
 #include "types.h"
 #include "object.h"
@@ -19,7 +19,7 @@ typedef struct _Player Player; /*<!Definition of the player structure*/
 
 /*
 * @brief creates a new player
-* @author Óscar Gómez, Jose Ignacio Gómez, Óscar Pinto
+* @author Óscar Gómez, Jose Ignacio Gómez, Óscar Pinto, Andrea Ruiz
 * @date 01/10/2016 (modified 08/11/2016)
 * @param the id of the player
 * @return Player* (created player)
@@ -30,7 +30,7 @@ Player* player_create(Id id);
 
 /*
 * @brief destroys a player
-* @author Óscar Gómez, Jose Ignacio Gómez, Óscar Pinto
+* @author Óscar Gómez, Jose Ignacio Gómez, Óscar Pinto, Andrea Ruiz
 * @date 01/10/2016 (modified 08/11/2016)
 * @param player pointer
 * @return STATUS (OK if the player was successfuly destroyed)
@@ -84,37 +84,25 @@ const Id player_get_location(Player *player);
 
 
 /*
-* @brief it points the player object to NULL and returns
-the object
-* @author Óscar Gómez, Jose Ignacio Gómez
+* @brief deletes the item of the bag so the player drops it
+* @author Óscar Gómez, Jose Ignacio Gómez, Andrea Ruiz
 * @date 01/10/2016
-* @param player pointer
-* @return Object* (the dropped object)
+* @param player pointer, id of the object to drop
+* @return BOOL (TRUE if the object was dropped)
 */
 
-Object* player_drop_object(Player *player);
+BOOL player_drop_object(Player *player, Id id);
 
 
 /*
 * @brief if the bag isn't full, it places an object
 in the bag
-* @author Óscar Gómez, Jose Ignacio Gómez
+* @author Óscar Gómez, Jose Ignacio Gómez, Andrea Ruiz
 * @date 01/10/2016
-* @param Player*, Object* (the picked object)
+* @param Player*, id of the picked object
 * @return BOOL(TRUE if the object was picked)
 */
 
-BOOL player_pick_object(Player *player, Object* object);
-
-
-/*
-* @brief It return the symbol of the Object that the player has
-* @author Óscar Gómez, Jose Ignacio Gómez
-* @date 23/10/2016
-* @param Player pointer
-* @return char (The symbol, if an error occurs it returns CHAR_ERROR)
-*/
-
-char player_get_object_symbol (Player* player);
+BOOL player_pick_object(Player *player, Id id);
 
 #endif

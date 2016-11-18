@@ -16,7 +16,6 @@
 
 typedef struct _Set Set; /*!<Definition of the Set structure*/
 
-
 /*
 * @brief creates a new set
 * @author Óscar Gómez, Jose Ignacio Gómez

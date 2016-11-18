@@ -70,7 +70,7 @@ BOOL   game_is_over(Game* game);
 
 /**
 * @brief prints on screen the data of the game
-* @author José Ignacio Gómez, Óscar Gómez
+* @author José Ignacio Gómez, Óscar Gómez, Andrea Ruiz
 * @date 29/09/2016
 * @param game pointer
 * @return void
