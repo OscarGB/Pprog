@@ -968,7 +968,7 @@ STATUS callback_ROLL(Game* game){
 
 /**
 * @brief callback for "inspect" instruction
-* @author Óscar Pinto
+* @author Óscar Pinto, Andrea Ruiz
 * @date 04/11/2016
 * @param game pointer
 * @param symbol to inspect
@@ -977,10 +977,9 @@ STATUS callback_ROLL(Game* game){
 STATUS callback_INSPECT(Game* game, char symbol){
 
     int i;/* !< Variable used for loops*/
-    Object *obj; /* !<Variable used for storing the player's object*/
-    Id obj_id;
-    Id player_location = NO_ID, object_location= NO_ID; /* !< Locations of the player and object*/
-/*
+    Object *obj = NULL; /* !<Variable used for storing the player's object*/
+    Id player_location = NO_ID; /* !< Locations of the player and object*/
+
     if(!game) return ERROR;
     if(symbol==E) return ERROR;
 
@@ -988,47 +987,27 @@ STATUS callback_INSPECT(Game* game, char symbol){
     if(player_location == NO_ID) return ERROR;
 
 
-    if(symbol=='s' || symbol=='S'){
+    if(symbol=='s' || symbol=='S'){ /*<! Inspecting space */
 	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
 		if(player_location==space_get_id(game->spaces[i])){
 		strcpy(game->desc, space_get_name(game->spaces[i]));
 		return OK;	
 		}
 	}
-    return ERROR;
-    }else{
-	    obj_id=player_drop_object(game->player);
-		for(i=0; i<MAX_IDS + 1; i++){
-			if(obj_id == object_get_id(game->object[i])){
+        return ERROR;
+    }else{ /*<! Inspecting an object */
+	for(i=0; i< game->num_objects; i++){ /*<! If player has the object or they're in the same field */
+		if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){
+			if(object_get_symbol(game->object[i]) == symbol)
 				obj = game->object[i];
-				break;
-			}
-			obj = NULL;
 		}
-		if(!obj) return ERROR;
-	    if(object_get_symbol(obj)==symbol){
-		strcpy(game->desc, object_get_name(obj));
-		player_pick_object(game->player, obj);
-		return OK;
-	    }
-	    player_pick_object(game->player, obj);
+	}
 
-	    object_location = game_get_object_location(game, symbol);
+	if(!obj) return ERROR;
 
-	    if(object_location!=player_location) return ERROR;
-
-	    for(i = 0; i < game->num_objects; i++){
-
-	    	if(object_get_symbol(game->object[i]) == symbol){
-
-		      	strcpy(game->desc, object_get_name(game->object[i]));
-			return OK;
-	    	}  
-	    }
-	return ERROR;
+        strcpy(game->desc, object_get_name(obj));
+	return OK;
     }
-*/
-return ERROR;
 }
 
 /**
