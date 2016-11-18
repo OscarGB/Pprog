@@ -62,7 +62,7 @@ space_test.o: codigo/test/space_test.c
 
 ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creando el ejecutable ocabas"
-	@gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
+	@gcc $(CFLAGS) -o JuegoOcaPlus game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 
 command.o: codigo/command/command.c 
 	@echo "--->Generando command.o"
