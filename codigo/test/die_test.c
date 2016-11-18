@@ -6,7 +6,147 @@
  * @date 17/11/2016
  */
 
-#include "die_test_func.c"
+#include "test.h"
+#include "die.h"
+#include "types.h"
+ 
+#define MAX_TESTS 14
+#define ID 3
+
+
+BOOL test_die1(){
+	Die *die = NULL;
+	die = die_create(NO_ID);
+	if(die == NULL){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+BOOL test_die2(){
+ 	Die* die = NULL;
+	die = die_create(ID);
+	if(!die){
+		return FALSE;
+	}
+	die_destroy(die);
+	return TRUE;
+}
+
+BOOL test_die3(){
+	Die* die = NULL;
+	die = die_create(ID);
+	if(die_get_id(die) == ID){
+		die_destroy(die);
+		return TRUE;
+	}
+	die_destroy(die);
+	return FALSE;
+}
+
+BOOL test_die4(){
+	if(die_get_id(NULL) == NO_ID){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+BOOL test_die5(){
+	Die* die = NULL;
+	int roll;
+	die = die_create(ID);
+	roll = die_roll(die, 1, 6);
+	if(roll < 1 || roll > 6){
+		die_destroy(die);
+		return FALSE;
+	}
+	die_destroy(die);
+	return TRUE;
+}
+
+BOOL test_die6(){
+	Die* die = NULL;
+	int roll;
+	die = die_create(ID);
+	roll = die_roll(die, 1, 6);
+	if(die_get_last_roll(die) == roll){
+		die_destroy(die);
+		return TRUE;
+	}
+	die_destroy(die);
+	return FALSE;
+}
+
+BOOL test_die7(){
+	if(die_roll(NULL, 1, 6) == -1){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+BOOL test_die8(){
+	Die* die = NULL;
+	die = die_create(ID);
+	if(die_roll(die, -1, 1) == -1){
+		die_destroy(die);
+		return TRUE;
+	}
+	die_destroy(die);
+	return FALSE;
+}
+
+BOOL test_die9(){
+	Die* die = NULL;
+	die = die_create(ID);
+	if(die_roll(die, 1, -1) == -1){
+		die_destroy(die);
+		return TRUE;
+	}
+	die_destroy(die);
+	return FALSE;
+}
+
+BOOL test_die10(){
+	Die* die = NULL;
+	die = die_create(ID);
+	if(die_roll(die, 6, 1) == -1){
+		die_destroy(die);
+		return TRUE;
+	}
+	die_destroy(die);
+	return FALSE;
+}
+
+BOOL test_die11(){
+	if(die_get_last_roll(NULL) == -1){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+BOOL test_die12(){
+	if(die_print(NULL) == ERROR){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+BOOL test_die13(){
+	Die* die = NULL;
+	die = die_create(ID);
+	if(die_destroy(die) == OK){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+BOOL test_die14(){
+	if(die_destroy(NULL) == ERROR){
+		return TRUE;
+	}
+	return FALSE;
+}
+
 
 int main(int argc, char* argv[]){
 	int test = 0;
@@ -38,10 +178,6 @@ int main(int argc, char* argv[]){
 	if(todas || test == 12) TEST_PRINT(test_die12());
 	if(todas || test == 13) TEST_PRINT(test_die13());
 	if(todas || test == 14) TEST_PRINT(test_die14());
-
-	if(test != 0 && test != 13){
-		end_test();
-	}
 
 	PRINT_RESULTS();
 
