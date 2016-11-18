@@ -17,6 +17,8 @@
 #include "die.h"
 #include "link.h"
 
+#define PLAYER_OBJ -2
+
 #ifdef __WINDOWS_BUILD__ /*In case we are working on Windows*/
 #define CLEAR "cls"
 #else
@@ -481,7 +483,7 @@ void game_print_data(Game* game) {
 
 /**
 * @brief prints on screen the data of the game
-* @author José Ignacio Gómez, Óscar Gómez
+* @author José Ignacio Gómez, Óscar Gómez, Andrea Ruiz
 * @date 29/09/2016
 * @param game pointer
 * @return void
@@ -495,7 +497,6 @@ void game_print_screen(Game* game){
   char obj[WORD_SIZE]; /* !< String with the objects*/
   char aux[WORD_SIZE]; /* !< Axiliar for reading object values*/
   int i, last; /* !< loops, last rolled value*/
-  char symbol; /* !< symbol of the player's objects*/
   int obj_size; /* !< Control of the number of objects to print*/
 
   obj[0] = '\0'; /* !< Set to empty*/
@@ -650,16 +651,21 @@ void game_print_screen(Game* game){
   
   printf("Object locations:");
   for(i = 0; i < game->num_objects; i++){
-    printf(" %c:%d", object_get_symbol(game->object[i]), (int)object_get_location(game->object[i]));
+    if(object_get_location(game->object[i]) != PLAYER_OBJ){
+	    printf(" %c:%d", object_get_symbol(game->object[i]), (int)object_get_location(game->object[i]));
+    }
   }    
   printf("\n");
 
-  symbol = player_get_object_symbol(game->player);
   printf("Player objects:");
-  if(symbol != CHAR_ERROR){
-    printf("%c", symbol);
+  for(i=0; i< game->num_objects; i++){
+	if(object_get_location(game->object[i]) == PLAYER_OBJ)
+		printf("%c ", object_get_symbol(game->object[i]));
   }
+
   printf("\n");
+
+    
 
   last = die_get_last_roll(game->die);
   if(last != -1){
@@ -867,28 +873,37 @@ STATUS callback_JUMP(Game* game){
 
 /**
 * @brief callback for "drop" instruction
-* @author José Ignacio Gómez, Óscar Gómez
+* @author José Ignacio Gómez, Óscar Gómez, Andrea Ruiz
 * @date 29/09/2016
 * @param game pointer
 * @param char symbol to drop
 * @return OK if it went ok
 */
 STATUS callback_DROP(Game* game, char symbol){
-  Object* object; /* !< Object that will be dropped*/
+  Object* object = NULL; /* !< Object that will be dropped*/
+  Id object_id = NO_ID;
   Id current_id; /* !< Id of the current space*/
+  int i;
 
-  object = player_drop_object(game->player);
-  if(!object){
-    return ERROR;
+  for(i=0; i< game->num_objects; i++){ /*<! Seeing if the symbol is associated to an object */
+	if(object_get_symbol(game->object[i]) == symbol){
+		object_id = object_get_id(game->object[i]);
+  		object = game->object[i];
+		break;
+	}
   }
+
+  if(object_id == NO_ID || !object) return ERROR;
+
+  if(player_drop_object(game->player, object_id) == FALSE)
+	return ERROR;
+
   if(object_get_symbol(object) != symbol){
-    player_pick_object(game->player, object);
+    player_pick_object(game->player, object_id);
     return ERROR;
   }
-  current_id = game_get_player_location(game);
 
-  game->object[game->num_objects] = object;
-  game->num_objects++;
+  current_id = game_get_player_location(game);
 
   return game_set_object_location(game, current_id, object_get_id(object));
 }
@@ -896,7 +911,7 @@ STATUS callback_DROP(Game* game, char symbol){
 
 /**
 * @brief callback for "pick" instruction
-* @author José Ignacio Gómez, Óscar Gómez
+* @author José Ignacio Gómez, Óscar Gómez, Andrea Ruiz
 * @date 29/09/2016
 * @param game pointer
 * @param the symbol to pick
@@ -924,17 +939,14 @@ STATUS callback_PICK(Game* game, char symbol){
     if(object_get_symbol(game->object[i]) == symbol){
       object = game->object[i];
 
-      if(player_pick_object(game->player, object) != FALSE){
-        object_set_location(object, NO_ID); 
-        game->object[i] = game->object[game->num_objects-1]; /*Reorder the table*/
-        game->object[game->num_objects -1] = NULL; /*Preventing errors*/
-        game->num_objects--; 
+      if(player_pick_object(game->player, object_get_id(object)) != FALSE){
+        object_set_location(object, PLAYER_OBJ); 
         return OK;
       }
     }  
   }
 
-  return ERROR;;
+  return ERROR;
 }
 
 
@@ -966,9 +978,9 @@ STATUS callback_INSPECT(Game* game, char symbol){
 
     int i;/* !< Variable used for loops*/
     Object *obj; /* !<Variable used for storing the player's object*/
-
+    Id obj_id;
     Id player_location = NO_ID, object_location= NO_ID; /* !< Locations of the player and object*/
-
+/*
     if(!game) return ERROR;
     if(symbol==E) return ERROR;
 
@@ -985,7 +997,15 @@ STATUS callback_INSPECT(Game* game, char symbol){
 	}
     return ERROR;
     }else{
-	    obj=player_drop_object(game->player);	
+	    obj_id=player_drop_object(game->player);
+		for(i=0; i<MAX_IDS + 1; i++){
+			if(obj_id == object_get_id(game->object[i])){
+				obj = game->object[i];
+				break;
+			}
+			obj = NULL;
+		}
+		if(!obj) return ERROR;
 	    if(object_get_symbol(obj)==symbol){
 		strcpy(game->desc, object_get_name(obj));
 		player_pick_object(game->player, obj);
@@ -1007,7 +1027,7 @@ STATUS callback_INSPECT(Game* game, char symbol){
 	    }
 	return ERROR;
     }
-
+*/
 return ERROR;
 }
 

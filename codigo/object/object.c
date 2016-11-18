@@ -21,6 +21,7 @@ struct _Object{
 	char desc[WORD_SIZE+1]; /*<!Written description of the object*/
 };
 
+
 /*
 * @brief it creates an object, setting all the fields to error
 * @author Óscar Gómez, Jose Ignacio Gómez.
