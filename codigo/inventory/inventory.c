@@ -18,7 +18,6 @@
  	int size; /*<! Size of the inventory */
  };
 
-/* !< Private functions*/
 
 BOOL inventory_is_full(Inventory* bag) {
 	if (set_get_num_ids(bag->set) == bag->size){

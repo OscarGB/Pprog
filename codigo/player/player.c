@@ -1,7 +1,7 @@
 /**
  * @brief It implements the functionality of the player
  * @file player.c
- * @author Óscar Gómez, José Ignacio Gómez
+ * @author Óscar Gómez, José Ignacio Gómez, Andrea Ruiz
  * @version 1.0
  * @date 30/09/2016
  * @revision_history none
@@ -14,29 +14,27 @@
 #include "space.h"
 #include "player.h"
 #include "object.h"
+#include "inventory.h"
+
 
 struct _Player {
 	Id id; /*<!Id of the player*/
 	char name[WORD_SIZE +1]; /*<!Name of the player*/
 	Id location; /*<!Location in the game*/
-	Object *object[MAX_OBJECTS]; /*<!We've set MAX_OBJECTS
-								as 1, in order to prepare 
-								the bag creation*/
-								/*We left it this way because in the I3 we will use
-								the inventory*/
+	Inventory* bag; /*<!Inventory of the player */
 };
 
 
 /*
 * @brief creates a new player
-* @author Óscar Gómez, Jose Ignacio Gómez, Óscar Pinto
+* @author Óscar Gómez, Jose Ignacio Gómez, Óscar Pinto, Andrea Ruiz
 * @date 01/10/2016 (modified 08/11/2016)
 * @param the id of the player
 * @return Player* (created player)
 */
 
 Player* player_create(Id id){
-	int i;
+
 
 	Player *newPlayer = NULL; /*New player to create*/
 
@@ -57,9 +55,7 @@ Player* player_create(Id id){
 
 	newPlayer->location = NO_ID;
 
-	for(i=0; i<MAX_OBJECTS; i++){
-		newPlayer->object[i]=NULL; 
-	} /*We set all for free() compatibility (avoid double free) the first one because we havent done the bag yet*/
+	newPlayer->bag = inventory_create(MAX_OBJECTS);
 
 	return newPlayer;
 }
@@ -67,21 +63,19 @@ Player* player_create(Id id){
 
 /*
 * @brief destroys a player
-* @author Óscar Gómez, Jose Ignacio Gómez, Óscar Pinto
+* @author Óscar Gómez, Jose Ignacio Gómez, Óscar Pinto, Andrea Ruiz
 * @date 01/10/2016 (modified 08/11/2016)
 * @param player pointer
 * @return STATUS (OK if the player was successfuly destroyed)
 */
 
 STATUS player_destroy(Player* player){
-	int i;
+
 	if(!player) {
 		return ERROR;
 	}
 	
-	for(i=0; i<MAX_OBJECTS; i++){
-		if(player->object[i]) free(player->object[i]); /*This objects are not freed in game.c*/
-	}
+	inventory_destroy(player->bag);
 	free(player);
 	player = NULL;
 
@@ -164,66 +158,43 @@ const Id player_get_location (Player* player) {
 
 
 /*
-* @brief it points the player object to NULL and returns
-the object
-* @author Óscar Gómez, Jose Ignacio Gómez
+* @brief deletes the item of the bag so the player drops it
+* @author Óscar Gómez, Jose Ignacio Gómez, Andrea Ruiz
 * @date 01/10/2016
-* @param player pointer
-* @return Object* (the dropped object)
+* @param player pointer, id of the object to drop
+* @return BOOL (TRUE if the object was dropped)
 */
 
-Object* player_drop_object (Player* player){
-	Object *obj = NULL;
+BOOL player_drop_object (Player* player, Id id){
 
-	if (!player || !player->object[0]){
-		return NULL;
+	if (!player || inventory_is_empty(player->bag) || id == NO_ID){
+		return FALSE;
 	}
 
-	obj = player->object[0];
-	player->object[0] = NULL;
+	if(inventory_delete_item(player->bag, id))
+		return TRUE;
 
-	return obj;
+	return FALSE;
+
 }
 
 
 /*
 * @brief if the bag isn't full, it places an object
 in the bag
-* @author Óscar Gómez, Jose Ignacio Gómez
+* @author Óscar Gómez, Jose Ignacio Gómez, Andrea Ruiz
 * @date 01/10/2016
-* @param Player*, Object* (the picked object)
+* @param Player*, id of the picked object
 * @return BOOL(TRUE if the object was picked)
 */
 
-BOOL player_pick_object (Player* player, Object* object){
-	int i;
+BOOL player_pick_object (Player* player, Id id){
 
-	if(player == NULL || object == NULL){
+	if(player == NULL || id == NO_ID || inventory_is_full(player->bag)){
 		return FALSE;
 	}
 
-	for (i = 0; i < MAX_OBJECTS; i++){
-		if (player->object[i] == NULL){
-			player->object[i] = object;
-			return TRUE;
-		}
-	}
+	inventory_add_item(player->bag, id);
 
-	return FALSE;
-}
-
-
-/*
-* @brief It return the symbol of the Object that the player has
-* @author Óscar Gómez, Jose Ignacio Gómez
-* @date 23/10/2016
-* @param Player pointer
-* @return char (The symbol, if an error occurs it returns CHAR_ERROR)
-*/
-
-char player_get_object_symbol (Player* player){
-	if(player == NULL || player->object[0] == NULL){
-		return CHAR_ERROR;
-	}
-	return object_get_symbol(player->object[0]);
+	return TRUE;
 }
