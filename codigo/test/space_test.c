@@ -77,7 +77,7 @@ BOOL test1_space_print(Space* space){
 
 BOOL test1_space_set/get_gdesc(Space* space, char * gdesc){
 	space_set_gdesc(space, gdesc);
-	return (!strcmp(gdesc, space_get_gdesc(space));
+	return (!strcmp(gdesc, space_get_gdesc(space)));
 }
 
 int main(void){
