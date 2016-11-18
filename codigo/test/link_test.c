@@ -1,7 +1,15 @@
+/**
+ * @brief Main to test the Link module
+ * @file link_test.c
+ * @author Óscar Gómez
+ * @version 1.0
+ * @date 17/11/2016
+ */
+
 #include "link_test_func.c"
 
 int main(int argc, char* argv[]){
-	int test;
+	int test = 0;
 	int todas = 1;
 
 	if(argc < 2){
@@ -47,6 +55,11 @@ int main(int argc, char* argv[]){
 	if(todas || test == 28) TEST_PRINT(test_link28());
 	if(todas || test == 29) TEST_PRINT(test_link29());
 	if(todas || test == 30) TEST_PRINT(test_link30());
+	if(todas || test == 31) TEST_PRINT(test_link31());
+
+	if(test != 0 && test != 29){
+		end_test();
+	}
 
 	PRINT_RESULTS();
 

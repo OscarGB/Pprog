@@ -1,6 +1,6 @@
 /**
- * @brief Implementation for the functions to test the link
- * @file link_test_fun
+ * @brief Implementation for the functions to test the Link module
+ * @file link_test_func.c
  * @author Óscar Gómez
  * @version 1.0
  * @date 17/11/2016
@@ -9,8 +9,8 @@
 #include "test.h"
 #include "link.h"
 #include "types.h"
- 
-#define MAX_TESTS 30
+
+#define MAX_TESTS 31
 
 Link* link = NULL;
 Id id = 3;
@@ -20,7 +20,6 @@ Id id2 = 8;
 
 
 BOOL test_link1(){
-	Link* link;
 	link = link_create(NO_ID);
 	if(!link){
 		return TRUE;
@@ -37,6 +36,9 @@ BOOL test_link2(){
 }
 
 BOOL test_link3(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_get_id(link) == id){
 		return TRUE;
 	}
@@ -44,6 +46,9 @@ BOOL test_link3(){
 }
 
 BOOL test_link4(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(strcmp(link_get_name(link), "") == 0){
 		return TRUE;
 	}
@@ -51,6 +56,9 @@ BOOL test_link4(){
 }
 
 BOOL test_link5(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_get_state(link) == OPEN){
 		return TRUE;
 	}
@@ -58,6 +66,9 @@ BOOL test_link5(){
 }
 
 BOOL test_link6(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_get_conection1(link) == NO_ID){
 		return TRUE;
 	}
@@ -65,6 +76,9 @@ BOOL test_link6(){
 }
 
 BOOL test_link7(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_get_conection2(link) == NO_ID){
 		return TRUE;
 	}
@@ -107,6 +121,9 @@ BOOL test_link12(){
 }
 
 BOOL test_link13(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_set_name(link, name) == OK){
 		return TRUE;
 	}
@@ -114,6 +131,10 @@ BOOL test_link13(){
 }
 
 BOOL test_link14(){
+	if(!link){
+		link = link_create(id);
+		link_set_name(link, name);
+	}
 	if(strcmp(link_get_name(link), name) == 0){
 		return TRUE;
 	}
@@ -121,6 +142,9 @@ BOOL test_link14(){
 }
 
 BOOL test_link15(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_set_conection1(link, id1) == OK){
 		return TRUE;
 	}
@@ -128,6 +152,9 @@ BOOL test_link15(){
 }
 
 BOOL test_link16(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_set_conection2(link, id2) == OK){
 		return TRUE;
 	}
@@ -135,6 +162,10 @@ BOOL test_link16(){
 }
 
 BOOL test_link17(){
+	if(!link){
+		link = link_create(id);
+		link_set_conection1(link, id1);
+	}
 	if(link_get_conection1(link) == id1){
 		return TRUE;
 	}
@@ -142,6 +173,10 @@ BOOL test_link17(){
 }
 
 BOOL test_link18(){
+	if(!link){
+		link = link_create(id);
+		link_set_conection2(link, id2);
+	}
 	if(link_get_conection2(link) == id2){
 		return TRUE;
 	}
@@ -149,6 +184,9 @@ BOOL test_link18(){
 }
 
 BOOL test_link19(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_set_state(link, CLOSED) == OK){
 		return TRUE;
 	}
@@ -156,6 +194,10 @@ BOOL test_link19(){
 }
 
 BOOL test_link20(){
+	if(!link){
+		link = link_create(id);
+		link_set_state(link, CLOSED);
+	}
 	if(link_get_state(link) == CLOSED){
 		return TRUE;
 	}
@@ -163,6 +205,9 @@ BOOL test_link20(){
 }
 
 BOOL test_link21(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_set_name(link, NULL) == ERROR){
 		return TRUE;
 	}
@@ -170,13 +215,16 @@ BOOL test_link21(){
 }
 
 BOOL test_link22(){
-	if(link_set_name(NULL, "") == ERROR){
+	if(link_set_name(NULL, name) == ERROR){
 		return TRUE;
 	}
 	return FALSE;
 }
 
 BOOL test_link23(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_set_conection1(link, NO_ID) == ERROR){
 		return TRUE;
 	}
@@ -191,6 +239,9 @@ BOOL test_link24(){
 }
 
 BOOL test_link25(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_set_conection2(link, NO_ID) == ERROR){
 		return TRUE;
 	}
@@ -212,6 +263,9 @@ BOOL test_link27(){
 }
 
 BOOL test_link28(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_set_state(link, 12) == ERROR){
 		return TRUE;
 	}
@@ -219,6 +273,9 @@ BOOL test_link28(){
 }
 
 BOOL test_link29(){
+	if(!link){
+		link = link_create(id);
+	}
 	if(link_destroy(link) == OK){
 		return TRUE;
 	}
@@ -230,4 +287,16 @@ BOOL test_link30(){
 		return TRUE;
 	}
 	return TRUE;
+}
+
+BOOL test_link31(){
+	if(link_print(NULL) == ERROR){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+void end_test(){
+	link_destroy(link);
+	return;
 }

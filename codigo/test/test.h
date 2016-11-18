@@ -36,9 +36,9 @@ printf(RESET "%s\n", (pass)? GREEN "PASS" RESET : RED "ERROR" RESET);\
 
 #define PRINT_RESULTS() do{\
 	if(test_counter == number_test_passed){\
-		printf(GREEN "ALL TESTS PASSED\n");\
+		printf(GREEN "ALL TESTS PASSED\n" RESET);\
 	}\
 	else{\
-		printf(YELLOW "%d/%d TESTS PASSED, " RED "%d/%d TESTS FAILED\n", number_test_passed, test_counter, test_counter - number_test_passed, test_counter);\
+		printf(YELLOW "%d/%d TESTS PASSED, " RED "%d/%d TESTS FAILED\n" RESET, number_test_passed, test_counter, test_counter - number_test_passed, test_counter);\
 	}\
 }while(0)
