@@ -47,8 +47,8 @@ STATUS get_user_input(Command* command){
 				strcpy(symbol, toks);
 			}
 			else{/*If there's not a symbol we set to E*/
-				symbol = "\0";
-				command->symbol = symbol;
+				symbol[0] = '\0';
+				command->symbol[0] = '\0';
 			}
 
 			#ifdef DEBUG
@@ -119,7 +119,7 @@ Command* command_create(){
 	}
 	/*Default values*/
 	newcom->cmd = UNKNOWN;
-	newcom->symbol = "\0";
+	newcom->symbol[0] = '\0';
 	return newcom;
 }
 
@@ -164,9 +164,9 @@ T_Command command_get_cmd(Command *com){
 * @return char (The symbol inside the given Command)
 */
 
-const char *command_get_symbol(Command *com){
+char *command_get_symbol(Command *com){
 	if(!com){
-		return UNKNOWN;
+		return '\0';
 	}
 	return com->symbol;
 }

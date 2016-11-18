@@ -84,6 +84,6 @@ T_Command command_get_cmd(Command *com);
 * @return char (The symbol inside the given Command)
 */
 
-const char *command_get_symbol(Command *com);
+char *command_get_symbol(Command *com);
 
 #endif

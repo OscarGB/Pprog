@@ -44,11 +44,11 @@ STATUS callback_QUIT(Game* game);
 STATUS callback_NEXT(Game* game);
 STATUS callback_BACK(Game* game);
 STATUS callback_JUMP(Game* game);
-STATUS callback_DROP(Game* game, char symbol);
-STATUS callback_PICK(Game* game, char symbol);
+STATUS callback_DROP(Game* game, char *symbol);
+STATUS callback_PICK(Game* game, char *symbol);
 STATUS callback_ROLL(Game* game);
-STATUS callback_INSPECT(Game* game, char symbol);
-STATUS callback_GO(Game* game, char symbol);
+STATUS callback_INSPECT(Game* game, char *symbol);
+STATUS callback_GO(Game* game, char *symbol);
 
 
 /**
@@ -65,7 +65,7 @@ Id     game_get_player_location(Game* game);
 
 STATUS game_add_object(Game* game, Object* object);
 STATUS game_set_object_location(Game* game, Id id_s, Id id_o);
-Id     game_get_object_location(Game* game, char symbol);
+Id     game_get_object_location(Game* game, char *symbol);
 
 /**
  * @brief Game interface implementation
@@ -398,12 +398,21 @@ Id game_get_player_location(Game* game) {
 * @param the symbol of the object
 * @return The id of the object location
 */
-Id game_get_object_location(Game* game, char symbol) {
+Id game_get_object_location(Game* game, char *symbol) {
     int i; /* !< Variable used for loops*/
 
-    for(i = 0; i < game->num_objects; i++){
-      if(object_get_symbol(game->object[i]) == symbol){
-        return object_get_location(game->object[i]);
+    if(strlen(symbol) == 1){
+      for(i = 0; i < game->num_objects; i++){
+        if(object_get_symbol(game->object[i]) == symbol[0]){
+          return object_get_location(game->object[i]);
+        }
+      }
+    }
+    else if(strlen(symbol) > 1){
+      for(i = 0; i < game->num_objects; i++){
+        if(strcmp(object_get_name(game->object[i]), symbol) == 0){
+          return object_get_location(game->object[i]);
+        }
       }
     }
     /*If theres no object with that symbol*/
@@ -879,18 +888,29 @@ STATUS callback_JUMP(Game* game){
 * @param char symbol to drop
 * @return OK if it went ok
 */
-STATUS callback_DROP(Game* game, char symbol){
+STATUS callback_DROP(Game* game, char *symbol){
   Object* object = NULL; /* !< Object that will be dropped*/
   Id object_id = NO_ID;
   Id current_id; /* !< Id of the current space*/
   int i;
 
-  for(i=0; i< game->num_objects; i++){ /*<! Seeing if the symbol is associated to an object */
-	if(object_get_symbol(game->object[i]) == symbol){
-		object_id = object_get_id(game->object[i]);
-  		object = game->object[i];
-		break;
-	}
+  if(strlen(symbol) == 1){
+    for(i=0; i< game->num_objects; i++){ /*<! Seeing if the symbol is associated to an object */
+    	if(object_get_symbol(game->object[i]) == symbol[0]){
+    		object_id = object_get_id(game->object[i]);
+      	object = game->object[i];
+    		break;
+    	}
+    }
+  }
+  else if(strlen(symbol) > 1){
+    for(i=0; i< game->num_objects; i++){ /*<! Seeing if the symbol is associated to an object */
+      if(strcmp(object_get_name(game->object[i]), symbol) == 0){
+        object_id = object_get_id(game->object[i]);
+          object = game->object[i];
+        break;
+      }
+    }
   }
 
   if(object_id == NO_ID || !object) return ERROR;
@@ -898,9 +918,17 @@ STATUS callback_DROP(Game* game, char symbol){
   if(player_drop_object(game->player, object_id) == FALSE)
 	return ERROR;
 
-  if(object_get_symbol(object) != symbol){
-    player_pick_object(game->player, object_id);
-    return ERROR;
+  if(strlen(symbol) == 1){
+    if(object_get_symbol(object) != symbol[0]){
+      player_pick_object(game->player, object_id);
+      return ERROR;
+    }
+  }
+  else if(strlen(symbol) > 1){
+    if(strcmp(object_get_name(object), symbol) == 0){
+      player_pick_object(game->player, object_id);
+      return ERROR;
+    }
   }
 
   current_id = game_get_player_location(game);
@@ -917,12 +945,12 @@ STATUS callback_DROP(Game* game, char symbol){
 * @param the symbol to pick
 * @return OK if it went ok
 */
-STATUS callback_PICK(Game* game, char symbol){
+STATUS callback_PICK(Game* game, char *symbol){
   Object* object; /* !< Object that will be picked*/
   Id player_id, object_id; /* !< Ids of the player and object*/
   int i; /* !< Variable used for loops*/
 
-  if(symbol == E){
+  if(strcmp(symbol, "\0")){
     return ERROR;
   }
 
@@ -934,16 +962,31 @@ STATUS callback_PICK(Game* game, char symbol){
     return ERROR;
   }
 
-  for(i = 0; i < game->num_objects; i++){
+  if(strlen(symbol) == 1){
+    for(i = 0; i < game->num_objects; i++){
 
-    if(object_get_symbol(game->object[i]) == symbol){
-      object = game->object[i];
+      if(object_get_symbol(game->object[i]) == symbol[0]){
+        object = game->object[i];
 
-      if(player_pick_object(game->player, object_get_id(object)) != FALSE){
-        object_set_location(object, PLAYER_OBJ); 
-        return OK;
-      }
-    }  
+        if(player_pick_object(game->player, object_get_id(object)) != FALSE){
+          object_set_location(object, PLAYER_OBJ); 
+          return OK;
+        }
+      }  
+    }
+  }
+  else if(strlen(symbol) > 1){
+    for(i = 0; i < game->num_objects; i++){
+
+      if(strcmp(object_get_name(game->object[i]), symbol) == 0){
+        object = game->object[i];
+
+        if(player_pick_object(game->player, object_get_id(object)) != FALSE){
+          object_set_location(object, PLAYER_OBJ); 
+          return OK;
+        }
+      }  
+    }
   }
 
   return ERROR;
@@ -974,12 +1017,12 @@ STATUS callback_ROLL(Game* game){
 * @param symbol to inspect
 * @return OK if it went ok
 */
-STATUS callback_INSPECT(Game* game, char symbol){
+/*STATUS callback_INSPECT(Game* game, char symbol){
 
     int i;/* !< Variable used for loops*/
-    Object *obj; /* !<Variable used for storing the player's object*/
-    Id obj_id;
-    Id player_location = NO_ID, object_location= NO_ID; /* !< Locations of the player and object*/
+  /*  Object *obj; /* !<Variable used for storing the player's object*/
+    /*Id obj_id;
+    /*Id player_location = NO_ID, object_location= NO_ID; /* !< Locations of the player and object*/
 /*
     if(!game) return ERROR;
     if(symbol==E) return ERROR;
@@ -1028,7 +1071,7 @@ STATUS callback_INSPECT(Game* game, char symbol){
 	return ERROR;
     }
 */
-return ERROR;
+/*return ERROR;
 }
 
 /**
@@ -1040,7 +1083,7 @@ return ERROR;
 * @return OK if it went ok
 */
 
-STATUS callback_GO(Game* game, char symbol){
+STATUS callback_GO(Game* game, char *symbol){
 
     int i = 0, j = 0; /* !< Variables used for loops*/
     Id current_id = NO_ID, west_id = NO_ID; /* !< Current space id and sout id*/
@@ -1052,57 +1095,107 @@ STATUS callback_GO(Game* game, char symbol){
 
     space_id = game_get_player_location(game);
     if (space_id == NO_ID) {
-	return ERROR;
+	   return ERROR;
     }
 
-    if(symbol == 'n'){ /* Go north */ 
-	callback_BACK(game);
-    }
+    if(strlen(symbol) == 1){
+      if(symbol[0] == 'n'){ /* Go north */ 
+  	   callback_BACK(game);
+      }
 
-    if(symbol == 's'){ /* Go south */ 
-	callback_NEXT(game);
-    }
+      if(symbol[0] == 's'){ /* Go south */ 
+  	   callback_NEXT(game);
+      }
 
-    if(symbol == 'e'){ /* Go east */ 
-	callback_JUMP(game);
-    }
+      if(symbol[0] == 'e'){ /* Go east */ 
+  	   callback_JUMP(game);
+      }
 
-    if(symbol == 'w'){ /* Go west */
+      if(symbol[0] == 'w'){ /* Go west */
 
-	for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
-		current_id = space_get_id(game->spaces[i]);
-	    	if (current_id == space_id) {
-      			link_id = space_get_west(game->spaces[i]);
-	        	for(j = 0; j < (4 * MAX_SPACES); j++){
-        			if(link_get_id(game->links[j]) == link_id){
-	        			if(link_get_conection1(game->links[j]) == current_id){
-            					west_id = link_get_conection2(game->links[j]);
-            					break;
-          				}
-          				else{
-            					west_id = link_get_conection1(game->links[j]);
-            					break;
-          				}
-        			}
+        	for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
+        		current_id = space_get_id(game->spaces[i]);
+        	    	if (current_id == space_id) {
+              			link_id = space_get_west(game->spaces[i]);
+        	        	for(j = 0; j < (4 * MAX_SPACES); j++){
+                			if(link_get_id(game->links[j]) == link_id){
+        	        			if(link_get_conection1(game->links[j]) == current_id){
+                    					west_id = link_get_conection2(game->links[j]);
+                    					break;
+                  				}
+                  				else{
+                    					west_id = link_get_conection1(game->links[j]);
+                    					break;
+                  				}
+                			}
+                			else{
+        				        west_id = NO_ID;
+                			}
+              			}	
+        	      		if (west_id != NO_ID) {
+
+        			        return game_set_player_location(game, west_id);
+              			}
         			else{
-				        west_id = NO_ID;
-        			}
-      			}	
-	      		if (west_id != NO_ID) {
+        			        return ERROR;
+              			}
+                	}
+          	}	
 
-			        return game_set_player_location(game, west_id);
-      			}
-			else{
-			        return ERROR;
-      			}
-        	}
-  	}	
-
-    }
+      }
 
     return ERROR;
+  }
+
+  else if(strlen(symbol) > 1){
+      if(strcpy(symbol, "north") == 0){ /* Go north */ 
+       callback_BACK(game);
+      }
+
+      if(strcpy(symbol, "south") == 0){ /* Go south */ 
+       callback_NEXT(game);
+      }
+
+      if(strcpy(symbol, "east") == 0){ /* Go east */ 
+       callback_JUMP(game);
+      }
+
+      if(strcpy(symbol, "west") == 0){ /* Go west */
+
+          for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
+            current_id = space_get_id(game->spaces[i]);
+                if (current_id == space_id) {
+                    link_id = space_get_west(game->spaces[i]);
+                    for(j = 0; j < (4 * MAX_SPACES); j++){
+                      if(link_get_id(game->links[j]) == link_id){
+                        if(link_get_conection1(game->links[j]) == current_id){
+                              west_id = link_get_conection2(game->links[j]);
+                              break;
+                          }
+                          else{
+                              west_id = link_get_conection1(game->links[j]);
+                              break;
+                          }
+                      }
+                      else{
+                        west_id = NO_ID;
+                      }
+                    } 
+                    if (west_id != NO_ID) {
+
+                      return game_set_player_location(game, west_id);
+                    }
+              else{
+                      return ERROR;
+                    }
+                  }
+            } 
+
+      }
+
+    return ERROR;
+  }
 
 
-
-
+return OK;
 }
