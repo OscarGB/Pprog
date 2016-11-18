@@ -10,7 +10,7 @@ BOOL test1_link(){
 	Link* link;
 	link = link_create(NO_ID);
 	if(!link){
-		return FALSE;
+		return TRUE;
 	}
 	return FALSE;
 }
