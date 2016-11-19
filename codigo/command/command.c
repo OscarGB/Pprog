@@ -55,20 +55,13 @@ STATUS get_user_input(Command* command){
 				printf("Leido: %s\n", input); /*Debug case*/
 			#endif
 
+
 			/*Detecting what command was written*/
 			if (!strcmp(action, "q") || !strcmp(action, "quit")){
 				command->cmd = QUIT;
 			}
-			else if (!strcmp(action, "n") || !strcmp(action, "next")){
-				command->cmd = NEXT;
-			}
-			else if (!strcmp(action, "b") || !strcmp(action, "back")){
-				command->cmd = BACK;
-			}
-			else if (!strcmp(action, "j") || !strcmp(action, "jump")){
-				command->cmd = JUMP;
-			}
 			else if (!strcmp(action, "p") || !strcmp(action, "pick")){
+
 				command->cmd = PICK;
 
 				strcpy(command->symbol, symbol);

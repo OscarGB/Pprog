@@ -86,6 +86,7 @@ STATUS object_set_name(Object* object, char* name){
 		return ERROR;
 	}
 
+
 	if(!strcpy(object->name, name)){
 		return ERROR;
 	}
@@ -163,7 +164,6 @@ char* object_get_name(Object* object){
 	if(!object){
 		return "\0";
 	}
-
 	return object->name;
 }
 

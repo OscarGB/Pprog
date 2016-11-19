@@ -436,12 +436,6 @@ STATUS game_update(Game* game, Command *cmd) {
     return callback_UNKNOWN(game);
   case QUIT:
     return callback_QUIT(game);
-  case NEXT:
-    return callback_NEXT(game);
-  case BACK:
-    return callback_BACK(game);
-  case JUMP:
-    return callback_JUMP(game);
   case PICK:
     return callback_PICK(game, command_get_symbol(cmd));
   case DROP:
@@ -687,7 +681,7 @@ void game_print_screen(Game* game){
   game->desc[0] = '\0';
 
 
-  printf("\n[commands: next or n, back or b, jump or j, quit or q, drop or d, pick or p, roll or r, inspect or i, go or g]");
+  printf("\n[commands: quit or q, drop or d, pick or p, roll or r, inspect or i, go or g]");
   printf("\nprompt:> ");
 }
 
@@ -907,7 +901,7 @@ STATUS callback_DROP(Game* game, char *symbol){
     for(i=0; i< game->num_objects; i++){ /*<! Seeing if the symbol is associated to an object */
       if(strcmp(object_get_name(game->object[i]), symbol) == 0){
         object_id = object_get_id(game->object[i]);
-          object = game->object[i];
+        object = game->object[i];
         break;
       }
     }
@@ -925,7 +919,7 @@ STATUS callback_DROP(Game* game, char *symbol){
     }
   }
   else if(strlen(symbol) > 1){
-    if(strcmp(object_get_name(object), symbol) == 0){
+    if(strcmp(object_get_name(object), symbol) != 0){
       player_pick_object(game->player, object_id);
       return ERROR;
     }
@@ -950,9 +944,10 @@ STATUS callback_PICK(Game* game, char *symbol){
   Id player_id, object_id; /* !< Ids of the player and object*/
   int i; /* !< Variable used for loops*/
 
-  if(strcmp(symbol, "\0")){
+  if(strcmp(symbol, "\0") == 0){
     return ERROR;
   }
+
 
   player_id = game_get_player_location(game);
 
@@ -974,6 +969,7 @@ STATUS callback_PICK(Game* game, char *symbol){
         }
       }  
     }
+
   }
   else if(strlen(symbol) > 1){
     for(i = 0; i < game->num_objects; i++){
@@ -1011,68 +1007,76 @@ STATUS callback_ROLL(Game* game){
 
 /**
 * @brief callback for "inspect" instruction
-* @author Óscar Pinto
+* @author Óscar Pinto, Andrea Ruiz
 * @date 04/11/2016
 * @param game pointer
 * @param symbol to inspect
 * @return OK if it went ok
 */
-/*STATUS callback_INSPECT(Game* game, char symbol){
+STATUS callback_INSPECT(Game* game, char *symbol){
 
     int i;/* !< Variable used for loops*/
-  /*  Object *obj; /* !<Variable used for storing the player's object*/
-    /*Id obj_id;
-    /*Id player_location = NO_ID, object_location= NO_ID; /* !< Locations of the player and object*/
-/*
+    Object *obj; /* !<Variable used for storing the player's object*/
+    Id player_location = NO_ID; /* !< Locations of the player and object*/
+
+    obj = NULL;
+    
     if(!game) return ERROR;
-    if(symbol==E) return ERROR;
+    if(strcmp(symbol, "E") == 0) return ERROR;
 
     player_location = game_get_player_location(game);
     if(player_location == NO_ID) return ERROR;
 
+    if(strlen(symbol) == 1){
+      if(symbol[0] == 's' || symbol[0] == 'S'){ /*<! Inspecting space */
+        	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
+        		if(player_location==space_get_id(game->spaces[i])){
+        		    strcpy(game->desc, space_get_name(game->spaces[i]));
+        		    return OK;	
+        		}
+        	}
+              return ERROR;
+      }else{ /*<! Inspecting an object */
+  	     for(i=0; i< game->num_objects; i++){ /*<! If player has the object or they're in the same field */
+  		      if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){
+  			       if(object_get_symbol(game->object[i]) == symbol[0])
+  				        obj = game->object[i];
+  		      }
+          }
 
-    if(symbol=='s' || symbol=='S'){
-	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
-		if(player_location==space_get_id(game->spaces[i])){
-		strcpy(game->desc, space_get_name(game->spaces[i]));
-		return OK;	
-		}
-	}
-    return ERROR;
-    }else{
-	    obj_id=player_drop_object(game->player);
-		for(i=0; i<MAX_IDS + 1; i++){
-			if(obj_id == object_get_id(game->object[i])){
-				obj = game->object[i];
-				break;
-			}
-			obj = NULL;
-		}
-		if(!obj) return ERROR;
-	    if(object_get_symbol(obj)==symbol){
-		strcpy(game->desc, object_get_name(obj));
-		player_pick_object(game->player, obj);
-		return OK;
-	    }
-	    player_pick_object(game->player, obj);
+          if(!obj) return ERROR;
 
-	    object_location = game_get_object_location(game, symbol);
-
-	    if(object_location!=player_location) return ERROR;
-
-	    for(i = 0; i < game->num_objects; i++){
-
-	    	if(object_get_symbol(game->object[i]) == symbol){
-
-		      	strcpy(game->desc, object_get_name(game->object[i]));
-			return OK;
-	    	}  
-	    }
-	return ERROR;
+          strcpy(game->desc, object_get_name(obj));
+          return OK;
+        }
     }
-*/
-/*return ERROR;
-}
+
+    else if(strlen(symbol) > 1){
+      if(strcmp(symbol, "space") == 0 || strcmp(symbol, "Space") == 0){ /*<! Inspecting space */
+          for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
+            if(player_location==space_get_id(game->spaces[i])){
+                strcpy(game->desc, space_get_name(game->spaces[i]));
+                return OK;  
+            }
+          }
+              return ERROR;
+      }else{ /*<! Inspecting an object */
+         for(i=0; i< game->num_objects; i++){ /*<! If player has the object or they're in the same field */
+            if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){
+               if(strcmp(object_get_name(game->object[i]), symbol) == 0)
+                  obj = game->object[i];
+            }
+          }
+
+          if(!obj) return ERROR;
+
+          strcpy(game->desc, object_get_name(obj));
+          return OK;
+        }
+    }
+
+  return ERROR;
+} 
 
 /**
 * @brief callback for "go" instruction
@@ -1148,19 +1152,19 @@ STATUS callback_GO(Game* game, char *symbol){
   }
 
   else if(strlen(symbol) > 1){
-      if(strcpy(symbol, "north") == 0){ /* Go north */ 
+      if(strcmp(symbol, "north") == 0){ /* Go north */ 
        callback_BACK(game);
       }
 
-      if(strcpy(symbol, "south") == 0){ /* Go south */ 
+      if(strcmp(symbol, "south") == 0){ /* Go south */ 
        callback_NEXT(game);
       }
 
-      if(strcpy(symbol, "east") == 0){ /* Go east */ 
+      if(strcmp(symbol, "east") == 0){ /* Go east */ 
        callback_JUMP(game);
       }
 
-      if(strcpy(symbol, "west") == 0){ /* Go west */
+      if(strcmp(symbol, "west") == 0){ /* Go west */
 
           for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
             current_id = space_get_id(game->spaces[i]);

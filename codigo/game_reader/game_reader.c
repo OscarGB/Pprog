@@ -135,7 +135,7 @@ STATUS game_load_objects(Game* game, char* filename) {
       space_id = atol(toks);
       toks = strtok(NULL, "|");
       symbol = toks[0];
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, " |");
       strcpy(desc, toks);
 
 #ifdef DEBUG 

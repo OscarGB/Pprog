@@ -44,25 +44,25 @@ die_test.o: codigo/test/die_test.c
 	@echo "--->Generando die_test.o"
 	@gcc $(CFLAGS) -c codigo/test/die_test.c
 
-set_test.o: codigo/set/set_test.c 
+set_test.o: codigo/test/set_test.c 
 	@echo "--->Generando set_test.o"
-	@gcc $(CFLAGS) -c codigo/set/set_test.c
+	@gcc $(CFLAGS) -c codigo/test/set_test.c
 
 link_test.o: codigo/test/link_test.c
 	@echo "--->Generando link_test.o"
 	@gcc $(CFLAGS) -c codigo/test/link_test.c
 
-inventory_test.o: codigo/inventory/inventory_test.c
+inventory_test.o: codigo/test/inventory_test.c
 	@echo "--->Generando inventory_test.o"
-	@gcc $(CFLAGS) -c codigo/inventory/inventory_test.c
+	@gcc $(CFLAGS) -c codigo/test/inventory_test.c
 
 space_test.o: codigo/test/space_test.c
 	@echo "--->Generando space_test.o"
 	@gcc $(CFLAGS) -c codigo/test/space_test.c
 
 ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
-	@echo "--->Creando el ejecutable ocabas"
-	@gcc $(CFLAGS) -o ocabas game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
+	@echo "--->Creando el ejecutable JuegoOcaPlus"
+	@gcc $(CFLAGS) -o JuegoOcaPlus game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 
 command.o: codigo/command/command.c 
 	@echo "--->Generando command.o"
