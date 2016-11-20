@@ -1,6 +1,6 @@
 /**
  * @brief Declaration of struct game and functions in game.c
- * @file game.c
+ * @file game.h
  * @author Óscar Gómez, José Ignacio Gómez, Óscar pinto
  * @version 1.0
  * @date 9/11/2016

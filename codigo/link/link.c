@@ -1,5 +1,5 @@
 /**
- * @brief ImplementaTion of the link module
+ * @brief Implementation of the link module
  * @file link.c
  * @author Óscar Gómez
  * @version 1.0

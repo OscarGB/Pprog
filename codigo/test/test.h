@@ -1,3 +1,11 @@
+/**
+ * @brief It defines the functions for testing modules
+ * @file test.h
+ * @author Óscar Gómez, Óscar Pinto
+ * @version 1.0
+ * @date 16/11/2016
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

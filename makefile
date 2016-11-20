@@ -110,7 +110,7 @@ inventory.o: codigo/inventory/inventory.c
 
 clean: #Comando de limpieza del directorio raiz
 	@echo "--->Borrando todos los ejecutables y los ficheros de distribución, incluyendo los test y el log"
-	@rm -f *.exe  *.o *.tgz *.log $(ALL_DEBUG) *.out
+	@rm -rf *.exe  *.o *.tgz *.log $(ALL_DEBUG) *.out 
 
 dist: #Comando de generación de un comprimido para la distribución del programa
 	@echo "--->Creando tgz para la distribución del programa"

@@ -1,0 +1,10 @@
+<map id="codigo/space/space.h" name="codigo/space/space.h">
+<area shape="rect" id="node2" href="$game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="229,80,371,107"/>
+<area shape="rect" id="node5" href="$game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="5,155,144,196"/>
+<area shape="rect" id="node6" href="$game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="349,244,488,285"/>
+<area shape="rect" id="node7" href="$link_8c.html" title="Implementation of the link module. " alt="" coords="507,80,626,107"/>
+<area shape="rect" id="node8" href="$player_8c.html" title="It implements the functionality of the player. " alt="" coords="649,80,799,107"/>
+<area shape="rect" id="node9" href="$space_8c.html" title="It implements the game spaces. " alt="" coords="823,80,972,107"/>
+<area shape="rect" id="node3" href="$game_8c.html" title="It implements the game interface for each command. " alt="" coords="57,251,199,278"/>
+<area shape="rect" id="node4" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="219,155,381,196"/>
+</map>

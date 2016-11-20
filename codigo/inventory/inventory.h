@@ -1,5 +1,5 @@
 /**
- * @brief It implements the inventory
+ * @brief It defines the inventory
  * @file inventory.h
  * @author José Ignacio Gómez
  * @version 1.0

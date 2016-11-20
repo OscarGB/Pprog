@@ -1,0 +1,9 @@
+<map id="_Game" name="_Game">
+<area shape="rect" id="node2" href="$struct___link.html" title="_Link" alt="" coords="5,196,59,223"/>
+<area shape="rect" id="node3" href="$struct___die.html" title="_Die" alt="" coords="83,196,133,223"/>
+<area shape="rect" id="node4" href="$struct___space.html" title="_Space" alt="" coords="160,145,227,172"/>
+<area shape="rect" id="node5" href="$struct___set.html" title="_Set" alt="" coords="209,5,258,32"/>
+<area shape="rect" id="node8" href="$struct___inventory.html" title="_Inventory" alt="" coords="235,95,317,121"/>
+<area shape="rect" id="node6" href="$struct___object.html" title="_Object" alt="" coords="343,196,409,223"/>
+<area shape="rect" id="node7" href="$struct___player.html" title="_Player" alt="" coords="252,196,319,223"/>
+</map>

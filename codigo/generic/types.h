@@ -1,17 +1,10 @@
-/* ===================================================================
-File: types.h
-
-Version: 1.0
-
-Date: 23/09/2016
-
-Author: Óscar Gómez, Jose Ignacio Gómez.
-
-Description: It defines common types
-
-Revision history: none
-
-=================================================================== */
+/**
+ * @brief It defines common types
+ * @file types.h
+ * @author Óscar Gómez, José Ignacio Gómez
+ * @version 1.0
+ * @date 23/09/2016
+ */
 
 #ifndef TYPES_H
 #define TYPES_H

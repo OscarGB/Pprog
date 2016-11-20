@@ -1,5 +1,5 @@
 /**
- * @brief It implements the rutine that reads a file to prepare the game
+ * @brief It defines the rutine that reads a file to prepare the game
  * @file game_reader.h
  * @author Óscar Gómez, José Ignacio Gómez
  * @version 1.0

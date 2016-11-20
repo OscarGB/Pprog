@@ -1,0 +1,6 @@
+<map id="codigo/game/game.h" name="codigo/game/game.h">
+<area shape="rect" id="node2" href="$game_8c.html" title="It implements the game interface for each command. " alt="" coords="5,177,148,203"/>
+<area shape="rect" id="node3" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="50,80,213,121"/>
+<area shape="rect" id="node4" href="$game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="237,80,375,121"/>
+<area shape="rect" id="node5" href="$game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="290,169,429,211"/>
+</map>
