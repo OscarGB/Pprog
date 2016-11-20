@@ -8,7 +8,7 @@ IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefijo de -I para la inclusión de las
 
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
 
-ALL = ocabas 	#Ejecutables a generar si se llama a make
+ALL = JuegoOcaPlus 	#Ejecutables a generar si se llama a make
 TEST = link_test die_test inventory_test#set_test link_test space_test	#Ejecutables a generar si se llama a make debug o make test
 ALL_DEBUG = $(ALL) $(TEST)
 
@@ -60,7 +60,7 @@ space_test.o: codigo/test/space_test.c
 	@echo "--->Generando space_test.o"
 	@gcc $(CFLAGS) -c codigo/test/space_test.c
 
-ocabas: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
+JuegoOcaPlus: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creando el ejecutable JuegoOcaPlus"
 	@gcc $(CFLAGS) -o JuegoOcaPlus game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 
