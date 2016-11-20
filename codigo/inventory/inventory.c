@@ -19,24 +19,6 @@
  };
 
 
-BOOL inventory_is_full(Inventory* bag) {
-	if (set_get_num_ids(bag->set) == bag->size){
-		return TRUE;
-	}
-	else {
-		return FALSE;
-	}
-}
-
-BOOL inventory_is_empty(Inventory* bag) {
-	if (set_get_num_ids(bag->set) == 0){
-		return TRUE;
-	}
-	else {
-		return FALSE;
-	}
-}
-
 /* !< Public functions*/
 
 /**
@@ -59,7 +41,10 @@ Inventory* inventory_create(int size) {
 	}
 
 	bag->set = set_create();
-	if (!bag->set) return NULL;
+	if (!bag->set){
+		free(bag);
+		return NULL;
+	}
 
 	bag->size = size; /* !< the size of the bag
 						will be set outside the inventory
@@ -90,6 +75,44 @@ STATUS inventory_destroy(Inventory* bag) {
 
 	return OK;
 }
+
+
+/**
+* @brief Checks if the inventory is full
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*
+* @return BOOL (TRUE if full)
+*/
+
+BOOL inventory_is_full(Inventory* bag) {
+	if (set_get_num_ids(bag->set) == bag->size){
+		return TRUE;
+	}
+	else {
+		return FALSE;
+	}
+}
+
+
+/**
+* @brief Checks if the inventory is empty
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*
+* @return BOOL (TRUE if empty)
+*/
+
+
+BOOL inventory_is_empty(Inventory* bag) {
+	if (set_get_num_ids(bag->set) == 0){
+		return TRUE;
+	}
+	else {
+		return FALSE;
+	}
+}
+
 
 /**
 * @brief Adds an item to the inventory

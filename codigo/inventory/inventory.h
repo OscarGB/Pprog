@@ -14,8 +14,6 @@
 
 typedef struct _Inventory Inventory; /* !< Definition of the Inventory structure */
 
-BOOL inventory_is_full(Inventory* bag);
-BOOL inventory_is_empty(Inventory* bag);
 
 /**
 * @brief Creates a new inventory for the game
@@ -36,6 +34,26 @@ Inventory* inventory_create(int size);
 STATUS inventory_destroy(Inventory* bag);
 
 /**
+* @brief Checks if the inventory is full
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*
+* @return BOOL (TRUE if full)
+*/
+
+BOOL inventory_is_full(Inventory* bag);
+
+/**
+* @brief Checks if the inventory is empty
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*
+* @return BOOL (TRUE if empty)
+*/
+
+BOOL inventory_is_empty(Inventory* bag);
+
+/**
 * @brief Adds an item to the inventory
 * @author José Ignacio Gómez
 * @date 5/11/2016
@@ -52,6 +70,15 @@ STATUS inventory_add_item(Inventory* bag, Id id);
 * @return STATUS
 */
 STATUS inventory_delete_item(Inventory* bag, Id id);
+
+/**
+* @brief Sets the set of items of the inventory
+* @author José Ignacio Gómez
+* @date 5/11/2016
+* @param Inventory*, Set*
+* @return STATUS
+*/
+STATUS inventory_set_set(Inventory* bag, Set* set);
 
 /**
 * @brief Gets the set of items from the inventory
