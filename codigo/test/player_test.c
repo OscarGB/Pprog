@@ -1,0 +1,147 @@
+/**
+ * @brief Main to test the Player module
+ * @file player_test.c
+ * @author José Ignacio Gómez
+ * @version 1.0
+ * @date 21/11/2016
+ */
+
+#include "test.h"
+#include "player.h"
+#include "types.h"
+ 
+#define MAX_TESTS 14
+#define ID 3
+#define NAME "Lucille"
+#define SPAIN 1
+
+BOOL test_player1(){ /*Test for player create with NO_ID*/
+	Player *player = NULL;
+	player = player_create(NO_ID);
+	if(player == NULL){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+BOOL test_player2(){ /*Test for player create with  valid ID*/
+ 	Player* player = NULL;
+	player = player_create(ID);
+	if(!player){
+		return FALSE;
+	}
+	player_destroy(player);
+	return TRUE;
+}
+
+BOOL test_player3(){ /*Test for set_name and get_name*/
+	Player* player = NULL;
+	player = player_create(ID);
+	if(player_set_name(player, NAME) == ERROR){
+		player_destroy(player);
+		return FALSE;
+	}
+	else if(strcmp(player_get_name(player), NAME) != 0){
+		player_destroy(player);
+		return FALSE;
+	}
+
+	player_destroy(player);
+	return TRUE;
+}
+
+BOOL test_player4(){ /*Test for set_location and get_location*/
+	Player* player = NULL;
+	player = player_create(ID);
+	if(player_set_location(player, SPAIN) == ERROR){
+		player_destroy(player);
+		return FALSE;
+	}
+	else if(player_get_location(player) != SPAIN){
+		player_destroy(player);
+		return FALSE;
+	}
+
+	player_destroy(player);
+	return TRUE;
+}
+
+BOOL test_player5(){ /*Test for set_location and get_location with invalid location*/
+	Player* player = NULL;
+	player = player_create(ID);
+	if(player_set_location(player, NO_ID) == ERROR){
+		player_destroy(player);
+		return TRUE;
+	}
+
+	player_destroy(player);
+	return FALSE;
+}
+
+BOOL test_player6(){ /*Test for drop_object (empty bag)*/
+	Player* player = NULL;
+	player = player_create(ID);
+	if (player_drop_object(player, ID) != FALSE){
+		player_destroy(player);
+		return FALSE;
+	}
+
+	player_destroy(player);
+	return TRUE;
+}
+
+BOOL test_player7(){ /*Test for pick_object (empty bag)*/
+	Player* player = NULL;
+	player = player_create(ID);
+	if (player_pick_object(player, ID) == TRUE){
+		player_destroy(player);
+		return TRUE;
+	}
+
+	player_destroy(player);
+	return FALSE;
+}
+
+BOOL test_player8(){ /*Test for drop_object (non-empty bag)*/
+	Player* player = NULL;
+	player = player_create(ID);
+	player_pick_object(player, ID);
+	if(player_drop_object(player, ID) != TRUE){
+		player_destroy(player);
+		return FALSE;
+	}
+
+	player_destroy(player);
+	return TRUE;
+	
+}
+
+int main(int argc, char* argv[]){
+	int test = 0;
+	int todas = 1;
+
+	if(argc < 2){
+		printf("Pasando todas las pruebas al modulo Player:\n");
+	}else{
+		test = atoi(argv[1]);
+		todas = 0;
+		if(test < 1 || test > MAX_TESTS){
+			printf("Error, prueba no reconocida\n");
+			exit(EXIT_SUCCESS);
+		}
+		printf("Pasando la prueba numero %d al modulo Player: \n", test);
+	}
+
+	if(todas || test == 1) TEST_PRINT(test_player1());
+	if(todas || test == 2) TEST_PRINT(test_player2());
+	if(todas || test == 3) TEST_PRINT(test_player3());
+	if(todas || test == 4) TEST_PRINT(test_player4());
+	if(todas || test == 5) TEST_PRINT(test_player5());
+	if(todas || test == 6) TEST_PRINT(test_player6());
+	if(todas || test == 7) TEST_PRINT(test_player7());
+	if(todas || test == 8) TEST_PRINT(test_player8());
+
+	PRINT_RESULTS();
+
+	return 0;
+}
