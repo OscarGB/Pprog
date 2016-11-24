@@ -66,7 +66,7 @@ BOOL test_player4(){ /*Test for set_location and get_location*/
 	return TRUE;
 }
 
-BOOL test_player5(){ /*Test for set_location and get_location with invalid location*/
+BOOL test_player5(){ /*Test for set_location with invalid location*/
 	Player* player = NULL;
 	player = player_create(ID);
 	if(player_set_location(player, NO_ID) == ERROR){
@@ -116,6 +116,29 @@ BOOL test_player8(){ /*Test for drop_object (non-empty bag)*/
 	
 }
 
+
+BOOL test_player9(){ /*Test for player_pick_object (full bag)*/
+	int i = 0;
+
+	Player* player = NULL;
+	player = player_create(ID);
+
+	
+	while(i <= player_get_bag_size(player)){
+		player_pick_object(player, i);
+		i++;
+	} /*Player's bag is full*/
+
+	if(player_pick_object(player, i) != FALSE){
+		player_destroy(player);
+		return FALSE;
+	}
+
+	player_destroy(player);
+	return TRUE;
+	
+}
+
 int main(int argc, char* argv[]){
 	int test = 0;
 	int todas = 1;
@@ -140,6 +163,7 @@ int main(int argc, char* argv[]){
 	if(todas || test == 6) TEST_PRINT(test_player6());
 	if(todas || test == 7) TEST_PRINT(test_player7());
 	if(todas || test == 8) TEST_PRINT(test_player8());
+	if(todas || test == 9) TEST_PRINT(test_player9());
 
 	PRINT_RESULTS();
 

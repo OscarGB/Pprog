@@ -105,4 +105,15 @@ in the bag
 
 BOOL player_pick_object(Player *player, Id id);
 
+
+/*
+* @brief returns the size of the player's bag
+* @author Óscar Gómez, Jose Ignacio Gómez, Andrea Ruiz
+* @date 24/11/2016
+* @param Player*
+* @return size of the bag (int)
+*/
+
+int player_get_bag_size(Player *player);
+
 #endif

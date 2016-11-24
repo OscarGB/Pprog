@@ -200,7 +200,7 @@ BOOL test_inventory13(){ /*<! inventory_create */
 BOOL test_inventory14(){ /*<! inventory_destroy */
  	Inventory* inventory = NULL;
 
-	if(inventory_destroy(inventory) == ERROR);
+	if(inventory_destroy(inventory) == ERROR)
 		return TRUE;
 
 	return FALSE;

@@ -194,7 +194,14 @@ BOOL player_pick_object (Player* player, Id id){
 		return FALSE;
 	}
 
-	inventory_add_item(player->bag, id);
+	if(inventory_add_item(player->bag, id) == ERROR) return FALSE;
 
 	return TRUE;
+}
+
+int player_get_bag_size(Player *player){
+
+	 if(!player) return -1;
+
+	 return inventory_get_size(player->bag);
 }
