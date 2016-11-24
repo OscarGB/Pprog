@@ -111,8 +111,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="inventory_8h__dep__incl.png" border="0" usemap="#codigo_2inventory_2inventory_8hdep" alt=""/></div>
 <map name="codigo_2inventory_2inventory_8hdep" id="codigo_2inventory_2inventory_8hdep">
-<area shape="rect" id="node2" href="inventory_8c.html" title="It implements the inventory. " alt="" coords="5,80,191,107"/>
-<area shape="rect" id="node3" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="215,80,365,107"/>
+<area shape="rect" id="node2" href="inventory_8c.html" title="It implements the inventory. " alt="" coords="5,87,191,114"/>
+<area shape="rect" id="node3" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="215,87,365,114"/>
+<area shape="rect" id="node4" href="inventory__test_8c.html" title="Main to test the Inventory module. " alt="" coords="388,80,531,121"/>
 </map>
 </div>
 </div>
@@ -126,24 +127,27 @@ typedef struct <a class="el" href="struct___inventory.html">_Inventory</a>&#160;
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8284d16f802fe1225be5a34f0616dffd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8284d16f802fe1225be5a34f0616dffd"></a>
-BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>inventory_is_full</b> (<a class="el" href="struct___inventory.html">Inventory</a> *bag)</td></tr>
-<tr class="separator:a8284d16f802fe1225be5a34f0616dffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e42d41ecfb69141831596f72cd7d694"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e42d41ecfb69141831596f72cd7d694"></a>
-BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>inventory_is_empty</b> (<a class="el" href="struct___inventory.html">Inventory</a> *bag)</td></tr>
-<tr class="separator:a2e42d41ecfb69141831596f72cd7d694"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c1e28ee41fba77e41e9b5241b4db882"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct___inventory.html">Inventory</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8h.html#a9c1e28ee41fba77e41e9b5241b4db882">inventory_create</a> (int size)</td></tr>
 <tr class="memdesc:a9c1e28ee41fba77e41e9b5241b4db882"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new inventory for the game.  <a href="#a9c1e28ee41fba77e41e9b5241b4db882">More...</a><br /></td></tr>
 <tr class="separator:a9c1e28ee41fba77e41e9b5241b4db882"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a654cebc804053355650fc71c49e79169"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8h.html#a654cebc804053355650fc71c49e79169">inventory_destroy</a> (<a class="el" href="struct___inventory.html">Inventory</a> *bag)</td></tr>
 <tr class="memdesc:a654cebc804053355650fc71c49e79169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroyes an inventory.  <a href="#a654cebc804053355650fc71c49e79169">More...</a><br /></td></tr>
 <tr class="separator:a654cebc804053355650fc71c49e79169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8284d16f802fe1225be5a34f0616dffd"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8h.html#a8284d16f802fe1225be5a34f0616dffd">inventory_is_full</a> (<a class="el" href="struct___inventory.html">Inventory</a> *bag)</td></tr>
+<tr class="memdesc:a8284d16f802fe1225be5a34f0616dffd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the inventory is full.  <a href="#a8284d16f802fe1225be5a34f0616dffd">More...</a><br /></td></tr>
+<tr class="separator:a8284d16f802fe1225be5a34f0616dffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e42d41ecfb69141831596f72cd7d694"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8h.html#a2e42d41ecfb69141831596f72cd7d694">inventory_is_empty</a> (<a class="el" href="struct___inventory.html">Inventory</a> *bag)</td></tr>
+<tr class="memdesc:a2e42d41ecfb69141831596f72cd7d694"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the inventory is empty.  <a href="#a2e42d41ecfb69141831596f72cd7d694">More...</a><br /></td></tr>
+<tr class="separator:a2e42d41ecfb69141831596f72cd7d694"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a289b573f0e2b1912764b67a1a9182ac5"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8h.html#a289b573f0e2b1912764b67a1a9182ac5">inventory_add_item</a> (<a class="el" href="struct___inventory.html">Inventory</a> *bag, Id id)</td></tr>
 <tr class="memdesc:a289b573f0e2b1912764b67a1a9182ac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an item to the inventory.  <a href="#a289b573f0e2b1912764b67a1a9182ac5">More...</a><br /></td></tr>
 <tr class="separator:a289b573f0e2b1912764b67a1a9182ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae10d1bc2a603af50dc627c5c94965d78"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8h.html#ae10d1bc2a603af50dc627c5c94965d78">inventory_delete_item</a> (<a class="el" href="struct___inventory.html">Inventory</a> *bag, Id id)</td></tr>
 <tr class="memdesc:ae10d1bc2a603af50dc627c5c94965d78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes an item from the inventory.  <a href="#ae10d1bc2a603af50dc627c5c94965d78">More...</a><br /></td></tr>
 <tr class="separator:ae10d1bc2a603af50dc627c5c94965d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf549db330cb81b574a0437ee8674e95"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8h.html#aaf549db330cb81b574a0437ee8674e95">inventory_set_set</a> (<a class="el" href="struct___inventory.html">Inventory</a> *bag, <a class="el" href="set_8h.html#a6d3b7f7c92cbb4577ef3ef7ddbf93161">Set</a> *set)</td></tr>
+<tr class="memdesc:aaf549db330cb81b574a0437ee8674e95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the set of items of the inventory.  <a href="#aaf549db330cb81b574a0437ee8674e95">More...</a><br /></td></tr>
+<tr class="separator:aaf549db330cb81b574a0437ee8674e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60c25937b75342b2db4c18f3c21ace5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="set_8h.html#a6d3b7f7c92cbb4577ef3ef7ddbf93161">Set</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8h.html#a60c25937b75342b2db4c18f3c21ace5f">inventory_get_set</a> (<a class="el" href="struct___inventory.html">Inventory</a> *bag)</td></tr>
 <tr class="memdesc:a60c25937b75342b2db4c18f3c21ace5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the set of items from the inventory.  <a href="#a60c25937b75342b2db4c18f3c21ace5f">More...</a><br /></td></tr>
 <tr class="separator:a60c25937b75342b2db4c18f3c21ace5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -375,6 +379,60 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>inventory_is_empty</b
 
 </div>
 </div>
+<a class="anchor" id="a2e42d41ecfb69141831596f72cd7d694"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL inventory_is_empty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___inventory.html">Inventory</a> *&#160;</td>
+          <td class="paramname"><em>bag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if the inventory is empty. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>5/11/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Inventory*</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL (TRUE if empty) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8284d16f802fe1225be5a34f0616dffd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL inventory_is_full </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___inventory.html">Inventory</a> *&#160;</td>
+          <td class="paramname"><em>bag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if the inventory is full. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>5/11/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Inventory*</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL (TRUE if full) </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a0ed5cc36b3b4413a8d282d2f8d0fb966"></a>
 <div class="memitem">
 <div class="memproto">
@@ -395,6 +453,43 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>inventory_is_empty</b
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Inventory*</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aaf549db330cb81b574a0437ee8674e95"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS inventory_set_set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___inventory.html">Inventory</a> *&#160;</td>
+          <td class="paramname"><em>bag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="set_8h.html#a6d3b7f7c92cbb4577ef3ef7ddbf93161">Set</a> *&#160;</td>
+          <td class="paramname"><em>set</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the set of items of the inventory. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>5/11/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Inventory*,Set*</td><td></td></tr>
   </table>
   </dd>
 </dl>

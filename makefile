@@ -121,11 +121,16 @@ clean: #Comando de limpieza del directorio raiz
 	@rm -rf *.exe  *.o *.tgz *.log $(ALL_DEBUG) *.out 
 
 dist: #Comando de generación de un comprimido para la distribución del programa
+	@echo "--->Generando documentación mediante Doxygen"
+	@nohup doxygen Doxyfile
 	@echo "--->Creando tgz para la distribución del programa"
 	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ informes_pruebas/ reuniones/ html/ makefile *.dat Doxyfile *.oca
 
 doc: #Comando de generación de la documentación
 	@echo "--->Generando documentación mediante Doxygen"
 	@nohup doxygen Doxyfile
+	
+
+opendoc: #Comando para abrir la documentación
 	@echo "--->Abriendo documentación"
 	@firefox html/index.html
