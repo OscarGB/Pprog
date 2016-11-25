@@ -1,6 +1,22 @@
+go north
+i o
 p +
-n
-n
-n
+go south
+go south
+g s
 d +
-q
+i +
+i s
+p o
+i o
+roll
+go east
+go south
+go south
+go east
+go west
+go north
+foobar
+quit
+
+
