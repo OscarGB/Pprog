@@ -15,6 +15,8 @@
 #include "object.h"
 #include "space.h"
 
+#define VACIO "|           |\n|           |\n|           |\n"
+
 
 /*
 * @brief reads the game table from a file
@@ -59,18 +61,23 @@ STATUS game_load_spaces(Game* game, char* filename) {
       toks = strtok(NULL, "|");
       west = atol(toks);
       toks = strtok(NULL, "|");
-      strcpy(gdesc, "|");
-      strcat(gdesc, toks);
-      strcat(gdesc, "|\n");
-      toks = strtok(NULL, "|");
-      strcat(gdesc, "|");
-      strcat(gdesc, toks);
-      strcat(gdesc, "|\n");
-      toks = strtok(NULL, "|");
-      strcat(gdesc, "|");
-      strcat(gdesc, toks);
-      strcat(gdesc, "|\n");
-      strcat(gdesc, "\0");
+      if(strcmp(toks, "\n") != 0){
+        strcpy(gdesc, "|");
+        strcat(gdesc, toks);
+        strcat(gdesc, "|\n");
+        toks = strtok(NULL, "|");
+        strcat(gdesc, "|");
+        strcat(gdesc, toks);
+        strcat(gdesc, "|\n");
+        toks = strtok(NULL, "|");
+        strcat(gdesc, "|");
+        strcat(gdesc, toks);
+        strcat(gdesc, "|\n");
+        strcat(gdesc, "\0");
+      }
+      else {
+        strcpy(gdesc, VACIO);
+      }
       
 #ifdef DEBUG 
       printf("Leido: %ld|%s|%ld|%ld|%ld|%ld\nGdesc:\n%s\n", id, name, north, east, south, west, gdesc);
