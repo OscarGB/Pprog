@@ -11,7 +11,7 @@
 
 #include "types.h"
 
-#define MAX_LINKS 10000
+#define MAX_LINKS 10000 /*!< Macro for the max amount of links*/
 
 typedef struct _Link Link; /*!<Definition of the Link structure*/
 

@@ -128,15 +128,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0d01072a28b01545d36240cb8bd9d4f8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d01072a28b01545d36240cb8bd9d4f8"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__reader_8h.html#a0d01072a28b01545d36240cb8bd9d4f8">game_load_spaces</a> (<a class="el" href="struct___game.html">Game</a> *game, char *filename)</td></tr>
-<tr class="memdesc:a0d01072a28b01545d36240cb8bd9d4f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private functions. <br /></td></tr>
+<tr class="memitem:a0d01072a28b01545d36240cb8bd9d4f8"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__reader_8h.html#a0d01072a28b01545d36240cb8bd9d4f8">game_load_spaces</a> (<a class="el" href="struct___game.html">Game</a> *game, char *filename)</td></tr>
+<tr class="memdesc:a0d01072a28b01545d36240cb8bd9d4f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the game table from a file  <a href="#a0d01072a28b01545d36240cb8bd9d4f8">More...</a><br /></td></tr>
 <tr class="separator:a0d01072a28b01545d36240cb8bd9d4f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66279ceefe2efe0967be248e8d0e0565"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66279ceefe2efe0967be248e8d0e0565"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>game_load_objects</b> (<a class="el" href="struct___game.html">Game</a> *game, char *filename)</td></tr>
+<tr class="memitem:a66279ceefe2efe0967be248e8d0e0565"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__reader_8h.html#a66279ceefe2efe0967be248e8d0e0565">game_load_objects</a> (<a class="el" href="struct___game.html">Game</a> *game, char *filename)</td></tr>
+<tr class="memdesc:a66279ceefe2efe0967be248e8d0e0565"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the objects from a file  <a href="#a66279ceefe2efe0967be248e8d0e0565">More...</a><br /></td></tr>
 <tr class="separator:a66279ceefe2efe0967be248e8d0e0565"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab4103cf97109ac921f358858ca2684d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab4103cf97109ac921f358858ca2684d"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>game_load_links</b> (<a class="el" href="struct___game.html">Game</a> *game, char *filename)</td></tr>
+<tr class="memitem:aab4103cf97109ac921f358858ca2684d"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__reader_8h.html#aab4103cf97109ac921f358858ca2684d">game_load_links</a> (<a class="el" href="struct___game.html">Game</a> *game, char *filename)</td></tr>
+<tr class="memdesc:aab4103cf97109ac921f358858ca2684d"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the links from a file  <a href="#aab4103cf97109ac921f358858ca2684d">More...</a><br /></td></tr>
 <tr class="separator:aab4103cf97109ac921f358858ca2684d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -144,7 +143,119 @@ STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>game_load_links</b>
 <dl class="section author"><dt>Author</dt><dd>Óscar Gómez, José Ignacio Gómez </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>30/09/2016  none </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="aab4103cf97109ac921f358858ca2684d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS game_load_links </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reads the links from a file </p>
+<dl class="section author"><dt>Author</dt><dd></dd></dl>
+<dl class="section date"><dt>Date</dt><dd>08/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game*</td><td>and a char* (filename) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if the links were successfuly read </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a66279ceefe2efe0967be248e8d0e0565"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS game_load_objects </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reads the objects from a file </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game*</td><td>and a char* (filename) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if the objects were successfuly read </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0d01072a28b01545d36240cb8bd9d4f8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS game_load_spaces </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reads the game table from a file </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>30/09/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game*</td><td>and a char* (filename) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if the table was successfuly read </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

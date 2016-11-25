@@ -17,8 +17,8 @@
 #include "die.h"
 #include "link.h"
 
-#define PLAYER_OBJ -2
-#define DIE_FACES 6
+#define PLAYER_OBJ -2 /*!< Id for an object into the player's bag*/
+#define DIE_FACES 6 /*!< Faces of the die*/
 
 
 typedef struct _Game Game;

@@ -9,7 +9,7 @@
 
 #ifndef PLAYER_H
 #define PLAYER_H
-#define MAX_OBJECTS 1000 /*Used to know the bag size*/
+#define MAX_OBJECTS 1000 /*!< Max amount of objects (1000)*/
 
 #include "types.h"
 #include "object.h"

@@ -31,10 +31,10 @@ struct _Game{
   Die* die; /*!< Pointer to Die Structure */
   Link *links[MAX_LINKS]; /*!< Array of pointers to Link Structure */
   char desc[WORD_SIZE+1]; /* !< For inspect command*/
-};
+};/*!< Game structure*/
 
-/**
-* @brief List of callbacks for each command in the game 
+/*
+* brief List of callbacks for each command in the game 
 */
 
 STATUS callback_UNKNOWN(Game* game);
@@ -49,8 +49,8 @@ STATUS callback_INSPECT(Game* game, char *symbol);
 STATUS callback_GO(Game* game, char *symbol);
 
 
-/**
-* @brief Private functions
+/*
+* Private functions
 */
 
 STATUS game_load_spaces(Game* game, char* filename);

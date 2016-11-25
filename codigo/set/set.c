@@ -16,8 +16,8 @@
 #define NOT_FOUND -1
 
 struct _Set {
-	Id id[MAX_IDS]; /*<!The array of ids of the set*/
-	int num_ids; /*<!The number of elements that the set has*/
+	Id id[MAX_IDS]; /*!<The array of ids of the set*/
+	int num_ids; /*!<The number of elements that the set has*/
 };/*!<Set structure*/
 
 	
