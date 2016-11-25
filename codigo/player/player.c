@@ -18,11 +18,11 @@
 
 
 struct _Player {
-	Id id; /*<!Id of the player*/
-	char name[WORD_SIZE +1]; /*<!Name of the player*/
-	Id location; /*<!Location in the game*/
-	Inventory* bag; /*<!Inventory of the player */
-};
+	Id id; /*!<Id of the player*/
+	char name[WORD_SIZE +1]; /*!<Name of the player*/
+	Id location; /*!<Location in the game*/
+	Inventory* bag; /*!<Inventory of the player */
+};/*!<Player structure*/
 
 
 /*

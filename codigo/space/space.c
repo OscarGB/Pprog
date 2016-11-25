@@ -15,15 +15,15 @@
 #include "set.h"
 
 struct _Space {
-    Id id; /*<!The id of the space*/
-    char name[WORD_SIZE + 1]; /*<!the name of the space*/
-    Id north; /*<!The id of the link located at the north*/
-    Id south; /*<!The id of the link located at the south*/
-    Id east; /*<!The id of the link located at the east*/
-    Id west; /*<!The id of the link located at the west*/
-    Set *object; /*<!The objects in the space*/
-    char gdesc[MAX_GDESC]; /*<!The gdesc of the space (The drawing)*/
-};
+    Id id; /*!<The id of the space*/
+    char name[WORD_SIZE + 1]; /*!<the name of the space*/
+    Id north; /*!<The id of the link located at the north*/
+    Id south; /*!<The id of the link located at the south*/
+    Id east; /*!<The id of the link located at the east*/
+    Id west; /*!<The id of the link located at the west*/
+    Set *object; /*!<The objects in the space*/
+    char gdesc[MAX_GDESC]; /*!<The gdesc of the space (The drawing)*/
+};/*!<Space structure*/
 
 /**
 * @brief Creates a new space for the game
@@ -34,7 +34,7 @@ struct _Space {
 */
 Space* space_create(Id id) {
 
-    Space *newSpace = NULL; /*<!The new space to create*/
+    Space *newSpace = NULL; /*!<The new space to create*/
 
     if (id == NO_ID)
         return NULL;
@@ -276,7 +276,7 @@ Id space_get_west(Space* space) {
 * @param Space* space (the space we want to know about)
 * @return Set* (The set inside the Space)
 */
-Set* space_get_object(Space* space) {
+Set* space_get_objects(Space* space) {
     if (!space) {
         return FALSE;
     }
@@ -307,7 +307,7 @@ BOOL space_is_object_in(Space* space, Id id){
 * @return STATUS (OK if everything went well, ERROR if something went wrong)
 */
 STATUS space_print(Space* space) {
-    Id idaux = NO_ID; /*<!Auxiliar Id*/
+    Id idaux = NO_ID; /*!<Auxiliar Id*/
   
     if (!space) {
         return ERROR;
@@ -343,7 +343,7 @@ STATUS space_print(Space* space) {
         fprintf(stdout, "---> No west link.\n");
     }
     
-   if (set_is_empty(space_get_object(space)) == FALSE) {
+   if (set_is_empty(space_get_objects(space)) == FALSE) {
         fprintf(stdout, "---> Object in the space.\n");
     } else {
         fprintf(stdout, "---> No object in the space.\n");

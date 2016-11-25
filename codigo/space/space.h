@@ -14,7 +14,7 @@
 
 typedef struct _Space Space; /*!<Definition of the Space structure*/
 
-#define MAX_SPACES 100 /*!<Max number of spaces*/
+#define MAX_SPACES 10000 /*!<Max number of spaces*/
 #define FIRST_SPACE 1 /*!<Definition of the first space*/
 #define MAX_GDESC 42 /*!<Max number of characters in gdesc*/
 
@@ -157,7 +157,7 @@ Id space_get_west(Space* space);
 * @param Space* space (the space we want to know about)
 * @return Set* (The set inside the Space)
 */
-Set* space_get_object(Space* space);
+Set* space_get_objects(Space* space);
 
 /**
 * @brief Checks if the object is in the given space

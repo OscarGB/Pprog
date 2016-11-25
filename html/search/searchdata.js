@@ -3,8 +3,8 @@ var indexSectionsWithContent =
   0: "_cdfgilmnopst",
   1: "_",
   2: "cdgilopst",
-  3: "cgils",
-  4: "cins",
+  3: "cgilps",
+  4: "cilmns",
   5: "ls",
   6: "fm"
 };
