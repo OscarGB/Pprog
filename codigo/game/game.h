@@ -17,6 +17,9 @@
 #include "die.h"
 #include "link.h"
 
+#define PLAYER_OBJ -2
+#define DIE_FACES 6
+
 
 typedef struct _Game Game;
 

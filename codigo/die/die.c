@@ -2,9 +2,9 @@
  * @brief It implements the die's commands
  * @file die.c
  * @author Óscar Gómez, José Ignacio Gómez
- * @version 1.0
+ * @version 2.0
  * @date 07/10/2016
- * @revision_history none
+ * @revision_history Changed creation for different die faces
  */
 
 
@@ -17,6 +17,7 @@
 struct _Die{
 	Id id; /*<!Die's id*/
 	int last; /*<!Last rolled value*/
+	int max; /*<!Maximum value to roll*/
 };
 
 /*
@@ -27,12 +28,17 @@ struct _Die{
 * @return int (the random number)
 */
 
-int die_roll(Die* die, int inf, int sup){
+int die_roll(Die* die){
+	int inf, sup;
 	float random; /*The rolled value*/
 
-	if(inf < 0 || sup < 0 || sup < inf || !die){
+	if(!die){
 		return -1; /*ERROR*/
 	}
+
+	inf = 1;
+	sup = die->max;
+
 	srand(clock()); /*seed*/
 	random = rand(); /*random number between 0 and RAND_MAX*/
 	random /= RAND_MAX; /*random number between 0 and 1*/
@@ -54,10 +60,10 @@ int die_roll(Die* die, int inf, int sup){
 * @return die pointer (of the created one)
 */
 
-Die* die_create(Id id){
+Die* die_create(Id id, int faces){
 	Die *die = NULL; /*New pointer for die*/
 
-	if(id == NO_ID){
+	if(id == NO_ID || faces < 1){
 		return NULL;
 	}
 
@@ -70,6 +76,7 @@ Die* die_create(Id id){
 	/*Default values*/
 	die->id = id;
 	die->last = NOT_ROLLED;
+	die->max = faces;
 
 	return die;
 }
@@ -112,6 +119,7 @@ STATUS die_print(Die* die){
 	/*Print the values of the die*/
 	fprintf(stdout, "-->Die (Id: %ld)\n", die_get_id(die));
 	fprintf(stdout, "--->Last value: %d\n", die_get_last_roll(die));
+	fprintf(stdout, "--->Faces: %d\n", die_get_faces(die));
 
 	return OK;
 }
@@ -148,4 +156,20 @@ Id die_get_id(Die* die){
 	}
 	/*Get the Id fo the die*/
 	return die->id;
+}
+
+/*
+* @brief It returns the number of faces the die has
+* @author Óscar Gómez
+* @date 25/11/2016
+* @param Die* (The die we want to get the Id)
+* @return int (The faces of the die)
+*/
+
+int die_get_faces(Die* die){
+	if(!die){
+		return 0;
+	}
+
+	return die->max;
 }

@@ -12,11 +12,12 @@
  
 #define MAX_TESTS 14
 #define ID 3
+#define FACES 6
 
 
 BOOL test_die1(){
 	Die *die = NULL;
-	die = die_create(NO_ID);
+	die = die_create(NO_ID, FACES);
 	if(die == NULL){
 		return TRUE;
 	}
@@ -25,7 +26,7 @@ BOOL test_die1(){
 
 BOOL test_die2(){
  	Die* die = NULL;
-	die = die_create(ID);
+	die = die_create(ID, FACES);
 	if(!die){
 		return FALSE;
 	}
@@ -35,7 +36,7 @@ BOOL test_die2(){
 
 BOOL test_die3(){
 	Die* die = NULL;
-	die = die_create(ID);
+	die = die_create(ID, FACES);
 	if(die_get_id(die) == ID){
 		die_destroy(die);
 		return TRUE;
@@ -54,8 +55,8 @@ BOOL test_die4(){
 BOOL test_die5(){
 	Die* die = NULL;
 	int roll;
-	die = die_create(ID);
-	roll = die_roll(die, 1, 6);
+	die = die_create(ID, FACES);
+	roll = die_roll(die);
 	if(roll < 1 || roll > 6){
 		die_destroy(die);
 		return FALSE;
@@ -67,8 +68,8 @@ BOOL test_die5(){
 BOOL test_die6(){
 	Die* die = NULL;
 	int roll;
-	die = die_create(ID);
-	roll = die_roll(die, 1, 6);
+	die = die_create(ID, FACES);
+	roll = die_roll(die);
 	if(die_get_last_roll(die) == roll){
 		die_destroy(die);
 		return TRUE;
@@ -78,7 +79,7 @@ BOOL test_die6(){
 }
 
 BOOL test_die7(){
-	if(die_roll(NULL, 1, 6) == -1){
+	if(die_roll(NULL) == -1){
 		return TRUE;
 	}
 	return FALSE;
@@ -86,9 +87,8 @@ BOOL test_die7(){
 
 BOOL test_die8(){
 	Die* die = NULL;
-	die = die_create(ID);
-	if(die_roll(die, -1, 1) == -1){
-		die_destroy(die);
+	die = die_create(ID, -2);
+	if(die == NULL){
 		return TRUE;
 	}
 	die_destroy(die);
@@ -97,8 +97,8 @@ BOOL test_die8(){
 
 BOOL test_die9(){
 	Die* die = NULL;
-	die = die_create(ID);
-	if(die_roll(die, 1, -1) == -1){
+	die = die_create(ID, FACES);
+	if(die_get_faces(die) == FACES){
 		die_destroy(die);
 		return TRUE;
 	}
@@ -107,13 +107,9 @@ BOOL test_die9(){
 }
 
 BOOL test_die10(){
-	Die* die = NULL;
-	die = die_create(ID);
-	if(die_roll(die, 6, 1) == -1){
-		die_destroy(die);
+	if(die_get_faces(NULL) == 0){
 		return TRUE;
 	}
-	die_destroy(die);
 	return FALSE;
 }
 
@@ -133,7 +129,7 @@ BOOL test_die12(){
 
 BOOL test_die13(){
 	Die* die = NULL;
-	die = die_create(ID);
+	die = die_create(ID, FACES);
 	if(die_destroy(die) == OK){
 		return TRUE;
 	}

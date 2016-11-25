@@ -121,7 +121,6 @@ dist: #Comando de generación de un comprimido para la distribución del program
 doc: #Comando de generación de la documentación
 	@echo "--->Generando documentación mediante Doxygen"
 	@nohup doxygen Doxyfile
-	
 
 opendoc: #Comando para abrir la documentación
 	@echo "--->Abriendo documentación"

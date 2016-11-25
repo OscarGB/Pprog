@@ -17,8 +17,6 @@
 #include "die.h"
 #include "link.h"
 
-#define PLAYER_OBJ -2
-
 #ifdef __WINDOWS_BUILD__ /*In case we are working on Windows*/
 #define CLEAR "cls"
 #else
@@ -105,7 +103,7 @@ Game* game_init(Game* game) {
   game->num_objects = 0;
 
   /*Creating die*/
-  game->die = die_create(1);
+  game->die = die_create(1, DIE_FACES);
   if(!game->die){ /*Error case*/
     player_destroy(game->player);
     game_destroy(game);
@@ -1033,7 +1031,7 @@ STATUS callback_PICK(Game* game, char *symbol){
 STATUS callback_ROLL(Game* game){
     int res; /* !< Result of the rolled die*/
 
-    res = die_roll(game->die, 1, 6);
+    res = die_roll(game->die);
     if(res < 1 || res > 6) return ERROR;
 
     return OK;

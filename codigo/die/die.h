@@ -26,7 +26,7 @@ typedef struct _Die Die; /*<! Definition of the Die structure */
 * @return int (the random number)
 */
 
-int die_roll(Die* die, int inf, int sup);
+int die_roll(Die* die);
 
 
 /*
@@ -37,7 +37,7 @@ int die_roll(Die* die, int inf, int sup);
 * @return die pointer (of the created one)
 */
 
-Die* die_create(Id id);
+Die* die_create(Id id, int faces);
 
 
 /*
@@ -81,5 +81,15 @@ int die_get_last_roll(Die* die);
 */
 
 Id die_get_id(Die* die);
+
+/*
+* @brief It returns the number of faces the die has
+* @author Óscar Gómez
+* @date 25/11/2016
+* @param Die* (The die we want to get the Id)
+* @return int (The faces of the die)
+*/
+
+int die_get_faces(Die* die);
 
 #endif
