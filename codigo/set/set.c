@@ -133,7 +133,7 @@ STATUS set_destroy(Set* set) {
 
 STATUS set_add(Set* set, Id id) {
 
-	if(set_where_is_id(set, id) != NOT_FOUND || !set || id == NO_ID || set_is_full(set) == TRUE){
+	if(!set || set_where_is_id(set, id) != NOT_FOUND || id == NO_ID || set_is_full(set) == TRUE){
 		return ERROR;
 	}
 
