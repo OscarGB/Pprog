@@ -10,7 +10,7 @@
 #include "link.h"
 #include "types.h"
 
-#define MAX_TESTS 31
+#define MAX_TESTS 32
 #define ID 3
 #define ID1 5
 #define ID2 8
