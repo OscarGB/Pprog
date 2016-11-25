@@ -42,6 +42,7 @@ JuegoOcaPlus
 # Temporal files
 *~
 ~*
+.*
 
 # Log file
 *.log

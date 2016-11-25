@@ -127,7 +127,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a5f54fd55f983a2e33ce076cd9f587e82"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a5f54fd55f983a2e33ce076cd9f587e82">MAX_SPACES</a>&#160;&#160;&#160;100</td></tr>
+<tr class="memitem:a5f54fd55f983a2e33ce076cd9f587e82"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a5f54fd55f983a2e33ce076cd9f587e82">MAX_SPACES</a>&#160;&#160;&#160;10000</td></tr>
 <tr class="separator:a5f54fd55f983a2e33ce076cd9f587e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a088cbe7c6f78264d46c2624194c5c680"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a088cbe7c6f78264d46c2624194c5c680">FIRST_SPACE</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a088cbe7c6f78264d46c2624194c5c680"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,9 +183,9 @@ Functions</h2></td></tr>
 <tr class="memitem:af495ebfd5d13eba1a48cebd10992a17f"><td class="memItemLeft" align="right" valign="top">Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#af495ebfd5d13eba1a48cebd10992a17f">space_get_west</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
 <tr class="memdesc:af495ebfd5d13eba1a48cebd10992a17f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the id of the Link in the west.  <a href="#af495ebfd5d13eba1a48cebd10992a17f">More...</a><br /></td></tr>
 <tr class="separator:af495ebfd5d13eba1a48cebd10992a17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab24abae4e127bf0bca596cd71ba3aad6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="set_8h.html#a6d3b7f7c92cbb4577ef3ef7ddbf93161">Set</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#ab24abae4e127bf0bca596cd71ba3aad6">space_get_object</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
-<tr class="memdesc:ab24abae4e127bf0bca596cd71ba3aad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">It returns the Set of objects inside the Space.  <a href="#ab24abae4e127bf0bca596cd71ba3aad6">More...</a><br /></td></tr>
-<tr class="separator:ab24abae4e127bf0bca596cd71ba3aad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc0e3f36d3bdf0105c5d25c256c9cfbd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="set_8h.html#a6d3b7f7c92cbb4577ef3ef7ddbf93161">Set</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#afc0e3f36d3bdf0105c5d25c256c9cfbd">space_get_objects</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
+<tr class="memdesc:afc0e3f36d3bdf0105c5d25c256c9cfbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">It returns the Set of objects inside the Space.  <a href="#afc0e3f36d3bdf0105c5d25c256c9cfbd">More...</a><br /></td></tr>
+<tr class="separator:afc0e3f36d3bdf0105c5d25c256c9cfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac1e07503b3a4e740444c1318f6ea868"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#aac1e07503b3a4e740444c1318f6ea868">space_is_object_in</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, Id id)</td></tr>
 <tr class="memdesc:aac1e07503b3a4e740444c1318f6ea868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the object is in the given space.  <a href="#aac1e07503b3a4e740444c1318f6ea868">More...</a><br /></td></tr>
 <tr class="separator:aac1e07503b3a4e740444c1318f6ea868"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -236,7 +236,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MAX_SPACES&#160;&#160;&#160;100</td>
+          <td class="memname">#define MAX_SPACES&#160;&#160;&#160;10000</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -486,12 +486,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab24abae4e127bf0bca596cd71ba3aad6"></a>
+<a class="anchor" id="afc0e3f36d3bdf0105c5d25c256c9cfbd"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="set_8h.html#a6d3b7f7c92cbb4577ef3ef7ddbf93161">Set</a>* space_get_object </td>
+          <td class="memname"><a class="el" href="set_8h.html#a6d3b7f7c92cbb4577ef3ef7ddbf93161">Set</a>* space_get_objects </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
           <td class="paramname"><em>space</em></td><td>)</td>

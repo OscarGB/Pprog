@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['last',['last',['../struct___die.html#a72e27dee31b1c4c6a504fbed29542d97',1,'_Die']]],
   ['link',['Link',['../link_8h.html#ae3b299941e67be6971bfd64a25505eff',1,'link.h']]],
   ['link_2ec',['link.c',['../link_8c.html',1,'']]],
   ['link_2eh',['link.h',['../link_8h.html',1,'']]],

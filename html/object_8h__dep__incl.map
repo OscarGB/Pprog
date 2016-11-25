@@ -1,10 +1,11 @@
 <map id="codigo/object/object.h" name="codigo/object/object.h">
-<area shape="rect" id="node2" href="$game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="59,155,201,181"/>
-<area shape="rect" id="node3" href="$game_8c.html" title="It implements the game interface for each command. " alt="" coords="45,326,188,353"/>
-<area shape="rect" id="node5" href="$game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="327,229,466,271"/>
-<area shape="rect" id="node6" href="$game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="327,319,466,360"/>
-<area shape="rect" id="node7" href="$object_8c.html" title="It implements the functionality of the objects. " alt="" coords="551,80,701,107"/>
-<area shape="rect" id="node8" href="$player_8h.html" title="It defines the functionality of the player. " alt="" coords="167,80,317,107"/>
-<area shape="rect" id="node9" href="$player_8c.html" title="It implements the functionality of the player. " alt="" coords="277,155,426,181"/>
-<area shape="rect" id="node4" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="39,229,202,271"/>
+<area shape="rect" id="node2" href="$game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="249,162,392,189"/>
+<area shape="rect" id="node3" href="$game_8c.html" title="It implements the game interface for each command. " alt="" coords="220,341,362,367"/>
+<area shape="rect" id="node5" href="$game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="502,244,640,285"/>
+<area shape="rect" id="node6" href="$game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="502,333,640,375"/>
+<area shape="rect" id="node7" href="$object_8c.html" title="It implements the functionality of the objects. " alt="" coords="715,80,864,107"/>
+<area shape="rect" id="node8" href="$player_8h.html" title="It defines the functionality of the player. " alt="" coords="246,80,395,107"/>
+<area shape="rect" id="node9" href="$player_8c.html" title="It implements the functionality of the player. " alt="" coords="415,162,564,189"/>
+<area shape="rect" id="node4" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="214,244,376,285"/>
+<area shape="rect" id="node10" href="$player__test_8c.html" title="Main to test the Player module. " alt="" coords="31,155,156,196"/>
 </map>
