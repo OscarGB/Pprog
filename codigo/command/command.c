@@ -15,8 +15,8 @@
 #define CMD_LENGHT 30
 
 struct _Command{
-	T_Command cmd; /*<!The command*/
-	char symbol[50]; /*<!A symbol for TAKE and DROP and INSPECTcommands*/
+	T_Command cmd; /*!<The command*/
+	char symbol[50]; /*!<A symbol for TAKE and DROP and INSPECTcommands*/
 };/*!<Command structure*/
 
 
