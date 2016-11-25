@@ -10,6 +10,7 @@ var searchData=
   ['callback_5fquit',['callback_QUIT',['../game_8c.html#a559c272131b091cc3c95332a003f013c',1,'game.c']]],
   ['callback_5froll',['callback_ROLL',['../game_8c.html#aaf4fc1ffe2189ae3c6818b255c89b00b',1,'game.c']]],
   ['callback_5funknown',['callback_UNKNOWN',['../game_8c.html#a408b9e99262618cba7b0a672712cb7fe',1,'game.c']]],
+  ['char_5ferror',['CHAR_ERROR',['../object_8h.html#af7555d869b0034eb4e3b8c7ce6c6590f',1,'object.h']]],
   ['cmd',['cmd',['../struct___command.html#a987286cd4accace9e59c05dbb19a40ab',1,'_Command']]],
   ['command_2ec',['command.c',['../command_8c.html',1,'']]],
   ['command_2eh',['command.h',['../command_8h.html',1,'']]],

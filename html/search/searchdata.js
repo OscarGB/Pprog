@@ -5,8 +5,8 @@ var indexSectionsWithContent =
   2: "cdgilopst",
   3: "cgilps",
   4: "bcdegilmnopsw",
-  5: "ls",
-  6: "fm"
+  5: "dls",
+  6: "cdfmnpw"
 };
 
 var indexSectionNames =
