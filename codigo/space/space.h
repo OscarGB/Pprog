@@ -14,7 +14,7 @@
 
 typedef struct _Space Space; /*!<Definition of the Space structure*/
 
-#define MAX_SPACES 100 /*!<Max number of spaces*/
+#define MAX_SPACES 10000 /*!<Max number of spaces*/
 #define FIRST_SPACE 1 /*!<Definition of the first space*/
 #define MAX_GDESC 42 /*!<Max number of characters in gdesc*/
 
