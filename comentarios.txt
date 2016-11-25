@@ -1,0 +1,13 @@
+
+
+//PASO DE ARGUMENTOS
+
+	- Para el paso de argumentos como -l y -nv, el orden en que se pasen al programa es indistinto. 
+
+	- Los archivos log para ejecutar con el comando -l deben acabar en .log, en caso contrario no serán eliminados por el Makefile.
+
+//FICHEROS DE DATOS
+
+	- Los ficheros de espacios, links y objetos se ubicarán en el mismo archivo, con el formato de datos elegido (#s: para espacio, #o: para objeto, #l: para link).
+
+
