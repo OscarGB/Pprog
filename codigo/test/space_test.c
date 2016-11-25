@@ -78,7 +78,7 @@ BOOL test_space4(){ /*!< Test space_get_name with alloc'd space*/
 }
 
 
-BOOL test_space5(){ /*!< Test space_get_name and space_set_name with alloc'd space*/
+BOOL test_space5(){ /*!< Test space_set_name with alloc'd space*/
 	Space* space = NULL;
 	STATUS res1=FALSE, res2=FALSE;
 	BOOL result=FALSE;
@@ -165,7 +165,7 @@ BOOL test_space8(){ /*!< Test space_get_south with alloc'd space*/
 }
 
 
-BOOL test_space9(){ /*!< Test space_set_south and space_get_south with alloc'd space*/
+BOOL test_space9(){ /*!< Test space_set_south with alloc'd space*/
 	
 	Space* space = NULL;
 	Id test=-1;
@@ -209,7 +209,7 @@ BOOL test_space10(){ /*!< Test space_get_east with alloc'd space*/
 }
 
 
-BOOL test_space11(){ /*!< Test space_set_east and space_get_east with alloc'd space*/
+BOOL test_space11(){ /*!< Test space_set_east with alloc'd space*/
 		
 	Space* space = NULL;
 	Id test=-1;
@@ -253,7 +253,7 @@ BOOL test_space12(){ /*!< Test space_get_west with alloc'd space*/
 }
 
 
-BOOL test_space13(){ /*!< Test space_set_west and space_get_west with alloc'd space*/
+BOOL test_space13(){ /*!< Test space_set_west with alloc'd space*/
 	
 	Space* space = NULL;
 	Id test=-1;
@@ -292,7 +292,7 @@ BOOL test_space14(){ /*!< Test space_add_object and space_is_object_in with allo
 	return result;
 }
 
-BOOL test_space15(){ /*!< Test space_get_object with alloc'd space*/
+BOOL test_space15(){ /*!< Test space_get_objects with alloc'd space*/
 	
 	Set* set = NULL;
 	Space* space = NULL;
@@ -305,7 +305,7 @@ BOOL test_space15(){ /*!< Test space_get_object with alloc'd space*/
 	}
 
 	space_add_object(space, 100);
-	set=space_get_object(space);
+	set=space_get_objects(space);
 	if(set_delete(set, 100)==OK) result=TRUE;
 	space_destroy(space);
 	TEST_PRINT(result);
@@ -344,7 +344,7 @@ BOOL test_space17(){ /*Test space_get_gdesc with alloc'd space*/
 	return result;
 }
 
-BOOL test_space18(){ /*Test space_set_gdesc and space_get_gdesc with alloc'd space*/
+BOOL test_space18(){ /*Test space_set_gdesc with alloc'd space*/
 
 	Space* space;
 	BOOL result=FALSE;
