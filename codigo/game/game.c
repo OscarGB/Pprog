@@ -619,11 +619,11 @@ void game_print_screen(Game* game){
       for(i=0; i<(4*MAX_SPACES); i++){
         if(link_get_id(game->links[i]) == space_get_east(space_act)){
           if(link_get_conection1(game->links[i]) == id_act){
-            printf("|         %2d| --> %d \n",(int) id_act, (int) link_get_conection2(game->links[i]));
+            printf("| >8D     %2d| --> %d \n",(int) id_act, (int) link_get_conection2(game->links[i]));
             break;
           }
           else{
-            printf("|         %2d| --> %d \n",(int) id_act, (int) link_get_conection1(game->links[i]));
+            printf("| >8D     %2d| --> %d \n",(int) id_act, (int) link_get_conection1(game->links[i]));
             break;
           }
         }
@@ -631,7 +631,7 @@ void game_print_screen(Game* game){
     }
     else{
       printf("+-----------+\n");
-      printf("|         %2d|\n",(int) id_act);
+      printf("| >8D     %2d|\n",(int) id_act);
     } 
     printf("%s", space_get_gdesc(space_act));
     printf("|           |\n");
