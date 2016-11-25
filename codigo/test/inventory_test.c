@@ -21,10 +21,12 @@ BOOL test_inventory1(){ /*<! inventory_create */
 	inventory = inventory_create(SIZE);
 
 	if(!inventory){
+		TEST_PRINT(FALSE);
 		return FALSE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(TRUE);
 	return TRUE;
 }
 
@@ -33,10 +35,12 @@ BOOL test_inventory2(){ /*<! inventory_destroy */
 	inventory = inventory_create(SIZE);
 
 	if(!inventory){
+		TEST_PRINT(FALSE);
 		return FALSE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(TRUE);
 	return TRUE;
 }
 
@@ -50,10 +54,12 @@ BOOL test_inventory3(){ /*<! inventory_is_full */
 
 	if(inventory_is_full(inventory) == TRUE){
 		inventory_destroy(inventory);
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 
 }
@@ -64,10 +70,12 @@ BOOL test_inventory4(){ /*<! inventory_is_empty */
 
 	if(inventory_is_empty(inventory) == TRUE){
 		inventory_destroy(inventory);
+		TEST_PRINT(TRUE);
 		return TRUE;		
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -77,10 +85,12 @@ BOOL test_inventory5(){ /*<! inventory_add_item */
 
 	if(inventory_add_item(inventory, ID) == OK){
 		inventory_destroy(inventory);
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -91,10 +101,12 @@ BOOL test_inventory6(){ /*<! inventory_delete_item */
 	inventory_add_item(inventory, ID);
 	if(inventory_delete_item(inventory, ID) == OK){
 		inventory_destroy(inventory);
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 	
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -107,10 +119,12 @@ BOOL test_inventory7(){ /*<! inventory_set_set */
 	set_add(set, ID);
 	if(inventory_set_set(inventory, set) == OK){
 		inventory_destroy(inventory);
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 	
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -124,10 +138,12 @@ BOOL test_inventory8(){ /*<! inventory_get_set */
 	inventory_set_set(inventory, set);
 	if(inventory_get_set(inventory) == set){
 		inventory_destroy(inventory);
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 	
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -137,10 +153,12 @@ BOOL test_inventory9(){ /*<! inventory_get_size */
 
 	if(inventory_get_size(inventory) == SIZE){
 		inventory_destroy(inventory);
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -150,10 +168,12 @@ BOOL test_inventory10(){ /*<! inventory_set_size */
 	
 	if(inventory_set_size(inventory, 2*SIZE) == OK){
 		inventory_destroy(inventory);
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -163,10 +183,12 @@ BOOL test_inventory11(){ /*<! inventory_get_num_items */
 	
 	if(inventory_get_num_items(inventory) == 0){
 		inventory_destroy(inventory);
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -176,10 +198,12 @@ BOOL test_inventory12(){ /*<! inventory_print */
 	
 	if(inventory_print(inventory) == OK){
 		inventory_destroy(inventory);
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -190,10 +214,12 @@ BOOL test_inventory13(){ /*<! inventory_create */
 	inventory = inventory_create(-1);
 
 	if(!inventory){
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -201,8 +227,10 @@ BOOL test_inventory14(){ /*<! inventory_destroy */
  	Inventory* inventory = NULL;
 
 	if(inventory_destroy(inventory) == ERROR)
+		TEST_PRINT(TRUE);
 		return TRUE;
 
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -212,10 +240,12 @@ BOOL test_inventory15(){ /*<! inventory_is_full */
 
 	if(inventory_is_full(inventory) == TRUE){
 		inventory_destroy(inventory);
+		TEST_PRINT(FALSE);
 		return FALSE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(TRUE);
 	return TRUE;
 
 }
@@ -227,10 +257,12 @@ BOOL test_inventory16(){ /*<! inventory_is_empty */
 	inventory_add_item(inventory, ID);
 	if(inventory_is_empty(inventory) == TRUE){
 		inventory_destroy(inventory);
+		TEST_PRINT(FALSE);
 		return FALSE;		
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(TRUE);
 	return TRUE;
 }
 
@@ -240,10 +272,12 @@ BOOL test_inventory17(){ /*<! inventory_add_item */
 
 	if(inventory_add_item(inventory, NO_ID) == OK){
 		inventory_destroy(inventory);
+		TEST_PRINT(FALSE);
 		return FALSE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(TRUE);
 	return TRUE;
 }
 
@@ -253,10 +287,12 @@ BOOL test_inventory18(){ /*<! inventory_delete_item */
 
 	if(inventory_delete_item(inventory, ID) == OK){
 		inventory_destroy(inventory);
+		TEST_PRINT(FALSE);
 		return FALSE;
 	}
 	
 	inventory_destroy(inventory);
+	TEST_PRINT(TRUE);
 	return TRUE;
 }
 
@@ -267,10 +303,12 @@ BOOL test_inventory19(){ /*<! inventory_set_set */
 
 	if(inventory_set_set(inventory, set) == OK){
 		inventory_destroy(inventory);
+		TEST_PRINT(FALSE);
 		return FALSE;
 	}
 	
 	inventory_destroy(inventory);
+	TEST_PRINT(TRUE);
 	return TRUE;
 }
 
@@ -284,10 +322,12 @@ BOOL test_inventory20(){ /*<! inventory_get_set */
 	inventory_set_set(inventory, set);
 	if(inventory_get_set(inventory) != set){
 		inventory_destroy(inventory);
+		TEST_PRINT(FALSE);
 		return FALSE;
 	}
 	
 	inventory_destroy(inventory);
+	TEST_PRINT(TRUE);
 	return TRUE;
 }
 
@@ -295,9 +335,11 @@ BOOL test_inventory21(){ /*<! inventory_get_size */
 	Inventory * inventory = NULL;
 
 	if(inventory_get_size(inventory) == -1){
+		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 
+	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
@@ -307,10 +349,12 @@ BOOL test_inventory22(){ /*<! inventory_set_size */
 	
 	if(inventory_set_size(inventory, -1) == OK){
 		inventory_destroy(inventory);
+		TEST_PRINT(FALSE);
 		return FALSE;
 	}
 
 	inventory_destroy(inventory);
+	TEST_PRINT(TRUE);
 	return TRUE;
 }
 
@@ -318,9 +362,11 @@ BOOL test_inventory23(){ /*<! inventory_get_num_items */
 	Inventory* inventory = NULL;
 	
 	if(inventory_get_num_items(inventory) != -1){
+		TEST_PRINT(FALSE);
 		return FALSE;
 	}
 
+	TEST_PRINT(TRUE);
 	return TRUE;
 }
 
@@ -328,9 +374,11 @@ BOOL test_inventory24(){ /*<! inventory_print */
 	Inventory* inventory = NULL;
 	
 	if(inventory_print(inventory) == OK){
+		TEST_PRINT(FALSE);
 		return FALSE;
 	}
 
+	TEST_PRINT(TRUE);
 	return TRUE;
 }
 
@@ -351,30 +399,30 @@ int main(int argc, char* argv[]){
 		printf("Pasando la prueba numero %d al modulo Inventory: \n", test);
 	}
 
-	if(todas || test == 1) TEST_PRINT(test_inventory1());
-	if(todas || test == 2) TEST_PRINT(test_inventory2());
-	if(todas || test == 3) TEST_PRINT(test_inventory3());
-	if(todas || test == 4) TEST_PRINT(test_inventory4());
-	if(todas || test == 5) TEST_PRINT(test_inventory5());
-	if(todas || test == 6) TEST_PRINT(test_inventory6());
-	if(todas || test == 7) TEST_PRINT(test_inventory7());
-	if(todas || test == 8) TEST_PRINT(test_inventory8());
-	if(todas || test == 9) TEST_PRINT(test_inventory9());
-	if(todas || test == 10) TEST_PRINT(test_inventory10());
-	if(todas || test == 11) TEST_PRINT(test_inventory11());
-	if(todas || test == 12) TEST_PRINT(test_inventory12());
-	if(todas || test == 13) TEST_PRINT(test_inventory13());
-	if(todas || test == 14) TEST_PRINT(test_inventory14());
-	if(todas || test == 15) TEST_PRINT(test_inventory15());
-	if(todas || test == 16) TEST_PRINT(test_inventory16());
-	if(todas || test == 17) TEST_PRINT(test_inventory17());
-	if(todas || test == 18) TEST_PRINT(test_inventory18());
-	if(todas || test == 19) TEST_PRINT(test_inventory19());
-	if(todas || test == 20) TEST_PRINT(test_inventory20());
-	if(todas || test == 21) TEST_PRINT(test_inventory21());
-	if(todas || test == 22) TEST_PRINT(test_inventory22());
-	if(todas || test == 23) TEST_PRINT(test_inventory23());
-	if(todas || test == 24) TEST_PRINT(test_inventory24());
+	if(todas || test == 1) test_inventory1();
+	if(todas || test == 2) test_inventory2();
+	if(todas || test == 3) test_inventory3();
+	if(todas || test == 4) test_inventory4();
+	if(todas || test == 5) test_inventory5();
+	if(todas || test == 6) test_inventory6();
+	if(todas || test == 7) test_inventory7();
+	if(todas || test == 8) test_inventory8();
+	if(todas || test == 9) test_inventory9();
+	if(todas || test == 10) test_inventory10();
+	if(todas || test == 11) test_inventory11();
+	if(todas || test == 12) test_inventory12();
+	if(todas || test == 13) test_inventory13();
+	if(todas || test == 14) test_inventory14();
+	if(todas || test == 15) test_inventory15();
+	if(todas || test == 16) test_inventory16();
+	if(todas || test == 17) test_inventory17();
+	if(todas || test == 18) test_inventory18();
+	if(todas || test == 19) test_inventory19();
+	if(todas || test == 20) test_inventory20();
+	if(todas || test == 21) test_inventory21();
+	if(todas || test == 22) test_inventory22();
+	if(todas || test == 23) test_inventory23();
+	if(todas || test == 24) test_inventory24();
 
 
 	PRINT_RESULTS();
