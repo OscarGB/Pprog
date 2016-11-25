@@ -25,7 +25,7 @@ die_test: die_test.o die.o
 	@gcc $(CFLAGS) -o die_test die_test.o die.o
 
 player_test: player_test.o player.o inventory.o set.o
-	@echo "--->Creating executable die_test"
+	@echo "--->Creating executable player_test"
 	@gcc $(CFLAGS) -o player_test player_test.o player.o inventory.o set.o
 
 set_test: set_test.o set.o

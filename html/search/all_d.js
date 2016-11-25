@@ -27,6 +27,7 @@ var searchData=
   ['space_5fset_5fnorth',['space_set_north',['../space_8c.html#a9e6e3e3bac4996ac6b8bd555e52bfb26',1,'space_set_north(Space *space, Id id):&#160;space.c'],['../space_8h.html#a9e6e3e3bac4996ac6b8bd555e52bfb26',1,'space_set_north(Space *space, Id id):&#160;space.c']]],
   ['space_5fset_5fsouth',['space_set_south',['../space_8c.html#a422ab9f220b4c471c44256a27377de1a',1,'space_set_south(Space *space, Id id):&#160;space.c'],['../space_8h.html#a422ab9f220b4c471c44256a27377de1a',1,'space_set_south(Space *space, Id id):&#160;space.c']]],
   ['space_5fset_5fwest',['space_set_west',['../space_8c.html#ad44b14cb38902cf31fa1f341beaab0db',1,'space_set_west(Space *space, Id id):&#160;space.c'],['../space_8h.html#ad44b14cb38902cf31fa1f341beaab0db',1,'space_set_west(Space *space, Id id):&#160;space.c']]],
+  ['spaces',['spaces',['../struct___game.html#a44a2852deb66395e6b01e0c040385d0c',1,'_Game']]],
   ['state',['state',['../struct___link.html#a876b486d3a5241a126bd5751c5f70f79',1,'_Link::state()'],['../link_8h.html#ad8c54cca58ad40ca172f1d3abb791e77',1,'State():&#160;link.h']]],
   ['symbol',['symbol',['../struct___command.html#a6ea85795a33055a00977c7c083e4f9a7',1,'_Command::symbol()'],['../struct___object.html#af7565614b2ea8e3f98b39303ae09ebca',1,'_Object::symbol()']]]
 ];

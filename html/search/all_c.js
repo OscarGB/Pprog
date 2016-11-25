@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['player',['player',['../struct___game.html#a96781128d3743da3d17e0fdd91afba7b',1,'_Game']]],
   ['player_2ec',['player.c',['../player_8c.html',1,'']]],
   ['player_2eh',['player.h',['../player_8h.html',1,'']]],
   ['player_5ftest_2ec',['player_test.c',['../player__test_8c.html',1,'']]],

@@ -17,5 +17,6 @@ var searchData=
   ['link_5fset_5fname',['link_set_name',['../link_8c.html#a6c7a3bd7a856288c377edbcd045912e6',1,'link_set_name(Link *link, char *name):&#160;link.c'],['../link_8h.html#a6c7a3bd7a856288c377edbcd045912e6',1,'link_set_name(Link *link, char *name):&#160;link.c']]],
   ['link_5fset_5fstate',['link_set_state',['../link_8c.html#ace036b501767e17a316d3dd93cee5cfb',1,'link_set_state(Link *link, State state):&#160;link.c'],['../link_8h.html#ace036b501767e17a316d3dd93cee5cfb',1,'link_set_state(Link *link, State state):&#160;link.c']]],
   ['link_5ftest_2ec',['link_test.c',['../link__test_8c.html',1,'']]],
+  ['links',['links',['../struct___game.html#a0d7e87427ec42d09d40f5d79cdc15284',1,'_Game']]],
   ['location',['location',['../struct___object.html#a5ef730c626751b65a24f4666d2c70a91',1,'_Object::location()'],['../struct___player.html#a5ef730c626751b65a24f4666d2c70a91',1,'_Player::location()']]]
 ];
