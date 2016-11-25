@@ -20,11 +20,11 @@
 #define GREEN "\x1B[32m"
 #define RESET "\033[0m"
 #else
-#define RED 1
-#define BLUE 1
-#define YELLOW 1
-#define GREEN 1
-#define RESET 1
+#define RED "\033[0m"
+#define BLUE "\033[0m"
+#define YELLOW "\033[0m"
+#define GREEN "\033[0m"
+#define RESET "\033[0m"
 #endif
 
 

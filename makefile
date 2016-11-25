@@ -3,22 +3,25 @@
 # Author: Óscar Gómez Borzdynski             #
 #--------------------------------------------#
 
-DEPS = game command generic space set player object die game_reader link inventory test	#Nombre de las carpetas de los módulos
-IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefijo de -I para la inclusión de las carpetas en la compilación
+DEPS = game command generic space set player object die game_reader link inventory test	#Name of the module's folders
+IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefix -I for the compilation with headers
 
-CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags de compilación
+CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
 
-ALL = JuegoOcaPlus 	#Ejecutables a generar si se llama a make
-TEST = link_test die_test player_test inventory_test space_test set_test	#Ejecutables a generar si se llama a make debug o make test
-ALL_DEBUG = $(ALL) $(TEST)
+ALL = JuegoOcaPlus 	#Executables to make with a make call
+TEST = link_test die_test player_test inventory_test space_test set_test	#Executables to make with make test or make debug
+ALL_DEBUG = $(ALL) $(TEST) #Executables to make with make debug
 
-all: $(ALL) #Genera únicamente el juego
+all: $(ALL) #Generates only the main game
 
-test: CFLAGS += -DDEBUG	#Se añade el flag -DDEBUG a la compilación
-test: $(TEST) #Crea todos los tests
+test: CFLAGS += -DDEBUG	#Adition of DEBUG macro
+test: $(TEST) #Generates the tests
 
-debug: CFLAGS += -DDEBUG	#Se añade el flag -DDEBUG a la compilación
-debug: $(ALL_DEBUG) #Crea los tests y el ejecutable del juego
+nocolors: CFLAGS += -DNO_COLORS	#Adition of NO_COLORS macro for execution without colors
+nocolors: $(ALL_DEBUG) #Generates the tests and the main game without colors
+
+debug: CFLAGS += -DDEBUG	#Adition of DEBUG macro
+debug: $(ALL_DEBUG) #Generates the tests and the main game
 
 die_test: die_test.o die.o 
 	@echo "--->Creating executable die_test"
@@ -116,20 +119,20 @@ inventory.o: codigo/inventory/inventory.c
 	@echo "--->Generating inventory.o"
 	@gcc $(CFLAGS) -c codigo/inventory/inventory.c
 
-clean: #Comando de limpieza del directorio raiz
+clean: #Command to clean the root
 	@echo "--->Deleting all executables, distributing  files, tests and logs"
 	@rm -rf *.exe  *.o *.tgz *.log $(ALL_DEBUG) *.out 
 
-dist: #Comando de generación de un comprimido para la distribución del programa
+dist: #Command to make the distributable file
 	@echo "--->Generating documentation with Doxygen"
 	@nohup doxygen Doxyfile
 	@echo "--->Creating tgz for program's distribution"
 	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ informes_pruebas/ reuniones/ html/ makefile *.dat Doxyfile *.oca test_games/
 
-doc: #Comando de generación de la documentación
+doc: #Command to generate the documentation
 	@echo "--->Generating documentation with Doxygen"
 	@nohup doxygen Doxyfile
 
-opendoc: #Comando para abrir la documentación
+opendoc: #Command to open the documentation
 	@echo "--->Opening documentation"
 	@firefox html/index.html
