@@ -132,7 +132,7 @@ STATUS player_set_location(Player* player, Id location) {
 */
 
 const char* player_get_name(Player* player) {
-	if (!player) {
+	if (!player || strcmp(player->name, "\0") == 0) {
 		return NULL;
 	}
 

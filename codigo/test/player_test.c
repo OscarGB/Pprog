@@ -38,7 +38,33 @@ BOOL test_player2(){ /*Test for player create with  valid ID*/
 	return TRUE;
 }
 
-BOOL test_player3(){ /*Test for set_name and get_name*/
+BOOL test_player3(){ /*Test for set_name*/
+	Player* player = NULL;
+	player = player_create(ID);
+	if(player_set_name(player, NAME) == ERROR){
+		player_destroy(player);
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	player_destroy(player);
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+BOOL test_player4(){ /*Test for get_name (no name)*/
+	Player* player = NULL;
+	player = player_create(ID);
+	if(player_get_name(player) != ERROR){
+		player_destroy(player);
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	player_destroy(player);
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+BOOL test_player5(){ /*Test for set_name and get_name*/
 	Player* player = NULL;
 	player = player_create(ID);
 	if(player_set_name(player, NAME) == ERROR){
@@ -57,7 +83,35 @@ BOOL test_player3(){ /*Test for set_name and get_name*/
 	return TRUE;
 }
 
-BOOL test_player4(){ /*Test for set_location and get_location*/
+BOOL test_player6(){ /*Test for set_location*/
+	Player* player = NULL;
+	player = player_create(ID);
+	if(player_set_location(player, SPAIN) == ERROR){
+		player_destroy(player);
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	player_destroy(player);
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+BOOL test_player7(){ /*Test for get_location (NO_ID)*/
+	Player* player = NULL;
+	player = player_create(ID);
+	if(player_get_location(player) != NO_ID){
+		player_destroy(player);
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	player_destroy(player);
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+BOOL test_player8(){ /*Test for set_location and get_location*/
 	Player* player = NULL;
 	player = player_create(ID);
 	if(player_set_location(player, SPAIN) == ERROR){
@@ -76,7 +130,7 @@ BOOL test_player4(){ /*Test for set_location and get_location*/
 	return TRUE;
 }
 
-BOOL test_player5(){ /*Test for set_location with invalid location*/
+BOOL test_player9(){ /*Test for set_location with invalid location*/
 	Player* player = NULL;
 	player = player_create(ID);
 	if(player_set_location(player, NO_ID) == ERROR){
@@ -90,7 +144,7 @@ BOOL test_player5(){ /*Test for set_location with invalid location*/
 	return FALSE;
 }
 
-BOOL test_player6(){ /*Test for drop_object (empty bag)*/
+BOOL test_player10(){ /*Test for drop_object (empty bag)*/
 	Player* player = NULL;
 	player = player_create(ID);
 	if (player_drop_object(player, ID) != FALSE){
@@ -104,7 +158,7 @@ BOOL test_player6(){ /*Test for drop_object (empty bag)*/
 	return TRUE;
 }
 
-BOOL test_player7(){ /*Test for pick_object (empty bag)*/
+BOOL test_player11(){ /*Test for pick_object (empty bag)*/
 	Player* player = NULL;
 	player = player_create(ID);
 	if (player_pick_object(player, ID) == TRUE){
@@ -118,7 +172,7 @@ BOOL test_player7(){ /*Test for pick_object (empty bag)*/
 	return FALSE;
 }
 
-BOOL test_player8(){ /*Test for drop_object (non-empty bag)*/
+BOOL test_player12(){ /*Test for drop_object (non-empty bag)*/
 	Player* player = NULL;
 	player = player_create(ID);
 	player_pick_object(player, ID);
@@ -135,7 +189,7 @@ BOOL test_player8(){ /*Test for drop_object (non-empty bag)*/
 }
 
 
-BOOL test_player9(){ /*Test for player_pick_object (full bag)*/
+BOOL test_player13(){ /*Test for player_pick_object (full bag)*/
 	int i = 0;
 
 	Player* player = NULL;
@@ -159,7 +213,7 @@ BOOL test_player9(){ /*Test for player_pick_object (full bag)*/
 	
 }
 
-BOOL test_player10(){ /*Test for player_destoy (NULL player)*/
+BOOL test_player14(){ /*Test for player_destoy (NULL player)*/
 	Player* player = NULL;
 
 	if(player_destroy(player) != ERROR){
@@ -198,6 +252,10 @@ int main(int argc, char* argv[]){
 	if(todas || test == 8) test_player8();
 	if(todas || test == 9) test_player9();
 	if(todas || test == 10) test_player10();
+	if(todas || test == 10) test_player11();
+	if(todas || test == 10) test_player12();
+	if(todas || test == 10) test_player13();
+	if(todas || test == 10) test_player14();
 
 	PRINT_RESULTS();
 
