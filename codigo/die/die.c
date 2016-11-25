@@ -15,10 +15,10 @@
 #include <time.h>
 
 struct _Die{
-	Id id; /*<!Die's id*/
-	int last; /*<!Last rolled value*/
-	int max; /*<!Maximum value to roll*/
-};
+	Id id; /*!<Die's id*/
+	int last; /*!<Last rolled value*/
+	int max; /*!<Maximum value to roll*/
+};/*!<Die structure*/
 
 /*
 * @brief It return a random value between inf and sup

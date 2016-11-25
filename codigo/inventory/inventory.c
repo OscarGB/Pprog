@@ -16,7 +16,7 @@
  struct _Inventory {
  	Set *set; /*<! Pointer to set structure */
  	int size; /*<! Size of the inventory */
- };
+ };/*!<Inventory structure*/
 
 
 /* !< Public functions*/

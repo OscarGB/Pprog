@@ -22,7 +22,7 @@ struct _Player {
 	char name[WORD_SIZE +1]; /*<!Name of the player*/
 	Id location; /*<!Location in the game*/
 	Inventory* bag; /*<!Inventory of the player */
-};
+};/*!<Player structure*/
 
 
 /*

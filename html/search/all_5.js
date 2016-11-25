@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['id',['id',['../struct___link.html#a150a709e86e7134d17cd063de6810b6c',1,'_Link']]],
+  ['id',['id',['../struct___die.html#a150a709e86e7134d17cd063de6810b6c',1,'_Die::id()'],['../struct___link.html#a150a709e86e7134d17cd063de6810b6c',1,'_Link::id()']]],
   ['inventory_2ec',['inventory.c',['../inventory_8c.html',1,'']]],
   ['inventory_2eh',['inventory.h',['../inventory_8h.html',1,'']]],
   ['inventory_5fadd_5fitem',['inventory_add_item',['../inventory_8c.html#a289b573f0e2b1912764b67a1a9182ac5',1,'inventory_add_item(Inventory *bag, Id id):&#160;inventory.c'],['../inventory_8h.html#a289b573f0e2b1912764b67a1a9182ac5',1,'inventory_add_item(Inventory *bag, Id id):&#160;inventory.c']]],

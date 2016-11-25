@@ -23,7 +23,7 @@ struct _Space {
     Id west; /*<!The id of the link located at the west*/
     Set *object; /*<!The objects in the space*/
     char gdesc[MAX_GDESC]; /*<!The gdesc of the space (The drawing)*/
-};
+};/*!<Space structure*/
 
 /**
 * @brief Creates a new space for the game
@@ -276,7 +276,7 @@ Id space_get_west(Space* space) {
 * @param Space* space (the space we want to know about)
 * @return Set* (The set inside the Space)
 */
-Set* space_get_object(Space* space) {
+Set* space_get_objects(Space* space) {
     if (!space) {
         return FALSE;
     }
@@ -343,7 +343,7 @@ STATUS space_print(Space* space) {
         fprintf(stdout, "---> No west link.\n");
     }
     
-   if (set_is_empty(space_get_object(space)) == FALSE) {
+   if (set_is_empty(space_get_objects(space)) == FALSE) {
         fprintf(stdout, "---> Object in the space.\n");
     } else {
         fprintf(stdout, "---> No object in the space.\n");

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['state',['state',['../struct___link.html#a876b486d3a5241a126bd5751c5f70f79',1,'_Link']]]
+  ['max',['max',['../struct___die.html#ae1e1dde676c120fa6d10f3bb2c14059e',1,'_Die']]]
 ];
