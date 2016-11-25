@@ -3,7 +3,7 @@ var indexSectionsWithContent =
   0: "_cdfgilmnopst",
   1: "_",
   2: "cdgilopst",
-  3: "cgils",
+  3: "cgilps",
   4: "cins",
   5: "ls",
   6: "fm"

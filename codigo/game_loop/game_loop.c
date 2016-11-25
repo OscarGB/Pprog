@@ -21,9 +21,9 @@
 * @author José Ignacio Gómez
 * @date 18/11/2016
 * @param int argc (number of arguments)
-         char **[argv] (number of arguments)
-         int *flag (log flag)
-         int *nvflag (no verbose flag)
+* @param char **[argv] (number of arguments)
+* @param int *flag (log flag)
+* @param int *nvflag (no verbose flag)
 * @return int -1 if ERROR, the position of the log file if OK
 */
 int check_flags(int argc, char **argv, int *flag, int *nvflag){
@@ -94,7 +94,17 @@ int check_flags(int argc, char **argv, int *flag, int *nvflag){
 	return position;
 }
 
-void print_log(Command* command,STATUS log,FILE* l){
+/**
+* @brief Prints the file for the log
+* @author Óscar Gómez
+* @date 25/11/2016
+* @param Command* command (The command itself)
+* @param STATUS log (The status if the command was succesfully executed)
+* @param FILE* l (The file where it's going to print)
+* @return void
+*/
+
+void print_log(Command* command, STATUS log, FILE* l){
 	if(!l || !command){
 		return;
 	}

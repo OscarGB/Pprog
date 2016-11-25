@@ -112,12 +112,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="player_8h__dep__incl.png" border="0" usemap="#codigo_2player_2player_8hdep" alt=""/></div>
 <map name="codigo_2player_2player_8hdep" id="codigo_2player_2player_8hdep">
-<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="241,80,383,107"/>
-<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="347,251,490,278"/>
-<area shape="rect" id="node7" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="507,80,656,107"/>
-<area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="5,155,168,196"/>
-<area shape="rect" id="node5" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="243,155,381,196"/>
-<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="160,244,299,285"/>
+<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="241,87,383,114"/>
+<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="347,266,490,293"/>
+<area shape="rect" id="node7" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="507,87,656,114"/>
+<area shape="rect" id="node8" href="player__test_8c.html" title="Main to test the Player module. " alt="" coords="680,80,805,121"/>
+<area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="5,169,168,211"/>
+<area shape="rect" id="node5" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="243,169,381,211"/>
+<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="160,259,299,300"/>
 </map>
 </div>
 </div>
@@ -126,7 +127,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:acdc7844fbd4d45737d4aa56834d37829"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acdc7844fbd4d45737d4aa56834d37829"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_OBJECTS</b>&#160;&#160;&#160;10 /*Used to know the bag size*/</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_OBJECTS</b>&#160;&#160;&#160;1000 /*Used to know the bag size*/</td></tr>
 <tr class="separator:acdc7844fbd4d45737d4aa56834d37829"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -161,6 +162,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>player_drop_object</b
 <tr class="memitem:a441afe1f73f8b1bee77e0a98ba13ac8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a441afe1f73f8b1bee77e0a98ba13ac8d"></a>
 BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>player_pick_object</b> (<a class="el" href="struct___player.html">Player</a> *player, Id id)</td></tr>
 <tr class="separator:a441afe1f73f8b1bee77e0a98ba13ac8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c0af7f079f5992e907c79830e9e75d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c0af7f079f5992e907c79830e9e75d3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>player_get_bag_size</b> (<a class="el" href="struct___player.html">Player</a> *player)</td></tr>
+<tr class="separator:a6c0af7f079f5992e907c79830e9e75d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It defines the functionality of the player. </p>
