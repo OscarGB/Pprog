@@ -24,12 +24,12 @@
 #endif
 
 struct _Game{
-  Player* player; /*<! Pointer to Player Structure */
-  Object* object[MAX_IDS + 1]; /*<! Array of pointers to Object Structure */
-  int num_objects; /*<! Number of objects of the Game */
-  Space* spaces[MAX_SPACES]; /*<! Array of pointers to Space Structure */
-  Die* die; /*<! Pointer to Die Structure */
-  Link *links[MAX_LINKS]; /*<! Array of pointers to Link Structure */
+  Player* player; /*!< Pointer to Player Structure */
+  Object* object[MAX_IDS + 1]; /*!< Array of pointers to Object Structure */
+  int num_objects; /*!< Number of objects of the Game */
+  Space* spaces[MAX_SPACES]; /*!< Array of pointers to Space Structure */
+  Die* die; /*!< Pointer to Die Structure */
+  Link *links[MAX_LINKS]; /*!< Array of pointers to Link Structure */
   char desc[WORD_SIZE+1]; /* !< For inspect command*/
 };
 
@@ -79,7 +79,7 @@ Id     game_get_object_location(Game* game, char *symbol);
 * @return OK if it was successfuly initialized
 */
 Game* game_init(Game* game) {
-  int i; /* <! Variable used for loops*/
+  int i; /* !< Variable used for loops*/
 
   game = (Game *) malloc (sizeof(Game));
   if(!game)
@@ -491,7 +491,7 @@ void game_print_data(Game* game) {
 */
 void game_print_screen(Game* game){
   Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID; /* !< Ids for locations*/
-  Id id_l_back = NO_ID, id_l_next = NO_ID; /*<! Ids of the links*/
+  Id id_l_back = NO_ID, id_l_next = NO_ID; /*!< Ids of the links*/
   Space* space_act = NULL; /* !< Pointers to spaces needed to print the game*/
   Space* space_back = NULL;
   Space* space_next = NULL;
@@ -921,7 +921,7 @@ STATUS callback_DROP(Game* game, char *symbol){
   int i;
 
   if(strlen(symbol) == 1){
-    for(i=0; i< game->num_objects; i++){ /*<! Seeing if the symbol is associated to an object */
+    for(i=0; i< game->num_objects; i++){ /*!< Seeing if the symbol is associated to an object */
     	if(object_get_symbol(game->object[i]) == symbol[0]){
     		object_id = object_get_id(game->object[i]);
       	object = game->object[i];
@@ -930,7 +930,7 @@ STATUS callback_DROP(Game* game, char *symbol){
     }
   }
   else if(strlen(symbol) > 1){
-    for(i=0; i< game->num_objects; i++){ /*<! Seeing if the symbol is associated to an object */
+    for(i=0; i< game->num_objects; i++){ /*!< Seeing if the symbol is associated to an object */
       if(strcmp(object_get_name(game->object[i]), symbol) == 0){
         object_id = object_get_id(game->object[i]);
         object = game->object[i];
@@ -1060,7 +1060,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
     if(player_location == NO_ID) return ERROR;
 
     if(strlen(symbol) == 1){
-      if(symbol[0] == 's' || symbol[0] == 'S'){ /*<! Inspecting space */
+      if(symbol[0] == 's' || symbol[0] == 'S'){ /*!< Inspecting space */
         	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
         		if(player_location==space_get_id(game->spaces[i])){
         		    strcpy(game->desc, space_get_name(game->spaces[i]));
@@ -1068,8 +1068,8 @@ STATUS callback_INSPECT(Game* game, char *symbol){
         		}
         	}
               return ERROR;
-      }else{ /*<! Inspecting an object */
-  	     for(i=0; i< game->num_objects; i++){ /*<! If player has the object or they're in the same field */
+      }else{ /*!< Inspecting an object */
+  	     for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
   		      if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){
   			       if(object_get_symbol(game->object[i]) == symbol[0])
   				        obj = game->object[i];
@@ -1084,7 +1084,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
     }
 
     else if(strlen(symbol) > 1){
-      if(strcmp(symbol, "space") == 0 || strcmp(symbol, "Space") == 0){ /*<! Inspecting space */
+      if(strcmp(symbol, "space") == 0 || strcmp(symbol, "Space") == 0){ /*!< Inspecting space */
           for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
             if(player_location==space_get_id(game->spaces[i])){
                 strcpy(game->desc, space_get_name(game->spaces[i]));
@@ -1092,8 +1092,8 @@ STATUS callback_INSPECT(Game* game, char *symbol){
             }
           }
               return ERROR;
-      }else{ /*<! Inspecting an object */
-         for(i=0; i< game->num_objects; i++){ /*<! If player has the object or they're in the same field */
+      }else{ /*!< Inspecting an object */
+         for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
             if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){
                if(strcmp(object_get_name(game->object[i]), symbol) == 0)
                   obj = game->object[i];
