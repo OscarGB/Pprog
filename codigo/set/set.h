@@ -10,7 +10,7 @@
 #ifndef SET_H
 #define SET_H
 
-#define MAX_IDS 4 /*! The max amount of players	is 4*/
+#define MAX_IDS 1000 /*! The max amount of objects	is 4*/
 
 #include "types.h"
 
