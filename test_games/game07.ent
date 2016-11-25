@@ -1,0 +1,26 @@
+grab obj20
+go north
+grab obj21
+go north
+grab obj22
+go north
+grab obj23
+go north
+grab obj24
+go north
+grab obj25
+go north
+grab obj26
+go north
+grab obj27
+go north
+grab obj28
+go north
+grab obj29
+leave obj20
+go south
+go north
+grab obj29
+leave obj29
+grab obj20
+quit
