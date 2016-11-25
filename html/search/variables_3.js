@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['max',['max',['../struct___die.html#ae1e1dde676c120fa6d10f3bb2c14059e',1,'_Die']]]
+  ['east',['east',['../struct___space.html#a87a8169b3b69dd4f299b6d0a1974e412',1,'_Space']]]
 ];

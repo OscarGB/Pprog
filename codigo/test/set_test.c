@@ -1,10 +1,10 @@
 #include "test.h"
 #include "space.h"
 
-#define MAX_TESTS 24
+#define MAX_TESTS 17
 #define ID 1
 
-BOOL test_set1(){ /*<! Test set_create*/
+BOOL test_set1(){ /*!< Test set_create*/
 	BOOL res= FALSE;
 	Set* set=NULL;
 	set = set_create();
@@ -15,7 +15,7 @@ BOOL test_set1(){ /*<! Test set_create*/
 	
 }
 
-BOOL test_space2(){ /*<! Test set_destroy with alloc'd set*/
+BOOL test_set2(){ /*!< Test set_destroy with alloc'd set*/
 	Set* set;
 	BOOL result=FALSE;
 	STATUS res=ERROR;
@@ -26,7 +26,7 @@ BOOL test_space2(){ /*<! Test set_destroy with alloc'd set*/
 	return result;
 }
 
-BOOL test_space3(){ /*<! Test set_destroy with not alloc'd set*/
+BOOL test_set3(){ /*!< Test set_destroy with not alloc'd set*/
 	STATUS res=OK;
 	BOOL result=FALSE;
 	res=set_destroy(NULL);
@@ -36,7 +36,7 @@ BOOL test_space3(){ /*<! Test set_destroy with not alloc'd set*/
 }
 
 
-BOOL test_space4(){ /*<! Test set_add with alloc'd set*/
+BOOL test_set4(){ /*!< Test set_add with alloc'd set*/
 	Set* set;
 	STATUS res=FALSE;
 	BOOL result=FALSE;
@@ -50,19 +50,18 @@ BOOL test_space4(){ /*<! Test set_add with alloc'd set*/
 	return result;
 }
 
-BOOL test_space5(){ /*<! Test set_add with not alloc'd set*/
-	Set* set;
+BOOL test_set5(){ /*!< Test set_add with not alloc'd set*/
+	Set* set=NULL;
 	STATUS res=FALSE;
 	BOOL result=FALSE;;
 	
 	res=set_add(set, ID);
-	set_destroy(set);
 	if(res==ERROR) result=TRUE;
 	TEST_PRINT(result);
 	return result;
 }
 
-BOOL test_space6(){ /*<! Test set_delete with alloc'd set*/
+BOOL test_set6(){ /*!< Test set_delete with alloc'd set*/
 	Set* set;
 	STATUS res=FALSE;
 	BOOL result=FALSE;
@@ -78,21 +77,19 @@ BOOL test_space6(){ /*<! Test set_delete with alloc'd set*/
 	return result;
 }
 
-BOOL test_space7(){ /*<! Test set_delete with not alloc'd set*/
-	Set* set;
+BOOL test_set7(){ /*!< Test set_delete with not alloc'd set*/
+	Set* set=NULL;
 	STATUS res=FALSE;
 	BOOL result=FALSE;
 	
 	set_add(set, ID);
 	res=set_delete(set, ID);
-
-	set_destroy(set);
 	if(res==ERROR) result=TRUE;
 	TEST_PRINT(result);
 	return result;
 }
 
-BOOL test_space8(){ /*<! Test set_print with alloc'd set*/
+BOOL test_set8(){ /*!< Test set_print with alloc'd set*/
 	Set* set;
 	BOOL result=FALSE;
 	set= set_create();
@@ -102,115 +99,103 @@ BOOL test_space8(){ /*<! Test set_print with alloc'd set*/
 	return result;;
 }
 
-BOOL test_space9(){ /*<! Test set_print with not alloc'd set*/
+BOOL test_set9(){ /*!< Test set_print with not alloc'd set*/
+	Set* set=NULL;
+	BOOL result=FALSE;
+	if(set_print(set)==ERROR) result=TRUE;
+	TEST_PRINT(result);
+	return result;;
+}
+
+BOOL test_set10(){ /*!< Test set_is_empty with empty alloc'd set*/
 	Set* set;
 	BOOL result=FALSE;
 	set= set_create();
-	if(set_print(set)==ERROR) result=TRUE;
+	result=set_is_empty(set);
 	set_destroy(set);
 	TEST_PRINT(result);
 	return result;;
 }
 
-BOOL test_space5(){ /*<! Test space_set_north and space_get_north with alloc'd space*/
-	
-	Space* space;
-	Id test=-1;
-	BOOL result=FALSE;
-	space = space_create(ID);
-
-	space_set_north(space, ID);
-	test=space_get_north(space);
-	if(test==ID) result=TRUE;
-	space_destroy(space);
-	TEST_PRINT(result);
-	return result;
-}
-
-BOOL test_space6(){ /*<! Test space_set_south and space_get_south with alloc'd space*/
-	
-	Space* space;
-	Id test=-1;
-	BOOL result=FALSE;
-	space = space_create(ID);
-
-	space_set_south(space, ID);
-	test=space_get_south(space);
-	if(test==ID) result=TRUE;
-	space_destroy(space);
-	TEST_PRINT(result);
-	return result;
-}
-
-BOOL test_space7(){ /*<! Test space_set_east and space_get_east with alloc'd space*/
-		
-	Space* space;
-	Id test=-1;
-	BOOL result=FALSE;
-	space = space_create(ID);
-
-	space_set_east(space, ID);
-	test=space_get_east(space);
-	if(test==ID) result=TRUE;
-	space_destroy(space);
-	TEST_PRINT(result);
-	return result;
-}
-
-BOOL test_space8(){ /*<! Test space_set_west and space_get_west with alloc'd space*/
-	
-	Space* space;
-	Id test=-1;
-	BOOL result=FALSE;
-	space = space_create(ID);
-
-	space_set_west(space, ID);
-	test=space_get_west(space);
-	if(test==ID) result=TRUE;
-	space_destroy(space);
-	TEST_PRINT(result);
-	return result;
-}
-
-BOOL test_space9(){ /*<! Test space_add_object and space_is_object_in with alloc'd space*/
-
-	Space* space;
-	BOOL result=FALSE;
-	space = space_create(ID);
-
-	space_add_object(space, ID);
-	result=space_is_object_in(space, ID);
-	space_destroy(space);
-	TEST_PRINT(result);
-	return result;
-}
-
-BOOL test_space10(){ /*<! Test space_get_object with alloc'd space*/
-	
+BOOL test_set11(){ /*!< Test set_is_empty with not empty alloc'd set*/
 	Set* set;
-	Space* space;
 	BOOL result=FALSE;
-	space = space_create(ID);
-
-	space_add_object(space, 100);
-	set=space_get_object(space);
-	if(set_delete(set, 100)==OK) result=TRUE;
-	space_destroy(space);
+	set= set_create();
+	set_add(set, ID);
+	result=!(set_is_empty(set));
+	set_destroy(set);
 	TEST_PRINT(result);
-	return result;
+	return result;;
 }
 
-
-BOOL test_space12(){ /*Test space_set_gdesc and space_get_gdesc with alloc'd space*/
-
-	Space* space;
+BOOL test_set12(){ /*!< Test set_is_empty with not alloc'd set*/
+	Set* set;
 	BOOL result=FALSE;
-	space = space_create(ID);
-	space_set_gdesc(space, NAME);
-	if(!strcmp(NAME, space_get_gdesc(space))) result=TRUE;
-	space_destroy(space);
+	set= set_create();
+	set_add(set, ID);
+	result=!(set_is_empty(set));
+	set_destroy(set);
 	TEST_PRINT(result);
-	return result;
+	return result;;
+}
+
+BOOL test_set13(){ /*!< Test set_is_full with not full alloc'd set*/
+	Set* set;
+	BOOL result=FALSE;
+	set= set_create();
+	set_add(set, ID);
+	result=!(set_is_full(set));
+	set_destroy(set);
+	TEST_PRINT(result);
+	return result;;
+}
+
+BOOL test_set14(){ /*!< Test set_is_full with full alloc'd set*/
+	int i;
+	Set* set=NULL;
+	BOOL result=FALSE;
+	set= set_create();
+	for(i=0; i<MAX_IDS; i++){
+		set_add(set, ID+i);
+	}
+	result=set_is_full(set);
+	set_destroy(set);
+	TEST_PRINT(result);
+	return result;;
+}
+
+BOOL test_set15(){ /*!< Test set_is_full with not alloc'd set*/
+	Set* set=NULL;
+	BOOL result=FALSE;
+	set= set_create();
+	result=!(set_is_full(set));
+	set_destroy(set);
+	TEST_PRINT(result);
+	return result;;
+}
+
+BOOL test_set16(){ /*!< Test set_get_num_ids with alloc'd set*/
+	Set* set=NULL;
+	BOOL result=FALSE;
+	set= set_create();
+	set_add(set, ID);
+	set_add(set, ID+1);
+	set_add(set, ID+2);
+	if(set_get_num_ids(set)==3) result=TRUE;
+	set_destroy(set);
+	TEST_PRINT(result);
+	return result;;
+}
+
+BOOL test_set17(){ /*!< Test set_get_num_ids with alloc'd set*/
+	Set* set=NULL;
+	BOOL result=FALSE;
+	set= set_create();
+	set_add(set, ID+7);
+	if(set_is_id(set,ID+7)) result=TRUE;
+	set_destroy(set);
+	TEST_PRINT(result);
+	return result;;
 }
 
 
@@ -243,6 +228,11 @@ int main(int argc, char* argv[]){
 	if(todas || test == 10) test_set10();
 	if(todas || test == 11) test_set11();
 	if(todas || test == 12) test_set12();
+	if(todas || test == 12) test_set13();
+	if(todas || test == 12) test_set14();
+	if(todas || test == 12) test_set15();
+	if(todas || test == 12) test_set16();
+	if(todas || test == 12) test_set17();
 
 
 

@@ -10,11 +10,11 @@
 #include "link.h"
 #include "types.h"
 
-#define MAX_TESTS 32
+#define MAX_TESTS 31
 #define ID 3
 #define ID1 5
 #define ID2 8
-#define NAME "Testing"
+#define NAME "ZELDA"
 
 
 BOOL test_link1(){

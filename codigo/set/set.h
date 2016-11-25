@@ -105,7 +105,7 @@ BOOL set_is_empty(Set* set);
 
 
 /*
-* @brief gives the number of stored ids
+* @brief Checks if id is in the set
 * @author Óscar Gómez, Jose Ignacio Gómez
 * @date 14/10/2016
 * @param set pointer, id
