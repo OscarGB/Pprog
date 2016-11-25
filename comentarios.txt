@@ -6,8 +6,22 @@
 
 	- Los archivos log para ejecutar con el comando -l deben acabar en .log, en caso contrario no serán eliminados por el Makefile.
 
+	- Un ejemplo de ejecución sería: ./JuegoOcaPlus loader.dat -nv -l check.log < entrada.oca
+
 //FICHEROS DE DATOS
 
 	- Los ficheros de espacios, links y objetos se ubicarán en el mismo archivo, con el formato de datos elegido (#s: para espacio, #o: para objeto, #l: para link).
 
+//MAKEFILE
 
+	- make: Genera el juego.
+	- make test: Genera los tests.
+	- make debug: Genera los dos anteriores.
+	- make nocolors: Genera los dos primeros con ejecuciones sin colores (para terminales que no lo acepten).
+	- make clean: Limpia la raiz de ficheros necesarios en compilación, logs, outs...
+	- make doc: Genera la documentación mediante Doxygen.
+	- make opendoc: Abre la documentación.
+
+//TEST_GAMES
+
+	- Nuestro ejecutable, pese a funcionar correctamente, da ERROR con los ficheros de pruebas proporcionados por el equipo docente, debido a que el formato de los ficheros de carga son diferentes.

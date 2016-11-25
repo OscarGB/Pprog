@@ -1136,15 +1136,15 @@ STATUS callback_GO(Game* game, char *symbol){
 
     if(strlen(symbol) == 1){
       if(symbol[0] == 'n'){ /* Go north */ 
-  	   callback_BACK(game);
+  	   return callback_BACK(game);
       }
 
       if(symbol[0] == 's'){ /* Go south */ 
-  	   callback_NEXT(game);
+  	   return callback_NEXT(game);
       }
 
       if(symbol[0] == 'e'){ /* Go east */ 
-  	   callback_JUMP(game);
+  	   return callback_JUMP(game);
       }
 
       if(symbol[0] == 'w'){ /* Go west */
@@ -1172,7 +1172,7 @@ STATUS callback_GO(Game* game, char *symbol){
 
         			        return game_set_player_location(game, west_id);
               			}
-        			else{
+        			      else{
         			        return ERROR;
               			}
                 	}
@@ -1180,20 +1180,20 @@ STATUS callback_GO(Game* game, char *symbol){
 
       }
 
-    return ERROR;
+    return OK;
   }
 
   else if(strlen(symbol) > 1){
       if(strcmp(symbol, "north") == 0){ /* Go north */ 
-       callback_BACK(game);
+       return callback_BACK(game);
       }
 
       if(strcmp(symbol, "south") == 0){ /* Go south */ 
-       callback_NEXT(game);
+       return callback_NEXT(game);
       }
 
       if(strcmp(symbol, "east") == 0){ /* Go east */ 
-       callback_JUMP(game);
+       return callback_JUMP(game);
       }
 
       if(strcmp(symbol, "west") == 0){ /* Go west */
@@ -1218,10 +1218,9 @@ STATUS callback_GO(Game* game, char *symbol){
                       }
                     } 
                     if (west_id != NO_ID) {
-
                       return game_set_player_location(game, west_id);
                     }
-              else{
+                    else{
                       return ERROR;
                     }
                   }
@@ -1229,9 +1228,9 @@ STATUS callback_GO(Game* game, char *symbol){
 
       }
 
-    return ERROR;
+    return OK;
   }
 
 
-return OK;
+return ERROR;
 }
