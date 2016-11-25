@@ -13,9 +13,9 @@
 #include <stdio.h>
 #include "types.h"
 
-#define NOT_ROLLED -1
+#define NOT_ROLLED -1 /*!< Value for a not rolled die*/
 
-typedef struct _Die Die; /*<! Definition of the Die structure */
+typedef struct _Die Die; /*!< Definition of the Die structure */
 
 
 /*
