@@ -23,9 +23,10 @@ BOOL test_space1(){ /*<! Test space_create with id and space_get_id*/
 BOOL test_space2(){ /*<! Test space_destroy with alloc'd space*/
 	Space* space;
 	BOOL result=FALSE;
+	STATUS res=ERROR;
 	space = space_create(ID);
-	space_destroy(space);
-	if(space==NULL) result=TRUE;
+	res=space_destroy(space);
+	if(res==OK) result=TRUE;
 	TEST_PRINT(result);
 	return result;
 }
@@ -44,7 +45,7 @@ BOOL test_space4(){ /*<! Test space_get_name and space_set_name with alloc'd spa
 	Space* space;
 	STATUS res1=FALSE, res2=FALSE;
 	BOOL result=FALSE;
-	char* name;
+	const char* name;
 
 	space = space_create(ID);
 	res1=space_set_name(space, NAME);
