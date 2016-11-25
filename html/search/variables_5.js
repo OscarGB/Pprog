@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['state',['state',['../struct___link.html#a876b486d3a5241a126bd5751c5f70f79',1,'_Link']]]
+  ['id',['id',['../struct___die.html#a150a709e86e7134d17cd063de6810b6c',1,'_Die::id()'],['../struct___link.html#a150a709e86e7134d17cd063de6810b6c',1,'_Link::id()'],['../struct___object.html#a150a709e86e7134d17cd063de6810b6c',1,'_Object::id()'],['../struct___player.html#a150a709e86e7134d17cd063de6810b6c',1,'_Player::id()'],['../struct___space.html#a150a709e86e7134d17cd063de6810b6c',1,'_Space::id()']]]
 ];
