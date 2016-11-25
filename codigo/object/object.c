@@ -19,7 +19,7 @@ struct _Object{
 	char symbol; /*<!symbol of the object*/
 	Id location; /*<!Location in the game*/
 	char desc[WORD_SIZE+1]; /*<!Written description of the object*/
-};
+};/*!<Object structure*/
 
 
 /*

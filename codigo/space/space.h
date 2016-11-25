@@ -157,7 +157,7 @@ Id space_get_west(Space* space);
 * @param Space* space (the space we want to know about)
 * @return Set* (The set inside the Space)
 */
-Set* space_get_object(Space* space);
+Set* space_get_objects(Space* space);
 
 /**
 * @brief Checks if the object is in the given space
