@@ -1,0 +1,10 @@
+go north: ERROR
+go south: ERROR
+go east: ERROR
+go west: ERROR
+go up: ERROR
+go down: ERROR
+grab obj1: ERROR
+leave obj1: ERROR
+examine obj1: ERROR
+quit : OK

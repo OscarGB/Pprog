@@ -124,7 +124,7 @@ dist: #Comando de generación de un comprimido para la distribución del program
 	@echo "--->Generating documentation with Doxygen"
 	@nohup doxygen Doxyfile
 	@echo "--->Creating tgz for program's distribution"
-	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ informes_pruebas/ reuniones/ html/ makefile *.dat Doxyfile *.oca
+	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ informes_pruebas/ reuniones/ html/ makefile *.dat Doxyfile *.oca test_games/
 
 doc: #Comando de generación de la documentación
 	@echo "--->Generating documentation with Doxygen"
