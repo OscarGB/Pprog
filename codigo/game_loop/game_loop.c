@@ -94,6 +94,77 @@ int check_flags(int argc, char **argv, int *flag, int *nvflag){
 	return position;
 }
 
+void print_log(Command* command,STATUS log,FILE* l){
+	if(!l || !command){
+		return;
+	}
+	switch (command_get_cmd(command)) {
+		case UNKNOWN:
+			if(log == OK){
+				fprintf(l, "UNKNOWN : OK\n");
+			}
+			else{
+				fprintf(l, "UNKNOWN : ERROR\n");
+			}
+			break;
+		case QUIT:
+			if(log == OK){
+				fprintf(l, "Quit : OK\n");
+			}
+			else{
+				fprintf(l, "Quit : ERROR\n");
+			}
+			break;
+		case GO:
+			if(log == OK){
+				fprintf(l, "Go %s : OK\n", command_get_symbol(command));
+			}
+			else{
+				fprintf(l,"Go %s : ERROR\n", command_get_symbol(command));
+			}
+			break;
+		
+		case PICK:
+			if(log == OK){
+				fprintf(l, "Pick %s : OK\n", command_get_symbol(command));
+			}
+			else{
+				fprintf(l, "Pick %s : ERROR\n", command_get_symbol(command));
+			}
+			break;
+		case DROP:
+			if(log == OK){
+				fprintf(l, "Drop %s : OK\n", command_get_symbol(command));
+			}
+			else{
+				fprintf(l, "Drop %s : ERROR\n", command_get_symbol(command));
+			}
+			break;
+		case ROLL:
+			if(log == OK){
+				fprintf(l, "Roll : OK\n");
+			}
+			else{
+				fprintf(l, "Roll : ERROR\n");
+			}
+			break;
+		case INSPECT:
+			if(log == OK){
+				fprintf(l, "Inspect %s : OK\n", command_get_symbol(command));
+			}
+			else{
+				fprintf(l, "Inspect %s : ERROR\n", command_get_symbol(command));
+			}
+			break;
+		case NO_CMD:
+			fprintf(l, "NO_CMD\n");
+			break;
+		default: /* We must never arrive here*/
+		    fprintf(l, "ERROR\n");
+	}
+	return;
+}
+
 /*
 * @brief function main for the program, runs the game.
 * it creates the command inside
@@ -145,91 +216,13 @@ int main(int argc, char *argv[]){
 			game_print_screen(game);
 		}
 
-		 get_user_input(command);
-		 log = game_update(game, command);
-		 /*Log mode*/
-		 if(flag == 1){
-		 	switch (command_get_cmd(command)) {
-			  case UNKNOWN:
-			  	if(log == OK){
-			  		fprintf(l, "UNKNOWN : OK\n");
-			  	}
-			  	else{
-			  		fprintf(l, "UNKNOWN : ERROR\n");
-			  	}
-			  	break;
-			  case QUIT:
-			  	if(log == OK){
-			  		fprintf(l, "QUIT : OK\n");
-			  	}
-			  	else{
-			  		fprintf(l, "QUIT : ERROR\n");
-			  	}
-			  	break;
-			  case NEXT:
-			    if(log == OK){
-			  		fprintf(l, "NEXT : OK\n");
-			  	}
-			  	else{
-			  		fprintf(l,"NEXT : ERROR\n");
-			  	}
-			  	break;
-			  case BACK:
-			    if(log == OK){
-			  		fprintf(l, "BACK : OK\n");
-			  	}
-			  	else{
-			  		fprintf(l, "BACK : ERROR\n");
-			  	}
-			  	break;
-			  case JUMP:
-			    if(log == OK){
-			  		fprintf(l, "JUMP : OK\n");
-			  	}
-			  	else{
-			  		fprintf(l, "JUMP : ERROR\n");
-			  	}
-			  	break;
-			  case PICK:
-			    if(log == OK){
-			  		fprintf(l, "PICK : OK\n");
-			  	}
-			  	else{
-			  		fprintf(l, "PICK : ERROR\n");
-			  	}
-			  	break;
-			  case DROP:
-			    if(log == OK){
-			  		fprintf(l, "DROP : OK\n");
-			  	}
-			  	else{
-			  		fprintf(l, "DROP : ERROR\n");
-			  	}
-			  	break;
-			  case ROLL:
-			    if(log == OK){
-			  		fprintf(l, "ROLL : OK\n");
-			  	}
-			  	else{
-			  		fprintf(l, "ROLL : ERROR\n");
-			  	}
-			  	break;
-			  case INSPECT:
-			    if(log == OK){
-			  		fprintf(l, "INSPECT : OK\n");
-			  	}
-			  	else{
-			  		fprintf(l, "INSPECT : ERROR\n");
-			  	}
-			  	break;
-			  case NO_CMD:
-			  	fprintf(l, "NO_CMD\n");
-			    break;
-			  default: /* We must never arrive here*/
-			    fprintf(l, "ERROR\n");
-			  }
-		 	}
+		get_user_input(command);
+		log = game_update(game, command);
+		/*Log mode*/
+		if(flag == 1){
+			print_log(command, log, l); 	
 		}
+	}
 	game_destroy(game);
 	command_destroy(command);
 	/*Log mode*/
