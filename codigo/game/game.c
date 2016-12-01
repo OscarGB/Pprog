@@ -42,6 +42,8 @@ STATUS callback_QUIT(Game* game);
 STATUS callback_NEXT(Game* game);
 STATUS callback_BACK(Game* game);
 STATUS callback_JUMP(Game* game);
+STATUS callback_UP(Game* game);
+STATUS callback_BACK(Game* game);
 STATUS callback_DROP(Game* game, char *symbol);
 STATUS callback_PICK(Game* game, char *symbol);
 STATUS callback_ROLL(Game* game);
@@ -855,7 +857,6 @@ STATUS callback_BACK(Game* game) {
   }
   return ERROR;
 }
-
 
 /**
 * @brief callback for "jump" instruction

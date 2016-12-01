@@ -87,6 +87,25 @@ STATUS space_set_east(Space* space, Id id);
 STATUS space_set_west(Space* space, Id id);
 
 /**
+* @brief Sets the Id of the upper Link
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* Space (The space which need to be set)
+* @param Id id (The id of the Link located up)
+* @return STATUS (OK if everything went well, ERROR if something went wrong)
+*/
+STATUS space_set_up(Space* space, Id id);
+
+/**
+* @brief Sets the Id of the lower Link
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* Space (The space which need to be set)
+* @param Id id (The id of the Link located down)
+* @return STATUS (OK if everything went well, ERROR if something went wrong)
+*/
+STATUS space_set_down(Space* space, Id id);
+/**
 * @brief Adds an object to the space
 * @author Óscar Gómez
 * @date 4/11/2016
@@ -151,6 +170,23 @@ Id space_get_east(Space* space);
 Id space_get_west(Space* space);
 
 /**
+* @brief Gets the Id of the upper Link
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* Space (The space which need to be set)
+* @return Id id (The id of the link located up)
+*/
+Id space_get_up(Space* space, Id id);
+
+/**
+* @brief Gets the Id of the lower Link
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* Space (The space which need to be set)
+* @return Id id (The id of the link located down)
+*/
+STATUS space_get_down(Space* space);
+/**
 * @brief It returns the Set of objects inside the Space
 * @author Óscar Gómez
 * @date 4/11/2106
@@ -196,5 +232,24 @@ STATUS space_set_gdesc(Space* space, char* gdesc);
 * @return char* (The gdesc inside the Space)
 */
 char* space_get_gdesc(Space* space);
+
+/**
+* @brief Sets the light of the input space
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* space (The space to modify)
+* @param BOOL (TRUE to illuminate)
+* @return STATUS (OK if it was successfuly set)
+*/
+STATUS space_set_light(Space* space, BOOL light);
+
+/**
+* @brief Gets the light status of the input space
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* space
+* @return BOOL (TRUE if illuminated, FALSE if not)
+*/
+BOOL space_get_light(Space* space);
 
 #endif
