@@ -21,8 +21,11 @@ struct _Space {
     Id south; /*!<The id of the link located at the south*/
     Id east; /*!<The id of the link located at the east*/
     Id west; /*!<The id of the link located at the west*/
+	Id up; /*!<The id of the link located up*/
+	Id down; /*!<The id of the link located down*/
     Set *object; /*!<The objects in the space*/
     char gdesc[MAX_GDESC]; /*!<The gdesc of the space (The drawing)*/
+	BOOL light; /*!<TRUE if the space is illuminated*/
 };/*!<Space structure*/
 
 /**
@@ -54,12 +57,17 @@ Space* space_create(Id id) {
     newSpace->south = NO_ID;
     newSpace->east = NO_ID;
     newSpace->west = NO_ID;
+	newSpace->up = NO_ID;
+	newSpace->down = NO_ID;
 
     newSpace->object = set_create();
     if(!newSpace->object){
         space_destroy(newSpace);
+		newSpace = NULL;
         return NULL;
     }
+
+	newSpace->light = TRUE;
 
     strcpy(newSpace->gdesc,"");
 
@@ -154,7 +162,7 @@ STATUS space_set_east(Space* space, Id id) {
 
 /**
 * @brief Sets the Id of the west Link
-* @author JÓscar Gómez
+* @author Óscar Gómez
 * @date 4/11/2016
 * @param Space* Space (The space which need to be set)
 * @param Id id (The id of the Link located at the west)
@@ -165,6 +173,39 @@ STATUS space_set_west(Space* space, Id id) {
         return ERROR;
     }
     space->west = id;
+    return OK;
+}
+
+/**
+* @brief Sets the Id of the upper Link
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* Space (The space which need to be set)
+* @param Id id (The id of the Link located up)
+* @return STATUS (OK if everything went well, ERROR if something went wrong)
+
+*/
+STATUS space_set_up(Space* space, Id id) {
+    if (!space || id == NO_ID) {
+        return ERROR;
+    }
+    space->up = id;
+    return OK;
+}
+
+/**
+* @brief Sets the Id of the lower Link
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* Space (The space which need to be set)
+* @param Id id (The id of the Link located down)
+* @return STATUS (OK if everything went well, ERROR if something went wrong)
+*/
+STATUS space_set_down(Space* space, Id id) {
+    if (!space || id == NO_ID) {
+        return ERROR;
+    }
+    space->down = id;
     return OK;
 }
 
@@ -270,6 +311,36 @@ Id space_get_west(Space* space) {
 }
 
 /**
+* @brief Gets the Id of the upper Link
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* Space (The space which need to be set)
+* @return Id id (The id of the link located up)
+*/
+Id space_get_up(Space* space, Id id) {
+    if (!space) {
+        return NO_ID;
+    }
+
+    return space->up;
+}
+
+/**
+* @brief Gets the Id of the lower Link
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* Space (The space which need to be set)
+* @return Id id (The id of the link located down)
+*/
+STATUS space_get_down(Space* space) {
+    if (!space) {
+        return NO_ID;
+    }
+    
+    return space->down;
+}
+
+/**
 * @brief It returns the Set of objects inside the Space
 * @author Óscar Gómez
 * @date 4/11/2106
@@ -308,12 +379,14 @@ BOOL space_is_object_in(Space* space, Id id){
 */
 STATUS space_print(Space* space) {
     Id idaux = NO_ID; /*!<Auxiliar Id*/
+	char light[5] = ""; /*!<To check light status*/
   
     if (!space) {
         return ERROR;
     }
+ 
 
-    fprintf(stdout, "--> Space (Id: %ld; Name: %s)\n", space->id, space->name);
+	fprintf(stdout, "--> Space (Id: %ld; Name: %s)\n", space->id, space->name);
     
     idaux = space_get_north(space);
     if (NO_ID != idaux) {
@@ -354,6 +427,14 @@ STATUS space_print(Space* space) {
         return OK;
     }
     fprintf(stdout, "---> Gdesc: %s\n", space->gdesc);
+	
+	if(space_get_light(space) == TRUE)
+		strcpy(light, "ON");
+	else
+		strcpy(light, "OFF");
+
+
+	fprintf(stdout, "---> Light: %s\n", light);
 
     return OK;
 }
@@ -390,4 +471,41 @@ char* space_get_gdesc(Space* space){
     }
  
     return space->gdesc;
+}
+
+
+/**
+* @brief Sets the light of the input space
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* space (The space to modify)
+* @param BOOL (TRUE to illuminate)
+* @return STATUS (OK if it was successfuly set)
+*/
+STATUS space_set_light(Space* space, BOOL light){
+ 
+    if(!space){
+        return ERROR;
+    }
+
+    space->light = light;
+
+    return OK;
+}
+
+/**
+
+* @brief Gets the light status of the input space
+* @author Andrea Ruiz
+* @date 1/12/2016
+* @param Space* space
+* @return BOOL (TRUE if illuminated, FALSE if not)
+
+*/
+BOOL space_get_light(Space* space){
+    if(!space){
+        return FALSE;
+    }
+ 
+    return space->light;
 }
