@@ -23,7 +23,7 @@ struct _Graphics{
 
 /**
 * @brief Init the module Graphics
-* @author José Ignacio Gómez, Óscar Gómez
+* @author Óscar Gómez
 * @date 01/12/2016
 * @param none
 * @return void
@@ -41,7 +41,7 @@ void screen_init(){
 
 /**
 * @brief Draw the borders of dialogue and commands zones
-* @author José Ignacio Gómez, Óscar Gómez
+* @author Óscar Gómez
 * @date 01/12/2016
 * @param Graphics* gra (The graphics pointer to draw)
 * @return void
