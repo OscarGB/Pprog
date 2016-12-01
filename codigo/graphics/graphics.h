@@ -21,12 +21,7 @@ typedef enum{
 
 typedef struct _Graphics Graphics; /*<! Definition of the structure "Graphics"*/
 
-
 void draw_borders(Graphics *gra);
-
-void screen_init();
-
-void screen_destroy();
 
 Graphics* graphics_create();
 
