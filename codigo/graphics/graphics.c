@@ -52,3 +52,41 @@ void screen_init(){
 	curs_set(FALSE);
 	return;
 }
+
+
+/**
+* @brief Creates a graphic structure
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 01/12/2016
+* @param none
+* @return 
+*/
+Graphics* graphics_create(){
+	Graphics *gra = NULL;
+
+	gra = (Graphics *) malloc (sizeof(Graphics));
+	if(!gra) return NULL;
+
+	gra->playground = newwin(WIN1_Y, WIN1_X, 0, 0);
+	if (!gra->playground){
+		free(gra);
+		return NULL;
+	}
+
+	gra->dialogue = newwin(WIN2_Y, WIN2_X, 0, WIN1_X + 1);
+	if (!gra->dialogue){
+		delwin(gra->playground);
+		free(gra);
+		return NULL;
+	}
+
+	gra->commands = newwin(WIN3_Y, WIN3_X, WIN1_Y + 1, 0);
+	if (!gra->commands){
+		delwin(gra->playground);
+		delwin(gra->dialogue);
+		free(gra);
+		return NULL;
+	}
+
+	return gra;
+}
