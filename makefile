@@ -3,7 +3,7 @@
 # Author: Óscar Gómez Borzdynski             #
 #--------------------------------------------#
 
-DEPS = game command generic space set player object die game_reader link inventory test	#Name of the module's folders
+DEPS = game command generic space set player object die game_reader link inventory test graphics	#Name of the module's folders
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefix -I for the compilation with headers
 
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
