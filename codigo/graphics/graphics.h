@@ -6,27 +6,29 @@
  * @date 01/12/2016
  */
 
-#define WIN1_X 42 /*<! X size of window 1*/
-#define WIN1_Y 21 /*<! Y size of window 1*/
-#define WIN2_X 38 /*<! X size of window 2*/
-#define WIN2_Y 21 /*<! Y size of window 2*/
-#define WIN3_X 80 /*<! X size of window 3*/
-#define WIN3_Y 3  /*<! Y size of window 3*/
+#define WIN1_X 42 /*!< X size of window 1*/
+#define WIN1_Y 21 /*!< Y size of window 1*/
+#define WIN2_X 38 /*!< X size of window 2*/
+#define WIN2_Y 21 /*!< Y size of window 2*/
+#define WIN3_X 80 /*!< X size of window 3*/
+#define WIN3_Y 3  /*!< Y size of window 3*/
 
 typedef enum{
-	PLAYGROUND = 0,
-	COMMANDS,
-	DIALOGUE
-}ZONE;
+	PLAYGROUND = 0, /*!< Playground zone*/
+	COMMANDS, /*!< Command zone*/
+	DIALOGUE /*!< Dialogue zone*/
+}ZONE; /*!< Enumeration for the screen zones*/
 
-typedef struct _Graphics Graphics; /*<! Definition of the structure "Graphics"*/
+typedef struct _Graphics Graphics; /*!< Definition of the structure "Graphics"*/
 
-
+/**
+* @brief Draw the borders of dialogue and commands zones
+* @author Óscar Gómez
+* @date 01/12/2016
+* @param Graphics* gra (The graphics pointer to draw)
+* @return void
+*/
 void draw_borders(Graphics *gra);
-
-void screen_init();
-
-void screen_destroy();
 
 Graphics* graphics_create();
 
