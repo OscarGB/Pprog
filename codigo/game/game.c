@@ -599,7 +599,7 @@ STATUS callback_NEXT(Game* game) {
 
 
 /**
-* @brief callbac for "back" instruction
+* @brief callback for "back" instruction
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
@@ -637,6 +637,104 @@ STATUS callback_BACK(Game* game) {
       }
       if (north_id != NO_ID) {
         return game_set_player_location(game, north_id);
+      }
+      else{
+        return ERROR;
+      }
+    }
+  }
+  return ERROR;
+}
+
+/**
+* @brief callback for "up" instruction
+* @author Andrea Ruiz
+* @date 2/12/2016
+* @param game pointer
+* @return OK if it went ok
+*/
+STATUS callback_UP(Game* game){
+
+  int i = 0, j = 0; /* !< Variables used for loops*/
+  Id current_id = NO_ID, up_id = NO_ID; /* !< Current space id and sout id*/
+  Id link_id = NO_ID; /* !< Link id*/
+  Id space_id = NO_ID; /* !< Space id*/
+  
+  space_id = game_get_player_location(game);
+  if (space_id == NO_ID) {
+    return ERROR;
+  }
+  
+  for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
+    current_id = space_get_id(game->spaces[i]);
+    if (current_id == space_id) {
+      link_id = space_get_up(game->spaces[i]);
+      for(j = 0; j < (4 * MAX_SPACES); j++){
+        if(link_get_id(game->links[j]) == link_id){
+          if(link_get_conection1(game->links[j]) == current_id){
+            up_id = link_get_conection2(game->links[j]);
+            break;
+          }
+          else{
+            up_id = link_get_conection1(game->links[j]);
+            break;
+          }
+        }
+        else{
+          up_id = NO_ID;
+        }
+      }
+      if (up_id != NO_ID) {
+        return game_set_player_location(game, up_id);
+      }
+      else{
+        return ERROR;
+      }
+    }
+  }
+  return ERROR;
+
+}
+
+/**
+* @brief callback for "down" instruction
+* @author Andrea Ruiz
+* @date 2/12/2016
+* @param game pointer
+* @return OK if it went ok
+*/
+STATUS callback_DOWN(Game* game){
+  int i = 0, j = 0; /* !< Variables used for loops*/
+  Id current_id = NO_ID, down_id = NO_ID; /* !< Current space id and sout id*/
+  Id link_id = NO_ID; /* !< Link id*/
+  Id space_id = NO_ID; /* !< Space id*/
+  
+  space_id = game_get_player_location(game);
+  if (space_id == NO_ID) {
+    return ERROR;
+  }
+  
+  for (i = 0; i < MAX_SPACES && game->spaces[i] != NULL; i++) {
+    current_id = space_get_id(game->spaces[i]);
+    if (current_id == space_id) {
+      link_id = space_get_down(game->spaces[i]);
+      for(j = 0; j < (4 * MAX_SPACES); j++){
+        if(link_get_id(game->links[j]) == link_id){
+          if(link_get_conection1(game->links[j]) == current_id){
+            down_id = link_get_conection2(game->links[j]);
+            break;
+          }
+          else{
+            down_id = link_get_conection1(game->links[j]);
+            break;
+          }
+        }
+        else{
+          down_id = NO_ID;
+        }
+      }
+      if (down_id != NO_ID) {
+        return game_set_player_location(game, down_id);
       }
       else{
         return ERROR;
