@@ -19,6 +19,12 @@ struct _Object{
 	char symbol; /*!<symbol of the object*/
 	Id location; /*!<Location in the game*/
 	char desc[WORD_SIZE+1]; /*!<Written description of the object*/
+	BOOL movable; /*!<Object can be moved or not*/
+	BOOL moved; /*!<Object has been moved or not*/
+	BOOL hidden; /*!<Object is hidden and not mentioned in description of space*/
+	Id open; /*!<Object can open the given ID link*/
+	BOOL light; /*!<Object can illuminate spaces or not*/
+	BOOL on_off; /*!<Object which can light is on or off*/
 };/*!<Object structure*/
 
 
