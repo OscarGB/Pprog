@@ -6,16 +6,16 @@
  * @date 01/12/2016
  */
 
-#include <ncurses.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "graphics.h"
+#include <unistd.h>
+#include <ncurses.h>
+#include <stdlib.h>
 
 struct _Graphics{
 	WINDOW* playground; /*!< Declared window for the playing zone*/
 	WINDOW* dialogue; /*!< Declared winloguedow for dialogue zone*/
 	WINDOW* commands; /*!< Declared winloguedow for command zone*/
-}/*!< Graphics structure*/
+};/*!< Graphics structure*/
 
 /*--------------------------------------------*/
 /* Private functions                          */
@@ -56,13 +56,13 @@ void screen_destroy(){
 * @author Óscar Gómez
 * @date 01/12/2016
 * @param Graphics* gra (The graphics pointer to draw)
-* @return void
+* @return STATUS (OK if everything worked, ERROR if didnt)
 */
-void draw_borders(Graphics* gra) {
+STATUS draw_borders(Graphics* gra) {
 	int i;
 
 	if(!gra){
-		return;
+		return ERROR;
 	}
 
 	/*Borders of dialogue*/
@@ -95,6 +95,8 @@ void draw_borders(Graphics* gra) {
 		mvwprintw(gra->commands, 0, i, "-");
 		mvwprintw(gra->commands, WIN3_Y - 1, i, "-");
 	}
+
+	return OK;
 }
 
 /**
@@ -139,12 +141,12 @@ Graphics* graphics_create(){
 * @author Óscar Gómez
 * @date 02/12/2016
 * @param Graphics* gra (The graphics to be destroy)
-* @return void
+* @return STATUS (OK if everything worked, ERROR if didnt)
 */
-void graphics_destroy(Graphics* gra){
+STATUS graphics_destroy(Graphics* gra){
 	
 	if(!gra){
-		return;
+		return ERROR;
 	}
 	/*Delete the windows*/
 	delwin(gra->playground);
@@ -155,7 +157,7 @@ void graphics_destroy(Graphics* gra){
 
 	free(gra);
 
-	return;
+	return OK;
 }
 
 /**
@@ -163,7 +165,7 @@ void graphics_destroy(Graphics* gra){
 * @author Óscar Gómez
 * @date 02/12/2016
 * @param Graphics* gra (The graphics to be cleared)
-* @return void
+* @return STATUS (OK if everything worked, ERROR if didnt)
 */
 STATUS graphics_clear(Graphics* gra){
 
@@ -174,7 +176,7 @@ STATUS graphics_clear(Graphics* gra){
 	}
 
 	for(i = PLAYGROUND; i <= DIALOGUE; i++){
-		if(graphics_clear_window(gra, i) == ERROR){
+		if(graphics_clear_zone(gra, i) == ERROR){
 			return ERROR;
 		}
 	}
@@ -183,12 +185,12 @@ STATUS graphics_clear(Graphics* gra){
 }
 
 /**
-* @brief Clears a graphics structure
+* @brief Clears a zone of the graphics structure
 * @author Óscar Gómez
 * @date 02/12/2016
-* @param Graphics* gra (The graphics to be cleared)
+* @param Graphics* gra (The graphics)
 * @param ZONE zone (The zone to be cleared)
-* @return void
+* @return STATUS (OK if everything worked, ERROR if didnt)
 */
 STATUS graphics_clear_zone(Graphics* gra, ZONE zone){
 	if(!gra){
@@ -208,4 +210,53 @@ STATUS graphics_clear_zone(Graphics* gra, ZONE zone){
 		default:
 			return ERROR;
 	}
+}
+
+/**
+* @brief Prints a string in a determined zone
+* @author Óscar Gómez
+* @date 02/12/2016
+* @param Graphics* gra (The grahpcis)
+* @param ZONE zone (The zone in which you are going to print)
+* @param char* print (The string to be printed)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS print_in_zone(Graphics* gra, ZONE zone , char* print){
+	
+	if(!gra || !print){
+		return ERROR;
+	}
+
+	switch(zone){
+		case PLAYGROUND:
+			wprintw(gra->playground, print);
+			return OK;
+		case COMMANDS:
+			wprintw(gra->commands, print);
+			return OK;
+		case DIALOGUE:
+			wprintw(gra->dialogue, print);
+			return OK;
+		default:
+			return ERROR;
+	}
+}
+
+/**
+* @brief Refreshes the graphics
+* @author Óscar Gómez
+* @date 02/12/2016
+* @param Graphics* gra (The graphics to refresh)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS graphics_refresh(Graphics* gra){
+
+	if(!gra){
+		return ERROR;
+	}
+
+	wrefresh(gra->playground);
+	wrefresh(gra->dialogue);
+	wrefresh(gra->commands);
+	return OK;
 }

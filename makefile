@@ -6,6 +6,8 @@
 DEPS = game command generic space set player object die game_reader link inventory test graphics	#Name of the module's folders
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefix -I for the compilation with headers
 
+NCURSES = -lncurses
+
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
 
 ALL = JuegoOcaPlus 	#Executables to make with a make call
@@ -71,9 +73,13 @@ space_test.o: codigo/test/space_test.c
 	@echo "--->Generating space_test.o"
 	@gcc $(CFLAGS) -c codigo/test/space_test.c
 
-JuegoOcaPlus: game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
+JuegoOcaPlus: game_loop.o graphics.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creating executable JuegoOcaPlus"
-	@gcc $(CFLAGS) -o JuegoOcaPlus game_loop.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
+	@gcc $(CFLAGS) -o JuegoOcaPlus game_loop.o graphics.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o $(NCURSES)
+
+graphics.o: codigo/graphics/graphics.c
+	@echo "--->Generating graphics.o"
+	@gcc $(CFLAGS) -c codigo/graphics/graphics.c $(NCURSES)
 
 command.o: codigo/command/command.c 
 	@echo "--->Generating command.o"

@@ -6,6 +6,11 @@
  * @date 01/12/2016
  */
 
+#ifndef GRAPHICS_H
+#define GRAPHICS_H
+
+#include "types.h"
+
 #define WIN1_X 42 /*!< X size of window 1*/
 #define WIN1_Y 21 /*!< Y size of window 1*/
 #define WIN2_X 38 /*!< X size of window 2*/
@@ -22,15 +27,6 @@ typedef enum{
 typedef struct _Graphics Graphics; /*!< Definition of the structure "Graphics"*/
 
 /**
-* @brief Draw the borders of dialogue and commands zones
-* @author Óscar Gómez
-* @date 01/12/2016
-* @param Graphics* gra (The graphics pointer to draw)
-* @return void
-*/
-void draw_borders(Graphics *gra);
-
-/**
 * @brief Creates a graphics structure
 * @author José Ignacio Gómez
 * @date 01/12/2016
@@ -44,12 +40,56 @@ Graphics* graphics_create();
 * @author Óscar Gómez
 * @date 02/12/2016
 * @param Graphics* gra (The graphics to be destroy)
-* @return void
+* @return STATUS (OK if everything worked, ERROR if didnt)
 */
-void graphics_destroy(Graphics* gra);
+STATUS graphics_destroy(Graphics* gra);
 
-void clear_graphics(Graphics* gra);
+/**
+* @brief Draw the borders of dialogue and commands zones
+* @author Óscar Gómez
+* @date 01/12/2016
+* @param Graphics* gra (The graphics pointer to draw)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS draw_borders(Graphics *gra);
 
-void print_in_window(Graphics* gra, ZONE zone , char* print);
+/**
+* @brief Clears a graphics structure
+* @author Óscar Gómez
+* @date 02/12/2016
+* @param Graphics* gra (The graphics to be cleared)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS graphics_clear(Graphics* gra);
 
-void refresh_graphics(Graphics* gra);
+/**
+* @brief Clears a zone of the graphics structure
+* @author Óscar Gómez
+* @date 02/12/2016
+* @param Graphics* gra (The graphics)
+* @param ZONE zone (The zone to be cleared)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS graphics_clear_zone(Graphics* gra, ZONE zone);
+
+/**
+* @brief Prints a string in a determined zone
+* @author Óscar Gómez
+* @date 02/12/2016
+* @param Graphics* gra (The grahpcis)
+* @param ZONE zone (The zone in which you are going to print)
+* @param char* print (The string to be printed)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS print_in_zone(Graphics* gra, ZONE zone , char* print);
+
+/**
+* @brief Refreshes the graphics
+* @author Óscar Gómez
+* @date 02/12/2016
+* @param Graphics* gra (The graphics to refresh)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS graphics_refresh(Graphics* gra);
+
+#endif
