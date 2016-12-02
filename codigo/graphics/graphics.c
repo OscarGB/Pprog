@@ -259,6 +259,8 @@ STATUS graphics_refresh(Graphics* gra){
 		return ERROR;
 	}
 
+	draw_borders(gra);
+	
 	wrefresh(gra->playground);
 	wrefresh(gra->dialogue);
 	wrefresh(gra->commands);
