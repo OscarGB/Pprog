@@ -110,7 +110,11 @@ Graphics* graphics_create(){
 	Graphics *gra = NULL;
 
 	gra = (Graphics *) malloc (sizeof(Graphics));
-	if(!gra) return NULL;
+	if(!gra){
+		return NULL;
+	}
+
+	screen_init();
 
 	gra->playground = newwin(WIN1_Y, WIN1_X, 0, 0);
 	if (!gra->playground){
@@ -258,6 +262,6 @@ STATUS graphics_refresh(Graphics* gra){
 	wrefresh(gra->playground);
 	wrefresh(gra->dialogue);
 	wrefresh(gra->commands);
-	
+
 	return OK;
 }

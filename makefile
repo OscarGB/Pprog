@@ -49,6 +49,10 @@ space_test: space_test.o space.o set.o
 	@echo "--->Creating executable space_test"
 	@gcc $(CFLAGS) -o space_test space_test.o space.o set.o
 
+graphics_test: graphics_test.o graphics.o
+	@echo "--->Creating executable graphics_test"
+	@gcc $(CFLAGS) -o graphics_test graphics_test.o graphics.o $(NCURSES)
+
 die_test.o: codigo/test/die_test.c 
 	@echo "--->Generating die_test.o"
 	@gcc $(CFLAGS) -c codigo/test/die_test.c
@@ -72,6 +76,10 @@ inventory_test.o: codigo/test/inventory_test.c
 space_test.o: codigo/test/space_test.c
 	@echo "--->Generating space_test.o"
 	@gcc $(CFLAGS) -c codigo/test/space_test.c
+
+graphics_test.o: codigo/test/graphics_test.c
+	@echo "--->Generating graphics_test.o"
+	@gcc $(CFLAGS) -c codigo/test/graphics_test.c $(NCURSES)
 
 JuegoOcaPlus: game_loop.o graphics.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creating executable JuegoOcaPlus"
