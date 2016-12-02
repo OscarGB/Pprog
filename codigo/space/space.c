@@ -25,7 +25,8 @@ struct _Space {
 	Id down; /*!<The id of the link located down*/
     Set *object; /*!<The objects in the space*/
     char gdesc[MAX_GDESC]; /*!<The gdesc of the space (The drawing)*/
-	BOOL light; /*!<TRUE if the space is illuminated*/
+	char agdesc[MAX_AGDESC]; /*!<Advanced gdesc of the space*/
+    BOOL light; /*!<TRUE if the space is illuminated*/
 };/*!<Space structure*/
 
 /**
@@ -70,6 +71,7 @@ Space* space_create(Id id) {
 	newSpace->light = TRUE;
 
     strcpy(newSpace->gdesc,"");
+	strcpy(newSpace->agdesc, "");
 
     return newSpace;
 }
@@ -113,7 +115,7 @@ STATUS space_set_name(Space* space, char* name) {
 }
 
 /**
-* @brief Sets the Id of the nort Link
+* @brief Sets the Id of the north Link
 * @author Óscar Gómez
 * @date 4/11/2016
 * @param Space* Space (The space which need to be set)
@@ -317,7 +319,7 @@ Id space_get_west(Space* space) {
 * @param Space* Space (The space which need to be set)
 * @return Id id (The id of the link located up)
 */
-Id space_get_up(Space* space, Id id) {
+Id space_get_up(Space* space) {
     if (!space) {
         return NO_ID;
     }
@@ -422,11 +424,17 @@ STATUS space_print(Space* space) {
         fprintf(stdout, "---> No object in the space.\n");
     }
 
-    if(strcmp(space->gdesc, "") == 0){
+    if(strcmp(space->gdesc, "") == 0)
         fprintf(stdout, "---> No gdesc\n");
-        return OK;
-    }
-    fprintf(stdout, "---> Gdesc: %s\n", space->gdesc);
+    else
+    	fprintf(stdout, "---> Gdesc: %s\n", space->gdesc);
+	
+
+	if(strcmp(space->agdesc, "") == 0)
+		fprintf(stdout, "---> No advanced gdesc\n");
+	else
+	   	fprintf(stdout, "---> Advanced gdesc: %s\n", space->agdesc);
+	
 	
 	if(space_get_light(space) == TRUE)
 		strcpy(light, "ON");
@@ -471,6 +479,41 @@ char* space_get_gdesc(Space* space){
     }
  
     return space->gdesc;
+}
+
+/**
+* @brief Sets the advanced gdesc of a Space
+* @author Andrea Ruiz
+* @date 2/12/2016
+* @param Space* space (The space to modify)
+* @param char* agdesc (The new agdesc)
+* @return STATUS (OK if it was successfuly set)
+*/
+STATUS space_set_agdec(Space* space, char* agdesc){
+
+	if(!space || !agdesc){
+		return ERROR;
+	}
+
+	strcpy(space->agdesc, agdesc);
+
+	return OK;
+}
+
+/**
+* @brief Returns the advanced gdesc of a space
+* @author Andrea Ruiz
+* @date 5/12/2016
+* @param Space* space (The space to inspect)
+* @return char* (The agdesc inside the Space)
+*/
+char* space_get_agdesc(Space* space){
+    
+	if(!space){
+        return NULL;
+    }
+ 
+    return space->agdesc;
 }
 
 
