@@ -35,6 +35,18 @@ void screen_init(){
 	return;
 }
 
+/**
+* @brief Ends the module Graphics
+* @author Óscar Gómez
+* @date 01/12/2016
+* @param none
+* @return void
+*/
+void screen_destroy(){
+	endwin();
+	return;
+}
+
 /*--------------------------------------------*/
 /* Public functions                           */
 /*--------------------------------------------*/
@@ -85,20 +97,12 @@ void draw_borders(Graphics* gra) {
 	}
 }
 
-void screen_init(){
-	initscr();
-	noecho();
-	curs_set(FALSE);
-	return;
-}
-
-
 /**
 * @brief Creates a graphic structure
-* @author José Ignacio Gómez, Óscar Gómez
+* @author José Ignacio Gómez
 * @date 01/12/2016
 * @param none
-* @return 
+* @return Graphics* (The created grapghics)
 */
 Graphics* graphics_create(){
 	Graphics *gra = NULL;
@@ -128,4 +132,80 @@ Graphics* graphics_create(){
 	}
 
 	return gra;
+}
+
+/**
+* @brief Destroys a graphics structure
+* @author Óscar Gómez
+* @date 02/12/2016
+* @param Graphics* gra (The graphics to be destroy)
+* @return void
+*/
+void graphics_destroy(Graphics* gra){
+	
+	if(!gra){
+		return;
+	}
+	/*Delete the windows*/
+	delwin(gra->playground);
+	delwin(gra->commands);
+	delwin(gra->dialogue);
+	/*End graphics*/
+	screen_destroy();
+
+	free(gra);
+
+	return;
+}
+
+/**
+* @brief Clears a graphics structure
+* @author Óscar Gómez
+* @date 02/12/2016
+* @param Graphics* gra (The graphics to be cleared)
+* @return void
+*/
+STATUS graphics_clear(Graphics* gra){
+
+	int i;
+
+	if(!gra){
+		return ERROR;
+	}
+
+	for(i = PLAYGROUND; i <= DIALOGUE; i++){
+		if(graphics_clear_window(gra, i) == ERROR){
+			return ERROR;
+		}
+	}
+
+	return OK;
+}
+
+/**
+* @brief Clears a graphics structure
+* @author Óscar Gómez
+* @date 02/12/2016
+* @param Graphics* gra (The graphics to be cleared)
+* @param ZONE zone (The zone to be cleared)
+* @return void
+*/
+STATUS graphics_clear_zone(Graphics* gra, ZONE zone){
+	if(!gra){
+		return ERROR;
+	}
+
+	switch(zone){
+		case PLAYGROUND:
+			wclear(gra->playground);
+			return OK;
+		case COMMANDS:
+			wclear(gra->commands);
+			return OK;
+		case DIALOGUE:
+			wclear(gra->dialogue);
+			return OK;
+		default:
+			return ERROR;
+	}
 }

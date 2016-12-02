@@ -30,8 +30,22 @@ typedef struct _Graphics Graphics; /*!< Definition of the structure "Graphics"*/
 */
 void draw_borders(Graphics *gra);
 
+/**
+* @brief Creates a graphics structure
+* @author José Ignacio Gómez
+* @date 01/12/2016
+* @param none
+* @return Graphics* (The created grapghics)
+*/
 Graphics* graphics_create();
 
+/**
+* @brief Destroys a graphics structure
+* @author Óscar Gómez
+* @date 02/12/2016
+* @param Graphics* gra (The graphics to be destroy)
+* @return void
+*/
 void graphics_destroy(Graphics* gra);
 
 void clear_graphics(Graphics* gra);
