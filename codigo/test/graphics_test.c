@@ -12,8 +12,8 @@
 #include <unistd.h>
 
 
-#define MAX_TESTS 2
-#define DELAY 1
+#define MAX_TESTS 5
+#define DELAY 30
 
 BOOL test_graphics1(){
 	Graphics* gra = NULL;
@@ -39,6 +39,39 @@ BOOL test_graphics2(){
 	return TRUE;
 }
 
+BOOL test_graphics3(){
+	if(graphics_destroy(NULL) == OK){
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+BOOL test_graphics4(){
+	Graphics* gra = NULL;
+	gra = graphics_create();
+	if(draw_borders(gra) == ERROR){
+		graphics_destroy(gra);
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	graphics_refresh(gra);
+	sleep(DELAY);
+	graphics_destroy(gra);
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+BOOL test_graphics5(){
+	if(draw_borders(NULL) != ERROR){
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
 int main(int argc, char* argv[]){
 	int test = 0;
 	int todas = 1;
@@ -57,6 +90,9 @@ int main(int argc, char* argv[]){
 
 	if(todas || test == 1) test_graphics1();
 	if(todas || test == 2) test_graphics2();
+	if(todas || test == 3) test_graphics3();
+	if(todas || test == 4) test_graphics4();
+	if(todas || test == 5) test_graphics5();
 
 	PRINT_RESULTS();
 

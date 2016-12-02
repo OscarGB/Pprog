@@ -132,7 +132,7 @@ STATUS player_set_location(Player* player, Id location) {
 */
 
 const char* player_get_name(Player* player) {
-	if (!player || strcmp(player->name, "\0") == 0) {
+	if (!player) {
 		return NULL;
 	}
 
@@ -171,7 +171,7 @@ BOOL player_drop_object (Player* player, Id id){
 		return FALSE;
 	}
 
-	if(inventory_delete_item(player->bag, id))
+	if(inventory_delete_item(player->bag, id) == OK)
 		return TRUE;
 
 	return FALSE;

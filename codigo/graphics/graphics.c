@@ -269,7 +269,7 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 			mvwprintw(gra->commands, 1, 1, "%s", print);
 			return OK;
 		case DIALOGUE:
-			wprintw(gra->dialogue, 1, 1, "%s", print);
+			mvwprintw(gra->dialogue, 1, 1, "%s", print);
 			return OK;
 		default:
 			return ERROR;

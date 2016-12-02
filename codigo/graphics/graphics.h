@@ -13,7 +13,7 @@
 
 #define WIN1_X 42 /*!< X size of window 1*/
 #define WIN1_Y 21 /*!< Y size of window 1*/
-#define WIN2_X 38 /*!< X size of window 2*/
+#define WIN2_X 37 /*!< X size of window 2*/
 #define WIN2_Y 21 /*!< Y size of window 2*/
 #define WIN3_X 80 /*!< X size of window 3*/
 #define WIN3_Y 3  /*!< Y size of window 3*/

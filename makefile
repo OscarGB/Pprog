@@ -11,7 +11,7 @@ NCURSES = -lncurses
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
 
 ALL = JuegoOcaPlus 	#Executables to make with a make call
-TEST = link_test die_test player_test inventory_test space_test set_test	#Executables to make with make test or make debug
+TEST = link_test die_test player_test inventory_test space_test set_test graphics_test	#Executables to make with make test or make debug
 ALL_DEBUG = $(ALL) $(TEST) #Executables to make with make debug
 
 all: $(ALL) #Generates only the main game

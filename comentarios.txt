@@ -25,3 +25,4 @@
 //TEST_GAMES
 
 	- Nuestro ejecutable, pese a funcionar correctamente, da ERROR con los ficheros de pruebas proporcionados por el equipo docente, debido a que el formato de los ficheros de carga son diferentes.
+	- Para correr graphics_test debes enviar la salida a un fichero de texto y leerlo con cat
