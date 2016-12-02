@@ -258,5 +258,6 @@ STATUS graphics_refresh(Graphics* gra){
 	wrefresh(gra->playground);
 	wrefresh(gra->dialogue);
 	wrefresh(gra->commands);
+	
 	return OK;
 }
