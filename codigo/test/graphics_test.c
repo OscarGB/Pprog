@@ -12,7 +12,7 @@
 #include <unistd.h>
 
 
-#define MAX_TESTS 1
+#define MAX_TESTS 2
 #define DELAY 1
 
 BOOL test_graphics1(){

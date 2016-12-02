@@ -19,11 +19,11 @@ typedef enum {
 } BOOL;
 
 typedef enum {
-    ERROR, OK
+    ERROR = -1, OK = 0
 } STATUS;
 
 typedef enum {
-    N, S, E, W
+    N = 0, NE, E, SE, S, SW, W, NW, C
 } DIRECTION;
 
 #endif
