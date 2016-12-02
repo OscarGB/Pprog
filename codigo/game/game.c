@@ -950,7 +950,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
       if(symbol[0] == 's' || symbol[0] == 'S'){ /*!< Inspecting space */
         	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
         		if(player_location==space_get_id(game->spaces[i])){
-        		    strcpy(game->desc, space_get_name(game->spaces[i]));
+        		    strcpy(game->desc, space_get_adesc(game->spaces[i]));
         		    return OK;	
         		}
         	}
@@ -974,7 +974,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
       if(strcmp(symbol, "space") == 0 || strcmp(symbol, "Space") == 0){ /*!< Inspecting space */
           for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
             if(player_location==space_get_id(game->spaces[i])){
-                strcpy(game->desc, space_get_name(game->spaces[i]));
+                strcpy(game->desc, space_get_adesc(game->spaces[i]));
                 return OK;  
             }
           }
@@ -1030,6 +1030,14 @@ STATUS callback_GO(Game* game, char *symbol){
   	   return callback_NEXT(game);
       }
 
+	  if(symbol[0] == 'u'){ /* Go up */
+	   return callback_UP(game); 
+	  }
+
+	  if(symbol[0] == 'd'){ /* Go down */
+	   return callback_DOWN(game);
+	  }
+
       if(symbol[0] == 'e'){ /* Go east */ 
   	   return callback_JUMP(game);
       }
@@ -1077,6 +1085,14 @@ STATUS callback_GO(Game* game, char *symbol){
 
       if(strcmp(symbol, "south") == 0){ /* Go south */ 
        return callback_NEXT(game);
+      }
+
+	  if(strcmp(symbol, "up") == 0){ /* Go up */ 
+       return callback_UP(game);
+      }
+
+	  if(strcmp(symbol, "down") == 0){ /* Go down */ 
+       return callback_DOWN(game);
       }
 
       if(strcmp(symbol, "east") == 0){ /* Go east */ 

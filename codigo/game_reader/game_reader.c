@@ -32,7 +32,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
   char name[WORD_SIZE] = ""; /*Name of the space read*/
   char gdesc[MAX_GDESC]; /*Gdesc (drawing of the space)*/
   char* toks = NULL; /*String for tokenization*/
-  Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID; /*Group of Ids for the space*/
+  Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID, up = NO_ID, down = NO_ID; /*Group of Ids for the space*/
   Space* space = NULL; /*Space pointer*/
   STATUS status = OK; /*Status set to OK*/
   
@@ -60,6 +60,10 @@ STATUS game_load_spaces(Game* game, char* filename) {
       south = atol(toks);
       toks = strtok(NULL, "|");
       west = atol(toks);
+      toks = strtok(NULL, "|");
+      up = atol(toks);
+      toks = strtok(NULL, "|");
+      down = atol(toks);
       toks = strtok(NULL, "|");
       if(strcmp(toks, "\n") != 0){
         strcpy(gdesc, "|");
@@ -90,7 +94,10 @@ STATUS game_load_spaces(Game* game, char* filename) {
       	space_set_east(space, east);
       	space_set_south(space, south);
       	space_set_west(space, west);
+	space_set_up(space, up);
+	space_set_down(space, down);
         space_set_gdesc(space, gdesc);
+	space_set_adesc(space, "To be written");
       	game_add_space(game, space);
       }
     }
