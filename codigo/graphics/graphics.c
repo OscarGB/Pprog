@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <ncurses.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct _Graphics{
 	WINDOW* playground; /*!< Declared window for the playing zone*/
@@ -45,6 +46,17 @@ void screen_init(){
 void screen_destroy(){
 	endwin();
 	return;
+}
+
+int str_cut(char *str, int begin, int len)
+{
+    int l = strlen(str);
+
+    if (len < 0) len = l - begin;
+    if (begin + len > l) len = l - begin;
+    memmove(str + begin, str + begin + len, l - len + 1);
+
+    return len;
 }
 
 /*--------------------------------------------*/
@@ -122,14 +134,14 @@ Graphics* graphics_create(){
 		return NULL;
 	}
 
-	gra->dialogue = newwin(WIN2_Y, WIN2_X, 0, WIN1_X + 1);
+	gra->dialogue = newwin(WIN2_Y, WIN2_X, 0, WIN1_X);
 	if (!gra->dialogue){
 		delwin(gra->playground);
 		free(gra);
 		return NULL;
 	}
 
-	gra->commands = newwin(WIN3_Y, WIN3_X, WIN1_Y + 1, 0);
+	gra->commands = newwin(WIN3_Y, WIN3_X, WIN1_Y, 0);
 	if (!gra->commands){
 		delwin(gra->playground);
 		delwin(gra->dialogue);
@@ -222,18 +234,44 @@ STATUS graphics_clear_zone(Graphics* gra, ZONE zone){
 * @date 02/12/2016
 * @param Graphics* gra (The grahpcis)
 * @param ZONE zone (The zone in which you are going to print)
-* @param DIRECTION dir (The direction of the space int he playground, will be omitted if the zone is different of PLAYGROUND)
-* @param char* print (The string to be printed)
+* @param DIRECTION dir (The direction of the space in the playground or dialogue, will be omitted if the zone is different of PLAYGROUND or DIALOGUE)
+* @param char* string (The string to be printed)
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
-STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
-	
-	if(!gra || !print){
+STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* string){
+	char print[WORD_SIZE];
+	int i = 0;
+
+	if(!gra || !string){
 		return ERROR;
 	}
 
+	print[0] = '\0';
+
 	switch(zone){
 		case PLAYGROUND:
+		if(strlen(string) > 14){
+					mvwprintw(gra->playground, 15, 13, "4");
+			while(1){
+				if(string[i] == '\0'){
+					mvwprintw(gra->playground, 15, 14, "1");
+					break;
+				}
+				if(((i+1) % 14) == 0){
+					mvwprintw(gra->playground, 15, 12, "2");
+					strcat(print, "\n");
+					strcat(print, &(string[i]));
+				}
+				else{
+					mvwprintw(gra->playground, 15, 11, "3");
+					strcat(print, &(string[i]));
+				}
+				i++;
+			}
+		}
+		else{
+			strcpy(print, string);
+		}
 			switch(dir){
 				case NW:
 					mvwprintw(gra->playground, 0, 0, "%s", print);
@@ -267,10 +305,18 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 			}
 		case COMMANDS:
 			mvwprintw(gra->commands, 1, 1, "%s", print);
-			return OK;
+			return OK;	
 		case DIALOGUE:
-			mvwprintw(gra->dialogue, 1, 1, "%s", print);
-			return OK;
+			switch(dir){
+				case N:
+					mvwprintw(gra->dialogue, 1, 1, "%s", print);
+					return OK;
+				case S:
+					mvwprintw(gra->dialogue, 10, 1, "%s", print);
+					return OK;
+				default:
+					return ERROR;
+			}
 		default:
 			return ERROR;
 	}

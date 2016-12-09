@@ -79,7 +79,7 @@ STATUS space_set_east(Space* space, Id id);
 
 /**
 * @brief Sets the Id of the west Link
-* @author JÓscar Gómez
+* @author Óscar Gómez
 * @date 4/11/2016
 * @param Space* Space (The space which need to be set)
 * @param Id id (The id of the Link located at the west)
