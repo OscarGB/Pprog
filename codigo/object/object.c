@@ -19,6 +19,13 @@ struct _Object{
 	char symbol; /*!<symbol of the object*/
 	Id location; /*!<Location in the game*/
 	char desc[WORD_SIZE+1]; /*!<Written description of the object*/
+	BOOL movable; /*!<Object can be moved or not*/
+	BOOL moved; /*!<Object has been moved or not*/
+	BOOL hidden; /*!<Object is hidden and not mentioned in description of space*/
+	Id open; /*!<Object can open the given ID link*/
+	BOOL light; /*!<Object can illuminate spaces or not*/
+	BOOL on_off; /*!<Object which can light is on or off*/
+	int duration; /*!< Amount of turns the object can still be on*/
 };/*!<Object structure*/
 
 
@@ -47,6 +54,13 @@ Object* object_create(Id id){
 	newObject->name[0]='\0';
 	newObject->symbol = CHAR_ERROR;
 	newObject->desc[0] = '\0';
+	newObject->movable = FALSE;
+	newObject->moved = FALSE;
+	newObject->light = FALSE;
+	newObject->hidden = FALSE;
+	newObject->on_off = FALSE;
+	newObject->open = NO_ID;
+	newObject->duration = 0;
 
 	return newObject;
 }
@@ -153,11 +167,116 @@ char object_get_symbol(Object* object){
 
 
 /*
-* @brief It gets the name of the given object
-* @author Óscar Gómez, Jose Ignacio Gómez.
-* @date 30/09/2016
+* @brief It gets the movable field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
 * @param Object pointer
-* @return char* (the name of the object)
+* @return BOOL (the movable field the object)
+*/
+
+BOOL object_get_movable(Object* object){
+	if(!object){
+		return FALSE;
+	}
+	return object->movable;
+}
+
+/*
+* @brief It gets the moved field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return BOOL (the moved field of the object)
+*/
+
+BOOL object_get_moved(Object* object){
+	if(!object){
+		return FALSE;
+	}
+	return object->moved;
+}
+
+/*
+* @brief It gets the hidden field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return BOOL (the hidden field of the object)
+*/
+
+BOOL object_get_hidden(Object* object){
+	if(!object){
+		return FALSE;
+	}
+	return object->hidden;
+}
+
+/*
+* @brief It gets the light field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return BOOL (the light field of the object)
+*/
+
+BOOL object_get_light(Object* object){
+	if(!object){
+		return FALSE;
+	}
+	return object->light;
+}
+
+/*
+* @brief It gets the on_off field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return BOOL (the on_off field of the object)
+*/
+
+BOOL object_get_on_off(Object* object){
+	if(!object){
+		return FALSE;
+	}
+	return object->on_off;
+}
+
+/*
+* @brief It gets the open field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return Id (the open field of the object)
+*/
+
+Id object_get_open(Object* object){
+	if(!object){
+		return NO_ID;
+	}
+	return object->open;
+}
+
+/*
+* @brief It gets the duration field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return int (the duration field of the object)
+*/
+
+int object_get_duration(Object* object){
+	if(!object){
+		return -1;
+	}
+	return object->duration;
+}
+
+/*
+* @brief It gets the name of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return int (the duration field of the object)
 */
 
 char* object_get_name(Object* object){
@@ -213,7 +332,12 @@ STATUS object_print(Object* object){
 		return ERROR;
 	}
 
-	fprintf(stdout, "--> Object (Id: %ld; Name: %s; Symbol: %c",object_get_id(object), object_get_name(object), object_get_symbol(object));
+	fprintf(stdout, "--> Object (Id: %ld; Name: %s; Symbol: %c; Location: %ld;\n"
+		"Desc: %s"
+		"Movable: %s; Moved: %s; Hidden: %s; Light: %s; On_Off: %s; Open: %ld; Duration: %d",
+		object->id, object->name, object->symbol, object->location, object->desc, GET_BOOL(object->movable), 
+		GET_BOOL(object->moved), GET_BOOL(object->hidden), GET_BOOL(object->light), GET_BOOL(object->on_off), 
+		object->open, object->duration);
 
 	return OK;
 }

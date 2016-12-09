@@ -21,11 +21,12 @@ struct _Space {
     Id south; /*!<The id of the link located at the south*/
     Id east; /*!<The id of the link located at the east*/
     Id west; /*!<The id of the link located at the west*/
-	Id up; /*!<The id of the link located up*/
-	Id down; /*!<The id of the link located down*/
+    Id up; /*!<The id of the link located up*/
+    Id down; /*!<The id of the link located down*/
     Set *object; /*!<The objects in the space*/
     char gdesc[MAX_GDESC]; /*!<The gdesc of the space (The drawing)*/
-	BOOL light; /*!<TRUE if the space is illuminated*/
+    BOOL light; /*!<TRUE if the space is illuminated*/
+    char adesc[MAX_adesc]; /*!<Advanced desc of the space*/
 };/*!<Space structure*/
 
 /**
@@ -57,19 +58,20 @@ Space* space_create(Id id) {
     newSpace->south = NO_ID;
     newSpace->east = NO_ID;
     newSpace->west = NO_ID;
-	newSpace->up = NO_ID;
-	newSpace->down = NO_ID;
+    newSpace->up = NO_ID;
+    newSpace->down = NO_ID;
 
     newSpace->object = set_create();
     if(!newSpace->object){
         space_destroy(newSpace);
-		newSpace = NULL;
+	newSpace = NULL;
         return NULL;
     }
 
-	newSpace->light = TRUE;
+    newSpace->light = TRUE;
 
     strcpy(newSpace->gdesc,"");
+    strcpy(newSpace->adesc, "");
 
     return newSpace;
 }
@@ -113,7 +115,7 @@ STATUS space_set_name(Space* space, char* name) {
 }
 
 /**
-* @brief Sets the Id of the nort Link
+* @brief Sets the Id of the north Link
 * @author Óscar Gómez
 * @date 4/11/2016
 * @param Space* Space (The space which need to be set)
@@ -317,7 +319,7 @@ Id space_get_west(Space* space) {
 * @param Space* Space (The space which need to be set)
 * @return Id id (The id of the link located up)
 */
-Id space_get_up(Space* space, Id id) {
+Id space_get_up(Space* space) {
     if (!space) {
         return NO_ID;
     }
@@ -332,7 +334,7 @@ Id space_get_up(Space* space, Id id) {
 * @param Space* Space (The space which need to be set)
 * @return Id id (The id of the link located down)
 */
-STATUS space_get_down(Space* space) {
+Id space_get_down(Space* space) {
     if (!space) {
         return NO_ID;
     }
@@ -422,11 +424,17 @@ STATUS space_print(Space* space) {
         fprintf(stdout, "---> No object in the space.\n");
     }
 
-    if(strcmp(space->gdesc, "") == 0){
+    if(strcmp(space->gdesc, "") == 0)
         fprintf(stdout, "---> No gdesc\n");
-        return OK;
-    }
-    fprintf(stdout, "---> Gdesc: %s\n", space->gdesc);
+    else
+    	fprintf(stdout, "---> Gdesc: %s\n", space->gdesc);
+	
+
+	if(strcmp(space->adesc, "") == 0)
+		fprintf(stdout, "---> No advanced gdesc\n");
+	else
+	   	fprintf(stdout, "---> Advanced gdesc: %s\n", space->adesc);
+	
 	
 	if(space_get_light(space) == TRUE)
 		strcpy(light, "ON");
@@ -471,6 +479,41 @@ char* space_get_gdesc(Space* space){
     }
  
     return space->gdesc;
+}
+
+/**
+* @brief Sets the advanced description of a Space
+* @author Andrea Ruiz
+* @date 2/12/2016
+* @param Space* space (The space to modify)
+* @param char* adesc (The new adesc)
+* @return STATUS (OK if it was successfuly set)
+*/
+STATUS space_set_adesc(Space* space, char* adesc){
+
+	if(!space || !adesc){
+		return ERROR;
+	}
+
+	strcpy(space->adesc, adesc);
+
+	return OK;
+}
+
+/**
+* @brief Returns the advanced description of a space
+* @author Andrea Ruiz
+* @date 2/12/2016
+* @param Space* space (The space to inspect)
+* @return char* (The adesc inside the Space)
+*/
+char* space_get_adesc(Space* space){
+    
+    if(!space){
+        return NULL;
+    }
+ 
+    return space->adesc;
 }
 
 

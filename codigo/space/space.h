@@ -17,6 +17,7 @@ typedef struct _Space Space; /*!<Definition of the Space structure*/
 #define MAX_SPACES 10000 /*!<Max number of spaces*/
 #define FIRST_SPACE 1 /*!<Definition of the first space*/
 #define MAX_GDESC 42 /*!<Max number of characters in gdesc*/
+#define MAX_adesc 100 /*!<Max number of characters in advanced gdesc*/
 
 /**
 * @brief Creates a new space for the game
@@ -176,7 +177,7 @@ Id space_get_west(Space* space);
 * @param Space* Space (The space which need to be set)
 * @return Id id (The id of the link located up)
 */
-Id space_get_up(Space* space, Id id);
+Id space_get_up(Space* space);
 
 /**
 * @brief Gets the Id of the lower Link
@@ -185,7 +186,7 @@ Id space_get_up(Space* space, Id id);
 * @param Space* Space (The space which need to be set)
 * @return Id id (The id of the link located down)
 */
-STATUS space_get_down(Space* space);
+Id space_get_down(Space* space);
 /**
 * @brief It returns the Set of objects inside the Space
 * @author Óscar Gómez
@@ -233,6 +234,24 @@ STATUS space_set_gdesc(Space* space, char* gdesc);
 */
 char* space_get_gdesc(Space* space);
 
+/**
+* @brief Sets the advanced description of a Space
+* @author Andrea Ruiz
+* @date 2/12/2016
+* @param Space* space (The space to modify)
+* @param char* adesc (The new adesc)
+* @return STATUS (OK if it was successfuly set)
+*/
+STATUS space_set_adesc(Space* space, char* adesc);
+
+/**
+* @brief Returns the advanced description of a space
+* @author Andrea Ruiz
+* @date 5/12/2016
+* @param Space* space (The space to inspect)
+* @return char* (The adesc inside the Space)
+*/
+char* space_get_adesc(Space* space);
 /**
 * @brief Sets the light of the input space
 * @author Andrea Ruiz

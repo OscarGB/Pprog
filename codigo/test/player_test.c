@@ -54,7 +54,7 @@ BOOL test_player3(){ /*Test for set_name*/
 BOOL test_player4(){ /*Test for get_name (no name)*/
 	Player* player = NULL;
 	player = player_create(ID);
-	if(player_get_name(player) != ERROR){
+	if(strcmp(player_get_name(player), "") != 0){
 		player_destroy(player);
 		TEST_PRINT(FALSE);
 		return FALSE;

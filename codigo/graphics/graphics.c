@@ -222,10 +222,11 @@ STATUS graphics_clear_zone(Graphics* gra, ZONE zone){
 * @date 02/12/2016
 * @param Graphics* gra (The grahpcis)
 * @param ZONE zone (The zone in which you are going to print)
+* @param DIRECTION dir (The direction of the space int he playground, will be omitted if the zone is different of PLAYGROUND)
 * @param char* print (The string to be printed)
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
-STATUS print_in_zone(Graphics* gra, ZONE zone , char* print){
+STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 	
 	if(!gra || !print){
 		return ERROR;
@@ -233,13 +234,42 @@ STATUS print_in_zone(Graphics* gra, ZONE zone , char* print){
 
 	switch(zone){
 		case PLAYGROUND:
-			wprintw(gra->playground, print);
-			return OK;
+			switch(dir){
+				case NW:
+					mvwprintw(gra->playground, 0, 0, "%s", print);
+					return OK;
+				case N:
+					mvwprintw(gra->playground, 0, SPACE_SIZE_X, "%s", print);
+					return OK;
+				case NE:
+					mvwprintw(gra->playground, 0, 2*SPACE_SIZE_X, "%s", print);
+					return OK;
+				case W:
+					mvwprintw(gra->playground, SPACE_SIZE_Y, 0, "%s", print);
+					return OK;
+				case C:
+					mvwprintw(gra->playground, SPACE_SIZE_Y, SPACE_SIZE_X, "%s", print);
+					return OK;
+				case E:
+					mvwprintw(gra->playground, SPACE_SIZE_Y, 2*SPACE_SIZE_X, "%s", print);
+					return OK;
+				case SW:
+					mvwprintw(gra->playground, 2*SPACE_SIZE_Y, 0, "%s", print);
+					return OK;
+				case S:
+					mvwprintw(gra->playground, 2*SPACE_SIZE_Y, SPACE_SIZE_X, "%s", print);
+					return OK;
+				case SE:
+					mvwprintw(gra->playground, 2*SPACE_SIZE_Y, 2*SPACE_SIZE_X, "%s", print);
+					return OK;
+				default:
+					return ERROR;
+			}
 		case COMMANDS:
-			wprintw(gra->commands, print);
+			mvwprintw(gra->commands, 1, 1, "%s", print);
 			return OK;
 		case DIALOGUE:
-			wprintw(gra->dialogue, print);
+			mvwprintw(gra->dialogue, 1, 1, "%s", print);
 			return OK;
 		default:
 			return ERROR;
@@ -259,6 +289,8 @@ STATUS graphics_refresh(Graphics* gra){
 		return ERROR;
 	}
 
+	draw_borders(gra);
+	
 	wrefresh(gra->playground);
 	wrefresh(gra->dialogue);
 	wrefresh(gra->commands);

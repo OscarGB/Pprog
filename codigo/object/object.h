@@ -9,6 +9,8 @@
 
 #ifndef OBJECT_H
 #define OBJECT_H
+#define GET_BOOL(x) ("(x==0)? TRUE: FALSE)")
+
 
 #define CHAR_ERROR '!' /*!< Macro for char_error (!)*/
 
