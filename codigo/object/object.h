@@ -130,5 +130,149 @@ Id object_get_location(Object* object);
 
 STATUS object_print(Object* object);
 
+/*
+* @brief It gets the movable field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return BOOL (the movable field the object)
+*/
+
+BOOL object_get_movable(Object* object);
+/*
+* @brief It sets the movable field of the given object
+* @author Óscar Pinto.
+* @date 09/12/2016
+* @param Object pointer
+* @return BOOL (the moved field of the object)
+*/
+
+Object* object_set_movable(Object* object, BOOL value);
+
+/*
+* @brief It gets the moved field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @param BOOL value
+* @return BOOL (the moved field of the object)
+*/
+
+BOOL object_get_moved(Object* object);
+
+/*
+* @brief It sets the moved field of the given object
+* @author Óscar Pinto.
+* @date 09/12/2016
+* @param Object pointer
+* @param BOOL value
+* @return BOOL (the moved field of the object)
+*/
+
+Object* object_set_moved(Object* object, BOOL value);
+
+/*
+* @brief It gets the hidden field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return BOOL (the hidden field of the object)
+*/
+
+BOOL object_get_hidden(Object* object);
+
+/*
+* @brief It sets the hidden field of the given object
+* @author Óscar Pinto.
+* @date 09/12/2016
+* @param Object pointer
+* @param BOOL value
+* @return BOOL (the moved field of the object)
+*/
+
+Object* object_set_hidden(Object* object, BOOL value);
+
+
+/*
+* @brief It gets the light field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return BOOL (the light field of the object)
+*/
+
+BOOL object_get_light(Object* object);
+
+/*
+* @brief It sets the light field of the given object
+* @author Óscar Pinto.
+* @date 09/12/2016
+* @param Object pointer
+* @param BOOL value
+* @return BOOL (the moved field of the object)
+*/
+
+Object* object_set_light(Object* object, BOOL value);
+/*
+* @brief It gets the on_off field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return BOOL (the on_off field of the object)
+*/
+
+BOOL object_get_on_off(Object* object);
+
+/*
+* @brief It sets the on_off field of the given object
+* @author Óscar Pinto.
+* @date 09/12/2016
+* @param Object pointer
+* @param BOOL value
+* @return BOOL (the moved field of the object)
+*/
+
+Object* object_set_on_off(Object* object, BOOL value);
+
+/*
+* @brief It gets the open field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return Id (the open field of the object)
+*/
+
+Id object_get_open(Object* object);
+/*
+* @brief It sets the open field of the given object
+* @author Óscar Pinto.
+* @date 09/12/2016
+* @param Object pointer
+* @param id value
+* @return BOOL (the moved field of the object)
+*/
+
+Object* object_set_open(Object* object, id value);
+
+/*
+* @brief It gets the duration field of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return int (the duration field of the object)
+*/
+
+int object_get_duration(Object* object);
+/*
+* @brief It sets the duration field of the given object
+* @author Óscar Pinto.
+* @date 09/12/2016
+* @param Object pointer
+* @param BOOL value
+* @return BOOL (the moved field of the object)
+*/
+
+Object* object_set_duration(Object* object, id value);
+
 
 #endif
