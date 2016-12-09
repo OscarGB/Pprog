@@ -10,11 +10,13 @@
 #define GRAPHICS_H
 
 #include "types.h"
-
+/*PLAYGROUND*/
 #define WIN1_X 42 /*!< X size of window 1*/
 #define WIN1_Y 21 /*!< Y size of window 1*/
-#define WIN2_X 37 /*!< X size of window 2*/
+/*DIALOGUES*/
+#define WIN2_X 38 /*!< X size of window 2*/
 #define WIN2_Y 21 /*!< Y size of window 2*/
+/*COMMANDS*/
 #define WIN3_X 80 /*!< X size of window 3*/
 #define WIN3_Y 3  /*!< Y size of window 3*/
 #define SPACE_SIZE_X 14 
@@ -80,11 +82,11 @@ STATUS graphics_clear_zone(Graphics* gra, ZONE zone);
 * @date 02/12/2016
 * @param Graphics* gra (The grahpcis)
 * @param ZONE zone (The zone in which you are going to print)
-* @param DIRECTION dir (The direction of the space int he playground, will be omitted if the zone is different of PLAYGROUND)
-* @param char* print (The string to be printed)
+* @param DIRECTION dir (The direction of the space in the playground and dialogue, will be omitted if the zone is different of PLAYGROUND or DIALOGUE)
+* @param char* string (The string to be printed)
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
-STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir, char* print);
+STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir, char* string);
 
 /**
 * @brief Refreshes the graphics
