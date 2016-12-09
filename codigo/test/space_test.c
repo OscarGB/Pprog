@@ -1,7 +1,7 @@
 #include "test.h"
 #include "space.h"
 
-#define MAX_TESTS 18
+#define MAX_TESTS 26
 #define ID 1
 
 
@@ -356,6 +356,171 @@ BOOL test_space18(){ /*Test space_set_gdesc with alloc'd space*/
 	return result;
 }
 
+BOOL test_space19(){ /*!< Test space_get_up with alloc'd space*/
+	Space* space = NULL;
+	BOOL result=FALSE;
+
+	space = space_create(ID);
+	if(!space){
+		TEST_PRINT(result);
+		return result;
+	}
+
+	if(space_get_up(space) == NO_ID){
+		result = TRUE;
+		space_destroy(space);
+		TEST_PRINT(result);
+		return result;
+	}
+		
+	space_destroy(space);
+	TEST_PRINT(result);
+	return result;
+}
+
+
+BOOL test_space20(){ /*!< Test space_set_up with alloc'd space*/
+	
+	Space* space = NULL;
+	Id test=-1;
+	BOOL result=FALSE;
+
+	space = space_create(ID);
+	if(!space){
+		TEST_PRINT(result);
+		return result;
+	}
+
+
+	space_set_up(space, ID);
+	test=space_get_up(space);
+	if(test==ID) result=TRUE;
+	space_destroy(space);
+	TEST_PRINT(result);
+	return result;
+}
+
+BOOL test_space21(){ /*!< Test space_get_down with alloc'd space*/
+	Space* space = NULL;
+	BOOL result=FALSE;
+
+	space = space_create(ID);
+	if(!space){
+		TEST_PRINT(result);
+		return result;
+	}
+
+	if(space_get_down(space) == NO_ID){
+		result = TRUE;
+		space_destroy(space);
+		TEST_PRINT(result);
+		return result;
+	}
+		
+	space_destroy(space);
+	TEST_PRINT(result);
+	return result;
+}
+
+
+BOOL test_space22(){ /*!< Test space_set_down with alloc'd space*/
+	
+	Space* space = NULL;
+	Id test=-1;
+	BOOL result=FALSE;
+
+	space = space_create(ID);
+	if(!space){
+		TEST_PRINT(result);
+		return result;
+	}
+
+
+	space_set_down(space, ID);
+	test=space_get_down(space);
+	if(test==ID) result=TRUE;
+	space_destroy(space);
+	TEST_PRINT(result);
+	return result;
+}
+
+BOOL test_space23(){ /*Test space_get_adesc with alloc'd space*/
+	Space* space = NULL;
+	BOOL result=FALSE;
+
+	space = space_create(ID);
+	if(!space){
+		TEST_PRINT(result);
+		return result;
+	}
+
+	if(strcmp(space_get_adesc(space), "") == 0){
+		result = TRUE;
+		space_destroy(space);
+		TEST_PRINT(result);
+		return result;
+	}
+
+	space_destroy(space);
+	TEST_PRINT(result);
+	return result;
+}
+
+BOOL test_space24(){ /*Test space_set_adesc with alloc'd space*/
+
+	Space* space;
+	BOOL result=FALSE;
+	space = space_create(ID);
+	space_set_adesc(space, "NAME");
+	if(!strcmp("NAME", space_get_adesc(space))) result=TRUE;
+	space_destroy(space);
+	TEST_PRINT(result);
+	return result;
+}
+
+
+BOOL test_space25(){ /*!< Test space_get_light with alloc'd space*/
+	Space* space = NULL;
+	BOOL result=FALSE;
+
+	space = space_create(ID);
+	if(!space){
+		TEST_PRINT(result);
+		return result;
+	}
+
+	if(space_get_light(space) == TRUE){
+		result = TRUE;
+		space_destroy(space);
+		TEST_PRINT(result);
+		return result;
+	}
+		
+	space_destroy(space);
+	TEST_PRINT(result);
+	return result;
+}
+
+BOOL test_space26(){ /*!< Test space_set_light with alloc'd space*/
+	
+	Space* space = NULL;
+	Id test=-1;
+	BOOL result=FALSE;
+
+	space = space_create(ID);
+	if(!space){
+		TEST_PRINT(result);
+		return result;
+	}
+
+
+	space_set_light(space, FALSE);
+	test=space_get_light(space);
+	if(test==FALSE) result=TRUE;
+	space_destroy(space);
+	TEST_PRINT(result);
+	return result;
+}
 
 
 int main(int argc, char* argv[]){
@@ -392,6 +557,14 @@ int main(int argc, char* argv[]){
 	if(todas || test == 16) test_space16();
 	if(todas || test == 17) test_space17();
 	if(todas || test == 18) test_space18();
+	if(todas || test == 19) test_space19();
+	if(todas || test == 20) test_space20();
+	if(todas || test == 21) test_space21();
+	if(todas || test == 22) test_space22();
+	if(todas || test == 23) test_space23();
+	if(todas || test == 24) test_space24();
+	if(todas || test == 25) test_space25();
+	if(todas || test == 26) test_space26();
 
 
 
