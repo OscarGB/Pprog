@@ -426,20 +426,25 @@ STATUS space_print(Space* space) {
 
     if(strcmp(space->gdesc, "") == 0)
         fprintf(stdout, "---> No gdesc\n");
-    else
-    	fprintf(stdout, "---> Gdesc: %s\n", space->gdesc);
+    else{
+        fprintf(stdout, "---> Gdesc: %s\n", space->gdesc);
+    }
 	
 
-	if(strcmp(space->adesc, "") == 0)
+	if(strcmp(space->adesc, "") == 0){
 		fprintf(stdout, "---> No advanced gdesc\n");
-	else
+    }
+	else{
 	   	fprintf(stdout, "---> Advanced gdesc: %s\n", space->adesc);
+    }
 	
 	
-	if(space_get_light(space) == TRUE)
+	if(space_get_light(space) == TRUE){
 		strcpy(light, "ON");
-	else
+    }
+	else{
 		strcpy(light, "OFF");
+    }
 
 
 	fprintf(stdout, "---> Light: %s\n", light);

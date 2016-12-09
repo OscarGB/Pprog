@@ -16,7 +16,7 @@
 
 struct _Command{
 	T_Command cmd; /*!<The command*/
-	char symbol[50]; /*!<A symbol for TAKE and DROP and INSPECTcommands*/
+	char symbol[50]; /*!<A symbol for TAKE and DROP and INSPECT and TURN commands*/
 };/*!<Command structure*/
 
 
@@ -81,6 +81,21 @@ STATUS get_user_input(Command* command){
 			}
 			else if (!strcmp(action, "g") || !strcmp(action, "go")){
 				command->cmd = GO;
+
+				strcpy(command->symbol, symbol);
+			}
+			else if (!strcmp(action, "turnon")){
+				command->cmd = TURNON;
+
+				strcpy(command->symbol, symbol);
+			}
+			else if (!strcmp(action, "turnoff")){
+				command->cmd = TURNOFF;
+
+				strcpy(command->symbol, symbol);
+			}
+			else if (!strcmp(action, "OPEN")){
+				command->cmd = OPEN;
 
 				strcpy(command->symbol, symbol);
 			}

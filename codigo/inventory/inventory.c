@@ -255,3 +255,21 @@ STATUS inventory_print(Inventory* bag) {
 
 	return OK;
 }
+
+/**
+* @brief Search for an item in the inventory
+* @author José Ignacio Gómez
+* @date 9/12/2016
+* @param Inventory*, bag
+* @return BOOL
+*/
+BOOL inventory_is_in(Inventory* bag, Id id){
+	Set* set;
+
+	if(!bag) return FALSE;
+
+	set = inventory_get_set(bag);
+	if(!bag) return FALSE;
+
+	return set_is_id(set, id);
+}

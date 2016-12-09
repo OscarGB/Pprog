@@ -199,9 +199,32 @@ BOOL player_pick_object (Player* player, Id id){
 	return TRUE;
 }
 
+
+/*
+* @brief returns the size of the player's bag
+* @author Óscar Gómez, Jose Ignacio Gómez, Andrea Ruiz
+* @date 24/11/2016
+* @param Player*
+* @return size of the bag (int)
+*/
 int player_get_bag_size(Player *player){
 
 	 if(!player) return -1;
 
 	 return inventory_get_size(player->bag);
+}
+
+
+/**
+* @brief Search for an item in the bag
+* @author José Ignacio Gómez
+* @date 9/12/2016
+* @param Player*, id
+* @return BOOL
+*/
+BOOL player_has_object(Player *player, Id id){
+
+	if(!player || !player->bag) return FALSE;
+
+	return inventory_is_in(player->bag, id);
 }

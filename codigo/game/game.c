@@ -446,6 +446,12 @@ STATUS game_update(Game* game, Command *cmd) {
     return callback_INSPECT(game, command_get_symbol(cmd));
   case GO:
     return callback_GO(game, command_get_symbol(cmd));
+  case TURNON:
+    return callback_TURNON(game, command_get_symbol(cmd)); 
+  case TURNON:
+    return callback_TURNOFF(game, command_get_symbol(cmd));
+  case OPEN:
+    return callback_TURNON(game, command_get_symbol(cmd));
   case NO_CMD:
     break;
   default: /*We must never arrive here*/
@@ -1136,4 +1142,135 @@ STATUS callback_GO(Game* game, char *symbol){
 
 
 return ERROR;
+}
+
+STATUS callback_TURNON(Game* game, char *symbol){
+  Object* object; /* !< Object that will be picked*/
+  Id player_id, object_id; /* !< Ids of the player and object*/
+  int i; /* !< Variable used for loops*/
+
+  if(strcmp(symbol, "\0") == 0){
+    return ERROR;
+  }
+
+
+  player_id = game_get_player_location(game);
+
+  object_id = game_get_object_location(game, symbol);
+
+  if(player_id != object_id || player_id == NO_ID || object_id == NO_ID){
+    return ERROR;
+  }
+
+
+  if(strlen(symbol) == 1){
+    for(i = 0; i < game->num_objects; i++){
+
+      if(object_get_symbol(game->object[i]) == symbol[0]){
+        object = game->object[i];
+
+        if(player_has_object(game->player, object_get_id(object)) == TRUE){
+          if(object_turnoff(object) == OK){
+            return OK;
+          }
+          else{
+            strcpy(game->desc, "I think it cannot be lighted.");
+            return ERROR;
+          }
+        }
+        else{
+          strcpy(game->desc, "Is this object in your bag?");
+          return ERROR;
+        }
+      }  
+    }
+
+  }
+  else if(strlen(symbol) > 1){
+    for(i = 0; i < game->num_objects; i++){
+
+      if(strcmp(object_get_name(game->object[i]), symbol) == 0){
+        object = game->object[i];
+
+        if(player_has_object(game->player, object_get_id(object)) == TRUE){
+          if(object_turnoff(object) == OK){
+            return OK;
+          }
+          else{
+            strcpy(game->desc, "I think it cannot be lighted.");
+            return ERROR;
+          }
+        }
+        else{
+          strcpy(game->desc, "Is this object in your bag?");
+          return ERROR;
+        }
+      }  
+    }
+  }
+
+  return ERROR;
+}
+
+
+STATUS callback_TURNOFF(Game* game, char *symbol){
+  Object* object; /* !< Object that will be picked*/
+  Id player_id, object_id; /* !< Ids of the player and object*/
+  int i; /* !< Variable used for loops*/
+
+  if(strcmp(symbol, "\0") == 0){
+    return ERROR;
+  }
+
+
+  player_id = game_get_player_location(game);
+
+  object_id = game_get_object_location(game, symbol);
+
+  if(player_id != object_id || player_id == NO_ID || object_id == NO_ID){
+    return ERROR;
+  }
+
+
+  if(strlen(symbol) == 1){
+    for(i = 0; i < game->num_objects; i++){
+
+      if(object_get_symbol(game->object[i]) == symbol[0]){
+        object = game->object[i];
+
+        if(player_has_object(game->player, object_get_id(object)) == TRUE){
+          return object_turnoff(object);
+        }
+        else{
+          strcpy(game->desc, "Is this object in your bag?");
+          return ERROR;
+        }
+      }  
+    }
+
+  }
+  else if(strlen(symbol) > 1){
+    for(i = 0; i < game->num_objects; i++){
+
+      if(strcmp(object_get_name(game->object[i]), symbol) == 0){
+        object = game->object[i];
+
+        if(player_has_object(game->player, object_get_id(object)) == TRUE){
+          return object_turnoff(object);
+        }
+        else{
+          strcpy(game->desc, "Is this object in your bag?");
+          return ERROR;
+        }
+      }  
+    }
+  }
+
+  return ERROR;
+}
+
+STATUS callback_OPEN(Game* game, char *symbol){
+  /*Comprobacion de argumentos*/
+
+  /*Existirá una función object_can_open(Object* obj, Id link)*/
 }

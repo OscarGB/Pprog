@@ -166,6 +166,30 @@ void print_log(Command* command, STATUS log, FILE* l){
 				fprintf(l, "Inspect %s : ERROR\n", command_get_symbol(command));
 			}
 			break;
+		case TURNON:
+			if(log == OK){
+				fprintf(l, "Turn on %s : OK\n", command_get_symbol(command));
+			}
+			else{
+				fprintf(l, "Turn on %s : ERROR\n", command_get_symbol(command));
+			}
+			break;
+		case TURNOFF:
+			if(log == OK){
+				fprintf(l, "Turn off %s : OK\n", command_get_symbol(command));
+			}
+			else{
+				fprintf(l, "Turn off %s : ERROR\n", command_get_symbol(command));
+			}
+			break;
+		case OPEN:
+			if(log == OK){
+				fprintf(l, "Open %s : OK\n", command_get_symbol(command));
+			}
+			else{
+				fprintf(l, "Open %s : ERROR\n", command_get_symbol(command));
+			}
+			break;
 		case NO_CMD:
 			fprintf(l, "NO_CMD\n");
 			break;

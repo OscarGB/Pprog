@@ -117,6 +117,15 @@ STATUS inventory_set_size(Inventory* bag, int size);
 int inventory_get_num_items(Inventory* bag);
 
 /**
+* @brief Search for an item in the inventory
+* @author José Ignacio Gómez
+* @date 9/12/2016
+* @param Inventory*, bag
+* @return BOOL
+*/
+BOOL inventory_is_in(Inventory* bag, Id id);
+
+/**
 * @brief Prints the inventory
 * @author José Ignacio Gómez
 * @date 5/11/2016

@@ -116,4 +116,13 @@ BOOL player_pick_object(Player *player, Id id);
 
 int player_get_bag_size(Player *player);
 
+/**
+* @brief Search for an item in the bag
+* @author José Ignacio Gómez
+* @date 9/12/2016
+* @param Player*, id
+* @return BOOL
+*/
+BOOL player_has_object(Player *player, Id id);
+
 #endif
