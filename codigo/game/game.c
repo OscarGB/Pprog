@@ -451,7 +451,7 @@ STATUS game_update(Game* game, Command *cmd) {
     return callback_GO(game, command_get_symbol(cmd));
   case TURNON:
     return callback_TURNON(game, command_get_symbol(cmd)); 
-  case TURNON:
+  case TURNOFF:
     return callback_TURNOFF(game, command_get_symbol(cmd));
   case OPEN:
     return callback_TURNON(game, command_get_symbol(cmd));

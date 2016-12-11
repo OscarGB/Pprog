@@ -16,8 +16,8 @@
 typedef struct _Link Link; /*!<Definition of the Link structure*/
 
 typedef enum enum_link{
-	CLOSED = 0,
-	OPEN
+	CLOSEDL = 0,
+	OPENL
 } State; /*!<Definition of the State enumeration (controling an open or closed link)*/
 
 /**

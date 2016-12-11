@@ -18,7 +18,7 @@ struct _Link{
 	char name[WORD_SIZE + 1]; /*!<The name of the link*/
 	Id conection1; /*!<One of the conections of the link*/
 	Id conection2; /*!<The other conection of the link*/
-	State state; /*!<The state (open or closed)*/
+	State state; /*!<The state (openL or closedL)*/
 };/*!<Link structure*/
 
 /**
@@ -44,7 +44,7 @@ Link* link_create(Id id){
 	newlink->name[0] = '\0';
 	newlink->conection1 = NO_ID;
 	newlink->conection2 = NO_ID;
-	newlink->state = OPEN;
+	newlink->state = OPENL;
 
 	return newlink;
 }
@@ -106,7 +106,7 @@ const char* link_get_name(Link* link){
 */
 State link_get_state(Link* link){
 	if(!link){
-		return OPEN;
+		return OPENL;
 	}
 
 	return link->state;
@@ -211,7 +211,7 @@ STATUS link_set_state(Link* link, State state){
 	if(!link){
 		return ERROR;
 	}
-	if(!(state == OPEN || state == CLOSED)){
+	if(!(state == OPENL || state == CLOSEDL)){
 		return ERROR;
 	}
 
@@ -221,14 +221,14 @@ STATUS link_set_state(Link* link, State state){
 }
 
 /**
-* @brief Opens a link
+* @brief OpenLs a link
 * @author José Ignacio Gómez
 * @date 3/11/2016
 * @param Link* (The Link to change)
 * @return STATUS (OK if the State have been changed, ERROR if haven't)
 */
-STATUS link_open(Link* link){
-	return link_set_state(link, OPEN);
+STATUS link_openL(Link* link){
+	return link_set_state(link, OPENL);
 }
 
 /**
@@ -239,7 +239,7 @@ STATUS link_open(Link* link){
 * @return STATUS (OK if the State have been changed, ERROR if haven't)
 */
 STATUS link_close(Link* link){
-	return link_set_state(link, CLOSED);
+	return link_set_state(link, CLOSEDL);
 }
 
 /**
@@ -274,11 +274,11 @@ STATUS link_print(Link* link){
 		fprintf(stdout, "---> No conection 2.\n");
 	}
 
-	if(link_get_state(link) == OPEN){
-		fprintf(stdout,"----> State: Open.\n");
+	if(link_get_state(link) == OPENL){
+		fprintf(stdout,"----> State: OpenL.\n");
 	}
 	else{
-		fprintf(stdout,"----> State: Closed.\n");
+		fprintf(stdout,"----> State: ClosedL.\n");
 	}
 
 	return OK;

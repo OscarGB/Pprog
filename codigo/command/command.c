@@ -94,7 +94,7 @@ STATUS get_user_input(Command* command){
 
 				strcpy(command->symbol, symbol);
 			}
-			else if (!strcmp(action, "OPEN")){
+			else if (!strcmp(action, "open")){
 				command->cmd = OPEN;
 
 				strcpy(command->symbol, symbol);

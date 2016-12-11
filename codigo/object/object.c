@@ -353,7 +353,7 @@ Id object_get_open(Object* object){
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_open(Object* object, id value){
+Object* object_set_open(Object* object, Id value){
 	if(!object){
 		return FALSE;
 	}
@@ -385,7 +385,7 @@ int object_get_duration(Object* object){
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_duration(Object* object, id value){
+Object* object_set_duration(Object* object, Id value){
 	if(!object){
 		return FALSE;
 	}

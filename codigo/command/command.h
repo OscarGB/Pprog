@@ -25,7 +25,10 @@ typedef enum enum_Command {
   DROP,
   ROLL,
   INSPECT,
-  GO
+  GO,
+  TURNON,
+  TURNOFF,
+  OPEN
 } T_Command; 
 
 typedef struct _Command Command; /*<! Definition of Command structure */
