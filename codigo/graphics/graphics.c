@@ -11,6 +11,7 @@
 #include <ncurses.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 struct _Graphics{
 	WINDOW* playground; /*!< Declared window for the playing zone*/
@@ -238,40 +239,16 @@ STATUS graphics_clear_zone(Graphics* gra, ZONE zone){
 * @param char* string (The string to be printed)
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
-STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* string){
-	char print[WORD_SIZE];
-	int i = 0;
+STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
+	int i = 0, j = 0;
+	FILE *f;
 
-	if(!gra || !string){
+	if(!gra || !print){
 		return ERROR;
 	}
 
-	print[0] = '\0';
-
 	switch(zone){
 		case PLAYGROUND:
-		if(strlen(string) > 14){
-					mvwprintw(gra->playground, 15, 13, "4");
-			while(1){
-				if(string[i] == '\0'){
-					mvwprintw(gra->playground, 15, 14, "1");
-					break;
-				}
-				if(((i+1) % 14) == 0){
-					mvwprintw(gra->playground, 15, 12, "2");
-					strcat(print, "\n");
-					strcat(print, &(string[i]));
-				}
-				else{
-					mvwprintw(gra->playground, 15, 11, "3");
-					strcat(print, &(string[i]));
-				}
-				i++;
-			}
-		}
-		else{
-			strcpy(print, string);
-		}
 			switch(dir){
 				case NW:
 					mvwprintw(gra->playground, 0, 0, "%s", print);
@@ -304,15 +281,43 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* string){
 					return ERROR;
 			}
 		case COMMANDS:
-			mvwprintw(gra->commands, 1, 1, "%s", print);
-			return OK;	
+			for(i = 0; i < (WIN3_X - 2); i++){
+				if(i == strlen(print)){
+					return OK;
+				}
+				mvwprintw(gra->commands, 1, 1+i, "%c", print[i]);
+			}
+			return OK;
 		case DIALOGUE:
 			switch(dir){
 				case N:
-					mvwprintw(gra->dialogue, 1, 1, "%s", print);
+					j = 1;
+					for(i = 0; i < strlen(print); i++){
+						if(i > ((WIN2_X-2)*(floor(WIN2_Y-2)))){
+							return OK;
+						}
+						if(i%(WIN2_X-2) == 0){
+							j++;
+						}
+						mvwprintw(gra->dialogue, j, (i%(WIN2_X -2))+1, "%c", print[i]);
+					}
 					return OK;
 				case S:
-					mvwprintw(gra->dialogue, 10, 1, "%s", print);
+					
+					f = fopen("tusmuertos", "w");
+					j = 10;
+					for(i = 0; i < strlen(print); i++){
+						if(i > ((WIN2_X-2)*(floor(WIN2_Y-2)))){
+							return OK;
+							fprintf(f, "%d %d\n", i,j);
+						}
+						if(i%(WIN2_X-2) == 0){
+							fprintf(f, "%d %d\n", i,j);
+							j++;
+						}
+						fprintf(f, "%d %d\n", i,j);
+						mvwprintw(gra->dialogue, j, (i%(WIN2_X -2))+1, "%c", print[i]);
+					}
 					return OK;
 				default:
 					return ERROR;

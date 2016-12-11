@@ -13,7 +13,7 @@
 
 
 #define MAX_TESTS 28
-#define DELAY 10
+#define DELAY 1
 
 BOOL test_graphics1(){
 	Graphics* gra = NULL;
@@ -135,7 +135,7 @@ BOOL test_graphics10(){
 BOOL test_graphics11(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, DIALOGUE, N,"TESTING");
+	print_in_zone(gra, DIALOGUE, N,"TESTINGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, DIALOGUE) == ERROR){
@@ -390,7 +390,7 @@ BOOL test_graphics26(){
 BOOL test_graphics27(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, DIALOGUE, S,"TESTINGTESTINGTESTINGTESTINGTESTINGTESTING");
+	print_in_zone(gra, DIALOGUE, S,"TESTINGTESTINGTESTINGTESTINGTESTINGTESTINGEEEEEEE");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, DIALOGUE) == ERROR){
