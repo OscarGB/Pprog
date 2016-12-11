@@ -132,4 +132,21 @@ STATUS link_set_state(Link* link, State state);
 */
 STATUS link_print(Link* link);
 
+/**
+* @brief Opens a link
+* @author José Ignacio Gómez
+* @date 3/11/2016
+* @param Link* (The Link to change)
+* @return STATUS (OK if the State have been changed, ERROR if haven't)
+*/
+STATUS link_open(Link* link);
+
+/**
+* @brief Closes a link
+* @author José Ignacio Gómez
+* @date 3/11/2016
+* @param Link* (The Link to change)
+* @return STATUS (OK if the State have been changed, ERROR if haven't)
+*/
+STATUS link_close(Link* link);
 #endif

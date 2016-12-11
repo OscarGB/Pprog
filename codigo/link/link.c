@@ -221,6 +221,28 @@ STATUS link_set_state(Link* link, State state){
 }
 
 /**
+* @brief Opens a link
+* @author José Ignacio Gómez
+* @date 3/11/2016
+* @param Link* (The Link to change)
+* @return STATUS (OK if the State have been changed, ERROR if haven't)
+*/
+STATUS link_open(Link* link){
+	return link_set_state(link, OPEN);
+}
+
+/**
+* @brief Closes a link
+* @author José Ignacio Gómez
+* @date 3/11/2016
+* @param Link* (The Link to change)
+* @return STATUS (OK if the State have been changed, ERROR if haven't)
+*/
+STATUS link_close(Link* link){
+	return link_set_state(link, CLOSED);
+}
+
+/**
 * @brief It prints the content of a Link
 * @author Óscar Gómez
 * @date 3/11/2016

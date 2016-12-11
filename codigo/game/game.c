@@ -30,6 +30,7 @@ struct _Game{
   Space* spaces[MAX_SPACES]; /*!< Array of pointers to Space Structure */
   Die* die; /*!< Pointer to Die Structure */
   Link *links[MAX_LINKS]; /*!< Array of pointers to Link Structure */
+  int num_links;
   char desc[WORD_SIZE+1]; /* !< For inspect command*/
 };/*!< Game structure*/
 
@@ -103,6 +104,7 @@ Game* game_init(Game* game) {
   }
 
   game->num_objects = 0;
+  game->num_links = 0;
 
   /*Creating die*/
   game->die = die_create(1, DIE_FACES);
@@ -257,6 +259,7 @@ STATUS game_add_link(Game *game, Link* link){
 
   /*Set the link to the proper position*/
   game->links[i] = link;
+  game->num_links ++;
 
   return OK;
 }
@@ -1269,8 +1272,57 @@ STATUS callback_TURNOFF(Game* game, char *symbol){
   return ERROR;
 }
 
-STATUS callback_OPEN(Game* game, char *symbol){
-  /*Comprobacion de argumentos*/
+STATUS callback_OPEN(Game* game, char *string){
+  char* link_name = NULL;
+  char* object_name = NULL;
+  char* token = NULL;
+  Object* object = NULL;
+  Link* link = NULL;
+  Id link_id = NO_ID;
+  int i;
 
-  /*Existirá una función object_can_open(Object* obj, Id link)*/
+  /*string will be like "door with key", because "open"
+  has been already read*/
+  link_name = strtok(string, " ");
+  token = strtok(NULL, " ");
+  if(strcmp(token, "with") != 0){
+    strcpy(game->desc, "Maybe trying *open <door> with <key>*?");
+    return ERROR;
+  }
+  object_name = strtok(NULL, " ");
+
+  /*Finding the object by its name*/
+  for(i = 0; i < game->num_objects; i++){
+
+      if(strcmp(object_get_name(game->object[i]), object_name) == 0){
+        object = game->object[i];
+
+        if(player_has_object(game->player, object_get_id(object)) == FALSE){
+          strcpy(game->desc, "Is this object in your bag?");
+          return ERROR;
+        
+        }
+      }  
+  }
+
+  /*Finding the link_id by its name*/
+  for(i = 0; i < game->num_links; i++){
+
+      if(strcmp(link_get_name(game->links[i]), link_name) == 0){
+        link = game->links[i];
+        link_id = link_get_id(link);
+        break;
+      }
+
+  }
+
+  /*Can the object open the link?*/
+  if(object_can_open(object, link_id) == TRUE){
+    return link_open(link);
+  }
+  else{
+    strcpy(game->desc, "It won't be opened");
+  }
+
+  return ERROR;
 }
