@@ -17,7 +17,8 @@ struct _Graphics{
 	WINDOW* playground; /*!< Declared window for the playing zone*/
 	WINDOW* dialogue; /*!< Declared winloguedow for dialogue zone*/
 	WINDOW* commands; /*!< Declared winloguedow for command zone*/
-};/*!< Graphics structure*/
+	char dia[WORD_SIZE+1]; /*!< String for previous dialogue*/
+};/*!< Graphics structure*/ 
 
 /*--------------------------------------------*/
 /* Private functions                          */
@@ -49,16 +50,6 @@ void screen_destroy(){
 	return;
 }
 
-int str_cut(char *str, int begin, int len)
-{
-    int l = strlen(str);
-
-    if (len < 0) len = l - begin;
-    if (begin + len > l) len = l - begin;
-    memmove(str + begin, str + begin + len, l - len + 1);
-
-    return len;
-}
 
 /*--------------------------------------------*/
 /* Public functions                           */
@@ -251,31 +242,112 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 		case PLAYGROUND:
 			switch(dir){
 				case NW:
-					mvwprintw(gra->playground, 0, 0, "%s", print);
+					j = 0;
+					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
+						if(i == strlen(print)){
+							return OK;
+						}
+						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						mvwprintw(gra->playground, j, i%SPACE_SIZE_X, "%c", print[i]);
+					}
 					return OK;
 				case N:
-					mvwprintw(gra->playground, 0, SPACE_SIZE_X, "%s", print);
+					j = 0;
+					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
+						if(i == strlen(print)){
+							return OK;
+						}
+						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						mvwprintw(gra->playground, j, SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
+					}
 					return OK;
 				case NE:
-					mvwprintw(gra->playground, 0, 2*SPACE_SIZE_X, "%s", print);
+					j = 0;
+					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
+						if(i == strlen(print)){
+							return OK;
+						}
+						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						mvwprintw(gra->playground, j, 2*SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
+					}
 					return OK;
 				case W:
-					mvwprintw(gra->playground, SPACE_SIZE_Y, 0, "%s", print);
+					j = 0;
+					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
+						if(i == strlen(print)){
+							return OK;
+						}
+						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						mvwprintw(gra->playground, SPACE_SIZE_Y + j, i%SPACE_SIZE_X, "%c", print[i]);
+					}
 					return OK;
 				case C:
-					mvwprintw(gra->playground, SPACE_SIZE_Y, SPACE_SIZE_X, "%s", print);
+					j = 0;
+					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
+						if(i == strlen(print)){
+							return OK;
+						}
+						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						mvwprintw(gra->playground, SPACE_SIZE_Y + j, SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
+					}
 					return OK;
 				case E:
-					mvwprintw(gra->playground, SPACE_SIZE_Y, 2*SPACE_SIZE_X, "%s", print);
+					j = 0;
+					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
+						if(i == strlen(print)){
+							return OK;
+						}
+						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						mvwprintw(gra->playground, SPACE_SIZE_Y + j, 2*SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
+					}
 					return OK;
 				case SW:
-					mvwprintw(gra->playground, 2*SPACE_SIZE_Y, 0, "%s", print);
+					j = 0;
+					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
+						if(i == strlen(print)){
+							return OK;
+						}
+						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						mvwprintw(gra->playground, 2*SPACE_SIZE_Y + j, i%SPACE_SIZE_X, "%c", print[i]);
+					}
 					return OK;
 				case S:
-					mvwprintw(gra->playground, 2*SPACE_SIZE_Y, SPACE_SIZE_X, "%s", print);
+					j = 0;
+					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
+						if(i == strlen(print)){
+							return OK;
+						}
+						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						mvwprintw(gra->playground, 2*SPACE_SIZE_Y + j, SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
+					}
 					return OK;
 				case SE:
-					mvwprintw(gra->playground, 2*SPACE_SIZE_Y, 2*SPACE_SIZE_X, "%s", print);
+					j = 0;
+					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
+						if(i == strlen(print)){
+							return OK;
+						}
+						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						mvwprintw(gra->playground, 2*SPACE_SIZE_Y + j, 2*SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
+					}
 					return OK;
 				default:
 					return ERROR;
@@ -289,39 +361,30 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 			}
 			return OK;
 		case DIALOGUE:
-			switch(dir){
-				case N:
-					j = 1;
-					for(i = 0; i < strlen(print); i++){
-						if(i > ((WIN2_X-2)*(floor(WIN2_Y-2)))){
-							return OK;
-						}
-						if(i%(WIN2_X-2) == 0){
-							j++;
-						}
-						mvwprintw(gra->dialogue, j, (i%(WIN2_X -2))+1, "%c", print[i]);
-					}
+			j = 1;
+			for(i = 0; i < strlen(print); i++){
+				if(i > ((WIN2_X-2)*(WIN2_Y-2))){
 					return OK;
-				case S:
-					
-					f = fopen("tusmuertos", "w");
-					j = 10;
-					for(i = 0; i < strlen(print); i++){
-						if(i > ((WIN2_X-2)*(floor(WIN2_Y-2)))){
-							return OK;
-							fprintf(f, "%d %d\n", i,j);
-						}
-						if(i%(WIN2_X-2) == 0){
-							fprintf(f, "%d %d\n", i,j);
-							j++;
-						}
-						fprintf(f, "%d %d\n", i,j);
-						mvwprintw(gra->dialogue, j, (i%(WIN2_X -2))+1, "%c", print[i]);
-					}
-					return OK;
-				default:
-					return ERROR;
+				}
+				if(i%(WIN2_X-2) == 0){
+					j++;
+				}
+				mvwprintw(gra->dialogue, j, (i%(WIN2_X -2))+1, "%c", print[i]);
 			}
+			
+			j = 10;
+			for(i = 0; i < strlen(gra->dia); i++){
+				if(i > ((WIN2_X-2)*(WIN2_Y-2))){
+					return OK;
+				}
+				if(i%(WIN2_X-2) == 0){
+					j++;
+				}
+				mvwprintw(gra->dialogue, j, (i%(WIN2_X -2))+1, "%c", gra->dia[i]);
+			}
+
+			strcpy(gra->dia, print);
+			return OK;
 		default:
 			return ERROR;
 	}

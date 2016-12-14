@@ -19,8 +19,9 @@
 /*COMMANDS*/
 #define WIN3_X 80 /*!< X size of window 3*/
 #define WIN3_Y 3  /*!< Y size of window 3*/
-#define SPACE_SIZE_X 14 
-#define SPACE_SIZE_Y 7
+/*SPACES*/
+#define SPACE_SIZE_X 14 /*!< X size of each space*/
+#define SPACE_SIZE_Y 7 /*!< Y size of each space*/
 
 typedef enum{
 	PLAYGROUND = 0, /*!< Playground zone*/
