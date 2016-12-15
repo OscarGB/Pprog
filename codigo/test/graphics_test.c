@@ -84,9 +84,9 @@ BOOL test_graphics6(){
 BOOL test_graphics7(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, DIALOGUE, N, "HOLA");
-	print_in_zone(gra, COMMANDS, 0, "CARACOLA");
-	print_in_zone(gra, PLAYGROUND, NW, "¡JUGUEMOS!PENEPENEPENEPENEPENEPENEPENE");
+	print_in_zone(gra, DIALOGUE, N, "HELLO");
+	print_in_zone(gra, COMMANDS, 0, "HOW ARE YOU?");
+	print_in_zone(gra, PLAYGROUND, NW, "¡LET'S PLAY!");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear(gra) == ERROR){
@@ -135,7 +135,7 @@ BOOL test_graphics10(){
 BOOL test_graphics11(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, DIALOGUE, N,"TESTINGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+	print_in_zone(gra, DIALOGUE, N,"TESTING WITH A LONG SENTENCE TO SEE IF IT WORKS CORRECTLY");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, DIALOGUE) == ERROR){
@@ -171,7 +171,7 @@ BOOL test_graphics12(){
 BOOL test_graphics13(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, PLAYGROUND, NW,"TESTING");
+	print_in_zone(gra, PLAYGROUND, NW,"--------------|            ||            ||            ||            ||            |--------------");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra,PLAYGROUND) == ERROR){
@@ -189,7 +189,7 @@ BOOL test_graphics13(){
 BOOL test_graphics14(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, PLAYGROUND, N,"TESTING");
+	print_in_zone(gra, PLAYGROUND, N,"--------------|            ||            ||            ||            ||            |--------------");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, PLAYGROUND) == ERROR){
@@ -207,7 +207,7 @@ BOOL test_graphics14(){
 BOOL test_graphics15(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, PLAYGROUND, NE,"TESTING");
+	print_in_zone(gra, PLAYGROUND, NE,"--------------|            ||            ||            ||            ||            |--------------");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, PLAYGROUND) == ERROR){
@@ -225,7 +225,7 @@ BOOL test_graphics15(){
 BOOL test_graphics16(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, PLAYGROUND, W,"TESTING");
+	print_in_zone(gra, PLAYGROUND, W,"--------------|            ||            ||            ||            ||            |--------------");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, PLAYGROUND) == ERROR){
@@ -243,7 +243,7 @@ BOOL test_graphics16(){
 BOOL test_graphics17(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, PLAYGROUND, C,"TESTING");
+	print_in_zone(gra, PLAYGROUND, C,"--------------|            ||            ||            ||            ||            |--------------");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, PLAYGROUND) == ERROR){
@@ -261,7 +261,7 @@ BOOL test_graphics17(){
 BOOL test_graphics18(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, PLAYGROUND, E,"TESTING");
+	print_in_zone(gra, PLAYGROUND, E,"--------------|            ||            ||            ||            ||            |--------------");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, PLAYGROUND) == ERROR){
@@ -279,7 +279,7 @@ BOOL test_graphics18(){
 BOOL test_graphics19(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, PLAYGROUND, SW,"TESTING");
+	print_in_zone(gra, PLAYGROUND, SW,"--------------|            ||            ||            ||            ||            |--------------");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, PLAYGROUND) == ERROR){
@@ -297,7 +297,7 @@ BOOL test_graphics19(){
 BOOL test_graphics20(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, PLAYGROUND, S,"TESTING");
+	print_in_zone(gra, PLAYGROUND, S,"--------------|            ||            ||            ||            ||            |--------------");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, PLAYGROUND) == ERROR){
@@ -315,7 +315,7 @@ BOOL test_graphics20(){
 BOOL test_graphics21(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, PLAYGROUND, SE,"TESTING");
+	print_in_zone(gra, PLAYGROUND, SE,"--------------|            ||            ||            ||            ||            |--------------");
 	graphics_refresh(gra);
 	sleep(DELAY);
 	if(graphics_clear_zone(gra, PLAYGROUND) == ERROR){
@@ -390,10 +390,18 @@ BOOL test_graphics26(){
 BOOL test_graphics27(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	print_in_zone(gra, DIALOGUE, S,"TESTINGTESTINGTESTINGTESTINGTESTINGTESTINGEEEEEEE");
+	print_in_zone(gra, PLAYGROUND, NW,"--------------|            ||            ||            ||            ||            |--------------");
+	print_in_zone(gra, PLAYGROUND, N,"--------------|            ||            ||            ||            ||            |--------------");
+	print_in_zone(gra, PLAYGROUND, NE,"--------------|            ||            ||            ||            ||            |--------------");
+	print_in_zone(gra, PLAYGROUND, W,"--------------|            ||            ||            ||            ||            |--------------");
+	print_in_zone(gra, PLAYGROUND, C,"--------------|            ||            ||            ||            ||            |--------------");
+	print_in_zone(gra, PLAYGROUND, E,"--------------|            ||            ||            ||            ||            |--------------");
+	print_in_zone(gra, PLAYGROUND, SW,"--------------|            ||            ||            ||            ||            |--------------");
+	print_in_zone(gra, PLAYGROUND, S,"--------------|            ||            ||            ||            ||            |--------------");
+	print_in_zone(gra, PLAYGROUND, SE,"--------------|            ||            ||            ||            ||            |--------------");
 	graphics_refresh(gra);
 	sleep(DELAY);
-	if(graphics_clear_zone(gra, DIALOGUE) == ERROR){
+	if(graphics_clear_zone(gra, PLAYGROUND) == ERROR){
 		graphics_destroy(gra);
 		TEST_PRINT(FALSE);
 		return FALSE;
@@ -408,11 +416,17 @@ BOOL test_graphics27(){
 BOOL test_graphics28(){
 	Graphics* gra = NULL;
 	gra = graphics_create();
-	if(print_in_zone(gra, DIALOGUE, 805, "TESTING") != ERROR){
+	print_in_zone(gra, DIALOGUE, 0, "TESTING 2");
+	graphics_refresh(gra);
+	sleep(DELAY);
+	graphics_clear(gra);
+	if(print_in_zone(gra, DIALOGUE, 0, "TESTING 1") == ERROR){
 		graphics_destroy(gra);
 		TEST_PRINT(FALSE);
 		return FALSE;
 	}
+	graphics_refresh(gra);
+	sleep(DELAY);
 	graphics_destroy(gra);
 	TEST_PRINT(TRUE);
 	return TRUE;
