@@ -951,6 +951,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
     int i;/* !< Variable used for loops*/
     Object *obj; /* !<Variable used for storing the player's object*/
     Id player_location = NO_ID; /* !< Locations of the player and object*/
+    Space *space; /*!<Variable used for storing auxiliary spaces*/
 
     obj = NULL;
     
@@ -981,6 +982,11 @@ STATUS callback_INSPECT(Game* game, char *symbol){
 
           if(!obj) return ERROR;
 
+		  space = game_get_space(Game* game, Id id); /*Get the space where the object is*/
+
+		  if(space_get_light(space) == FALSE){
+		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
+		  }
           strcpy(game->desc, object_get_description(obj));
           return OK;
         }
@@ -1006,8 +1012,13 @@ STATUS callback_INSPECT(Game* game, char *symbol){
           }
 
           if(!obj) return ERROR;
+	
+		  space = game_get_space(Game* game, Id id); /*Get the space where the object is*/
 
-          strcpy(game->desc, object_get_description(obj));
+		  if(space_get_light(space) == FALSE){
+		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
+		  }
+		  strcpy(game->desc, object_get_description(obj));
           return OK;
         }
     }
