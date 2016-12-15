@@ -981,7 +981,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
 
           if(!obj) return ERROR;
 
-          strcpy(game->desc, object_get_name(obj));
+          strcpy(game->desc, object_get_description(obj));
           return OK;
         }
     }
@@ -1007,7 +1007,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
 
           if(!obj) return ERROR;
 
-          strcpy(game->desc, object_get_name(obj));
+          strcpy(game->desc, object_get_description(obj));
           return OK;
         }
     }

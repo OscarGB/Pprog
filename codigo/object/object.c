@@ -19,6 +19,7 @@ struct _Object{
 	char symbol; /*!<symbol of the object*/
 	Id location; /*!<Location in the game*/
 	char desc[WORD_SIZE+1]; /*!<Written description of the object*/
+	char mdesc[WORD_SIZE+1]; /*!<Written description when the object is moved*/ 
 	BOOL movable; /*!<Object can be moved or not*/
 	BOOL moved; /*!<Object has been moved or not*/
 	BOOL hidden; /*!<Object is hidden and not mentioned in description of space*/
@@ -107,6 +108,52 @@ STATUS object_set_name(Object* object, char* name){
 
 	return OK;
 }
+
+/*
+* @brief It sets the mdesc of the given object
+* @author Óscar Pinto
+* @date 15/12/2016
+* @param Object* object(the object to change)
+	 char* name(the new mdesc of the object)
+* @return STATUS (OK if everything went well, ERROR if didn't)
+*/
+
+STATUS object_set_mdesc(Object* object, char* mdesc){
+	if(!object || !mdesc){
+		return ERROR;
+	}
+
+
+	if(!strcpy(object->mdesc, mdesc)){
+		return ERROR;
+	}
+
+	return OK;
+}
+
+
+/*
+* @brief It sets the desc of the given object
+* @author Óscar Pinto
+* @date 15/12/2016
+* @param Object* object(the object to change)
+	 char* desc(the desc of the object)
+* @return STATUS (OK if everything went well, ERROR if didn't)
+*/
+
+STATUS object_set_desc(Object* object, char* desc){
+	if(!object || !desc){
+		return ERROR;
+	}
+
+
+	if(!strcpy(object->desc, desc)){
+		return ERROR;
+	}
+
+	return OK;
+}
+
 
 
 /*
@@ -398,7 +445,7 @@ Object* object_set_duration(Object* object, Id value){
 * @author Óscar Pinto.
 * @date 02/12/2016
 * @param Object pointer
-* @return int (the duration field of the object)
+* @return char* (name of the given object)
 */
 
 char* object_get_name(Object* object){
@@ -408,6 +455,35 @@ char* object_get_name(Object* object){
 	return object->name;
 }
 
+/*
+* @brief It gets the mdesc of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return char* (description for moved object)
+*/
+
+char* object_get_mdesc(Object* object){
+	if(!object){
+		return "\0";
+	}
+	return object->mdesc;
+}
+
+/*
+* @brief It gets the desc of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return char* (description for object in original location)
+*/
+
+char* object_get_desc(Object* object){
+	if(!object){
+		return "\0";
+	}
+	return object->desc;
+}
 
 /*
 * @brief It gets the id of the given object
@@ -541,6 +617,22 @@ int object_decrease_duration(Object *object){
 	}
 	
 	return dur;
+}
+
+/*
+* @brief Returns the desc field if object not moved, mdesc if moved
+* @author Óscar Pinto.
+* @date 15/12/2016
+* @param Object pointer
+* @return char* (the suitable description of the object)
+*/
+
+char* object_get_description(Object *object){
+	if(!object) return NULL;
+
+	if(object->moved==FALSE)
+		return object_get_desc(object);
+	return object_get_mdesc(object);
 }
 
 

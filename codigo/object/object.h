@@ -314,5 +314,57 @@ BOOL object_can_open(Object *object, Id id);
 
 int object_decrease_duration(Object *object);
 
+/*
+* @brief It gets the mdesc of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return char* (description for moved object)
+*/
+
+char* object_get_mdesc(Object* object);
+
+/*
+* @brief It gets the desc of the given object
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return char* (description for object in original location)
+*/
+
+char* object_get_desc(Object* object);
+
+
+/*
+* @brief It sets the mdesc of the given object
+* @author Óscar Pinto
+* @date 15/12/2016
+* @param Object* object(the object to change)
+	 char* name(the new mdesc of the object)
+* @return STATUS (OK if everything went well, ERROR if didn't)
+*/
+
+STATUS object_set_mdesc(Object* object, char* mdesc);
+
+/*
+* @brief It sets the desc of the given object
+* @author Óscar Pinto
+* @date 15/12/2016
+* @param Object* object(the object to change)
+	 char* desc(the desc of the object)
+* @return STATUS (OK if everything went well, ERROR if didn't)
+*/
+
+STATUS object_set_desc(Object* object, char* desc);
+
+/*
+* @brief Returns the desc field if object not moved, mdesc if moved
+* @author Óscar Pinto.
+* @date 15/12/2016
+* @param Object pointer
+* @return char* (the suitable description of the object)
+*/
+
+char* object_get_description(Object *object);
 
 #endif
