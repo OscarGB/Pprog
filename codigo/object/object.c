@@ -463,3 +463,84 @@ STATUS object_print(Object* object){
 
 	return OK;
 }
+
+/*
+* @brief It turns on an object if it is possible
+* @author Óscar Pinto.
+* @date 13/12/2016
+* @param Object pointer
+* @return STATUS(Ok or error)
+*/
+
+STATUS object_turnon(Object* object){
+
+	if(!object) return ERROR;
+	
+	if(object->light==FALSE || object_duration<=0) return ERROR; /*Object can't be turned on because it can't illuminate or hasn't got battery left*/
+	if(object->on_off==TRUE) return ERROR; /*Object already on*/
+
+	object->on_off=TRUE;
+
+	return OK;
+}
+
+/*
+* @brief It turns off an object if it is possible
+* @author Óscar Pinto.
+* @date 13/12/2016
+* @param Object pointer
+* @return STATUS(Ok or error)
+*/
+
+STATUS object_turnoff(Object* object){
+
+	if(!object) return ERROR;
+	
+	if(!object->light || object->on_off==FALSE) return ERROR; /*Object can't be turned off because it can't illuminate or is not on*/
+
+
+	object->on_off=FALSE;
+
+	return OK;
+}
+
+/*
+* @brief Checks if input object can open input id
+* @author Óscar Pinto.
+* @date 13/12/2016
+* @param Object pointer, Id id
+* @return BOOL (can or cannot open)
+*/
+
+BOOL object_can_open(Object *object, Id id){
+	if(!object || id==NO_ID) return FALSE;
+
+	if(object_get_open(object)==id) return TRUE;
+	return FALSE;
+}
+
+/*
+* @brief Decreases duration of the battery if object can illuminate and it is on
+* @author Óscar Pinto.
+* @date 13/12/2016
+* @param Object pointer
+* @return int (current duration)
+*/
+
+int object_decrease_duration(Object *object){
+	int dur=-1;
+	if(!object) return -1;
+
+	if(object_get_light(object)==TRUE){
+		if (object_get_on_off(object)==TRUE){
+			dur=object_get_duration(object);
+			dur--;
+			object_det_duration(object, dur);
+			return dur;
+		}
+	}
+	
+	return dur;
+}
+
+

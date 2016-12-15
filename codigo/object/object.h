@@ -274,5 +274,45 @@ int object_get_duration(Object* object);
 
 Object* object_set_duration(Object* object, Id value);
 
+/*
+* @brief It turns on an object if it is possible
+* @author Óscar Pinto.
+* @date 13/12/2016
+* @param Object pointer
+* @return STATUS(Ok or error)
+*/
+
+STATUS object_turnon(Object* object);
+
+/*
+* @brief It turns off an object if it is possible
+* @author Óscar Pinto.
+* @date 13/12/2016
+* @param Object pointer
+* @return STATUS(Ok or error)
+*/
+
+STATUS object_turnoff(Object* object);
+
+/*
+* @brief Checks if input object can open input id
+* @author Óscar Pinto.
+* @date 13/12/2016
+* @param Object pointer, Id id
+* @return BOOL (can or cannot open)
+*/
+
+BOOL object_can_open(Object *object, Id id);
+
+/*
+* @brief Decreases duration of the battery if object can illuminate and it is on
+* @author Óscar Pinto.
+* @date 13/12/2016
+* @param Object pointer
+* @return int (current duration)
+*/
+
+int object_decrease_duration(Object *object);
+
 
 #endif
