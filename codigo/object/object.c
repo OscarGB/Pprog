@@ -476,7 +476,7 @@ STATUS object_turnon(Object* object){
 
 	if(!object) return ERROR;
 	
-	if(object->light==FALSE || object_duration<=0) return ERROR; /*Object can't be turned on because it can't illuminate or hasn't got battery left*/
+	if(object->light==FALSE || object->duration<=0) return ERROR; /*Object can't be turned on because it can't illuminate or hasn't got battery left*/
 	if(object->on_off==TRUE) return ERROR; /*Object already on*/
 
 	object->on_off=TRUE;
@@ -535,7 +535,7 @@ int object_decrease_duration(Object *object){
 		if (object_get_on_off(object)==TRUE){
 			dur=object_get_duration(object);
 			dur--;
-			object_det_duration(object, dur);
+			object_get_duration(object);
 			return dur;
 		}
 	}

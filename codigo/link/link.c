@@ -227,7 +227,7 @@ STATUS link_set_state(Link* link, State state){
 * @param Link* (The Link to change)
 * @return STATUS (OK if the State have been changed, ERROR if haven't)
 */
-STATUS link_openL(Link* link){
+STATUS link_open(Link* link){
 	return link_set_state(link, OPENL);
 }
 

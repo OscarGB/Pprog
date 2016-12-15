@@ -50,6 +50,8 @@ STATUS callback_PICK(Game* game, char *symbol);
 STATUS callback_ROLL(Game* game);
 STATUS callback_INSPECT(Game* game, char *symbol);
 STATUS callback_GO(Game* game, char *symbol);
+STATUS callback_TURNON(Game* game, char *symbol);
+STATUS callback_TURNOFF(Game* game, char *symbol);
 
 
 /*
@@ -111,7 +113,7 @@ Game* game_init(Game* game) {
   if(!game->die){ /*Error case*/
     player_destroy(game->player);
     game_destroy(game);
-    return ERROR;
+    return NULL;
   }
 
   for (i = 0; i < MAX_LINKS; i++){
@@ -512,8 +514,11 @@ void game_print_screen(Game* game){
   }
 
   /*Set to NO_ID the id's of the different links*/
-  for(i = 0; i < 8; i++)
+  for(i = 0; i < 8; i++){
     id_l[i] = NO_ID;
+  }
+
+  return;
 }
 
 
@@ -957,13 +962,15 @@ STATUS callback_INSPECT(Game* game, char *symbol){
 
     if(strlen(symbol) == 1){
       if(symbol[0] == 's' || symbol[0] == 'S'){ /*!< Inspecting space */
-        	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
-        		if(player_location==space_get_id(game->spaces[i])){
-        		    strcpy(game->desc, space_get_adesc(game->spaces[i]));
-        		    return OK;	
-        		}
-        	}
-              return ERROR;
+          	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
+          		if(player_location==space_get_id(game->spaces[i])){
+                if(space_get_light(game->spaces[i]) == TRUE){
+          		    strcpy(game->desc, space_get_adesc(game->spaces[i]));
+          		    return OK;	
+                }
+          		}
+          	}
+            return ERROR;
       }else{ /*!< Inspecting an object */
   	     for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
   		      if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){
@@ -983,11 +990,13 @@ STATUS callback_INSPECT(Game* game, char *symbol){
       if(strcmp(symbol, "space") == 0 || strcmp(symbol, "Space") == 0){ /*!< Inspecting space */
           for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
             if(player_location==space_get_id(game->spaces[i])){
-                strcpy(game->desc, space_get_adesc(game->spaces[i]));
-                return OK;  
+                if(space_get_light(game->spaces[i]) == TRUE){
+                  strcpy(game->desc, space_get_adesc(game->spaces[i]));
+                  return OK;  
+                }  
             }
           }
-              return ERROR;
+          return ERROR;
       }else{ /*!< Inspecting an object */
          for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
             if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){

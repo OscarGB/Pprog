@@ -232,7 +232,6 @@ STATUS graphics_clear_zone(Graphics* gra, ZONE zone){
 */
 STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 	int i = 0, j = 0;
-	FILE *f;
 
 	if(!gra || !print){
 		return ERROR;
