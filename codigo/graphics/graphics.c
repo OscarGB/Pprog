@@ -34,7 +34,7 @@ struct _Graphics{
 void screen_init(){
 	initscr();
 	noecho();
-	curs_set(FALSE);
+	curs_set(TRUE);
 	return;
 }
 

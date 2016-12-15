@@ -16,6 +16,7 @@
 #include "game_reader.h"
 #include "die.h"
 #include "link.h"
+#include "graphics.h"
 
 #ifdef __WINDOWS_BUILD__ /*In case we are working on Windows*/
 #define CLEAR "cls"
@@ -502,23 +503,200 @@ void game_print_data(Game* game) {
 * @param game pointer
 * @return void
 */
-void game_print_screen(Game* game){
-  Id id[9];
-  Id id_l[8]; /*!< Ids of the links*/
-  Space* space = NULL; /* !< Pointer to spaces needed to print the game*/
-  int i;
+void game_print_screen(Game* game, Graphics* gra){
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID; /* !< Ids for locations*/
+  Id id_l_back = NO_ID, id_l_next = NO_ID; /*!< Ids of the links*/
+  Space* space_act = NULL; /* !< Pointers to spaces needed to print the game*/
+  Space* space_back = NULL;
+  Space* space_next = NULL;
+  char obj[WORD_SIZE]; /* !< String with the objects*/
+  char aux[WORD_SIZE]; /* !< Axiliar for reading object values*/
+  int i, last; /* !< loops, last rolled value*/
+  int obj_size; /* !< Control of the number of objects to print*/
+  char graspa[WORD_SIZE+1]; /* !< Graphics for the space*/
 
-  /*Set to NO_ID the id's of the different spaces*/
-  for(i = 0; i < 9; i++){
-    id[i] = NO_ID;
+  if(!gra || !game){
+    return;
   }
 
-  /*Set to NO_ID the id's of the different links*/
-  for(i = 0; i < 8; i++){
-    id_l[i] = NO_ID;
+  graphics_clear(gra);
+
+  obj[0] = '\0'; /* !< Set to empty*/
+  
+  id_act = game_get_player_location(game);
+
+  if (id_act == NO_ID){
+    return;
+  }
+  
+  space_act = game_get_space(game, id_act);
+  id_l_back = space_get_north(space_act);
+  id_l_next = space_get_south(space_act);
+
+  /*Search for the id of the back space*/
+  for(i=0; i<(4*MAX_SPACES); i++){
+    if(link_get_id(game->links[i]) == id_l_back){
+      if(link_get_conection1(game->links[i]) == id_act){
+        id_back = link_get_conection2(game->links[i]);
+        break;
+      }
+      else{
+        id_back = link_get_conection1(game->links[i]);
+        break;
+      }
+    }
+    else{
+      id_back = NO_ID;
+    }
   }
 
-  return;
+  /*Search for the id of the next space*/
+  for(i=0; i<(4*MAX_SPACES); i++){
+    if(link_get_id(game->links[i]) == id_l_next){
+      if(link_get_conection1(game->links[i]) == id_act){
+        id_next = link_get_conection2(game->links[i]);
+        break;
+      }
+      else{
+        id_next = link_get_conection1(game->links[i]);
+        break;
+      }
+    }
+    else{
+      id_next = NO_ID;
+    }
+  }
+
+  space_back = game_get_space(game, id_back);
+  space_next = game_get_space(game, id_next);  
+  
+  if(system(CLEAR))
+     return; 
+  obj_size = 0;
+
+  for(i = 0; i < game->num_objects; i++){
+    if (object_get_location(game->object[i]) == id_back){
+      aux[0] = object_get_symbol(game->object[i]);
+      aux[1] = '\0';
+      strcat(obj,aux); /*add the symbol*/
+      obj_size++; 
+    }
+  }
+  /*In case there are more than 3 objects*/
+  if(obj_size > 3){
+    obj[3] = '.';
+    obj[4] = '.';
+    obj[5] = '.';
+    obj[6] = '\0';
+  }
+
+  if (id_back != NO_ID) {
+    if(space_get_light(space_back) == TRUE){
+      print_in_zone(gra, PLAYGROUND, N, space_get_gdesc(space_back));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, N, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, N, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+  
+  obj[0] = '\0'; /*Set to empty*/
+  obj_size = 0;
+
+  for(i = 0; i < game->num_objects; i++){
+    if (object_get_location(game->object[i]) == id_act) {
+      aux[0] = object_get_symbol(game->object[i]);
+      aux[1] = '\0';
+      strcat(obj,aux); /*add the symbol*/
+      obj_size++;
+    }
+  }
+  /*In case there are more than 3 objects*/
+  if(obj_size > 3){
+    obj[3] = '.';
+    obj[4] = '.';
+    obj[5] = '.';
+    obj[6] = '\0';
+  }
+
+  if (id_act != NO_ID) {
+    if(space_get_light(space_act) == TRUE){
+      print_in_zone(gra, PLAYGROUND, C, space_get_gdesc(space_act));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, C, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, C, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+
+  obj[0] = '\0'; /*Set to empty*/
+  obj_size = 0;
+
+   for(i = 0; i < game->num_objects; i++){
+    if (object_get_location(game->object[i]) == id_next) {
+      aux[0] = object_get_symbol(game->object[i]);
+      aux[1] = '\0';
+      strcat(obj,aux); /*add the symbol*/
+      obj_size++;
+    }
+  }
+  /*In case there are more than 3 objects*/
+  if(obj_size > 3){
+    obj[3] = '.';
+    obj[4] = '.';
+    obj[5] = '.';
+    obj[6] = '\0';
+  }
+  
+  if (id_next != NO_ID) {
+    if(space_get_light(space_next) == TRUE){
+      print_in_zone(gra, PLAYGROUND, S, space_get_gdesc(space_next));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, S, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, S, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+  
+  graphics_refresh(gra);
+
+  /*printf("Object locations:");
+  for(i = 0; i < game->num_objects; i++){
+    if(object_get_location(game->object[i]) != PLAYER_OBJ){
+      printf(" %c:%d", object_get_symbol(game->object[i]), (int)object_get_location(game->object[i]));
+    }
+  }    
+  printf("\n");
+
+  printf("Player objects: ");
+  for(i=0; i< game->num_objects; i++){
+  if(object_get_location(game->object[i]) == PLAYER_OBJ)
+    printf("%c ", object_get_symbol(game->object[i]));
+  }
+
+  printf("\n");
+
+    
+
+  last = die_get_last_roll(game->die);
+  if(last != -1){
+    printf("Last die value: %d\n", last);
+  }
+
+  if(strlen(game->desc) != 0){
+  printf("Description: %s\n", game->desc);
+  }
+  game->desc[0] = '\0';
+
+
+  printf("\n[commands: quit or q, drop or d, pick or p, roll or r, inspect or i, go or g]");
+  printf("\nprompt:> ");*/
 }
 
 

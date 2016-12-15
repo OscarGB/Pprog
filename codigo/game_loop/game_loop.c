@@ -13,6 +13,7 @@
 #include "game.h"
 #include "command.h"
 #include "types.h"
+#include "graphics.h"
 
 
 /*
@@ -209,6 +210,7 @@ void print_log(Command* command, STATUS log, FILE* l){
 * @return int 1 if ERROR, 0 if OK
 */
 int main(int argc, char *argv[]){
+	Graphics* gra = NULL;
   	Game * game = NULL; /*Game pointer*/
   	Command *command = NULL; /*Command pointer*/
   	FILE *l = NULL; /*Log file*/
@@ -244,10 +246,18 @@ int main(int argc, char *argv[]){
 	if(!command){
 		fprintf(stderr, "Command couldn't be created\n");
 		game_destroy(game);
+		return 1;
+	}
+	gra = graphics_create();
+	if(!gra){
+		fprintf(stderr, "Graphics couldn't be created\n");
+		game_destroy(game);
+		command_destroy(command);
+		return 1;
 	}
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
 		if(nvflag != 1){ 
-			game_print_screen(game);
+			game_print_screen(game, gra);
 		}
 
 		get_user_input(command);
