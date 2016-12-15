@@ -259,14 +259,14 @@ int main(int argc, char *argv[]){
 		if(nvflag != 1){ 
 			game_print_screen(game, gra);
 		}
-
-		get_user_input(command);
+		scan_from_screen(gra, command);
 		log = game_update(game, command);
 		/*Log mode*/
 		if(flag == 1){
 			print_log(command, log, l); 	
 		}
 	}
+	graphics_destroy(gra);
 	game_destroy(game);
 	command_destroy(command);
 	/*Log mode*/

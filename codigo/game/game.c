@@ -504,24 +504,20 @@ void game_print_data(Game* game) {
 * @return void
 */
 void game_print_screen(Game* game, Graphics* gra){
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID; /* !< Ids for locations*/
-  Id id_l_back = NO_ID, id_l_next = NO_ID; /*!< Ids of the links*/
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_east = NO_ID, id_west = NO_ID; /* !< Ids for locations*/
+  Id id_l_back = NO_ID, id_l_next = NO_ID, id_l_east = NO_ID, id_l_west = NO_ID; /*!< Ids of the links*/
   Space* space_act = NULL; /* !< Pointers to spaces needed to print the game*/
   Space* space_back = NULL;
   Space* space_next = NULL;
-  char obj[WORD_SIZE]; /* !< String with the objects*/
-  char aux[WORD_SIZE]; /* !< Axiliar for reading object values*/
+  Space* space_east = NULL;
+  Space* space_west = NULL;
   int i, last; /* !< loops, last rolled value*/
-  int obj_size; /* !< Control of the number of objects to print*/
-  char graspa[WORD_SIZE+1]; /* !< Graphics for the space*/
 
   if(!gra || !game){
     return;
   }
 
   graphics_clear(gra);
-
-  obj[0] = '\0'; /* !< Set to empty*/
   
   id_act = game_get_player_location(game);
 
@@ -532,6 +528,8 @@ void game_print_screen(Game* game, Graphics* gra){
   space_act = game_get_space(game, id_act);
   id_l_back = space_get_north(space_act);
   id_l_next = space_get_south(space_act);
+  id_l_east = space_get_east(space_act);
+  id_l_west = space_get_west(space_act);
 
   /*Search for the id of the back space*/
   for(i=0; i<(4*MAX_SPACES); i++){
@@ -567,28 +565,47 @@ void game_print_screen(Game* game, Graphics* gra){
     }
   }
 
+  /*Search for the id of the east space*/
+  for(i=0; i<(4*MAX_SPACES); i++){
+    if(link_get_id(game->links[i]) == id_l_east){
+      if(link_get_conection1(game->links[i]) == id_act){
+        id_east = link_get_conection2(game->links[i]);
+        break;
+      }
+      else{
+        id_east = link_get_conection1(game->links[i]);
+        break;
+      }
+    }
+    else{
+      id_east = NO_ID;
+    }
+  }
+
+  /*Search for the id of the west space*/
+  for(i=0; i<(4*MAX_SPACES); i++){
+    if(link_get_id(game->links[i]) == id_l_west){
+      if(link_get_conection1(game->links[i]) == id_act){
+        id_west = link_get_conection2(game->links[i]);
+        break;
+      }
+      else{
+        id_west = link_get_conection1(game->links[i]);
+        break;
+      }
+    }
+    else{
+      id_west = NO_ID;
+    }
+  }
+
+  space_west = game_get_space(game, id_west);
+  space_east = game_get_space(game, id_east);
   space_back = game_get_space(game, id_back);
   space_next = game_get_space(game, id_next);  
   
   if(system(CLEAR))
      return; 
-  obj_size = 0;
-
-  for(i = 0; i < game->num_objects; i++){
-    if (object_get_location(game->object[i]) == id_back){
-      aux[0] = object_get_symbol(game->object[i]);
-      aux[1] = '\0';
-      strcat(obj,aux); /*add the symbol*/
-      obj_size++; 
-    }
-  }
-  /*In case there are more than 3 objects*/
-  if(obj_size > 3){
-    obj[3] = '.';
-    obj[4] = '.';
-    obj[5] = '.';
-    obj[6] = '\0';
-  }
 
   if (id_back != NO_ID) {
     if(space_get_light(space_back) == TRUE){
@@ -600,25 +617,6 @@ void game_print_screen(Game* game, Graphics* gra){
   }
   else{
     print_in_zone(gra, PLAYGROUND, N, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-  }
-  
-  obj[0] = '\0'; /*Set to empty*/
-  obj_size = 0;
-
-  for(i = 0; i < game->num_objects; i++){
-    if (object_get_location(game->object[i]) == id_act) {
-      aux[0] = object_get_symbol(game->object[i]);
-      aux[1] = '\0';
-      strcat(obj,aux); /*add the symbol*/
-      obj_size++;
-    }
-  }
-  /*In case there are more than 3 objects*/
-  if(obj_size > 3){
-    obj[3] = '.';
-    obj[4] = '.';
-    obj[5] = '.';
-    obj[6] = '\0';
   }
 
   if (id_act != NO_ID) {
@@ -632,25 +630,6 @@ void game_print_screen(Game* game, Graphics* gra){
   else{
     print_in_zone(gra, PLAYGROUND, C, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   }
-
-  obj[0] = '\0'; /*Set to empty*/
-  obj_size = 0;
-
-   for(i = 0; i < game->num_objects; i++){
-    if (object_get_location(game->object[i]) == id_next) {
-      aux[0] = object_get_symbol(game->object[i]);
-      aux[1] = '\0';
-      strcat(obj,aux); /*add the symbol*/
-      obj_size++;
-    }
-  }
-  /*In case there are more than 3 objects*/
-  if(obj_size > 3){
-    obj[3] = '.';
-    obj[4] = '.';
-    obj[5] = '.';
-    obj[6] = '\0';
-  }
   
   if (id_next != NO_ID) {
     if(space_get_light(space_next) == TRUE){
@@ -663,7 +642,33 @@ void game_print_screen(Game* game, Graphics* gra){
   else{
     print_in_zone(gra, PLAYGROUND, S, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   }
+
+  if (id_east != NO_ID) {
+    if(space_get_light(space_east) == TRUE){
+      print_in_zone(gra, PLAYGROUND, E, space_get_gdesc(space_east));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, E, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, E, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+
+  if (id_west != NO_ID) {
+    if(space_get_light(space_west) == TRUE){
+      print_in_zone(gra, PLAYGROUND, W, space_get_gdesc(space_west));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, W, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, W, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
   
+
+
   graphics_refresh(gra);
 
   /*printf("Object locations:");
@@ -1160,7 +1165,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
 
           if(!obj) return ERROR;
 
-		  space = game_get_space(Game* game, Id id); /*Get the space where the object is*/
+		  /*space = game_get_space(Game* game, Id id);*/ /*Get the space where the object is*/
 
 		  if(space_get_light(space) == FALSE){
 		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
@@ -1191,7 +1196,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
 
           if(!obj) return ERROR;
 	
-		  space = game_get_space(Game* game, Id id); /*Get the space where the object is*/
+		  /*space = game_get_space(Game* game, Id id);*/ /*Get the space where the object is*/
 
 		  if(space_get_light(space) == FALSE){
 		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");

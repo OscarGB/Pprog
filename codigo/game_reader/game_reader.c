@@ -15,7 +15,7 @@
 #include "object.h"
 #include "space.h"
 
-#define VACIO "|           |\n|           |\n|           |\n"
+#define VACIO "+------------+|           ||           ||           ||           ||           ||           |+------------+"
 
 
 /**

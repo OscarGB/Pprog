@@ -7,6 +7,7 @@
  */
 
 #include "graphics.h"
+#include "command.h"
 #include <unistd.h>
 #include <ncurses.h>
 #include <stdlib.h>
@@ -33,7 +34,7 @@ struct _Graphics{
 */
 void screen_init(){
 	initscr();
-	noecho();
+	echo();
 	curs_set(TRUE);
 	return;
 }
@@ -409,4 +410,29 @@ STATUS graphics_refresh(Graphics* gra){
 	wrefresh(gra->commands);
 
 	return OK;
+}
+
+/**
+* @brief Scans the user input from screen
+* @author Óscar Gómez
+* @date 16/12/2016
+* @param Graphics* gra (The graphics to scan)
+* @param Command* command (The place where you save the command)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS scan_from_screen(Graphics* gra, Command* command){
+	char input[CMD_LENGHT]; /* The input */
+
+	if(!gra || !command){
+		return ERROR;
+	}
+
+	mvwprintw(gra->commands, 1, 1, "prompt:> ");
+	graphics_refresh(gra);
+
+	if(mvwgetstr(gra->commands, 1, 10, input) < 0){
+		return ERROR;	
+	}
+
+	return get_user_input(command, input);
 }
