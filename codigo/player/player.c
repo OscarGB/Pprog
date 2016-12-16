@@ -228,3 +228,18 @@ BOOL player_has_object(Player *player, Id id){
 
 	return inventory_is_in(player->bag, id);
 }
+
+/**
+* @brief Returns the id of the player
+* @author Óscar Pinto Santamaría
+* @date 16/12/2016
+* @param Player* player
+* @return Id (id from player)
+*/
+
+Id player_get_id(Player* player){
+
+	if(!player) return NULL;
+	
+	return player->id;
+}
