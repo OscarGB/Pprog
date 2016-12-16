@@ -1596,14 +1596,18 @@ STATUS print_space_save(FILE *f, Space* space){
     Id west; 
     Id up; 
     Id down; 
-    char gdesc[MAX_GDESC], buff[MAX_GDESC];
+    char gdesc[MAX_GDESC+1];
     char *toks=NULL; 
     BOOL light;
     char luz[100];
     char adesc[MAX_adesc];
     char space_str[1024];
+    char buff[MAX_GDESC+1];
+
+	buff[0] = '\0';
 
 	if(!f || !space) return ERROR;
+
 	id = space_get_id(space);
 	strcpy(name,space_get_name(space));
 	north = space_get_north(space);
@@ -1613,8 +1617,8 @@ STATUS print_space_save(FILE *f, Space* space){
 	up = space_get_up(space);
 	down = space_get_down(space);
 	light= space_get_light(space);
-	strcpy(buff,space_get_gdesc(space));
 	strcpy(adesc,space_get_adesc(space));
+	strcpy(buff,space_get_gdesc(space));
 
 	if(light==TRUE){
 		strcpy(luz, "TRUE");
@@ -1622,14 +1626,8 @@ STATUS print_space_save(FILE *f, Space* space){
 		strcpy(luz, "FALSE");
 	}
 
-	/*toks = strtok(buff, "\n");
-	strcat(gdesc, toks);
-	toks = strtok(NULL, "\n");
-	strcat(gdesc, toks);
-	toks = strtok(NULL, "\n");
-	strcat(gdesc, toks);*/
 
-	sprintf(space_str, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%s|%s%s", 
+	sprintf(space_str, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%s|%s|%s", 
 			id, name, north, east, south, west, up, down,
 			luz, adesc, buff);
 	fprintf(f, "%s\n", space_str);
