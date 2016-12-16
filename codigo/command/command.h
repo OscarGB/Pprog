@@ -35,7 +35,7 @@ typedef enum enum_Command {
   LOAD
 } T_Command; 
 
-typedef struct _Command Command; /*<! Definition of Command structure */
+typedef struct _Command Command; /*!< Definition of Command structure */
 
 
 /*
@@ -93,5 +93,15 @@ T_Command command_get_cmd(Command *com);
 */
 
 char *command_get_symbol(Command *com);
+
+/**
+* @brief Copies a command to another
+* @author Óscar Gómez
+* @date 16-12-2016
+* @param Command *to (The command where you copy)
+* @param Command *from (The command to copy)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS command_copy(Command *to, Command *from);
 
 #endif

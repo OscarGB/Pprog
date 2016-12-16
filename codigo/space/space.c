@@ -15,6 +15,7 @@
 #include "set.h"
 
 struct _Space {
+	char adesc[MAX_ADESC+1]; /*!<Advanced desc of the space*/
     Id id; /*!<The id of the space*/
     char name[WORD_SIZE + 1]; /*!<the name of the space*/
     Id north; /*!<The id of the link located at the north*/
@@ -24,9 +25,8 @@ struct _Space {
     Id up; /*!<The id of the link located up*/
     Id down; /*!<The id of the link located down*/
     Set *object; /*!<The objects in the space*/
-    char gdesc[MAX_GDESC]; /*!<The gdesc of the space (The drawing)*/
+    char gdesc[MAX_GDESC+1]; /*!<The gdesc of the space (The drawing)*/
     BOOL light; /*!<TRUE if the space is illuminated*/
-    char adesc[MAX_adesc]; /*!<Advanced desc of the space*/
 };/*!<Space structure*/
 
 /**
