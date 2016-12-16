@@ -1277,6 +1277,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
     Id player_location = NO_ID; /* !< Locations of the player and object*/
     Space *space; /*!<Variable used for storing auxiliary spaces*/
     char *symbol = NULL; /*!< Variable used for storing the command*/
+    Inventory* inventory = NULL;
 
     symbol = command_get_cmd(cmd);
 
@@ -1330,7 +1331,14 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
             }
           }
           return ERROR;
-      }else{ /*!< Inspecting an object */
+      }
+      else if(strcmp(symbol, "inventory") == 0 || strcmp(symbol, "Inventory") == 0){ /*!< Inspecting inventory*/
+        inventory = player_get_inventory(game->player);
+        if(!inventory) return ERROR;
+        /***HACER ARRAY DE OBJECTS INVENTORY****/
+        return dialogue_generic(dialogue, objects);
+      }
+      else{ /*!< Inspecting an object */
          for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
             if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){
                if(strcmp(object_get_name(game->object[i]), symbol) == 0)
@@ -1340,14 +1348,14 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
 
           if(!obj) return ERROR;
 	
-		  space = game_get_space(game, object_get_location(obj)); /*Get the space where the object is*/
+		      space = game_get_space(game, object_get_location(obj)); /*Get the space where the object is*/
 
-		  if(space_get_light(space) == FALSE){
-		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
-		  }
-		  strcpy(game->desc, object_get_description(obj));
+    		  if(space_get_light(space) == FALSE){
+    		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
+    		  }
+    		  strcpy(game->desc, object_get_description(obj));
           return OK;
-        }
+      }
     }
 
   return ERROR;
@@ -1744,9 +1752,8 @@ STATUS print_space_save(FILE *f, Space* space){
     char gdesc[MAX_GDESC], buff[MAX_GDESC];
     char *toks=NULL; 
     BOOL light;
-    char luz[100];
-    char adesc[MAX_adesc];
-    char space_str[1024];
+    char lux[100];
+    char adesc[MAX_ADESC];
 
 	if(!f || !space) return ERROR;
 	id = space_get_id(space);
@@ -1762,9 +1769,9 @@ STATUS print_space_save(FILE *f, Space* space){
 	strcpy(adesc,space_get_adesc(space));
 
 	if(light==TRUE){
-		strcpy(luz, "TRUE");
+		strcpy(lux, "TRUE");
 	}else{
-		strcpy(luz, "FALSE");
+		strcpy(lux, "FALSE");
 	}
 
 	/*toks = strtok(buff, "\n");
@@ -1774,23 +1781,127 @@ STATUS print_space_save(FILE *f, Space* space){
 	toks = strtok(NULL, "\n");
 	strcat(gdesc, toks);*/
 
-	sprintf(space_str, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%s|%s%s", 
+	fprintf(f, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%s|%s|%s\n", 
 			id, name, north, east, south, west, up, down,
-			luz, adesc, buff);
-	fprintf(f, "%s\n", space_str);
+			lux, adesc, buff);
 
 	return OK;
 }
 
 STATUS print_link_save(FILE *f, Link *link){
+
+	Id id; 
+	char name[WORD_SIZE + 1]; 
+	Id conection1; 
+	Id conection2; 
+	State state; 
+	char stt[100];
+
+	if(!f || !link) return ERROR;
+
+	id = link_get_id(link);
+	strcpy(name, link_get_name(link));
+	conection1 = link_get_conection1(link);
+	conection2 = link_get_conection2(link);
+	state = link_get_state(link);
+
+	if(state==CLOSEDL){
+		strcpy(stt, "CLOSEDL");
+	}else{
+		strcpy(stt, "OPENL");
+	}
+
+	fprintf(f, "#l:%ld|%ld|%ld|%s|%s|\n", 
+			id, conection1, conection2, name, stt);
 	return OK;
 	}
 
 STATUS print_object_save(FILE *f, Object *object){
-	return OK;
+
+	Id id;
+	char name[WORD_SIZE + 1]; 
+	char symbol; 
+	Id location;
+	char desc[WORD_SIZE+1];
+	char mdesc[WORD_SIZE+1];
+	BOOL movable;
+	BOOL moved;
+	BOOL hidden;
+	Id open;
+	BOOL light;
+	BOOL on_off;
+	int duration;
+	char object_str[1024];
+	char mvbl[100], mvd[100], hddn[100], lux[100], on[100];
+
+
+	if(!f || !object) return ERROR;
+
+	id = object_get_id(space);
+	strcpy(name,object_get_name(object));
+	strcpy(desc, object_get_desc(object));
+	strcpy(mdesc, object_get_mdesc(object));
+	symbol = object_get_symbol(object);
+	location = object_get_location(object);
+	movable = object_get_movable(object);
+	moved = object_get_moved(object);
+	hidden = object_get_hidden(object);
+	open = object_get_open(object);
+	light = object_get_light(object);
+	on_off = object_get_on_off(object);
+	duration = object_get_duration(object);
+
+	if(light==TRUE){
+		strcpy(lux, "TRUE");
+	}else{
+		strcpy(lux, "FALSE");
 	}
 
+	if(movable==TRUE){
+		strcpy(mvbl, "TRUE");
+	}else{
+		strcpy(mvbl, "FALSE");
+	}
+
+	if(moved==TRUE){
+		strcpy(mvd, "TRUE");
+	}else{
+		strcpy(mvd, "FALSE");
+	}
+
+	if(hidden==TRUE){
+		strcpy(hddn, "TRUE");
+	}else{
+		strcpy(hddn, "FALSE");
+	}
+
+	if(on_off==TRUE){
+		strcpy(on, "TRUE");
+	}else{
+		strcpy(on, "FALSE");
+	}
+	
+	fprintf(f, "#o:%ld|%ld|%s|%s|%s|%c|%s|%s|%s|%s|%s|%d|%d|\n", 
+			id, location, name, desc, mdesc, symbol, mvbl, mvd,
+			hddn, lux, on, open, duration);
+
+	return OK;
+}
+
 STATUS print_player_save(FILE *f, Player *player){
+
+	if(!f || !object) return ERROR;
+
+	Id id;
+	char name[WORD_SIZE +1];
+	Id location; 
+
+	id = player_get_id(player);
+	strcpy(name, get_player_name(player));
+	location = player_get_location(player);
+
+	fprintf(f, "#p:%ld|%ld|%s|\n", id, location, name);	
+
 	return OK;
 }
 

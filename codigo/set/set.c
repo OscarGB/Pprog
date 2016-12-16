@@ -225,3 +225,16 @@ BOOL set_is_id(Set* set, Id id){
 
 	return TRUE;
 }
+
+/*
+* @brief Gets the array of ids
+* @author Jose Ignacio Gómez
+* @date 16/12/2016
+* @param set pointer
+* @return int*
+*/
+int* set_get_array(Set* set){
+	if(!set) return NULL;
+
+	return set->id;
+}

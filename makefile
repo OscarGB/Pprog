@@ -3,7 +3,9 @@
 # Author: Óscar Gómez Borzdynski             #
 #--------------------------------------------#
 
-DEPS = game command generic space set player object die game_reader link inventory test graphics 	#Name of the module's folders
+
+DEPS = game command generic space set player object die game_management link inventory test graphics game_rules dialogue	#Name of the module's folders
+
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefix -I for the compilation with headers
 
 NCURSES = -lncurses
@@ -81,9 +83,9 @@ graphics_test.o: codigo/test/graphics_test.c
 	@echo "--->Generating graphics_test.o"
 	@gcc $(CFLAGS) -c codigo/test/graphics_test.c $(NCURSES)
 
-JuegoOcaPlus: game_loop.o graphics.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o
+JuegoOcaPlus: game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creating executable JuegoOcaPlus"
-	@gcc $(CFLAGS) -o JuegoOcaPlus game_loop.o graphics.o game.o space.o command.o game_reader.o player.o object.o set.o die.o link.o inventory.o $(NCURSES)
+	@gcc $(CFLAGS) -o JuegoOcaPlus game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o $(NCURSES)
 
 graphics.o: codigo/graphics/graphics.c
 	@echo "--->Generating graphics.o"
@@ -105,9 +107,17 @@ space.o: codigo/space/space.c
 	@echo "--->Generating space.o"
 	@gcc $(CFLAGS) -c codigo/space/space.c
 
-game_reader.o: codigo/game_reader/game_reader.c 
-	@echo "--->Generating game_reader.o"
-	@gcc $(CFLAGS) -c codigo/game_reader/game_reader.c
+game_management.o: codigo/game_management/game_management.c 
+	@echo "--->Generating game_management.o"
+	@gcc $(CFLAGS) -c codigo/game_management/game_management.c
+
+dialogue.o: codigo/dialogue/dialogue.c
+	@echo "--->Generating dialogue.o"
+	@gcc $(CFLAGS) -c codigo/dialogue/dialogue.c
+
+game_rules.o: codigo/game_rules/game_rules.c
+	@echo "--->Generating game_rules.o"
+	@gcc $(CFLAGS) -c codigo/game_rules/game_rules.c
 
 player.o: codigo/player/player.c 
 	@echo "--->Generating player.o"
