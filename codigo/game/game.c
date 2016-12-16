@@ -514,13 +514,19 @@ void game_print_data(Game* game) {
 * @return void
 */
 void game_print_screen(Game* game, Graphics* gra){
-  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_east = NO_ID, id_west = NO_ID; /* !< Ids for locations*/
+  Id id_act = NO_ID, id_north = NO_ID, id_south = NO_ID, id_east = NO_ID, id_west = NO_ID; /* !< Ids for locations*/
+  Id id_swest = NO_ID, id_nwest = NO_ID, id_neast = NO_ID, id_seast = NO_ID;
   Id id_l_back = NO_ID, id_l_next = NO_ID, id_l_east = NO_ID, id_l_west = NO_ID; /*!< Ids of the links*/
+  Id id_l_swest = NO_ID, id_l_nwest = NO_ID, id_l_neast = NO_ID, id_l_seast = NO_ID;
   Space* space_act = NULL; /* !< Pointers to spaces needed to print the game*/
-  Space* space_back = NULL;
-  Space* space_next = NULL;
+  Space* space_north = NULL;
+  Space* space_south = NULL;
   Space* space_east = NULL;
   Space* space_west = NULL;
+  Space* space_nwest = NULL;
+  Space* space_swest = NULL;
+  Space* space_neast = NULL;
+  Space* space_seast = NULL;
   int i; /* !< loops, last rolled value*/
 
   if(!gra || !game){
@@ -545,16 +551,16 @@ void game_print_screen(Game* game, Graphics* gra){
   for(i=0; i<(4*MAX_SPACES); i++){
     if(link_get_id(game->links[i]) == id_l_back){
       if(link_get_conection1(game->links[i]) == id_act){
-        id_back = link_get_conection2(game->links[i]);
+        id_north = link_get_conection2(game->links[i]);
         break;
       }
       else{
-        id_back = link_get_conection1(game->links[i]);
+        id_north = link_get_conection1(game->links[i]);
         break;
       }
     }
     else{
-      id_back = NO_ID;
+      id_north = NO_ID;
     }
   }
 
@@ -562,16 +568,19 @@ void game_print_screen(Game* game, Graphics* gra){
   for(i=0; i<(4*MAX_SPACES); i++){
     if(link_get_id(game->links[i]) == id_l_next){
       if(link_get_conection1(game->links[i]) == id_act){
-        id_next = link_get_conection2(game->links[i]);
+        id_south
+     = link_get_conection2(game->links[i]);
         break;
       }
       else{
-        id_next = link_get_conection1(game->links[i]);
+        id_south
+     = link_get_conection1(game->links[i]);
         break;
       }
     }
     else{
-      id_next = NO_ID;
+      id_south
+   = NO_ID;
     }
   }
 
@@ -611,15 +620,114 @@ void game_print_screen(Game* game, Graphics* gra){
 
   space_west = game_get_space(game, id_west);
   space_east = game_get_space(game, id_east);
-  space_back = game_get_space(game, id_back);
-  space_next = game_get_space(game, id_next);  
+  space_north = game_get_space(game, id_north);
+  space_south = game_get_space(game, id_south
+);
+
+  /*Search for the north west space*/
+  id_l_nwest = space_get_north(space_west);
+  if(id_l_nwest == NO_ID){
+    id_l_nwest = space_get_west(space_north);
+  } 
+  if(id_l_nwest != NO_ID){
+    for(i=0; i<(4*MAX_SPACES); i++){
+      if(link_get_id(game->links[i]) == id_l_nwest){
+        if(link_get_conection1(game->links[i]) == id_west || link_get_conection1(game->links[i]) == id_north){
+          id_nwest = link_get_conection2(game->links[i]);
+          break;
+        }
+        else{
+          id_nwest = link_get_conection1(game->links[i]);
+          break;
+        }
+      }
+      else{
+        id_nwest = NO_ID;
+      }
+    }
+  }
+
+  /*Search for the north east space*/
+  id_l_neast = space_get_north(space_east);
+  if(id_l_neast == NO_ID){
+    id_l_neast = space_get_east(space_north);
+  } 
+  if(id_l_neast != NO_ID){
+    for(i=0; i<(4*MAX_SPACES); i++){
+      if(link_get_id(game->links[i]) == id_l_neast){
+        if(link_get_conection1(game->links[i]) == id_east || link_get_conection1(game->links[i]) == id_north){
+          id_neast = link_get_conection2(game->links[i]);
+          break;
+        }
+        else{
+          id_neast = link_get_conection1(game->links[i]);
+          break;
+        }
+      }
+      else{
+        id_neast = NO_ID;
+      }
+    } 
+  }
+
+  /*Search for the south east space*/
+  id_l_seast = space_get_south(space_east);
+  if(id_l_seast == NO_ID){
+    id_l_seast = space_get_east(space_south);
+  } 
+  if(id_l_seast != NO_ID){
+    for(i=0; i<(4*MAX_SPACES); i++){
+      if(link_get_id(game->links[i]) == id_l_seast){
+        if(link_get_conection1(game->links[i]) == id_east || link_get_conection1(game->links[i]) == id_south){
+          id_seast = link_get_conection2(game->links[i]);
+          break;
+        }
+        else{
+          id_seast = link_get_conection1(game->links[i]);
+          break;
+        }
+      }
+      else{
+        id_seast = NO_ID;
+      }
+    } 
+  }
+
+  /*Search for the south west space*/
+  id_l_swest = space_get_south(space_west);
+  if(id_l_swest == NO_ID){
+    id_l_swest = space_get_west(space_south);
+  } 
+  if(id_l_swest != NO_ID){
+    for(i=0; i<(4*MAX_SPACES); i++){
+      if(link_get_id(game->links[i]) == id_l_swest){
+        if(link_get_conection1(game->links[i]) == id_west || link_get_conection1(game->links[i]) == id_south){
+          id_swest = link_get_conection2(game->links[i]);
+          break;
+        }
+        else{
+          id_swest = link_get_conection1(game->links[i]);
+          break;
+        }
+      }
+      else{
+        id_swest = NO_ID;
+      }
+    }
+  }
+
+
+  space_nwest = game_get_space(game, id_nwest);
+  space_neast = game_get_space(game, id_neast);
+  space_seast = game_get_space(game, id_seast);
+  space_swest = game_get_space(game, id_swest);
   
   if(system(CLEAR))
      return; 
 
-  if (id_back != NO_ID) {
-    if(space_get_light(space_back) == TRUE){
-      print_in_zone(gra, PLAYGROUND, N, space_get_gdesc(space_back));
+  if (id_north != NO_ID) {
+    if(space_get_light(space_north) == TRUE){
+      print_in_zone(gra, PLAYGROUND, N, space_get_gdesc(space_north));
     }
     else{
       print_in_zone(gra, PLAYGROUND, N, "+------------+|            ||            ||            ||            ||            |+------------+");
@@ -641,9 +749,9 @@ void game_print_screen(Game* game, Graphics* gra){
     print_in_zone(gra, PLAYGROUND, C, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   }
   
-  if (id_next != NO_ID) {
-    if(space_get_light(space_next) == TRUE){
-      print_in_zone(gra, PLAYGROUND, S, space_get_gdesc(space_next));
+  if (id_south != NO_ID) {
+    if(space_get_light(space_south) == TRUE){
+      print_in_zone(gra, PLAYGROUND, S, space_get_gdesc(space_south));
     }
     else{
       print_in_zone(gra, PLAYGROUND, S, "+------------+|            ||            ||            ||            ||            |+------------+");
@@ -677,6 +785,53 @@ void game_print_screen(Game* game, Graphics* gra){
     print_in_zone(gra, PLAYGROUND, W, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   }
   
+  if (id_nwest != NO_ID) {
+    if(space_get_light(space_nwest) == TRUE){
+      print_in_zone(gra, PLAYGROUND, NW, space_get_gdesc(space_nwest));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, NW, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, NW, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+
+  if (id_neast != NO_ID) {
+    if(space_get_light(space_neast) == TRUE){
+      print_in_zone(gra, PLAYGROUND, NE, space_get_gdesc(space_neast));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, NE, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, NE, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+
+  if (id_swest != NO_ID) {
+    if(space_get_light(space_swest) == TRUE){
+      print_in_zone(gra, PLAYGROUND, SW, space_get_gdesc(space_swest));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, SW, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, SW, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+
+  if (id_seast != NO_ID) {
+    if(space_get_light(space_seast) == TRUE){
+      print_in_zone(gra, PLAYGROUND, SE, space_get_gdesc(space_seast));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, SE, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, SE, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
 
 
   graphics_refresh(gra);
