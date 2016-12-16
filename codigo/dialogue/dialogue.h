@@ -18,6 +18,12 @@
 
 typedef struct _Dialogue Dialogue; /*!< Definition of struct Dialogue*/
 
+typedef enum{
+	SPACE = 0,
+	INVENTORY,
+	OBJECT
+}DIALOGUE_INSPECT;
+
 /*
 * @brief creates a new dialogue
 * @author Jose Ignacio Gómez

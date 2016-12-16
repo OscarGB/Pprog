@@ -59,10 +59,6 @@ STATUS dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
-STATUS dialogue_inspect(){
-	
-}
-
 STATUS dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
 	char string[MAX_DIALOGUE];
 	char* direction = NULL;
@@ -151,6 +147,17 @@ STATUS dialogue_load(){
 	
 }*/
 
+STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory, STATUS check){
+	char string[MAX_DIALOGUE];
+
+	string = "";
+
+	if(check == OK){
+		strcpy(string, "Inspecting space: \n");
+		
+	}
+}
+
 /*PUBLIC FUNCTIONS*/
 
 Dialogue* dialogue_create(Command* current){
@@ -191,7 +198,7 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 
 }
 
-STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Space* space, Graphics* gra, Inventory* inventory){
+STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Space* space, Graphics* gra){
 	T_command cmd;
 
 	if(!dialogue || !objects || !space) return ERROR;
@@ -199,29 +206,27 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Space*
 	cmd = command_get_cmd(dialogue->current);
 	switch cmd{
 		case NO_CMD:
-			return dialogue_error();
+			return dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects);
 		case UNKNOWN:
-			return dialogue_error();
+			return dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects);
 		case QUIT:
-			return dialogue_quit();
+			return dialogue_quit(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
 		case PICK:
-			return dialogue_pick();
+			return dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
 		case DROP:
-			return dialogue_drop();
-		case INSPECT:
-			return dialogue_inspect();
+			return dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
 		case GO:
-			return dialogue_go();
+			return dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
 		case TURNON:
-			return dialogue_turnon();
+			return dialogue_turnon(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
 		case TURNOFF:
-			return dialogue_turnoff():
+			return dialogue_turnoff(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check):
 		case OPEN:
-			return dialogue_open();
+			return dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
 		case SAVE:
-			return dialogue_save();
+			return dialogue_save(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
 		case LOAD:
-			return dialogue_load();
+			return dialogue_load(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
 		default:
 			return ERROR;
 	}
@@ -229,6 +234,18 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Space*
 	return ERROR;
 }
 
+STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Graphics* gra, DIALOGUE_INSPECT type){
+	if(!dialogue || !gra) return ERROR;
+
+	switch type{
+		case SPACE:
+			return dialogue_inspect_space(gra, dialogue, inventory[0], check); /* Inventory[0] will be the description of the space/object*/
+		case INVENTORY:
+			return dialogue_inspect_inventory(gra, dialogue, inventory, check);
+		case OBJECT:
+			return dialogue_inspect_object(gra, dialogue, inventory[0], check);
+	}
+}
 /*
 * @brief prints on screen the dialogue
 * @author José Ignacio Gómez
