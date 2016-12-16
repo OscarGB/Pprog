@@ -153,6 +153,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ace036b501767e17a316d3dd93cee5cfb"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="link_8c.html#ace036b501767e17a316d3dd93cee5cfb">link_set_state</a> (<a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *link, <a class="el" href="link_8h.html#ad8c54cca58ad40ca172f1d3abb791e77">State</a> state)</td></tr>
 <tr class="memdesc:ace036b501767e17a316d3dd93cee5cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the State of a Link.  <a href="#ace036b501767e17a316d3dd93cee5cfb">More...</a><br /></td></tr>
 <tr class="separator:ace036b501767e17a316d3dd93cee5cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7993b94cbfa5de4e4086e5499ac43461"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="link_8c.html#a7993b94cbfa5de4e4086e5499ac43461">link_open</a> (<a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *link)</td></tr>
+<tr class="memdesc:a7993b94cbfa5de4e4086e5499ac43461"><td class="mdescLeft">&#160;</td><td class="mdescRight">OpenLs a link.  <a href="#a7993b94cbfa5de4e4086e5499ac43461">More...</a><br /></td></tr>
+<tr class="separator:a7993b94cbfa5de4e4086e5499ac43461"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f26781833ca6b299c0bc35a6f08a36d"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="link_8c.html#a1f26781833ca6b299c0bc35a6f08a36d">link_close</a> (<a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *link)</td></tr>
+<tr class="memdesc:a1f26781833ca6b299c0bc35a6f08a36d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes a link.  <a href="#a1f26781833ca6b299c0bc35a6f08a36d">More...</a><br /></td></tr>
+<tr class="separator:a1f26781833ca6b299c0bc35a6f08a36d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95ea756dad592e65440a33dfbe47edcf"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="link_8c.html#a95ea756dad592e65440a33dfbe47edcf">link_print</a> (<a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *link)</td></tr>
 <tr class="memdesc:a95ea756dad592e65440a33dfbe47edcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">It prints the content of a Link.  <a href="#a95ea756dad592e65440a33dfbe47edcf">More...</a><br /></td></tr>
 <tr class="separator:a95ea756dad592e65440a33dfbe47edcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,6 +169,33 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>3/11/2016 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a1f26781833ca6b299c0bc35a6f08a36d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS link_close </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *&#160;</td>
+          <td class="paramname"><em>link</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Closes a link. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>3/11/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Link*</td><td>(The Link to change) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if the State have been changed, ERROR if haven't) </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a8090d7f529cfd6a2fc5df3dd379fe514"></a>
 <div class="memitem">
 <div class="memproto">
@@ -350,6 +383,34 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>State (The state of the Link) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7993b94cbfa5de4e4086e5499ac43461"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS link_open </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *&#160;</td>
+          <td class="paramname"><em>link</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>OpenLs a link. </p>
+<p>Opens a link.</p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>3/11/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Link*</td><td>(The Link to change) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if the State have been changed, ERROR if haven't) </dd></dl>
 
 </div>
 </div>

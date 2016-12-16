@@ -86,6 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -110,24 +111,33 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="command_8h__dep__incl.png" border="0" usemap="#codigo_2command_2command_8hdep" alt=""/></div>
 <map name="codigo_2command_2command_8hdep" id="codigo_2command_2command_8hdep">
-<area shape="rect" id="node2" href="command_8c.html" title="It implements the command interpreter. " alt="" coords="5,80,199,107"/>
-<area shape="rect" id="node3" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="279,80,421,107"/>
-<area shape="rect" id="node5" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="150,155,313,196"/>
-<area shape="rect" id="node4" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="303,251,445,278"/>
-<area shape="rect" id="node6" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="387,155,526,196"/>
-<area shape="rect" id="node7" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="482,244,621,285"/>
+<area shape="rect" id="node2" href="command_8c.html" title="It implements the command interpreter. " alt="" coords="24,80,217,107"/>
+<area shape="rect" id="node3" href="dialogue_8h.html" title="It defines the dialogue module. " alt="" coords="241,80,416,107"/>
+<area shape="rect" id="node4" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="322,155,465,181"/>
+<area shape="rect" id="node6" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="431,229,594,271"/>
+<area shape="rect" id="node10" href="graphics_8h.html" title="Definition of the graphic interface. " alt="" coords="542,80,720,107"/>
+<area shape="rect" id="node11" href="graphics_8c.html" title="Implementation of the graphic interface. " alt="" coords="669,155,846,181"/>
+<area shape="rect" id="node5" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="322,326,465,353"/>
+<area shape="rect" id="node7" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="218,229,356,271"/>
+<area shape="rect" id="node8" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="39,319,178,360"/>
+<area shape="rect" id="node9" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="26,229,193,271"/>
 </map>
 </div>
 </div>
 <p><a href="command_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a2b1bd24d2eddf8081d8c541e4cc4fd4b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b1bd24d2eddf8081d8c541e4cc4fd4b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CMD_LENGHT</b>&#160;&#160;&#160;30</td></tr>
+<tr class="separator:a2b1bd24d2eddf8081d8c541e4cc4fd4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a0473597db8c45c0289b6b8e2f8abbe32"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0473597db8c45c0289b6b8e2f8abbe32"></a>
 typedef enum enum_Command&#160;</td><td class="memItemRight" valign="bottom"><b>T_Command</b></td></tr>
 <tr class="separator:a0473597db8c45c0289b6b8e2f8abbe32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d2935971c252377cb0fc1c8545dc2bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d2935971c252377cb0fc1c8545dc2bc"></a>
-typedef struct <a class="el" href="struct___command.html">_Command</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Command</b></td></tr>
+<tr class="memitem:a7d2935971c252377cb0fc1c8545dc2bc"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct___command.html">_Command</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a></td></tr>
 <tr class="separator:a7d2935971c252377cb0fc1c8545dc2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -145,35 +155,97 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<b>ROLL</b>, 
 <b>INSPECT</b>, 
-<b>GO</b>
+<b>GO</b>, 
+<b>TURNON</b>, 
+<br />
+&#160;&#160;<b>TURNOFF</b>, 
+<b>OPEN</b>, 
+<b>SAVE</b>, 
+<b>LOAD</b>
 <br />
  }</td></tr>
 <tr class="separator:ace19ba2296a74e4aef53304e0934c50c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adb160f1183ea083c5404fc8911a09920"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb160f1183ea083c5404fc8911a09920"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>get_user_input</b> ()</td></tr>
-<tr class="separator:adb160f1183ea083c5404fc8911a09920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7de113e2fa05f4778e769bc1a7ddcff7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7de113e2fa05f4778e769bc1a7ddcff7"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>get_user_input</b> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *command, char *input)</td></tr>
+<tr class="separator:a7de113e2fa05f4778e769bc1a7ddcff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e1d59fed8f0eb039c403543477d2ce0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e1d59fed8f0eb039c403543477d2ce0"></a>
-<a class="el" href="struct___command.html">Command</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>command_create</b> ()</td></tr>
+<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>command_create</b> ()</td></tr>
 <tr class="separator:a3e1d59fed8f0eb039c403543477d2ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19554f0a7e4992cb1c2ebf2a2cef2949"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19554f0a7e4992cb1c2ebf2a2cef2949"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>command_destroy</b> (<a class="el" href="struct___command.html">Command</a> *com)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>command_destroy</b> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *com)</td></tr>
 <tr class="separator:a19554f0a7e4992cb1c2ebf2a2cef2949"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ffebe5a80e84913ef9dd0dc79149476"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ffebe5a80e84913ef9dd0dc79149476"></a>
-T_Command&#160;</td><td class="memItemRight" valign="bottom"><b>command_get_cmd</b> (<a class="el" href="struct___command.html">Command</a> *com)</td></tr>
+T_Command&#160;</td><td class="memItemRight" valign="bottom"><b>command_get_cmd</b> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *com)</td></tr>
 <tr class="separator:a8ffebe5a80e84913ef9dd0dc79149476"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cf1083e88019e1337191e07a095b74a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8cf1083e88019e1337191e07a095b74a"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>command_get_symbol</b> (<a class="el" href="struct___command.html">Command</a> *com)</td></tr>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>command_get_symbol</b> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *com)</td></tr>
 <tr class="separator:a8cf1083e88019e1337191e07a095b74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a267bec636fbe8ba0187d2debf6c877c2"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command_8h.html#a267bec636fbe8ba0187d2debf6c877c2">command_copy</a> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *to, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *from)</td></tr>
+<tr class="memdesc:a267bec636fbe8ba0187d2debf6c877c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies a command to another.  <a href="#a267bec636fbe8ba0187d2debf6c877c2">More...</a><br /></td></tr>
+<tr class="separator:a267bec636fbe8ba0187d2debf6c877c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It defines the command interpreter. </p>
 <dl class="section author"><dt>Author</dt><dd>Óscar Gómez, José Ignacio Gómez </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>23/09/2016  none </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a class="anchor" id="a7d2935971c252377cb0fc1c8545dc2bc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct___command.html">_Command</a> <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Definition of Command structure </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a267bec636fbe8ba0187d2debf6c877c2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS command_copy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>to</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>from</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copies a command to another. </p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16-12-2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Command</td><td>*to (The command where you copy) </td></tr>
+    <tr><td class="paramname">Command</td><td>*from (The command to copy) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything worked, ERROR if didnt) </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

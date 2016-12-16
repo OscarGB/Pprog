@@ -1,9 +1,26 @@
 var searchData=
 [
-  ['desc',['desc',['../struct___object.html#ab13e9dba2d330b54cd11d93cef3a7deb',1,'_Object']]],
-  ['die',['die',['../struct___game.html#a4b1b840fbb450f0132e2ba0738fb2e50',1,'_Game::die()'],['../die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3',1,'Die():&#160;die.h']]],
-  ['die_2ec',['die.c',['../die_8c.html',1,'']]],
-  ['die_2eh',['die.h',['../die_8h.html',1,'']]],
-  ['die_5ffaces',['DIE_FACES',['../game_8h.html#a0a1632016d187a693fee35e34c8f07ba',1,'game.h']]],
-  ['die_5ftest_2ec',['die_test.c',['../die__test_8c.html',1,'']]]
+  ['callback_5fback',['callback_BACK',['../game_8c.html#a2661813f919d43d434fb60f4508b5f5c',1,'game.c']]],
+  ['callback_5fdown',['callback_DOWN',['../game_8c.html#ac5a74668fae3750215957c188830a0f4',1,'game.c']]],
+  ['callback_5fdrop',['callback_DROP',['../game_8c.html#a045e658bfcf2d9ab95a8c01da3a426f7',1,'game.c']]],
+  ['callback_5fgo',['callback_GO',['../game_8c.html#a13db2d703036d7abeca156246144c132',1,'game.c']]],
+  ['callback_5finspect',['callback_INSPECT',['../game_8c.html#a721a13a48e9b6cacfd0cabc697d2bb84',1,'game.c']]],
+  ['callback_5fjump',['callback_JUMP',['../game_8c.html#a09f7948980bb5a019291df930bf14bce',1,'game.c']]],
+  ['callback_5fnext',['callback_NEXT',['../game_8c.html#a7e45477d826bfce2fafc5459ce404cfd',1,'game.c']]],
+  ['callback_5fpick',['callback_PICK',['../game_8c.html#aca28a933abd93834375ee4ee3b76960b',1,'game.c']]],
+  ['callback_5fquit',['callback_QUIT',['../game_8c.html#abfa7167c4b0d7d4ddfdd66956c9ee982',1,'game.c']]],
+  ['callback_5froll',['callback_ROLL',['../game_8c.html#ae318a3e7417fbbca702c4cb69c21336b',1,'game.c']]],
+  ['callback_5fturnoff',['callback_TURNOFF',['../game_8c.html#a8fb8807bab2e6d6dee0d0497cea3c220',1,'game.c']]],
+  ['callback_5fturnon',['callback_TURNON',['../game_8c.html#ad74b567a082799f825a6676d0dc9ee4d',1,'game.c']]],
+  ['callback_5funknown',['callback_UNKNOWN',['../game_8c.html#ace17557336a1e20d7e003280308d31e5',1,'game.c']]],
+  ['callback_5fup',['callback_UP',['../game_8c.html#a585d97f380bab9ecd56f119d28280bab',1,'game.c']]],
+  ['char_5ferror',['CHAR_ERROR',['../object_8h.html#af7555d869b0034eb4e3b8c7ce6c6590f',1,'object.h']]],
+  ['cmd',['cmd',['../struct___command.html#a987286cd4accace9e59c05dbb19a40ab',1,'_Command']]],
+  ['command',['Command',['../command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc',1,'command.h']]],
+  ['command_2ec',['command.c',['../command_8c.html',1,'']]],
+  ['command_2eh',['command.h',['../command_8h.html',1,'']]],
+  ['command_5fcopy',['command_copy',['../command_8c.html#a267bec636fbe8ba0187d2debf6c877c2',1,'command_copy(Command *to, Command *from):&#160;command.c'],['../command_8h.html#a267bec636fbe8ba0187d2debf6c877c2',1,'command_copy(Command *to, Command *from):&#160;command.c']]],
+  ['commands',['commands',['../struct___graphics.html#a5745bd1ac3efbc85d38e565d9ff00130',1,'_Graphics::commands()'],['../graphics_8h.html#a0073c1262c9d5b72ba2d3093aeb95dbaa71bb3b36ba3054533c011ea42dbe0923',1,'COMMANDS():&#160;graphics.h']]],
+  ['conection1',['conection1',['../struct___link.html#ad54dd79ff14b96edd4b9c7e4dadd4cd0',1,'_Link']]],
+  ['conection2',['conection2',['../struct___link.html#a83eb5b56fb4fdd0ae61c9572a242fc75',1,'_Link']]]
 ];

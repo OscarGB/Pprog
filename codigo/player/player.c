@@ -241,3 +241,17 @@ Inventory* player_get_inventory(Player* player){
 
 	return player->bag;
 }
+
+/**
+* @brief Returns the id of the player
+* @author Óscar Pinto Santamaría
+* @date 16/12/2016
+* @param Player* player
+* @return Id (id from player)
+*/
+Id player_get_id(Player* player){
+
+	if(!player) return NULL;
+	
+	return player->id;
+}
