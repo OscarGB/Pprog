@@ -228,3 +228,16 @@ BOOL player_has_object(Player *player, Id id){
 
 	return inventory_is_in(player->bag, id);
 }
+
+/**
+* @brief Gets the inventory of the player
+* @author José Ignacio Gómez
+* @date 16/12/2016
+* @param Player*
+* @return Inventory*
+*/
+Inventory* player_get_inventory(Player* player){
+	if(!player) return NULL;
+
+	return player->bag;
+}

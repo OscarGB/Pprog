@@ -1279,6 +1279,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
     Id player_location = NO_ID; /* !< Locations of the player and object*/
     Space *space; /*!<Variable used for storing auxiliary spaces*/
     char *symbol = NULL; /*!< Variable used for storing the command*/
+    Inventory* inventory = NULL;
 
     symbol = command_get_cmd(cmd);
 
@@ -1332,7 +1333,14 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
             }
           }
           return ERROR;
-      }else{ /*!< Inspecting an object */
+      }
+      else if(strcmp(symbol, "inventory") == 0 || strcmp(symbol, "Inventory") == 0){ /*!< Inspecting inventory*/
+        inventory = player_get_inventory(game->player);
+        if(!inventory) return ERROR;
+        /***HACER ARRAY DE OBJECTS INVENTORY****/
+        return dialogue_generic(dialogue, objects);
+      }
+      else{ /*!< Inspecting an object */
          for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
             if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){
                if(strcmp(object_get_name(game->object[i]), symbol) == 0)
@@ -1342,14 +1350,14 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
 
           if(!obj) return ERROR;
 	
-		  space = game_get_space(game, object_get_location(obj)); /*Get the space where the object is*/
+		      space = game_get_space(game, object_get_location(obj)); /*Get the space where the object is*/
 
-		  if(space_get_light(space) == FALSE){
-		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
-		  }
-		  strcpy(game->desc, object_get_description(obj));
+    		  if(space_get_light(space) == FALSE){
+    		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
+    		  }
+    		  strcpy(game->desc, object_get_description(obj));
           return OK;
-        }
+      }
     }
 
   return ERROR;

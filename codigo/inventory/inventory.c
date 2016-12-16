@@ -273,3 +273,25 @@ BOOL inventory_is_in(Inventory* bag, Id id){
 
 	return set_is_id(set, id);
 }
+
+/**
+* @brief Returns a string with the names of the objects, for the dialogue
+* @author José Ignacio Gómez
+* @date 16/12/2016
+* @param Inventory*
+* @return char* string
+*/
+int* inventory_get_ids(Inventory* bag){
+	int* ids = NULL;
+	Set* set = NULL;
+
+	if(!bag) return NULL;
+
+	set = inventory_get_set(bag);
+	if(!set) return NULL;
+
+	ids = set_get_array(set);
+	if(!ids) return NULL;
+
+	return ids;
+}
