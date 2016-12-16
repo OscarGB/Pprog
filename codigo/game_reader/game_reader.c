@@ -68,15 +68,12 @@ STATUS game_load_spaces(Game* game, char* filename) {
       if(strcmp(toks, "\n") != 0){
         strcpy(gdesc, "|");
         strcat(gdesc, toks);
-        strcat(gdesc, "|\n");
         toks = strtok(NULL, "|");
         strcat(gdesc, "|");
         strcat(gdesc, toks);
-        strcat(gdesc, "|\n");
         toks = strtok(NULL, "|");
         strcat(gdesc, "|");
         strcat(gdesc, toks);
-        strcat(gdesc, "|\n");
         strcat(gdesc, "\0");
       }
       else {

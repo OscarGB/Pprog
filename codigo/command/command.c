@@ -98,6 +98,11 @@ STATUS get_user_input(Command* command, char* input){
 
 			strcpy(command->symbol, symbol);
 		}
+		else if (!strcmp(action, "save") || !strcmp(action, "s")){
+			command->cmd = SAVE;
+
+			strcpy(command->symbol, symbol);
+		}
 		else{
 			command->cmd = UNKNOWN;
 		}
