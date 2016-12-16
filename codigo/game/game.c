@@ -511,7 +511,7 @@ void game_print_screen(Game* game, Graphics* gra){
   Space* space_next = NULL;
   Space* space_east = NULL;
   Space* space_west = NULL;
-  int i, last; /* !< loops, last rolled value*/
+  int i; /* !< loops, last rolled value*/
 
   if(!gra || !game){
     return;
@@ -1165,7 +1165,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
 
           if(!obj) return ERROR;
 
-		  /*space = game_get_space(Game* game, Id id);*/ /*Get the space where the object is*/
+		  space = game_get_space(game, object_get_location(obj)); /*Get the space where the object is*/
 
 		  if(space_get_light(space) == FALSE){
 		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
@@ -1196,7 +1196,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
 
           if(!obj) return ERROR;
 	
-		  /*space = game_get_space(Game* game, Id id);*/ /*Get the space where the object is*/
+		  space = game_get_space(game, object_get_location(obj)); /*Get the space where the object is*/
 
 		  if(space_get_light(space) == FALSE){
 		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
