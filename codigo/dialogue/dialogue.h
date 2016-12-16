@@ -13,6 +13,8 @@
 
 #include "command.h"
 
+#define MAX_DIALOGUE 180;
+
 
 typedef struct _Dialogue Dialogue; /*!< Definition of struct Dialogue*/
 
