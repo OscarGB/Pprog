@@ -105,21 +105,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &quot;<a class="el" href="game__reader_8h_source.html">game_reader.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="die_8h_source.html">die.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="link_8h_source.html">link.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="graphics_8h_source.html">graphics.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for game.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="game_8c__incl.png" border="0" usemap="#codigo_2game_2game_8c" alt=""/></div>
 <map name="codigo_2game_2game_8c" id="codigo_2game_2game_8c">
-<area shape="rect" id="node5" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="310,155,375,181"/>
-<area shape="rect" id="node10" href="player_8h.html" title="It defines the functionality of the player. " alt="" coords="381,229,449,256"/>
-<area shape="rect" id="node11" href="object_8h.html" title="It defines the functionality of the objects. " alt="" coords="83,304,151,331"/>
-<area shape="rect" id="node12" href="die_8h.html" title="It defines the die&#39;s commands. " alt="" coords="473,229,524,256"/>
-<area shape="rect" id="node13" href="link_8h.html" title="Definition of the link module. " alt="" coords="548,229,601,256"/>
-<area shape="rect" id="node14" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="214,80,322,107"/>
-<area shape="rect" id="node6" href="command_8h.html" title="It defines the command interpreter. " alt="" coords="301,304,392,331"/>
-<area shape="rect" id="node8" href="space_8h.html" title="It defines the game spaces. " alt="" coords="186,229,254,256"/>
-<area shape="rect" id="node9" href="set_8h.html" title="It defines the capability of store sets of things. " alt="" coords="227,304,277,331"/>
-<area shape="rect" id="node7" href="types_8h.html" title="It defines common types. " alt="" coords="266,379,331,405"/>
+<area shape="rect" id="node5" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="349,155,414,181"/>
+<area shape="rect" id="node10" href="player_8h.html" title="It defines the functionality of the player. " alt="" coords="542,229,610,256"/>
+<area shape="rect" id="node11" href="object_8h.html" title="It defines the functionality of the objects. " alt="" coords="643,304,711,331"/>
+<area shape="rect" id="node12" href="die_8h.html" title="It defines the die&#39;s commands. " alt="" coords="64,229,115,256"/>
+<area shape="rect" id="node13" href="link_8h.html" title="Definition of the link module. " alt="" coords="635,229,688,256"/>
+<area shape="rect" id="node14" href="graphics_8h.html" title="Definition of the graphic interface. " alt="" coords="139,229,221,256"/>
+<area shape="rect" id="node15" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="450,80,558,107"/>
+<area shape="rect" id="node6" href="command_8h.html" title="It defines the command interpreter. " alt="" coords="217,304,308,331"/>
+<area shape="rect" id="node8" href="space_8h.html" title="It defines the game spaces. " alt="" coords="347,229,415,256"/>
+<area shape="rect" id="node9" href="set_8h.html" title="It defines the capability of store sets of things. " alt="" coords="344,304,395,331"/>
+<area shape="rect" id="node7" href="types_8h.html" title="It defines common types. " alt="" coords="399,379,465,405"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -136,36 +138,51 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a408b9e99262618cba7b0a672712cb7fe"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a408b9e99262618cba7b0a672712cb7fe">callback_UNKNOWN</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
-<tr class="memdesc:a408b9e99262618cba7b0a672712cb7fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for an unknown parameter  <a href="#a408b9e99262618cba7b0a672712cb7fe">More...</a><br /></td></tr>
-<tr class="separator:a408b9e99262618cba7b0a672712cb7fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a559c272131b091cc3c95332a003f013c"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a559c272131b091cc3c95332a003f013c">callback_QUIT</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
-<tr class="memdesc:a559c272131b091cc3c95332a003f013c"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for quitting the game  <a href="#a559c272131b091cc3c95332a003f013c">More...</a><br /></td></tr>
-<tr class="separator:a559c272131b091cc3c95332a003f013c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58e7e2ffc88cbdea850e4c808746946e"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a58e7e2ffc88cbdea850e4c808746946e">callback_NEXT</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
-<tr class="memdesc:a58e7e2ffc88cbdea850e4c808746946e"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "next" instruction  <a href="#a58e7e2ffc88cbdea850e4c808746946e">More...</a><br /></td></tr>
-<tr class="separator:a58e7e2ffc88cbdea850e4c808746946e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1c058d88c0399f9bc6b033185da99d9"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#aa1c058d88c0399f9bc6b033185da99d9">callback_BACK</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
-<tr class="memdesc:aa1c058d88c0399f9bc6b033185da99d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">callbac for "back" instruction  <a href="#aa1c058d88c0399f9bc6b033185da99d9">More...</a><br /></td></tr>
-<tr class="separator:aa1c058d88c0399f9bc6b033185da99d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac70f6ec315dc698a1093054651efeee2"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#ac70f6ec315dc698a1093054651efeee2">callback_JUMP</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
-<tr class="memdesc:ac70f6ec315dc698a1093054651efeee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "jump" instruction  <a href="#ac70f6ec315dc698a1093054651efeee2">More...</a><br /></td></tr>
-<tr class="separator:ac70f6ec315dc698a1093054651efeee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15e0c91f012fddf46599f7687cb74f19"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a15e0c91f012fddf46599f7687cb74f19">callback_DROP</a> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol)</td></tr>
-<tr class="memdesc:a15e0c91f012fddf46599f7687cb74f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "drop" instruction  <a href="#a15e0c91f012fddf46599f7687cb74f19">More...</a><br /></td></tr>
-<tr class="separator:a15e0c91f012fddf46599f7687cb74f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c46ac36cde130a6859b4bf36f36a405"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a9c46ac36cde130a6859b4bf36f36a405">callback_PICK</a> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol)</td></tr>
-<tr class="memdesc:a9c46ac36cde130a6859b4bf36f36a405"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "pick" instruction  <a href="#a9c46ac36cde130a6859b4bf36f36a405">More...</a><br /></td></tr>
-<tr class="separator:a9c46ac36cde130a6859b4bf36f36a405"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf4fc1ffe2189ae3c6818b255c89b00b"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#aaf4fc1ffe2189ae3c6818b255c89b00b">callback_ROLL</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
-<tr class="memdesc:aaf4fc1ffe2189ae3c6818b255c89b00b"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "roll" instruction  <a href="#aaf4fc1ffe2189ae3c6818b255c89b00b">More...</a><br /></td></tr>
-<tr class="separator:aaf4fc1ffe2189ae3c6818b255c89b00b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45af6b4e1befdc2eb4ede5dae980e94c"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a45af6b4e1befdc2eb4ede5dae980e94c">callback_INSPECT</a> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol)</td></tr>
-<tr class="memdesc:a45af6b4e1befdc2eb4ede5dae980e94c"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "inspect" instruction  <a href="#a45af6b4e1befdc2eb4ede5dae980e94c">More...</a><br /></td></tr>
-<tr class="separator:a45af6b4e1befdc2eb4ede5dae980e94c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd8ffcf3cc8aeff906f4f4fe8b6a410f"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#afd8ffcf3cc8aeff906f4f4fe8b6a410f">callback_GO</a> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol)</td></tr>
-<tr class="memdesc:afd8ffcf3cc8aeff906f4f4fe8b6a410f"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "go" instruction  <a href="#afd8ffcf3cc8aeff906f4f4fe8b6a410f">More...</a><br /></td></tr>
-<tr class="separator:afd8ffcf3cc8aeff906f4f4fe8b6a410f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace17557336a1e20d7e003280308d31e5"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#ace17557336a1e20d7e003280308d31e5">callback_UNKNOWN</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:ace17557336a1e20d7e003280308d31e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for an unknown parameter  <a href="#ace17557336a1e20d7e003280308d31e5">More...</a><br /></td></tr>
+<tr class="separator:ace17557336a1e20d7e003280308d31e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfa7167c4b0d7d4ddfdd66956c9ee982"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#abfa7167c4b0d7d4ddfdd66956c9ee982">callback_QUIT</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:abfa7167c4b0d7d4ddfdd66956c9ee982"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for quitting the game  <a href="#abfa7167c4b0d7d4ddfdd66956c9ee982">More...</a><br /></td></tr>
+<tr class="separator:abfa7167c4b0d7d4ddfdd66956c9ee982"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e45477d826bfce2fafc5459ce404cfd"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a7e45477d826bfce2fafc5459ce404cfd">callback_NEXT</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:a7e45477d826bfce2fafc5459ce404cfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "next" instruction  <a href="#a7e45477d826bfce2fafc5459ce404cfd">More...</a><br /></td></tr>
+<tr class="separator:a7e45477d826bfce2fafc5459ce404cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2661813f919d43d434fb60f4508b5f5c"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a2661813f919d43d434fb60f4508b5f5c">callback_BACK</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:a2661813f919d43d434fb60f4508b5f5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "back" instruction  <a href="#a2661813f919d43d434fb60f4508b5f5c">More...</a><br /></td></tr>
+<tr class="separator:a2661813f919d43d434fb60f4508b5f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09f7948980bb5a019291df930bf14bce"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a09f7948980bb5a019291df930bf14bce">callback_JUMP</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:a09f7948980bb5a019291df930bf14bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "jump" instruction  <a href="#a09f7948980bb5a019291df930bf14bce">More...</a><br /></td></tr>
+<tr class="separator:a09f7948980bb5a019291df930bf14bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a585d97f380bab9ecd56f119d28280bab"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a585d97f380bab9ecd56f119d28280bab">callback_UP</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:a585d97f380bab9ecd56f119d28280bab"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "up" instruction  <a href="#a585d97f380bab9ecd56f119d28280bab">More...</a><br /></td></tr>
+<tr class="separator:a585d97f380bab9ecd56f119d28280bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad16994719b302e23d4b836fd1ce57849"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad16994719b302e23d4b836fd1ce57849"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>callback_DROP</b> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:ad16994719b302e23d4b836fd1ce57849"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56fe96b7ea8251abc4ee0cda8867dfa0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56fe96b7ea8251abc4ee0cda8867dfa0"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>callback_PICK</b> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:a56fe96b7ea8251abc4ee0cda8867dfa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae318a3e7417fbbca702c4cb69c21336b"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#ae318a3e7417fbbca702c4cb69c21336b">callback_ROLL</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:ae318a3e7417fbbca702c4cb69c21336b"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "roll" instruction  <a href="#ae318a3e7417fbbca702c4cb69c21336b">More...</a><br /></td></tr>
+<tr class="separator:ae318a3e7417fbbca702c4cb69c21336b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fa62cfaa0688f7d81795ad1b5992729"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1fa62cfaa0688f7d81795ad1b5992729"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>callback_INSPECT</b> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:a1fa62cfaa0688f7d81795ad1b5992729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c1f0e61e4ddca85da05f480528a3f14"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c1f0e61e4ddca85da05f480528a3f14"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>callback_GO</b> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:a0c1f0e61e4ddca85da05f480528a3f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade37051c6914da24ae08d92d9f61f96f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade37051c6914da24ae08d92d9f61f96f"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>callback_TURNON</b> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:ade37051c6914da24ae08d92d9f61f96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08d759dc896a1017ffe74c0dcbd60ec2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08d759dc896a1017ffe74c0dcbd60ec2"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>callback_TURNOFF</b> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:a08d759dc896a1017ffe74c0dcbd60ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a231b6102f2cdf0a885c3431de67d57f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a231b6102f2cdf0a885c3431de67d57f7"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>callback_OPEN</b> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:a231b6102f2cdf0a885c3431de67d57f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b337d5fc2f8c462a7ab6cb78310dce4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b337d5fc2f8c462a7ab6cb78310dce4"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>callback_SAVE</b> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:a7b337d5fc2f8c462a7ab6cb78310dce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d01072a28b01545d36240cb8bd9d4f8"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a0d01072a28b01545d36240cb8bd9d4f8">game_load_spaces</a> (<a class="el" href="struct___game.html">Game</a> *game, char *filename)</td></tr>
 <tr class="memdesc:a0d01072a28b01545d36240cb8bd9d4f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the game table from a file  <a href="#a0d01072a28b01545d36240cb8bd9d4f8">More...</a><br /></td></tr>
 <tr class="separator:a0d01072a28b01545d36240cb8bd9d4f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,6 +210,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ac8526b9a1a15e2b03f60852cf9afa32a"><td class="memItemLeft" align="right" valign="top">Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#ac8526b9a1a15e2b03f60852cf9afa32a">game_get_object_location</a> (<a class="el" href="struct___game.html">Game</a> *game, char *symbol)</td></tr>
 <tr class="memdesc:ac8526b9a1a15e2b03f60852cf9afa32a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the location of an object.  <a href="#ac8526b9a1a15e2b03f60852cf9afa32a">More...</a><br /></td></tr>
 <tr class="separator:ac8526b9a1a15e2b03f60852cf9afa32a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94832aa2338bea591e5528c3e3e0bd58"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a94832aa2338bea591e5528c3e3e0bd58"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>print_player_save</b> (FILE *f, <a class="el" href="struct___player.html">Player</a> *player)</td></tr>
+<tr class="separator:a94832aa2338bea591e5528c3e3e0bd58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4646d9860e4023f3e0f77d377a82712"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4646d9860e4023f3e0f77d377a82712"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>print_space_save</b> (FILE *f, <a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
+<tr class="separator:af4646d9860e4023f3e0f77d377a82712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2704e75db04d1df15da72d04fd20838e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2704e75db04d1df15da72d04fd20838e"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>print_link_save</b> (FILE *f, <a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *link)</td></tr>
+<tr class="separator:a2704e75db04d1df15da72d04fd20838e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a741b7610b89fb2dd3e3f08a9f7158f4d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a741b7610b89fb2dd3e3f08a9f7158f4d"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>print_object_save</b> (FILE *f, <a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:a741b7610b89fb2dd3e3f08a9f7158f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95137f0bd5824bab0b8e37232e821464"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct___game.html">Game</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a95137f0bd5824bab0b8e37232e821464">game_init</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
 <tr class="memdesc:a95137f0bd5824bab0b8e37232e821464"><td class="mdescLeft">&#160;</td><td class="mdescRight">Game interface implementation.  <a href="#a95137f0bd5824bab0b8e37232e821464">More...</a><br /></td></tr>
 <tr class="separator:a95137f0bd5824bab0b8e37232e821464"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,18 +234,52 @@ Functions</h2></td></tr>
 <tr class="memitem:a4691bee17d5784ad6eb257dfbb252c27"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a4691bee17d5784ad6eb257dfbb252c27">game_add_link</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *link)</td></tr>
 <tr class="memdesc:a4691bee17d5784ad6eb257dfbb252c27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a link to the game.  <a href="#a4691bee17d5784ad6eb257dfbb252c27">More...</a><br /></td></tr>
 <tr class="separator:a4691bee17d5784ad6eb257dfbb252c27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a045f6326f72665b02e730d718120a0d3"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a045f6326f72665b02e730d718120a0d3">game_update</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="struct___command.html">Command</a> *cmd)</td></tr>
+<tr class="memitem:a045f6326f72665b02e730d718120a0d3"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a045f6326f72665b02e730d718120a0d3">game_update</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
 <tr class="memdesc:a045f6326f72665b02e730d718120a0d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">it calls different callbacks depending on the written command  <a href="#a045f6326f72665b02e730d718120a0d3">More...</a><br /></td></tr>
 <tr class="separator:a045f6326f72665b02e730d718120a0d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33a5ed8937423f8c012df3cedad4fa4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a33a5ed8937423f8c012df3cedad4fa4c">game_print_data</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
 <tr class="memdesc:a33a5ed8937423f8c012df3cedad4fa4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints on screen the actual game state.  <a href="#a33a5ed8937423f8c012df3cedad4fa4c">More...</a><br /></td></tr>
 <tr class="separator:a33a5ed8937423f8c012df3cedad4fa4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a108f413649a6dc99d3ffeed092dc15f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a108f413649a6dc99d3ffeed092dc15f5">game_print_screen</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
-<tr class="memdesc:a108f413649a6dc99d3ffeed092dc15f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints on screen the data of the game  <a href="#a108f413649a6dc99d3ffeed092dc15f5">More...</a><br /></td></tr>
-<tr class="separator:a108f413649a6dc99d3ffeed092dc15f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6efe0650af110bbd84e742cc8046d93"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#aa6efe0650af110bbd84e742cc8046d93">game_is_over</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
-<tr class="memdesc:aa6efe0650af110bbd84e742cc8046d93"><td class="mdescLeft">&#160;</td><td class="mdescRight">ends the game  <a href="#aa6efe0650af110bbd84e742cc8046d93">More...</a><br /></td></tr>
-<tr class="separator:aa6efe0650af110bbd84e742cc8046d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addfd2d29d2adb9267da2ec628aa0c5ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#addfd2d29d2adb9267da2ec628aa0c5ed">game_print_screen</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra)</td></tr>
+<tr class="memdesc:addfd2d29d2adb9267da2ec628aa0c5ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints on screen the data of the game  <a href="#addfd2d29d2adb9267da2ec628aa0c5ed">More...</a><br /></td></tr>
+<tr class="separator:addfd2d29d2adb9267da2ec628aa0c5ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add873508716c3fae6951070bd9e01e30"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#add873508716c3fae6951070bd9e01e30">game_is_over</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:add873508716c3fae6951070bd9e01e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">ends the game  <a href="#add873508716c3fae6951070bd9e01e30">More...</a><br /></td></tr>
+<tr class="separator:add873508716c3fae6951070bd9e01e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5a74668fae3750215957c188830a0f4"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#ac5a74668fae3750215957c188830a0f4">callback_DOWN</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:ac5a74668fae3750215957c188830a0f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "down" instruction  <a href="#ac5a74668fae3750215957c188830a0f4">More...</a><br /></td></tr>
+<tr class="separator:ac5a74668fae3750215957c188830a0f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a045e658bfcf2d9ab95a8c01da3a426f7"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a045e658bfcf2d9ab95a8c01da3a426f7">callback_DROP</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:a045e658bfcf2d9ab95a8c01da3a426f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "drop" instruction  <a href="#a045e658bfcf2d9ab95a8c01da3a426f7">More...</a><br /></td></tr>
+<tr class="separator:a045e658bfcf2d9ab95a8c01da3a426f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca28a933abd93834375ee4ee3b76960b"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#aca28a933abd93834375ee4ee3b76960b">callback_PICK</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:aca28a933abd93834375ee4ee3b76960b"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "pick" instruction  <a href="#aca28a933abd93834375ee4ee3b76960b">More...</a><br /></td></tr>
+<tr class="separator:aca28a933abd93834375ee4ee3b76960b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a721a13a48e9b6cacfd0cabc697d2bb84"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a721a13a48e9b6cacfd0cabc697d2bb84">callback_INSPECT</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:a721a13a48e9b6cacfd0cabc697d2bb84"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "inspect" instruction  <a href="#a721a13a48e9b6cacfd0cabc697d2bb84">More...</a><br /></td></tr>
+<tr class="separator:a721a13a48e9b6cacfd0cabc697d2bb84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13db2d703036d7abeca156246144c132"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a13db2d703036d7abeca156246144c132">callback_GO</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="memdesc:a13db2d703036d7abeca156246144c132"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for "go" instruction  <a href="#a13db2d703036d7abeca156246144c132">More...</a><br /></td></tr>
+<tr class="separator:a13db2d703036d7abeca156246144c132"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad74b567a082799f825a6676d0dc9ee4d"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#ad74b567a082799f825a6676d0dc9ee4d">callback_TURNON</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:ad74b567a082799f825a6676d0dc9ee4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fb8807bab2e6d6dee0d0497cea3c220"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a8fb8807bab2e6d6dee0d0497cea3c220">callback_TURNOFF</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:a8fb8807bab2e6d6dee0d0497cea3c220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed6763869e8183e6fa779867d935ff37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed6763869e8183e6fa779867d935ff37"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>callback_OPEN</b> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
+<tr class="separator:aed6763869e8183e6fa779867d935ff37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b197e96b13029190b9b1507a3348574"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b197e96b13029190b9b1507a3348574"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>callback_SAVE</b> (<a class="el" href="struct___game.html">Game</a> *game, char *savename)</td></tr>
+<tr class="separator:a7b197e96b13029190b9b1507a3348574"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5753a09313b092a52c0cea742c40f3cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a5753a09313b092a52c0cea742c40f3cf">game_get_die</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a5753a09313b092a52c0cea742c40f3cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the game die.  <a href="#a5753a09313b092a52c0cea742c40f3cf">More...</a><br /></td></tr>
+<tr class="separator:a5753a09313b092a52c0cea742c40f3cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb7854c42c9a42982a48e444b0660f99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#aeb7854c42c9a42982a48e444b0660f99">game_get_link_n</a> (<a class="el" href="struct___game.html">Game</a> *game, int n)</td></tr>
+<tr class="memdesc:aeb7854c42c9a42982a48e444b0660f99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the link in a concrete position.  <a href="#aeb7854c42c9a42982a48e444b0660f99">More...</a><br /></td></tr>
+<tr class="separator:aeb7854c42c9a42982a48e444b0660f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fa81b602efd0e237e44320471e4007a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8c.html#a1fa81b602efd0e237e44320471e4007a">game_get_num_links</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a1fa81b602efd0e237e44320471e4007a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of links.  <a href="#a1fa81b602efd0e237e44320471e4007a">More...</a><br /></td></tr>
+<tr class="separator:a1fa81b602efd0e237e44320471e4007a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It implements the game interface for each command. </p>
@@ -224,7 +287,7 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>09/11/2016 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="aa1c058d88c0399f9bc6b033185da99d9"></a>
+<a class="anchor" id="a2661813f919d43d434fb60f4508b5f5c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -232,13 +295,23 @@ Functions</h2></td></tr>
           <td class="memname">STATUS callback_BACK </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>callbac for "back" instruction </p>
+<p>callback for "back" instruction </p>
 <dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>29/09/2016 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -251,7 +324,44 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a15e0c91f012fddf46599f7687cb74f19"></a>
+<a class="anchor" id="ac5a74668fae3750215957c188830a0f4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS callback_DOWN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>callback for "down" instruction </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">game</td><td>pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if it went ok </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a045e658bfcf2d9ab95a8c01da3a426f7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -264,8 +374,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>symbol</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -286,12 +396,13 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OK if it went ok </dd></dl>
+<p>&lt; Variable used for storing the command</p>
 <p>&lt; Seeing if the symbol is associated to an object</p>
 <p>&lt; Seeing if the symbol is associated to an object </p>
 
 </div>
 </div>
-<a class="anchor" id="afd8ffcf3cc8aeff906f4f4fe8b6a410f"></a>
+<a class="anchor" id="a13db2d703036d7abeca156246144c132"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -304,8 +415,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>symbol</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -326,10 +437,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OK if it went ok </dd></dl>
+<p>&lt; Variable used for storing the command </p>
 
 </div>
 </div>
-<a class="anchor" id="a45af6b4e1befdc2eb4ede5dae980e94c"></a>
+<a class="anchor" id="a721a13a48e9b6cacfd0cabc697d2bb84"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -342,8 +454,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>symbol</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -364,6 +476,8 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OK if it went ok </dd></dl>
+<p>&lt;Variable used for storing auxiliary spaces</p>
+<p>&lt; Variable used for storing the command</p>
 <p>&lt; Inspecting space</p>
 <p>&lt; Inspecting an object</p>
 <p>&lt; If player has the object or they're in the same field</p>
@@ -373,7 +487,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac70f6ec315dc698a1093054651efeee2"></a>
+<a class="anchor" id="a09f7948980bb5a019291df930bf14bce"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -381,8 +495,18 @@ Functions</h2></td></tr>
           <td class="memname">STATUS callback_JUMP </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -400,7 +524,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a58e7e2ffc88cbdea850e4c808746946e"></a>
+<a class="anchor" id="a7e45477d826bfce2fafc5459ce404cfd"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -408,8 +532,18 @@ Functions</h2></td></tr>
           <td class="memname">STATUS callback_NEXT </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -427,7 +561,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9c46ac36cde130a6859b4bf36f36a405"></a>
+<a class="anchor" id="aca28a933abd93834375ee4ee3b76960b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -440,8 +574,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>symbol</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -462,10 +596,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OK if it went ok </dd></dl>
+<p>&lt; Variable used for storing the command </p>
 
 </div>
 </div>
-<a class="anchor" id="a559c272131b091cc3c95332a003f013c"></a>
+<a class="anchor" id="abfa7167c4b0d7d4ddfdd66956c9ee982"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -473,8 +608,18 @@ Functions</h2></td></tr>
           <td class="memname">STATUS callback_QUIT </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -492,7 +637,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aaf4fc1ffe2189ae3c6818b255c89b00b"></a>
+<a class="anchor" id="ae318a3e7417fbbca702c4cb69c21336b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -500,8 +645,18 @@ Functions</h2></td></tr>
           <td class="memname">STATUS callback_ROLL </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -519,7 +674,61 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a408b9e99262618cba7b0a672712cb7fe"></a>
+<a class="anchor" id="a8fb8807bab2e6d6dee0d0497cea3c220"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS callback_TURNOFF </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>&lt; Variable used for storing the command </p>
+
+</div>
+</div>
+<a class="anchor" id="ad74b567a082799f825a6676d0dc9ee4d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS callback_TURNON </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>&lt; Variable used for storing the command </p>
+
+</div>
+</div>
+<a class="anchor" id="ace17557336a1e20d7e003280308d31e5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -527,8 +736,18 @@ Functions</h2></td></tr>
           <td class="memname">STATUS callback_UNKNOWN </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -536,6 +755,43 @@ Functions</h2></td></tr>
 <p>callback for an unknown parameter </p>
 <dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>29/09/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">game</td><td>pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if it went ok </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a585d97f380bab9ecd56f119d28280bab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS callback_UP </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>callback for "up" instruction </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2/12/2016 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">game</td><td>pointer </td></tr>
@@ -684,6 +940,97 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>OK if the game was successfuly destroyed </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5753a09313b092a52c0cea742c40f3cf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a>* game_get_die </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the game die. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Die pointer </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aeb7854c42c9a42982a48e444b0660f99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a>* game_get_link_n </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the link in a concrete position. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Link pointer </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1fa81b602efd0e237e44320471e4007a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int game_get_num_links </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the number of links. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int (number of links) </dd></dl>
 
 </div>
 </div>
@@ -893,7 +1240,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa6efe0650af110bbd84e742cc8046d93"></a>
+<a class="anchor" id="add873508716c3fae6951070bd9e01e30"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -901,8 +1248,18 @@ Functions</h2></td></tr>
           <td class="memname">BOOL game_is_over </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -984,7 +1341,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a108f413649a6dc99d3ffeed092dc15f5"></a>
+<a class="anchor" id="addfd2d29d2adb9267da2ec628aa0c5ed"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -992,8 +1349,18 @@ Functions</h2></td></tr>
           <td class="memname">void game_print_screen </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *&#160;</td>
+          <td class="paramname"><em>gra</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1108,7 +1475,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct___command.html">Command</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
           <td class="paramname"><em>cmd</em>&#160;</td>
         </tr>
         <tr>

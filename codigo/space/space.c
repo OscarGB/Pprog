@@ -557,3 +557,79 @@ BOOL space_get_light(Space* space){
  
     return space->light;
 }
+
+/**
+* @brief Changes the gdesc to show an open door
+* @author Óscar Gómez
+* @date 16/12/2016
+* @param Space* space (The space to modify)
+* @param DIRECTION (The direction where you open the door)
+* @return STATUS (OK if it was successfuly changed)
+*/
+STATUS space_open_door(Space* space, DIRECTION dir){
+    if(!space){
+        return ERROR;
+    }
+    switch(dir){
+        case N:
+            space->gdesc[4] = '|';
+            space->gdesc[5] = ' ';
+            space->gdesc[6] = ' ';
+            space->gdesc[7] = '|';
+            return OK;
+        case S:
+            space->gdesc[88] = '|';
+            space->gdesc[89] = ' ';
+            space->gdesc[90] = ' ';
+            space->gdesc[91] = '|';
+            return OK;
+        case W:
+            space->gdesc[32] = '238';
+            space->gdesc[46] = '95';
+            return OK;
+        case E:
+            space->gdesc[45] = '238';
+            space->gdesc[59] = '95';
+            return OK;
+        default:
+            return ERROR;
+    }
+}
+
+/**
+* @brief Changes the gdesc to show a closed door
+* @author Óscar Gómez
+* @date 16/12/2016
+* @param Space* space (The space to modify)
+* @param DIRECTION (The direction where you close the door)
+* @return STATUS (OK if it was successfuly changed)
+*/
+STATUS space_close_door(Space* space, DIRECTION dir){
+    if(!space){
+        return ERROR;
+    }
+    switch(dir){
+        case N:
+            space->gdesc[4] = '|';
+            space->gdesc[5] = '*';
+            space->gdesc[6] = '*';
+            space->gdesc[7] = '|';
+            return OK;
+        case S:
+            space->gdesc[88] = '|';
+            space->gdesc[89] = '*';
+            space->gdesc[90] = '*';
+            space->gdesc[91] = '|';
+            return OK;
+        case W:
+            space->gdesc[32] = ')';
+            space->gdesc[46] = ')';
+            return OK;
+        case E:
+            space->gdesc[45] = '(';
+            space->gdesc[59] = '(';
+            return OK;
+        default:
+            return ERROR;
+    }
+}

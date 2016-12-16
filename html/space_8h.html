@@ -112,14 +112,15 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="space_8h__dep__incl.png" border="0" usemap="#codigo_2space_2space_8hdep" alt=""/></div>
 <map name="codigo_2space_2space_8hdep" id="codigo_2space_2space_8hdep">
-<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="229,80,371,107"/>
-<area shape="rect" id="node5" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="5,155,144,196"/>
-<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="349,244,488,285"/>
-<area shape="rect" id="node7" href="link_8c.html" title="Implementation of the link module. " alt="" coords="507,80,626,107"/>
-<area shape="rect" id="node8" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="649,80,799,107"/>
-<area shape="rect" id="node9" href="space_8c.html" title="It implements the game spaces. " alt="" coords="823,80,972,107"/>
-<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="57,251,199,278"/>
-<area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="219,155,381,196"/>
+<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="311,80,454,107"/>
+<area shape="rect" id="node5" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="541,155,680,196"/>
+<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="5,244,144,285"/>
+<area shape="rect" id="node8" href="link_8c.html" title="Implementation of the link module. " alt="" coords="530,80,649,107"/>
+<area shape="rect" id="node9" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="672,80,821,107"/>
+<area shape="rect" id="node10" href="space_8c.html" title="It implements the game spaces. " alt="" coords="845,80,995,107"/>
+<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="486,251,629,278"/>
+<area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="112,155,275,196"/>
+<area shape="rect" id="node7" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="299,155,466,196"/>
 </map>
 </div>
 </div>
@@ -131,8 +132,10 @@ Macros</h2></td></tr>
 <tr class="separator:a5f54fd55f983a2e33ce076cd9f587e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a088cbe7c6f78264d46c2624194c5c680"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a088cbe7c6f78264d46c2624194c5c680">FIRST_SPACE</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a088cbe7c6f78264d46c2624194c5c680"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5e6bf0470b64b198a22be7c9dc06181"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#ad5e6bf0470b64b198a22be7c9dc06181">MAX_GDESC</a>&#160;&#160;&#160;42</td></tr>
+<tr class="memitem:ad5e6bf0470b64b198a22be7c9dc06181"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#ad5e6bf0470b64b198a22be7c9dc06181">MAX_GDESC</a>&#160;&#160;&#160;100</td></tr>
 <tr class="separator:ad5e6bf0470b64b198a22be7c9dc06181"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abad832479032ea984323a420633dc7ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#abad832479032ea984323a420633dc7ed">MAX_ADESC</a>&#160;&#160;&#160;100</td></tr>
+<tr class="separator:abad832479032ea984323a420633dc7ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -162,6 +165,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ad44b14cb38902cf31fa1f341beaab0db"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#ad44b14cb38902cf31fa1f341beaab0db">space_set_west</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, Id id)</td></tr>
 <tr class="memdesc:ad44b14cb38902cf31fa1f341beaab0db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Id of the west Link.  <a href="#ad44b14cb38902cf31fa1f341beaab0db">More...</a><br /></td></tr>
 <tr class="separator:ad44b14cb38902cf31fa1f341beaab0db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2707bdca8fd356ed8d15fd48e820a4f"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#aa2707bdca8fd356ed8d15fd48e820a4f">space_set_up</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, Id id)</td></tr>
+<tr class="memdesc:aa2707bdca8fd356ed8d15fd48e820a4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Id of the upper Link.  <a href="#aa2707bdca8fd356ed8d15fd48e820a4f">More...</a><br /></td></tr>
+<tr class="separator:aa2707bdca8fd356ed8d15fd48e820a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5b9fef52456ffccffbd73f882a56d23"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#ae5b9fef52456ffccffbd73f882a56d23">space_set_down</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, Id id)</td></tr>
+<tr class="memdesc:ae5b9fef52456ffccffbd73f882a56d23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Id of the lower Link.  <a href="#ae5b9fef52456ffccffbd73f882a56d23">More...</a><br /></td></tr>
+<tr class="separator:ae5b9fef52456ffccffbd73f882a56d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69b9e22046b7b44dc5aa2afe7cc0a1b9"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a69b9e22046b7b44dc5aa2afe7cc0a1b9">space_add_object</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, Id id)</td></tr>
 <tr class="memdesc:a69b9e22046b7b44dc5aa2afe7cc0a1b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an object to the space.  <a href="#a69b9e22046b7b44dc5aa2afe7cc0a1b9">More...</a><br /></td></tr>
 <tr class="separator:a69b9e22046b7b44dc5aa2afe7cc0a1b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +192,12 @@ Functions</h2></td></tr>
 <tr class="memitem:af495ebfd5d13eba1a48cebd10992a17f"><td class="memItemLeft" align="right" valign="top">Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#af495ebfd5d13eba1a48cebd10992a17f">space_get_west</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
 <tr class="memdesc:af495ebfd5d13eba1a48cebd10992a17f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the id of the Link in the west.  <a href="#af495ebfd5d13eba1a48cebd10992a17f">More...</a><br /></td></tr>
 <tr class="separator:af495ebfd5d13eba1a48cebd10992a17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a174a988b899d5a0db889a31b70763c9c"><td class="memItemLeft" align="right" valign="top">Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a174a988b899d5a0db889a31b70763c9c">space_get_up</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
+<tr class="memdesc:a174a988b899d5a0db889a31b70763c9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the Id of the upper Link.  <a href="#a174a988b899d5a0db889a31b70763c9c">More...</a><br /></td></tr>
+<tr class="separator:a174a988b899d5a0db889a31b70763c9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab269eab72b9ea7254044b34b1c177602"><td class="memItemLeft" align="right" valign="top">Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#ab269eab72b9ea7254044b34b1c177602">space_get_down</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
+<tr class="memdesc:ab269eab72b9ea7254044b34b1c177602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the Id of the lower Link.  <a href="#ab269eab72b9ea7254044b34b1c177602">More...</a><br /></td></tr>
+<tr class="separator:ab269eab72b9ea7254044b34b1c177602"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc0e3f36d3bdf0105c5d25c256c9cfbd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="set_8h.html#a6d3b7f7c92cbb4577ef3ef7ddbf93161">Set</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#afc0e3f36d3bdf0105c5d25c256c9cfbd">space_get_objects</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
 <tr class="memdesc:afc0e3f36d3bdf0105c5d25c256c9cfbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">It returns the Set of objects inside the Space.  <a href="#afc0e3f36d3bdf0105c5d25c256c9cfbd">More...</a><br /></td></tr>
 <tr class="separator:afc0e3f36d3bdf0105c5d25c256c9cfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -198,6 +213,24 @@ Functions</h2></td></tr>
 <tr class="memitem:a0dac96ce03e0ed60e3faa841f2b20b52"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a0dac96ce03e0ed60e3faa841f2b20b52">space_get_gdesc</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
 <tr class="memdesc:a0dac96ce03e0ed60e3faa841f2b20b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the gdesc of a space.  <a href="#a0dac96ce03e0ed60e3faa841f2b20b52">More...</a><br /></td></tr>
 <tr class="separator:a0dac96ce03e0ed60e3faa841f2b20b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3e2f7f0e98bea52d8c3ce1b640e21fb"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#af3e2f7f0e98bea52d8c3ce1b640e21fb">space_set_adesc</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, char *adesc)</td></tr>
+<tr class="memdesc:af3e2f7f0e98bea52d8c3ce1b640e21fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the advanced description of a Space.  <a href="#af3e2f7f0e98bea52d8c3ce1b640e21fb">More...</a><br /></td></tr>
+<tr class="separator:af3e2f7f0e98bea52d8c3ce1b640e21fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6fde31acc5d72a39c37cfc7bda00b9"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a0e6fde31acc5d72a39c37cfc7bda00b9">space_get_adesc</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
+<tr class="memdesc:a0e6fde31acc5d72a39c37cfc7bda00b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the advanced description of a space.  <a href="#a0e6fde31acc5d72a39c37cfc7bda00b9">More...</a><br /></td></tr>
+<tr class="separator:a0e6fde31acc5d72a39c37cfc7bda00b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97cdd4deef92d7d220ed0fe70ebc68e2"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a97cdd4deef92d7d220ed0fe70ebc68e2">space_set_light</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, BOOL light)</td></tr>
+<tr class="memdesc:a97cdd4deef92d7d220ed0fe70ebc68e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the light of the input space.  <a href="#a97cdd4deef92d7d220ed0fe70ebc68e2">More...</a><br /></td></tr>
+<tr class="separator:a97cdd4deef92d7d220ed0fe70ebc68e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abae16fa836379f9fa4b22d9417b317b0"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#abae16fa836379f9fa4b22d9417b317b0">space_get_light</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space)</td></tr>
+<tr class="memdesc:abae16fa836379f9fa4b22d9417b317b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the light status of the input space.  <a href="#abae16fa836379f9fa4b22d9417b317b0">More...</a><br /></td></tr>
+<tr class="separator:abae16fa836379f9fa4b22d9417b317b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b8d5bd9f0362d176db6904839a039fd"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a5b8d5bd9f0362d176db6904839a039fd">space_open_door</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, DIRECTION dir)</td></tr>
+<tr class="memdesc:a5b8d5bd9f0362d176db6904839a039fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the gdesc to show an open door.  <a href="#a5b8d5bd9f0362d176db6904839a039fd">More...</a><br /></td></tr>
+<tr class="separator:a5b8d5bd9f0362d176db6904839a039fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dd9b387c7aa145492ff084a78e6620e"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a2dd9b387c7aa145492ff084a78e6620e">space_close_door</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, DIRECTION dir)</td></tr>
+<tr class="memdesc:a2dd9b387c7aa145492ff084a78e6620e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the gdesc to show a closed door.  <a href="#a2dd9b387c7aa145492ff084a78e6620e">More...</a><br /></td></tr>
+<tr class="separator:a2dd9b387c7aa145492ff084a78e6620e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It defines the game spaces. </p>
@@ -218,12 +251,25 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="abad832479032ea984323a420633dc7ed"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_ADESC&#160;&#160;&#160;100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Max number of characters in advanced gdesc </p>
+
+</div>
+</div>
 <a class="anchor" id="ad5e6bf0470b64b198a22be7c9dc06181"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MAX_GDESC&#160;&#160;&#160;42</td>
+          <td class="memname">#define MAX_GDESC&#160;&#160;&#160;100</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -297,6 +343,44 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a2dd9b387c7aa145492ff084a78e6620e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS space_close_door </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DIRECTION&#160;</td>
+          <td class="paramname"><em>dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the gdesc to show a closed door. </p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>space (The space to modify) </td></tr>
+    <tr><td class="paramname">DIRECTION</td><td>(The direction where you close the door) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if it was successfuly changed) </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a162866fcea156b800fd546d0ffd271c9"></a>
 <div class="memitem">
 <div class="memproto">
@@ -349,6 +433,69 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>STATUS (OK if the space was destroyed, ERROR if it wasn't) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0e6fde31acc5d72a39c37cfc7bda00b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* space_get_adesc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the advanced description of a space. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>5/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>space (The space to inspect) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>char* (The adesc inside the Space)</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>space (The space to inspect) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>char* (The adesc inside the Space) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab269eab72b9ea7254044b34b1c177602"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Id space_get_down </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the Id of the lower Link. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>Space (The space which need to be set) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Id id (The id of the link located down) </dd></dl>
 
 </div>
 </div>
@@ -430,6 +577,33 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Id (the Id of the space) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abae16fa836379f9fa4b22d9417b317b0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL space_get_light </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the light status of the input space. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>space </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL (TRUE if illuminated, FALSE if not) </dd></dl>
 
 </div>
 </div>
@@ -541,6 +715,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a174a988b899d5a0db889a31b70763c9c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Id space_get_up </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the Id of the upper Link. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>Space (The space which need to be set) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Id id (The id of the link located up) </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="af495ebfd5d13eba1a48cebd10992a17f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -606,6 +807,44 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a5b8d5bd9f0362d176db6904839a039fd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS space_open_door </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DIRECTION&#160;</td>
+          <td class="paramname"><em>dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the gdesc to show an open door. </p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>space (The space to modify) </td></tr>
+    <tr><td class="paramname">DIRECTION</td><td>(The direction where you open the door) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if it was successfuly changed) </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a18eca058da6cdf20ae5eda9d122d992e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -630,7 +869,84 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well, ERROR if something went wrong) </dd></dl>
-<p>&lt;Auxiliar Id </p>
+<p>&lt;Auxiliar Id</p>
+<p>&lt;To check light status </p>
+
+</div>
+</div>
+<a class="anchor" id="af3e2f7f0e98bea52d8c3ce1b640e21fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS space_set_adesc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>adesc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the advanced description of a Space. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>space (The space to modify) </td></tr>
+    <tr><td class="paramname">char*</td><td>adesc (The new adesc) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if it was successfuly set) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae5b9fef52456ffccffbd73f882a56d23"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS space_set_down </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Id&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the Id of the lower Link. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>Space (The space which need to be set) </td></tr>
+    <tr><td class="paramname">Id</td><td>id (The id of the Link located down) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well, ERROR if something went wrong) </dd></dl>
 
 </div>
 </div>
@@ -710,6 +1026,44 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a97cdd4deef92d7d220ed0fe70ebc68e2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS space_set_light </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL&#160;</td>
+          <td class="paramname"><em>light</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the light of the input space. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>space (The space to modify) </td></tr>
+    <tr><td class="paramname">BOOL</td><td>(TRUE to illuminate) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if it was successfuly set) </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="aab5b468f9822ab78dbe16d1321870d93"></a>
 <div class="memitem">
 <div class="memproto">
@@ -782,6 +1136,17 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well, ERROR if something went wrong)</dd></dl>
+<p>Sets the Id of the nort Link.</p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>4/11/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>Space (The space which need to be set) </td></tr>
+    <tr><td class="paramname">Id</td><td>id (The id of the Link located at the north) </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well, ERROR if something went wrong) </dd></dl>
 
 </div>
@@ -824,6 +1189,44 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa2707bdca8fd356ed8d15fd48e820a4f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS space_set_up </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>space</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Id&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the Id of the upper Link. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>1/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>Space (The space which need to be set) </td></tr>
+    <tr><td class="paramname">Id</td><td>id (The id of the Link located up) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well, ERROR if something went wrong) </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ad44b14cb38902cf31fa1f341beaab0db"></a>
 <div class="memitem">
 <div class="memproto">
@@ -849,7 +1252,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Sets the Id of the west Link. </p>
-<dl class="section author"><dt>Author</dt><dd>JÓscar Gómez </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>4/11/2016 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

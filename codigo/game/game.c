@@ -746,7 +746,7 @@ void game_print_screen(Game* game, Graphics* gra){
       print_in_zone(gra, PLAYGROUND, C, print);
     }
     else{
-      print_in_zone(gra, PLAYGROUND, C, "+------------+|            ||            ||            ||            ||            |+------------+");
+      print_in_zone(gra, PLAYGROUND, C, "+------------+|            ||            ||     :)     ||            ||            |+------------+");
     }
   }
   else{
@@ -1821,7 +1821,7 @@ Link * game_get_link_n(Game * game, int n){
 	if(!game || n >= game->num_links || n < 0)
 		return NULL;
 	
-	return game->links[n]
+	return game->links[n];
 }
 
 /**

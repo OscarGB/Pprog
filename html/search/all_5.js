@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['first_5fspace',['FIRST_SPACE',['../space_8h.html#a088cbe7c6f78264d46c2624194c5c680',1,'space.h']]]
+  ['east',['east',['../struct___space.html#a87a8169b3b69dd4f299b6d0a1974e412',1,'_Space']]]
 ];

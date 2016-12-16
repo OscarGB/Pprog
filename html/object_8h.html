@@ -110,15 +110,16 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="object_8h__dep__incl.png" border="0" usemap="#codigo_2object_2object_8hdep" alt=""/></div>
 <map name="codigo_2object_2object_8hdep" id="codigo_2object_2object_8hdep">
-<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="249,162,392,189"/>
-<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="220,341,362,367"/>
-<area shape="rect" id="node5" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="502,244,640,285"/>
-<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="502,333,640,375"/>
-<area shape="rect" id="node7" href="object_8c.html" title="It implements the functionality of the objects. " alt="" coords="715,80,864,107"/>
-<area shape="rect" id="node8" href="player_8h.html" title="It defines the functionality of the player. " alt="" coords="246,80,395,107"/>
-<area shape="rect" id="node9" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="415,162,564,189"/>
-<area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="214,244,376,285"/>
-<area shape="rect" id="node10" href="player__test_8c.html" title="Main to test the Player module. " alt="" coords="31,155,156,196"/>
+<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="479,162,622,189"/>
+<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="260,341,403,367"/>
+<area shape="rect" id="node5" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="638,244,777,285"/>
+<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="638,333,777,375"/>
+<area shape="rect" id="node8" href="object_8c.html" title="It implements the functionality of the objects. " alt="" coords="852,80,1001,107"/>
+<area shape="rect" id="node9" href="player_8h.html" title="It defines the functionality of the player. " alt="" coords="306,80,456,107"/>
+<area shape="rect" id="node10" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="306,162,456,189"/>
+<area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="350,244,513,285"/>
+<area shape="rect" id="node7" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="159,244,326,285"/>
+<area shape="rect" id="node11" href="player__test_8c.html" title="Main to test the Player module. " alt="" coords="33,155,158,196"/>
 </map>
 </div>
 </div>
@@ -126,6 +127,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a28595739d632f62df691fa61b8ea81ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28595739d632f62df691fa61b8ea81ad"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GET_BOOL</b>(x)&#160;&#160;&#160;(&quot;(x==0)? TRUE: FALSE)&quot;)</td></tr>
+<tr class="separator:a28595739d632f62df691fa61b8ea81ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7555d869b0034eb4e3b8c7ce6c6590f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="object_8h.html#af7555d869b0034eb4e3b8c7ce6c6590f">CHAR_ERROR</a>&#160;&#160;&#160;'!'</td></tr>
 <tr class="separator:af7555d869b0034eb4e3b8c7ce6c6590f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -167,6 +171,75 @@ Id&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_location</b>
 <tr class="memitem:adebb77fb5d33fc70616ab3b2b64c27ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adebb77fb5d33fc70616ab3b2b64c27ce"></a>
 STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>object_print</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
 <tr class="separator:adebb77fb5d33fc70616ab3b2b64c27ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a013409023095272ee75cf6f13b680cf4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a013409023095272ee75cf6f13b680cf4"></a>
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_movable</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:a013409023095272ee75cf6f13b680cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27a9d8f2a99a33c27aaefb1f4e76bac4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27a9d8f2a99a33c27aaefb1f4e76bac4"></a>
+<a class="el" href="struct___object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>object_set_movable</b> (<a class="el" href="struct___object.html">Object</a> *object, BOOL value)</td></tr>
+<tr class="separator:a27a9d8f2a99a33c27aaefb1f4e76bac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae37631a7815c57d1c862a9cb1809942c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae37631a7815c57d1c862a9cb1809942c"></a>
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_moved</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:ae37631a7815c57d1c862a9cb1809942c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a67dbaa58a703e8eeb2c21c797053bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a67dbaa58a703e8eeb2c21c797053bf"></a>
+<a class="el" href="struct___object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>object_set_moved</b> (<a class="el" href="struct___object.html">Object</a> *object, BOOL value)</td></tr>
+<tr class="separator:a2a67dbaa58a703e8eeb2c21c797053bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6171471129f33c873f5704e6309eee0d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6171471129f33c873f5704e6309eee0d"></a>
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_hidden</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:a6171471129f33c873f5704e6309eee0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4c976622edd506927d2388acce0a6bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4c976622edd506927d2388acce0a6bb"></a>
+<a class="el" href="struct___object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>object_set_hidden</b> (<a class="el" href="struct___object.html">Object</a> *object, BOOL value)</td></tr>
+<tr class="separator:af4c976622edd506927d2388acce0a6bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab976169c6cb36f3da4b0ebb8e37e4ee3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab976169c6cb36f3da4b0ebb8e37e4ee3"></a>
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_light</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:ab976169c6cb36f3da4b0ebb8e37e4ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e985f81c34478c202c53d0feccad08a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e985f81c34478c202c53d0feccad08a"></a>
+<a class="el" href="struct___object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>object_set_light</b> (<a class="el" href="struct___object.html">Object</a> *object, BOOL value)</td></tr>
+<tr class="separator:a5e985f81c34478c202c53d0feccad08a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee741609bfcc997bdf7f3168e26c01c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee741609bfcc997bdf7f3168e26c01c6"></a>
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_on_off</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:aee741609bfcc997bdf7f3168e26c01c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21cc88b0a0242c6fd2bb5796715d5fbf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21cc88b0a0242c6fd2bb5796715d5fbf"></a>
+<a class="el" href="struct___object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>object_set_on_off</b> (<a class="el" href="struct___object.html">Object</a> *object, BOOL value)</td></tr>
+<tr class="separator:a21cc88b0a0242c6fd2bb5796715d5fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49dbce205db36230c53fb0ccf0a73174"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49dbce205db36230c53fb0ccf0a73174"></a>
+Id&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_open</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:a49dbce205db36230c53fb0ccf0a73174"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab55f191ba27e685c77a507ab45194f17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab55f191ba27e685c77a507ab45194f17"></a>
+<a class="el" href="struct___object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>object_set_open</b> (<a class="el" href="struct___object.html">Object</a> *object, Id value)</td></tr>
+<tr class="separator:ab55f191ba27e685c77a507ab45194f17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e37c9be707680eec504782b4e8a45e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e37c9be707680eec504782b4e8a45e8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_duration</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:a8e37c9be707680eec504782b4e8a45e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b5044e103b60a9fb6f4aec2ce18164f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b5044e103b60a9fb6f4aec2ce18164f"></a>
+<a class="el" href="struct___object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>object_set_duration</b> (<a class="el" href="struct___object.html">Object</a> *object, Id value)</td></tr>
+<tr class="separator:a9b5044e103b60a9fb6f4aec2ce18164f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6de6e22c6013b885e2fea904e6518aac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6de6e22c6013b885e2fea904e6518aac"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>object_turnon</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:a6de6e22c6013b885e2fea904e6518aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a406720e238ec9bffe5ec3b9962682583"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a406720e238ec9bffe5ec3b9962682583"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>object_turnoff</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:a406720e238ec9bffe5ec3b9962682583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5940e1cb08ded12f4c7b6a8b28d0cdfd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5940e1cb08ded12f4c7b6a8b28d0cdfd"></a>
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>object_can_open</b> (<a class="el" href="struct___object.html">Object</a> *object, Id id)</td></tr>
+<tr class="separator:a5940e1cb08ded12f4c7b6a8b28d0cdfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b5315e9e7592e5f5b29ea433ac81ffd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b5315e9e7592e5f5b29ea433ac81ffd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>object_decrease_duration</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:a0b5315e9e7592e5f5b29ea433ac81ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af13f3e0166b30ec87a7f078ef2beffc4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af13f3e0166b30ec87a7f078ef2beffc4"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_mdesc</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:af13f3e0166b30ec87a7f078ef2beffc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a756426d96876b17c0a4c32f2ea37bdec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a756426d96876b17c0a4c32f2ea37bdec"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_desc</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:a756426d96876b17c0a4c32f2ea37bdec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e1271ae39a423529e94b2f15d446d4a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e1271ae39a423529e94b2f15d446d4a"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>object_set_mdesc</b> (<a class="el" href="struct___object.html">Object</a> *object, char *mdesc)</td></tr>
+<tr class="separator:a8e1271ae39a423529e94b2f15d446d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11e4176ca2d39c256639f286f47fc574"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a11e4176ca2d39c256639f286f47fc574"></a>
+STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>object_set_desc</b> (<a class="el" href="struct___object.html">Object</a> *object, char *desc)</td></tr>
+<tr class="separator:a11e4176ca2d39c256639f286f47fc574"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab92f583fcb6e3000ebe48cc04c5853cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab92f583fcb6e3000ebe48cc04c5853cd"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>object_get_description</b> (<a class="el" href="struct___object.html">Object</a> *object)</td></tr>
+<tr class="separator:ab92f583fcb6e3000ebe48cc04c5853cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It defines the functionality of the objects. </p>

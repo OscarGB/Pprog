@@ -101,6 +101,22 @@ Data Fields</h2></td></tr>
 <tr class="separator:a5ef730c626751b65a24f4666d2c70a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab13e9dba2d330b54cd11d93cef3a7deb"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___object.html#ab13e9dba2d330b54cd11d93cef3a7deb">desc</a> [<a class="el" href="types_8h.html#a92ed8507d1cd2331ad09275c5c4c1c89">WORD_SIZE</a>+1]</td></tr>
 <tr class="separator:ab13e9dba2d330b54cd11d93cef3a7deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64ba6f17252854ffe5c9ee1c1bb9085"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___object.html#ad64ba6f17252854ffe5c9ee1c1bb9085">mdesc</a> [<a class="el" href="types_8h.html#a92ed8507d1cd2331ad09275c5c4c1c89">WORD_SIZE</a>+1]</td></tr>
+<tr class="separator:ad64ba6f17252854ffe5c9ee1c1bb9085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95316b8952c59a32e9a9301280ce0fdc"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___object.html#a95316b8952c59a32e9a9301280ce0fdc">movable</a></td></tr>
+<tr class="separator:a95316b8952c59a32e9a9301280ce0fdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72d230d97bc8e2725c8c8c2a52cd47b7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___object.html#a72d230d97bc8e2725c8c8c2a52cd47b7">moved</a></td></tr>
+<tr class="separator:a72d230d97bc8e2725c8c8c2a52cd47b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5192c09c47c3dc2f8088ac85242edbff"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___object.html#a5192c09c47c3dc2f8088ac85242edbff">hidden</a></td></tr>
+<tr class="separator:a5192c09c47c3dc2f8088ac85242edbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3aab86e69761da367c730f0c683cba7"><td class="memItemLeft" align="right" valign="top">Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___object.html#ad3aab86e69761da367c730f0c683cba7">open</a></td></tr>
+<tr class="separator:ad3aab86e69761da367c730f0c683cba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad25e653a5a1f98aa808c98dad4918ab1"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___object.html#ad25e653a5a1f98aa808c98dad4918ab1">light</a></td></tr>
+<tr class="separator:ad25e653a5a1f98aa808c98dad4918ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e2481e0ad2780237865e4d2f6da852c"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___object.html#a1e2481e0ad2780237865e4d2f6da852c">on_off</a></td></tr>
+<tr class="separator:a1e2481e0ad2780237865e4d2f6da852c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6e4b2a3cf932b33832d4e4e4e7cd0de"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___object.html#ac6e4b2a3cf932b33832d4e4e4e7cd0de">duration</a></td></tr>
+<tr class="separator:ac6e4b2a3cf932b33832d4e4e4e7cd0de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Object structure </p>
@@ -118,6 +134,32 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac6e4b2a3cf932b33832d4e4e4e7cd0de"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int duration</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Amount of turns the object can still be on </p>
+
+</div>
+</div>
+<a class="anchor" id="a5192c09c47c3dc2f8088ac85242edbff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL hidden</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Object is hidden and not mentioned in description of space </p>
+
+</div>
+</div>
 <a class="anchor" id="a150a709e86e7134d17cd063de6810b6c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -128,6 +170,19 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Id of the object </p>
+
+</div>
+</div>
+<a class="anchor" id="ad25e653a5a1f98aa808c98dad4918ab1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL light</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Object can illuminate spaces or not </p>
 
 </div>
 </div>
@@ -144,6 +199,45 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad64ba6f17252854ffe5c9ee1c1bb9085"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char mdesc[<a class="el" href="types_8h.html#a92ed8507d1cd2331ad09275c5c4c1c89">WORD_SIZE</a>+1]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Written description when the object is moved </p>
+
+</div>
+</div>
+<a class="anchor" id="a95316b8952c59a32e9a9301280ce0fdc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL movable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Object can be moved or not </p>
+
+</div>
+</div>
+<a class="anchor" id="a72d230d97bc8e2725c8c8c2a52cd47b7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL moved</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Object has been moved or not </p>
+
+</div>
+</div>
 <a class="anchor" id="a2b7341aac5f9360a8e88ae1061f497d2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -154,6 +248,32 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Name of the object </p>
+
+</div>
+</div>
+<a class="anchor" id="a1e2481e0ad2780237865e4d2f6da852c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL on_off</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Object which can light is on or off </p>
+
+</div>
+</div>
+<a class="anchor" id="ad3aab86e69761da367c730f0c683cba7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Id open</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Object can open the given ID link </p>
 
 </div>
 </div>

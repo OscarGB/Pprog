@@ -3,4 +3,5 @@
 <area shape="rect" id="node3" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="50,80,213,121"/>
 <area shape="rect" id="node4" href="$game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="237,80,375,121"/>
 <area shape="rect" id="node5" href="$game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="290,169,429,211"/>
+<area shape="rect" id="node6" href="$game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="451,80,617,121"/>
 </map>

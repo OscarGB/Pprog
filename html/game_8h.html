@@ -103,19 +103,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &quot;<a class="el" href="set_8h_source.html">set.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="die_8h_source.html">die.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="link_8h_source.html">link.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="graphics_8h_source.html">graphics.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for game.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="game_8h__incl.png" border="0" usemap="#codigo_2game_2game_8h" alt=""/></div>
 <map name="codigo_2game_2game_8h" id="codigo_2game_2game_8h">
-<area shape="rect" id="node2" href="command_8h.html" title="It defines the command interpreter. " alt="" coords="5,155,96,181"/>
-<area shape="rect" id="node4" href="space_8h.html" title="It defines the game spaces. " alt="" coords="94,80,162,107"/>
-<area shape="rect" id="node5" href="set_8h.html" title="It defines the capability of store sets of things. " alt="" coords="171,155,221,181"/>
-<area shape="rect" id="node6" href="player_8h.html" title="It defines the functionality of the player. " alt="" coords="238,80,306,107"/>
-<area shape="rect" id="node7" href="object_8h.html" title="It defines the functionality of the objects. " alt="" coords="297,155,365,181"/>
-<area shape="rect" id="node8" href="die_8h.html" title="It defines the die&#39;s commands. " alt="" coords="381,80,432,107"/>
-<area shape="rect" id="node10" href="link_8h.html" title="Definition of the link module. " alt="" coords="485,80,539,107"/>
-<area shape="rect" id="node3" href="types_8h.html" title="It defines common types. " alt="" coords="226,229,291,256"/>
+<area shape="rect" id="node2" href="command_8h.html" title="It defines the command interpreter. " alt="" coords="267,155,358,181"/>
+<area shape="rect" id="node4" href="space_8h.html" title="It defines the game spaces. " alt="" coords="200,80,268,107"/>
+<area shape="rect" id="node5" href="set_8h.html" title="It defines the capability of store sets of things. " alt="" coords="142,155,193,181"/>
+<area shape="rect" id="node6" href="player_8h.html" title="It defines the functionality of the player. " alt="" coords="5,80,73,107"/>
+<area shape="rect" id="node7" href="object_8h.html" title="It defines the functionality of the objects. " alt="" coords="49,155,117,181"/>
+<area shape="rect" id="node8" href="die_8h.html" title="It defines the die&#39;s commands. " alt="" coords="450,80,501,107"/>
+<area shape="rect" id="node10" href="link_8h.html" title="Definition of the link module. " alt="" coords="569,155,622,181"/>
+<area shape="rect" id="node11" href="graphics_8h.html" title="Definition of the graphic interface. " alt="" coords="343,80,426,107"/>
+<area shape="rect" id="node3" href="types_8h.html" title="It defines common types. " alt="" coords="239,229,304,256"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -127,6 +129,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <area shape="rect" id="node3" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="50,80,213,121"/>
 <area shape="rect" id="node4" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="237,80,375,121"/>
 <area shape="rect" id="node5" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="290,169,429,211"/>
+<area shape="rect" id="node6" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="451,80,617,121"/>
 </map>
 </div>
 </div>
@@ -138,6 +141,9 @@ Macros</h2></td></tr>
 <tr class="separator:a6036d9463ae6934f126cbe2823c97d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a1632016d187a693fee35e34c8f07ba"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a0a1632016d187a693fee35e34c8f07ba">DIE_FACES</a>&#160;&#160;&#160;6</td></tr>
 <tr class="separator:a0a1632016d187a693fee35e34c8f07ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28595739d632f62df691fa61b8ea81ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28595739d632f62df691fa61b8ea81ad"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GET_BOOL</b>(x)&#160;&#160;&#160;(&quot;(x==0)? TRUE: FALSE)&quot;)</td></tr>
+<tr class="separator:a28595739d632f62df691fa61b8ea81ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -153,7 +159,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a36b0475f294d9140ec758287c0940dc0"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a36b0475f294d9140ec758287c0940dc0">game_init_from_file</a> (<a class="el" href="struct___game.html">Game</a> *game, char *filename)</td></tr>
 <tr class="memdesc:a36b0475f294d9140ec758287c0940dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">it creates a game table loading spaces from a file  <a href="#a36b0475f294d9140ec758287c0940dc0">More...</a><br /></td></tr>
 <tr class="separator:a36b0475f294d9140ec758287c0940dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a045f6326f72665b02e730d718120a0d3"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a045f6326f72665b02e730d718120a0d3">game_update</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="struct___command.html">Command</a> *cmd)</td></tr>
+<tr class="memitem:a045f6326f72665b02e730d718120a0d3"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a045f6326f72665b02e730d718120a0d3">game_update</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd)</td></tr>
 <tr class="memdesc:a045f6326f72665b02e730d718120a0d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">it calls different callbacks depending on the written command  <a href="#a045f6326f72665b02e730d718120a0d3">More...</a><br /></td></tr>
 <tr class="separator:a045f6326f72665b02e730d718120a0d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0736924a1235c0e6fe9b6d91c2a12af8"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a0736924a1235c0e6fe9b6d91c2a12af8">game_destroy</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
@@ -162,9 +168,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aa6efe0650af110bbd84e742cc8046d93"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#aa6efe0650af110bbd84e742cc8046d93">game_is_over</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
 <tr class="memdesc:aa6efe0650af110bbd84e742cc8046d93"><td class="mdescLeft">&#160;</td><td class="mdescRight">ends the game  <a href="#aa6efe0650af110bbd84e742cc8046d93">More...</a><br /></td></tr>
 <tr class="separator:aa6efe0650af110bbd84e742cc8046d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a108f413649a6dc99d3ffeed092dc15f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a108f413649a6dc99d3ffeed092dc15f5">game_print_screen</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
-<tr class="memdesc:a108f413649a6dc99d3ffeed092dc15f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints on screen the data of the game  <a href="#a108f413649a6dc99d3ffeed092dc15f5">More...</a><br /></td></tr>
-<tr class="separator:a108f413649a6dc99d3ffeed092dc15f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addfd2d29d2adb9267da2ec628aa0c5ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#addfd2d29d2adb9267da2ec628aa0c5ed">game_print_screen</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra)</td></tr>
+<tr class="memdesc:addfd2d29d2adb9267da2ec628aa0c5ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints on screen the data of the game  <a href="#addfd2d29d2adb9267da2ec628aa0c5ed">More...</a><br /></td></tr>
+<tr class="separator:addfd2d29d2adb9267da2ec628aa0c5ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33a5ed8937423f8c012df3cedad4fa4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a33a5ed8937423f8c012df3cedad4fa4c">game_print_data</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
 <tr class="memdesc:a33a5ed8937423f8c012df3cedad4fa4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints on screen the actual game state.  <a href="#a33a5ed8937423f8c012df3cedad4fa4c">More...</a><br /></td></tr>
 <tr class="separator:a33a5ed8937423f8c012df3cedad4fa4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,6 +183,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a4691bee17d5784ad6eb257dfbb252c27"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a4691bee17d5784ad6eb257dfbb252c27">game_add_link</a> (<a class="el" href="struct___game.html">Game</a> *game, <a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *link)</td></tr>
 <tr class="memdesc:a4691bee17d5784ad6eb257dfbb252c27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a link to the game.  <a href="#a4691bee17d5784ad6eb257dfbb252c27">More...</a><br /></td></tr>
 <tr class="separator:a4691bee17d5784ad6eb257dfbb252c27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5753a09313b092a52c0cea742c40f3cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a5753a09313b092a52c0cea742c40f3cf">game_get_die</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a5753a09313b092a52c0cea742c40f3cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the game die.  <a href="#a5753a09313b092a52c0cea742c40f3cf">More...</a><br /></td></tr>
+<tr class="separator:a5753a09313b092a52c0cea742c40f3cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb7854c42c9a42982a48e444b0660f99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#aeb7854c42c9a42982a48e444b0660f99">game_get_link_n</a> (<a class="el" href="struct___game.html">Game</a> *game, int n)</td></tr>
+<tr class="memdesc:aeb7854c42c9a42982a48e444b0660f99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the link in a concrete position.  <a href="#aeb7854c42c9a42982a48e444b0660f99">More...</a><br /></td></tr>
+<tr class="separator:aeb7854c42c9a42982a48e444b0660f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fa81b602efd0e237e44320471e4007a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a1fa81b602efd0e237e44320471e4007a">game_get_num_links</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a1fa81b602efd0e237e44320471e4007a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of links.  <a href="#a1fa81b602efd0e237e44320471e4007a">More...</a><br /></td></tr>
+<tr class="separator:a1fa81b602efd0e237e44320471e4007a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacbf28320fd70aa492a722ad1789f479"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct___object.html">Object</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#aacbf28320fd70aa492a722ad1789f479">game_get_objects</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:aacbf28320fd70aa492a722ad1789f479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the objects in the game (all of them)  <a href="#aacbf28320fd70aa492a722ad1789f479">More...</a><br /></td></tr>
+<tr class="separator:aacbf28320fd70aa492a722ad1789f479"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Declaration of struct game and functions in <a class="el" href="game_8c.html" title="It implements the game interface for each command. ">game.c</a>. </p>
@@ -352,6 +370,124 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a5753a09313b092a52c0cea742c40f3cf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a>* game_get_die </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the game die. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Die pointer </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aeb7854c42c9a42982a48e444b0660f99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a>* game_get_link_n </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the link in a concrete position. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Link pointer </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1fa81b602efd0e237e44320471e4007a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int game_get_num_links </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the number of links. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int (number of links) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aacbf28320fd70aa492a722ad1789f479"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct___object.html">Object</a>** game_get_objects </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the objects in the game (all of them) </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Object</td><td>** object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to the array of objects </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a95137f0bd5824bab0b8e37232e821464"></a>
 <div class="memitem">
 <div class="memproto">
@@ -480,7 +616,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a108f413649a6dc99d3ffeed092dc15f5"></a>
+<a class="anchor" id="addfd2d29d2adb9267da2ec628aa0c5ed"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -488,8 +624,18 @@ Functions</h2></td></tr>
           <td class="memname">void game_print_screen </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
-          <td class="paramname"><em>game</em></td><td>)</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *&#160;</td>
+          <td class="paramname"><em>gra</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -521,7 +667,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct___command.html">Command</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
           <td class="paramname"><em>cmd</em>&#160;</td>
         </tr>
         <tr>

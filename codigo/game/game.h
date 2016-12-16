@@ -156,7 +156,7 @@ int game_get_num_links(Game * game);
 * @param Object ** object
 * @return pointer to the array of objects
 */	
-Object ** game_get_objects(Game * game)
+Object ** game_get_objects(Game * game);
 
 
 #endif
