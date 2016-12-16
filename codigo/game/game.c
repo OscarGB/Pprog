@@ -31,7 +31,7 @@ struct _Game{
   Space* spaces[MAX_SPACES]; /*!< Array of pointers to Space Structure */
   Die* die; /*!< Pointer to Die Structure */
   Link *links[MAX_LINKS]; /*!< Array of pointers to Link Structure */
-  int num_links;
+  int num_links; /*!<Number of links */
   char desc[WORD_SIZE+1]; /* !< For inspect command*/
 };/*!< Game structure*/
 
@@ -63,11 +63,9 @@ STATUS callback_SAVE(Game* game, char *symbol, Command* cmd);
 
 STATUS game_load_spaces(Game* game, char* filename);
 STATUS game_add_space(Game* game, Space* space);
-Space* game_get_space(Game* game, Id id);
 Id     game_get_space_id_at(Game* game, int position);
 
 STATUS game_set_player_location(Game* game, Id id);
-Id     game_get_player_location(Game* game);
 
 STATUS game_add_object(Game* game, Object* object);
 STATUS game_set_object_location(Game* game, Id id_s, Id id_o);
@@ -1844,8 +1842,22 @@ int game_get_num_links(Game * game){
 * @param Object ** object
 * @return pointer to the array of objects
 */	
-/*Object ** game_get_objects(Game * game){
+Object ** game_get_objects(Game * game){
 	if(!game)
 		return NULL;
 	return game->object;
-}*/
+}
+
+/**
+* @brief Returns the number of objects
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return int (number of objects)
+*/
+int game_get_num_objects(Game * game){
+	if(!game)
+		return NULL;
+
+	return game->num_objects;
+}
