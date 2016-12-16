@@ -248,6 +248,7 @@ int main(int argc, char *argv[]){
 		game_destroy(game);
 		return 1;
 	}
+
 	gra = graphics_create();
 	if(!gra){
 		fprintf(stderr, "Graphics couldn't be created\n");
@@ -255,6 +256,7 @@ int main(int argc, char *argv[]){
 		command_destroy(command);
 		return 1;
 	}
+
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
 		if(nvflag != 1){ 
 			game_print_screen(game, gra);
