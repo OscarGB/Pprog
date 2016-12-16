@@ -282,7 +282,7 @@ BOOL inventory_is_in(Inventory* bag, Id id){
 * @return char* string
 */
 int* inventory_get_ids(Inventory* bag){
-	int* ids = NULL;
+	Id* ids = NULL;
 	Set* set = NULL;
 
 	if(!bag) return NULL;

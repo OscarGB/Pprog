@@ -141,6 +141,6 @@ STATUS inventory_print(Inventory* bag);
 * @param Inventory*
 * @return char* string
 */
-int* inventory_get_ids(Inventory* bag);
+Id* inventory_get_ids(Inventory* bag);
 
 #endif

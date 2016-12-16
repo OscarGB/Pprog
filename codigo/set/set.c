@@ -233,7 +233,7 @@ BOOL set_is_id(Set* set, Id id){
 * @param set pointer
 * @return int*
 */
-int* set_get_array(Set* set){
+Id* set_get_array(Set* set){
 	if(!set) return NULL;
 
 	return set->id;
