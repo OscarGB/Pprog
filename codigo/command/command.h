@@ -35,7 +35,7 @@ typedef enum enum_Command {
   LOAD
 } T_Command; 
 
-typedef struct _Command Command; /*<! Definition of Command structure */
+typedef struct _Command Command; /*!< Definition of Command structure */
 
 
 /*
