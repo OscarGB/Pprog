@@ -13,6 +13,8 @@
 
 #include "types.h"
 
+#define CMD_LENGHT 30
+
 /*Enumeration of valid commands*/
 typedef enum enum_Command { 
   NO_CMD = -2, 
@@ -28,7 +30,9 @@ typedef enum enum_Command {
   GO,
   TURNON,
   TURNOFF,
-  OPEN
+  OPEN,
+  SAVE,
+  LOAD
 } T_Command; 
 
 typedef struct _Command Command; /*<! Definition of Command structure */
@@ -40,10 +44,11 @@ typedef struct _Command Command; /*<! Definition of Command structure */
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 23/09/2016
 * @param command pointer
+* @param the string written by the user
 * @return OK if command is changed with user's input
 */
 
-STATUS get_user_input();
+STATUS get_user_input(Command* command, char* input);
 
 
 /*

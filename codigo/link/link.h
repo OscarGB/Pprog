@@ -149,4 +149,5 @@ STATUS link_open(Link* link);
 * @return STATUS (OK if the State have been changed, ERROR if haven't)
 */
 STATUS link_close(Link* link);
+
 #endif

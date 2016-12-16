@@ -16,6 +16,7 @@
 #include "game_reader.h"
 #include "die.h"
 #include "link.h"
+#include "graphics.h"
 
 #ifdef __WINDOWS_BUILD__ /*In case we are working on Windows*/
 #define CLEAR "cls"
@@ -52,6 +53,8 @@ STATUS callback_INSPECT(Game* game, char *symbol);
 STATUS callback_GO(Game* game, char *symbol);
 STATUS callback_TURNON(Game* game, char *symbol);
 STATUS callback_TURNOFF(Game* game, char *symbol);
+STATUS callback_OPEN(Game* game, char *symbol);
+STATUS callback_SAVE(Game* game, char *symbol);
 
 
 /*
@@ -69,6 +72,12 @@ Id     game_get_player_location(Game* game);
 STATUS game_add_object(Game* game, Object* object);
 STATUS game_set_object_location(Game* game, Id id_s, Id id_o);
 Id     game_get_object_location(Game* game, char *symbol);
+
+STATUS print_player_save(FILE *f, Player *player);
+STATUS print_space_save(FILE *f, Space* space);
+STATUS print_link_save(FILE *f, Link *link);
+STATUS print_object_save(FILE *f, Object *object);
+
 
 /**
  * @brief Game interface implementation
@@ -456,7 +465,9 @@ STATUS game_update(Game* game, Command *cmd) {
   case TURNOFF:
     return callback_TURNOFF(game, command_get_symbol(cmd));
   case OPEN:
-    return callback_TURNON(game, command_get_symbol(cmd));
+    return callback_OPEN(game, command_get_symbol(cmd));
+  case SAVE:
+    return callback_SAVE(game, command_get_symbol(cmd));
   case NO_CMD:
     break;
   default: /*We must never arrive here*/
@@ -502,23 +513,205 @@ void game_print_data(Game* game) {
 * @param game pointer
 * @return void
 */
-void game_print_screen(Game* game){
-  Id id[9];
-  Id id_l[8]; /*!< Ids of the links*/
-  Space* space = NULL; /* !< Pointer to spaces needed to print the game*/
-  int i;
+void game_print_screen(Game* game, Graphics* gra){
+  Id id_act = NO_ID, id_back = NO_ID, id_next = NO_ID, id_east = NO_ID, id_west = NO_ID; /* !< Ids for locations*/
+  Id id_l_back = NO_ID, id_l_next = NO_ID, id_l_east = NO_ID, id_l_west = NO_ID; /*!< Ids of the links*/
+  Space* space_act = NULL; /* !< Pointers to spaces needed to print the game*/
+  Space* space_back = NULL;
+  Space* space_next = NULL;
+  Space* space_east = NULL;
+  Space* space_west = NULL;
+  int i; /* !< loops, last rolled value*/
 
-  /*Set to NO_ID the id's of the different spaces*/
-  for(i = 0; i < 9; i++){
-    id[i] = NO_ID;
+  if(!gra || !game){
+    return;
   }
 
-  /*Set to NO_ID the id's of the different links*/
-  for(i = 0; i < 8; i++){
-    id_l[i] = NO_ID;
+  graphics_clear(gra);
+  
+  id_act = game_get_player_location(game);
+
+  if (id_act == NO_ID){
+    return;
+  }
+  
+  space_act = game_get_space(game, id_act);
+  id_l_back = space_get_north(space_act);
+  id_l_next = space_get_south(space_act);
+  id_l_east = space_get_east(space_act);
+  id_l_west = space_get_west(space_act);
+
+  /*Search for the id of the back space*/
+  for(i=0; i<(4*MAX_SPACES); i++){
+    if(link_get_id(game->links[i]) == id_l_back){
+      if(link_get_conection1(game->links[i]) == id_act){
+        id_back = link_get_conection2(game->links[i]);
+        break;
+      }
+      else{
+        id_back = link_get_conection1(game->links[i]);
+        break;
+      }
+    }
+    else{
+      id_back = NO_ID;
+    }
   }
 
-  return;
+  /*Search for the id of the next space*/
+  for(i=0; i<(4*MAX_SPACES); i++){
+    if(link_get_id(game->links[i]) == id_l_next){
+      if(link_get_conection1(game->links[i]) == id_act){
+        id_next = link_get_conection2(game->links[i]);
+        break;
+      }
+      else{
+        id_next = link_get_conection1(game->links[i]);
+        break;
+      }
+    }
+    else{
+      id_next = NO_ID;
+    }
+  }
+
+  /*Search for the id of the east space*/
+  for(i=0; i<(4*MAX_SPACES); i++){
+    if(link_get_id(game->links[i]) == id_l_east){
+      if(link_get_conection1(game->links[i]) == id_act){
+        id_east = link_get_conection2(game->links[i]);
+        break;
+      }
+      else{
+        id_east = link_get_conection1(game->links[i]);
+        break;
+      }
+    }
+    else{
+      id_east = NO_ID;
+    }
+  }
+
+  /*Search for the id of the west space*/
+  for(i=0; i<(4*MAX_SPACES); i++){
+    if(link_get_id(game->links[i]) == id_l_west){
+      if(link_get_conection1(game->links[i]) == id_act){
+        id_west = link_get_conection2(game->links[i]);
+        break;
+      }
+      else{
+        id_west = link_get_conection1(game->links[i]);
+        break;
+      }
+    }
+    else{
+      id_west = NO_ID;
+    }
+  }
+
+  space_west = game_get_space(game, id_west);
+  space_east = game_get_space(game, id_east);
+  space_back = game_get_space(game, id_back);
+  space_next = game_get_space(game, id_next);  
+  
+  if(system(CLEAR))
+     return; 
+
+  if (id_back != NO_ID) {
+    if(space_get_light(space_back) == TRUE){
+      print_in_zone(gra, PLAYGROUND, N, space_get_gdesc(space_back));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, N, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, N, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+
+  if (id_act != NO_ID) {
+    if(space_get_light(space_act) == TRUE){
+      print_in_zone(gra, PLAYGROUND, C, space_get_gdesc(space_act));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, C, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, C, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+  
+  if (id_next != NO_ID) {
+    if(space_get_light(space_next) == TRUE){
+      print_in_zone(gra, PLAYGROUND, S, space_get_gdesc(space_next));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, S, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, S, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+
+  if (id_east != NO_ID) {
+    if(space_get_light(space_east) == TRUE){
+      print_in_zone(gra, PLAYGROUND, E, space_get_gdesc(space_east));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, E, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, E, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+
+  if (id_west != NO_ID) {
+    if(space_get_light(space_west) == TRUE){
+      print_in_zone(gra, PLAYGROUND, W, space_get_gdesc(space_west));
+    }
+    else{
+      print_in_zone(gra, PLAYGROUND, W, "+------------+|            ||            ||            ||            ||            |+------------+");
+    }
+  }
+  else{
+    print_in_zone(gra, PLAYGROUND, W, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+  }
+  
+
+
+  graphics_refresh(gra);
+
+  /*printf("Object locations:");
+  for(i = 0; i < game->num_objects; i++){
+    if(object_get_location(game->object[i]) != PLAYER_OBJ){
+      printf(" %c:%d", object_get_symbol(game->object[i]), (int)object_get_location(game->object[i]));
+    }
+  }    
+  printf("\n");
+
+  printf("Player objects: ");
+  for(i=0; i< game->num_objects; i++){
+  if(object_get_location(game->object[i]) == PLAYER_OBJ)
+    printf("%c ", object_get_symbol(game->object[i]));
+  }
+
+  printf("\n");
+
+    
+
+  last = die_get_last_roll(game->die);
+  if(last != -1){
+    printf("Last die value: %d\n", last);
+  }
+
+  if(strlen(game->desc) != 0){
+  printf("Description: %s\n", game->desc);
+  }
+  game->desc[0] = '\0';
+
+
+  printf("\n[commands: quit or q, drop or d, pick or p, roll or r, inspect or i, go or g]");
+  printf("\nprompt:> ");*/
 }
 
 
@@ -951,6 +1144,7 @@ STATUS callback_INSPECT(Game* game, char *symbol){
     int i;/* !< Variable used for loops*/
     Object *obj; /* !<Variable used for storing the player's object*/
     Id player_location = NO_ID; /* !< Locations of the player and object*/
+    Space *space; /*!<Variable used for storing auxiliary spaces*/
 
     obj = NULL;
     
@@ -981,7 +1175,12 @@ STATUS callback_INSPECT(Game* game, char *symbol){
 
           if(!obj) return ERROR;
 
-          strcpy(game->desc, object_get_name(obj));
+		  space = game_get_space(game, object_get_location(obj)); /*Get the space where the object is*/
+
+		  if(space_get_light(space) == FALSE){
+		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
+		  }
+          strcpy(game->desc, object_get_description(obj));
           return OK;
         }
     }
@@ -1006,8 +1205,13 @@ STATUS callback_INSPECT(Game* game, char *symbol){
           }
 
           if(!obj) return ERROR;
+	
+		  space = game_get_space(game, object_get_location(obj)); /*Get the space where the object is*/
 
-          strcpy(game->desc, object_get_name(obj));
+		  if(space_get_light(space) == FALSE){
+		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
+		  }
+		  strcpy(game->desc, object_get_description(obj));
           return OK;
         }
     }
@@ -1335,3 +1539,99 @@ STATUS callback_OPEN(Game* game, char *string){
 
   return ERROR;
 }
+
+STATUS callback_SAVE(Game *game, char *savename){
+
+	FILE *f=NULL;
+	int i;
+	char path[256]="Saves/";
+
+	if(!game || !savename) return ERROR;
+
+	strcat(path, savename); /*Open or create file in Saves directory with writing privilege and user selected name*/
+	strcat(path, ".ao");
+	f=fopen(path, "w+");
+	if(!f)
+		return ERROR;
+
+	print_player_save(f, game->player);
+
+	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){ /*loops for printing all not null links, spaces and objects to file*/
+		print_space_save(f, game->spaces[i]);
+	}
+
+	for(i=0; i<MAX_LINKS && game->links[i]; i++){
+		print_link_save(f, game->links[i]);
+	}
+
+	for(i=0; i<=MAX_IDS && game->object[i]; i++){
+		print_object_save(f, game->object[i]);
+	}
+
+	fclose(f);
+	return OK;
+}
+
+/*STATUS callback_LOAD(Game *game){
+	DIR *dir;
+struct dirent *ent;
+
+if ((dir = opendir ("codigo/Saves")) != NULL) {
+  while ((ent = readdir (dir)) != NULL) {
+    printf ("%s\n", ent->d_name);
+  }
+  closedir (dir);
+} else {
+  perror ("");
+  return ERROR;
+}*/
+
+
+STATUS print_space_save(FILE *f, Space* space){
+	Id id; 
+    char name[WORD_SIZE + 1]; 
+    Id north;
+    Id east; 
+    Id south; 
+    Id west; 
+    Id up; 
+    Id down; 
+    char gdesc[MAX_GDESC]; 
+    BOOL light; 
+    char adesc[MAX_adesc];
+    char space_str[1024];
+
+	if(!f || !space) return ERROR;
+	system("gnome-terminal");
+	id = space_get_id(space);
+	strcpy(name,space_get_name(space));
+	north = space_get_north(space);
+	south = space_get_south(space);
+	east = space_get_east(space);
+	west = space_get_west(space);
+	up = space_get_up(space);
+	down = space_get_down(space);
+	light= space_get_light(space);
+	strcpy(gdesc,space_get_gdesc(space));
+	strcpy(adesc,space_get_adesc(space));
+
+	sprintf(space_str, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%id|%s%s", 
+			id, name, north, east, south, west, up, down,
+			light, adesc, gdesc);
+	fprintf(f, "%s\n", space_str);
+
+	return OK;
+}
+
+STATUS print_link_save(FILE *f, Link *link){
+	return OK;
+	}
+
+STATUS print_object_save(FILE *f, Object *object){
+	return OK;
+	}
+
+STATUS print_player_save(FILE *f, Player *player){
+	return OK;
+}
+

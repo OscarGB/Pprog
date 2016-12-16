@@ -70,7 +70,7 @@ BOOL test_link4(){
 BOOL test_link5(){
 	Link* link = NULL;
 	link = link_create(ID);
-	if(link_get_state(link) == OPEN){
+	if(link_get_state(link) == OPENL){
 		link_destroy(link);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -125,7 +125,7 @@ BOOL test_link9(){
 }
 
 BOOL test_link10(){
-	if(link_get_state(NULL) == OPEN){
+	if(link_get_state(NULL) == OPENL){
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
@@ -235,7 +235,7 @@ BOOL test_link18(){
 BOOL test_link19(){
 	Link* link = NULL;
 	link = link_create(ID);
-	if(link_set_state(link, CLOSED) == OK){
+	if(link_set_state(link, CLOSEDL) == OK){
 		link_destroy(link);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -248,8 +248,8 @@ BOOL test_link19(){
 BOOL test_link20(){
 	Link* link = NULL;
 	link = link_create(ID);
-	link_set_state(link, CLOSED);
-	if(link_get_state(link) == CLOSED){
+	link_set_state(link, CLOSEDL);
+	if(link_get_state(link) == CLOSEDL){
 		link_destroy(link);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -326,7 +326,7 @@ BOOL test_link26(){
 }
 
 BOOL test_link27(){
-	if(link_set_state(NULL, CLOSED) == ERROR){
+	if(link_set_state(NULL, CLOSEDL) == ERROR){
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
@@ -374,6 +374,15 @@ BOOL test_link31(){
 	}
 	TEST_PRINT(FALSE);
 	return FALSE;
+}
+
+BOOL test_link32(){
+	if(link_open(NULL) != ERROR){
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	return TRUE;
 }
 
 int main(int argc, char* argv[]){
@@ -425,6 +434,7 @@ int main(int argc, char* argv[]){
 	if(todas || test == 29) test_link29();
 	if(todas || test == 30) test_link30();
 	if(todas || test == 31) test_link31();
+	if(todas || test == 32) test_link32();
 
 
 	PRINT_RESULTS();

@@ -10,6 +10,7 @@
 #define GRAPHICS_H
 
 #include "types.h"
+#include "command.h"
 /*PLAYGROUND*/
 #define WIN1_X 42 /*!< X size of window 1*/
 #define WIN1_Y 21 /*!< Y size of window 1*/
@@ -88,6 +89,16 @@ STATUS graphics_clear_zone(Graphics* gra, ZONE zone);
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
 STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir, char* string);
+
+/**
+* @brief Scans the user input from screen
+* @author Óscar Gómez
+* @date 16/12/2016
+* @param Graphics* gra (The graphics to scan)
+* @param Command* command (The place where you save the command)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS scan_from_screen(Graphics* gra, Command* command);
 
 /**
 * @brief Refreshes the graphics

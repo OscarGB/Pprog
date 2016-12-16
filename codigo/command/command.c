@@ -12,8 +12,6 @@
 #include <stdlib.h>
 #include "command.h"
 
-#define CMD_LENGHT 30
-
 struct _Command{
 	T_Command cmd; /*!<The command*/
 	char symbol[50]; /*!<A symbol for TAKE and DROP and INSPECT and TURN commands*/
@@ -26,86 +24,86 @@ struct _Command{
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 23/09/2016
 * @param command pointer
+* @param the string written by the user
 * @return OK if command is changed with user's input
 */
 
-STATUS get_user_input(Command* command){
+STATUS get_user_input(Command* command, char* input){
 	char action[CMD_LENGHT]; /*The action written*/
-	char input[CMD_LENGHT]; /*The real input*/
+	/*char input[CMD_LENGHT];*/ /*The real input*/
 	char symbol[50]; /*The character for TAKE and DROP*/
 	char* toks = NULL; /*String for tokenization*/
 
-	if(command == NULL){
+	if(command == NULL || input == NULL){
 		return ERROR;
 	}
-	if (fgets (input, WORD_SIZE, stdin) != NULL){
-		toks = strtok(input, " \n");
-		if(toks != NULL){/*If theres nothing written -> NO_CMD*/
-			strcpy(action, toks);
-			toks = strtok(NULL, " \n");
-			if(toks != NULL){ /*If there is a symbol -> set the symbol to the introduced valor*/
-				strcpy(symbol, toks);
-			}
-			else{/*If there's not a symbol we set to E*/
-				symbol[0] = '\0';
-				command->symbol[0] = '\0';
-			}
+	
+	toks = strtok(input, " \n");
+	if(toks != NULL){/*If theres nothing written -> NO_CMD*/
+		strcpy(action, toks);
+		toks = strtok(NULL, " \n");
+		if(toks != NULL){ /*If there is a symbol -> set the symbol to the introduced valor*/
+			strcpy(symbol, toks);
+		}
+		else{/*If there's not a symbol we set to E*/
+			symbol[0] = '\0';
+			command->symbol[0] = '\0';
+		}
 
-			#ifdef DEBUG
-				printf("Leido: %s\n", input); /*Debug case*/
-			#endif
+		#ifdef DEBUG
+			printf("Leido: %s\n", input); /*Debug case*/
+		#endif
 
 
-			/*Detecting what command was written*/
-			if (!strcmp(action, "q") || !strcmp(action, "quit")){
-				command->cmd = QUIT;
-			}
-			else if (!strcmp(action, "p") || !strcmp(action, "pick")){
+		/*Detecting what command was written*/
+		if (!strcmp(action, "q") || !strcmp(action, "quit")){
+			command->cmd = QUIT;
+		}
+		else if (!strcmp(action, "p") || !strcmp(action, "pick")){
 
-				command->cmd = PICK;
+			command->cmd = PICK;
 
-				strcpy(command->symbol, symbol);
-			}
-			else if (!strcmp(action, "d") || !strcmp(action, "drop")){
-				command->cmd = DROP;
+			strcpy(command->symbol, symbol);
+		}
+		else if (!strcmp(action, "d") || !strcmp(action, "drop")){
+			command->cmd = DROP;
 
-				strcpy(command->symbol, symbol);
-			}
-			else if (!strcmp(action, "r") || !strcmp(action, "roll")){
-				command->cmd = ROLL;
-			}
-			else if (!strcmp(action, "i") || !strcmp(action, "inspect")){
-				command->cmd = INSPECT;
+			strcpy(command->symbol, symbol);
+		}
+		else if (!strcmp(action, "r") || !strcmp(action, "roll")){
+			command->cmd = ROLL;
+		}
+		else if (!strcmp(action, "i") || !strcmp(action, "inspect")){
+			command->cmd = INSPECT;
 
-				strcpy(command->symbol, symbol);
-			}
-			else if (!strcmp(action, "g") || !strcmp(action, "go")){
-				command->cmd = GO;
+			strcpy(command->symbol, symbol);
+		}
+		else if (!strcmp(action, "g") || !strcmp(action, "go")){
+			command->cmd = GO;
 
-				strcpy(command->symbol, symbol);
-			}
-			else if (!strcmp(action, "turnon")){
-				command->cmd = TURNON;
+			strcpy(command->symbol, symbol);
+		}
+		else if (!strcmp(action, "turnon")){
+			command->cmd = TURNON;
 
-				strcpy(command->symbol, symbol);
-			}
-			else if (!strcmp(action, "turnoff")){
-				command->cmd = TURNOFF;
+			strcpy(command->symbol, symbol);
+		}
+		else if (!strcmp(action, "turnoff")){
+			command->cmd = TURNOFF;
 
-				strcpy(command->symbol, symbol);
-			}
-			else if (!strcmp(action, "open")){
-				command->cmd = OPEN;
+			strcpy(command->symbol, symbol);
+		}
+		else if (!strcmp(action, "open")){
+			command->cmd = OPEN;
 
-				strcpy(command->symbol, symbol);
-			}
-			else{
-				command->cmd = UNKNOWN;
-			}
+			strcpy(command->symbol, symbol);
 		}
 		else{
-			command->cmd = NO_CMD;
+			command->cmd = UNKNOWN;
 		}
+	}
+	else{
+		command->cmd = NO_CMD;
 	}
 	return OK;
 }
