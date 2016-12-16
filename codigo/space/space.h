@@ -252,6 +252,7 @@ STATUS space_set_adesc(Space* space, char* adesc);
 * @return char* (The adesc inside the Space)
 */
 char* space_get_adesc(Space* space);
+
 /**
 * @brief Sets the light of the input space
 * @author Andrea Ruiz
@@ -270,5 +271,25 @@ STATUS space_set_light(Space* space, BOOL light);
 * @return BOOL (TRUE if illuminated, FALSE if not)
 */
 BOOL space_get_light(Space* space);
+
+/**
+* @brief Changes the gdesc to show an open door
+* @author Óscar Gómez
+* @date 16/12/2016
+* @param Space* space (The space to modify)
+* @param DIRECTION (The direction where you open the door)
+* @return STATUS (OK if it was successfuly changed)
+*/
+STATUS space_open_door(Space* space, DIRECTION dir);
+
+/**
+* @brief Changes the gdesc to show a closed door
+* @author Óscar Gómez
+* @date 16/12/2016
+* @param Space* space (The space to modify)
+* @param DIRECTION (The direction where you close the door)
+* @return STATUS (OK if it was successfuly changed)
+*/
+STATUS space_close_door(Space* space, DIRECTION dir);
 
 #endif

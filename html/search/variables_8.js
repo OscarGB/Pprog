@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['name',['name',['../struct___link.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Link::name()'],['../struct___object.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Object::name()'],['../struct___player.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Player::name()'],['../struct___space.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Space::name()']]],
-  ['north',['north',['../struct___space.html#a8c9fe9c5953834f6bf21b2c0aa9c232c',1,'_Space']]],
-  ['num_5fids',['num_ids',['../struct___set.html#aea3b1b8a5e34c35cb4b6073752495a1a',1,'_Set']]],
-  ['num_5fobjects',['num_objects',['../struct___game.html#ab000eabbed09cacdd40b5585dd784e55',1,'_Game']]]
+  ['last',['last',['../struct___die.html#a72e27dee31b1c4c6a504fbed29542d97',1,'_Die']]],
+  ['light',['light',['../struct___object.html#ad25e653a5a1f98aa808c98dad4918ab1',1,'_Object::light()'],['../struct___space.html#ad25e653a5a1f98aa808c98dad4918ab1',1,'_Space::light()']]],
+  ['links',['links',['../struct___game.html#a0d7e87427ec42d09d40f5d79cdc15284',1,'_Game']]],
+  ['location',['location',['../struct___object.html#a5ef730c626751b65a24f4666d2c70a91',1,'_Object::location()'],['../struct___player.html#a5ef730c626751b65a24f4666d2c70a91',1,'_Player::location()']]]
 ];

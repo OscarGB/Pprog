@@ -112,13 +112,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="player_8h__dep__incl.png" border="0" usemap="#codigo_2player_2player_8hdep" alt=""/></div>
 <map name="codigo_2player_2player_8hdep" id="codigo_2player_2player_8hdep">
-<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="241,87,383,114"/>
-<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="347,266,490,293"/>
-<area shape="rect" id="node7" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="507,87,656,114"/>
-<area shape="rect" id="node8" href="player__test_8c.html" title="Main to test the Player module. " alt="" coords="680,80,805,121"/>
+<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="330,87,473,114"/>
+<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="539,266,682,293"/>
+<area shape="rect" id="node8" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="699,87,848,114"/>
+<area shape="rect" id="node9" href="player__test_8c.html" title="Main to test the Player module. " alt="" coords="872,80,997,121"/>
 <area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="5,169,168,211"/>
 <area shape="rect" id="node5" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="243,169,381,211"/>
-<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="160,259,299,300"/>
+<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="189,259,328,300"/>
+<area shape="rect" id="node7" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="406,169,573,211"/>
 </map>
 </div>
 </div>
@@ -164,6 +165,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>player_pick_object</b
 <tr class="memitem:a6c0af7f079f5992e907c79830e9e75d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c0af7f079f5992e907c79830e9e75d3"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>player_get_bag_size</b> (<a class="el" href="struct___player.html">Player</a> *player)</td></tr>
 <tr class="separator:a6c0af7f079f5992e907c79830e9e75d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a08e5ca32270d87cf1494099a1cb25"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8h.html#ad5a08e5ca32270d87cf1494099a1cb25">player_has_object</a> (<a class="el" href="struct___player.html">Player</a> *player, Id id)</td></tr>
+<tr class="memdesc:ad5a08e5ca32270d87cf1494099a1cb25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for an item in the bag.  <a href="#ad5a08e5ca32270d87cf1494099a1cb25">More...</a><br /></td></tr>
+<tr class="separator:ad5a08e5ca32270d87cf1494099a1cb25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It defines the functionality of the player. </p>
@@ -181,6 +185,44 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>player_get_bag_size</b
       </table>
 </div><div class="memdoc">
 <p>Max amount of objects (1000) </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ad5a08e5ca32270d87cf1494099a1cb25"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL player_has_object </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___player.html">Player</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Id&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Search for an item in the bag. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>9/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Player*,id</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL </dd></dl>
 
 </div>
 </div>

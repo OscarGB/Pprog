@@ -1,8 +1,12 @@
 <map id="codigo/command/command.h" name="codigo/command/command.h">
-<area shape="rect" id="node2" href="$command_8c.html" title="It implements the command interpreter. " alt="" coords="5,80,199,107"/>
-<area shape="rect" id="node3" href="$game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="279,80,421,107"/>
-<area shape="rect" id="node5" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="150,155,313,196"/>
-<area shape="rect" id="node4" href="$game_8c.html" title="It implements the game interface for each command. " alt="" coords="303,251,445,278"/>
-<area shape="rect" id="node6" href="$game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="387,155,526,196"/>
-<area shape="rect" id="node7" href="$game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="482,244,621,285"/>
+<area shape="rect" id="node2" href="$command_8c.html" title="It implements the command interpreter. " alt="" coords="24,80,217,107"/>
+<area shape="rect" id="node3" href="$dialogue_8h.html" title="It defines the dialogue module. " alt="" coords="241,80,416,107"/>
+<area shape="rect" id="node4" href="$game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="322,155,465,181"/>
+<area shape="rect" id="node6" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="431,229,594,271"/>
+<area shape="rect" id="node10" href="$graphics_8h.html" title="Definition of the graphic interface. " alt="" coords="542,80,720,107"/>
+<area shape="rect" id="node11" href="$graphics_8c.html" title="Implementation of the graphic interface. " alt="" coords="669,155,846,181"/>
+<area shape="rect" id="node5" href="$game_8c.html" title="It implements the game interface for each command. " alt="" coords="322,326,465,353"/>
+<area shape="rect" id="node7" href="$game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="218,229,356,271"/>
+<area shape="rect" id="node8" href="$game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="39,319,178,360"/>
+<area shape="rect" id="node9" href="$game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="26,229,193,271"/>
 </map>

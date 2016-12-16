@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['desc',['desc',['../struct___object.html#ab13e9dba2d330b54cd11d93cef3a7deb',1,'_Object']]],
-  ['die',['die',['../struct___game.html#a4b1b840fbb450f0132e2ba0738fb2e50',1,'_Game']]]
+  ['cmd',['cmd',['../struct___command.html#a987286cd4accace9e59c05dbb19a40ab',1,'_Command']]],
+  ['commands',['commands',['../struct___graphics.html#a5745bd1ac3efbc85d38e565d9ff00130',1,'_Graphics']]],
+  ['conection1',['conection1',['../struct___link.html#ad54dd79ff14b96edd4b9c7e4dadd4cd0',1,'_Link']]],
+  ['conection2',['conection2',['../struct___link.html#a83eb5b56fb4fdd0ae61c9572a242fc75',1,'_Link']]]
 ];

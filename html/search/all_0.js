@@ -1,8 +1,10 @@
 var searchData=
 [
   ['_5fcommand',['_Command',['../struct___command.html',1,'']]],
+  ['_5fdialogue',['_Dialogue',['../struct___dialogue.html',1,'']]],
   ['_5fdie',['_Die',['../struct___die.html',1,'']]],
   ['_5fgame',['_Game',['../struct___game.html',1,'']]],
+  ['_5fgraphics',['_Graphics',['../struct___graphics.html',1,'']]],
   ['_5finventory',['_Inventory',['../struct___inventory.html',1,'']]],
   ['_5flink',['_Link',['../struct___link.html',1,'']]],
   ['_5fobject',['_Object',['../struct___object.html',1,'']]],

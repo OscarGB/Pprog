@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['west',['west',['../struct___space.html#a2a48d53ab6fa715ffa1280307a865e1f',1,'_Space']]]
+  ['player',['player',['../struct___game.html#a96781128d3743da3d17e0fdd91afba7b',1,'_Game']]],
+  ['playground',['playground',['../struct___graphics.html#a69177ffecd22c0f578a1114910fe46e8',1,'_Graphics']]]
 ];

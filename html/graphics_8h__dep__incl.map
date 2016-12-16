@@ -1,0 +1,9 @@
+<map id="codigo/graphics/graphics.h" name="codigo/graphics/graphics.h">
+<area shape="rect" id="node2" href="$game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="269,80,411,107"/>
+<area shape="rect" id="node3" href="$game_8c.html" title="It implements the game interface for each command. " alt="" coords="322,251,465,278"/>
+<area shape="rect" id="node4" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="431,155,593,196"/>
+<area shape="rect" id="node8" href="$graphics_8c.html" title="Implementation of the graphic interface. " alt="" coords="669,80,846,107"/>
+<area shape="rect" id="node5" href="$game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="217,155,356,196"/>
+<area shape="rect" id="node6" href="$game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="39,244,177,285"/>
+<area shape="rect" id="node7" href="$game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="26,155,193,196"/>
+</map>

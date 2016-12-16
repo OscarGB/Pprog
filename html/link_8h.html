@@ -111,13 +111,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="link_8h__dep__incl.png" border="0" usemap="#codigo_2link_2link_8hdep" alt=""/></div>
 <map name="codigo_2link_2link_8hdep" id="codigo_2link_2link_8hdep">
-<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="241,80,383,107"/>
-<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="347,251,490,278"/>
-<area shape="rect" id="node7" href="link_8c.html" title="Implementation of the link module. " alt="" coords="507,80,626,107"/>
-<area shape="rect" id="node8" href="link__test_8c.html" title="Main to test the Link module. " alt="" coords="650,80,801,107"/>
+<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="330,80,473,107"/>
+<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="539,251,682,278"/>
+<area shape="rect" id="node8" href="link_8c.html" title="Implementation of the link module. " alt="" coords="699,80,818,107"/>
+<area shape="rect" id="node9" href="link__test_8c.html" title="Main to test the Link module. " alt="" coords="842,80,993,107"/>
 <area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="5,155,168,196"/>
 <area shape="rect" id="node5" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="243,155,381,196"/>
-<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="160,244,299,285"/>
+<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="189,244,328,285"/>
+<area shape="rect" id="node7" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="406,155,573,196"/>
 </map>
 </div>
 </div>
@@ -137,8 +138,8 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:aeaa26f570d823177e8ba9013ddd57d49"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeaa26f570d823177e8ba9013ddd57d49"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>enum_link</b> { <b>CLOSED</b> = 0, 
-<b>OPEN</b>
+<tr class="memitem:aeaa26f570d823177e8ba9013ddd57d49"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeaa26f570d823177e8ba9013ddd57d49"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>enum_link</b> { <b>CLOSEDL</b> = 0, 
+<b>OPENL</b>
  }</td></tr>
 <tr class="separator:aeaa26f570d823177e8ba9013ddd57d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -180,6 +181,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a95ea756dad592e65440a33dfbe47edcf"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="link_8h.html#a95ea756dad592e65440a33dfbe47edcf">link_print</a> (<a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *link)</td></tr>
 <tr class="memdesc:a95ea756dad592e65440a33dfbe47edcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">It prints the content of a Link.  <a href="#a95ea756dad592e65440a33dfbe47edcf">More...</a><br /></td></tr>
 <tr class="separator:a95ea756dad592e65440a33dfbe47edcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7993b94cbfa5de4e4086e5499ac43461"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="link_8h.html#a7993b94cbfa5de4e4086e5499ac43461">link_open</a> (<a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *link)</td></tr>
+<tr class="memdesc:a7993b94cbfa5de4e4086e5499ac43461"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a link.  <a href="#a7993b94cbfa5de4e4086e5499ac43461">More...</a><br /></td></tr>
+<tr class="separator:a7993b94cbfa5de4e4086e5499ac43461"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f26781833ca6b299c0bc35a6f08a36d"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="link_8h.html#a1f26781833ca6b299c0bc35a6f08a36d">link_close</a> (<a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *link)</td></tr>
+<tr class="memdesc:a1f26781833ca6b299c0bc35a6f08a36d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes a link.  <a href="#a1f26781833ca6b299c0bc35a6f08a36d">More...</a><br /></td></tr>
+<tr class="separator:a1f26781833ca6b299c0bc35a6f08a36d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definition of the link module. </p>
@@ -228,6 +235,33 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a1f26781833ca6b299c0bc35a6f08a36d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS link_close </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *&#160;</td>
+          <td class="paramname"><em>link</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Closes a link. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>3/11/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Link*</td><td>(The Link to change) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if the State have been changed, ERROR if haven't) </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a8090d7f529cfd6a2fc5df3dd379fe514"></a>
 <div class="memitem">
 <div class="memproto">
@@ -424,6 +458,43 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>State (The state of the Link) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7993b94cbfa5de4e4086e5499ac43461"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS link_open </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="link_8h.html#ae3b299941e67be6971bfd64a25505eff">Link</a> *&#160;</td>
+          <td class="paramname"><em>link</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Opens a link. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>3/11/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Link*</td><td>(The Link to change) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if the State have been changed, ERROR if haven't)</dd></dl>
+<p>Opens a link.</p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>3/11/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Link*</td><td>(The Link to change) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if the State have been changed, ERROR if haven't) </dd></dl>
 
 </div>
 </div>
