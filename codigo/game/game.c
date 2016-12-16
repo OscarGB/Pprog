@@ -1796,3 +1796,56 @@ STATUS print_player_save(FILE *f, Player *player){
 	return OK;
 }
 
+
+/**
+* @brief Returns the game die
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return Die pointer
+*/
+Die * game_get_die(Game * game){
+	if(!game) return NULL;
+	
+	return game->die;
+}
+
+/**
+* @brief Returns the link in a concrete position
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return Link pointer
+*/
+Link * game_get_link_n(Game * game, int n){
+	if(!game || n >= game->num_links || n < 0)
+		return NULL;
+	
+	return game->links[n]
+}
+
+/**
+* @brief Returns the number of links
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return int (number of links)
+*/
+int game_get_num_links(Game * game){
+	if(!game)
+		return NULL;
+	return game->num_links;
+}
+
+/**
+* @brief Returns the objects in the game (all of them)
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Object ** object
+* @return pointer to the array of objects
+*/	
+/*Object ** game_get_objects(Game * game){
+	if(!game)
+		return NULL;
+	return game->object;
+}*/
