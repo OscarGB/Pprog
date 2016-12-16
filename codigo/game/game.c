@@ -527,6 +527,7 @@ void game_print_screen(Game* game, Graphics* gra){
   Space* space_swest = NULL;
   Space* space_neast = NULL;
   Space* space_seast = NULL;
+  char print[]
   int i; /* !< loops, last rolled value*/
 
   if(!gra || !game){
@@ -739,7 +740,9 @@ void game_print_screen(Game* game, Graphics* gra){
 
   if (id_act != NO_ID) {
     if(space_get_light(space_act) == TRUE){
-      print_in_zone(gra, PLAYGROUND, C, space_get_gdesc(space_act));
+      print = space_get_gdesc(space_act);
+
+      print_in_zone(gra, PLAYGROUND, C, print);
     }
     else{
       print_in_zone(gra, PLAYGROUND, C, "+------------+|            ||            ||            ||            ||            |+------------+");
@@ -836,37 +839,6 @@ void game_print_screen(Game* game, Graphics* gra){
 
   graphics_refresh(gra);
 
-  /*printf("Object locations:");
-  for(i = 0; i < game->num_objects; i++){
-    if(object_get_location(game->object[i]) != PLAYER_OBJ){
-      printf(" %c:%d", object_get_symbol(game->object[i]), (int)object_get_location(game->object[i]));
-    }
-  }    
-  printf("\n");
-
-  printf("Player objects: ");
-  for(i=0; i< game->num_objects; i++){
-  if(object_get_location(game->object[i]) == PLAYER_OBJ)
-    printf("%c ", object_get_symbol(game->object[i]));
-  }
-
-  printf("\n");
-
-    
-
-  last = die_get_last_roll(game->die);
-  if(last != -1){
-    printf("Last die value: %d\n", last);
-  }
-
-  if(strlen(game->desc) != 0){
-  printf("Description: %s\n", game->desc);
-  }
-  game->desc[0] = '\0';
-
-
-  printf("\n[commands: quit or q, drop or d, pick or p, roll or r, inspect or i, go or g]");
-  printf("\nprompt:> ");*/
 }
 
 
