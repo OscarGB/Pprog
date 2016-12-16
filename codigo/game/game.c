@@ -1699,7 +1699,7 @@ STATUS callback_SAVE(Game *game, char *savename){
 
 	FILE *f=NULL;
 	int i;
-	char path[256]="Saves/";
+	char path[256]="codigo/Saves/";
 
 	if(!game || !savename) return ERROR;
 
@@ -1751,13 +1751,14 @@ STATUS print_space_save(FILE *f, Space* space){
     Id west; 
     Id up; 
     Id down; 
-    char gdesc[MAX_GDESC]; 
-    BOOL light; 
+    char gdesc[MAX_GDESC], buff[MAX_GDESC];
+    char *toks=NULL; 
+    BOOL light;
+    char luz[100];
     char adesc[MAX_adesc];
     char space_str[1024];
 
 	if(!f || !space) return ERROR;
-	system("gnome-terminal");
 	id = space_get_id(space);
 	strcpy(name,space_get_name(space));
 	north = space_get_north(space);
@@ -1767,12 +1768,25 @@ STATUS print_space_save(FILE *f, Space* space){
 	up = space_get_up(space);
 	down = space_get_down(space);
 	light= space_get_light(space);
-	strcpy(gdesc,space_get_gdesc(space));
+	strcpy(buff,space_get_gdesc(space));
 	strcpy(adesc,space_get_adesc(space));
 
-	sprintf(space_str, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%id|%s%s", 
+	if(light==TRUE){
+		strcpy(luz, "TRUE");
+	}else{
+		strcpy(luz, "FALSE");
+	}
+
+	/*toks = strtok(buff, "\n");
+	strcat(gdesc, toks);
+	toks = strtok(NULL, "\n");
+	strcat(gdesc, toks);
+	toks = strtok(NULL, "\n");
+	strcat(gdesc, toks);*/
+
+	sprintf(space_str, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%s|%s%s", 
 			id, name, north, east, south, west, up, down,
-			light, adesc, gdesc);
+			luz, adesc, buff);
 	fprintf(f, "%s\n", space_str);
 
 	return OK;
