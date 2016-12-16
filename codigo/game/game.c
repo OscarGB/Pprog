@@ -53,6 +53,8 @@ STATUS callback_INSPECT(Game* game, char *symbol);
 STATUS callback_GO(Game* game, char *symbol);
 STATUS callback_TURNON(Game* game, char *symbol);
 STATUS callback_TURNOFF(Game* game, char *symbol);
+STATUS callback_OPEN(Game* game, char *symbol);
+STATUS callback_SAVE(Game* game, char *symbol);
 
 
 /*
@@ -70,6 +72,12 @@ Id     game_get_player_location(Game* game);
 STATUS game_add_object(Game* game, Object* object);
 STATUS game_set_object_location(Game* game, Id id_s, Id id_o);
 Id     game_get_object_location(Game* game, char *symbol);
+
+STATUS print_player_save(FILE *f, Player *player);
+STATUS print_space_save(FILE *f, Space* space);
+STATUS print_link_save(FILE *f, Link *link);
+STATUS print_object_save(FILE *f, Object *object);
+
 
 /**
  * @brief Game interface implementation
@@ -457,7 +465,9 @@ STATUS game_update(Game* game, Command *cmd) {
   case TURNOFF:
     return callback_TURNOFF(game, command_get_symbol(cmd));
   case OPEN:
-    return callback_TURNON(game, command_get_symbol(cmd));
+    return callback_OPEN(game, command_get_symbol(cmd));
+  case SAVE:
+    return callback_SAVE(game, command_get_symbol(cmd));
   case NO_CMD:
     break;
   default: /*We must never arrive here*/
@@ -1529,3 +1539,99 @@ STATUS callback_OPEN(Game* game, char *string){
 
   return ERROR;
 }
+
+STATUS callback_SAVE(Game *game, char *savename){
+
+	FILE *f=NULL;
+	int i;
+	char path[256]="Saves/";
+
+	if(!game || !savename) return ERROR;
+
+	strcat(path, savename); /*Open or create file in Saves directory with writing privilege and user selected name*/
+	strcat(path, ".ao");
+	f=fopen(path, "w+");
+	if(!f)
+		return ERROR;
+
+	print_player_save(f, game->player);
+
+	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){ /*loops for printing all not null links, spaces and objects to file*/
+		print_space_save(f, game->spaces[i]);
+	}
+
+	for(i=0; i<MAX_LINKS && game->links[i]; i++){
+		print_link_save(f, game->links[i]);
+	}
+
+	for(i=0; i<=MAX_IDS && game->object[i]; i++){
+		print_object_save(f, game->object[i]);
+	}
+
+	fclose(f);
+	return OK;
+}
+
+/*STATUS callback_LOAD(Game *game){
+	DIR *dir;
+struct dirent *ent;
+
+if ((dir = opendir ("codigo/Saves")) != NULL) {
+  while ((ent = readdir (dir)) != NULL) {
+    printf ("%s\n", ent->d_name);
+  }
+  closedir (dir);
+} else {
+  perror ("");
+  return ERROR;
+}*/
+
+
+STATUS print_space_save(FILE *f, Space* space){
+	Id id; 
+    char name[WORD_SIZE + 1]; 
+    Id north;
+    Id east; 
+    Id south; 
+    Id west; 
+    Id up; 
+    Id down; 
+    char gdesc[MAX_GDESC]; 
+    BOOL light; 
+    char adesc[MAX_adesc];
+    char space_str[1024];
+
+	if(!f || !space) return ERROR;
+	system("gnome-terminal");
+	id = space_get_id(space);
+	strcpy(name,space_get_name(space));
+	north = space_get_north(space);
+	south = space_get_south(space);
+	east = space_get_east(space);
+	west = space_get_west(space);
+	up = space_get_up(space);
+	down = space_get_down(space);
+	light= space_get_light(space);
+	strcpy(gdesc,space_get_gdesc(space));
+	strcpy(adesc,space_get_adesc(space));
+
+	sprintf(space_str, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%id|%s%s", 
+			id, name, north, east, south, west, up, down,
+			light, adesc, gdesc);
+	fprintf(f, "%s\n", space_str);
+
+	return OK;
+}
+
+STATUS print_link_save(FILE *f, Link *link){
+	return OK;
+	}
+
+STATUS print_object_save(FILE *f, Object *object){
+	return OK;
+	}
+
+STATUS print_player_save(FILE *f, Player *player){
+	return OK;
+}
+

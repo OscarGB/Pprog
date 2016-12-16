@@ -30,7 +30,9 @@ typedef enum enum_Command {
   GO,
   TURNON,
   TURNOFF,
-  OPEN
+  OPEN,
+  SAVE,
+  LOAD
 } T_Command; 
 
 typedef struct _Command Command; /*<! Definition of Command structure */
