@@ -27,7 +27,7 @@
 * @param int *nvflag (no verbose flag)
 * @return int -1 if ERROR, the position of the log file if OK
 */
-int check_flags(int argc, char **argv, int *flag, int *nvflag){
+int check_flags(int argc, char **argv, int *flag, int *nvflag) {
 	int position = 0;
 
 	if (argc < 2){
