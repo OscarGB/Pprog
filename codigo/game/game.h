@@ -54,7 +54,7 @@ STATUS game_init_from_file(Game* game, char* filename);
 * @param game pointer
 * @return The id of the player location
 */
-Id     game_get_player_location(Game* game);
+Id game_get_player_location(Game* game);
 
 /**
 * @brief It gets the space from a given id

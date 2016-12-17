@@ -57,7 +57,7 @@ STATUS callback_TURNON(Game* game, char *symbol, Command* cmd, Dialogue* dia, Gr
 STATUS callback_TURNOFF(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_OPEN(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_SAVE(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra);
-STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra)
+STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
 
 
 /*
