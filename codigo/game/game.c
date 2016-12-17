@@ -1280,6 +1280,8 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     Space *space; /*!<Variable used for storing auxiliary spaces*/
     char *symbol = NULL; /*!< Variable used for storing the command*/
     Inventory* inventory = NULL;
+    Id* ids = NULL;
+    char *invobjs[MAX_IDS];
 
     symbol = command_get_cmd(cmd);
 
@@ -1345,18 +1347,27 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
       else if(strcmp(symbol, "inventory") == 0 || strcmp(symbol, "Inventory") == 0){ /*!< Inspecting inventory*/
         inventory = player_get_inventory(game->player);
         if(!inventory){ 
+          dialogue_inspect(dia, ERROR, &(game->desc, gra, INVENTORY));
           return ERROR;
         }
-        
-        
-
-
-
-
-
-
-
-
+        ids = inventory_get_ids(player_get_inventory(game->player));
+        if(!ids){
+          dialogue_inspect(dia, ERROR, &(game->desc, gra, INVENTORY));
+          return ERROR;
+        }
+        for(i = 0; i < MAX_IDS; i++){
+          if(ids[i] == NULL){
+            break;
+          }
+          for(j = 0; j < game->num_objects; i++){
+            if(object_get_id(game->objects[j]) == ids[i]){
+              invobjs[i] = object_get_name(game->objects[i]);
+              break;
+            }
+          }
+        }
+        dialogue_inspect(dia, OK, invobjs, gra, INVENTORY);
+        return OK;
       }
       else{ /*!< Inspecting an object */
          for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
