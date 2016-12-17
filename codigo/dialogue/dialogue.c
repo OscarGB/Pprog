@@ -13,6 +13,8 @@
 #include "types.h"
 #include "dialogue.h"
 #include "graphics.h"
+#include "command.h"
+#include <unistd.h>
 
 struct _Dialogue {
 	Command* prev; /*!< The previous command*/
@@ -194,7 +196,6 @@ STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory
 
 	if(!gra || !dialogue || !inventory) return ERROR;
 
-	string = "";
 
 	if(check == OK){
 		strcpy(string, "Inspecting space: \n");
@@ -234,10 +235,8 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 	char* obj = NULL;
 
 	if(!gra || !dialogue || !inventory) return ERROR;
-	obj = command_get_cmd(dialogue->current);
+	obj = command_get_symbol(dialogue->current);
 	if(!obj) return ERROR;
-
-	string = "";
 
 	if(check == OK){
 		strcpy(string, "Inspecting object ");
@@ -346,10 +345,10 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphics* gra){
 	T_command cmd; /*!< Command for switch*/
 
-	if(!dialogue || !objects || !space) return ERROR;
+	if(!dialogue || !objects) return ERROR;
 
 	cmd = command_get_cmd(dialogue->current);
-	switch cmd{
+	switch (cmd){
 		case NO_CMD:
 			return dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects);
 		case UNKNOWN:
@@ -394,7 +393,7 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Graphics* gra, DIALOGUE_INSPECT type){
 	if(!dialogue || !gra) return ERROR;
 
-	switch type{
+	switch (type){
 		case SPACE:
 			return dialogue_inspect_space(gra, dialogue, inventory[0], check); /* Inventory[0] will be the description of the space/object*/
 		case INVENTORY:
@@ -415,7 +414,7 @@ STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Grap
 * @return OK if it was printed successfuly
 */
 STATUS dialogue_print(Graphics* gra, char *string){
-	if(!gra) return NULL;
+	if(!gra) return ERROR;
 
 	return print_in_zone(gra, DIALOGUE, 0, string);
 }
