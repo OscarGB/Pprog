@@ -493,7 +493,7 @@ Id game_get_object_location(Game* game, char *symbol) {
 */
 
 STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
-  char *objects[game->num_objects+1] = NULL;
+  char *objects[MAX_IDS];
   int i, j = 0;
 
   for (i = 0; i < game->num_objects; i++){
