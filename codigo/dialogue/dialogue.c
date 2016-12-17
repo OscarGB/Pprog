@@ -354,7 +354,7 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 		case UNKNOWN:
 			return dialogue_error(gra, dialogue, objects);
 		case QUIT:
-			return dialogue_quit(gra, dialogue, objects, check);
+			return dialogue_quit(gra, dialogue);
 		case PICK:
 			return dialogue_pick(gra, dialogue, objects, check);
 		case DROP:
@@ -364,7 +364,7 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 		case TURNON:
 			return dialogue_turnon(gra, dialogue, objects, check);
 		case TURNOFF:
-			return dialogue_turnoff(gra, dialogue, objects, check):
+			return dialogue_turnoff(gra, dialogue, objects, check);
 		case OPEN:
 			return dialogue_open(gra, dialogue, objects, check);
 		/*case SAVE:
