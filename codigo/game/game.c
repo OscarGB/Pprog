@@ -1947,10 +1947,14 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	struct dirent *ent;
 	char savegames[256];
 	char *symbol = NULL;
+	char path[256] = "codigo/Saves/";
+	STATUS status = ERROR;
+	Game *game2, *aux;
 
 	if(!game || !cmd)
 		return ERROR;
 
+	/*This if only shows available files for load*/
 	symbol = command_get_symbol(cmd);
 	if(!strcmp(symbol, "show")){
 		if ((dir = opendir ("codigo/Saves")) != NULL) {
@@ -1966,7 +1970,21 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 		  	return ERROR;
 	}
 
-	return game_load(game, symbol);
+	/*This loads a file to the game*/
+	/*THIS SHOULD BE USE IN INIT FROM FILE game_load(game, symbol);*/
+
+	strcat(path, symbol);
+
+	aux = game;
+	game2 = game_init(game2);
+	if(!game2)
+		return ERROR;
+
+	status = game_init_from_file(game2, path);
+	game = game2;
+	game_destroy(aux);
+
+	return status;
 }
 
 
