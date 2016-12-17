@@ -53,8 +53,10 @@ Object* object_create(Id id){
 	/*Default values*/
 	newObject->id = id;
 	newObject->name[0]='\0';
+	newObject->location = NO_ID;
 	newObject->symbol = CHAR_ERROR;
 	newObject->desc[0] = '\0';
+	newObject->mdesc[0] = '\0';
 	newObject->movable = FALSE;
 	newObject->moved = FALSE;
 	newObject->light = FALSE;
