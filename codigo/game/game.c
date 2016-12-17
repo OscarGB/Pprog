@@ -24,7 +24,7 @@
 #define CLEAR "clear"
 #endif
 
-struct _Game{
+struct _Game {
   Player* player; /*!< Pointer to Player Structure */
   Object* object[MAX_IDS + 1]; /*!< Array of pointers to Object Structure */
   int num_objects; /*!< Number of objects of the Game */
@@ -954,9 +954,11 @@ STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   Id current_id = NO_ID, north_id = NO_ID; /* !< Current space id and sout id*/
   Id link_id = NO_ID; /* !< Link id*/
   Id space_id = NO_ID; /* !< Id of the next space*/
+  STATUS result;
   
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
+    dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
   
@@ -980,13 +982,18 @@ STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
         }
       }
       if (north_id != NO_ID) {
-        return game_set_player_location(game, north_id);
+        result = game_set_player_location(game, north_id);
+        dialogue_generic(dia, result, objects, gra);
+
+        return result;
       }
       else{
+        dialogue_generic(dia, ERROR, objects, gra);
         return ERROR;
       }
     }
   }
+  dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
 

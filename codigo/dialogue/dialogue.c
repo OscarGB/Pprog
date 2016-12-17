@@ -293,7 +293,7 @@ void dialogue_destroy(Dialogue* dialogue){
 * @param char string
 * @return OK if it worked
 */
-STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char string[MAX_DIALOGUE]){
+STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char* string){
 	int i; /*!< Counter*/
 
 	if(!dialogue || !objects || !gra){
@@ -396,7 +396,7 @@ STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Grap
 * @param char string
 * @return OK if it was printed successfuly
 */
-STATUS dialogue_print(Graphics* gra, char string[MAX_DIALOGUE]){
+STATUS dialogue_print(Graphics* gra, char *string){
 	if(!gra) return NULL;
 
 	return print_in_zone(gra, DIALOGUE, 0, string);
