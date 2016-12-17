@@ -591,8 +591,10 @@ void game_print_screen(Game* game, Graphics* gra){
   Space* space_swest = NULL;
   Space* space_neast = NULL;
   Space* space_seast = NULL;
-  char* print = NULL;
+  char print[(SPACE_SIZE_X * SPACE_SIZE_Y) + 1];
   int i; /* !< loops, last rolled value*/
+
+  print[0] = '\0';
 
   if(!gra || !game){
     return;
@@ -804,7 +806,7 @@ void game_print_screen(Game* game, Graphics* gra){
 
   if (id_act != NO_ID) {
     if(space_get_light(space_act) == TRUE){
-      print = strdupa(space_get_gdesc(space_act));
+      strcpy(print, space_get_gdesc(space_act));
       print[27] = ':';
       print[28] = ')';
       print_in_zone(gra, PLAYGROUND, C, print);
