@@ -41,8 +41,8 @@ struct _Game {
 * brief List of callbacks for each command in the game 
 */
 
-STATUS callback_UNKNOWN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
-STATUS callback_QUIT(Game* game, Command* cmd);
+STATUS callback_UNKNOWN(Game* game, Dialogue* dia, Graphics* gra);
+STATUS callback_QUIT(Game* game, Dialogue* dia, Graphics* gra);
 STATUS callback_NEXT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_JUMP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
@@ -917,7 +917,7 @@ void game_print_screen(Game* game, Graphics* gra){
 * @param game pointer
 * @return FALSE
 */
-BOOL game_is_over(Game* game, Command* cmd) {
+BOOL game_is_over(Game* game) {
   return FALSE;
 }
 
@@ -1162,10 +1162,10 @@ STATUS callback_DOWN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
         }
       }
       if (down_id != NO_ID) {
-        return = game_set_player_location(game, down_id);
-        dialogue_generic(dia, return, objects, gra);
+        result = game_set_player_location(game, down_id);
+        dialogue_generic(dia, result, objects, gra);
 
-        return ERROR;
+        return result;
       }
       else{
         dialogue_generic(dia, ERROR, objects, gra);
@@ -1240,7 +1240,7 @@ STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   Id current_id; /* !< Id of the current space*/
   int i;
   char *symbol = NULL; /*!< Variable used for storing the command*/
-  symbol = command_get_cmd(cmd); 
+  symbol = command_get_symbol(cmd); 
 
   if(strlen(symbol) == 1){
     for(i=0; i< game->num_objects; i++){ /*!< Seeing if the symbol is associated to an object */
@@ -1299,7 +1299,7 @@ STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   int i; /* !< Variable used for loops*/
   char *symbol = NULL; /*!< Variable used for storing the command*/
 
-  symbol = command_get_cmd(cmd);
+  symbol = command_get_symbol(cmd);
 
   if(strcmp(symbol, "\0") == 0){
     return ERROR;
@@ -1353,7 +1353,7 @@ STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @param game pointer
 * @return OK if it went ok
 */
-STATUS callback_ROLL(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
+STATUS callback_ROLL(Game* game, Command* cmd){
     int res; /* !< Result of the rolled die*/
 
     res = die_roll(game->die);
@@ -1379,9 +1379,9 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     char *symbol = NULL; /*!< Variable used for storing the command*/
     Inventory* inventory = NULL;
     Id* ids = NULL;
-    char *invobjs[game->num_objects];
+    char *invobjs[MAX_IDS];
 
-    symbol = command_get_cmd(cmd);
+    symbol = command_get_symbol(cmd);
 
     obj = NULL;
     
@@ -1397,12 +1397,13 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
           		if(player_location==space_get_id(game->spaces[i])){
                 if(space_get_light(game->spaces[i]) == TRUE){
           		    strcpy(game->desc, space_get_adesc(game->spaces[i]));
-          		    dialogue_inspect(dia, OK, &(game->desc), gra, SPACE);
+                  strcpy(invobjs[0], game->desc);
+          		    dialogue_inspect(dia, OK, invobjs, gra, SPACE);
                   return OK;	
                 }
           		}
           	}
-            dialogue_inspect(dia, ERROR, &(game->desc), gra, SPACE);
+            dialogue_inspect(dia, ERROR, invobjs, gra, SPACE);
             return ERROR;
       }else{ /*!< Inspecting an object */
   	     for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
@@ -1413,18 +1414,19 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
           }
 
           if(!obj){
-            dialogue_inspect(dia, ERROR, &(game->desc), gra, OBJECT);
+            dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
             return ERROR;
           }
 
 		  space = game_get_space(game, player_location); /*Get the space where the object is*/
 
 		  if(space_get_light(space) == FALSE){
-		    dialogue_inspect(dia, ERROR, &(game->desc), gra, OBJECT);
+		    dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
         return ERROR;
       }
       strcpy(game->desc, space_get_description(obj));
-      dialogue_inspect(dia, OK, &(game->desc), gra, OBJECT);
+      strcpy(invobjs[0], game->desc);
+      dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
       return OK;
     }
 
@@ -1434,23 +1436,24 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
             if(player_location==space_get_id(game->spaces[i])){
                 if(space_get_light(game->spaces[i]) == TRUE){
                   strcpy(game->desc, space_get_adesc(game->spaces[i]));
-                  dialogue_inspect(dia, OK, &(game->desc), gra, SPACE);
+                  strcpy(invobjs[0], game->desc);
+                  dialogue_inspect(dia, OK, invobjs, gra, SPACE);
                   return OK;  
                 }  
             }
           }
-          dialogue_inspect(dia, ERROR, &(game->desc), gra, SPACE);
+          dialogue_inspect(dia, ERROR, invobjs, gra, SPACE);
           return ERROR;
       }
       else if(strcmp(symbol, "inventory") == 0 || strcmp(symbol, "Inventory") == 0){ /*!< Inspecting inventory*/
         inventory = player_get_inventory(game->player);
         if(!inventory){ 
-          dialogue_inspect(dia, ERROR, &(game->desc, gra, INVENTORY));
+          dialogue_inspect(dia, ERROR, invobjs, gra, INVENTORY);
           return ERROR;
         }
         ids = inventory_get_ids(player_get_inventory(game->player));
         if(!ids){
-          dialogue_inspect(dia, ERROR, &(game->desc, gra, INVENTORY));
+          dialogue_inspect(dia, ERROR, invobjs, gra, INVENTORY);
           return ERROR;
         }
         for(i = 0; i < MAX_IDS; i++){
@@ -1476,18 +1479,19 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
           }
 
           if(!obj) {
-            dialogue_inspect(dia, ERROR, &(game->desc), gra, OBJECT);
+            dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
             return ERROR;
           }
 	
 		      space = game_get_space(game, player_location); /*Get the space where the object is*/
 
     		  if(space_get_light(space) == FALSE){
-            dialogue_inspect(dia, ERROR, &(game->desc), gra, OBJECT);
+            dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
             return ERROR;
           }
           strcpy(game->desc, space_get_description(obj));
-          dialogue_inspect(dia, OK, &(game->desc), gra, OBJECT);
+          strcpy(invobjs[0], game->desc);
+          dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
           return OK;
       }
     }
