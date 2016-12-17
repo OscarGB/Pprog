@@ -320,7 +320,7 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 	strcat(string, "ITEMS IN THIS ROOM: \n");
 	i = 0;
 	while(objects[i] != NULL){
-		strcat(string, object[i]);
+		strcat(string, objects[i]);
 		strcat(string, "\n");
 		i++;
 	}
@@ -343,34 +343,34 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 * @return OK if it worked
 */
 STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphics* gra){
-	T_command cmd; /*!< Command for switch*/
+	T_Command cmd; /*!< Command for switch*/
 
 	if(!dialogue || !objects) return ERROR;
 
 	cmd = command_get_cmd(dialogue->current);
 	switch (cmd){
 		case NO_CMD:
-			return dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects);
+			return dialogue_error(gra, dialogue, objects);
 		case UNKNOWN:
-			return dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects);
+			return dialogue_error(gra, dialogue, objects);
 		case QUIT:
-			return dialogue_quit(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_quit(gra, dialogue, objects, check);
 		case PICK:
-			return dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_pick(gra, dialogue, objects, check);
 		case DROP:
-			return dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_drop(gra, dialogue, objects, check);
 		case GO:
-			return dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_go(gra, dialogue, objects, check);
 		case TURNON:
-			return dialogue_turnon(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_turnon(gra, dialogue, objects, check);
 		case TURNOFF:
-			return dialogue_turnoff(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check):
+			return dialogue_turnoff(gra, dialogue, objects, check):
 		case OPEN:
-			return dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
-		case SAVE:
-			return dialogue_save(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_open(gra, dialogue, objects, check);
+		/*case SAVE:
+			return dialogue_save(gra, dialogue, objects, check);
 		case LOAD:
-			return dialogue_load(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_load(gra, dialogue, check);*/
 		default:
 			return ERROR;
 	}
