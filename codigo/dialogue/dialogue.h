@@ -12,8 +12,9 @@
 #define DIALOGUE_H
 
 #include "command.h"
+#include "graphics.h"
 
-#define MAX_DIALOGUE 180;
+#define MAX_DIALOGUE 180
 
 
 typedef struct _Dialogue Dialogue; /*!< Definition of struct Dialogue*/
@@ -53,7 +54,7 @@ void dialogue_destroy(Dialogue* dialogue);
 * @param char string
 * @return OK if it worked
 */
-STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char string[MAX_DIALOGUE]);
+STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char *string);
 
 /*
 * @brief generic dialogue engine
@@ -90,6 +91,6 @@ STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Grap
 * @param char string
 * @return OK if it was printed successfuly
 */
-STATUS dialogue_print(Graphics* gra, char string[MAX_DIALOGUE]);
+STATUS dialogue_print(Graphics* gra, char *string);
 
 #endif

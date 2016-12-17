@@ -24,7 +24,7 @@
 #define CLEAR "clear"
 #endif
 
-struct _Game{
+struct _Game {
   Player* player; /*!< Pointer to Player Structure */
   Object* object[MAX_IDS + 1]; /*!< Array of pointers to Object Structure */
   int num_objects; /*!< Number of objects of the Game */
@@ -39,22 +39,22 @@ struct _Game{
 * brief List of callbacks for each command in the game 
 */
 
-STATUS callback_UNKNOWN(Game* game, Command* cmd, Dialogue* dia, );
+STATUS callback_UNKNOWN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
 STATUS callback_QUIT(Game* game, Command* cmd);
-STATUS callback_NEXT(Game* game, Command* cmd);
-STATUS callback_BACK(Game* game, Command* cmd);
-STATUS callback_JUMP(Game* game, Command* cmd);
-STATUS callback_UP(Game* game, Command* cmd);
-STATUS callback_BACK(Game* game, Command* cmd);
-STATUS callback_DROP(Game* game, char *symbol, Command* cmd);
-STATUS callback_PICK(Game* game, char *symbol, Command* cmd);
+STATUS callback_NEXT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_JUMP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_UP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_DROP(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_PICK(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_ROLL(Game* game, Command* cmd);
-STATUS callback_INSPECT(Game* game, char *symbol, Command* cmd);
-STATUS callback_GO(Game* game, char *symbol, Command* cmd);
-STATUS callback_TURNON(Game* game, char *symbol, Command* cmd);
-STATUS callback_TURNOFF(Game* game, char *symbol, Command* cmd);
-STATUS callback_OPEN(Game* game, char *symbol, Command* cmd);
-STATUS callback_SAVE(Game* game, char *symbol, Command* cmd);
+STATUS callback_INSPECT(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** inventory);
+STATUS callback_GO(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_TURNON(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_TURNOFF(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_OPEN(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_SAVE(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra);
 
 
 /*
@@ -441,7 +441,7 @@ Id game_get_object_location(Game* game, char *symbol) {
 * @param Command cmd
 * @return OK if it was updated
 */
-STATUS game_update(Game* game, Command *cmd) {
+STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
 
   switch (command_get_cmd(cmd)) { /*Switch for the command value*/
   case UNKNOWN:
@@ -449,23 +449,23 @@ STATUS game_update(Game* game, Command *cmd) {
   case QUIT:
     return callback_QUIT(game, cmd);
   case PICK:
-    return callback_PICK(game, cmd;
+    return callback_PICK(game, cmd, dia, gra, objects);
   case DROP:
-    return callback_DROP(game, cmd);
+    return callback_DROP(game, cmd, dia, gra, objects);
   case ROLL:
     return callback_ROLL(game, cmd);
   case INSPECT:
-    return callback_INSPECT(game, cmd);
+    return callback_INSPECT(game, symbol, cmd, dia, gra, inventory);
   case GO:
-    return callback_GO(game, cmd);
+    return callback_GO(game, cmd, dia, gra, objects);
   case TURNON:
-    return callback_TURNON(game, cmd); 
+    return callback_TURNON(game, cmd, dia, gra, objects); 
   case TURNOFF:
-    return callback_TURNOFF(game, cmd);
+    return callback_TURNOFF(game, cmd, dia, gra, objects);
   case OPEN:
-    return callback_OPEN(game, cmd);
+    return callback_OPEN(game, cmd, dia, gra, objects);
   case SAVE:
-    return callback_SAVE(game, cmd);
+    return callback_SAVE(game, cmd, dia, gra);
   case NO_CMD:
     break;
   default: /*We must never arrive here*/
@@ -865,7 +865,9 @@ BOOL game_is_over(Game* game, Command* cmd) {
 * @param game pointer
 * @return OK if it went ok
 */
-STATUS callback_UNKNOWN(Game* game, Command* cmd) {
+STATUS callback_UNKNOWN(Game* game, Dialogue* dia, Graphics* gra) {
+
+  dialogue_generic(dia, OK, NULL, gra);
   return OK;
 }
 
@@ -877,7 +879,8 @@ STATUS callback_UNKNOWN(Game* game, Command* cmd) {
 * @param game pointer
 * @return OK if it went ok
 */
-STATUS callback_QUIT(Game* game, Command* cmd) {
+STATUS callback_QUIT(Game* game, Dialogue* dia, Graphics* gra) {
+  dialogue_generic(dia, OK, NULL, gra);
   return OK;
 }
 
@@ -889,14 +892,16 @@ STATUS callback_QUIT(Game* game, Command* cmd) {
 * @param game pointer
 * @return OK if it went ok
 */
-STATUS callback_NEXT(Game* game, Command* cmd) {
+STATUS callback_NEXT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects) {
   int i = 0, j = 0; /* !< Variables used for loops*/
   Id current_id = NO_ID, south_id = NO_ID; /* !< Current space id and sout id*/
   Id link_id = NO_ID; /* !< Link id*/
   Id space_id = NO_ID; /* !< Id of the next space*/
+  STATUS result;
   
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
+    dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
   
@@ -920,13 +925,19 @@ STATUS callback_NEXT(Game* game, Command* cmd) {
         }
       }
       if (south_id != NO_ID) {
-        return game_set_player_location(game, south_id);
+
+        result = game_set_player_location(game, south_id);
+        dialogue_generic(dia, result, objects, gra);
+
+        return result;
       }
       else{
+        dialogue_generic(dia, ERROR, objects, gra);
         return ERROR;
       }
     }
   }
+  dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
 
@@ -938,14 +949,16 @@ STATUS callback_NEXT(Game* game, Command* cmd) {
 * @param game pointer
 * @return OK if it went ok
 */
-STATUS callback_BACK(Game* game, Command* cmd) {
+STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects) {
   int i = 0, j = 0; /* !< Variables used for loops*/
   Id current_id = NO_ID, north_id = NO_ID; /* !< Current space id and sout id*/
   Id link_id = NO_ID; /* !< Link id*/
   Id space_id = NO_ID; /* !< Id of the next space*/
+  STATUS result;
   
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
+    dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
   
@@ -969,13 +982,18 @@ STATUS callback_BACK(Game* game, Command* cmd) {
         }
       }
       if (north_id != NO_ID) {
-        return game_set_player_location(game, north_id);
+        result = game_set_player_location(game, north_id);
+        dialogue_generic(dia, result, objects, gra);
+
+        return result;
       }
       else{
+        dialogue_generic(dia, ERROR, objects, gra);
         return ERROR;
       }
     }
   }
+  dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
 
@@ -986,7 +1004,7 @@ STATUS callback_BACK(Game* game, Command* cmd) {
 * @param game pointer
 * @return OK if it went ok
 */
-STATUS callback_UP(Game* game, Command* cmd){
+STATUS callback_UP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
 
   int i = 0, j = 0; /* !< Variables used for loops*/
   Id current_id = NO_ID, up_id = NO_ID; /* !< Current space id and sout id*/
@@ -1036,7 +1054,7 @@ STATUS callback_UP(Game* game, Command* cmd){
 * @param game pointer
 * @return OK if it went ok
 */
-STATUS callback_DOWN(Game* game, Command* cmd){
+STATUS callback_DOWN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
   int i = 0, j = 0; /* !< Variables used for loops*/
   Id current_id = NO_ID, down_id = NO_ID; /* !< Current space id and sout id*/
   Id link_id = NO_ID; /* !< Link id*/
@@ -1084,7 +1102,7 @@ STATUS callback_DOWN(Game* game, Command* cmd){
 * @param game pointer
 * @return OK if it went ok
 */
-STATUS callback_JUMP(Game* game, Command* cmd){
+STATUS callback_JUMP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
   int i = 0, j = 0; /* !< Variables used for loops*/
   Id current_id = NO_ID, east_id = NO_ID; /* !< Current space id and sout id*/
   Id link_id = NO_ID; /* !< Link id*/
@@ -1134,7 +1152,7 @@ STATUS callback_JUMP(Game* game, Command* cmd){
 * @param char symbol to drop
 * @return OK if it went ok
 */
-STATUS callback_DROP(Game* game, Command* cmd){
+STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
   Object* object = NULL; /* !< Object that will be dropped*/
   Id object_id = NO_ID;
   Id current_id; /* !< Id of the current space*/
@@ -1193,7 +1211,7 @@ STATUS callback_DROP(Game* game, Command* cmd){
 * @param the symbol to pick
 * @return OK if it went ok
 */
-STATUS callback_PICK(Game* game, Command* cmd){
+STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
   Object* object; /* !< Object that will be picked*/
   Id player_id, object_id; /* !< Ids of the player and object*/
   int i; /* !< Variable used for loops*/
@@ -1253,7 +1271,7 @@ STATUS callback_PICK(Game* game, Command* cmd){
 * @param game pointer
 * @return OK if it went ok
 */
-STATUS callback_ROLL(Game* game, Command* cmd){
+STATUS callback_ROLL(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
     int res; /* !< Result of the rolled die*/
 
     res = die_roll(game->die);
@@ -1404,7 +1422,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 * @return OK if it went ok
 */
 
-STATUS callback_GO(Game* game, Command* cmd){
+STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
 
     int i = 0, j = 0; /* !< Variables used for loops*/
     Id current_id = NO_ID, west_id = NO_ID; /* !< Current space id and sout id*/
@@ -1539,7 +1557,7 @@ STATUS callback_GO(Game* game, Command* cmd){
 return ERROR;
 }
 
-STATUS callback_TURNON(Game* game, Command* cmd){
+STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
   Object* object; /* !< Object that will be picked*/
   Id player_id, object_id; /* !< Ids of the player and object*/
   int i; /* !< Variable used for loops*/
@@ -1611,7 +1629,7 @@ STATUS callback_TURNON(Game* game, Command* cmd){
 }
 
 
-STATUS callback_TURNOFF(Game* game, Command* cmd){
+STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
   Object* object; /* !< Object that will be picked*/
   Id player_id, object_id; /* !< Ids of the player and object*/
   int i; /* !< Variable used for loops*/
@@ -1670,7 +1688,7 @@ STATUS callback_TURNOFF(Game* game, Command* cmd){
   return ERROR;
 }
 
-STATUS callback_OPEN(Game* game, Command* cmd){
+STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
   char* link_name = NULL;
   char* object_name = NULL;
   char* token = NULL;
@@ -1727,7 +1745,7 @@ STATUS callback_OPEN(Game* game, Command* cmd){
   return ERROR;
 }
 
-STATUS callback_SAVE(Game *game, char *savename){
+STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
 	FILE *f=NULL;
 	int i;

@@ -72,7 +72,7 @@ Space* game_get_space(Game* game, Id id);
 * @param Command cmd
 * @return OK if it was updated
 */
-STATUS game_update(Game* game, Command *cmd);
+STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra);
 
 /**
 * @brief it destroys a given game
