@@ -68,7 +68,6 @@ STATUS game_load_spaces(Game* game, char* filename);
 STATUS game_add_space(Game* game, Space* space);
 Id     game_get_space_id_at(Game* game, int position);
 
-STATUS game_add_player(Game* game, Player* player);
 STATUS game_set_player_location(Game* game, Id id);
 
 STATUS game_add_object(Game* game, Object* object);
@@ -1949,4 +1948,34 @@ Player * game_get_player(Game * game){
 		return NULL;
 
 	return game->player;
+}
+
+/**
+* @brief It gets the space from a given position
+* @author Andrea Ruiz
+* @date 17/12/2016
+* @param game pointer
+* @param Id space id
+* @return Space pointer in that position
+*/
+Space* game_get_space_at(Game* game, int pos){
+    if(!game || pos <0 || pos> MAX_SPACES)
+		return NULL;
+
+    return game->spaces[i];
+}
+
+/**
+* @brief It gets the space from a given position
+* @author Andrea Ruiz
+* @date 17/12/2016
+* @param game pointer
+* @param Id space id
+* @return Space pointer in that position
+*/
+Object* game_get_object_at(Game* game, int pos){
+    if(!game || pos <0 || pos> MAX_SPACES)
+		return NULL;
+
+    return game->object[i];
 }

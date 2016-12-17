@@ -144,6 +144,17 @@ STATUS game_add_space(Game* game, Space* space);
 STATUS game_add_object(Game* game, Object* object);
 
 /**
+* @brief Adds a player pointer to the gme Player field
+* @author Óscar Pinto Santamaría
+* @date 16/12/2016
+* @param Game* game, Player* player
+* @return OK or ERROR
+*/
+
+
+STATUS game_add_player(Game* game, Player* player);
+
+/**
 * @brief Adds a link to the game
 * @author Óscar Gómez
 * @date 4/11/2016
@@ -217,6 +228,26 @@ int game_get_turns(Game * game);
 */
 
 Player * game_get_player(Game * game);
+
+/**
+* @brief It gets the space from a given position
+* @author Andrea Ruiz
+* @date 17/12/2016
+* @param game pointer
+* @param Id space id
+* @return Space pointer in that position
+*/
+Space* game_get_space_at(Game* game, int pos);
+
+/**
+* @brief It gets the space from a given position
+* @author Andrea Ruiz
+* @date 17/12/2016
+* @param game pointer
+* @param Id space id
+* @return Space pointer in that position
+*/
+Object* game_get_object_at(Game* game, int pos);
 
 #endif
 
