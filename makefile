@@ -13,7 +13,7 @@ NCURSES = -lncurses
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
 
 ALL = JuegoOcaPlus 	#Executables to make with a make call
-TEST = link_test die_test player_test inventory_test space_test set_test graphics_test game_rules_test	#Executables to make with make test or make debug
+TEST = link_test die_test player_test inventory_test space_test set_test graphics_test	#Executables to make with make test or make debug
 ALL_DEBUG = $(ALL) $(TEST) #Executables to make with make debug
 
 all: $(ALL) #Generates only the main game
@@ -55,10 +55,6 @@ graphics_test: graphics_test.o graphics.o command.o
 	@echo "--->Creating executable graphics_test"
 	@gcc $(CFLAGS) -o graphics_test graphics_test.o graphics.o command.o $(NCURSES)
 
-game_rules_test: game_rules_test.o game_rules.o game.o
-	@echo "--->Creating executable game_rules_test"
-	@gcc $(CFLAGS) -o game_rules_test game_rules_test.o game_rules.o game.o
-
 die_test.o: codigo/test/die_test.c 
 	@echo "--->Generating die_test.o"
 	@gcc $(CFLAGS) -c codigo/test/die_test.c
@@ -86,11 +82,6 @@ space_test.o: codigo/test/space_test.c
 graphics_test.o: codigo/test/graphics_test.c
 	@echo "--->Generating graphics_test.o"
 	@gcc $(CFLAGS) -c codigo/test/graphics_test.c $(NCURSES)
-
-game_rules_test.o: codigo/test/game_rules_test.c
-	@echo "--->Generating game_rules_test.o"
-	@gcc $(CFLAGS) -c codigo/test/game_rules_test.c
-
 
 JuegoOcaPlus: game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creating executable JuegoOcaPlus"
