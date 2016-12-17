@@ -1371,7 +1371,7 @@ STATUS callback_ROLL(Game* game, Command* cmd){
 */
 STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
-    int i;/* !< Variable used for loops*/
+    int i, j;/* !< Variable used for loops*/
     Object *obj; /* !<Variable used for storing the player's object*/
     Id player_location = NO_ID; /* !< Locations of the player and object*/
     Space *space; /*!<Variable used for storing auxiliary spaces*/
@@ -1391,6 +1391,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     if(player_location == NO_ID) return ERROR;
 
     if(strlen(symbol) == 1){
+
       if(symbol[0] == 's' || symbol[0] == 'S'){ /*!< Inspecting space */
           	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
           		if(player_location==space_get_id(game->spaces[i])){
@@ -1404,8 +1405,10 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
           	}
             dialogue_inspect(dia, ERROR, invobjs, gra, SPACE);
             return ERROR;
-      }else{ /*!< Inspecting an object */
-  	     for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
+      }
+      else{ /*!< Inspecting an object */
+  	     
+         for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
   		      if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){
   			       if(object_get_symbol(game->object[i]) == symbol[0])
   				        obj = game->object[i];
@@ -1417,18 +1420,18 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
             return ERROR;
           }
 
-		  space = game_get_space(game, player_location); /*Get the space where the object is*/
+    		  space = game_get_space(game, player_location); /*Get the space where the object is*/
 
-		  if(space_get_light(space) == FALSE){
-		    dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
-        return ERROR;
+		      if(space_get_light(space) == FALSE){
+		        dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
+            return ERROR;
+          }
+          strcpy(game->desc, space_get_adesc(space));
+          strcpy(invobjs[0], game->desc);
+          dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
+          return OK;
       }
-      strcpy(game->desc, space_get_description(obj));
-      strcpy(invobjs[0], game->desc);
-      dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
-      return OK;
     }
-
     else if(strlen(symbol) > 1){
       if(strcmp(symbol, "space") == 0 || strcmp(symbol, "Space") == 0){ /*!< Inspecting space */
           for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
@@ -1456,12 +1459,12 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
           return ERROR;
         }
         for(i = 0; i < MAX_IDS; i++){
-          if(ids[i] == NULL){
+          if(ids[i] == NO_ID){
             break;
           }
           for(j = 0; j < game->num_objects; i++){
-            if(object_get_id(game->objects[j]) == ids[i]){
-              invobjs[i] = object_get_name(game->objects[i]);
+            if(object_get_id(game->object[j]) == ids[i]){
+              invobjs[i] = object_get_name(game->object[i]);
               break;
             }
           }
@@ -1488,7 +1491,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
             dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
             return ERROR;
           }
-          strcpy(game->desc, space_get_description(obj));
+          strcpy(game->desc, space_get_adesc(space));
           strcpy(invobjs[0], game->desc);
           dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
           return OK;
@@ -1515,7 +1518,7 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
     Id space_id = NO_ID; /* !< Id of the next space*/
     char *symbol = NULL; /*!< Variable used for storing the command*/
 
-    symbol = command_get_cmd(cmd);
+    symbol = command_get_symbol(cmd);
 
 
     if(!game) return ERROR;
@@ -1527,23 +1530,23 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
     if(strlen(symbol) == 1){
       if(symbol[0] == 'n'){ /* Go north */ 
-  	   return callback_BACK(game);
+  	   return callback_BACK(game, cmd, dia, gra, objects);
       }
 
       if(symbol[0] == 's'){ /* Go south */ 
-  	   return callback_NEXT(game);
+  	   return callback_NEXT(game, cmd, dia, gra, objects);
       }
 
 	  if(symbol[0] == 'u'){ /* Go up */
-	   return callback_UP(game); 
+	   return callback_UP(game, cmd, dia, gra, objects); 
 	  }
 
 	  if(symbol[0] == 'd'){ /* Go down */
-	   return callback_DOWN(game);
+	   return callback_DOWN(game, cmd, dia, gra, objects);
 	  }
 
       if(symbol[0] == 'e'){ /* Go east */ 
-  	   return callback_JUMP(game);
+  	   return callback_JUMP(game, cmd, dia, gra, objects);
       }
 
       if(symbol[0] == 'w'){ /* Go west */
@@ -1584,23 +1587,23 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
   else if(strlen(symbol) > 1){
       if(strcmp(symbol, "north") == 0){ /* Go north */ 
-       return callback_BACK(game);
+       return callback_BACK(game, cmd, dia, gra, objects);
       }
 
       if(strcmp(symbol, "south") == 0){ /* Go south */ 
-       return callback_NEXT(game);
+       return callback_NEXT(game, cmd, dia, gra, objects);
       }
 
 	  if(strcmp(symbol, "up") == 0){ /* Go up */ 
-       return callback_UP(game);
+       return callback_UP(game, cmd, dia, gra, objects);
       }
 
 	  if(strcmp(symbol, "down") == 0){ /* Go down */ 
-       return callback_DOWN(game);
+       return callback_DOWN(game, cmd, dia, gra, objects);
       }
 
       if(strcmp(symbol, "east") == 0){ /* Go east */ 
-       return callback_JUMP(game);
+       return callback_JUMP(game, cmd, dia, gra, objects);
       }
 
       if(strcmp(symbol, "west") == 0){ /* Go west */
@@ -1648,7 +1651,7 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
   int i; /* !< Variable used for loops*/
   char *symbol = NULL; /*!< Variable used for storing the command*/
 
-  symbol = command_get_cmd(cmd);
+  symbol = command_get_symbol(cmd);
 
   if(strcmp(symbol, "\0") == 0){
     return ERROR;
@@ -1720,7 +1723,7 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
   int i; /* !< Variable used for loops*/
   char *symbol = NULL; /*!< Variable used for storing the command*/
 
-  symbol = command_get_cmd(cmd);
+  symbol = command_get_symbol(cmd);
 
   if(strcmp(symbol, "\0") == 0){
     return ERROR;
@@ -1782,7 +1785,7 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   Id link_id = NO_ID;
   int i;
   char *string = NULL;
-  string = command_get_cmd(cmd);
+  string = command_get_symbol(cmd);
 
   /*string will be like "door with key", because "open"
   has been already read*/
@@ -1838,7 +1841,7 @@ STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
   	if(!game || !cmd)
   			return ERROR;
 
-  	symbol = command_get_cmd(cmd);
+  	symbol = command_get_symbol(cmd);
   	strcat(path, symbol); 
   	strcat(path, ".ao");
 	
@@ -1856,7 +1859,7 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	if(!game || !cmd)
 		return ERROR;
 
-	symbol = command_get_cmd(cmd);
+	symbol = command_get_symbol(cmd);
 	if(!strcmp(symbol, "show")){
 		if ((dir = opendir ("codigo/Saves")) != NULL) {
 		  while ((ent = readdir (dir)) != NULL && i<4) {
@@ -1913,7 +1916,7 @@ Link * game_get_link_n(Game * game, int n){
 */
 int game_get_num_links(Game * game){
 	if(!game)
-		return NULL;
+		return -1;
 	return game->num_links;
 }
 
@@ -1939,7 +1942,7 @@ Object ** game_get_objects(Game * game){
 */
 int game_get_num_objects(Game * game){
 	if(!game)
-		return NULL;
+		return -1;
 
 	return game->num_objects;
 }
@@ -1954,7 +1957,7 @@ int game_get_num_objects(Game * game){
 
 int game_get_turns(Game * game){
 	if(!game)
-		return NULL;
+		return -1;
 
 	return game->turns;
 }
@@ -1986,7 +1989,7 @@ Space* game_get_space_at(Game* game, int pos){
     if(!game || pos <0 || pos> MAX_SPACES)
 		return NULL;
 
-    return game->spaces[i];
+    return game->spaces[pos];
 }
 
 /**
@@ -2001,5 +2004,5 @@ Object* game_get_object_at(Game* game, int pos){
     if(!game || pos <0 || pos> MAX_SPACES)
 		return NULL;
 
-    return game->object[i];
+    return game->object[pos];
 }
