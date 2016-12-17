@@ -282,6 +282,7 @@ int main(int argc, char *argv[]){
 	graphics_destroy(gra);
 	game_destroy(game);
 	command_destroy(command);
+	dialogue_destroy(dialogue);
 	/*Log mode*/
 	if(flag == 1){
 		fclose(l);
