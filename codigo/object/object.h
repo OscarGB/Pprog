@@ -1,20 +1,24 @@
 /**
  * @brief It defines the functionality of the objects
  * @file object.h
- * @author Óscar Gómez, José Ignacio Gómez
- * @version 1.0
+ * @author Óscar Gómez, José Ignacio Gómez, Óscar Pinto Santmaría
+ * @version 2.0
  * @date 30/09/2016
- * @revision_history none
+ * @revision_history 16/12/2016 (by Óscar Pinto Santamaría)
  */
 
 #ifndef OBJECT_H
 #define OBJECT_H
-#define GET_BOOL(x) ("(x==0)? TRUE: FALSE)")
+#define True "TRUE"
+#define False "FALSE"
+#define GET_BOOL(x) ((x==0)? (False): (True))
 
 
 #define CHAR_ERROR '!' /*!< Macro for char_error (!)*/
 
 #include "types.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct _Object Object; /*<! Definition of Object structure */
 
@@ -128,7 +132,7 @@ Id object_get_location(Object* object);
 * @return STATUS (OK if everything went well, ERROR if didn't)
 */
 
-STATUS object_print(Object* object);
+STATUS object_print(FILE *f, Object* object);
 
 /*
 * @brief It gets the movable field of the given object
@@ -147,7 +151,7 @@ BOOL object_get_movable(Object* object);
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_movable(Object* object, BOOL value);
+STATUS object_set_movable(Object* object, BOOL value);
 
 /*
 * @brief It gets the moved field of the given object
@@ -169,7 +173,7 @@ BOOL object_get_moved(Object* object);
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_moved(Object* object, BOOL value);
+STATUS object_set_moved(Object* object, BOOL value);
 
 /*
 * @brief It gets the hidden field of the given object
@@ -190,7 +194,7 @@ BOOL object_get_hidden(Object* object);
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_hidden(Object* object, BOOL value);
+STATUS object_set_hidden(Object* object, BOOL value);
 
 
 /*
@@ -212,7 +216,7 @@ BOOL object_get_light(Object* object);
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_light(Object* object, BOOL value);
+STATUS object_set_light(Object* object, BOOL value);
 /*
 * @brief It gets the on_off field of the given object
 * @author Óscar Pinto.
@@ -232,7 +236,7 @@ BOOL object_get_on_off(Object* object);
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_on_off(Object* object, BOOL value);
+STATUS object_set_on_off(Object* object, BOOL value);
 
 /*
 * @brief It gets the open field of the given object
@@ -252,7 +256,7 @@ Id object_get_open(Object* object);
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_open(Object* object, Id value);
+STATUS object_set_open(Object* object, Id value);
 
 /*
 * @brief It gets the duration field of the given object
@@ -272,7 +276,7 @@ int object_get_duration(Object* object);
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_duration(Object* object, Id value);
+STATUS object_set_duration(Object* object, Id value);
 
 /*
 * @brief It turns on an object if it is possible

@@ -240,12 +240,12 @@ BOOL object_get_movable(Object* object){
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_movable(Object* object, BOOL value){
+STATUS object_set_movable(Object* object, BOOL value){
 	if(!object){
-		return FALSE;
+		return ERROR;
 	}
 	object->movable = value; 
-	return object;
+	return OK;
 }
 
 /*
@@ -273,12 +273,12 @@ BOOL object_get_moved(Object* object){
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_moved(Object* object, BOOL value){
+STATUS object_set_moved(Object* object, BOOL value){
 	if(!object){
-		return FALSE;
+		return ERROR;
 	}
 	object->moved = value; 
-	return object;
+	return OK;
 }
 
 /*
@@ -305,12 +305,12 @@ BOOL object_get_hidden(Object* object){
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_hidden(Object* object, BOOL value){
+STATUS object_set_hidden(Object* object, BOOL value){
 	if(!object){
-		return FALSE;
+		return ERROR;
 	}
 	object->hidden = value; 
-	return object;
+	return OK;
 }
 
 
@@ -338,12 +338,12 @@ BOOL object_get_light(Object* object){
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_light(Object* object, BOOL value){
+STATUS object_set_light(Object* object, BOOL value){
 	if(!object){
-		return FALSE;
+		return ERROR;
 	}
 	object->light = value; 
-	return object;
+	return OK;
 }
 
 /*
@@ -370,12 +370,12 @@ BOOL object_get_on_off(Object* object){
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_on_off(Object* object, BOOL value){
+STATUS object_set_on_off(Object* object, BOOL value){
 	if(!object){
-		return FALSE;
+		return ERROR;
 	}
 	object->on_off = value; 
-	return object;
+	return OK;
 }
 
 /*
@@ -402,12 +402,12 @@ Id object_get_open(Object* object){
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_open(Object* object, Id value){
+STATUS object_set_open(Object* object, Id value){
 	if(!object){
-		return FALSE;
+		return ERROR;
 	}
-	object->id = value; 
-	return object;
+	object->open= value; 
+	return OK;
 }
 
 /*
@@ -434,12 +434,12 @@ int object_get_duration(Object* object){
 * @return BOOL (the moved field of the object)
 */
 
-Object* object_set_duration(Object* object, Id value){
+STATUS object_set_duration(Object* object, Id value){
 	if(!object){
-		return FALSE;
+		return ERROR;
 	}
-	object->open = value; 
-	return object;
+	object->duration = value; 
+	return OK;
 }
 
 /*
@@ -527,17 +527,27 @@ Id object_get_location(Object* object){
 * @return STATUS (OK if everything went well, ERROR if didn't)
 */
 
-STATUS object_print(Object* object){
+STATUS object_print(FILE *f, Object* object){
+
+	char mvbl[100], mvd[100], light[100], O_F[100], hddn[100];
+
 	if(!object){
 		return ERROR;
 	}
 
-	fprintf(stdout, "--> Object (Id: %ld; Name: %s; Symbol: %c; Location: %ld;\n"
-		"Desc: %s"
-		"Movable: %s; Moved: %s; Hidden: %s; Light: %s; On_Off: %s; Open: %ld; Duration: %d",
-		object->id, object->name, object->symbol, object->location, object->desc, GET_BOOL(object->movable), 
-		GET_BOOL(object->moved), GET_BOOL(object->hidden), GET_BOOL(object->light), GET_BOOL(object->on_off), 
-		object->open, object->duration);
+	strcpy(mvbl, GET_BOOL(object->movable));
+	strcpy(mvd, GET_BOOL(object->movable));
+	strcpy(light, GET_BOOL(object->movable));
+	strcpy(O_F, GET_BOOL(object->movable));
+	strcpy(hddn, GET_BOOL(object->movable));
+
+
+	fprintf(f, "--> Object (Id: %ld; Name: %s; Symbol: %c; Location: %ld;\n"
+		"Desc: %s\n"
+		"Movable: %s; Moved: %s; Hidden: %s;\n"
+		"Light: %s; On_Off: %s; Open: %ld; Duration: %d\n",
+		object->id, object->name, object->symbol, object->location, object->desc,
+		mvbl, mvd, hddn, light, O_F, object->open, object->duration);
 
 	return OK;
 }
@@ -613,7 +623,8 @@ int object_decrease_duration(Object *object){
 
 	if(object_get_light(object)==TRUE){
 		if (object_get_on_off(object)==TRUE){
-			if(dur>=0) dur--;
+			if(dur >= 0) dur--;
+			object_set_duration(object, dur);
 			return dur;
 		}
 	}

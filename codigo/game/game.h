@@ -21,7 +21,6 @@
 
 #define PLAYER_OBJ -2 /*!< Id for an object into the player's bag*/
 #define DIE_FACES 6 /*!< Faces of the die*/
-#define GET_BOOL(x) ("(x==0)? TRUE: FALSE)")
 #define DEATH_DESERVED 100 /*!< Maximum number of turns allowed by a random function of game_rules */
 
 

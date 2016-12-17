@@ -13,7 +13,7 @@ NCURSES = -lncurses
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
 
 ALL = JuegoOcaPlus 	#Executables to make with a make call
-TEST = link_test die_test player_test inventory_test space_test set_test graphics_test	#Executables to make with make test or make debug
+TEST = object_test link_test die_test player_test inventory_test space_test set_test graphics_test	#Executables to make with make test or make debug
 ALL_DEBUG = $(ALL) $(TEST) #Executables to make with make debug
 
 all: $(ALL) #Generates only the main game
@@ -43,6 +43,10 @@ link_test: link_test.o link.o
 	@echo "--->Creating executable link_test"
 	@gcc $(CFLAGS) -o link_test link_test.o link.o
 
+object_test: object_test.o object.o
+	@echo "--->Creating executable object_test"
+	@gcc $(CFLAGS) -o object_test object_test.o object.o
+
 inventory_test: inventory_test.o inventory.o set.o
 	@echo "--->Creating executable inventory_test"
 	@gcc $(CFLAGS) -o inventory_test inventory_test.o inventory.o set.o
@@ -70,6 +74,10 @@ set_test.o: codigo/test/set_test.c
 link_test.o: codigo/test/link_test.c
 	@echo "--->Generating link_test.o"
 	@gcc $(CFLAGS) -c codigo/test/link_test.c
+
+object_test.o: codigo/test/object_test.c
+	@echo "--->Generating object_test.o"
+	@gcc $(CFLAGS) -c codigo/test/object_test.c
 
 inventory_test.o: codigo/test/inventory_test.c
 	@echo "--->Generating inventory_test.o"
