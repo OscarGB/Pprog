@@ -292,19 +292,16 @@ STATUS turn_object_light_off(Game * game){
 		return ERROR;
 
 	ids = inventory_get_ids(bag);
-	if(!ids)
-		return ERROR;
 
 	
-	for(i=0; ids!=NULL; i++){
-		object[i] = game_get_object(game, *ids);
+	for(i=0; i<MAX_IDS; i++){
+		object[i] = game_get_object(game, ids[i]);
 		if(object_get_on_off(object[i]) == TRUE){
 			object_turnoff(object[i]);
 			if(object_get_on_off(object[i]) == FALSE)
 				return OK;
 			return ERROR;
 		}
-		ids++;
 
 	}
 	
