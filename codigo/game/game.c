@@ -493,6 +493,17 @@ Id game_get_object_location(Game* game, char *symbol) {
 */
 
 STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
+  char *objects[game->num_objects+1] = NULL;
+  int i, j = 0;
+
+  for (i = 0; i < game->num_objects; i++){
+    if (object_get_location(game->objects[i]) == game_get_player_location(game)){
+      objects[j] = object_get_name(game->objects[i]);
+      j++
+    }
+  }
+  objects[j] = NULL;
+
 
   Hgame->turns++;
   switch (command_get_cmd(cmd)) { /*Switch for the command value*/
