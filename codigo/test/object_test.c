@@ -16,6 +16,7 @@
 #define ID2 8
 #define NAME "TRIFORCE"
 #define TEST_CHAR A
+#define TEST_INT 2728
 
 
 BOOL test_object1(){ /*!< Test object_create && object_destroy with invalid id*/
@@ -289,11 +290,13 @@ BOOL test_object19(){ /*!< Test object_set_location */
 	return FALSE;
 }
 
-BOOL test_object20(){ /*!< Test object_get_desc with default location*/
+BOOL test_object20(){ /*!< Test object_set_desc*/
 	
+	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
-	if(strcmp(object_get_desc(object), "") == 0){
+	res = object_set_desc(object, NAME);
+	if(strcmp(object_get_desc(object), NAME) == 0){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -303,11 +306,13 @@ BOOL test_object20(){ /*!< Test object_get_desc with default location*/
 	return FALSE;
 }
 
-BOOL test_object8(){ /*!< Test object_get_mdesc with default location*/
+BOOL test_object21(){ /*!< Test object_set_mdesc*/
 	
+	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
-	if(strcmp(object_get_mdesc(object), "") == 0){
+	res = object_set_mdesc(object, NAME);
+	if(strcmp(object_get_mdesc(object), NAME) == 0){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -317,11 +322,13 @@ BOOL test_object8(){ /*!< Test object_get_mdesc with default location*/
 	return FALSE;
 }
 
-BOOL test_object9(){ /*!< Test object_get_movable with default location*/
-
+BOOL test_object22(){ /*!< Test object_set_movable*/
+	
+	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
-	if(object_get_movable(object) == FALSE){
+	res = object_set_movable(object, TRUE);
+	if(object_get_movable(object) == TRUE){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -331,11 +338,13 @@ BOOL test_object9(){ /*!< Test object_get_movable with default location*/
 	return FALSE;
 }
 
-BOOL test_object10(){ /*!< Test object_get_moved with default location*/
-
+BOOL test_object23(){ /*!< Test object_set_moved*/
+	
+	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
-	if(object_get_moved(object) == FALSE){
+	res = object_set_moved(object, TRUE);
+	if(object_get_moved(object) == TRUE){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -345,11 +354,13 @@ BOOL test_object10(){ /*!< Test object_get_moved with default location*/
 	return FALSE;
 }
 
-BOOL test_object11(){ /*!< Test object_get_light with default location*/
-
+BOOL test_object24(){ /*!< Test object_set_light*/
+	
+	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
-	if(object_get_light(object) == FALSE){
+	res = object_set_light(object, TRUE);
+	if(object_get_light(object) == TRUE){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -359,11 +370,13 @@ BOOL test_object11(){ /*!< Test object_get_light with default location*/
 	return FALSE;
 }
 
-BOOL test_object12(){ /*!< Test object_get_hidden with default location*/
-
+BOOL test_object25(){ /*!< Test object_set_hidden*/
+	
+	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
-	if(object_get_hidden(object) == FALSE){
+	res = object_set_hidden(object, TRUE);
+	if(object_get_hidden(object) == TRUE){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -373,11 +386,13 @@ BOOL test_object12(){ /*!< Test object_get_hidden with default location*/
 	return FALSE;
 }
 
-BOOL test_object13(){ /*!< Test object_get_on_off with default location*/
-
+BOOL test_object26(){ /*!< Test object_set_on_off*/
+	
+	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
-	if(object_get_on_off(object) == FALSE){
+	res = object_set_on_off(object, TRUE);
+	if(object_get_on_off(object) == TRUE){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -387,11 +402,13 @@ BOOL test_object13(){ /*!< Test object_get_on_off with default location*/
 	return FALSE;
 }
 
-BOOL test_object14(){ /*!< Test object_get_open with default location*/
-
+BOOL test_object27(){ /*!< Test object_set_open*/
+	
+	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
-	if(object_get_open(object) == NO_ID){
+	res = object_set_open(object, ID2);
+	if(object_get_open(object) == ID2){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -401,24 +418,13 @@ BOOL test_object14(){ /*!< Test object_get_open with default location*/
 	return FALSE;
 }
 
-BOOL test_object15(){ /*!< Test object_get_open with default location*/
-
+BOOL test_object28(){ /*!< Test object_set_duration*/
+	
+	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
-	if(object_get_duration(object) == 0){
-		object_destroy(object);
-		TEST_PRINT(TRUE);
-		return TRUE;
-	}
-	object_destroy(object);
-	TEST_PRINT(FALSE);
-	return FALSE;
-}
-
-BOOL test_object28(){
-	Object* object = NULL;
-	object = object_create(ID);
-	if(object_set_state(object, 12) == ERROR){
+	res = object_set_duration(object, TEST_INT);
+	if(object_get_duration(object) == TEST_INT){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
