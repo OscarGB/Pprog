@@ -45,6 +45,25 @@ Game* game_init(Game* game);
 STATUS game_init_from_file(Game* game, char* filename);
 
 /**
+* @brief Gets the location of the player
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return The id of the player location
+*/
+Id     game_get_player_location(Game* game);
+
+/**
+* @brief It gets the space from a given id
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @param Id space id
+* @return Space pointer with that id
+*/
+Space* game_get_space(Game* game, Id id);
+
+/**
 * @brief it calls different callbacks depending on the written command
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
@@ -52,7 +71,7 @@ STATUS game_init_from_file(Game* game, char* filename);
 * @param Command cmd
 * @return OK if it was updated
 */
-STATUS game_update(Game* game, Command *cmd);
+STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra);
 
 /**
 * @brief it destroys a given game
@@ -121,6 +140,54 @@ STATUS game_add_object(Game* game, Object* object);
 */
 STATUS game_add_link(Game *game, Link* link);
 
+<<<<<<< HEAD
+=======
+/**
+* @brief Returns the game die
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return Die pointer
+*/
+Die * game_get_die(Game * game);
+
+/**
+* @brief Returns the link in a concrete position
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return Link pointer
+*/
+Link * game_get_link_n(Game * game, int n);
+
+/**
+* @brief Returns the number of links
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return int (number of links)
+*/
+int game_get_num_links(Game * game);
+
+/**
+* @brief Returns the objects in the game (all of them)
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Object ** object
+* @return pointer to the array of objects
+*/	
+Object ** game_get_objects(Game * game);
+
+/**
+* @brief Returns the number of objects
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return int (number of objects)
+*/
+int game_get_num_objects(Game * game);
+
+>>>>>>> fed92179ce95e9e5b721817a0ba7d23efe795e98
 
 #endif
 

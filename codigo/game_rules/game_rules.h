@@ -6,11 +6,13 @@
  * @date 16/12/2016
  */
 
+#include "game.h"
+
 
 typedef struct _Game_rules Game_rules;
 
-typedef enum enum_Game_rules {
-} E_Game_rules; 
+/*typedef enum enum_Game_rules {
+} E_Game_rules; */
 
 
 STATUS change_light_space(Game *game);

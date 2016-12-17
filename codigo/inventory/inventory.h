@@ -134,4 +134,13 @@ BOOL inventory_is_in(Inventory* bag, Id id);
 */
 STATUS inventory_print(Inventory* bag);
 
+/**
+* @brief Returns a string with the names of the objects, for the dialogue
+* @author José Ignacio Gómez
+* @date 16/12/2016
+* @param Inventory*
+* @return char* string
+*/
+Id* inventory_get_ids(Inventory* bag);
+
 #endif
