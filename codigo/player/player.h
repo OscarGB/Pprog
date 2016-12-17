@@ -13,6 +13,7 @@
 
 #include "types.h"
 #include "object.h"
+#include "inventory.h"
 
 typedef struct _Player Player; /*<!Definition of the player structure*/
 

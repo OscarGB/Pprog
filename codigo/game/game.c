@@ -34,6 +34,7 @@ struct _Game {
   Link *links[MAX_LINKS]; /*!< Array of pointers to Link Structure */
   int num_links; /*!<Number of links */
   char desc[WORD_SIZE+1]; /* !< For inspect command*/
+  int turns; /* !<Number of turns passed */
 };/*!< Game structure*/
 
 /*
@@ -117,6 +118,7 @@ Game* game_init(Game* game) {
 
   game->num_objects = 0;
   game->num_links = 0;
+  game->turns = 0;
 
   /*Creating die*/
   game->die = die_create(1, DIE_FACES);
@@ -347,6 +349,32 @@ Space* game_get_space(Game* game, Id id){
     return NULL;
 }
 
+/**
+* @brief It gets the object from a given id
+* @author Andrea Ruiz
+* @date 17/12/2016
+* @param game pointer
+* @param Id space id
+* @return Object pointer with that id
+*/
+Object * game_get_object(Game* game, Id id){
+    int i = 0; /* !< Variable used for loops*/
+
+    if (id == NO_ID) {
+      return NULL;
+    }
+    
+    /*Checks all the positions for the object*/
+    for (i = 0; i < MAX_SPACES && game->object[i] != NULL; i++) {
+      if (id == object_get_id(game->object[i])){
+      	return game->object[i];
+      }
+    }
+    
+    /*If theres no object with the given Id*/
+    return NULL;
+}
+
 
 /**
 * @brief Sets the player location at a given id
@@ -463,8 +491,10 @@ Id game_get_object_location(Game* game, char *symbol) {
 * @param Command cmd
 * @return OK if it was updated
 */
+
 STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
 
+  Hgame->turns++;
   switch (command_get_cmd(cmd)) { /*Switch for the command value*/
   case UNKNOWN:
     return callback_UNKNOWN(game, cmd);
@@ -487,6 +517,7 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   case OPEN:
     return callback_OPEN(game, cmd, dia, gra, objects);
   case SAVE:
+    game->turns--;
     return callback_SAVE(game, cmd, dia, gra);
   case LOAD:
   	return callback_LOAD(game, cmd, dia, gra);
@@ -1888,4 +1919,34 @@ int game_get_num_objects(Game * game){
 		return NULL;
 
 	return game->num_objects;
+}
+
+/**
+* @brief Returns the number of turns
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return int (number of objects)
+*/
+
+int game_get_turns(Game * game){
+	if(!game)
+		return NULL;
+
+	return game->turns;
+}
+
+/**
+* @brief Returns the player pointer
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return player pointer
+*/
+
+Player * game_get_player(Game * game){
+	if(!game)
+		return NULL;
+
+	return game->player;
 }

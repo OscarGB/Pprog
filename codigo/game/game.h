@@ -17,9 +17,12 @@
 #include "die.h"
 #include "link.h"
 #include "graphics.h"
+#include "dialogue.h"
 
 #define PLAYER_OBJ -2 /*!< Id for an object into the player's bag*/
 #define DIE_FACES 6 /*!< Faces of the die*/
+#define GET_BOOL(x) ("(x==0)? TRUE: FALSE)")
+#define DEATH_DESERVED 100 /*!< Maximum number of turns allowed by a random function of game_rules */
 
 
 typedef struct _Game Game;
@@ -62,6 +65,16 @@ Id     game_get_player_location(Game* game);
 * @return Space pointer with that id
 */
 Space* game_get_space(Game* game, Id id);
+
+/**
+* @brief It gets the object from a given id
+* @author Andrea Ruiz
+* @date 17/12/2016
+* @param game pointer
+* @param Id space id
+* @return Object pointer with that id
+*/
+Object * game_get_object(Game* game, Id id);
 
 /**
 * @brief it calls different callbacks depending on the written command
@@ -187,7 +200,25 @@ Object ** game_get_objects(Game * game);
 */
 int game_get_num_objects(Game * game);
 
->>>>>>> fed92179ce95e9e5b721817a0ba7d23efe795e98
+/**
+* @brief Returns the number of turns
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return int (number of objects)
+*/
+
+int game_get_turns(Game * game);
+
+/**
+* @brief Returns the player pointer
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return player pointer
+*/
+
+Player * game_get_player(Game * game);
 
 #endif
 
