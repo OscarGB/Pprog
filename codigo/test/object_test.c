@@ -10,7 +10,7 @@
 #include "object.h"
 #include "types.h"
 
-#define MAX_TESTS 31
+#define MAX_TESTS 39
 #define ID 3
 #define ID1 5
 #define ID2 8
@@ -434,43 +434,193 @@ BOOL test_object28(){ /*!< Test object_set_duration*/
 	return FALSE;
 }
 
-BOOL test_object29(){
+BOOL test_object29(){ /* Test object_turnon with object which can't be turned on (light == FALSE)*/
+	
 	Object* object = NULL;
 	object = object_create(ID);
-	if(object_destroy(object) == OK){
+	object_turnon(object);
+	if( object_get_on_off(object) == FALSE){
+		object_destroy(object)
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
+	object_destroy(object)
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
-BOOL test_object30(){
-	if(object_destroy(NULL) == ERROR){
+BOOL test_object30(){ /* Test object_turnon with object which can't be turned on (duration <= 0)*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_set_light(object, TRUE);
+	object_turnon(object);
+	if( object_get_on_off(object) == FALSE){
+		object_destroy(object)
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
+	object_destroy(object)
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
-BOOL test_object31(){
-	if(object_print(NULL) == ERROR){
+BOOL test_object31(){ /* Test object_turnon with object which can be turned on*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_set_light(object, TRUE);
+	object_set_duration(object, 5);
+	object_turnon(object);
+	if( object_get_on_off(object) == TRUE){
+		object_destroy(object)
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
+	object_destroy(object)
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
-BOOL test_object32(){
-	if(object_open(NULL) != ERROR){
-		TEST_PRINT(FALSE);
-		return FALSE;
+BOOL test_object32(){ /* Test object_turnoff with object which is off*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_set_on_off(object, FALSE);
+	object_turnoff(object);
+	if( object_get_on_off(object) == FALSE){
+		object_destroy(object)
+		TEST_PRINT(TRUE);
+		return TRUE;
 	}
-	TEST_PRINT(TRUE);
-	return TRUE;
+	object_destroy(object)
+	TEST_PRINT(FALSE);
+	return FALSE;
 }
+
+BOOL test_object33(){ /* Test object_turnoff with object which is on*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_set_on_off(object, TRUE);
+	object_turnoff(object);
+	if( object_get_on_off(object) == FALSE){
+		object_destroy(object)
+		TEST_PRINT(TRUE);
+		return TRUE;
+	}
+	object_destroy(object)
+	TEST_PRINT(FALSE);
+	return FALSE;
+}
+
+BOOL test_object34(){ /* Test object_decrease_duration with object with light == FALSE*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_decrease_duration(object);
+	if( object_get_duration(object) == 0){
+		object_destroy(object)
+		TEST_PRINT(TRUE);
+		return TRUE;
+	}
+	object_destroy(object)
+	TEST_PRINT(FALSE);
+	return FALSE;
+}
+
+BOOL test_object35(){ /* Test object_decrease_duration with object with light == TRUE and on_off == FALSE*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_set_light(object, TRUE);
+	object_decrease_duration(object);
+	if( object_get_duration(object) == 0){
+		object_destroy(object)
+		TEST_PRINT(TRUE);
+		return TRUE;
+	}
+	object_destroy(object)
+	TEST_PRINT(FALSE);
+	return FALSE;
+}
+
+BOOL test_object36(){ /* Test object_decrease_duration with object with light == TRUE and on_off == TRUE*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_decrease_duration(object);
+	if( object_get_duration(object) == -1){
+		object_destroy(object)
+		TEST_PRINT(TRUE);
+		return TRUE;
+	}
+	object_destroy(object)
+	TEST_PRINT(FALSE);
+	return FALSE;
+}
+
+BOOL test_object37(){ /* Test object_decrease_duration with object with light == TRUE and on_off == TRUE and duration < 0*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_set_duration(object, -1);
+	object_decrease_duration(object);
+	if( object_get_duration(object) == -1){
+		object_destroy(object)
+		TEST_PRINT(TRUE);
+		return TRUE;
+	}
+	object_destroy(object)
+	TEST_PRINT(FALSE);
+	return FALSE;
+}
+
+BOOL test_object38(){ /* Test object_can_open with incorrect Id*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_set_open(object, ID2);
+	if(object_can_open(object, ID1) == FALSE){
+		object_destroy(object)
+		TEST_PRINT(TRUE);
+		return TRUE;
+	}
+	object_destroy(object)
+	TEST_PRINT(FALSE);
+	return FALSE;
+}
+
+BOOL test_object38(){ /* Test object_can_open with NO_ID*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_set_open(object, NO_ID);
+	if(object_can_open(object, NO_ID) == FALSE){
+		object_destroy(object)
+		TEST_PRINT(TRUE);
+		return TRUE;
+	}
+	object_destroy(object)
+	TEST_PRINT(FALSE);
+	return FALSE;
+}
+
+BOOL test_object39(){ /* Test object_can_open with correct Id*/
+	
+	Object* object = NULL;
+	object = object_create(ID);
+	object_set_open(object, ID2);
+	if(object_can_open(object, ID2) == TRUE){
+		object_destroy(object)
+		TEST_PRINT(TRUE);
+		return TRUE;
+	}
+	object_destroy(object)
+	TEST_PRINT(FALSE);
+	return FALSE;
+}
+
 
 int main(int argc, char* argv[]){
 	int test = 0;
@@ -522,6 +672,13 @@ int main(int argc, char* argv[]){
 	if(todas || test == 30) test_object30();
 	if(todas || test == 31) test_object31();
 	if(todas || test == 32) test_object32();
+	if(todas || test == 33) test_object33();
+	if(todas || test == 34) test_object34();
+	if(todas || test == 35) test_object35();
+	if(todas || test == 36) test_object36();
+	if(todas || test == 37) test_object37();
+	if(todas || test == 38) test_object38();
+	if(todas || test == 39) test_object39();
 
 
 	PRINT_RESULTS();

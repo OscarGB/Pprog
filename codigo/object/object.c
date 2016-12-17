@@ -574,7 +574,7 @@ STATUS object_turnoff(Object* object){
 
 	if(!object) return ERROR;
 	
-	if(!object->light || object->on_off==FALSE) return ERROR; /*Object can't be turned off because it can't illuminate or is not on*/
+	if(object->on_off==FALSE) return ERROR; /*Object can't be turned off because it can't illuminate or is not on*/
 
 
 	object->on_off=FALSE;
@@ -609,11 +609,11 @@ int object_decrease_duration(Object *object){
 	int dur=-1;
 	if(!object) return -1;
 
+	dur=object_get_duration(object);
+
 	if(object_get_light(object)==TRUE){
 		if (object_get_on_off(object)==TRUE){
-			dur=object_get_duration(object);
-			dur--;
-			object_get_duration(object);
+			if(dur>=0) dur--;
 			return dur;
 		}
 	}
