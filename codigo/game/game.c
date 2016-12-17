@@ -51,7 +51,7 @@ STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_ROLL(Game* game, Command* cmd);
-STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** inventory);
+STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
 STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
@@ -518,7 +518,7 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   case ROLL:
     return callback_ROLL(game, cmd);
   case INSPECT:
-    return callback_INSPECT(game, symbol, cmd, dia, gra, inventory);
+    return callback_INSPECT(game, cmd, dia, gra);
   case GO:
     return callback_GO(game, cmd, dia, gra, objects);
   case TURNON:
