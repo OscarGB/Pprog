@@ -1281,7 +1281,7 @@ STATUS callback_ROLL(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @param symbol to inspect
 * @return OK if it went ok
 */
-STATUS callback_INSPECT(Game* game, Command* cmd){
+STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
     int i;/* !< Variable used for loops*/
     Object *obj; /* !<Variable used for storing the player's object*/
@@ -1289,12 +1289,14 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
     Space *space; /*!<Variable used for storing auxiliary spaces*/
     char *symbol = NULL; /*!< Variable used for storing the command*/
     Inventory* inventory = NULL;
+    Id* ids = NULL;
+    char *invobjs[game->num_objects];
 
     symbol = command_get_cmd(cmd);
 
     obj = NULL;
     
-    if(!game) return ERROR;
+    if(!game || !cmd || !dia || !gra) return ERROR;
     if(strcmp(symbol, "E") == 0) return ERROR;
 
     player_location = game_get_player_location(game);
@@ -1306,10 +1308,12 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
           		if(player_location==space_get_id(game->spaces[i])){
                 if(space_get_light(game->spaces[i]) == TRUE){
           		    strcpy(game->desc, space_get_adesc(game->spaces[i]));
-          		    return OK;	
+          		    dialogue_inspect(dia, OK, &(game->desc), gra, SPACE);
+                  return OK;	
                 }
           		}
           	}
+            dialogue_inspect(dia, ERROR, &(game->desc), gra, SPACE);
             return ERROR;
       }else{ /*!< Inspecting an object */
   	     for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
@@ -1319,16 +1323,20 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
   		      }
           }
 
-          if(!obj) return ERROR;
+          if(!obj){
+            dialogue_inspect(dia, ERROR, &(game->desc), gra, OBJECT);
+            return ERROR;
+          }
 
-		  space = game_get_space(game, object_get_location(obj)); /*Get the space where the object is*/
+		  space = game_get_space(game, player_location); /*Get the space where the object is*/
 
 		  if(space_get_light(space) == FALSE){
-		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
-		  }
-          strcpy(game->desc, object_get_description(obj));
-          return OK;
-        }
+		    dialogue_inspect(dia, ERROR, &(game->desc), gra, OBJECT);
+        return ERROR;
+      }
+      strcpy(game->desc, space_get_description(obj));
+      dialogue_inspect(dia, OK, &(game->desc), gra, OBJECT);
+      return OK;
     }
 
     else if(strlen(symbol) > 1){
@@ -1337,17 +1345,38 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
             if(player_location==space_get_id(game->spaces[i])){
                 if(space_get_light(game->spaces[i]) == TRUE){
                   strcpy(game->desc, space_get_adesc(game->spaces[i]));
+                  dialogue_inspect(dia, OK, &(game->desc), gra, SPACE);
                   return OK;  
                 }  
             }
           }
+          dialogue_inspect(dia, ERROR, &(game->desc), gra, SPACE);
           return ERROR;
       }
       else if(strcmp(symbol, "inventory") == 0 || strcmp(symbol, "Inventory") == 0){ /*!< Inspecting inventory*/
         inventory = player_get_inventory(game->player);
-        if(!inventory) return ERROR;
-        /***HACER ARRAY DE OBJECTS INVENTORY****/
-        return dialogue_generic(dialogue, objects);
+        if(!inventory){ 
+          dialogue_inspect(dia, ERROR, &(game->desc, gra, INVENTORY));
+          return ERROR;
+        }
+        ids = inventory_get_ids(player_get_inventory(game->player));
+        if(!ids){
+          dialogue_inspect(dia, ERROR, &(game->desc, gra, INVENTORY));
+          return ERROR;
+        }
+        for(i = 0; i < MAX_IDS; i++){
+          if(ids[i] == NULL){
+            break;
+          }
+          for(j = 0; j < game->num_objects; i++){
+            if(object_get_id(game->objects[j]) == ids[i]){
+              invobjs[i] = object_get_name(game->objects[i]);
+              break;
+            }
+          }
+        }
+        dialogue_inspect(dia, OK, invobjs, gra, INVENTORY);
+        return OK;
       }
       else{ /*!< Inspecting an object */
          for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
@@ -1357,14 +1386,19 @@ STATUS callback_INSPECT(Game* game, Command* cmd){
             }
           }
 
-          if(!obj) return ERROR;
+          if(!obj) {
+            dialogue_inspect(dia, ERROR, &(game->desc), gra, OBJECT);
+            return ERROR;
+          }
 	
-		      space = game_get_space(game, object_get_location(obj)); /*Get the space where the object is*/
+		      space = game_get_space(game, player_location); /*Get the space where the object is*/
 
     		  if(space_get_light(space) == FALSE){
-    		  	strcpy(game->desc, "You can't find the object in the pitch black darkness");
-    		  }
-    		  strcpy(game->desc, object_get_description(obj));
+            dialogue_inspect(dia, ERROR, &(game->desc), gra, OBJECT);
+            return ERROR;
+          }
+          strcpy(game->desc, space_get_description(obj));
+          dialogue_inspect(dia, OK, &(game->desc), gra, OBJECT);
           return OK;
       }
     }

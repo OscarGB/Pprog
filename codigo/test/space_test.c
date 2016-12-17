@@ -1,7 +1,7 @@
 #include "test.h"
 #include "space.h"
 
-#define MAX_TESTS 26
+#define MAX_TESTS 38
 #define ID 1
 
 
@@ -522,6 +522,169 @@ BOOL test_space26(){ /*!< Test space_set_light with alloc'd space*/
 	return result;
 }
 
+BOOL test_space27(){
+
+	Space* space = NULL;
+	space = space_create(ID);
+	space_set_gdesc(space, "+------------+|            ||            ||            ||            ||            |+------------+");
+	if(space_open_door(space, N) == ERROR){
+		TEST_PRINT(FALSE);
+		space_destroy(space);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	space_destroy(space);
+	return FALSE;
+}
+
+BOOL test_space28(){
+
+	Space* space = NULL;
+	space = space_create(ID);
+	space_set_gdesc(space, "+------------+|            ||            ||            ||            ||            |+------------+");
+	if(space_open_door(space, E) == ERROR){
+		TEST_PRINT(FALSE);
+		space_destroy(space);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	space_destroy(space);
+	return FALSE;
+}
+
+BOOL test_space29(){
+
+	Space* space = NULL;
+	space = space_create(ID);
+	space_set_gdesc(space, "+------------+|            ||            ||            ||            ||            |+------------+");
+	if(space_open_door(space, S) == ERROR){
+		TEST_PRINT(FALSE);
+		space_destroy(space);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	space_destroy(space);
+	return FALSE;
+}
+
+BOOL test_space30(){
+
+	Space* space = NULL;
+	space = space_create(ID);
+	space_set_gdesc(space, "+------------+|            ||            ||            ||            ||            |+------------+");
+	if(space_open_door(space, W) == ERROR){
+		TEST_PRINT(FALSE);
+		space_destroy(space);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	space_destroy(space);
+	return FALSE;
+}
+
+BOOL test_space31(){
+
+	Space* space = NULL;
+	space = space_create(ID);
+	space_set_gdesc(space, "+------------+|            ||            ||            ||            ||            |+------------+");
+	if(space_close_door(space, N) == ERROR){
+		TEST_PRINT(FALSE);
+		space_destroy(space);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	space_destroy(space);
+	return FALSE;
+}
+
+BOOL test_space32(){
+
+	Space* space = NULL;
+	space = space_create(ID);
+	space_set_gdesc(space, "+------------+|            ||            ||            ||            ||            |+------------+");
+	if(space_close_door(space, E) == ERROR){
+		TEST_PRINT(FALSE);
+		space_destroy(space);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	space_destroy(space);
+	return FALSE;
+}
+
+BOOL test_space33(){
+
+	Space* space = NULL;
+	space = space_create(ID);
+	space_set_gdesc(space, "+------------+|            ||            ||            ||            ||            |+------------+");
+	if(space_close_door(space, S) == ERROR){
+		TEST_PRINT(FALSE);
+		space_destroy(space);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	space_destroy(space);
+	return FALSE;
+}
+
+BOOL test_space34(){
+
+	Space* space = NULL;
+	space = space_create(ID);
+	space_set_gdesc(space, "+------------+|            ||            ||            ||            ||            |+------------+");
+	if(space_close_door(space, W) == ERROR){
+		TEST_PRINT(FALSE);
+		space_destroy(space);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	space_destroy(space);
+	return FALSE;
+}
+
+BOOL test_space35(){
+	if(space_close_door(NULL, 0) != ERROR){
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	return FALSE;
+}
+
+BOOL test_space36(){
+	if(space_open_door(NULL, 0) != ERROR){
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	return FALSE;
+}
+
+BOOL test_space37(){
+	Space* space = NULL;
+	space = space_create(ID);
+	if(space_close_door(space, 5000) != ERROR){
+		TEST_PRINT(FALSE);
+		space_destroy(space);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	space_destroy(space);
+	return FALSE;
+}
+
+BOOL test_space38(){
+	Space* space = NULL;
+	space = space_create(ID);
+	if(space_open_door(space, 5000) != ERROR){
+		TEST_PRINT(FALSE);
+		space_destroy(space);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	space_destroy(space);
+	return FALSE;
+}
 
 int main(int argc, char* argv[]){
 	int test = 0;
@@ -565,6 +728,19 @@ int main(int argc, char* argv[]){
 	if(todas || test == 24) test_space24();
 	if(todas || test == 25) test_space25();
 	if(todas || test == 26) test_space26();
+	if(todas || test == 27) test_space27();
+	if(todas || test == 28) test_space28();
+	if(todas || test == 29) test_space29();
+	if(todas || test == 30) test_space30();
+	if(todas || test == 31) test_space31();
+	if(todas || test == 32) test_space32();
+	if(todas || test == 33) test_space33();
+	if(todas || test == 34) test_space34();
+	if(todas || test == 35) test_space35();
+	if(todas || test == 36) test_space36();
+	if(todas || test == 37) test_space37();
+	if(todas || test == 38) test_space38();
+
 
 
 
