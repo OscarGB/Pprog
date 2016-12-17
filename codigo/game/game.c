@@ -48,15 +48,15 @@ STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 STATUS callback_JUMP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_UP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
-STATUS callback_DROP(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
-STATUS callback_PICK(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_ROLL(Game* game, Command* cmd);
-STATUS callback_INSPECT(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** inventory);
-STATUS callback_GO(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
-STATUS callback_TURNON(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
-STATUS callback_TURNOFF(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
-STATUS callback_OPEN(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
-STATUS callback_SAVE(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra);
+STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** inventory);
+STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
+STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
 STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
 
 
@@ -497,9 +497,9 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   int i, j = 0;
 
   for (i = 0; i < game->num_objects; i++){
-    if (object_get_location(game->objects[i]) == game_get_player_location(game)){
-      objects[j] = object_get_name(game->objects[i]);
-      j++
+    if (object_get_location(game->object[i]) == game_get_player_location(game)){
+      objects[j] = object_get_name(game->object[i]);
+      j++;
     }
   }
   objects[j] = NULL;
