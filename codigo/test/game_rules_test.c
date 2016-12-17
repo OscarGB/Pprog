@@ -7,7 +7,7 @@
  */
 
 #include "test.h"
-#include "game_reader.h"
+#include "game_rules.h"
  
 #define MAX_TESTS 7
 
