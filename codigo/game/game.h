@@ -46,6 +46,25 @@ Game* game_init(Game* game);
 STATUS game_init_from_file(Game* game, char* filename);
 
 /**
+* @brief Gets the location of the player
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @return The id of the player location
+*/
+Id     game_get_player_location(Game* game);
+
+/**
+* @brief It gets the space from a given id
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @param Id space id
+* @return Space pointer with that id
+*/
+Space* game_get_space(Game* game, Id id);
+
+/**
 * @brief it calls different callbacks depending on the written command
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
@@ -157,6 +176,15 @@ int game_get_num_links(Game * game);
 * @return pointer to the array of objects
 */	
 Object ** game_get_objects(Game * game);
+
+/**
+* @brief Returns the number of objects
+* @author Andrea Ruiz
+* @date 16/12/2016
+* @param Game *game
+* @return int (number of objects)
+*/
+int game_get_num_objects(Game * game);
 
 
 #endif

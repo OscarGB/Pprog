@@ -9,14 +9,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "game_rules.h"
-#include "game.h"
-
 
 STATUS change_light_space(Game *game){
-	Id current_id;
-	Die * die;
-	Space *current_space;
+	Id current_id = NO_ID;
+	Die * die = NULL;
+	Space *current_space = NULL;
 	BOOL space_light;
 	int roll;
 
@@ -29,7 +28,7 @@ STATUS change_light_space(Game *game){
 
 	current_space = game_get_space(game, current_id);
 	if(current_space == NULL)
-		return ERROR
+		return ERROR;
 	
 	space_light = space_get_light(current_space);
 
@@ -51,22 +50,20 @@ STATUS change_light_space(Game *game){
 			return ERROR;
 	}
 
-	return OK
+	return OK;
 
 }
 
 
 STATUS change_link_status(Game * game){
-	Id current_id;
-	Space *current_space;
-	Link * link;
-	State link_state;
-	Die * die;
+	Link * link = NULL;
+	Die * die = NULL;
 	int aleat;
 	int nlinks;
 	int roll;
+	State state;
 
-	if(!gamer)
+	if(!game)
 		return ERROR;
 
 	srand(time(NULL)+clock());
@@ -99,17 +96,18 @@ STATUS change_link_status(Game * game){
 		link_set_state(link, OPENL);
 		if(link_get_state(link) != OPENL)
 			return ERROR;
+	}
 
 	return OK;
 }
 
 STATUS change_object_location(Game * game){
 	Id current_id;
-	Die * die;
-	Space *current_space;
-	Object ** objects;
-	Object * object;
-	int roll;
+	Die * die = NULL;
+	Space *current_space = NULL;
+	Object ** objects = NULL;
+	Object * object = NULL;
+	int roll, i;
 
 	if(!game)
 		return ERROR;
@@ -120,9 +118,7 @@ STATUS change_object_location(Game * game){
 
 	current_space = game_get_space(game, current_id);
 	if(current_space == NULL)
-		return ERROR
-	
-	space_light = space_get_light(current_space);
+		return ERROR;
 
 	die = game_get_die(game);
 	if(!die)
@@ -133,7 +129,22 @@ STATUS change_object_location(Game * game){
 		return ERROR;
 
 	objects = game_get_objects(game);
+	if(!objects)
+		return ERROR;
 
+	for(i=0; i<game_get_num_objects(game); i++){
+		if(object_get_location(objects[i]) == current_id && object_get_movable(objects[i]) == TRUE){
+			object = objects[i];
+			break;
+		}
+	}
+	
+	if(!object) /* There are no movable objects in space */
+		return OK;
+	
+	object_set_location(object, current_id + 1);
+
+	return OK;
 	
 }
 
