@@ -23,6 +23,16 @@ struct _Dialogue {
 
 /*PRIVATE FUNCTIONS*/
 
+STATUS dialogue_quit(Graphics* gra, Dialogue* dialogue){
+	if(!gra || !dialogue) return ERROR;
+
+	print_in_zone(gra, DIALOGUE, 0, "See you soon!");
+
+	sleep(5);
+
+	return OK;
+}
+
 STATUS dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects){
 	char string[MAX_DIALOGUE];
 
