@@ -39,7 +39,7 @@ struct _Game{
 * brief List of callbacks for each command in the game 
 */
 
-STATUS callback_UNKNOWN(Game* game, Command* cmd);
+STATUS callback_UNKNOWN(Game* game, Command* cmd, Dialogue* dia, );
 STATUS callback_QUIT(Game* game, Command* cmd);
 STATUS callback_NEXT(Game* game, Command* cmd);
 STATUS callback_BACK(Game* game, Command* cmd);
