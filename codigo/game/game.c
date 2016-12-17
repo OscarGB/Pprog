@@ -10,10 +10,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 #include "game.h"
 #include "player.h"
 #include "object.h"
-#include "game_reader.h"
+#include "game_management.h"
 #include "die.h"
 #include "link.h"
 #include "graphics.h"
@@ -55,6 +56,7 @@ STATUS callback_TURNON(Game* game, char *symbol, Command* cmd, Dialogue* dia, Gr
 STATUS callback_TURNOFF(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_OPEN(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_SAVE(Game* game, char *symbol, Command* cmd, Dialogue* dia, Graphics* gra);
+STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra)
 
 
 /*
@@ -65,6 +67,7 @@ STATUS game_load_spaces(Game* game, char* filename);
 STATUS game_add_space(Game* game, Space* space);
 Id     game_get_space_id_at(Game* game, int position);
 
+STATUS game_add_player(Game* game, Player* player);
 STATUS game_set_player_location(Game* game, Id id);
 
 STATUS game_add_object(Game* game, Object* object);
@@ -401,6 +404,25 @@ Id game_get_player_location(Game* game) {
     return player_get_location(game->player);
 }
 
+/**
+* @brief Adds a player pointer to the gme Player field
+* @author Óscar Pinto Santamaría
+* @date 16/12/2016
+* @param Game* game, Player* player
+* @return OK or ERROR
+*/
+
+STATUS game_add_player(Game* game, Player* player){
+	if(!game || !player)
+		return ERROR;
+
+	game->player = player;
+	if(!game->player)
+		return ERROR;
+
+	return OK;
+}
+
 
 /**
 * @brief Gets the location of an object
@@ -466,6 +488,8 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
     return callback_OPEN(game, cmd, dia, gra, objects);
   case SAVE:
     return callback_SAVE(game, cmd, dia, gra);
+  case LOAD:
+  	return callback_LOAD(game, cmd, dia, gra);
   case NO_CMD:
     break;
   default: /*We must never arrive here*/
@@ -1747,215 +1771,49 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 
 STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
-	FILE *f=NULL;
-	int i;
-	char path[256]="codigo/Saves/";
+	char path[256] = "codigo/Saves/";
+  	char *symbol = NULL;
 
-	if(!game || !savename) return ERROR;
+  	if(!game || !cmd)
+  			return ERROR;
 
-	strcat(path, savename); /*Open or create file in Saves directory with writing privilege and user selected name*/
-	strcat(path, ".ao");
-	f=fopen(path, "w+");
-	if(!f)
+  	symbol = command_get_cmd(cmd);
+  	strcat(path, symbol); 
+  	strcat(path, ".ao");
+	
+	return game_save(game, path);
+}
+
+STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
+
+	int i=0;
+	DIR *dir;
+	struct dirent *ent;
+	char savegames[256];
+	char *symbol = NULL;
+
+	if(!game || !cmd)
 		return ERROR;
 
-	print_player_save(f, game->player);
-
-	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){ /*loops for printing all not null links, spaces and objects to file*/
-		print_space_save(f, game->spaces[i]);
+	symbol = command_get_cmd(cmd);
+	if(!strcmp(symbol, "show")){
+		if ((dir = opendir ("codigo/Saves")) != NULL) {
+		  while ((ent = readdir (dir)) != NULL && i<4) {
+		    strcat(savegames, ent->d_name);
+		    strcat(savegames, "\n");
+		    i++;
+		  }
+		  strcpy(game->desc, savegames);
+		  closedir (dir);
+		  return OK;
+		} else
+		  	return ERROR;
 	}
 
-	for(i=0; i<MAX_LINKS && game->links[i]; i++){
-		print_link_save(f, game->links[i]);
-	}
-
-	for(i=0; i<=MAX_IDS && game->object[i]; i++){
-		print_object_save(f, game->object[i]);
-	}
-
-	fclose(f);
-	return OK;
+	return game_load(game, symbol);
 }
 
-/*STATUS callback_LOAD(Game *game, Command* cmd){
-	DIR *dir;
-struct dirent *ent;
 
-if ((dir = opendir ("codigo/Saves")) != NULL) {
-  while ((ent = readdir (dir)) != NULL) {
-    printf ("%s\n", ent->d_name);
-  }
-  closedir (dir);
-} else {
-  perror ("");
-  return ERROR;
-}*/
-
-
-STATUS print_space_save(FILE *f, Space* space){
-	Id id; 
-    char name[WORD_SIZE + 1]; 
-    Id north;
-    Id east; 
-    Id south; 
-    Id west; 
-    Id up; 
-    Id down; 
-    char gdesc[MAX_GDESC], buff[MAX_GDESC];
-    char *toks=NULL; 
-    BOOL light;
-    char lux[100];
-    char adesc[MAX_ADESC];
-
-	if(!f || !space) return ERROR;
-	id = space_get_id(space);
-	strcpy(name,space_get_name(space));
-	north = space_get_north(space);
-	south = space_get_south(space);
-	east = space_get_east(space);
-	west = space_get_west(space);
-	up = space_get_up(space);
-	down = space_get_down(space);
-	light= space_get_light(space);
-	strcpy(buff,space_get_gdesc(space));
-	strcpy(adesc,space_get_adesc(space));
-
-	if(light==TRUE){
-		strcpy(lux, "TRUE");
-	}else{
-		strcpy(lux, "FALSE");
-	}
-
-	/*toks = strtok(buff, "\n");
-	strcat(gdesc, toks);
-	toks = strtok(NULL, "\n");
-	strcat(gdesc, toks);
-	toks = strtok(NULL, "\n");
-	strcat(gdesc, toks);*/
-
-	fprintf(f, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%s|%s|%s\n", 
-			id, name, north, east, south, west, up, down,
-			lux, adesc, buff);
-
-	return OK;
-}
-
-STATUS print_link_save(FILE *f, Link *link){
-
-	Id id; 
-	char name[WORD_SIZE + 1]; 
-	Id conection1; 
-	Id conection2; 
-	State state; 
-	char stt[100];
-
-	if(!f || !link) return ERROR;
-
-	id = link_get_id(link);
-	strcpy(name, link_get_name(link));
-	conection1 = link_get_conection1(link);
-	conection2 = link_get_conection2(link);
-	state = link_get_state(link);
-
-	if(state==CLOSEDL){
-		strcpy(stt, "CLOSEDL");
-	}else{
-		strcpy(stt, "OPENL");
-	}
-
-	fprintf(f, "#l:%ld|%ld|%ld|%s|%s|\n", 
-			id, conection1, conection2, name, stt);
-	return OK;
-	}
-
-STATUS print_object_save(FILE *f, Object *object){
-
-	Id id;
-	char name[WORD_SIZE + 1]; 
-	char symbol; 
-	Id location;
-	char desc[WORD_SIZE+1];
-	char mdesc[WORD_SIZE+1];
-	BOOL movable;
-	BOOL moved;
-	BOOL hidden;
-	Id open;
-	BOOL light;
-	BOOL on_off;
-	int duration;
-	char object_str[1024];
-	char mvbl[100], mvd[100], hddn[100], lux[100], on[100];
-
-
-	if(!f || !object) return ERROR;
-
-	id = object_get_id(space);
-	strcpy(name,object_get_name(object));
-	strcpy(desc, object_get_desc(object));
-	strcpy(mdesc, object_get_mdesc(object));
-	symbol = object_get_symbol(object);
-	location = object_get_location(object);
-	movable = object_get_movable(object);
-	moved = object_get_moved(object);
-	hidden = object_get_hidden(object);
-	open = object_get_open(object);
-	light = object_get_light(object);
-	on_off = object_get_on_off(object);
-	duration = object_get_duration(object);
-
-	if(light==TRUE){
-		strcpy(lux, "TRUE");
-	}else{
-		strcpy(lux, "FALSE");
-	}
-
-	if(movable==TRUE){
-		strcpy(mvbl, "TRUE");
-	}else{
-		strcpy(mvbl, "FALSE");
-	}
-
-	if(moved==TRUE){
-		strcpy(mvd, "TRUE");
-	}else{
-		strcpy(mvd, "FALSE");
-	}
-
-	if(hidden==TRUE){
-		strcpy(hddn, "TRUE");
-	}else{
-		strcpy(hddn, "FALSE");
-	}
-
-	if(on_off==TRUE){
-		strcpy(on, "TRUE");
-	}else{
-		strcpy(on, "FALSE");
-	}
-	
-	fprintf(f, "#o:%ld|%ld|%s|%s|%s|%c|%s|%s|%s|%s|%s|%d|%d|\n", 
-			id, location, name, desc, mdesc, symbol, mvbl, mvd,
-			hddn, lux, on, open, duration);
-
-	return OK;
-}
-
-STATUS print_player_save(FILE *f, Player *player){
-
-	if(!f || !object) return ERROR;
-
-	Id id;
-	char name[WORD_SIZE +1];
-	Id location; 
-
-	id = player_get_id(player);
-	strcpy(name, get_player_name(player));
-	location = player_get_location(player);
-
-	fprintf(f, "#p:%ld|%ld|%s|\n", id, location, name);	
-
-	return OK;
-}
 
 
 /**
