@@ -505,10 +505,10 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   objects[j] = NULL;
 
 
-  Hgame->turns++;
+  game->turns++;
   switch (command_get_cmd(cmd)) { /*Switch for the command value*/
   case UNKNOWN:
-    return callback_UNKNOWN(game, cmd);
+    return callback_UNKNOWN(game, cmd, dia, gra);
   case QUIT:
     return callback_QUIT(game, cmd);
   case PICK:
@@ -1132,9 +1132,11 @@ STATUS callback_DOWN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   Id current_id = NO_ID, down_id = NO_ID; /* !< Current space id and sout id*/
   Id link_id = NO_ID; /* !< Link id*/
   Id space_id = NO_ID; /* !< Space id*/
+  STATUS result;
   
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
+    dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
   
@@ -1158,13 +1160,18 @@ STATUS callback_DOWN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
         }
       }
       if (down_id != NO_ID) {
-        return game_set_player_location(game, down_id);
+        return = game_set_player_location(game, down_id);
+        dialogue_generic(dia, return, objects, gra);
+
+        return ERROR;
       }
       else{
+        dialogue_generic(dia, ERROR, objects, gra);
         return ERROR;
       }
     }
   }
+  dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
 
