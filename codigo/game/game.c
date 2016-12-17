@@ -1245,9 +1245,9 @@ STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   Id object_id = NO_ID;
   Id current_id; /* !< Id of the current space*/
   int i;
+  STATUS result;
   char *symbol = NULL; /*!< Variable used for storing the command*/
   symbol = command_get_symbol(cmd); 
-  STATUS result;
 
   if(strlen(symbol) == 1){
     for(i=0; i< game->num_objects; i++){ /*!< Seeing if the symbol is associated to an object */
@@ -1293,7 +1293,7 @@ STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   current_id = game_get_player_location(game);
 
   result = game_set_object_location(game, current_id, object_get_id(object));
-  dialogue_generic(dia, resutlt, objects, gra);
+  dialogue_generic(dia, result, objects, gra);
 
   return result;
 }
@@ -1869,9 +1869,9 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   Link* link = NULL;
   Id link_id = NO_ID;
   int i;
+  STATUS result;
   char *string = NULL;
   string = command_get_symbol(cmd);
-  STATUS result;
 
   /*string will be like "door with key", because "open"
   has been already read*/
