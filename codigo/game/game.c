@@ -1279,7 +1279,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     char *symbol = NULL; /*!< Variable used for storing the command*/
     Inventory* inventory = NULL;
     Id* ids = NULL;
-    char *invobjs[MAX_IDS];
+    char *invobjs[game->num_objects];
 
     symbol = command_get_cmd(cmd);
 
