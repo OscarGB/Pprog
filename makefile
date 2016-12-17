@@ -3,7 +3,9 @@
 # Author: Óscar Gómez Borzdynski             #
 #--------------------------------------------#
 
+
 DEPS = game command generic space set player object die game_management link inventory test graphics game_rules dialogue	#Name of the module's folders
+
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefix -I for the compilation with headers
 
 NCURSES = -lncurses
