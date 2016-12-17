@@ -51,9 +51,9 @@ space_test: space_test.o space.o set.o
 	@echo "--->Creating executable space_test"
 	@gcc $(CFLAGS) -o space_test space_test.o space.o set.o
 
-graphics_test: graphics_test.o graphics.o
+graphics_test: graphics_test.o graphics.o command.o
 	@echo "--->Creating executable graphics_test"
-	@gcc $(CFLAGS) -o graphics_test graphics_test.o graphics.o $(NCURSES)
+	@gcc $(CFLAGS) -o graphics_test graphics_test.o graphics.o command.o $(NCURSES)
 
 die_test.o: codigo/test/die_test.c 
 	@echo "--->Generating die_test.o"

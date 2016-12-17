@@ -13,6 +13,8 @@
 #include "types.h"
 #include "dialogue.h"
 #include "graphics.h"
+#include "command.h"
+#include <unistd.h>
 
 struct _Dialogue {
 	Command* prev; /*!< The previous command*/
@@ -38,7 +40,7 @@ STATUS dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects){
 
 	if(!gra || !dialogue) return ERROR;
 
-	string = "I didn't understand you.\n";
+	strcpy(string, "I didn't understand you.\n");
 
 	return dialogue_standard(gra, dialogue, objects, string);
 }
@@ -53,11 +55,14 @@ STATUS dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	if(!picked) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You have picked %s\n", picked); 
+		strcpy(string, "You have picked"); 
+		strcat(string, picked);
+		strcat(string, "\n");
 	}
 	else{
-		strcpy(string, "Could not pick %s\n", picked);
+		strcpy(string, "Could not pick "); 
+		strcat(string, picked);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -73,11 +78,14 @@ STATUS dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	if(!dropped) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You have dropped %s\n", dropped); 
+		strcpy(string, "You have dropped "); 
+		strcat(string, dropped);
+		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "Could not drop %s\n", dropped);
+		strcpy(string, "Could not drop "); 
+		strcat(string, dropped);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -93,11 +101,14 @@ STATUS dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS che
 	if(!direction) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You have gone %s\n", direction); 
+		strcpy(string, "You have gone "); 
+		strcat(string, direction);
+		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "You cannot go %s\n", direction);
+		strcpy(string, "You cannot go "); 
+		strcat(string, direction);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -113,11 +124,14 @@ STATUS dialogue_turnon(Graphics* gra, Dialogue* dialogue, char** objects, STATUS
 	if(!obj) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You turned the %s on\n", obj); 
+		strcpy(string, "You turned on the "); 
+		strcat(string, obj);
+		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "You cannot turn the %s on\n", obj);
+		strcpy(string, "Cannot turn on the "); 
+		strcat(string, obj);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -133,11 +147,14 @@ STATUS dialogue_turnoff(Graphics* gra, Dialogue* dialogue, char** objects, STATU
 	if(!obj) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You turned the %s off\n", obj); 
+		strcpy(string, "You turned off the "); 
+		strcat(string, obj);
+		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "You cannot turn the %s off\n", obj);
+		strcpy(string, "Cannot turn off the "); 
+		strcat(string, obj);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -153,11 +170,14 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	if(!str) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You opened %s\n", str); 
+		strcpy(string, "You opened the "); 
+		strcat(string, str);
+		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "You cannot open %s\n", str);
+		strcpy(string, "Cannot open the "); 
+		strcat(string, str);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -176,7 +196,6 @@ STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory
 
 	if(!gra || !dialogue || !inventory) return ERROR;
 
-	string = "";
 
 	if(check == OK){
 		strcpy(string, "Inspecting space: \n");
@@ -195,10 +214,8 @@ STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inve
 
 	if(!gra || !dialogue || !inventory) return ERROR;
 
-	string = "";
-
 	if(check == OK){
-		strcpy(string, "Inspecting inventory %s: \n", );
+		strcpy(string, "Inspecting inventory: \n");
 		i = 0;
 		while(inventory[i] != NULL){
 			strcat(string, inventory[i]);
@@ -218,17 +235,17 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 	char* obj = NULL;
 
 	if(!gra || !dialogue || !inventory) return ERROR;
-	obj = command_get_cmd(dialogue->current);
+	obj = command_get_symbol(dialogue->current);
 	if(!obj) return ERROR;
 
-	string = "";
-
 	if(check == OK){
-		strcpy(string, "Inspecting object %s: \n", obj);
+		strcpy(string, "Inspecting object ");
+		strcat(string, obj);
+		strcat(string, ": \n");
 		strcat(string, inventory);
 	}
 	else{
-		strcpy(string, "Could not inspect inventory\n");
+		strcpy(string, "Could not inspect the object\n");
 	}
 
 	return dialogue_print(gra, string);
@@ -303,7 +320,7 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 	strcat(string, "ITEMS IN THIS ROOM: \n");
 	i = 0;
 	while(objects[i] != NULL){
-		strcat(string, object[i]);
+		strcat(string, objects[i]);
 		strcat(string, "\n");
 		i++;
 	}
@@ -326,34 +343,34 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 * @return OK if it worked
 */
 STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphics* gra){
-	T_command cmd; /*!< Command for switch*/
+	T_Command cmd; /*!< Command for switch*/
 
-	if(!dialogue || !objects || !space) return ERROR;
+	if(!dialogue || !objects) return ERROR;
 
 	cmd = command_get_cmd(dialogue->current);
-	switch cmd{
+	switch (cmd){
 		case NO_CMD:
-			return dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects);
+			return dialogue_error(gra, dialogue, objects);
 		case UNKNOWN:
-			return dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects);
+			return dialogue_error(gra, dialogue, objects);
 		case QUIT:
-			return dialogue_quit(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_quit(gra, dialogue);
 		case PICK:
-			return dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_pick(gra, dialogue, objects, check);
 		case DROP:
-			return dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_drop(gra, dialogue, objects, check);
 		case GO:
-			return dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_go(gra, dialogue, objects, check);
 		case TURNON:
-			return dialogue_turnon(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_turnon(gra, dialogue, objects, check);
 		case TURNOFF:
-			return dialogue_turnoff(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check):
+			return dialogue_turnoff(gra, dialogue, objects, check);
 		case OPEN:
-			return dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
-		case SAVE:
-			return dialogue_save(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_open(gra, dialogue, objects, check);
+		/*case SAVE:
+			return dialogue_save(gra, dialogue, objects, check);
 		case LOAD:
-			return dialogue_load(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check);
+			return dialogue_load(gra, dialogue, check);*/
 		default:
 			return ERROR;
 	}
@@ -376,7 +393,7 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Graphics* gra, DIALOGUE_INSPECT type){
 	if(!dialogue || !gra) return ERROR;
 
-	switch type{
+	switch (type){
 		case SPACE:
 			return dialogue_inspect_space(gra, dialogue, inventory[0], check); /* Inventory[0] will be the description of the space/object*/
 		case INVENTORY:
@@ -397,7 +414,7 @@ STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Grap
 * @return OK if it was printed successfuly
 */
 STATUS dialogue_print(Graphics* gra, char *string){
-	if(!gra) return NULL;
+	if(!gra) return ERROR;
 
 	return print_in_zone(gra, DIALOGUE, 0, string);
 }

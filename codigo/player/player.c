@@ -251,7 +251,7 @@ Inventory* player_get_inventory(Player* player){
 */
 Id player_get_id(Player* player){
 
-	if(!player) return NULL;
+	if(!player) return NO_ID;
 	
 	return player->id;
 }

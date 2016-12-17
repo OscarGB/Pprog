@@ -306,18 +306,18 @@ return status;
 
 STATUS print_space_save(FILE *f, Space* space){
   Id id; 
-    char name[WORD_SIZE + 1]; 
-    Id north;
-    Id east; 
-    Id south; 
-    Id west; 
-    Id up; 
-    Id down; 
-    char gdesc[MAX_GDESC], buff[MAX_GDESC];
-    char *toks=NULL; 
-    BOOL light;
-    char lux[100];
-    char adesc[MAX_ADESC];
+  char name[WORD_SIZE + 1]; 
+  Id north;
+  Id east; 
+  Id south; 
+  Id west; 
+  Id up; 
+  Id down; 
+  char buff[MAX_GDESC];
+  /*char *toks=NULL; */
+  BOOL light;
+  char lux[100];
+  char adesc[MAX_ADESC];
 
   if(!f || !space) return ERROR;
   id = space_get_id(space);
@@ -411,13 +411,12 @@ STATUS print_object_save(FILE *f, Object *object){
   BOOL light;
   BOOL on_off;
   int duration;
-  char object_str[1024];
   char mvbl[100], mvd[100], hddn[100], lux[100], on[100];
 
 
   if(!f || !object) return ERROR;
 
-  id = object_get_id(space);
+  id = object_get_id(object);
   strcpy(name,object_get_name(object));
   strcpy(desc, object_get_desc(object));
   strcpy(mdesc, object_get_mdesc(object));
@@ -461,7 +460,7 @@ STATUS print_object_save(FILE *f, Object *object){
     strcpy(on, "FALSE");
   }
   
-  fprintf(f, "#o:%ld|%ld|%s|%s|%s|%c|%s|%s|%s|%s|%s|%d|%d|\n", 
+  fprintf(f, "#o:%ld|%ld|%s|%s|%s|%c|%s|%s|%s|%s|%s|%ld|%d|\n", 
       id, location, name, desc, mdesc, symbol, mvbl, mvd,
       hddn, lux, on, open, duration);
 
@@ -477,15 +476,14 @@ STATUS print_object_save(FILE *f, Object *object){
 */
 
 STATUS print_player_save(FILE *f, Player *player){
-
-  if(!f || !object) return ERROR;
-
   Id id;
   char name[WORD_SIZE +1];
   Id location; 
 
+  if(!f || !player) return ERROR;
+
   id = player_get_id(player);
-  strcpy(name, get_player_name(player));
+  strcpy(name, player_get_name(player));
   location = player_get_location(player);
 
   fprintf(f, "#p:%ld|%ld|%s|\n", id, location, name); 
@@ -511,18 +509,18 @@ STATUS game_save(Game* game, char* savepath){
   if(!f)
     return ERROR;
 
-  print_player_save(f, game->player);
+  print_player_save(f, game_get_player(game));
 
-  for(i=0; i<MAX_SPACES && game->spaces[i]; i++){ /*loops for printing all not null links, spaces and objects to file*/
-    print_space_save(f, game->spaces[i]);
+  for(i=0; i<MAX_SPACES && game_get_space_at(game, i) != NULL; i++){ /*loops for printing all not null links, spaces and objects to file*/
+    print_space_save(f, game_get_space_at(game,i));
   }
 
-  for(i=0; i<MAX_LINKS && game->links[i]; i++){
-    print_link_save(f, game->links[i]);
+  for(i=0; i<MAX_LINKS && game_get_link_n(game, i)!=NULL; i++){
+    print_link_save(f, game_get_link_n(game, i));
   }
 
-  for(i=0; i<=MAX_IDS && game->object[i]; i++){
-    print_object_save(f, game->object[i]);
+  for(i=0; i<=MAX_IDS && game_get_object_at(game, i) != NULL; i++){
+    print_object_save(f, game_get_object_at(game, i));
   }
 
   fclose(f);
