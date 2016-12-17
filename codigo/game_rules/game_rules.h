@@ -25,4 +25,12 @@ typedef struct _Game_rules Game_rules;
 STATUS pick_aleat_function(Game * game);
 
 
+STATUS change_light_space(Game *game);
+STATUS change_link_state(Game * game);
+STATUS change_object_location(Game * game);
+STATUS kill_player(Game * game);
+STATUS useless_player_deserves_death(Game * game);
+STATUS turn_object_light_off(Game * game);
+
+
 #endif
