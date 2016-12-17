@@ -17,6 +17,7 @@
 #include "die.h"
 #include "link.h"
 #include "graphics.h"
+#include "dialogue.h"
 
 #define PLAYER_OBJ -2 /*!< Id for an object into the player's bag*/
 #define DIE_FACES 6 /*!< Faces of the die*/
