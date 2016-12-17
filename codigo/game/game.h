@@ -20,7 +20,6 @@
 
 #define PLAYER_OBJ -2 /*!< Id for an object into the player's bag*/
 #define DIE_FACES 6 /*!< Faces of the die*/
-#define GET_BOOL(x) ("(x==0)? TRUE: FALSE)")
 
 
 typedef struct _Game Game;
@@ -122,41 +121,6 @@ STATUS game_add_object(Game* game, Object* object);
 */
 STATUS game_add_link(Game *game, Link* link);
 
-/**
-* @brief Returns the game die
-* @author Andrea Ruiz
-* @date 16/12/2016
-* @param Game *game
-* @return Die pointer
-*/
-Die * game_get_die(Game * game);
-
-/**
-* @brief Returns the link in a concrete position
-* @author Andrea Ruiz
-* @date 16/12/2016
-* @param Game *game
-* @return Link pointer
-*/
-Link * game_get_link_n(Game * game, int n);
-
-/**
-* @brief Returns the number of links
-* @author Andrea Ruiz
-* @date 16/12/2016
-* @param Game *game
-* @return int (number of links)
-*/
-int game_get_num_links(Game * game);
-
-/**
-* @brief Returns the objects in the game (all of them)
-* @author Andrea Ruiz
-* @date 16/12/2016
-* @param Object ** object
-* @return pointer to the array of objects
-*/	
-Object ** game_get_objects(Game * game);
-
 
 #endif
+
