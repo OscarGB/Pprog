@@ -14,6 +14,7 @@
 #include "command.h"
 #include "types.h"
 #include "graphics.h"
+#include "dialogue.h"
 
 
 /*
@@ -213,6 +214,7 @@ int main(int argc, char *argv[]){
 	Graphics* gra = NULL;
   	Game * game = NULL; /*Game pointer*/
   	Command *command = NULL; /*Command pointer*/
+  	Dialogue * dialogue = NULL; /*Dialogue pointer*/
   	FILE *l = NULL; /*Log file*/
   	int flag = 0; /*Flag if its on log mode*/
   	STATUS log; /*Variable for the creation of log file*/
@@ -257,12 +259,21 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
+	dialogue = dialogue_create(command);
+	if(!dialogue){
+		fprintf(stderr, "Dialogue couldn't be created\n");
+		game_destroy(game);
+		command_destroy(command);
+		graphics_destroy(gra);
+		return 1;
+	}
+
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
 		if(nvflag != 1){ 
 			game_print_screen(game, gra);
 		}
 		scan_from_screen(gra, command);
-		log = game_update(game, command);
+		log = game_update(game, command, dialogue, gra);
 		/*Log mode*/
 		if(flag == 1){
 			print_log(command, log, l); 	

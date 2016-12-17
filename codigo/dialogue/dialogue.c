@@ -38,7 +38,7 @@ STATUS dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects){
 
 	if(!gra || !dialogue) return ERROR;
 
-	string = "I didn't understand you.\n";
+	strcpy(string, "I didn't understand you.\n");
 
 	return dialogue_standard(gra, dialogue, objects, string);
 }
@@ -53,11 +53,14 @@ STATUS dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	if(!picked) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You have picked %s\n", picked); 
+		strcpy(string, "You have picked"); 
+		strcat(string, picked);
+		strcat(string, "\n");
 	}
 	else{
-		strcpy(string, "Could not pick %s\n", picked);
+		strcpy(string, "Could not pick "); 
+		strcat(string, picked);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -73,11 +76,14 @@ STATUS dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	if(!dropped) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You have dropped %s\n", dropped); 
+		strcpy(string, "You have dropped "); 
+		strcat(string, dropped);
+		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "Could not drop %s\n", dropped);
+		strcpy(string, "Could not drop "); 
+		strcat(string, dropped);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -93,11 +99,14 @@ STATUS dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS che
 	if(!direction) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You have gone %s\n", direction); 
+		strcpy(string, "You have gone "); 
+		strcat(string, direction);
+		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "You cannot go %s\n", direction);
+		strcpy(string, "You cannot go "); 
+		strcat(string, direction);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -113,11 +122,14 @@ STATUS dialogue_turnon(Graphics* gra, Dialogue* dialogue, char** objects, STATUS
 	if(!obj) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You turned the %s on\n", obj); 
+		strcpy(string, "You turned on the "); 
+		strcat(string, obj);
+		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "You cannot turn the %s on\n", obj);
+		strcpy(string, "Cannot turn on the "); 
+		strcat(string, obj);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -133,11 +145,14 @@ STATUS dialogue_turnoff(Graphics* gra, Dialogue* dialogue, char** objects, STATU
 	if(!obj) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You turned the %s off\n", obj); 
+		strcpy(string, "You turned off the "); 
+		strcat(string, obj);
+		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "You cannot turn the %s off\n", obj);
+		strcpy(string, "Cannot turn off the "); 
+		strcat(string, obj);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -153,11 +168,14 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	if(!str) return ERROR;
 
 	if(check == OK){
-		string = "";
-		strcpy(string, "You opened %s\n", str); 
+		strcpy(string, "You opened the "); 
+		strcat(string, str);
+		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "You cannot open %s\n", str);
+		strcpy(string, "Cannot open the "); 
+		strcat(string, str);
+		strcat(string, "\n");
 	}
 
 	return dialogue_standard(gra, dialogue, objects, string);
@@ -195,10 +213,8 @@ STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inve
 
 	if(!gra || !dialogue || !inventory) return ERROR;
 
-	string = "";
-
 	if(check == OK){
-		strcpy(string, "Inspecting inventory %s: \n", );
+		strcpy(string, "Inspecting inventory: \n");
 		i = 0;
 		while(inventory[i] != NULL){
 			strcat(string, inventory[i]);
@@ -224,11 +240,13 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 	string = "";
 
 	if(check == OK){
-		strcpy(string, "Inspecting object %s: \n", obj);
+		strcpy(string, "Inspecting object ");
+		strcat(string, obj);
+		strcat(string, ": \n");
 		strcat(string, inventory);
 	}
 	else{
-		strcpy(string, "Could not inspect inventory\n");
+		strcpy(string, "Could not inspect the object\n");
 	}
 
 	return dialogue_print(gra, string);
