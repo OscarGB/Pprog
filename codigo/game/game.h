@@ -83,7 +83,7 @@ Object * game_get_object(Game* game, Id id);
 * @param Command cmd
 * @return OK if it was updated
 */
-STATUS game_update(Game* game, Command *cmd);
+STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra);
 
 /**
 * @brief it destroys a given game
@@ -152,6 +152,8 @@ STATUS game_add_object(Game* game, Object* object);
 */
 STATUS game_add_link(Game *game, Link* link);
 
+<<<<<<< HEAD
+=======
 /**
 * @brief Returns the game die
 * @author Andrea Ruiz
@@ -217,5 +219,5 @@ int game_get_turns(Game * game);
 
 Player * game_get_player(Game * game);
 
-
 #endif
+
