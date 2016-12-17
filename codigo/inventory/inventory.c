@@ -281,7 +281,7 @@ BOOL inventory_is_in(Inventory* bag, Id id){
 * @param Inventory*
 * @return char* string
 */
-int* inventory_get_ids(Inventory* bag){
+long* inventory_get_ids(Inventory* bag){
 	Id* ids = NULL;
 	Set* set = NULL;
 
