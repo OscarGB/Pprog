@@ -507,9 +507,9 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   game->turns++;
   switch (command_get_cmd(cmd)) { /*Switch for the command value*/
   case UNKNOWN:
-    return callback_UNKNOWN(game, cmd, dia, gra);
+    return callback_UNKNOWN(game, dia, gra);
   case QUIT:
-    return callback_QUIT(game, cmd);
+    return callback_QUIT(game, dia, gra);
   case PICK:
     return callback_PICK(game, cmd, dia, gra, objects);
   case DROP:
