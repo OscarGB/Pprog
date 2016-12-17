@@ -14,7 +14,7 @@
 #include "game.h"
 #include "player.h"
 #include "object.h"
-#include "game_reader.h"
+#include "game_management.h"
 #include "die.h"
 #include "link.h"
 #include "graphics.h"

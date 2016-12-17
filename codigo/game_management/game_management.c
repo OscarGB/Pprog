@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "game_reader.h"
+#include "game_management.h"
 #include "game.h"
 #include "object.h"
 #include "space.h"

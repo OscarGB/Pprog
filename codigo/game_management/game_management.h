@@ -7,8 +7,8 @@
  * @revision_history none
  */
 
-#ifndef GAME_READER_H
-#define GAME_READER_H
+#ifndef GAME_MANAGEMENT_H
+#define GAME_MANAGEMENT_H
 
 #include "space.h"
 #include "object.h"
