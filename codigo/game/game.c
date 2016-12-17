@@ -1391,6 +1391,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     if(player_location == NO_ID) return ERROR;
 
     if(strlen(symbol) == 1){
+
       if(symbol[0] == 's' || symbol[0] == 'S'){ /*!< Inspecting space */
           	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
           		if(player_location==space_get_id(game->spaces[i])){
@@ -1404,8 +1405,10 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
           	}
             dialogue_inspect(dia, ERROR, invobjs, gra, SPACE);
             return ERROR;
-      }else{ /*!< Inspecting an object */
-  	     for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
+      }
+      else{ /*!< Inspecting an object */
+  	     
+         for(i=0; i< game->num_objects; i++){ /*!< If player has the object or they're in the same field */
   		      if(object_get_location(game->object[i]) == player_location || object_get_location(game->object[i]) == PLAYER_OBJ){
   			       if(object_get_symbol(game->object[i]) == symbol[0])
   				        obj = game->object[i];
@@ -1417,18 +1420,18 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
             return ERROR;
           }
 
-		  space = game_get_space(game, player_location); /*Get the space where the object is*/
+    		  space = game_get_space(game, player_location); /*Get the space where the object is*/
 
-		  if(space_get_light(space) == FALSE){
-		    dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
-        return ERROR;
+		      if(space_get_light(space) == FALSE){
+		        dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
+            return ERROR;
+          }
+          strcpy(game->desc, space_get_adesc(obj));
+          strcpy(invobjs[0], game->desc);
+          dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
+          return OK;
       }
-      strcpy(game->desc, space_get_description(obj));
-      strcpy(invobjs[0], game->desc);
-      dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
-      return OK;
     }
-
     else if(strlen(symbol) > 1){
       if(strcmp(symbol, "space") == 0 || strcmp(symbol, "Space") == 0){ /*!< Inspecting space */
           for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
