@@ -1,6 +1,6 @@
 /**
  * @brief Main to test the Graphics module
- * @file die_test.c
+ * @file graphics_test.c
  * @author Óscar Gómez
  * @version 1.0
  * @date 02/12/2016
@@ -73,7 +73,7 @@ BOOL test_graphics5(){
 }
 
 BOOL test_graphics6(){
-	if(graphics_clear(NULL) != ERROR){
+	if(graphics_clear(NULL, 0) != ERROR){
 		TEST_PRINT(FALSE);
 		return FALSE;
 	}
@@ -89,7 +89,7 @@ BOOL test_graphics7(){
 	print_in_zone(gra, PLAYGROUND, NW, "¡LET'S PLAY!");
 	graphics_refresh(gra);
 	sleep(DELAY);
-	if(graphics_clear(gra) == ERROR){
+	if(graphics_clear(gra, 0) == ERROR){
 		graphics_destroy(gra);
 		TEST_PRINT(FALSE);
 		return FALSE;
@@ -102,7 +102,7 @@ BOOL test_graphics7(){
 }
 
 BOOL test_graphics8(){
-	if(graphics_clear(NULL) != ERROR){
+	if(graphics_clear(NULL, 0) != ERROR){
 		TEST_PRINT(FALSE);
 		return FALSE;
 	}
@@ -419,7 +419,7 @@ BOOL test_graphics28(){
 	print_in_zone(gra, DIALOGUE, 0, "TESTING 2");
 	graphics_refresh(gra);
 	sleep(DELAY);
-	graphics_clear(gra);
+	graphics_clear(gra, 0);
 	if(print_in_zone(gra, DIALOGUE, 0, "TESTING 1") == ERROR){
 		graphics_destroy(gra);
 		TEST_PRINT(FALSE);

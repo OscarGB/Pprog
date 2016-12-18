@@ -248,5 +248,14 @@ Space* game_get_space_at(Game* game, int pos);
 */
 Object* game_get_object_at(Game* game, int pos);
 
+/**
+* @brief gets the name of the objects in player's location
+* @author José Ignacio Gómez
+* @date 18/12/2016
+* @param game pointer
+* @return string with the name of the objects
+*/
+char** game_get_objects_name(Game* game, char** objects);
+
 #endif
 

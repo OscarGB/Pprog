@@ -66,7 +66,7 @@ STATUS draw_borders(Graphics *gra);
 * @param Graphics* gra (The graphics to be cleared)
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
-STATUS graphics_clear(Graphics* gra);
+STATUS graphics_clear(Graphics* gra, ZONE z);
 
 /**
 * @brief Clears a zone of the graphics structure

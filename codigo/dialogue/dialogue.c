@@ -28,9 +28,14 @@ struct _Dialogue {
 STATUS dialogue_quit(Graphics* gra, Dialogue* dialogue){
 	if(!gra || !dialogue) return ERROR;
 
+	graphics_clear(gra, 0);
+	graphics_clear(gra, DIALOGUE);
+
 	print_in_zone(gra, DIALOGUE, 0, "See you soon!");
 
-	sleep(5);
+	graphics_refresh(gra);
+
+	sleep(3);
 
 	return OK;
 }
@@ -41,6 +46,8 @@ STATUS dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects){
 	if(!gra || !dialogue) return ERROR;
 
 	strcpy(string, "I didn't understand you.\n");
+
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 
 	return dialogue_standard(gra, dialogue, objects, string);
 }
@@ -65,6 +72,7 @@ STATUS dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 		strcat(string, "\n");
 	}
 
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
@@ -88,6 +96,7 @@ STATUS dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 		strcat(string, "\n");
 	}
 
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
@@ -111,6 +120,7 @@ STATUS dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS che
 		strcat(string, "\n");
 	}
 
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
@@ -134,6 +144,7 @@ STATUS dialogue_turnon(Graphics* gra, Dialogue* dialogue, char** objects, STATUS
 		strcat(string, "\n");
 	}
 
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
@@ -157,6 +168,7 @@ STATUS dialogue_turnoff(Graphics* gra, Dialogue* dialogue, char** objects, STATU
 		strcat(string, "\n");
 	}
 
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
@@ -180,6 +192,7 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 		strcat(string, "\n");
 	}
 
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
@@ -205,6 +218,7 @@ STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory
 		strcpy(string, "You should use a lantern\n");
 	}
 
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 	return dialogue_print(gra, string);
 }
 
@@ -227,6 +241,7 @@ STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inve
 		strcpy(string, "Could not inspect inventory\n");
 	}
 
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 	return dialogue_print(gra, string);
 }
 
@@ -248,6 +263,7 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 		strcpy(string, "Could not inspect the object\n");
 	}
 
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 	return dialogue_print(gra, string);
 }
 
@@ -317,7 +333,7 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 		return ERROR;
 	}
 
-	strcat(string, "ITEMS IN THIS ROOM: \n");
+	strcat(string, "\nITEMS IN THIS ROOM: \n");
 	i = 0;
 	while(objects[i] != NULL){
 		strcat(string, objects[i]);
@@ -345,7 +361,7 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphics* gra){
 	T_Command cmd; /*!< Command for switch*/
 
-	if(!dialogue || !objects) return ERROR;
+	if(!dialogue || !gra) return ERROR;
 
 	cmd = command_get_cmd(dialogue->current);
 	switch (cmd){
@@ -414,7 +430,15 @@ STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Grap
 * @return OK if it was printed successfuly
 */
 STATUS dialogue_print(Graphics* gra, char *string){
-	if(!gra) return ERROR;
+	STATUS result;
 
-	return print_in_zone(gra, DIALOGUE, 0, string);
+	if(!gra || !string) return ERROR;
+
+	if(graphics_clear(gra, DIALOGUE)) return ERROR;
+
+	result = print_in_zone(gra, DIALOGUE, 0, string);
+
+	graphics_refresh(gra);
+
+	return result;
 }
