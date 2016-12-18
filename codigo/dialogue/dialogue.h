@@ -83,6 +83,21 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 */
 STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Graphics* gra, DIALOGUE_INSPECT type);
 
+
+/*
+* @brief load callback print (show save files)
+* @author Óscar Pinto Santamaría
+* @date 18/12/2016
+* @param Dialogue*
+* @param STATUS
+* @param char* str
+* @param Graphics*
+* @param char string
+* @return OK if it worked
+*/
+
+STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS check);
+
 /*
 * @brief prints on screen the dialogue
 * @author José Ignacio Gómez

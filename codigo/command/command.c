@@ -103,6 +103,11 @@ STATUS get_user_input(Command* command, char* input){
 
 			strcpy(command->symbol, symbol);
 		}
+		else if (!strcmp(action, "load") || !strcmp(action, "l")){
+			command->cmd = LOAD;
+
+			strcpy(command->symbol, symbol);
+		}
 		else{
 			command->cmd = UNKNOWN;
 		}

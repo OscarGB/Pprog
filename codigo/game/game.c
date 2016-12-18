@@ -2049,7 +2049,7 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 }
 
 STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
-  char path[256] = "codigo/Saves/";
+  char path[256] = "codigo/Saves/save_";
   char *symbol = NULL;
 
 	if(!game || !dia || !gra || !cmd) return ERROR;
@@ -2069,7 +2069,7 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	int i=0;
 	DIR *dir;
 	struct dirent *ent;
-	char savegames[256];
+	char savegames[256]="";
 	char *symbol = NULL;
 	char path[256] = "codigo/Saves/";
 	STATUS status = ERROR;
@@ -2084,16 +2084,26 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	symbol = command_get_symbol(cmd);
 	if(!strcmp(symbol, "show")){
 		if ((dir = opendir ("codigo/Saves")) != NULL) {
-		  while ((ent = readdir (dir)) != NULL && i<4) {
-		    strcat(savegames, ent->d_name);
-		    strcat(savegames, "\n");
-		    i++;
+		  while ((ent = readdir (dir)) != NULL && i<=7) {
+			if ( !strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") ){
+    			 continue;
+			} else {
+		    		strcat(savegames, ent->d_name);
+		    		strcat(savegames, "\n");
+		    		i++;
+			}
+		 }
+		  if(!strcmp(savegames, "")){
+			dialogue_load_show(gra, dia, "No saved files\n", OK);
+		  }else{
+		  	dialogue_load_show(gra, dia, savegames, OK);
 		  }
-		  strcpy(game->desc, savegames);
 		  closedir (dir);
 		  return OK;
-		} else
+		} else{
+			dialogue_load_show(gra, dia, savegames, ERROR);
 		  	return ERROR;
+		}
 	}
 
 	/*This loads a file to the game*/
