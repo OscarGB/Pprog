@@ -60,13 +60,13 @@ STATUS graphics_destroy(Graphics* gra);
 STATUS draw_borders(Graphics *gra);
 
 /**
-* @brief Clears a graphics structure
+* @brief Clears a graphics structure without clearing the dialogue
 * @author Óscar Gómez
 * @date 02/12/2016
 * @param Graphics* gra (The graphics to be cleared)
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
-STATUS graphics_clear(Graphics* gra, ZONE z);
+STATUS graphics_clear(Graphics* gra);
 
 /**
 * @brief Clears a zone of the graphics structure

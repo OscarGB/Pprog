@@ -613,7 +613,7 @@ void game_print_screen(Game* game, Graphics* gra){
     return;
   }
 
-  graphics_clear(gra, 0);
+  graphics_clear(gra);
   
   id_act = game_get_player_location(game);
 
