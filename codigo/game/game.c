@@ -545,6 +545,7 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   case LOAD:
   	return callback_LOAD(game, cmd, dia, gra);
   case NO_CMD:
+    dialogue_generic(dia, OK, NULL, gra);
     break;
   default: /*We must never arrive here*/
     return ERROR;
