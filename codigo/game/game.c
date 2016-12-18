@@ -545,7 +545,7 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   case LOAD:
   	return callback_LOAD(game, cmd, dia, gra);
   case NO_CMD:
-    dialogue_generic(dia, OK, NULL, gra);
+    dialogue_generic(dia, OK, game_get_objects_name(game, objects), gra);
     break;
   default: /*We must never arrive here*/
     return ERROR;
@@ -944,8 +944,8 @@ BOOL game_is_over(Game* game) {
 * @return OK if it went ok
 */
 STATUS callback_UNKNOWN(Game* game, Dialogue* dia, Graphics* gra) {
-
-  dialogue_generic(dia, OK, NULL, gra);
+  char *objects[MAX_IDS];
+  dialogue_generic(dia, OK, game_get_objects_name(game, objects), gra);
   return OK;
 }
 
@@ -1423,7 +1423,7 @@ void free_invobjs(char **invobjs){
 */
 STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
-    int i, j;/* !< Variable used for loops*/
+    int i;/* !< Variable used for loops*/
     Object *obj; /* !<Variable used for storing the player's object*/
     Id player_location = NO_ID; /* !< Locations of the player and object*/
     Space *space; /*!<Variable used for storing auxiliary spaces*/
