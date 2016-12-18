@@ -229,7 +229,7 @@ STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inve
 	if(check == OK){
 		strcpy(string, "Inspecting inventory: \n");
 		i = 0;
-		while(inventory[i] != NULL){
+		while(inventory[i][0] != '\0'){
 			strcat(string, inventory[i]);
 			strcat(string, "\n");
 			i++;

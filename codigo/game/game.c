@@ -1518,15 +1518,19 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     }
     else if(strlen(symbol) > 1){
       if(strcmp(symbol, "space") == 0 || strcmp(symbol, "Space") == 0){ /*!< Inspecting space */
-          for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
-            if(player_location==space_get_id(game->spaces[i])){
-                if(space_get_light(game->spaces[i]) == TRUE){
-                  strcpy(game->desc, space_get_adesc(game->spaces[i]));
-                  strcpy(invobjs[0], game->desc);
-                  dialogue_inspect(dia, OK, invobjs, gra, SPACE);
-                  free_invobjs(invobjs);
-                  return OK;  
-                }  
+        for(i=0; i < MAX_SPACES; i++){
+            if(player_location == space_get_id(game->spaces[i])){
+              if(space_get_light(game->spaces[i]) != FALSE){
+                strcpy(invobjs[0], space_get_adesc(game->spaces[i]));
+                dialogue_inspect(dia, OK, invobjs, gra, SPACE);
+                free_invobjs(invobjs);
+                return OK;  
+              }
+              else{
+                dialogue_inspect(dia, ERROR, invobjs, gra, SPACE);
+                free_invobjs(invobjs);
+                return OK;
+              }
             }
           }
           dialogue_inspect(dia, ERROR, invobjs, gra, SPACE);
@@ -1550,12 +1554,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
           if(ids[i] == NO_ID){
             break;
           }
-          for(j = 0; j < game->num_objects; i++){
-            if(object_get_id(game->object[j]) == ids[i]){
-              strcpy(invobjs[i], object_get_name(game->object[i]));
-              break;
-            }
-          }
+          strcpy(invobjs[i], object_get_name(game_get_object(game, ids[i])));
         }
         dialogue_inspect(dia, OK, invobjs, gra, INVENTORY);
         free_invobjs(invobjs);
