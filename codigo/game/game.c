@@ -1396,6 +1396,23 @@ STATUS callback_ROLL(Game* game, Command* cmd){
 }
 
 /**
+* @brief frees invobjs (private function)
+* @author  Óscar Gómez
+* @date 18/12/2016
+* @param char **invobjs (inbobjs)
+* @return void
+*/
+void free_invobjs(char **invobjs){
+  int i;
+  if(!invobjs) return;
+  for (i = 0; i < MAX_IDS && invobjs[i]; i++){
+    free(invobjs[i]);
+  }
+  free(invobjs);
+  return;
+}
+
+/**
 * @brief callback for "inspect" instruction
 * @author Óscar Pinto, Andrea Ruiz
 * @date 04/11/2016
@@ -1412,11 +1429,17 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     char *symbol = NULL; /*!< Variable used for storing the command*/
     Inventory* inventory = NULL;
     Id* ids = NULL;
-    char **invobjs;
+    char **invobjs = NULL;
 
-    invobjs = (char **) malloc(sizeof(char *) * (1 + game->num_objects));
-    for(i = 0; i >= game->num_objects; i++){
-      invobjs[i] = (char*) malloc(sizeof(char)*MAX_ADESC);
+    invobjs = malloc(sizeof(char*) * MAX_IDS);
+    if(!invobjs)return ERROR;
+    for(i = 0; i<MAX_IDS; i++){
+      invobjs[i] = NULL;
+      invobjs[i] = malloc(sizeof(char)*MAX_ADESC);
+      if(!invobjs[i]){
+        free_invobjs(invobjs);
+        return ERROR;
+      }
       invobjs[i][0] = '\0';
     }
 
@@ -1426,16 +1449,19 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     
     if(!game || !cmd || !dia || !gra){
       dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
+      free_invobjs(invobjs);
       return ERROR;
     }
     if(strcmp(symbol, "E") == 0){
       dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
+      free_invobjs(invobjs);
       return ERROR;
     }
 
     player_location = game_get_player_location(game);
     if(player_location == NO_ID){
       dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
+      free_invobjs(invobjs);
       return ERROR;
     }
 
@@ -1447,15 +1473,18 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
                 if(space_get_light(game->spaces[i]) != FALSE){
           		    strcpy(invobjs[0], space_get_adesc(game->spaces[i]));
           		    dialogue_inspect(dia, OK, invobjs, gra, SPACE);
+                  free_invobjs(invobjs);
                   return OK;	
                 }
                 else{
                   dialogue_inspect(dia, ERROR, invobjs, gra, SPACE);
+                  free_invobjs(invobjs);
                   return OK;
                 }
           		}
           	}
             dialogue_inspect(dia, ERROR, invobjs, gra, SPACE);
+            free_invobjs(invobjs);
             return ERROR;
       }
       else{ /*!< Inspecting an object */
@@ -1469,6 +1498,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
           if(!obj){
             dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
+            free_invobjs(invobjs);
             return ERROR;
           }
 
@@ -1476,11 +1506,13 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
 		      if(space_get_light(space) == FALSE){
 		        dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
+            free_invobjs(invobjs);
             return ERROR;
           }
           strcpy(game->desc, space_get_adesc(space));
           strcpy(invobjs[0], game->desc);
           dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
+          free_invobjs(invobjs);
           return OK;
       }
     }
@@ -1492,22 +1524,26 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
                   strcpy(game->desc, space_get_adesc(game->spaces[i]));
                   strcpy(invobjs[0], game->desc);
                   dialogue_inspect(dia, OK, invobjs, gra, SPACE);
+                  free_invobjs(invobjs);
                   return OK;  
                 }  
             }
           }
           dialogue_inspect(dia, ERROR, invobjs, gra, SPACE);
+          free_invobjs(invobjs);
           return ERROR;
       }
       else if(strcmp(symbol, "inventory") == 0 || strcmp(symbol, "Inventory") == 0){ /*!< Inspecting inventory*/
         inventory = player_get_inventory(game->player);
         if(!inventory){ 
           dialogue_inspect(dia, ERROR, invobjs, gra, INVENTORY);
+          free_invobjs(invobjs);
           return ERROR;
         }
         ids = inventory_get_ids(player_get_inventory(game->player));
         if(!ids){
           dialogue_inspect(dia, ERROR, invobjs, gra, INVENTORY);
+          free_invobjs(invobjs);
           return ERROR;
         }
         for(i = 0; i < MAX_IDS; i++){
@@ -1516,12 +1552,13 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
           }
           for(j = 0; j < game->num_objects; i++){
             if(object_get_id(game->object[j]) == ids[i]){
-              invobjs[i] = object_get_name(game->object[i]);
+              strcpy(invobjs[i], object_get_name(game->object[i]));
               break;
             }
           }
         }
         dialogue_inspect(dia, OK, invobjs, gra, INVENTORY);
+        free_invobjs(invobjs);
         return OK;
       }
       else{ /*!< Inspecting an object */
@@ -1534,6 +1571,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
           if(!obj) {
             dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
+            free_invobjs(invobjs);
             return ERROR;
           }
 	
@@ -1541,16 +1579,19 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
     		  if(space_get_light(space) == FALSE){
             dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
+            free_invobjs(invobjs);
             return ERROR;
           }
           strcpy(game->desc, space_get_adesc(space));
           strcpy(invobjs[0], game->desc);
           dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
+          free_invobjs(invobjs);
           return OK;
       }
     }
 
   dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
+  free_invobjs(invobjs);
   return ERROR;
 } 
 
