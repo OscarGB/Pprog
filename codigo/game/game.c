@@ -984,8 +984,6 @@ STATUS callback_NEXT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
-    objects = game_get_objects_name(game, objects);
-    dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
   
@@ -1011,20 +1009,13 @@ STATUS callback_NEXT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
       if (south_id != NO_ID) {
 
         result = game_set_player_location(game, south_id);
-        objects = game_get_objects_name(game, objects);
-        dialogue_generic(dia, result, objects, gra);
-
         return result;
       }
       else{
-        objects = game_get_objects_name(game, objects);
-        dialogue_generic(dia, ERROR, objects, gra);
         return ERROR;
       }
     }
   }
-  objects = game_get_objects_name(game, objects);
-  dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
 
@@ -1047,8 +1038,6 @@ STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
-    objects = game_get_objects_name(game, objects);
-    dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
   
@@ -1073,21 +1062,13 @@ STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
       }
       if (north_id != NO_ID) {
         result = game_set_player_location(game, north_id);
-        objects = game_get_objects_name(game, objects);
-        dialogue_generic(dia, result, objects, gra);
-
         return result;
       }
       else{
-        objects = game_get_objects_name(game, objects);
-        dialogue_generic(dia, ERROR, objects, gra);
         return ERROR;
       }
     }
   }
-
-  objects = game_get_objects_name(game, objects);
-  dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
 
@@ -1110,8 +1091,6 @@ STATUS callback_UP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
-    objects = game_get_objects_name(game, objects);
-    dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
   
@@ -1136,21 +1115,13 @@ STATUS callback_UP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
       }
       if (up_id != NO_ID) {
         result = game_set_player_location(game, up_id);
-        objects = game_get_objects_name(game, objects);
-        dialogue_generic(dia, result, objects, gra);
-
         return result;
       }
       else{
-        objects = game_get_objects_name(game, objects);
-        dialogue_generic(dia, ERROR, objects, gra);
         return ERROR;
       }
     }
   }
-
-  objects = game_get_objects_name(game, objects);
-  dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 
 }
@@ -1173,8 +1144,6 @@ STATUS callback_DOWN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
-    objects = game_get_objects_name(game, objects);
-    dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
   
@@ -1199,20 +1168,13 @@ STATUS callback_DOWN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
       }
       if (down_id != NO_ID) {
         result = game_set_player_location(game, down_id);
-        objects = game_get_objects_name(game, objects);
-        dialogue_generic(dia, result, objects, gra);
-
         return result;
       }
       else{
-        objects = game_get_objects_name(game, objects);
-        dialogue_generic(dia, ERROR, objects, gra);
         return ERROR;
       }
     }
   }
-  objects = game_get_objects_name(game, objects);
-  dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
 
@@ -1234,8 +1196,6 @@ STATUS callback_JUMP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
-    objects = game_get_objects_name(game, objects);
-    dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
   
@@ -1260,20 +1220,13 @@ STATUS callback_JUMP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
       }
       if (east_id != NO_ID) {
         result = game_set_player_location(game, east_id);
-        objects = game_get_objects_name(game, objects);
-        dialogue_generic(dia, result, objects, gra);
-
         return result;
       }
       else{
-        objects = game_get_objects_name(game, objects);
-        dialogue_generic(dia, ERROR, objects, gra);
         return ERROR;
       }
     }
   }
-  objects = game_get_objects_name(game, objects);
-  dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
 

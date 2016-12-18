@@ -142,6 +142,8 @@ Graphics* graphics_create(){
 		return NULL;
 	}
 
+	gra->dia[0] = '\0';
+
 	return gra;
 }
 
@@ -239,7 +241,7 @@ STATUS graphics_clear_zone(Graphics* gra, ZONE zone){
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
 STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
-	int i = 0, j = 0;
+	int i = 0, j = 0, p = 0;
 
 	if(!gra || !print){
 		return ERROR;
@@ -257,6 +259,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 						if(i%SPACE_SIZE_X == 0 && i != 0){
 							j++;
 						}
+						if(print[i] == '\n'){
+							j++;
+						}
 						mvwprintw(gra->playground, j, i%SPACE_SIZE_X, "%c", print[i]);
 					}
 					return OK;
@@ -267,6 +272,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 							return OK;
 						}
 						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						if(print[i] == '\n'){
 							j++;
 						}
 						mvwprintw(gra->playground, j, SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
@@ -281,6 +289,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 						if(i%SPACE_SIZE_X == 0 && i != 0){
 							j++;
 						}
+						if(print[i] == '\n'){
+							j++;
+						}
 						mvwprintw(gra->playground, j, 2*SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
 					}
 					return OK;
@@ -291,6 +302,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 							return OK;
 						}
 						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						if(print[i] == '\n'){
 							j++;
 						}
 						mvwprintw(gra->playground, SPACE_SIZE_Y + j, i%SPACE_SIZE_X, "%c", print[i]);
@@ -305,6 +319,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 						if(i%SPACE_SIZE_X == 0 && i != 0){
 							j++;
 						}
+						if(print[i] == '\n'){
+							j++;
+						}
 						mvwprintw(gra->playground, SPACE_SIZE_Y + j, SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
 					}
 					return OK;
@@ -315,6 +332,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 							return OK;
 						}
 						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						if(print[i] == '\n'){
 							j++;
 						}
 						mvwprintw(gra->playground, SPACE_SIZE_Y + j, 2*SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
@@ -329,6 +349,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 						if(i%SPACE_SIZE_X == 0 && i != 0){
 							j++;
 						}
+						if(print[i] == '\n'){
+							j++;
+						}
 						mvwprintw(gra->playground, 2*SPACE_SIZE_Y + j, i%SPACE_SIZE_X, "%c", print[i]);
 					}
 					return OK;
@@ -341,6 +364,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 						if(i%SPACE_SIZE_X == 0 && i != 0){
 							j++;
 						}
+						if(print[i] == '\n'){
+							j++;
+						}
 						mvwprintw(gra->playground, 2*SPACE_SIZE_Y + j, SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
 					}
 					return OK;
@@ -351,6 +377,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 							return OK;
 						}
 						if(i%SPACE_SIZE_X == 0 && i != 0){
+							j++;
+						}
+						if(print[i] == '\n'){
 							j++;
 						}
 						mvwprintw(gra->playground, 2*SPACE_SIZE_Y + j, 2*SPACE_SIZE_X + i%SPACE_SIZE_X, "%c", print[i]);
@@ -368,26 +397,42 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 			}
 			return OK;
 		case DIALOGUE:
-			j = 1;
+			j = 2;
+			p = 1;
 			for(i = 0; i < strlen(print); i++){
-				if(i > ((WIN2_X-2)*(WIN2_Y-2))){
+				if(p > ((WIN2_X-2)*(WIN2_Y-2))){
 					return OK;
 				}
-				if(i%(WIN2_X-2) == 0){
+				if(p%(WIN2_X-2) == 0){
 					j++;
 				}
-				mvwprintw(gra->dialogue, j, (i%(WIN2_X -2))+1, "%c", print[i]);
+				if(print[i] == '\n'){
+					while(p%(WIN2_X-2) != 0){
+						p++;
+					}
+					j++;
+				}
+				mvwprintw(gra->dialogue, j, (p%(WIN2_X -2)), "%c", print[i]);
+				p++;
 			}
 			
 			j = 10;
+			p = 1;
 			for(i = 0; i < strlen(gra->dia); i++){
-				if(i > ((WIN2_X-2)*(WIN2_Y-2))){
+				if(p > ((WIN2_X-2)*(WIN2_Y-2))){
 					return OK;
 				}
-				if(i%(WIN2_X-2) == 0){
+				if(p%(WIN2_X-2) == 0){
 					j++;
 				}
-				mvwprintw(gra->dialogue, j, (i%(WIN2_X -2))+1, "%c", gra->dia[i]);
+				if(gra->dia[i] == '\n'){
+					while(p%(WIN2_X-2) != 0){
+						p++;
+					}
+					j++;
+				}
+				mvwprintw(gra->dialogue, j, (p%(WIN2_X -2)), "%c", gra->dia[i]);
+				p++;
 			}
 
 			strcpy(gra->dia, print);
