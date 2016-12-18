@@ -28,8 +28,8 @@ struct _Dialogue {
 STATUS dialogue_quit(Graphics* gra, Dialogue* dialogue){
 	if(!gra || !dialogue) return ERROR;
 
-	graphics_clear(gra, 0);
-	graphics_clear(gra, DIALOGUE);
+	graphics_clear(gra);
+	graphics_clear_zone(gra, DIALOGUE);
 
 	print_in_zone(gra, DIALOGUE, 0, "See you soon!");
 
@@ -432,7 +432,7 @@ STATUS dialogue_print(Graphics* gra, char *string){
 
 	if(!gra || !string) return ERROR;
 
-	if(graphics_clear(gra, DIALOGUE) == ERROR) return ERROR;
+	if(graphics_clear_zone(gra, DIALOGUE) == ERROR) return ERROR;
 
 	result = print_in_zone(gra, DIALOGUE, 0, string);
 
