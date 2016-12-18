@@ -407,7 +407,7 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 * @return OK if it worked
 */
 STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Graphics* gra, DIALOGUE_INSPECT type){
-	if(!dialogue || !gra) return ERROR;
+	if(!dialogue || !gra || !inventory) return ERROR;
 
 	switch (type){
 		case SPACE:

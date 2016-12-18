@@ -13,7 +13,7 @@ NCURSES = -lncurses
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
 
 ALL = JuegoOcaPlus 	#Executables to make with a make call
-TEST = object_test link_test die_test player_test inventory_test space_test set_test graphics_test	#Executables to make with make test or make debug
+TEST = object_test link_test die_test player_test inventory_test space_test set_test graphics_test dialogue_test	#Executables to make with make test or make debug
 ALL_DEBUG = $(ALL) $(TEST) #Executables to make with make debug
 
 all: $(ALL) #Generates only the main game
@@ -26,6 +26,10 @@ nocolors: $(ALL_DEBUG) #Generates the tests and the main game without colors
 
 debug: CFLAGS += -DDEBUG	#Adition of DEBUG macro
 debug: $(ALL_DEBUG) #Generates the tests and the main game
+
+dialogue_test: dialogue_test.o dialogue.o
+	@echo "--->Creating executable dialogue_test"
+	@gcc $(CFLAGS) -o dialogue_test dialogue_test.o dialogue.o command.o graphics.o $(NCURSES)
 
 die_test: die_test.o die.o 
 	@echo "--->Creating executable die_test"
@@ -58,6 +62,10 @@ space_test: space_test.o space.o set.o
 graphics_test: graphics_test.o graphics.o command.o
 	@echo "--->Creating executable graphics_test"
 	@gcc $(CFLAGS) -o graphics_test graphics_test.o graphics.o command.o $(NCURSES)
+
+dialogue_test.o: codigo/test/dialogue_test.c 
+	@echo "--->Generating dialogue_test.o"
+	@gcc $(CFLAGS) -c codigo/test/dialogue_test.c $(NCURSES)
 
 die_test.o: codigo/test/die_test.c 
 	@echo "--->Generating die_test.o"

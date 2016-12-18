@@ -1488,7 +1488,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
           	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
           		if(player_location==space_get_id(game->spaces[i])){
                 if(space_get_light(game->spaces[i]) == TRUE){
-          		    strcpy(game->desc, "Descripcion avanzada");
+          		    strcpy(game->desc, space_get_adesc(game->spaces[i]));
                   strcpy(invobjs[0], game->desc);
           		    dialogue_inspect(dia, OK, invobjs, gra, SPACE);
                   return OK;	

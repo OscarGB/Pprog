@@ -8,3 +8,17 @@ Cambiar todo lo relativo a LINKS, esta jodido
 COSAS PARA PONER EN DOCUMENTACION:
 Siempre que se juega hay que poner la terminal en pantalla completa
 Prueba
+
+---------------------------------------------
+cores:
+inspect de objeto
+open
+
+bugs:
+impresión de basura en dialogue
+
+fallos:
+inspect no imprime
+inspect_object da core
+open da core
+inspect inventory funciona a nivel de dialogue, pero no imprime objetos
