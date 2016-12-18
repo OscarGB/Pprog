@@ -12,7 +12,7 @@
 #include <unistd.h>
 
 
-#define MAX_TESTS 56
+#define MAX_TESTS 49
 #define DELAY 1
 
 BOOL test_graphics1(){
@@ -457,15 +457,6 @@ BOOL test_graphics30(){
 }
 
 BOOL test_graphics31(){
-	if(graphics_destroy(NULL) == OK){
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-	TEST_PRINT(TRUE);
-	return TRUE;
-}
-
-BOOL test_graphics32(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	if(draw_borders(gra) == ERROR){
@@ -480,25 +471,7 @@ BOOL test_graphics32(){
 	return TRUE;
 }
 
-BOOL test_graphics33(){
-	if(draw_borders(NULL) != ERROR){
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-	TEST_PRINT(TRUE);
-	return TRUE;
-}
-
-BOOL test_graphics34(){
-	if(graphics_clear(NULL) != ERROR){
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-	TEST_PRINT(TRUE);
-	return TRUE;
-}
-
-BOOL test_graphics35(){
+BOOL test_graphics32(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, DIALOGUE, N, "HELLO");
@@ -518,25 +491,7 @@ BOOL test_graphics35(){
 	return TRUE;
 }
 
-BOOL test_graphics36(){
-	if(graphics_clear(NULL) != ERROR){
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-	TEST_PRINT(TRUE);
-	return TRUE;
-}
-
-BOOL test_graphics37(){
-	if(graphics_clear_zone(NULL, COMMANDS) != ERROR){
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-	TEST_PRINT(TRUE);
-	return TRUE;
-}
-
-BOOL test_graphics38(){
+BOOL test_graphics33(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	if(graphics_clear_zone(gra, 8) != ERROR){
@@ -549,7 +504,7 @@ BOOL test_graphics38(){
 	return TRUE;
 }
 
-BOOL test_graphics39(){
+BOOL test_graphics34(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, DIALOGUE, N,"TESTING WITH A LONG SENTENCE TO SEE IF IT WORKS CORRECTLY");
@@ -567,7 +522,7 @@ BOOL test_graphics39(){
 	return TRUE;
 }
 
-BOOL test_graphics40(){
+BOOL test_graphics35(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, COMMANDS, 0,"TESTING");
@@ -585,7 +540,7 @@ BOOL test_graphics40(){
 	return TRUE;
 }
 
-BOOL test_graphics41(){
+BOOL test_graphics36(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, PLAYGROUND, NW,"--------------|            ||            ||            ||            ||            |--------------");
@@ -603,7 +558,7 @@ BOOL test_graphics41(){
 	return TRUE;
 }
 
-BOOL test_graphics42(){
+BOOL test_graphics37(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, PLAYGROUND, N,"--------------|            ||            ||            ||            ||            |--------------");
@@ -621,7 +576,7 @@ BOOL test_graphics42(){
 	return TRUE;
 }
 
-BOOL test_graphics43(){
+BOOL test_graphics38(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, PLAYGROUND, NE,"--------------|            ||            ||            ||            ||            |--------------");
@@ -639,7 +594,7 @@ BOOL test_graphics43(){
 	return TRUE;
 }
 
-BOOL test_graphics44(){
+BOOL test_graphics39(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, PLAYGROUND, W,"--------------|            ||            ||            ||            ||            |--------------");
@@ -657,7 +612,7 @@ BOOL test_graphics44(){
 	return TRUE;
 }
 
-BOOL test_graphics45(){
+BOOL test_graphics40(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, PLAYGROUND, C,"--------------|            ||            ||            ||            ||            |--------------");
@@ -675,7 +630,7 @@ BOOL test_graphics45(){
 	return TRUE;
 }
 
-BOOL test_graphics46(){
+BOOL test_graphics41(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, PLAYGROUND, E,"--------------|            ||            ||            ||            ||            |--------------");
@@ -693,7 +648,7 @@ BOOL test_graphics46(){
 	return TRUE;
 }
 
-BOOL test_graphics47(){
+BOOL test_graphics42(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, PLAYGROUND, SW,"--------------|            ||            ||            ||            ||            |--------------");
@@ -711,7 +666,7 @@ BOOL test_graphics47(){
 	return TRUE;
 }
 
-BOOL test_graphics48(){
+BOOL test_graphics43(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, PLAYGROUND, S,"--------------|            ||            ||            ||            ||            |--------------");
@@ -729,7 +684,7 @@ BOOL test_graphics48(){
 	return TRUE;
 }
 
-BOOL test_graphics49(){
+BOOL test_graphics44(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, PLAYGROUND, SE,"--------------|            ||            ||            ||            ||            |--------------");
@@ -747,16 +702,7 @@ BOOL test_graphics49(){
 	return TRUE;
 }
 
-BOOL test_graphics50(){
-	if(print_in_zone(NULL, PLAYGROUND, NW, "TESTING") != ERROR){
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-	TEST_PRINT(TRUE);
-	return TRUE;
-}
-
-BOOL test_graphics51(){
+BOOL test_graphics45(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	if(print_in_zone(gra, 8, NW, "TESTING") != ERROR){
@@ -769,7 +715,7 @@ BOOL test_graphics51(){
 	return TRUE;
 }
 
-BOOL test_graphics52(){
+BOOL test_graphics46(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	if(print_in_zone(gra, PLAYGROUND, 805, "TESTING") != ERROR){
@@ -782,7 +728,7 @@ BOOL test_graphics52(){
 	return TRUE;
 }
 
-BOOL test_graphics53(){
+BOOL test_graphics47(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	if(print_in_zone(gra, DIALOGUE, E, NULL) != ERROR){
@@ -795,16 +741,7 @@ BOOL test_graphics53(){
 	return TRUE;
 }
 
-BOOL test_graphics54(){
-	if(graphics_refresh(NULL) != ERROR){
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-	TEST_PRINT(TRUE);
-	return TRUE;
-}
-
-BOOL test_graphics55(){
+BOOL test_graphics48(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, PLAYGROUND, NW,"--------------|            ||            ||            ||            ||            |--------------");
@@ -830,7 +767,7 @@ BOOL test_graphics55(){
 	return TRUE;
 }
 
-BOOL test_graphics56(){
+BOOL test_graphics49(){
 	Graphics* gra = NULL;
 	gra = graphics_create(1);
 	print_in_zone(gra, DIALOGUE, 0, "TESTING 2");
@@ -914,13 +851,6 @@ int main(int argc, char* argv[]){
 	if(todas || test == 47) test_graphics47();
 	if(todas || test == 48) test_graphics48();
 	if(todas || test == 49) test_graphics49();
-	if(todas || test == 50) test_graphics50();
-	if(todas || test == 51) test_graphics51();
-	if(todas || test == 52) test_graphics52();
-	if(todas || test == 53) test_graphics53();
-	if(todas || test == 54) test_graphics54();
-	if(todas || test == 55) test_graphics55();
-	if(todas || test == 56) test_graphics56();
 	PRINT_RESULTS();
 
 	return 0;
