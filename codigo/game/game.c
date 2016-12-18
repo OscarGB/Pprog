@@ -12,6 +12,7 @@
 #include <string.h>
 #include <dirent.h>
 #include <unistd.h>
+#include <alloca.h>
 #include "game.h"
 #include "player.h"
 #include "object.h"
@@ -800,9 +801,6 @@ void game_print_screen(Game* game, Graphics* gra){
   space_seast = game_get_space(game, id_seast);
   space_swest = game_get_space(game, id_swest);
   
-  if(system(CLEAR))
-     return; 
-
   if (id_north != NO_ID) {
     if(space_get_light(space_north) == TRUE){
       print_in_zone(gra, PLAYGROUND, N, space_get_gdesc(space_north));
@@ -1446,14 +1444,14 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
       if(symbol[0] == 's' || symbol[0] == 'S'){ /*!< Inspecting space */
           	for(i=0; i < MAX_SPACES; i++){
           		if(player_location == space_get_id(game->spaces[i])){
-                if(game->spaces[i] == NULL){
-
-                  dialogue_inspect(dia, OK, invobjs, gra, SPACE);
-                }
-                if(space_get_light(game->spaces[i]) == TRUE){
+                if(space_get_light(game->spaces[i]) != FALSE){
           		    strcpy(invobjs[0], space_get_adesc(game->spaces[i]));
           		    dialogue_inspect(dia, OK, invobjs, gra, SPACE);
                   return OK;	
+                }
+                else{
+                  dialogue_inspect(dia, ERROR, invobjs, gra, SPACE);
+                  return OK;
                 }
           		}
           	}

@@ -19,6 +19,7 @@ struct _Graphics{
 	WINDOW* dialogue; /*!< Declared winloguedow for dialogue zone*/
 	WINDOW* commands; /*!< Declared winloguedow for command zone*/
 	char dia[WORD_SIZE+1]; /*!< String for previous dialogue*/
+	int nv; /*Non verbose flag*/
 };/*!< Graphics structure*/ 
 
 /*--------------------------------------------*/
@@ -70,6 +71,10 @@ STATUS draw_borders(Graphics* gra) {
 		return ERROR;
 	}
 
+	if(gra->nv == 1){
+		return OK;
+	}
+
 	/*Borders of dialogue*/
 	/*Corners*/
 	mvwprintw(gra->dialogue, 0, 0, "+");
@@ -108,42 +113,43 @@ STATUS draw_borders(Graphics* gra) {
 * @brief Creates a graphic structure
 * @author José Ignacio Gómez
 * @date 01/12/2016
-* @param none
+* @param int nv (Declares if the nv mode is active) 
 * @return Graphics* (The created grapghics)
 */
-Graphics* graphics_create(){
+Graphics* graphics_create(int nv){
 	Graphics *gra = NULL;
 
 	gra = (Graphics *) malloc (sizeof(Graphics));
 	if(!gra){
 		return NULL;
 	}
-
-	screen_init();
-
-	gra->playground = newwin(WIN1_Y, WIN1_X, 0, 0);
-	if (!gra->playground){
-		free(gra);
-		return NULL;
+	gra->nv = nv;
+	if(nv != 1){ 
+		screen_init();
+	
+		gra->playground = newwin(WIN1_Y, WIN1_X, 0, 0);
+		if (!gra->playground){
+			free(gra);
+			return NULL;
+		}
+	
+		gra->dialogue = newwin(WIN2_Y, WIN2_X, 0, WIN1_X);
+		if (!gra->dialogue){
+			delwin(gra->playground);
+			free(gra);
+			return NULL;
+		}
+	
+		gra->commands = newwin(WIN3_Y, WIN3_X, WIN1_Y, 0);
+		if (!gra->commands){
+			delwin(gra->playground);
+			delwin(gra->dialogue);
+			free(gra);
+			return NULL;
+		}
+	
+		gra->dia[0] = '\0';
 	}
-
-	gra->dialogue = newwin(WIN2_Y, WIN2_X, 0, WIN1_X);
-	if (!gra->dialogue){
-		delwin(gra->playground);
-		free(gra);
-		return NULL;
-	}
-
-	gra->commands = newwin(WIN3_Y, WIN3_X, WIN1_Y, 0);
-	if (!gra->commands){
-		delwin(gra->playground);
-		delwin(gra->dialogue);
-		free(gra);
-		return NULL;
-	}
-
-	gra->dia[0] = '\0';
-
 	return gra;
 }
 
@@ -159,13 +165,14 @@ STATUS graphics_destroy(Graphics* gra){
 	if(!gra){
 		return ERROR;
 	}
-	/*Delete the windows*/
-	delwin(gra->playground);
-	delwin(gra->commands);
-	delwin(gra->dialogue);
-	/*End graphics*/
-	screen_destroy();
-
+	if(gra->nv != 1){
+		/*Delete the windows*/
+		delwin(gra->playground);
+		delwin(gra->commands);
+		delwin(gra->dialogue);
+		/*End graphics*/
+		screen_destroy();
+	}
 	free(gra);
 
 	return OK;
@@ -184,6 +191,10 @@ STATUS graphics_clear(Graphics* gra, ZONE z){
 
 	if(!gra){
 		return ERROR;
+	}
+
+	if(gra->nv == 1){
+		return OK;
 	}
 
 	if(z == DIALOGUE){
@@ -211,18 +222,28 @@ STATUS graphics_clear(Graphics* gra, ZONE z){
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
 STATUS graphics_clear_zone(Graphics* gra, ZONE zone){
+
 	if(!gra){
 		return ERROR;
 	}
 
 	switch(zone){
 		case PLAYGROUND:
+			if(gra->nv == 1){
+				return OK;
+			}
 			wclear(gra->playground);
 			return OK;
 		case COMMANDS:
+			if(gra->nv == 1){
+				return OK;
+			}
 			wclear(gra->commands);
 			return OK;
 		case DIALOGUE:
+			if(gra->nv == 1){
+				return OK;
+			}
 			wclear(gra->dialogue);
 			return OK;
 		default:
@@ -251,6 +272,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 		case PLAYGROUND:
 			switch(dir){
 				case NW:
+					if(gra->nv == 1){
+						return OK;
+					}
 					j = 0;
 					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
 						if(i == strlen(print)){
@@ -263,6 +287,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					}
 					return OK;
 				case N:
+					if(gra->nv == 1){
+						return OK;
+					}
 					j = 0;
 					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
 						if(i == strlen(print)){
@@ -275,6 +302,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					}
 					return OK;
 				case NE:
+					if(gra->nv == 1){
+						return OK;
+					}
 					j = 0;
 					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
 						if(i == strlen(print)){
@@ -287,6 +317,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					}
 					return OK;
 				case W:
+					if(gra->nv == 1){
+						return OK;
+					}
 					j = 0;
 					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
 						if(i == strlen(print)){
@@ -299,6 +332,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					}
 					return OK;
 				case C:
+					if(gra->nv == 1){
+						return OK;
+					}
 					j = 0;
 					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
 						if(i == strlen(print)){
@@ -311,6 +347,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					}
 					return OK;
 				case E:
+					if(gra->nv == 1){
+						return OK;
+					}
 					j = 0;
 					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
 						if(i == strlen(print)){
@@ -323,6 +362,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					}
 					return OK;
 				case SW:
+					if(gra->nv == 1){
+						return OK;
+					}
 					j = 0;
 					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
 						if(i == strlen(print)){
@@ -335,6 +377,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					}
 					return OK;
 				case S:
+					if(gra->nv == 1){
+						return OK;
+					}
 					j = 0;
 					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
 						if(i == strlen(print)){
@@ -347,6 +392,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					}
 					return OK;
 				case SE:
+					if(gra->nv == 1){
+						return OK;
+					}
 					j = 0;
 					for(i = 0; i < (SPACE_SIZE_X*SPACE_SIZE_Y); i++){
 						if(i == strlen(print)){
@@ -362,6 +410,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					return ERROR;
 			}
 		case COMMANDS:
+			if(gra->nv == 1){
+				return OK;
+			}
 			for(i = 0; i < (WIN3_X - 2); i++){
 				if(i == strlen(print)){
 					return OK;
@@ -370,6 +421,9 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 			}
 			return OK;
 		case DIALOGUE:
+			if(gra->nv == 1){
+				return OK;
+			}
 			j = 2;
 			p = 1;
 			for(i = 0; i < strlen(print); i++){
@@ -428,6 +482,10 @@ STATUS graphics_refresh(Graphics* gra){
 		return ERROR;
 	}
 
+	if(gra->nv == 1){
+		return OK;
+	}
+
 	draw_borders(gra);
 	
 	wrefresh(gra->playground);
@@ -450,6 +508,10 @@ STATUS scan_from_screen(Graphics* gra, Command* command){
 
 	if(!gra || !command){
 		return ERROR;
+	}
+
+	if(gra->nv == 1){
+		return OK;
 	}
 
 	mvwprintw(gra->commands, 1, 1, "prompt:> ");

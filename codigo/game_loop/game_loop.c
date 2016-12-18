@@ -220,6 +220,7 @@ int main(int argc, char *argv[]){
   	STATUS log; /*Variable for the creation of log file*/
   	int nvflag = 0; /*Variable for the -nv flag*/
 	int file_pos = 0; /*In case we use a log file, this is its argument-position*/
+	char input[CMD_LENGHT];
 
 	file_pos = check_flags(argc, argv, &flag, &nvflag);
 	if(file_pos == -1){
@@ -251,7 +252,7 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
-	gra = graphics_create();
+	gra = graphics_create(nvflag);
 	if(!gra){
 		fprintf(stderr, "Graphics couldn't be created\n");
 		game_destroy(game);
@@ -271,8 +272,12 @@ int main(int argc, char *argv[]){
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
 		if(nvflag != 1){ 
 			game_print_screen(game, gra);
+			scan_from_screen(gra, command);
 		}
-		scan_from_screen(gra, command);
+		if(nvflag == 1){
+			fgets(input, CMD_LENGHT, stdin);
+			get_user_input(command, input);
+		}
 		log = game_update(game, command, dialogue, gra);
 		/*Log mode*/
 		if(flag == 1){
