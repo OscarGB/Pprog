@@ -207,9 +207,8 @@ STATUS dialogue_load(){
 STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory, STATUS check){
 	char string[MAX_DIALOGUE];
 
+	
 	if(!gra || !dialogue || !inventory) return ERROR;
-
-
 	if(check == OK){
 		strcpy(string, "Inspecting space: \n");
 		strcat(string, inventory);
@@ -217,7 +216,6 @@ STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory
 	else{
 		strcpy(string, "You should use a lantern\n");
 	}
-
 	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 	return dialogue_print(gra, string);
 }
@@ -434,7 +432,7 @@ STATUS dialogue_print(Graphics* gra, char *string){
 
 	if(!gra || !string) return ERROR;
 
-	if(graphics_clear(gra, DIALOGUE)) return ERROR;
+	if(graphics_clear(gra, DIALOGUE) == ERROR) return ERROR;
 
 	result = print_in_zone(gra, DIALOGUE, 0, string);
 

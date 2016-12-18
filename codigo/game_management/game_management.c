@@ -96,11 +96,11 @@ STATUS game_load_spaces(Game* game, char* filename) {
       	space_set_east(space, east);
       	space_set_south(space, south);
       	space_set_west(space, west);
-	space_set_up(space, up);
-	space_set_down(space, down);
+	      space_set_up(space, up);
+	      space_set_down(space, down);
         space_set_gdesc(space, gdesc);
-	space_set_adesc(space, "To be written");
-      	game_add_space(game, space);
+	      space_set_adesc(space, "To be written");
+      	if(game_add_space(game, space) == ERROR) status = ERROR;
       }
     }
   }

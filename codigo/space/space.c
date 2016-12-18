@@ -64,7 +64,7 @@ Space* space_create(Id id) {
     newSpace->object = set_create();
     if(!newSpace->object){
         space_destroy(newSpace);
-	newSpace = NULL;
+	    newSpace = NULL;
         return NULL;
     }
 
