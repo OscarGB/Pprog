@@ -551,7 +551,7 @@ STATUS space_set_light(Space* space, BOOL light){
 
 */
 BOOL space_get_light(Space* space){
-    if(!space){
+    if(space == NULL){
         return FALSE;
     }
  

@@ -1414,7 +1414,13 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     char *symbol = NULL; /*!< Variable used for storing the command*/
     Inventory* inventory = NULL;
     Id* ids = NULL;
-    char *invobjs[MAX_IDS];
+    char **invobjs;
+
+    invobjs = (char **) malloc(sizeof(char *) * (1 + game->num_objects));
+    for(i = 0; i >= game->num_objects; i++){
+      invobjs[i] = (char*) malloc(sizeof(char)*MAX_ADESC);
+      invobjs[i][0] = '\0';
+    }
 
     symbol = command_get_symbol(cmd);
 
@@ -1438,10 +1444,13 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     if(strlen(symbol) == 1){
 
       if(symbol[0] == 's' || symbol[0] == 'S'){ /*!< Inspecting space */
-          	for(i=0; i<MAX_SPACES && game->spaces[i]; i++){
+          	for(i=0; i < MAX_SPACES; i++){
           		if(player_location == space_get_id(game->spaces[i])){
+                if(game->spaces[i] == NULL){
+
                   dialogue_inspect(dia, OK, invobjs, gra, SPACE);
-                if(space_get_light(game->spaces[i]) == TRUE || 1){
+                }
+                if(space_get_light(game->spaces[i]) == TRUE){
           		    strcpy(invobjs[0], space_get_adesc(game->spaces[i]));
           		    dialogue_inspect(dia, OK, invobjs, gra, SPACE);
                   return OK;	
