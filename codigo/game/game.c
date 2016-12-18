@@ -2051,6 +2051,7 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
   char path[256] = "codigo/Saves/save_";
   char *symbol = NULL;
+  char str[256] = "Game saved as:\n";
 
 	if(!game || !dia || !gra || !cmd) return ERROR;
 
@@ -2060,6 +2061,10 @@ STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
   	symbol = command_get_symbol(cmd);
   	strcat(path, symbol); 
   	strcat(path, ".ao");
+
+	strcat(str, path);
+	strcat(str, "\n");
+	dialogue_print(gra, str);
 	
 	return game_save(game, path);
 }
@@ -2073,9 +2078,6 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	char *symbol = NULL;
 	char path[256] = "codigo/Saves/";
 	STATUS status = ERROR;
-	Game *game2, *aux;
-
-  game2 = NULL;
 
 	if(!game || !dia || !gra || !cmd)
 		return ERROR;
@@ -2107,18 +2109,19 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	}
 
 	/*This loads a file to the game*/
-	/*THIS SHOULD BE USE IN INIT FROM FILE game_load(game, symbol);*/
-
+	/*THIS SHOULD BE USED IN INIT FROM FILE game_load(game, symbol);*/
 	strcat(path, symbol);
-
-	aux = game;
-	game2 = game_init(game2);
-	if(!game2)
+	
+	game_destroy(game);
+	game_init(game);
+	if(!game){
+		dialogue_load(gra, dia, symbol, ERROR);
 		return ERROR;
+	}
 
-	status = game_init_from_file(game2, path);
-	game = game2;
-	game_destroy(aux);
+	status = game_init_from_file(game, path);
+
+	dialogue_load(gra, dia, symbol, status);
 
 	return status;
 }

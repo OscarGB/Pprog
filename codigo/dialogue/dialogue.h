@@ -99,6 +99,20 @@ STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Grap
 STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS check);
 
 /*
+* @brief load callback print
+* @author Óscar Pinto Santamaría
+* @date 18/12/2016
+* @param Dialogue*
+* @param STATUS
+* @param char* str
+* @param Graphics*
+* @param char string
+* @return OK if it worked
+*/
+
+STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check);
+
+/*
 * @brief prints on screen the dialogue
 * @author José Ignacio Gómez
 * @date 16/12/2016
@@ -106,6 +120,9 @@ STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS c
 * @param char string
 * @return OK if it was printed successfuly
 */
+
+
+
 STATUS dialogue_print(Graphics* gra, char *string);
 
 #endif

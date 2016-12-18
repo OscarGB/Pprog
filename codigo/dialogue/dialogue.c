@@ -196,9 +196,6 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
-/*STATUS dialogue_save(){
-	
-}*/
 
 STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
 	char string[MAX_DIALOGUE];
@@ -210,6 +207,26 @@ STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS c
 	if(check == OK){
 		strcpy(string, "Saved games: \n");
 		strcat(string, str);
+	}else{
+		strcpy(string, "Something went wrong\n");
+	}
+
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
+
+	return dialogue_print(gra, string);
+}
+
+STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
+	char string[MAX_DIALOGUE];
+
+	if(!gra || !dialogue) return ERROR;
+
+	if(!str) return ERROR;
+
+	if(check == OK){
+		strcpy(string, "Game loaded from file: ");
+		strcat(string, str);
+		strcat(string, "\n");
 	}else{
 		strcpy(string, "Something went wrong\n");
 	}
