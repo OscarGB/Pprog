@@ -198,11 +198,26 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 
 /*STATUS dialogue_save(){
 	
-}
-
-STATUS dialogue_load(){
-	
 }*/
+
+STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
+	char string[MAX_DIALOGUE];
+
+	if(!gra || !dialogue) return ERROR;
+
+	if(!str) return ERROR;
+
+	if(check == OK){
+		strcpy(string, "Saved games: \n");
+		strcat(string, str);
+	}else{
+		strcpy(string, "Something went wrong\n");
+	}
+
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
+
+	return dialogue_print(gra, string);
+}
 
 STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory, STATUS check){
 	char string[MAX_DIALOGUE];
