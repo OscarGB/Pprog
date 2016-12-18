@@ -185,7 +185,7 @@ STATUS graphics_destroy(Graphics* gra){
 * @param Graphics* gra (The graphics to be cleared)
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
-STATUS graphics_clear(Graphics* gra, ZONE z){
+STATUS graphics_clear(Graphics* gra){
 
 	int i;
 
@@ -195,12 +195,6 @@ STATUS graphics_clear(Graphics* gra, ZONE z){
 
 	if(gra->nv == 1){
 		return OK;
-	}
-
-	if(z == DIALOGUE){
-		if(graphics_clear_zone(gra, DIALOGUE) == ERROR){
-			return ERROR;
-		}
 	}
 
 	for(i = PLAYGROUND; i <= COMMANDS; i++){

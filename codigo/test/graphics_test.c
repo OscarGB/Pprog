@@ -73,7 +73,7 @@ BOOL test_graphics5(){
 }
 
 BOOL test_graphics6(){
-	if(graphics_clear(NULL, 0) != ERROR){
+	if(graphics_clear(NULL) != ERROR){
 		TEST_PRINT(FALSE);
 		return FALSE;
 	}
@@ -89,7 +89,7 @@ BOOL test_graphics7(){
 	print_in_zone(gra, PLAYGROUND, NW, "¡LET'S PLAY!");
 	graphics_refresh(gra);
 	sleep(DELAY);
-	if(graphics_clear(gra, 0) == ERROR){
+	if(graphics_clear(gra) == ERROR){
 		graphics_destroy(gra);
 		TEST_PRINT(FALSE);
 		return FALSE;
@@ -102,7 +102,7 @@ BOOL test_graphics7(){
 }
 
 BOOL test_graphics8(){
-	if(graphics_clear(NULL, 0) != ERROR){
+	if(graphics_clear(NULL) != ERROR){
 		TEST_PRINT(FALSE);
 		return FALSE;
 	}
@@ -419,7 +419,7 @@ BOOL test_graphics28(){
 	print_in_zone(gra, DIALOGUE, 0, "TESTING 2");
 	graphics_refresh(gra);
 	sleep(DELAY);
-	graphics_clear(gra, 0);
+	graphics_clear(gra);
 	if(print_in_zone(gra, DIALOGUE, 0, "TESTING 1") == ERROR){
 		graphics_destroy(gra);
 		TEST_PRINT(FALSE);
@@ -490,7 +490,7 @@ BOOL test_graphics33(){
 }
 
 BOOL test_graphics34(){
-	if(graphics_clear(NULL, 0) != ERROR){
+	if(graphics_clear(NULL) != ERROR){
 		TEST_PRINT(FALSE);
 		return FALSE;
 	}
@@ -506,7 +506,7 @@ BOOL test_graphics35(){
 	print_in_zone(gra, PLAYGROUND, NW, "¡LET'S PLAY!");
 	graphics_refresh(gra);
 	sleep(DELAY);
-	if(graphics_clear(gra, 0) == ERROR){
+	if(graphics_clear(gra) == ERROR){
 		graphics_destroy(gra);
 		TEST_PRINT(FALSE);
 		return FALSE;
@@ -519,7 +519,7 @@ BOOL test_graphics35(){
 }
 
 BOOL test_graphics36(){
-	if(graphics_clear(NULL, 0) != ERROR){
+	if(graphics_clear(NULL) != ERROR){
 		TEST_PRINT(FALSE);
 		return FALSE;
 	}
@@ -836,7 +836,7 @@ BOOL test_graphics56(){
 	print_in_zone(gra, DIALOGUE, 0, "TESTING 2");
 	graphics_refresh(gra);
 	sleep(DELAY);
-	graphics_clear(gra, 0);
+	graphics_clear(gra);
 	if(print_in_zone(gra, DIALOGUE, 0, "TESTING 1") == ERROR){
 		graphics_destroy(gra);
 		TEST_PRINT(FALSE);
