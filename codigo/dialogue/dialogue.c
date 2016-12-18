@@ -200,7 +200,7 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	
 }*/
 
-STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
+STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
 	char string[MAX_DIALOGUE];
 
 	if(!gra || !dialogue) return ERROR;

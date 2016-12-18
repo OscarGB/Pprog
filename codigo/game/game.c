@@ -2094,14 +2094,14 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 			}
 		 }
 		  if(!strcmp(savegames, "")){
-			dialogue_load(gra, dia, "No saved files\n", OK);
+			dialogue_load_show(gra, dia, "No saved files\n", OK);
 		  }else{
-		  	dialogue_load(gra, dia, savegames, OK);
+		  	dialogue_load_show(gra, dia, savegames, OK);
 		  }
 		  closedir (dir);
 		  return OK;
 		} else{
-			dialogue_load(gra, dia, savegames, ERROR);
+			dialogue_load_show(gra, dia, savegames, ERROR);
 		  	return ERROR;
 		}
 	}

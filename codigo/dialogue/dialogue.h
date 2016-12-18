@@ -96,7 +96,7 @@ STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Grap
 * @return OK if it worked
 */
 
-STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check);
+STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS check);
 
 /*
 * @brief prints on screen the dialogue
