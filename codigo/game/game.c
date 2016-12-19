@@ -106,12 +106,6 @@ Game* game_init(Game* game) {
     game->spaces[i] = NULL;
   }
   
-  /*Creating player*/
-  game->player = player_create(1);
-  if(!game->player){
-    game_destroy(game);
-    return NULL;
-  }
 
   for (i = 0; i < MAX_IDS; i++){
     game->object[i] = NULL;
@@ -124,7 +118,6 @@ Game* game_init(Game* game) {
   /*Creating die*/
   game->die = die_create(1, DIE_FACES);
   if(!game->die){ /*Error case*/
-    player_destroy(game->player);
     game_destroy(game);
     return NULL;
   }
@@ -153,24 +146,9 @@ STATUS game_init_from_file(Game* game, char* filename) {
   }*/
 
   /*Load objects from file*/
-  if (game_load_objects(game, filename) == ERROR) {
-    return ERROR;
-  }
-
-  /*Load spaces from file*/
-  if (game_load_spaces(game, filename) == ERROR) {
-    return ERROR;
-  }
-
-  /*Load links from file*/
-  if(game_load_links(game, filename) == ERROR) {
-    return ERROR;
-  }
-
-  /*Set player in the initial position*/
-  aux = game_get_space_id_at(game, 0);
-  game_set_player_location(game, aux);
-  return OK;
+  if (game_load(game, filename)==OK)
+    return OK;
+  return ERROR;
 }
 
 /**

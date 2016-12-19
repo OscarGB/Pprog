@@ -24,7 +24,7 @@
 * @return OK if the space was succesfully inserted
 */
 
-STATUS game_load_space(Game* game, char* line);
+STATUS game_load_spaces(Game* game, char* line);
 
 
 /**
@@ -35,7 +35,7 @@ STATUS game_load_space(Game* game, char* line);
 * @return OK if the object was succesfully inserted
 */
 
-STATUS game_load_object(Game* game, char* line);
+STATUS game_load_objects(Game* game, char* line);
 
 
 /**
@@ -46,7 +46,7 @@ STATUS game_load_object(Game* game, char* line);
 * @return OK if the link was succesfully inserted
 */
 
-STATUS game_load_link(Game* game, char* line);
+STATUS game_load_links(Game* game, char* line);
 
 /**
 * @brief inserts a player in game
