@@ -267,6 +267,9 @@ STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inve
 			strcat(string, "\n");
 			i++;
 		}
+		if(inventory[0][0] == '\0'){
+			strcpy(string, "Uups, it seems that you inventory is empty!");
+		}
 	}
 	else{
 		strcpy(string, "Could not inspect inventory\n");

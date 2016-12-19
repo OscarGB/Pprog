@@ -419,7 +419,7 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 				return OK;
 			}
 			j = 2;
-			p = 1;
+			p = 0;
 			for(i = 0; i < strlen(print); i++){
 				if(p > ((WIN2_X-2)*(WIN2_Y-2))){
 					return OK;
@@ -433,12 +433,13 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					}
 					j++;
 				}
-				mvwprintw(gra->dialogue, j, (p%(WIN2_X -2)), "%c", print[i]);
+				mvwprintw(gra->dialogue, j, (p%(WIN2_X -2)+1), "%c", print[i]);
 				p++;
+				
 			}
 			
 			j = 11;
-			p = 1;
+			p = 0;
 			for(i = 0; i < strlen(gra->dia); i++){
 				if(p > ((WIN2_X-2)*(WIN2_Y-2))){
 					return OK;
@@ -452,7 +453,7 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 					}
 					j++;
 				}
-				mvwprintw(gra->dialogue, j, (p%(WIN2_X -2)), "%c", gra->dia[i]);
+				mvwprintw(gra->dialogue, j, (p%(WIN2_X -2)+1), "%c", gra->dia[i]);
 				p++;
 			}
 

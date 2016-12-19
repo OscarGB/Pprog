@@ -29,6 +29,7 @@
 *.hex
 ocabas
 JuegoOcaPlus
+JuegoConv
 *_test
 
 # Debug files
