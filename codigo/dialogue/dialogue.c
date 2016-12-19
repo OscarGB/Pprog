@@ -121,6 +121,7 @@ STATUS dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS che
 	}
 
 	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
+	
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
