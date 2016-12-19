@@ -269,6 +269,8 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
+	dialogue_start_game(gra);
+
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
 		if(nvflag != 1){ 
 			game_print_screen(game, gra);

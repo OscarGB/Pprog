@@ -256,7 +256,7 @@ STATUS graphics_clear_zone(Graphics* gra, ZONE zone){
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
 STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
-	int i = 0, j = 0, p = 0;
+	int i = 0, j = 0, p = 0, flag = 0;
 
 	if(!gra || !print){
 		return ERROR;
@@ -424,18 +424,20 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 				if(p > ((WIN2_X-2)*(WIN2_Y-2))){
 					return OK;
 				}
-				if(p%(WIN2_X-2) == 0){
+				if(p%(WIN2_X-2) == 0 && flag != 1){
 					j++;
 				}
+				flag = 0;
 				if(print[i] == '\n'){
 					while(p%(WIN2_X-2) != 0){
 						p++;
 					}
 					j++;
+					flag = 1;
+				} else{
+					mvwprintw(gra->dialogue, j, (p%(WIN2_X -2)+1), "%c", print[i]);
+					p++;
 				}
-				mvwprintw(gra->dialogue, j, (p%(WIN2_X -2)+1), "%c", print[i]);
-				p++;
-				
 			}
 			
 			j = 11;
@@ -444,17 +446,20 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 				if(p > ((WIN2_X-2)*(WIN2_Y-2))){
 					return OK;
 				}
-				if(p%(WIN2_X-2) == 0){
+				if(p%(WIN2_X-2) == 0 && flag != 1){
 					j++;
 				}
+				flag = 0;
 				if(gra->dia[i] == '\n'){
 					while(p%(WIN2_X-2) != 0){
 						p++;
 					}
 					j++;
+					flag = 1;
+				} else{
+					mvwprintw(gra->dialogue, j, (p%(WIN2_X -2)+1), "%c", gra->dia[i]);
+					p++;
 				}
-				mvwprintw(gra->dialogue, j, (p%(WIN2_X -2)+1), "%c", gra->dia[i]);
-				p++;
 			}
 
 			strcpy(gra->dia, print);
