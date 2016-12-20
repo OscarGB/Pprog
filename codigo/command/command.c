@@ -218,3 +218,17 @@ STATUS command_copy(Command *to, Command *from){
 	strcpy(to->symbol, from->symbol);
 	return OK;
 }
+
+/**
+* @brief Sets the cmd of a command
+* @author Óscar Gómez
+* @date 20-12-2016
+* @param Command *cmd (The command to modify)
+* @param T_Command new (The new cmd)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS command_set_cmd(Command *cmd, T_Command new){
+	if(!cmd) return ERROR;
+	cmd->cmd = new;
+	return OK;
+}
