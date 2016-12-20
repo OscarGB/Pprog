@@ -81,6 +81,7 @@ STATUS print_space_save(FILE *f, Space* space);
 STATUS print_link_save(FILE *f, Link *link);
 STATUS print_object_save(FILE *f, Object *object);
 
+int game_get_objects_at_space(Game *game, Id id);
 
 /**
  * @brief Game interface implementation
@@ -544,9 +545,10 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
     return callback_SAVE(game, cmd, dia, gra);
   case LOAD:
   	return callback_LOAD(game, cmd, dia, gra);
+  case HELP:
+    return dialogue_generic(dia, OK, objects, gra);
   case NO_CMD:
-    dialogue_generic(dia, OK, game_get_objects_name(game, objects), gra);
-    break;
+    return dialogue_generic(dia, OK, game_get_objects_name(game, objects), gra);
   default: /*We must never arrive here*/
     return ERROR;
   }
@@ -1245,9 +1247,17 @@ STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   int i;
   STATUS result;
   char *symbol = NULL; /*!< Variable used for storing the command*/
+  
   symbol = command_get_symbol(cmd); 
+  current_id = game_get_player_location(game);
 
   if(!game || !dia || !gra || !cmd) return ERROR;
+
+  if(game_get_objects_at_space(game, current_id) >= MAX_OBS_PER_SPA){
+    objects = game_get_objects_name(game, objects);
+    dialogue_generic(dia, ERROR, objects, gra);
+    return ERROR;
+  }
 
   if(strlen(symbol) == 1){
     for(i=0; i< game->num_objects; i++){ /*!< Seeing if the symbol is associated to an object */
@@ -1296,8 +1306,6 @@ STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
       return ERROR;
     }
   }
-
-  current_id = game_get_player_location(game);
 
   result = game_set_object_location(game, current_id, object_get_id(object));
   objects = game_get_objects_name(game, objects);
@@ -2246,7 +2254,7 @@ Space* game_get_space_at(Game* game, int pos){
 * @author Andrea Ruiz
 * @date 17/12/2016
 * @param game pointer
-* @param Id space id
+* @param int position
 * @return Space pointer in that position
 */
 Object* game_get_object_at(Game* game, int pos){
@@ -2254,4 +2262,27 @@ Object* game_get_object_at(Game* game, int pos){
 		return NULL;
 
     return game->object[pos];
+}
+
+/**
+* @brief It gets the number of objects in a given space
+* @author Óscar Gómez
+* @date 20/12/2016
+* @param game pointer
+* @param Id space id
+* @return int (the number of objects in that space)
+*/
+int game_get_objects_at_space(Game *game, Id id){
+  int  contador = 0, i;
+
+  if(!game || id == NO_ID){
+    return MAX_OBS_PER_SPA+1;
+  }
+  
+  for (i = 0; i < game->num_objects; i++){
+    if (id == object_get_location(game->object[i])){
+      contador++;
+    }
+  }
+  return contador;
 }

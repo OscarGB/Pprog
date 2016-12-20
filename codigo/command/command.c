@@ -83,17 +83,17 @@ STATUS get_user_input(Command* command, char* input){
 
 			strcpy(command->symbol, symbol);
 		}
-		else if (!strcmp(action, "turnon")){
+		else if (!strcmp(action, "turnon") || !strcmp(action, "on")){
 			command->cmd = TURNON;
 
 			strcpy(command->symbol, symbol);
 		}
-		else if (!strcmp(action, "turnoff")){
+		else if (!strcmp(action, "turnoff") || !strcmp(action, "off")){
 			command->cmd = TURNOFF;
 
 			strcpy(command->symbol, symbol);
 		}
-		else if (!strcmp(action, "open")){
+		else if (!strcmp(action, "open") || !strcmp(action, "o")){
 			command->cmd = OPEN;
 
 			strcpy(command->symbol, symbol);
@@ -107,6 +107,9 @@ STATUS get_user_input(Command* command, char* input){
 			command->cmd = LOAD;
 
 			strcpy(command->symbol, symbol);
+		}
+		else if (!strcmp(action, "h") || !strcmp(action, "help")){
+			command->cmd = HELP;
 		}
 		else{
 			command->cmd = UNKNOWN;

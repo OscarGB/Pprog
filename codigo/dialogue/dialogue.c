@@ -303,9 +303,16 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 	return dialogue_print(gra, string);
 }
 
-
-
-
+/**
+* @brief prints the help dialogue
+* @author Óscar Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
+STATUS dialogue_help(Graphics* gra){
+	return dialogue_print(gra, "The available commands are:\nquit, go, pick, drop, inspect,\nturnon, turnoff, open, save, load\nand help.");
+}
 
 
 /*PUBLIC FUNCTIONS*/
@@ -419,6 +426,8 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 			return dialogue_turnoff(gra, dialogue, objects, check);
 		case OPEN:
 			return dialogue_open(gra, dialogue, objects, check);
+		case HELP:
+			return dialogue_help(gra);
 		/*case SAVE:
 			return dialogue_save(gra, dialogue, objects, check);
 		case LOAD:
@@ -493,7 +502,7 @@ STATUS dialogue_start_game(Graphics* gra){
 
 	if(graphics_clear_zone(gra, DIALOGUE) == ERROR) return ERROR;
 
-	result = print_in_zone(gra, DIALOGUE, 0, "Welcome to this game!\nTry to escape from this building, \nfind the keys and get out.\nIf you need some help try typing\n\"HELP\"");
+	result = print_in_zone(gra, DIALOGUE, 0, "Welcome to this game!\nTry to escape from this building, \nfind the keys and get out.\nIf you need some help try typing\n\"help\"");
 
 	graphics_refresh(gra);
 

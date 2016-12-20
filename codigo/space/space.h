@@ -18,6 +18,7 @@ typedef struct _Space Space; /*!<Definition of the Space structure*/
 #define FIRST_SPACE 1 /*!<Definition of the first space*/
 #define MAX_GDESC  100 /*!<Max number of characters in gdesc*/
 #define MAX_ADESC 100 /*!<Max number of characters in advanced gdesc*/
+#define MAX_OBS_PER_SPA 3 /*!<Max number of objects per space*/
 
 /**
 * @brief Creates a new space for the game

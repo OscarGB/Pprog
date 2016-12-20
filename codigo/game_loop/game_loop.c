@@ -192,6 +192,30 @@ void print_log(Command* command, STATUS log, FILE* l){
 				fprintf(l, "Open %s : ERROR\n", command_get_symbol(command));
 			}
 			break;
+		case HELP:
+			if(log == OK){
+				fprintf(l, "Help : OK\n");
+			}
+			else{
+				fprintf(l, "Help : ERROR\n");
+			}
+			break;
+		case SAVE:
+			if(log == OK){
+				fprintf(l, "Save %s : OK\n", command_get_symbol(command));
+			}
+			else{
+				fprintf(l, "Save %s : ERROR\n", command_get_symbol(command));
+			}
+			break;
+		case LOAD:
+			if(log == OK){
+				fprintf(l, "Load %s : OK\n", command_get_symbol(command));
+			}
+			else{
+				fprintf(l, "Load %s : ERROR\n", command_get_symbol(command));
+			}
+			break;
 		case NO_CMD:
 			fprintf(l, "NO_CMD\n");
 			break;
