@@ -37,6 +37,11 @@ STATUS get_user_input(Command* command, char* input){
 	if(command == NULL || input == NULL){
 		return ERROR;
 	}
+
+
+#ifdef DEBUG
+	printf("Leido: %s\n", input); /*Debug case*/
+#endif
 	
 	toks = strtok(input, " \n");
 	if(toks != NULL){/*If theres nothing written -> NO_CMD*/
@@ -44,15 +49,22 @@ STATUS get_user_input(Command* command, char* input){
 		toks = strtok(NULL, " \n");
 		if(toks != NULL){ /*If there is a symbol -> set the symbol to the introduced valor*/
 			strcpy(symbol, toks);
+			toks = strtok(NULL, " \n");
+			if(toks != NULL){
+				strcat(symbol, " ");
+				strcat(symbol, toks);
+				toks = strtok(NULL, "\n");
+				if(toks != NULL){
+					strcat(symbol, " ");
+					strcat(symbol, toks);
+				}
+			}
 		}
 		else{/*If there's not a symbol we set to E*/
 			symbol[0] = '\0';
 			command->symbol[0] = '\0';
 		}
 
-		#ifdef DEBUG
-			printf("Leido: %s\n", input); /*Debug case*/
-		#endif
 
 
 		/*Detecting what command was written*/
