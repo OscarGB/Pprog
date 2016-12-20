@@ -2006,10 +2006,9 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   token = strtok(string, " ");
   strcpy(link_name, token);
   token = strtok(NULL, " ");
-  if(strcmp(token, "with") != 0){
-    objects = game_get_objects_name(game, objects);
+  if(!token || strcmp(token, "with" ) != 0){
+    strcpy(objects[0], "syntax");
     dialogue_generic(dia, ERROR, objects, gra);
-    /*HELP*/
     return ERROR;
   }
   token = strtok(NULL, "\n");

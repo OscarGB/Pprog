@@ -190,9 +190,14 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 		strcat(string, "\n"); 
 	}
 	else{
-		strcpy(string, "Cannot open the "); 
-		strcat(string, str);
-		strcat(string, "\n");
+		if(strcmp("syntax", objects[0]) == 0){
+			strcpy(string, "Maybe traying OPEN link WITH object?");
+		}
+		else{
+			strcpy(string, "Cannot open the "); 
+			strcat(string, str);
+			strcat(string, "\n");
+		}
 	}
 
 	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
