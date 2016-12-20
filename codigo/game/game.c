@@ -60,7 +60,7 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
 STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects);
 STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
 STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
-
+STATUS callback_WIN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
 
 /*
 * Private functions
@@ -82,6 +82,7 @@ STATUS print_link_save(FILE *f, Link *link);
 STATUS print_object_save(FILE *f, Object *object);
 
 int game_get_objects_at_space(Game *game, Id id);
+BOOL game_won_game(Game* game);
 
 /**
  * @brief Game interface implementation
@@ -569,11 +570,25 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   default: /*We must never arrive here*/
     return ERROR;
   }
-  /*Condicion final de partida*/
+  if(game_won_game(game) == TRUE){
+    return callback_WIN(game, cmd, dia, gra);
+  }
   return result;
 }
 
-
+/**
+* @brief Checks if the player has won the game
+* @author Óscar Gómez
+* @date 20/12/2016
+* @param game pointer
+* @return BOOL (if you have ended or not)
+*/
+BOOL game_won_game(Game* game){
+  if(game_get_player_location(game) == YOU_WON){
+    return TRUE;
+  }
+  return FALSE;
+}
 
 /**
 * @brief Prints on screen the actual game state
@@ -2160,7 +2175,25 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	return status;
 }
 
+/**
+* @brief callback for "win" instruction
+* @author Óscar Gómez
+* @date 20/12/2016
+* @param game pointer
+* @param command pointer
+* @param dialogue pointer
+* @param graphics pointer
+* @return OK if it went ok
+*/
+STATUS callback_WIN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
+  if(!game || !dia || !gra || !cmd) return ERROR;
 
+  command_set_cmd(cmd, WIN);
+  dialogue_generic(dia, OK, NULL, gra);
+  command_set_cmd(cmd, QUIT);
+
+  return OK;
+}
 
 
 /**
