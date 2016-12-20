@@ -293,4 +293,13 @@ STATUS space_open_door(Space* space, DIRECTION dir);
 */
 STATUS space_close_door(Space* space, DIRECTION dir);
 
+/**
+* @brief Gets where is that link
+* @author Óscar Gómez
+* @date 20/12/2016
+* @param Space* space (The space to modify)
+* @param Id link_id (The link to search)
+* @return DIRECTION (where the link is)
+*/
+DIRECTION space_get_link_direction(Space* spa, Id link_id);
 #endif

@@ -2029,6 +2029,7 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   STATUS result;
   char *string = NULL;
   char syntax[WORD_SIZE];
+  Space* spa = NULL;
 
   strcpy(syntax, "syntax");
   string = command_get_symbol(cmd);
@@ -2086,7 +2087,10 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
     objects = game_get_objects_name(game, objects);
     dialogue_generic(dia, result, objects, gra);
     if(result == OK){
-      space_open_door(game_get_space(game, link_get_conection1(link)), space_get_link_direction())
+      spa = game_get_space(game, link_get_conection1(link));
+      space_open_door(spa, space_get_link_direction(spa, link_id));
+      spa = game_get_space(game, link_get_conection2(link));
+      space_open_door(spa, space_get_link_direction(spa, link_id));
     }
     return result;
   }
