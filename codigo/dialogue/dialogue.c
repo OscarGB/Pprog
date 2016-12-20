@@ -31,6 +31,8 @@ STATUS dialogue_quit(Graphics* gra, Dialogue* dialogue){
 	graphics_clear(gra);
 	graphics_clear_zone(gra, DIALOGUE);
 
+	print_in_zone(gra, DIALOGUE, 0, " ");
+	graphics_clear_zone(gra, DIALOGUE);
 	print_in_zone(gra, DIALOGUE, 0, "See you soon!");
 
 	graphics_refresh(gra);
@@ -121,6 +123,7 @@ STATUS dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS che
 	}
 
 	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
+	
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
@@ -266,6 +269,9 @@ STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inve
 			strcat(string, "\n");
 			i++;
 		}
+		if(inventory[0][0] == '\0'){
+			strcpy(string, "Uups, it seems that you inventory is empty!");
+		}
 	}
 	else{
 		strcpy(string, "Could not inspect inventory\n");
@@ -297,14 +303,21 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 	return dialogue_print(gra, string);
 }
 
-
-
-
+/**
+* @brief prints the help dialogue
+* @author Óscar Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
+STATUS dialogue_help(Graphics* gra){
+	return dialogue_print(gra, "The available commands are:\nquit, go, pick, drop, inspect,\nturnon, turnoff, open x with y,\nsave, load and help.");
+}
 
 
 /*PUBLIC FUNCTIONS*/
 
-/*
+/**
 * @brief creates a new dialogue
 * @author Jose Ignacio Gómez
 * @date 16/12/16
@@ -329,7 +342,7 @@ Dialogue* dialogue_create(Command* current){
 	return dialogue;
 }
 
-/*
+/**
 * @brief destroys a dialogue
 * @author Jose Ignacio Gómez
 * @date 16/12/16
@@ -345,7 +358,7 @@ void dialogue_destroy(Dialogue* dialogue){
 	return;
 }
 
-/*
+/**
 * @brief Print the standard dialogue (objects in the space)
 * @author José Ignacio Gómez
 * @date 16/12/2016
@@ -377,7 +390,7 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 
 }
 
-/*
+/**
 * @brief generic dialogue engine
 * @author José Ignacio Gómez
 * @date 16/12/2016
@@ -413,6 +426,8 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 			return dialogue_turnoff(gra, dialogue, objects, check);
 		case OPEN:
 			return dialogue_open(gra, dialogue, objects, check);
+		case HELP:
+			return dialogue_help(gra);
 		/*case SAVE:
 			return dialogue_save(gra, dialogue, objects, check);
 		case LOAD:
@@ -424,7 +439,7 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 	return ERROR;
 }
 
-/*
+/**
 * @brief dialogue engine for inspect
 * @author José Ignacio Gómez
 * @date 16/12/2016
@@ -451,7 +466,7 @@ STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Grap
 	return ERROR;
 }
 
-/*
+/**
 * @brief prints on screen the dialogue
 * @author José Ignacio Gómez
 * @date 16/12/2016
@@ -467,6 +482,27 @@ STATUS dialogue_print(Graphics* gra, char *string){
 	if(graphics_clear_zone(gra, DIALOGUE) == ERROR) return ERROR;
 
 	result = print_in_zone(gra, DIALOGUE, 0, string);
+
+	graphics_refresh(gra);
+
+	return result;
+}
+
+/**
+* @brief prints on screen the dialogue the default starting string
+* @author Óscar Gómez
+* @date 19/12/2016
+* @param Graphics*
+* @return OK if it was printed successfuly
+*/
+STATUS dialogue_start_game(Graphics* gra){
+	STATUS result;
+
+	if(!gra) return ERROR;
+
+	if(graphics_clear_zone(gra, DIALOGUE) == ERROR) return ERROR;
+
+	result = print_in_zone(gra, DIALOGUE, 0, "Welcome to this game!\nTry to escape from this building, \nfind the keys and get out.\nIf you need some help try typing\n\"help\"");
 
 	graphics_refresh(gra);
 

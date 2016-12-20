@@ -643,7 +643,7 @@ int object_decrease_duration(Object *object){
 char* object_get_description(Object *object){
 	if(!object) return NULL;
 
-	if(object->moved==FALSE)
+	if(object->moved == FALSE)
 		return object_get_desc(object);
 	return object_get_mdesc(object);
 }

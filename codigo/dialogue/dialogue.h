@@ -95,7 +95,6 @@ STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Grap
 * @param char string
 * @return OK if it worked
 */
-
 STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS check);
 
 /*
@@ -109,7 +108,6 @@ STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS c
 * @param char string
 * @return OK if it worked
 */
-
 STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check);
 
 /*
@@ -120,9 +118,14 @@ STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check)
 * @param char string
 * @return OK if it was printed successfuly
 */
-
-
-
 STATUS dialogue_print(Graphics* gra, char *string);
 
+/**
+* @brief prints on screen the dialogue the default starting string
+* @author Óscar Gómez
+* @date 19/12/2016
+* @param Graphics*
+* @return OK if it was printed successfuly
+*/
+STATUS dialogue_start_game(Graphics* gra);
 #endif
