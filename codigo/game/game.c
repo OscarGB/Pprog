@@ -2085,7 +2085,9 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
     result = link_open(link);
     objects = game_get_objects_name(game, objects);
     dialogue_generic(dia, result, objects, gra);
-
+    if(result == OK){
+      space_open_door(game_get_space(game, link_get_conection1(link)), space_get_link_direction())
+    }
     return result;
   }
   else{
