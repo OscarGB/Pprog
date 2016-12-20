@@ -64,8 +64,6 @@ STATUS dialogue_win(Graphics* gra, Dialogue* dialogue){
 	graphics_clear(gra);
 	graphics_clear_zone(gra, DIALOGUE);
 
-	print_in_zone(gra, DIALOGUE, 0, " ");
-	graphics_clear_zone(gra, DIALOGUE);
 	print_in_zone(gra, DIALOGUE, 0, "Congratulations! You've won the most difficult game ever!\n");
 
 	graphics_refresh(gra);
@@ -96,7 +94,7 @@ STATUS dialogue_help(Graphics* gra){
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects){
-	char string[MAX_DIALOGUE];
+	char string[MAX_DIALOGUE]; /*!< string for print*/
 
 	if(!gra || !dialogue) return ERROR;
 
@@ -119,8 +117,8 @@ STATUS dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects){
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
-	char string[MAX_DIALOGUE];
-	char* picked = NULL;
+	char string[MAX_DIALOGUE]; /*!< string for print*/
+	char* picked = NULL; /*!< string for the picked object*/
 
 	if(!gra || !dialogue) return ERROR;
 
@@ -153,8 +151,8 @@ STATUS dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
-	char string[MAX_DIALOGUE];
-	char* dropped = NULL;
+	char string[MAX_DIALOGUE]; /*!< string for print*/
+	char* dropped = NULL; /*!< string for the dropped object*/
 
 	if(!gra || !dialogue) return ERROR;
 
@@ -187,8 +185,8 @@ STATUS dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
-	char string[MAX_DIALOGUE];
-	char* direction = NULL;
+	char string[MAX_DIALOGUE]; /*!< string for print*/
+	char* direction = NULL; /*!< string for the direction*/
 
 	if(!gra || !dialogue) return ERROR;
 
@@ -222,8 +220,8 @@ STATUS dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS che
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_turnon(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
-	char string[MAX_DIALOGUE];
-	char* obj = NULL;
+	char string[MAX_DIALOGUE]; /*!< string for print*/
+	char* obj = NULL; /*!< string for the object*/
 
 	if(!gra || !dialogue) return ERROR;
 
@@ -256,8 +254,8 @@ STATUS dialogue_turnon(Graphics* gra, Dialogue* dialogue, char** objects, STATUS
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_turnoff(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
-	char string[MAX_DIALOGUE];
-	char* obj = NULL;
+	char string[MAX_DIALOGUE]; /*!< string for print*/
+	char* obj = NULL; /*!< string for print*/
 
 	if(!gra || !dialogue) return ERROR;
 
@@ -290,8 +288,8 @@ STATUS dialogue_turnoff(Graphics* gra, Dialogue* dialogue, char** objects, STATU
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
-	char string[MAX_DIALOGUE];
-	char* str = NULL;
+	char string[MAX_DIALOGUE]; /*!< string for print*/
+	char* str = NULL; /*!< string for the open command*/
 
 	if(!gra || !dialogue) return ERROR;
 
@@ -330,7 +328,7 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
-	char string[MAX_DIALOGUE];
+	char string[MAX_DIALOGUE]; /*!< string for print*/
 
 	if(!gra || !dialogue) return ERROR;
 
@@ -359,7 +357,7 @@ STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS c
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
-	char string[MAX_DIALOGUE];
+	char string[MAX_DIALOGUE]; /*!< string for print*/
 
 	if(!gra || !dialogue) return ERROR;
 
@@ -389,7 +387,7 @@ STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check)
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory, STATUS check){
-	char string[MAX_DIALOGUE];
+	char string[MAX_DIALOGUE]; /*!< string for print*/
 
 	
 	if(!gra || !dialogue || !inventory) return ERROR;
@@ -415,8 +413,8 @@ STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inventory, STATUS check){
-	char string[MAX_DIALOGUE];
-	int i;
+	char string[MAX_DIALOGUE]; /*!< string for print*/
+	int i; /*!< counter*/
 
 	if(!gra || !dialogue || !inventory) return ERROR;
 
@@ -451,8 +449,8 @@ STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inve
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventory, STATUS check){
-	char string[MAX_DIALOGUE];
-	char* obj = NULL;
+	char string[MAX_DIALOGUE]; /*!< string for print*/
+	char* obj = NULL; /*!< string for the inspected object*/
 
 	if(!gra || !dialogue || !inventory) return ERROR;
 	obj = command_get_symbol(dialogue->current);
@@ -483,7 +481,7 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 * @return Dialogue* (created dialogue)
 */
 Dialogue* dialogue_create(Command* current){
-	Dialogue* dialogue = NULL; /*!< Dialogue**/
+	Dialogue* dialogue = NULL; /*!< Dialogue*/
 
 	if(!current) return NULL;
 
@@ -636,7 +634,7 @@ STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Grap
 * @return OK if it was printed successfuly
 */
 STATUS dialogue_print(Graphics* gra, char *string){
-	STATUS result;
+	STATUS result; /*!< STATUS for the result*/
 
 	if(!gra || !string) return ERROR;
 
@@ -657,7 +655,7 @@ STATUS dialogue_print(Graphics* gra, char *string){
 * @return OK if it was printed successfuly
 */
 STATUS dialogue_start_game(Graphics* gra){
-	STATUS result;
+	STATUS result; /*!< STATUS for the result*/
 
 	if(!gra) return ERROR;
 
