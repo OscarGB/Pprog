@@ -1994,15 +1994,17 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 
   /*string will be like "door with key", because "open"
   has been already read*/
-  link_name = strtok(string, " ");
+  token = strtok(string, " ");
+  strcpy(link_name, token);
   token = strtok(NULL, " ");
   if(strcmp(token, "with") != 0){
-    strcpy(game->desc, "Maybe trying *open <door> with <key>*?");
     objects = game_get_objects_name(game, objects);
     dialogue_generic(dia, ERROR, objects, gra);
+    /*HELP*/
     return ERROR;
   }
-  object_name = strtok(NULL, " ");
+  token = strtok(NULL, "\n");
+  strcpy(object_name, token);
 
   /*Finding the object by its name*/
   for(i = 0; i < game->num_objects; i++){
