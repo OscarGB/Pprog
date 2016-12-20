@@ -304,6 +304,8 @@ STATUS game_add_object(Game* game, Object* object) {
     game->object[game->num_objects] = object;
     game->num_objects++;
 
+    space_add_object(game_get_space(game, object_get_location(object)), object_get_id(object));
+
     return OK;
 }
 
@@ -1611,7 +1613,6 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 * @param symbol to inspect (direction)
 * @return OK if it went ok
 */
-
 STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
 
   int i = 0, j = 0; /* !< Variables used for loops*/

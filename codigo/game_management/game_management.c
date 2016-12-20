@@ -128,7 +128,7 @@ STATUS game_load_objects(Game* game, char* filename) {
   if (file == NULL) {
     return ERROR;
   }
-  while (fgets(line, WORD_SIZE, file) && num_objects < 4) {
+  while (fgets(line, WORD_SIZE, file) && num_objects < MAX_IDS) {
     if (strncmp("#o:", line, 3) == 0) {
       toks = strtok(line + 3, "|");
       object_id = atol(toks);
@@ -136,7 +136,7 @@ STATUS game_load_objects(Game* game, char* filename) {
       space_id = atol(toks);
       toks = strtok(NULL, "|");
       symbol = toks[0];
-      toks = strtok(NULL, " |");
+      toks = strtok(NULL, "|");
       strcpy(desc, toks);
 
 #ifdef DEBUG 
