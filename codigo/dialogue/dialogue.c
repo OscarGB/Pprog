@@ -311,7 +311,7 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 * @return STATUS (OK if everything went well, ERROR if it didn't)
 */
 STATUS dialogue_help(Graphics* gra){
-	return dialogue_print(gra, "The available commands are:\nquit, go, pick, drop, inspect,\nturnon, turnoff, open, save, load\nand help.");
+	return dialogue_print(gra, "The available commands are:\nquit, go, pick, drop, inspect,\nturnon, turnoff, open x with y,\nsave, load and help.");
 }
 
 
