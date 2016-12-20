@@ -2018,8 +2018,8 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
 }
 
 STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
-  char* link_name = NULL;
-  char* object_name = NULL;
+  char link_name[WORD_SIZE];
+  char object_name[WORD_SIZE];
   char* token = NULL;
   Object* object = NULL;
   Link* link = NULL;
@@ -2027,6 +2027,9 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   int i;
   STATUS result;
   char *string = NULL;
+  char syntax[WORD_SIZE];
+
+  strcpy(syntax, "syntax");
   string = command_get_symbol(cmd);
 
   if(!game || !dia || !gra || !cmd) return ERROR;
@@ -2034,10 +2037,15 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   /*string will be like "door with key", because "open"
   has been already read*/
   token = strtok(string, " ");
+  if(!token){
+    objects[0] = syntax;
+    dialogue_generic(dia, ERROR, objects, gra);
+    return ERROR;
+  }
   strcpy(link_name, token);
-  token = strtok(NULL, " ");
+  token = strtok(NULL, " ");  
   if(!token || strcmp(token, "with" ) != 0){
-    strcpy(objects[0], "syntax");
+    objects[0] = syntax;
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }

@@ -25,6 +25,14 @@ struct _Dialogue {
 
 /*PRIVATE FUNCTIONS*/
 
+/**
+* @brief prints the quit dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_quit(Graphics* gra, Dialogue* dialogue){
 	if(!gra || !dialogue) return ERROR;
 
@@ -42,6 +50,51 @@ STATUS dialogue_quit(Graphics* gra, Dialogue* dialogue){
 	return OK;
 }
 
+/**
+* @brief prints the win dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
+STATUS dialogue_win(Graphics* gra, Dialogue* dialogue){
+	if(!gra || !dialogue) return ERROR;
+
+	graphics_clear(gra);
+	graphics_clear_zone(gra, DIALOGUE);
+
+	print_in_zone(gra, DIALOGUE, 0, " ");
+	graphics_clear_zone(gra, DIALOGUE);
+	print_in_zone(gra, DIALOGUE, 0, "Congratulations! You've won the most difficult game ever!\n");
+
+	graphics_refresh(gra);
+
+	sleep(3);
+
+	return OK;
+}
+
+/**
+* @brief prints the help dialogue
+* @author Óscar Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
+STATUS dialogue_help(Graphics* gra){
+	return dialogue_print(gra, "The available commands are:\nquit, go, pick, drop, inspect,\nturnon, turnoff, open x with y,\nsave, load and help.");
+}
+
+/**
+* @brief prints the error dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects){
 	char string[MAX_DIALOGUE];
 
@@ -51,9 +104,20 @@ STATUS dialogue_error(Graphics* gra, Dialogue* dialogue, char** objects){
 
 	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
 
-	return dialogue_standard(gra, dialogue, objects, string);
+	dialogue_help(gra);
+	return dialogue_print(gra, string);
 }
 
+/**
+* @brief prints the pick dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
 	char string[MAX_DIALOGUE];
 	char* picked = NULL;
@@ -64,7 +128,7 @@ STATUS dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	if(!picked) return ERROR;
 
 	if(check == OK){
-		strcpy(string, "You have picked"); 
+		strcpy(string, "You have picked "); 
 		strcat(string, picked);
 		strcat(string, "\n");
 	}
@@ -78,6 +142,16 @@ STATUS dialogue_pick(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
+/**
+* @brief prints the drop dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
 	char string[MAX_DIALOGUE];
 	char* dropped = NULL;
@@ -102,6 +176,16 @@ STATUS dialogue_drop(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
+/**
+* @brief prints the go dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
 	char string[MAX_DIALOGUE];
 	char* direction = NULL;
@@ -127,6 +211,16 @@ STATUS dialogue_go(Graphics* gra, Dialogue* dialogue, char** objects, STATUS che
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
+/**
+* @brief prints the turnon dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_turnon(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
 	char string[MAX_DIALOGUE];
 	char* obj = NULL;
@@ -151,6 +245,16 @@ STATUS dialogue_turnon(Graphics* gra, Dialogue* dialogue, char** objects, STATUS
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
+/**
+* @brief prints the turnoff dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_turnoff(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
 	char string[MAX_DIALOGUE];
 	char* obj = NULL;
@@ -175,6 +279,16 @@ STATUS dialogue_turnoff(Graphics* gra, Dialogue* dialogue, char** objects, STATU
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
+/**
+* @brief prints the open dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS check){
 	char string[MAX_DIALOGUE];
 	char* str = NULL;
@@ -191,7 +305,8 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	}
 	else{
 		if(strcmp("syntax", objects[0]) == 0){
-			strcpy(string, "Maybe traying OPEN link WITH object?");
+			strcpy(string, "Maybe trying OPEN link WITH object?");
+			return dialogue_print(gra, string);
 		}
 		else{
 			strcpy(string, "Cannot open the "); 
@@ -204,7 +319,16 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
-
+/**
+* @brief prints the load_show dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
 	char string[MAX_DIALOGUE];
 
@@ -224,6 +348,16 @@ STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS c
 	return dialogue_print(gra, string);
 }
 
+/**
+* @brief prints the load dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
 	char string[MAX_DIALOGUE];
 
@@ -244,6 +378,16 @@ STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check)
 	return dialogue_print(gra, string);
 }
 
+/**
+* @brief prints the inspect_space dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory, STATUS check){
 	char string[MAX_DIALOGUE];
 
@@ -260,6 +404,16 @@ STATUS dialogue_inspect_space(Graphics* gra, Dialogue* dialogue, char* inventory
 	return dialogue_print(gra, string);
 }
 
+/**
+* @brief prints the inspect_inventory dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inventory, STATUS check){
 	char string[MAX_DIALOGUE];
 	int i;
@@ -286,6 +440,16 @@ STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inve
 	return dialogue_print(gra, string);
 }
 
+/**
+* @brief prints the inspect_object dialogue
+* @author José Ignacio Gómez
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char** objects
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
 STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventory, STATUS check){
 	char string[MAX_DIALOGUE];
 	char* obj = NULL;
@@ -308,16 +472,6 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 	return dialogue_print(gra, string);
 }
 
-/**
-* @brief prints the help dialogue
-* @author Óscar Gómez
-* @date 20/12/16
-* @param Graphics* gra (The graphics where it prints)
-* @return STATUS (OK if everything went well, ERROR if it didn't)
-*/
-STATUS dialogue_help(Graphics* gra){
-	return dialogue_print(gra, "The available commands are:\nquit, go, pick, drop, inspect,\nturnon, turnoff, open x with y,\nsave, load and help.");
-}
 
 
 /*PUBLIC FUNCTIONS*/
@@ -419,6 +573,8 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 			return dialogue_error(gra, dialogue, objects);
 		case QUIT:
 			return dialogue_quit(gra, dialogue);
+		case WIN:
+			return dialogue_win(gra, dialogue);
 		case PICK:
 			return dialogue_pick(gra, dialogue, objects, check);
 		case DROP:
@@ -433,10 +589,10 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 			return dialogue_open(gra, dialogue, objects, check);
 		case HELP:
 			return dialogue_help(gra);
-		/*case SAVE:
+		case SAVE:
 			return dialogue_save(gra, dialogue, objects, check);
 		case LOAD:
-			return dialogue_load(gra, dialogue, check);*/
+			return dialogue_load(gra, dialogue, check);
 		default:
 			return ERROR;
 	}
