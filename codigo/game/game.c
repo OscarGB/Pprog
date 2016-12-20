@@ -519,42 +519,58 @@ char** game_get_objects_name(Game* game, char** objects){
 
 STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   char *objects[MAX_IDS];
+  STATUS result;
 
   game->turns++;
   switch (command_get_cmd(cmd)) { /*Switch for the command value*/
   case UNKNOWN:
-    return callback_UNKNOWN(game, dia, gra);
+    result = callback_UNKNOWN(game, dia, gra);
+    break;
   case QUIT:
-    return callback_QUIT(game, dia, gra);
+    result = callback_QUIT(game, dia, gra);
+    break;
   case PICK:
-    return callback_PICK(game, cmd, dia, gra, objects);
+    result = callback_PICK(game, cmd, dia, gra, objects);
+    break;
   case DROP:
-    return callback_DROP(game, cmd, dia, gra, objects);
+    result = callback_DROP(game, cmd, dia, gra, objects);
+    break;
   case ROLL:
-    return callback_ROLL(game, cmd);
+    result = callback_ROLL(game, cmd);
+    break;
   case INSPECT:
-    return callback_INSPECT(game, cmd, dia, gra);
+    result = callback_INSPECT(game, cmd, dia, gra);
+    break;
   case GO:
-    return callback_GO(game, cmd, dia, gra, objects);
+    result = callback_GO(game, cmd, dia, gra, objects);
+    break;
   case TURNON:
-    return callback_TURNON(game, cmd, dia, gra, objects); 
+    result = callback_TURNON(game, cmd, dia, gra, objects); 
+    break;
   case TURNOFF:
-    return callback_TURNOFF(game, cmd, dia, gra, objects);
+    result = callback_TURNOFF(game, cmd, dia, gra, objects);
+    break;
   case OPEN:
-    return callback_OPEN(game, cmd, dia, gra, objects);
+    result = callback_OPEN(game, cmd, dia, gra, objects);
+    break;
   case SAVE:
     game->turns--;
-    return callback_SAVE(game, cmd, dia, gra);
+    result = callback_SAVE(game, cmd, dia, gra);
+    break;
   case LOAD:
-  	return callback_LOAD(game, cmd, dia, gra);
+  	result = callback_LOAD(game, cmd, dia, gra);
+    break;
   case HELP:
-    return dialogue_generic(dia, OK, objects, gra);
+    result = dialogue_generic(dia, OK, objects, gra);
+    break;
   case NO_CMD:
-    return dialogue_generic(dia, OK, game_get_objects_name(game, objects), gra);
+    result = dialogue_generic(dia, OK, game_get_objects_name(game, objects), gra);
+    break;
   default: /*We must never arrive here*/
     return ERROR;
   }
-  return OK;
+  /*Condicion final de partida*/
+  return result;
 }
 
 
