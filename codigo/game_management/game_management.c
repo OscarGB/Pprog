@@ -29,10 +29,10 @@
 
 
 STATUS game_load_spaces(Game* game, char* filename) {
+  char gdesc[MAX_GDESC+1]; /*Gdesc (drawing of the space)*/
   FILE* file = NULL; /*File to read*/
   char line[WORD_SIZE] = ""; /*Line read*/
   char name[WORD_SIZE] = ""; /*Name of the space read*/
-  char gdesc[MAX_GDESC]; /*Gdesc (drawing of the space)*/
   char* toks = NULL; /*String for tokenization*/
   Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID, up = NO_ID, down = NO_ID; /*Group of Ids for the space*/
   Space* space = NULL; /*Space pointer*/
@@ -66,24 +66,8 @@ STATUS game_load_spaces(Game* game, char* filename) {
       up = atol(toks);
       toks = strtok(NULL, "|");
       down = atol(toks);
-      toks = strtok(NULL, "|");
-      if(strcmp(toks, "\n") != 0){
-        strcpy(gdesc, "|");
-        strcat(gdesc, toks);
-        strcat(gdesc, "|");
-        toks = strtok(NULL, "|");
-        strcat(gdesc, "|");
-        strcat(gdesc, toks);
-        strcat(gdesc, "|");
-        toks = strtok(NULL, "|");
-        strcat(gdesc, "|");
-        strcat(gdesc, toks);
-        strcat(gdesc, "|");
-        strcat(gdesc, "\0");
-      }
-      else {
-        strcpy(gdesc, VACIO);
-      }
+      toks = strtok(NULL, "\n");
+      strcpy(gdesc, toks);
       
 #ifdef DEBUG 
       printf("Leido: %ld|%s|%ld|%ld|%ld|%ld\nGdesc:\n%s\n", id, name, north, east, south, west, gdesc);
@@ -97,6 +81,7 @@ STATUS game_load_spaces(Game* game, char* filename) {
       	space_set_south(space, south);
       	space_set_west(space, west);
 	      space_set_up(space, up);
+        space_set_light(space, TRUE);
 	      space_set_down(space, down);
         space_set_gdesc(space, gdesc);
 	      space_set_adesc(space, "To be written");
@@ -277,7 +262,7 @@ STATUS game_load_player(Game* game, char* filename){
       strcpy(name, toks);
 
       #ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%ld\n", link_id, desc, con1_id, con2_id);
+      printf("Leido: %ld|%s|%ld\n", id, name, location);
       #endif
       player = player_create(id);
       if (player != NULL) {

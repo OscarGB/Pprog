@@ -817,8 +817,8 @@ void game_print_screen(Game* game, Graphics* gra){
   if (id_act != NO_ID) {
     if(space_get_light(space_act) == TRUE){
       strcpy(print, space_get_gdesc(space_act));
-      print[27] = ':';
-      print[28] = ')';
+      print[49] = ':';
+      print[50] = ')';
       print_in_zone(gra, PLAYGROUND, C, print);
     }
     else{

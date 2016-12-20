@@ -418,7 +418,7 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 			if(gra->nv == 1){
 				return OK;
 			}
-			j = 2;
+			j = 1;
 			p = 0;
 			for(i = 0; i < strlen(print); i++){
 				if(p > ((WIN2_X-2)*(WIN2_Y-2))){
@@ -440,7 +440,7 @@ STATUS print_in_zone(Graphics* gra, ZONE zone, DIRECTION dir , char* print){
 				}
 			}
 			
-			j = 11;
+			j = 10;
 			p = 0;
 			for(i = 0; i < strlen(gra->dia); i++){
 				if(p > ((WIN2_X-2)*(WIN2_Y-2))){
