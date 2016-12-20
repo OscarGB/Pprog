@@ -114,6 +114,6 @@ STATUS command_copy(Command *to, Command *from);
 * @param T_Command new (The new cmd)
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
-STATUS command_set_cmd(Command *cmd, T_Command new)
+STATUS command_set_cmd(Command *cmd, T_Command new);
 
 #endif

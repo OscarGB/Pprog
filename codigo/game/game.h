@@ -22,7 +22,7 @@
 #define PLAYER_OBJ -2 /*!< Id for an object into the player's bag*/
 #define DIE_FACES 6 /*!< Faces of the die*/
 #define DEATH_DESERVED 100 /*!< Maximum number of turns allowed by a random function of game_rules */
-#define YOU_WON 10 /*!< Id of the finishing space*/ 
+#define YOU_WON 9 /*!< Id of the finishing space*/ 
 
 typedef struct _Game Game;
 

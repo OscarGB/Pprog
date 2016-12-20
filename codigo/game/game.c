@@ -82,6 +82,7 @@ STATUS print_link_save(FILE *f, Link *link);
 STATUS print_object_save(FILE *f, Object *object);
 
 int game_get_objects_at_space(Game *game, Id id);
+BOOL game_won_game(Game* game);
 
 /**
  * @brief Game interface implementation

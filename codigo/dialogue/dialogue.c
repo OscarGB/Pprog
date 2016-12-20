@@ -589,10 +589,10 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 			return dialogue_open(gra, dialogue, objects, check);
 		case HELP:
 			return dialogue_help(gra);
-		case SAVE:
+		/*case SAVE:
 			return dialogue_save(gra, dialogue, objects, check);
 		case LOAD:
-			return dialogue_load(gra, dialogue, check);
+			return dialogue_load(gra, dialogue, check);*/
 		default:
 			return ERROR;
 	}
