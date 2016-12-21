@@ -592,7 +592,7 @@ STATUS space_open_door(Space* space, DIRECTION dir){
             space->gdesc[69] = '_';
             return OK;
         default:
-            return ERROR;
+            return OK;
     }
 }
 
@@ -628,6 +628,8 @@ STATUS space_close_door(Space* space, DIRECTION dir){
         case E:
             space->gdesc[45] = '(';
             space->gdesc[59] = '(';
+            return OK;
+        case C:
             return OK;
         default:
             return ERROR;

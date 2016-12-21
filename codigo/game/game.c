@@ -253,7 +253,7 @@ STATUS game_add_link(Game *game, Link* link){
 
   /*Set the link to the proper position*/
   game->links[i] = link;
-  game->num_links ++;
+  game->num_links++;
 
   return OK;
 }
@@ -2052,7 +2052,6 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
         object = game->object[i];
 
         if(player_has_object(game->player, object_get_id(object)) == FALSE){
-          strcpy(game->desc, "Is this object in your bag?");
           objects = game_get_objects_name(game, objects);
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;

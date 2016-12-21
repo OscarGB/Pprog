@@ -602,10 +602,10 @@ STATUS object_turnoff(Object* object){
 
 	if(!object) return ERROR;
 	
-	if(object->on_off==FALSE) return ERROR; /*Object can't be turned off because it can't illuminate or is not on*/
+	if(object->on_off == FALSE) return ERROR; /*Object can't be turned off because it can't illuminate or is not on*/
 
 
-	object->on_off=FALSE;
+	object->on_off = FALSE;
 
 	return OK;
 }
@@ -619,9 +619,9 @@ STATUS object_turnoff(Object* object){
 */
 
 BOOL object_can_open(Object *object, Id id){
-	if(!object || id==NO_ID) return FALSE;
+	if(!object || id == NO_ID) return FALSE;
 
-	if(object_get_open(object)==id) return TRUE;
+	if(object_get_open(object) == id) return TRUE;
 	return FALSE;
 }
 
