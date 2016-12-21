@@ -12,7 +12,6 @@
 #include <string.h>
 #include <dirent.h>
 #include <unistd.h>
-#include <alloca.h>
 #include "game.h"
 #include "player.h"
 #include "object.h"
@@ -142,12 +141,12 @@ Game* game_init(Game* game) {
 * @return OK if it was successfuly initialized
 */
 STATUS game_init_from_file(Game* game, char* filename) {
-  if(!game){
+  if(!game || !filename){
     return ERROR;
   }
 
   /*Load objects from file*/
-  if (game_load(game, filename)==OK)
+  if (game_load(game, filename) == OK)
     return OK;
   return ERROR;
 }
@@ -2257,12 +2256,13 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
     return ERROR;
   }
 	
-	game_destroy(game);
+	
+  game_destroy(game);      
 
   game = game_init(game);
 
   if(game){
-	 status = game_init_from_file(game, path);
+   status = game_init_from_file(game, path);
    dialogue_load(gra, dia, symbol, status);
    return status;
   }
