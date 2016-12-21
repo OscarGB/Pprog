@@ -18,6 +18,7 @@ typedef struct _Space Space; /*!<Definition of the Space structure*/
 #define FIRST_SPACE 1 /*!<Definition of the first space*/
 #define MAX_GDESC  100 /*!<Max number of characters in gdesc*/
 #define MAX_ADESC 100 /*!<Max number of characters in advanced gdesc*/
+#define MAX_OBS_PER_SPA 3 /*!<Max number of objects per space*/
 
 /**
 * @brief Creates a new space for the game
@@ -292,4 +293,13 @@ STATUS space_open_door(Space* space, DIRECTION dir);
 */
 STATUS space_close_door(Space* space, DIRECTION dir);
 
+/**
+* @brief Gets where is that link
+* @author Óscar Gómez
+* @date 20/12/2016
+* @param Space* space (The space to modify)
+* @param Id link_id (The link to search)
+* @return DIRECTION (where the link is)
+*/
+DIRECTION space_get_link_direction(Space* spa, Id link_id);
 #endif

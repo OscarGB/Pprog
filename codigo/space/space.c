@@ -633,3 +633,29 @@ STATUS space_close_door(Space* space, DIRECTION dir){
             return ERROR;
     }
 }
+
+/**
+* @brief Gets where is that link
+* @author Óscar Gómez
+* @date 20/12/2016
+* @param Space* space (The space to modify)
+* @param Id link_id (The link to search)
+* @return DIRECTION (where the link is)
+*/
+DIRECTION space_get_link_direction(Space* spa, Id link_id){
+    if(!spa || link_id == NO_ID) return C;
+
+    if(spa->north == link_id){
+        return N;
+    }
+    if(spa->south == link_id){
+        return S;
+    }
+    if(spa->east == link_id){
+        return E;
+    }
+    if(spa->west == link_id){
+        return W;
+    }
+    return C;
+}

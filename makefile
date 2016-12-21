@@ -12,7 +12,7 @@ NCURSES = -lncurses
 
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
 
-ALL = JuegoOcaPlus 	#Executables to make with a make call
+ALL = JuegoConv 	#Executables to make with a make call
 TEST = object_test link_test die_test player_test inventory_test space_test set_test graphics_test dialogue_test	#Executables to make with make test or make debug
 ALL_DEBUG = $(ALL) $(TEST) #Executables to make with make debug
 
@@ -99,9 +99,9 @@ graphics_test.o: codigo/test/graphics_test.c
 	@echo "--->Generating graphics_test.o"
 	@gcc $(CFLAGS) -c codigo/test/graphics_test.c $(NCURSES)
 
-JuegoOcaPlus: game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o
-	@echo "--->Creating executable JuegoOcaPlus"
-	@gcc $(CFLAGS) -o JuegoOcaPlus game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o $(NCURSES)
+JuegoConv: game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o
+	@echo "--->Creating executable JuegoConv"
+	@gcc $(CFLAGS) -o JuegoConv game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o $(NCURSES)
 
 graphics.o: codigo/graphics/graphics.c
 	@echo "--->Generating graphics.o"
@@ -160,14 +160,14 @@ inventory.o: codigo/inventory/inventory.c
 	@gcc $(CFLAGS) -c codigo/inventory/inventory.c
 
 clean: #Command to clean the root
-	@echo "--->Deleting all executables, distributing  files, tests and logs"
-	@rm -rf *.exe  *.o *.tgz *.log $(ALL_DEBUG) *.out 
+	@echo "--->Deleting all executables, distributing  files, tests, saved games and logs"
+	@rm -rf *.exe  *.o *.tgz *.log $(ALL_DEBUG) *.out codigo/Saves/*
 
 dist: #Command to make the distributable file
 	@echo "--->Generating documentation with Doxygen"
 	@nohup doxygen Doxyfile
 	@echo "--->Creating tgz for program's distribution"
-	@tar cvzf s1-cod_OcaBasicaIni-v3.0.tgz codigo/ informes_pruebas/ comentarios.txt reuniones/ html/ makefile *.dat Doxyfile *.oca test_games/
+	@tar cvzf s1-cod_JuegoConv-v4.0.tgz codigo/ informes_pruebas/ comentarios.txt reuniones/ html/ makefile *.dat Doxyfile *.oca
 
 doc: #Command to generate the documentation
 	@echo "--->Generating documentation with Doxygen"

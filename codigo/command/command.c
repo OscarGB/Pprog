@@ -37,6 +37,11 @@ STATUS get_user_input(Command* command, char* input){
 	if(command == NULL || input == NULL){
 		return ERROR;
 	}
+
+
+#ifdef DEBUG
+	printf("Leido: %s\n", input); /*Debug case*/
+#endif
 	
 	toks = strtok(input, " \n");
 	if(toks != NULL){/*If theres nothing written -> NO_CMD*/
@@ -44,15 +49,22 @@ STATUS get_user_input(Command* command, char* input){
 		toks = strtok(NULL, " \n");
 		if(toks != NULL){ /*If there is a symbol -> set the symbol to the introduced valor*/
 			strcpy(symbol, toks);
+			toks = strtok(NULL, " \n");
+			if(toks != NULL){
+				strcat(symbol, " ");
+				strcat(symbol, toks);
+				toks = strtok(NULL, "\n");
+				if(toks != NULL){
+					strcat(symbol, " ");
+					strcat(symbol, toks);
+				}
+			}
 		}
 		else{/*If there's not a symbol we set to E*/
 			symbol[0] = '\0';
 			command->symbol[0] = '\0';
 		}
 
-		#ifdef DEBUG
-			printf("Leido: %s\n", input); /*Debug case*/
-		#endif
 
 
 		/*Detecting what command was written*/
@@ -83,17 +95,17 @@ STATUS get_user_input(Command* command, char* input){
 
 			strcpy(command->symbol, symbol);
 		}
-		else if (!strcmp(action, "turnon")){
+		else if (!strcmp(action, "turnon") || !strcmp(action, "on")){
 			command->cmd = TURNON;
 
 			strcpy(command->symbol, symbol);
 		}
-		else if (!strcmp(action, "turnoff")){
+		else if (!strcmp(action, "turnoff") || !strcmp(action, "off")){
 			command->cmd = TURNOFF;
 
 			strcpy(command->symbol, symbol);
 		}
-		else if (!strcmp(action, "open")){
+		else if (!strcmp(action, "open") || !strcmp(action, "o")){
 			command->cmd = OPEN;
 
 			strcpy(command->symbol, symbol);
@@ -107,6 +119,9 @@ STATUS get_user_input(Command* command, char* input){
 			command->cmd = LOAD;
 
 			strcpy(command->symbol, symbol);
+		}
+		else if (!strcmp(action, "h") || !strcmp(action, "help")){
+			command->cmd = HELP;
 		}
 		else{
 			command->cmd = UNKNOWN;
@@ -201,5 +216,19 @@ STATUS command_copy(Command *to, Command *from){
 	}
 	to->cmd = from->cmd;
 	strcpy(to->symbol, from->symbol);
+	return OK;
+}
+
+/**
+* @brief Sets the cmd of a command
+* @author Óscar Gómez
+* @date 20-12-2016
+* @param Command *cmd (The command to modify)
+* @param T_Command new (The new cmd)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS command_set_cmd(Command *cmd, T_Command new){
+	if(!cmd) return ERROR;
+	cmd->cmd = new;
 	return OK;
 }

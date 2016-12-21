@@ -366,7 +366,7 @@ STATUS game_load_object(Game* game, char* line) {
       	object_set_light(object, light);
       	object_set_on_off(object, on_off);
         object_set_open(object, open);
-        /*object_set_duration(object, duration);*/
+        object_set_duration(object, duration);
         status = game_add_object(game, object);
       }
   

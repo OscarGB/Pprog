@@ -32,13 +32,15 @@ typedef enum enum_Command {
   TURNOFF,
   OPEN,
   SAVE,
-  LOAD
+  LOAD,
+  HELP,
+  WIN
 } T_Command; 
 
 typedef struct _Command Command; /*!< Definition of Command structure */
 
 
-/*
+/**
 * @brief reads from keyboard in search of a valid command to execute
 * it creates the command inside
 * @author José Ignacio Gómez, Óscar Gómez
@@ -51,7 +53,7 @@ typedef struct _Command Command; /*!< Definition of Command structure */
 STATUS get_user_input(Command* command, char* input);
 
 
-/*
+/**
 * @brief It creates a command, defining its atributes to UNKNOWN and ''
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 21/10/2016
@@ -62,7 +64,7 @@ STATUS get_user_input(Command* command, char* input);
 Command* command_create();
 
 
-/*
+/**
 * @brief It destroys a command, freeing all the memory
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 21/10/2016
@@ -73,7 +75,7 @@ Command* command_create();
 void command_destroy(Command *com);
 
 
-/*
+/**
 * @brief It gives the value of the T_Command inside Command
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 21/10/2016
@@ -84,7 +86,7 @@ void command_destroy(Command *com);
 T_Command command_get_cmd(Command *com);
 
 
-/*
+/**
 * @brief It gives the value of the symbol inside Command
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 21/10/2016
@@ -103,5 +105,15 @@ char *command_get_symbol(Command *com);
 * @return STATUS (OK if everything worked, ERROR if didnt)
 */
 STATUS command_copy(Command *to, Command *from);
+
+/**
+* @brief Sets the cmd of a command
+* @author Óscar Gómez
+* @date 20-12-2016
+* @param Command *cmd (The command to modify)
+* @param T_Command new (The new cmd)
+* @return STATUS (OK if everything worked, ERROR if didnt)
+*/
+STATUS command_set_cmd(Command *cmd, T_Command new);
 
 #endif
