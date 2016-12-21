@@ -127,7 +127,6 @@ STATUS print_object_save(FILE *f, Object *object){
   char desc[WORD_SIZE+1];
   char mdesc[WORD_SIZE+1];
   BOOL movable;
-  BOOL moved;
   BOOL hidden;
   Id open, original_location;
   BOOL light;
@@ -257,8 +256,6 @@ STATUS game_load(Game* game, char* path){
 	STATUS ret1 = OK, ret2 = OK, ret3 = OK, ret4 = OK, status = OK;
 	char line[WORD_SIZE+1];
 
-  printf("A\n");
-
   if(!game || !path)
       return ERROR;
 
@@ -270,26 +267,16 @@ STATUS game_load(Game* game, char* path){
   while (fgets(line, WORD_SIZE, file) != NULL) {
     if(!strncmp("#s:", line, 3)){
       ret1 = game_load_space(game, line+3);
-      printf("Entrando a load_space\n");
-
     } else if(!strncmp("#o:", line, 3)){
       ret2 = game_load_object(game, line+3);
-      printf("Entrando a load_object\n");
-
     }else if(!strncmp("#l:", line, 3)){
       ret3 = game_load_link(game, line+3);
-      printf("Entrando a load_links\n");
-
     }else if(!strncmp("#p:", line, 3)){
       ret4 = game_load_player(game, line+3);
-
-      printf("Entrando a load_player\n");
     }else{
-      printf("else\n");
       break;
     }
   }
-  printf("WTF\n");
 
     if (ferror(file)) {
     	status = ERROR;
@@ -410,7 +397,7 @@ STATUS game_load_link(Game* game, char* line) {
   char name[WORD_SIZE + 1]; 
   Id conection1; 
   Id conection2; 
-  State state; 
+  State state = CLOSEDL; 
 
   toks = strtok(line, "|");
   id = atol(toks);
@@ -491,7 +478,6 @@ STATUS game_load_space(Game* game, char* line) {
   	space_set_gdesc(space, gdesc);
   	status = game_add_space(game, space);
   }
-  printf("%d\n", status);
 return status;
 }
 
