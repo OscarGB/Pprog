@@ -70,8 +70,8 @@ Space* space_create(Id id) {
 
     newSpace->light = TRUE;
 
-    strcpy(newSpace->gdesc,"");
-    strcpy(newSpace->adesc, "");
+    strcpy(newSpace->gdesc," ");
+    strcpy(newSpace->adesc, " ");
 
     return newSpace;
 }

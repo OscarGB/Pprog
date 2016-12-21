@@ -424,8 +424,9 @@ STATUS game_add_player(Game* game, Player* player){
 		return ERROR;
 
 	game->player = player;
-	if(!game->player)
+	if(!game->player){
 		return ERROR;
+	}
 
 	return OK;
 }

@@ -260,14 +260,14 @@ STATUS game_save(Game* game, char* savepath){
 STATUS game_load(Game* game, char* path){
 
 	FILE *file;
-	STATUS ret1 = OK, ret2 = OK, ret3 = OK, ret4 = OK, status = ERROR;
-	char line[WORD_SIZE];
+	STATUS ret1 = OK, ret2 = OK, ret3 = OK, ret4 = OK, status = OK;
+	char line[WORD_SIZE+1];
 
 
 	if(!game || !path)
 	    return ERROR;
 
-	file = fopen(path, "r");
+	file = fopen(path, "r+");
 	if (file == NULL) {
 	    return ERROR;
 	}
@@ -285,7 +285,7 @@ STATUS game_load(Game* game, char* path){
 		}else if(!strncmp("#p:", line, 3)){
 			ret4 = game_load_player(game, line+3);
 		}else
-			ret1 = ret2 = ret3 = ret4 = ERROR;
+			break;
 	}
 
     if (ferror(file)) {
@@ -294,9 +294,9 @@ STATUS game_load(Game* game, char* path){
 
   fclose(file);
 
-  if(ret1 == OK && ret2 == OK && ret3 == OK && ret4 == OK)
+  if(ret1 == OK && ret2 == OK && ret3 == OK && ret4 == OK){
   	return status;
-
+  }
   return ERROR;
 }
 
@@ -332,23 +332,23 @@ STATUS game_load_object(Game* game, char* line) {
       strcpy(mdesc, toks);
       toks = strtok(NULL, "|");
       symbol = toks[0];
-      toks = strtok(NULL, " |");
+      toks = strtok(NULL, "|");
       if (!strcmp(toks, "TRUE"))
       	movable = TRUE;
-      toks = strtok(NULL, " |");
+      toks = strtok(NULL, "|");
       if (!strcmp(toks, "TRUE"))
       	moved = TRUE;
-      toks = strtok(NULL, " |");
+      toks = strtok(NULL, "|");
       if (!strcmp(toks, "TRUE"))
       	hidden = TRUE;
-      toks = strtok(NULL, " |");
+      toks = strtok(NULL, "|");
       if (!strcmp(toks, "TRUE"))
       	light = TRUE;
-      toks = strtok(NULL, " |");
+      toks = strtok(NULL, "|");
       if (!strcmp(toks, "TRUE"))
       	on_off = TRUE;
       toks = strtok(NULL, "|");
-      open = atoi(toks);
+      open = atol(toks);
       toks = strtok(NULL, "|");
       duration = atoi(toks);
       
@@ -366,7 +366,7 @@ STATUS game_load_object(Game* game, char* line) {
       	object_set_light(object, light);
       	object_set_on_off(object, on_off);
         object_set_open(object, open);
-        object_set_duration(object, duration);
+        /*object_set_duration(object, duration);*/
         status = game_add_object(game, object);
       }
   
@@ -393,7 +393,7 @@ STATUS game_load_player(Game* game, char* line) {
       if (player != NULL) {
       	player_set_location(player, location);
       	player_set_name(player, name);
-      	game_add_player(game, player);
+      	status = game_add_player(game, player);
       }
   
 return status;
@@ -472,8 +472,8 @@ STATUS game_load_space(Game* game, char* line) {
       	light = TRUE;
       toks = strtok(NULL, "|");
       strcpy(adesc, toks);
-      toks = strtok(NULL, "\n");
-      strcpy(gdesc, gdesc);
+      toks = strtok(NULL, "/");
+      strcpy(gdesc, toks);
 
       space = space_create(id);
       if (space != NULL) {

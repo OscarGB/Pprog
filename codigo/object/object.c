@@ -40,7 +40,7 @@ struct _Object{
 
 Object* object_create(Id id){
 	Object *newObject = NULL; /*New object to create*/
-
+	char desc[WORD_SIZE]=" ", mdesc[WORD_SIZE]=" ";
 	if (id  == NO_ID)
 		return NULL;
 
@@ -55,8 +55,8 @@ Object* object_create(Id id){
 	newObject->name[0]='\0';
 	newObject->location = NO_ID;
 	newObject->symbol = CHAR_ERROR;
-	newObject->desc[0] = '\0';
-	newObject->mdesc[0] = '\0';
+	strcpy(newObject->desc, desc);
+	strcpy(newObject->mdesc, mdesc);
 	newObject->movable = FALSE;
 	newObject->moved = FALSE;
 	newObject->light = FALSE;

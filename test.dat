@@ -54,9 +54,9 @@
 #l:30|21|25|link (Oca) 30|OPENL|
 #l:29|22|1|link (Muerte) 29|OPENL|
 #l:31|8|16|link (Puente) 31|OPENL|
-#o:1|1|Star| | |*|FALSE|FALSE|FALSE|FALSE|FALSE|-1|0|
-#o:2|1|Plus| | |+|FALSE|FALSE|FALSE|FALSE|FALSE|-1|0|
-#o:3|1|littleO| | |o|FALSE|FALSE|FALSE|FALSE|FALSE|-1|0|
-#o:4|1|At| | |@|FALSE|FALSE|FALSE|FALSE|FALSE|-1|0|
+#o:1|
+#o:2|
+#o:3|
+#o:4|
 #p:1|1|OSCAR|
 
