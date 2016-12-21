@@ -104,7 +104,7 @@ BOOL test_object7(){ /*!< Test object_get_desc with default location*/
 	
 	Object* object = NULL;
 	object = object_create(ID);
-	if(strcmp(object_get_desc(object), "") == 0){
+	if(strcmp(object_get_desc(object), " ") == 0){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -118,7 +118,7 @@ BOOL test_object8(){ /*!< Test object_get_mdesc with default location*/
 	
 	Object* object = NULL;
 	object = object_create(ID);
-	if(strcmp(object_get_mdesc(object), "") == 0){
+	if(strcmp(object_get_mdesc(object), " ") == 0){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
@@ -341,7 +341,7 @@ BOOL test_object23(){ /*!< Test object_set_moved*/
 	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
-	res = object_set_moved(object, TRUE);
+	res = object_set_original_location(object, ID2);
 	if(object_get_moved(object) == TRUE && res == OK){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
@@ -550,7 +550,7 @@ BOOL test_object36(){ /* Test object_decrease_duration with object with light ==
 	object_set_light(object, TRUE);
 	object_set_on_off(object, TRUE);
 	object_decrease_duration(object);
-	if( object_get_duration(object) == -1){
+	if(object_get_duration(object) == -1){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;

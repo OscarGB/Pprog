@@ -127,7 +127,6 @@ STATUS print_object_save(FILE *f, Object *object){
   char desc[WORD_SIZE+1];
   char mdesc[WORD_SIZE+1];
   BOOL movable;
-  BOOL moved;
   BOOL hidden;
   Id open, original_location;
   BOOL light;
@@ -410,7 +409,7 @@ STATUS game_load_link(Game* game, char* line) {
   char name[WORD_SIZE + 1]; 
   Id conection1; 
   Id conection2; 
-  State state; 
+  State state = CLOSEDL; 
 
   toks = strtok(line, "|");
   id = atol(toks);
@@ -432,6 +431,7 @@ STATUS game_load_link(Game* game, char* line) {
   	link_set_state(link, state);
   	status = game_add_link(game, link);
   }
+  printf("%d\n", status);
 return status;
 }
 
