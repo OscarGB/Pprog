@@ -257,30 +257,34 @@ STATUS game_load(Game* game, char* path){
 	STATUS ret1 = OK, ret2 = OK, ret3 = OK, ret4 = OK, status = OK;
 	char line[WORD_SIZE+1];
 
+  printf("A\n");
 
-	if(!game || !path)
-	    return ERROR;
+  if(!game || !path)
+      return ERROR;
 
-	file = fopen(path, "r+");
-	if (file == NULL) {
-	    return ERROR;
-	}
+  file = fopen(path, "r+");
+  if (file == NULL) {
+      return ERROR;
+  }
 
-	while (fgets(line, WORD_SIZE, file)) {
-		if(!strncmp("#s:", line, 3)){
-			ret1 = game_load_space(game, line+3);
+  while (fgets(line, WORD_SIZE, file) != NULL) {
+    if(!strncmp("#s:", line, 3)){
+      ret1 = game_load_space(game, line+3);
+      printf("Entrando a load_space\n");
 
-		} else if(!strncmp("#o:", line, 3)){
-			ret2 = game_load_object(game, line+3);
+    } else if(!strncmp("#o:", line, 3)){
+      ret2 = game_load_object(game, line+3);
 
-		}else if(!strncmp("#l:", line, 3)){
-			ret3 = game_load_link(game, line+3);
+    }else if(!strncmp("#l:", line, 3)){
+      ret3 = game_load_link(game, line+3);
 
-		}else if(!strncmp("#p:", line, 3)){
-			ret4 = game_load_player(game, line+3);
-		}else
-			break;
-	}
+    }else if(!strncmp("#p:", line, 3)){
+      ret4 = game_load_player(game, line+3);
+    }else
+      printf("else\n");
+      break;
+  }
+  printf("WTF\n");
 
     if (ferror(file)) {
     	status = ERROR;
@@ -443,7 +447,7 @@ STATUS game_load_space(Game* game, char* line) {
   /*char *toks=NULL; */
   BOOL light = FALSE;
   char adesc[MAX_ADESC];
-  
+
   toks = strtok(line, "|");
   id = atol(toks);
   toks = strtok(NULL, "|");
@@ -482,6 +486,7 @@ STATUS game_load_space(Game* game, char* line) {
   	space_set_gdesc(space, gdesc);
   	status = game_add_space(game, space);
   }
+  printf("%d\n", status);
 return status;
 }
 
