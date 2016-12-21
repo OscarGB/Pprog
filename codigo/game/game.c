@@ -1851,6 +1851,7 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
 
   if(!game || !dia || !gra || !cmd) return ERROR;
 
+
   symbol = command_get_symbol(cmd);
 
   if(strcmp(symbol, "\0") == 0){
@@ -1864,7 +1865,7 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
 
   object_id = game_get_object_location(game, symbol);
 
-  if(player_id != object_id || object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
+  if(object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
     objects = game_get_objects_name(game, objects);
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
@@ -1873,25 +1874,25 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
 
   if(strlen(symbol) == 1){
     for(i = 0; i < game->num_objects; i++){
-
+      /*Finds the object inside the game*/
       if(object_get_symbol(game->object[i]) == symbol[0]){
         object = game->object[i];
 
+        /*Checks if the object is inside the inventory*/
         if(player_has_object(game->player, object_get_id(object)) == TRUE){
+          /*Turns the object ON*/
           if(object_turnon(object) == OK){
             objects = game_get_objects_name(game, objects);
             dialogue_generic(dia, OK, objects, gra);
             return OK;
           }
           else{
-            strcpy(game->desc, "I think it cannot be lighted.");
             objects = game_get_objects_name(game, objects);
             dialogue_generic(dia, ERROR, objects, gra);
             return ERROR;
           }
         }
         else{
-          strcpy(game->desc, "Is this object in your bag?");
           objects = game_get_objects_name(game, objects);
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;
@@ -1913,14 +1914,12 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
             return OK;
           }
           else{
-            strcpy(game->desc, "I think it cannot be lighted.");
             objects = game_get_objects_name(game, objects);
             dialogue_generic(dia, ERROR, objects, gra);
             return ERROR;
           }
         }
         else{
-          strcpy(game->desc, "Is this object in your bag?");
           objects = game_get_objects_name(game, objects);
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;
@@ -1958,7 +1957,7 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
 
   object_id = game_get_object_location(game, symbol);
 
-  if(player_id != object_id || object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
+  if(object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
     objects = game_get_objects_name(game, objects);objects = game_get_objects_name(game, objects);
 
     dialogue_generic(dia, ERROR, objects, gra);
