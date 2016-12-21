@@ -584,12 +584,12 @@ STATUS space_open_door(Space* space, DIRECTION dir){
             space->gdesc[91] = '|';
             return OK;
         case W:
-            space->gdesc[32] = '/';
-            space->gdesc[46] = '_';
+            space->gdesc[42] = '-';
+            space->gdesc[56] = '_';
             return OK;
         case E:
-            space->gdesc[45] = '/';
-            space->gdesc[59] = '_';
+            space->gdesc[55] = '-';
+            space->gdesc[69] = '_';
             return OK;
         default:
             return ERROR;
