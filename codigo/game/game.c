@@ -556,6 +556,7 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   if(game_won_game(game) == TRUE){
     return callback_WIN(game, cmd, dia, gra);
   }
+  
   return result;
 }
 
