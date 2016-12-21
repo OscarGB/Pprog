@@ -2072,9 +2072,6 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
     }
     return result;
   }
-  else{
-    strcpy(game->desc, "It won't be opened");
-  }
 
   objects = game_get_objects_name(game, objects);
   dialogue_generic(dia, ERROR, objects, gra);
