@@ -9,7 +9,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define WORD_SIZE 1000 /*!< Macro for the word size*/
+#define WORD_SIZE 10000 /*!< Macro for the word size*/
 #define NO_ID -1 /*!< Macro for an invalid ID*/
 
 typedef long Id;

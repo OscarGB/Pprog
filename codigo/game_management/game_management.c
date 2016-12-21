@@ -274,15 +274,20 @@ STATUS game_load(Game* game, char* path){
 
     } else if(!strncmp("#o:", line, 3)){
       ret2 = game_load_object(game, line+3);
+      printf("Entrando a load_object\n");
 
     }else if(!strncmp("#l:", line, 3)){
       ret3 = game_load_link(game, line+3);
+      printf("Entrando a load_links\n");
 
     }else if(!strncmp("#p:", line, 3)){
       ret4 = game_load_player(game, line+3);
-    }else
+
+      printf("Entrando a load_player\n");
+    }else{
       printf("else\n");
       break;
+    }
   }
   printf("WTF\n");
 
