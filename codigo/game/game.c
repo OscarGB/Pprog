@@ -1116,8 +1116,8 @@ STATUS callback_UP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
     if (current_id == space_id) {
       link_id = space_get_up(game->spaces[i]);
       for(j = 0; j < (4 * MAX_SPACES); j++){
-        link = game->links[j];
         if(link_get_id(game->links[j]) == link_id){
+          link = game->links[j];
           if(link_get_conection1(game->links[j]) == current_id){
             up_id = link_get_conection2(game->links[j]);
             break;
