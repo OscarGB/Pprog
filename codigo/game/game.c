@@ -175,22 +175,26 @@ STATUS game_destroy(Game* game) {
 
     /*Destroy all the objects*/
     if(game->object != NULL){
-      for (i = 0; i < game->num_objects; i++){
+      for (i = 0; game->num_objects>0; i++){
         object_destroy(game->object[i]);
+        game->num_objects--;
       }
     }
+
+    /*Destroy all the links*/
+    for(i=0; i < MAX_LINKS && game->links[i]!=NULL; i++){
+      link_destroy(game->links[i]);
+      game->num_links--;
+    }
+
 
     /*Destroy the die*/
     if(game->die != NULL){
       die_destroy(game->die);
     }
 
-    /*Destroy all the links*/
-    for(i=0; i < MAX_LINKS; i++){
-      link_destroy(game->links[i]);
-    }
-
     free(game);
+    game = NULL;
         
     return OK;
 }
@@ -2097,7 +2101,7 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 }
 
 STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
-  char path[256] = "codigo/Saves/save_";
+  char path[256] = "codigo/Saves/";
   char *symbol = NULL;
   char str[256] = "Game saved as:\n";
 
@@ -2108,7 +2112,7 @@ STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
   	symbol = command_get_symbol(cmd);
   	strcat(path, symbol); 
-  	strcat(path, ".ao");
+  	strcat(path, ".s");
 
 	strcat(str, path);
 	strcat(str, "\n");
@@ -2157,16 +2161,11 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	}
 
 	/*This loads a file to the game*/
-	/*THIS SHOULD BE USED IN INIT FROM FILE game_load(game, symbol);*/
 	strcat(path, symbol);
 	
 	game_destroy(game);
-	game_init(game);
-	if(!game){
-		dialogue_load(gra, dia, symbol, ERROR);
-		return ERROR;
-	}
-
+	if(game) system("gnome-terminal");
+	game = game_init(game);
 	status = game_init_from_file(game, path);
 
 	dialogue_load(gra, dia, symbol, status);
