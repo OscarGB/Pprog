@@ -429,7 +429,7 @@ STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inve
 			i++;
 		}
 		if(inventory[0][0] == '\0'){
-			strcpy(string, "Uups, it seems that you inventory is empty!");
+			strcpy(string, "Uups, it seems that you inventory is empty!\n");
 		}
 	}
 	else{
@@ -539,7 +539,7 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 
 	strcat(string, "\nITEMS IN THIS ROOM: \n");
 	i = 0;
-	while(objects[i] != NULL){
+	while(objects[i][0] != '\0'){
 		strcat(string, objects[i]);
 		strcat(string, "\n");
 		i++;
