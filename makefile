@@ -13,7 +13,7 @@ NCURSES = -lncurses
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
 
 ALL = JuegoConv 	#Executables to make with a make call
-TEST = object_test link_test die_test player_test inventory_test space_test set_test graphics_test dialogue_test	#Executables to make with make test or make debug
+TEST = object_test link_test die_test player_test inventory_test space_test set_test graphics_test dialogue_test game_rules_test	#Executables to make with make test or make debug
 ALL_DEBUG = $(ALL) $(TEST) #Executables to make with make debug
 
 all: $(ALL) #Generates only the main game
@@ -26,6 +26,10 @@ nocolors: $(ALL_DEBUG) #Generates the tests and the main game without colors
 
 debug: CFLAGS += -DDEBUG	#Adition of DEBUG macro
 debug: $(ALL_DEBUG) #Generates the tests and the main game
+
+game_rules_test: game_rules_test.o game_rules.o
+	@echo "--->Creating executable game_rules_test"
+	@gcc $(CFLAGS) -o game_rules_test game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphics.o die.o $(NCURSES)
 
 dialogue_test: dialogue_test.o dialogue.o
 	@echo "--->Creating executable dialogue_test"
@@ -98,6 +102,10 @@ space_test.o: codigo/test/space_test.c
 graphics_test.o: codigo/test/graphics_test.c
 	@echo "--->Generating graphics_test.o"
 	@gcc $(CFLAGS) -c codigo/test/graphics_test.c $(NCURSES)
+
+game_rules_test.o: codigo/test/game_rules_test.c
+	@echo "--->Generating game_rules_test.o"
+	@gcc $(CFLAGS) -c codigo/test/game_rules_test.c
 
 JuegoConv: game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creating executable JuegoConv"
