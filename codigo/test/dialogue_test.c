@@ -1126,13 +1126,13 @@ BOOL test_dialogue32(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1184,13 +1184,13 @@ BOOL test_dialogue33(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1242,13 +1242,13 @@ BOOL test_dialogue34(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1300,13 +1300,13 @@ BOOL test_dialogue35(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1358,13 +1358,13 @@ BOOL test_dialogue36(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1416,13 +1416,13 @@ BOOL test_dialogue37(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1474,13 +1474,13 @@ BOOL test_dialogue38(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1532,13 +1532,13 @@ BOOL test_dialogue39(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1590,13 +1590,13 @@ BOOL test_dialogue40(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1648,13 +1648,13 @@ BOOL test_dialogue41(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1669,7 +1669,7 @@ BOOL test_dialogue41(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		free(objects[i]);
 	}
 	free(objects);
@@ -1706,13 +1706,13 @@ BOOL test_dialogue42(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1770,7 +1770,7 @@ BOOL test_dialogue42(){
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -1828,7 +1828,7 @@ BOOL test_dialogue42(){
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
