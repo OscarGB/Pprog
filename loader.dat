@@ -8,7 +8,7 @@
 #o:7|2|Stone|This is a stone|s|FALSE|1|FALSE|FALSE|FALSE|-1|-1|
 #o:8|2|Ladder|This is a ladder|Moved Ladder|=|TRUE|1|FALSE|FALSE|FALSE|10|-1|
 #o:9|3|Minus|This is a negative minus|This is a moved negative minus|-|TRUE|1|FALSE|FALSE|FALSE|-1|-1|
-#o:10|5|Lobster|This is a lobster|This is a moved lobster|l|FALSE|5|FALSE|FALSE|FALSE|9|-1|
+#o:10|5|Lobster|This is a lobster|This is a moved lobster (and may be a KEY)|l|FALSE|5|FALSE|FALSE|FALSE|9|-1|
 #o:11|5|Important thing|This is an important thing|i|FALSE|1|FALSE|FALSE|FALSE|-1|-1|
 #o:12|6|Non important thing|This is a non important thing|n|FALSE|1|FALSE|FALSE|FALSE|-1|-1|
 #o:13|8|Most important key|This is the MOST IMPORTANT KEY|This the moved MOST IMPORTANT KEY|m|TRUE|1|FALSE|FALSE|FALSE|-1|-1|
@@ -20,7 +20,7 @@
 #o:19|4|federal cop|This is a federal cop|f|FALSE|1|FALSE|FALSE|FALSE|-1|-1|
 #o:20|4|Pprog|Best subject ever!|P|FALSE|1|FALSE|FALSE|FALSE|-1|-1|
 #s:1|Entrance|-1|1|3|-1|-1|-1|TRUE|This is the beginning of your adventure|+------------+|            |+--+         |   |         (   |         (   |         |   +|  |-----+
-#s:2|Closed_ pace|-1|-1|2|1|-1|-1|TRUE|This space was closed|+------------+|            ||            |)            |)            ||            |+---|**|-----+
+#s:2|Closed_ pace|-1|-1|2|1|-1|-1|FALSE|This space was closed|+------------+|            ||            |)            |)            ||            |+---|**|-----+
 #s:3|Casilla|-1|4|-1|-1|-1|-1|TRUE|To be written|+---+         |   +--------+|            ||            -|            _|            |+------------+
 #s:4|Casilla|3|5|-1|4|10|-1|TRUE|To be written|+---|  |-----+|            ||         =  |-        =   -_            _|            |+------------+
 #s:5|Casilla|2|-1|6|5|-1|-1|TRUE|To be written|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+
