@@ -27,7 +27,7 @@ nocolors: $(ALL_DEBUG) #Generates the tests and the main game without colors
 debug: CFLAGS += -DDEBUG	#Adition of DEBUG macro
 debug: $(ALL_DEBUG) #Generates the tests and the main game
 
-game_rules_test: game_rules_test.o game_rules.o
+game_rules_test: game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphics.o game_management.o die.o
 	@echo "--->Creating executable game_rules_test"
 	@gcc $(CFLAGS) -o game_rules_test game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphics.o game_management.o die.o $(NCURSES)
 
