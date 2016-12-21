@@ -1529,7 +1529,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
             free_invobjs(invobjs);
             return ERROR;
           }
-          strcpy(game->desc, space_get_adesc(space));
+          strcpy(game->desc, object_get_description(obj));
           strcpy(invobjs[0], game->desc);
           dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
           free_invobjs(invobjs);

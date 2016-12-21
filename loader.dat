@@ -30,12 +30,12 @@
 #s:9|Casilla|-1|9|-1|-1|-1|-1|TRUE|To be written|+------------+|            |+--+         |   |         (   |         (   |         |   +---------+
 #s:10|Casilla|8|-1|-1|9|-1|-1|TRUE|To be written|+---|  |-----+|            ||            |)            |)            ||      +-----++------+      
 #l:1|1|2|Door1|CLOSEDL|
-#l:2|2|5|Door2|OPENL|
+#l:2|2|5|Door2|CLOSEDL|
 #l:3|1|4|Door3|OPENL|
 #l:4|3|4|Door4|OPENL|
 #l:5|4|5|Door5|OPENL|
 #l:6|5|7|Door6|OPENL|
 #l:7|7|8|Door7|OPENL|
 #l:8|8|10|Door8|OPENL|
-#l:9|9|10|Door9|OPENL|
-##l:10|4|6|Door10|OPENL|
+#l:9|9|10|Door9|CLOSEDL|
+##l:10|4|6|Uncomplete_lader|CLOSEDL|
