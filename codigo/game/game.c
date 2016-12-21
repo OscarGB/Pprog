@@ -1630,6 +1630,7 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
   Id space_id = NO_ID; /* !< Id of the next space*/
   char *symbol = NULL; /*!< Variable used for storing the command*/
   STATUS result;
+  Link* link = NULL;
 
   if(!game || !dia || !gra || !cmd){
     objects = game_get_objects_name(game, objects);
@@ -1696,6 +1697,7 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
           			link_id = space_get_west(game->spaces[i]);
     	        	for(j = 0; j < (4 * MAX_SPACES); j++){
             			if(link_get_id(game->links[j]) == link_id){
+                    link = game->links[j];
     	        			if(link_get_conection1(game->links[j]) == current_id){
                 					west_id = link_get_conection2(game->links[j]);
                 					break;
@@ -1781,6 +1783,7 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
                   link_id = space_get_west(game->spaces[i]);
                   for(j = 0; j < (4 * MAX_SPACES); j++){
                     if(link_get_id(game->links[j]) == link_id){
+                      link = game->links[j];
                       if(link_get_conection1(game->links[j]) == current_id){
                             west_id = link_get_conection2(game->links[j]);
                             break;
@@ -1794,7 +1797,7 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
                       west_id = NO_ID;
                     }
                   } 
-                  if (west_id != NO_ID) {
+                  if (west_id != NO_ID && link_get_state(link) == OPENL) {
                     result = game_set_player_location(game, west_id);
                     objects = game_get_objects_name(game, objects);
                     dialogue_generic(dia, result, objects, gra);
