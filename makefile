@@ -29,7 +29,7 @@ debug: $(ALL_DEBUG) #Generates the tests and the main game
 
 game_rules_test: game_rules_test.o game_rules.o
 	@echo "--->Creating executable game_rules_test"
-	@gcc $(CFLAGS) -o game_rules_test game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphics.o die.o $(NCURSES)
+	@gcc $(CFLAGS) -o game_rules_test game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphics.o game_management.o die.o $(NCURSES)
 
 dialogue_test: dialogue_test.o dialogue.o
 	@echo "--->Creating executable dialogue_test"
