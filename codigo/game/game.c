@@ -37,6 +37,7 @@ struct _Game {
   int num_links; /*!<Number of links */
   char desc[WORD_SIZE+1]; /* !< For inspect command*/
   int turns; /* !<Number of turns passed */
+  BOOL endgame; /* !<Flag to end game */
 };/*!< Game structure*/
 
 /*
@@ -69,8 +70,6 @@ STATUS callback_WIN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
 STATUS game_load_spaces(Game* game, char* filename);
 STATUS game_add_space(Game* game, Space* space);
 Id     game_get_space_id_at(Game* game, int position);
-
-STATUS game_set_player_location(Game* game, Id id);
 
 STATUS game_add_object(Game* game, Object* object);
 STATUS game_set_object_location(Game* game, Id id_s, Id id_o);
@@ -117,6 +116,7 @@ Game* game_init(Game* game) {
   game->num_objects = 0;
   game->num_links = 0;
   game->turns = 0;
+  game->endgame = FALSE;
 
   /*Creating die*/
   game->die = die_create(1, DIE_FACES);
@@ -142,10 +142,9 @@ Game* game_init(Game* game) {
 * @return OK if it was successfuly initialized
 */
 STATUS game_init_from_file(Game* game, char* filename) {
-  /*Init the game*/
-  /*if (game_init(game) == ERROR){
+  if(!game){
     return ERROR;
-  }*/
+  }
 
   /*Load objects from file*/
   if (game_load(game, filename)==OK)
@@ -542,7 +541,7 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
     result = callback_SAVE(game, cmd, dia, gra);
     break;
   case LOAD:
-  	result = callback_LOAD(game, cmd, dia, gra);
+    result = callback_LOAD(game, cmd, dia, gra);
     break;
   case HELP:
     result = dialogue_generic(dia, OK, objects, gra);
@@ -947,7 +946,9 @@ void game_print_screen(Game* game, Graphics* gra){
 * @return FALSE
 */
 BOOL game_is_over(Game* game) {
-  return FALSE;
+	if(game->endgame == TRUE)
+		return TRUE;
+	return FALSE;
 }
 
 
@@ -2250,15 +2251,25 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
 	/*This loads a file to the game*/
 	strcat(path, symbol);
+  /*Checks if the file exists*/
+  if(access(path, F_OK) == -1){
+    dialogue_load(gra, dia, symbol, ERROR);
+    return ERROR;
+  }
 	
 	game_destroy(game);
-	if(game) system("gnome-terminal");
-	game = game_init(game);
-	status = game_init_from_file(game, path);
 
-	dialogue_load(gra, dia, symbol, status);
+  game = game_init(game);
 
-	return status;
+  if(game){
+	 status = game_init_from_file(game, path);
+   dialogue_load(gra, dia, symbol, status);
+   return status;
+  }
+
+	dialogue_load(gra, dia, symbol, ERROR);
+
+	return ERROR;
 }
 
 /**
@@ -2461,3 +2472,38 @@ BOOL game_player_has_light_object(Game* game){
   }
   return FALSE;
 }
+
+
+/**
+* @brief It sets the flag "endgame" of game structure
+* @author Andrea Ruiz
+* @date 20/12/2016
+* @param game pointer
+* @param BOOL value (to be set)
+* @return STATUS (OK if everything went well, ERROR if not)
+*/
+STATUS game_set_endgame(Game * game, BOOL value){
+	if(!game || (value != TRUE && value != FALSE))
+		return ERROR;
+	game->endgame = value;
+	return OK;
+}
+
+/**
+* @brief It gets the flag "endgame" of game structure
+* @author Andrea Ruiz
+* @date 20/12/2016
+* @param game pointer
+* @return BOOL (flag value)
+*/
+BOOL game_get_endgame(Game * game){
+	if(!game)
+		return FALSE;
+	return game->endgame;
+}
+
+
+
+
+
+
