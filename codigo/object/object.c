@@ -21,7 +21,7 @@ struct _Object{
 	char desc[WORD_SIZE+1]; /*!<Written description of the object*/
 	char mdesc[WORD_SIZE+1]; /*!<Written description when the object is moved*/ 
 	BOOL movable; /*!<Object can be moved or not*/
-	BOOL moved; /*!<Object has been moved or not*/
+	Id original_location; /*!<Object has been moved or not*/
 	BOOL hidden; /*!<Object is hidden and not mentioned in description of space*/
 	Id open; /*!<Object can open the given ID link*/
 	BOOL light; /*!<Object can illuminate spaces or not*/
@@ -58,7 +58,7 @@ Object* object_create(Id id){
 	strcpy(newObject->desc, desc);
 	strcpy(newObject->mdesc, mdesc);
 	newObject->movable = FALSE;
-	newObject->moved = FALSE;
+	newObject->original_location = NO_ID;
 	newObject->light = FALSE;
 	newObject->hidden = FALSE;
 	newObject->on_off = FALSE;
@@ -237,7 +237,8 @@ BOOL object_get_movable(Object* object){
 * @author Óscar Pinto.
 * @date 09/12/2016
 * @param Object pointer
-* @return BOOL (the moved field of the object)
+* @param BOOL value
+* @return STATUS Ok if everything worked
 */
 
 STATUS object_set_movable(Object* object, BOOL value){
@@ -249,36 +250,53 @@ STATUS object_set_movable(Object* object, BOOL value){
 }
 
 /*
-* @brief It gets the moved field of the given object
+* @brief It gets the original_location field of the given object
 * @author Óscar Pinto.
 * @date 02/12/2016
 * @param Object pointer
 * @param BOOL value
-* @return BOOL (the moved field of the object)
+* @return Id (the original location)
 */
 
+Id object_get_original_location(Object* object){
+	if(!object){
+		return FALSE;
+	}
+	return object->original_location;
+}
+
+/*
+* @brief It sets the original_location field of the given object
+* @author Óscar Pinto.
+* @date 09/12/2016
+* @param Object pointer
+* @param Id value
+* @return STATUS Ok if everything worked
+*/
+
+STATUS object_set_original_location(Object* object, Id value){
+	if(!object){
+		return ERROR;
+	}
+	object->original_location = value; 
+	return OK;
+}
+
+/*
+* @brief It tells if an object has been moved
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return BOOL (TRUE if it has been moved)
+*/
 BOOL object_get_moved(Object* object){
 	if(!object){
 		return FALSE;
 	}
-	return object->moved;
-}
-
-/*
-* @brief It sets the moved field of the given object
-* @author Óscar Pinto.
-* @date 09/12/2016
-* @param Object pointer
-* @param BOOL value
-* @return BOOL (the moved field of the object)
-*/
-
-STATUS object_set_moved(Object* object, BOOL value){
-	if(!object){
-		return ERROR;
+	if(object->original_location == object->location){
+		return FALSE;
 	}
-	object->moved = value; 
-	return OK;
+	return TRUE;
 }
 
 /*
@@ -643,7 +661,7 @@ int object_decrease_duration(Object *object){
 char* object_get_description(Object *object){
 	if(!object) return NULL;
 
-	if(object->moved == FALSE)
+	if(object_get_moved(object) == FALSE)
 		return object_get_desc(object);
 	return object_get_mdesc(object);
 }
