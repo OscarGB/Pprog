@@ -129,11 +129,11 @@ STATUS print_object_save(FILE *f, Object *object){
   BOOL movable;
   BOOL moved;
   BOOL hidden;
-  Id open;
+  Id open, original_location;
   BOOL light;
   BOOL on_off;
   int duration;
-  char mvbl[100], mvd[100], hddn[100], lux[100], on[100];
+  char mvbl[100], hddn[100], lux[100], on[100];
 
 
   if(!f || !object) return ERROR;
@@ -145,7 +145,7 @@ STATUS print_object_save(FILE *f, Object *object){
   symbol = object_get_symbol(object);
   location = object_get_location(object);
   movable = object_get_movable(object);
-  moved = object_get_moved(object);
+  original_location = object_get_original_location(object);
   hidden = object_get_hidden(object);
   open = object_get_open(object);
   light = object_get_light(object);
@@ -164,12 +164,6 @@ STATUS print_object_save(FILE *f, Object *object){
     strcpy(mvbl, "FALSE");
   }
 
-  if(moved==TRUE){
-    strcpy(mvd, "TRUE");
-  }else{
-    strcpy(mvd, "FALSE");
-  }
-
   if(hidden==TRUE){
     strcpy(hddn, "TRUE");
   }else{
@@ -182,8 +176,8 @@ STATUS print_object_save(FILE *f, Object *object){
     strcpy(on, "FALSE");
   }
   
-  fprintf(f, "#o:%ld|%ld|%s|%s|%s|%c|%s|%s|%s|%s|%s|%ld|%d|\n", 
-      id, location, name, desc, mdesc, symbol, mvbl, mvd,
+  fprintf(f, "#o:%ld|%ld|%s|%s|%s|%c|%s|%ld|%s|%s|%s|%ld|%d|\n", 
+      id, location, name, desc, mdesc, symbol, mvbl, original_location,
       hddn, lux, on, open, duration);
 
   return OK;
@@ -312,7 +306,7 @@ STATUS game_load_object(Game* game, char* line) {
   char desc[WORD_SIZE+1];
   char mdesc[WORD_SIZE+1];
   BOOL movable = FALSE;
-  BOOL moved = FALSE;
+  Id original_location;
   BOOL hidden = FALSE;
   Id open;
   BOOL light = FALSE;
@@ -336,8 +330,7 @@ STATUS game_load_object(Game* game, char* line) {
       if (!strcmp(toks, "TRUE"))
       	movable = TRUE;
       toks = strtok(NULL, "|");
-      if (!strcmp(toks, "TRUE"))
-      	moved = TRUE;
+      original_location = atol(toks);
       toks = strtok(NULL, "|");
       if (!strcmp(toks, "TRUE"))
       	hidden = TRUE;
@@ -361,7 +354,7 @@ STATUS game_load_object(Game* game, char* line) {
       	object_set_mdesc(object, mdesc);
       	object_set_symbol(object, symbol);
       	object_set_movable(object, movable);
-      	object_set_moved(object, moved);
+      	object_set_original_location(object, original_location);
       	object_set_hidden(object, hidden);
       	object_set_light(object, light);
       	object_set_on_off(object, on_off);
@@ -410,26 +403,26 @@ STATUS game_load_link(Game* game, char* line) {
   Id conection2; 
   State state; 
 
-      toks = strtok(line, "|");
-      id = atol(toks);
-      toks = strtok(NULL, "|");
-      conection1 = atol(toks);
-      toks = strtok(NULL, "|");
-      conection2 = atol(toks);
-      toks = strtok(NULL, "|");
-      strcpy(name, toks);
- 	  toks = strtok(NULL, "|");
-      if (!strcmp(toks, "OPENL"))
-      	state = OPENL;
+  toks = strtok(line, "|");
+  id = atol(toks);
+  toks = strtok(NULL, "|");
+  conection1 = atol(toks);
+  toks = strtok(NULL, "|");
+  conection2 = atol(toks);
+  toks = strtok(NULL, "|");
+  strcpy(name, toks);
+  toks = strtok(NULL, "|");
+  if (!strcmp(toks, "OPENL"))
+  	state = OPENL;
 
-      link = link_create(id);
-      if (link != NULL) {
-      	link_set_name(link, name);
-      	link_set_conection1(link, conection1);
-      	link_set_conection2(link, conection2);
-      	link_set_state(link, state);
-      	status = game_add_link(game, link);
-      }
+  link = link_create(id);
+  if (link != NULL) {
+  	link_set_name(link, name);
+  	link_set_conection1(link, conection1);
+  	link_set_conection2(link, conection2);
+  	link_set_state(link, state);
+  	status = game_add_link(game, link);
+  }
 return status;
 }
 
@@ -450,45 +443,45 @@ STATUS game_load_space(Game* game, char* line) {
   /*char *toks=NULL; */
   BOOL light = FALSE;
   char adesc[MAX_ADESC];
+  
+  toks = strtok(line, "|");
+  id = atol(toks);
+  toks = strtok(NULL, "|");
+  strcpy(name, toks);
+  toks = strtok(NULL, "|");
+  north = atol(toks);
+  toks = strtok(NULL, "|");
+  east = atol(toks);
+  toks = strtok(NULL, "|");
+  south = atol(toks);
+  toks = strtok(NULL, "|");
+  west = atol(toks);
+  toks = strtok(NULL, "|");
+  up = atol(toks);
+  toks = strtok(NULL, "|");
+  down = atol(toks);
+  toks = strtok(NULL, "|");
+  if(!strcmp(toks, "TRUE"))
+  	light = TRUE;
+  toks = strtok(NULL, "|");
+  strcpy(adesc, toks);
+  toks = strtok(NULL, "\n");
+  strcpy(gdesc, toks);
 
-      toks = strtok(line, "|");
-      id = atol(toks);
-      toks = strtok(NULL, "|");
-      strcpy(name, toks);
-      toks = strtok(NULL, "|");
-      north = atol(toks);
-      toks = strtok(NULL, "|");
-      east = atol(toks);
-      toks = strtok(NULL, "|");
-      south = atol(toks);
-      toks = strtok(NULL, "|");
-      west = atol(toks);
-      toks = strtok(NULL, "|");
-      up = atol(toks);
-      toks = strtok(NULL, "|");
-      down = atol(toks);
-      toks = strtok(NULL, "|");
-      if(!strcmp(toks, "TRUE"))
-      	light = TRUE;
-      toks = strtok(NULL, "|");
-      strcpy(adesc, toks);
-      toks = strtok(NULL, "/");
-      strcpy(gdesc, toks);
-
-      space = space_create(id);
-      if (space != NULL) {
-      	space_set_name(space, name);
-      	space_set_north(space, north);
-      	space_set_east(space, east);
-      	space_set_south(space, south);
-      	space_set_west(space, west);
-      	space_set_up(space, up);
-      	space_set_down(space, down);
-      	space_set_light(space, light);
-      	space_set_adesc(space, adesc);
-      	space_set_gdesc(space, gdesc);
-      	status = game_add_space(game, space);
-      }
+  space = space_create(id);
+  if (space != NULL) {
+  	space_set_name(space, name);
+  	space_set_north(space, north);
+  	space_set_east(space, east);
+  	space_set_south(space, south);
+  	space_set_west(space, west);
+  	space_set_up(space, up);
+  	space_set_down(space, down);
+  	space_set_light(space, light);
+  	space_set_adesc(space, adesc);
+  	space_set_gdesc(space, gdesc);
+  	status = game_add_space(game, space);
+  }
 return status;
 }
 

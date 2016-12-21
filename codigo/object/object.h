@@ -154,26 +154,35 @@ BOOL object_get_movable(Object* object);
 STATUS object_set_movable(Object* object, BOOL value);
 
 /*
-* @brief It gets the moved field of the given object
+* @brief It tells if an object has been moved
+* @author Óscar Pinto.
+* @date 02/12/2016
+* @param Object pointer
+* @return BOOL (TRUE if it has been moved)
+*/
+BOOL object_get_moved(Object* object);
+
+/*
+* @brief It sets the original_location field of the given object
+* @author Óscar Pinto.
+* @date 09/12/2016
+* @param Object pointer
+* @param Id value
+* @return STATUS Ok if everything worked
+*/
+
+STATUS object_set_original_location(Object* object, Id value);
+
+/*
+* @brief It gets the original_location field of the given object
 * @author Óscar Pinto.
 * @date 02/12/2016
 * @param Object pointer
 * @param BOOL value
-* @return BOOL (the moved field of the object)
+* @return Id (the original location)
 */
 
-BOOL object_get_moved(Object* object);
-
-/*
-* @brief It sets the moved field of the given object
-* @author Óscar Pinto.
-* @date 09/12/2016
-* @param Object pointer
-* @param BOOL value
-* @return BOOL (the moved field of the object)
-*/
-
-STATUS object_set_moved(Object* object, BOOL value);
+Id object_get_original_location(Object* object);
 
 /*
 * @brief It gets the hidden field of the given object
