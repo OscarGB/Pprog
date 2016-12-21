@@ -4,7 +4,7 @@
 #o:3|1|littleO|This is a little o|This is a moved little o|o|TRUE|1|FALSE|FALSE|FALSE|-1|-1|
 #o:4|3|At|This is an at|This is a moved at|@|TRUE|1|FALSE|FALSE|FALSE|-1|-1|
 #o:5|2|Key|This is a key|This is a moved key|K|TRUE|1|FALSE|FALSE|FALSE|1|-1|
-#o:6|3|Tnt|This is TNT|This is a moved TNT|t|TRUE|1|FALSE|FALSE|FALSE|2|-1|
+#o:6|3|Tnt|This is TNT|This is a moved TNT|t|TRUE|1|FALSE|FALSE|FALSE|-1|-1|
 #o:7|2|Stone|This is a stone|s|FALSE|1|FALSE|FALSE|FALSE|-1|-1|
 #o:8|2|Ladder|This is a ladder|=|FALSE|1|FALSE|FALSE|FALSE|-1|-1|
 #o:9|3|Minus|This is a negative minus|This is a moved negative minus|-|TRUE|1|FALSE|FALSE|FALSE|-1|-1|
