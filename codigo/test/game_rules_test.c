@@ -9,12 +9,14 @@
 #include "test.h"
 #include "game_rules.h"
  
-#define MAX_TESTS 7
+#define MAX_TESTS 8
+#define ID 10
 
 BOOL test_game_rules1(){ /*Test for change_light_space with valid game*/
 	Game *game = NULL;
 	STATUS s;
 	game = game_init(game);
+	game_init_from_file(game, "loader.dat");
 	s = change_light_space(game);
 	if(s == OK){
 		game_destroy(game);
@@ -30,6 +32,7 @@ BOOL test_game_rules2(){ /*Test for change_link_state with valid game*/
  	Game *game = NULL;
 	STATUS s;
 	game = game_init(game);
+	game_init_from_file(game, "loader.dat");
 	s = change_link_state(game);
 	if(s == OK){
 		game_destroy(game);
@@ -45,6 +48,7 @@ BOOL test_game_rules3(){ /*Test for change_object_location with valid game*/
 	Game *game = NULL;
 	STATUS s;
 	game = game_init(game);
+	game_init_from_file(game, "loader.dat");
 	s = change_object_location(game);
 	if(s == OK){
 		game_destroy(game);
@@ -60,6 +64,7 @@ BOOL test_game_rules4(){ /*Test for kill_player with valid game*/
 	Game *game = NULL;
 	STATUS s;
 	game = game_init(game);
+	game_init_from_file(game, "loader.dat");
 	s = kill_player(game);
 	if(s == OK){
 		game_destroy(game);
@@ -75,6 +80,7 @@ BOOL test_game_rules5(){ /*Test for useless_player_deserves_death with valid gam
 	Game *game = NULL;
 	STATUS s;
 	game = game_init(game);
+	game_init_from_file(game, "loader.dat");
 	s = useless_player_deserves_death(game);
 	if(s == OK){
 		game_destroy(game);
@@ -90,6 +96,7 @@ BOOL test_game_rules6(){ /*Test for turn_object_light_off with valid game*/
 	Game *game = NULL;
 	STATUS s;
 	game = game_init(game);
+	game_init_from_file(game, "loader.dat");
 	s = turn_object_light_off(game);
 	if(s == OK){
 		game_destroy(game);
@@ -105,6 +112,7 @@ BOOL test_game_rules7(){ /*Test for pick_aleat_function with valid game*/
 	Game *game = NULL;
 	STATUS s;
 	game = game_init(game);
+	game_init_from_file(game, "loader.dat");
 	s = pick_aleat_function(game);
 	if(s == OK){
 		game_destroy(game);

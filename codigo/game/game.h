@@ -56,6 +56,16 @@ STATUS game_init_from_file(Game* game, char* filename);
 Id game_get_player_location(Game* game);
 
 /**
+* @brief Sets the player location at a given id
+* @author José Ignacio Gómez, Óscar Gómez
+* @date 29/09/2016
+* @param game pointer
+* @param the id of the location
+* @return OK if it was set
+*/
+STATUS game_set_player_location(Game* game, Id id);
+
+/**
 * @brief It gets the space from a given id
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
@@ -256,6 +266,25 @@ Object* game_get_object_at(Game* game, int pos);
 * @return string with the name of the objects
 */
 char** game_get_objects_name(Game* game, char** objects);
+
+/**
+* @brief It sets the flag "endgame" of game structure
+* @author Andrea Ruiz
+* @date 20/12/2016
+* @param game pointer
+* @param BOOL value (to be set)
+* @return STATUS (OK if everything went well, ERROR if not)
+*/
+STATUS game_set_endgame(Game * game, BOOL value);
+
+/**
+* @brief It gets the flag "endgame" of game structure
+* @author Andrea Ruiz
+* @date 20/12/2016
+* @param game pointer
+* @return BOOL (flag value)
+*/
+BOOL game_get_endgame(Game * game);
 
 #endif
 
