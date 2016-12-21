@@ -142,10 +142,9 @@ Game* game_init(Game* game) {
 * @return OK if it was successfuly initialized
 */
 STATUS game_init_from_file(Game* game, char* filename) {
-  /*Init the game*/
-  /*if (game_init(game) == ERROR){
+  if(!game){
     return ERROR;
-  }*/
+  }
 
   /*Load objects from file*/
   if (game_load(game, filename)==OK)
@@ -2252,15 +2251,25 @@ STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
 	/*This loads a file to the game*/
 	strcat(path, symbol);
+  /*Checks if the file exists*/
+  if(access(path, F_OK) == -1){
+    dialogue_load(gra, dia, symbol, ERROR);
+    return ERROR;
+  }
 	
 	game_destroy(game);
-	if(game) system("gnome-terminal");
-	game = game_init(game);
-	status = game_init_from_file(game, path);
 
-	dialogue_load(gra, dia, symbol, status);
+  game = game_init(game);
 
-	return status;
+  if(game){
+	 status = game_init_from_file(game, path);
+   dialogue_load(gra, dia, symbol, status);
+   return status;
+  }
+
+	dialogue_load(gra, dia, symbol, ERROR);
+
+	return ERROR;
 }
 
 /**
