@@ -23,7 +23,9 @@ struct _Dialogue {
 
 }; /*!< Dialogue structure*/
 
-/*PRIVATE FUNCTIONS*/
+/*
+* @brief Private functions
+*/
 
 /**
 * @brief prints the quit dialogue
@@ -472,7 +474,9 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 
 
 
-/*PUBLIC FUNCTIONS*/
+/*
+* @brief Public functions
+*/
 
 /**
 * @brief creates a new dialogue
