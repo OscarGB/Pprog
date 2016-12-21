@@ -83,6 +83,7 @@ STATUS print_object_save(FILE *f, Object *object);
 
 int game_get_objects_at_space(Game *game, Id id);
 BOOL game_won_game(Game* game);
+BOOL game_player_has_light_object(Game* game);
 
 /**
  * @brief Game interface implementation
@@ -828,7 +829,7 @@ void game_print_screen(Game* game, Graphics* gra){
   }
 
   if (id_act != NO_ID) {
-    if(space_get_light(space_act) == TRUE){
+    if(space_get_light(space_act) == TRUE || game_player_has_light_object(game) == TRUE){
       strcpy(print, space_get_gdesc(space_act));
       print[49] = ':';
       print[50] = ')';
@@ -1859,7 +1860,7 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
 
   object_id = game_get_object_location(game, symbol);
 
-  if(player_id != object_id || player_id == NO_ID || object_id == NO_ID){
+  if(player_id != object_id || object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
     objects = game_get_objects_name(game, objects);
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
@@ -1873,7 +1874,7 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
         object = game->object[i];
 
         if(player_has_object(game->player, object_get_id(object)) == TRUE){
-          if(object_turnoff(object) == OK){
+          if(object_turnon(object) == OK){
             objects = game_get_objects_name(game, objects);
             dialogue_generic(dia, OK, objects, gra);
             return OK;
@@ -1902,7 +1903,7 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
         object = game->object[i];
 
         if(player_has_object(game->player, object_get_id(object)) == TRUE){
-          if(object_turnoff(object) == OK){
+          if(object_turnon(object) == OK){
             objects = game_get_objects_name(game, objects);
             dialogue_generic(dia, OK, objects, gra);
             return OK;
@@ -1953,7 +1954,7 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
 
   object_id = game_get_object_location(game, symbol);
 
-  if(player_id != object_id || player_id == NO_ID || object_id == NO_ID){
+  if(player_id != object_id || object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
     objects = game_get_objects_name(game, objects);objects = game_get_objects_name(game, objects);
 
     dialogue_generic(dia, ERROR, objects, gra);
@@ -2342,4 +2343,34 @@ int game_get_objects_at_space(Game *game, Id id){
     }
   }
   return contador;
+}
+
+/**
+* @brief It seeks if the player has an object that lights
+* @author Óscar Gómez
+* @date 21/12/2016
+* @param game pointer
+* @return BOOL (TRUE if it has, FALSE if hasn't)
+*/
+BOOL game_player_has_light_object(Game* game){
+  int i;
+  Inventory* inventory = NULL;
+  Id* ids = NULL;
+
+  if(!game){
+    return FALSE;
+  }
+
+  inventory = player_get_inventory(game->player);
+  ids = inventory_get_ids(inventory);
+
+  for(i = 0; i < MAX_IDS; i++){
+    if(ids[i] == NO_ID){
+      break;
+    }
+    if(object_get_on_off(game_get_object(game, ids[i])) == TRUE){
+      return TRUE;
+    }
+  }
+  return FALSE;
 }
