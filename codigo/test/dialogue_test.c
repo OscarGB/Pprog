@@ -123,7 +123,7 @@ BOOL test_dialogue6(){
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2] = NULL;
+	objects[2][0] = '\0';
 
 	if(dialogue_standard(gra, dia, objects, string) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -179,7 +179,7 @@ BOOL test_dialogue7(){
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2] = NULL;
+	objects[2][0] = '\0';
 
 	if(dialogue_standard(gra, dia, objects, string) != ERROR){
 		for(i = 0; i < 3; i++){
@@ -232,7 +232,7 @@ BOOL test_dialogue8(){
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2] = NULL;
+	objects[2][0] = '\0';
 
 	if(dialogue_standard(gra, dia, objects, string) != ERROR){
 		for(i = 0; i < 3; i++){
@@ -318,7 +318,7 @@ BOOL test_dialogue10(){
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2] = NULL;
+	objects[2][0] = '\0';
 
 	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -375,7 +375,7 @@ BOOL test_dialogue11(){
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2] = NULL;
+	objects[2][0] = '\0';
 
 	if(dialogue_generic(dia, ERROR, objects, gra) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -426,7 +426,7 @@ BOOL test_dialogue12(){
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2] = NULL;
+	objects[2][0] = '\0';
 
 	if(dialogue_generic(dia, ERROR, objects, gra) != ERROR){
 		for(i = 0; i < 3; i++){
@@ -477,7 +477,7 @@ BOOL test_dialogue13(){
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2] = NULL;
+	objects[2][0] = '\0';
 
 	if(dialogue_generic(dia, ERROR, objects, gra) != ERROR){
 		for(i = 0; i < 3; i++){
@@ -503,38 +503,8 @@ BOOL test_dialogue13(){
 }
 
 
-/*Dialogue_generic with NULL objects*/
-BOOL test_dialogue14(){
-	Dialogue* dia = NULL;
-	char** objects = NULL;
-	Graphics* gra = NULL;
-	Command* cmd = NULL;
-
-	cmd = command_create();
-
-	dia = dialogue_create(cmd);
-
-	gra = graphics_create();
-
-	if(dialogue_generic(dia, ERROR, objects, gra) != ERROR){
-		command_destroy(cmd);
-		dialogue_destroy(dia);
-		graphics_destroy(gra);
-
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-
-	command_destroy(cmd);
-	dialogue_destroy(dia);
-	graphics_destroy(gra);
-
-	TEST_PRINT(TRUE);
-	return TRUE;
-}
-
 /*Testing dialogue_inspect SPACE*/
-BOOL test_dialogue15(){
+BOOL test_dialogue14(){
 	Dialogue* dia = NULL;
 	char** inventory = NULL;
 	Graphics* gra = NULL;
@@ -589,7 +559,7 @@ BOOL test_dialogue15(){
 }
 
 /*Testing dialogue_inspect INVENTORY*/
-BOOL test_dialogue16(){
+BOOL test_dialogue15(){
 	Dialogue* dia = NULL;
 	char** inventory = NULL;
 	Graphics* gra = NULL;
@@ -602,7 +572,7 @@ BOOL test_dialogue16(){
 
 	gra = graphics_create();
 
-	inventory = (char**) malloc (3 * sizeof(char*));
+	inventory = (char**) malloc (1000 * sizeof(char*));
 	if(!inventory){
 		command_destroy(cmd);
 		dialogue_destroy(dia);
@@ -616,9 +586,9 @@ BOOL test_dialogue16(){
 		inventory[i] = (char*)malloc(100 * sizeof(char));
 	}
 
-	strcpy(inventory[0], "OBJ1\n");
-	strcpy(inventory[1], "OBJ2\n");
-	inventory[2] = NULL;
+	strcpy(inventory[0], "OBJ1\n\0");
+	strcpy(inventory[1], "OBJ2\n\0");
+	inventory[2][0] = '\0';
 
 	if(dialogue_inspect(dia, OK, inventory, gra, INVENTORY) == ERROR){
 		for(i = 0; i < 3; i++){
@@ -646,7 +616,7 @@ BOOL test_dialogue16(){
 }
 
 /*Testing dialogue_inspect OBJECT*/
-BOOL test_dialogue17(){
+BOOL test_dialogue16(){
 	Dialogue* dia = NULL;
 	char** inventory = NULL;
 	Graphics* gra = NULL;
@@ -701,7 +671,7 @@ BOOL test_dialogue17(){
 }
 
 /*Testing dialogue_inspect with NULL dialogue*/
-BOOL test_dialogue18(){
+BOOL test_dialogue17(){
 	Dialogue* dia = NULL;
 	char** inventory = NULL;
 	Graphics* gra = NULL;
@@ -745,7 +715,7 @@ BOOL test_dialogue18(){
 }
 
 /*Testing dialogue_inspect with NULL graphics*/
-BOOL test_dialogue19(){
+BOOL test_dialogue18(){
 	Dialogue* dia = NULL;
 	char** inventory = NULL;
 	Graphics* gra = NULL;
@@ -795,7 +765,7 @@ BOOL test_dialogue19(){
 }
 
 /*Testing dialogue_inspect with NULL inventory*/
-BOOL test_dialogue20(){
+BOOL test_dialogue19(){
 	Dialogue* dia = NULL;
 	char** inventory = NULL;
 	Graphics* gra = NULL;
@@ -823,6 +793,1067 @@ BOOL test_dialogue20(){
 	TEST_PRINT(TRUE);
 	return TRUE;
 }
+
+/*Test for dialogue_load_show*/
+BOOL test_dialogue20(){
+	Dialogue* dia = NULL;
+	char str[200] = "Testing string";
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+
+	cmd = command_create();
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	if(dialogue_load_show(gra, dia, str, OK) == ERROR){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_load_show with NULL dialogue*/
+BOOL test_dialogue21(){
+	Dialogue* dia = NULL;
+	char str[200] = "Testing string";
+	Graphics* gra = NULL;
+
+	gra = graphics_create();
+
+	if(dialogue_load_show(gra, dia, str, OK) != ERROR){
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_load_show with NULL graphics*/
+BOOL test_dialogue22(){
+	Dialogue* dia = NULL;
+	char str[200] = "Testing string";
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+
+	cmd = command_create();
+
+	dia = dialogue_create(cmd);
+
+
+	if(dialogue_load_show(gra, dia, str, OK) != ERROR){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_load_show with NULL string*/
+BOOL test_dialogue23(){
+	Dialogue* dia = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+
+	cmd = command_create();
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	if(dialogue_load_show(gra, dia, NULL, OK) != ERROR){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_load_show with ERROR STATUS*/
+BOOL test_dialogue24(){
+	Dialogue* dia = NULL;
+	char str[200] = "Testing string";
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+
+	cmd = command_create();
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	if(dialogue_load_show(gra, dia, str, ERROR) == ERROR){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_load*/
+BOOL test_dialogue25(){
+	Dialogue* dia = NULL;
+	char str[200] = "Testing string";
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+
+	cmd = command_create();
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	if(dialogue_load(gra, dia, str, ERROR) == ERROR){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_load_show with NULL dialogue*/
+BOOL test_dialogue26(){
+	Dialogue* dia = NULL;
+	char str[200] = "Testing string";
+	Graphics* gra = NULL;
+
+	gra = graphics_create();
+
+	if(dialogue_load(gra, dia, str, OK) != ERROR){
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_load_show with NULL graphics*/
+BOOL test_dialogue27(){
+	Dialogue* dia = NULL;
+	char str[200] = "Testing string";
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+
+	cmd = command_create();
+
+	dia = dialogue_create(cmd);
+
+
+	if(dialogue_load(gra, dia, str, OK) != ERROR){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_load_show with NULL string*/
+BOOL test_dialogue28(){
+	Dialogue* dia = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+
+	cmd = command_create();
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	if(dialogue_load(gra, dia, NULL, OK) != ERROR){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_load_show with ERROR STATUS*/
+BOOL test_dialogue29(){
+	Dialogue* dia = NULL;
+	char str[200] = "Testing string";
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+
+	cmd = command_create();
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	if(dialogue_load(gra, dia, str, ERROR) == ERROR){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_start_game*/
+BOOL test_dialogue30(){
+	Graphics* gra = NULL;
+
+	gra = graphics_create();
+
+	if(dialogue_start_game(gra) == ERROR){
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_start_game with NULL graphics*/
+BOOL test_dialogue31(){
+
+	if(dialogue_start_game(NULL) != ERROR){
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with NO_CMD*/
+BOOL test_dialogue32(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, NO_ID);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with UNKNOWN*/
+BOOL test_dialogue33(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, UNKNOWN);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with QUIT*/
+BOOL test_dialogue34(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, QUIT);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with WIN*/
+BOOL test_dialogue35(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, WIN);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with PICK*/
+BOOL test_dialogue36(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, PICK);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with DROP*/
+BOOL test_dialogue37(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, DROP);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with GO*/
+BOOL test_dialogue38(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, GO);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with TURNON*/
+BOOL test_dialogue39(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, TURNON);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with TURNOFF*/
+BOOL test_dialogue40(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, TURNOFF);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with OPEN*/
+BOOL test_dialogue41(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, OPEN);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with HELP*/
+BOOL test_dialogue42(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, HELP);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+/*Test for dialogue_generic with SAVE*/
+/*BOOL test_dialogue43(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, SAVE);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}*/
+
+/*Test for dialogue_generic with LOAD*/
+/*BOOL test_dialogue44(){
+	Dialogue* dia = NULL;
+	char** objects = NULL;
+	Graphics* gra = NULL;
+	Command* cmd = NULL;
+	int i;
+
+	cmd = command_create();
+	command_set_cmd(cmd, LOAD);
+
+	dia = dialogue_create(cmd);
+
+	gra = graphics_create();
+
+	objects = (char**) malloc (3 * sizeof(char*));
+	if(!objects){
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		objects[i] = (char*)malloc(100 * sizeof(char));
+	}
+
+	strcpy(objects[0], "OBJ1\n");
+	strcpy(objects[1], "OBJ2\n");
+	objects[2][0] = '\0';
+
+	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
+		for(i = 0; i < 3; i++){
+			free(objects[i]);
+		}
+		free(objects);
+		command_destroy(cmd);
+		dialogue_destroy(dia);
+		graphics_destroy(gra);
+
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+
+	for(i = 0; i < 3; i++){
+		free(objects[i]);
+	}
+	free(objects);
+	command_destroy(cmd);
+	dialogue_destroy(dia);
+	graphics_destroy(gra);
+
+	TEST_PRINT(TRUE);
+	return TRUE;
+}*/
 
 int main(int argc, char* argv[]){
 	int test = 0;
@@ -860,6 +1891,30 @@ int main(int argc, char* argv[]){
 	if(todas || test == 18) test_dialogue18();
 	if(todas || test == 19) test_dialogue19();
 	if(todas || test == 20) test_dialogue20();
+	if(todas || test == 21) test_dialogue21();
+	if(todas || test == 22) test_dialogue22();
+	if(todas || test == 23) test_dialogue23();
+	if(todas || test == 24) test_dialogue24();
+	if(todas || test == 25) test_dialogue25();
+	if(todas || test == 26) test_dialogue26();
+	if(todas || test == 27) test_dialogue27();
+	if(todas || test == 28) test_dialogue28();
+	if(todas || test == 29) test_dialogue29();
+	if(todas || test == 30) test_dialogue30();
+	if(todas || test == 31) test_dialogue31();
+	if(todas || test == 32) test_dialogue32();
+	if(todas || test == 33) test_dialogue33();
+	if(todas || test == 34) test_dialogue34();
+	if(todas || test == 35) test_dialogue35();
+	if(todas || test == 36) test_dialogue36();
+	if(todas || test == 37) test_dialogue37();
+	if(todas || test == 38) test_dialogue38();
+	if(todas || test == 39) test_dialogue39();
+	if(todas || test == 40) test_dialogue40();
+	if(todas || test == 41) test_dialogue41();
+	if(todas || test == 42) test_dialogue42();
+	/*if(todas || test == 43) test_dialogue43();
+	if(todas || test == 44) test_dialogue44();*/
 	PRINT_RESULTS();
 
 	return 0;
