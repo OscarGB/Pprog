@@ -2182,7 +2182,7 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @return OK if it went ok
 */
 STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
-  char path[256] = "codigo/Saves/";
+  char path[256] = "Saves/";
   char *symbol = NULL;
   char str[256] = "Game saved as:\n";
 
