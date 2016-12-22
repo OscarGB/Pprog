@@ -2,7 +2,7 @@
  * @brief Implementation of the game rules
  * @file game_rules.c
  * @author Andrea Ruiz
- * @version 1.0
+ * @version 2.0 (dialogues added)
  * @date 16/12/2016
  */
 
