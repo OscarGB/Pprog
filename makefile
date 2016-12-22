@@ -31,9 +31,9 @@ game_rules_test: game_rules_test.o game_rules.o game.o space.o player.o object.o
 	@echo "--->Creating executable game_rules_test"
 	@gcc $(CFLAGS) -o game_rules_test game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphics.o game_management.o die.o $(NCURSES)
 
-game_management_test: game_management_test.o game_management.o game.o space.o player.o object.o link.o command.o dialogue.o graphics.o die.o
-	@echo "--->Creating executable game_rules_test"
-	@gcc $(CFLAGS) -o game_management_test game_management_test.o game_management.o game.o space.o player.o object.o link.o command.o dialogue.o graphics.o die.o $(NCURSES)
+game_management_test: game_management_test.o game_management.o inventory.o set.o game.o space.o player.o object.o link.o command.o dialogue.o graphics.o die.o
+	@echo "--->Creating executable game_management_test"
+	@gcc $(CFLAGS) -o game_management_test game_management_test.o game_management.o inventory.o set.o game.o space.o player.o object.o link.o command.o dialogue.o graphics.o die.o $(NCURSES)
 
 
 
