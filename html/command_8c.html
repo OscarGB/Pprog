@@ -116,24 +116,27 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7de113e2fa05f4778e769bc1a7ddcff7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7de113e2fa05f4778e769bc1a7ddcff7"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>get_user_input</b> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *command, char *input)</td></tr>
+<tr class="memitem:a7de113e2fa05f4778e769bc1a7ddcff7"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command_8c.html#a7de113e2fa05f4778e769bc1a7ddcff7">get_user_input</a> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *command, char *input)</td></tr>
+<tr class="memdesc:a7de113e2fa05f4778e769bc1a7ddcff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads from keyboard in search of a valid command to execute it creates the command inside  <a href="#a7de113e2fa05f4778e769bc1a7ddcff7">More...</a><br /></td></tr>
 <tr class="separator:a7de113e2fa05f4778e769bc1a7ddcff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e1d59fed8f0eb039c403543477d2ce0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e1d59fed8f0eb039c403543477d2ce0"></a>
-<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>command_create</b> ()</td></tr>
+<tr class="memitem:a3e1d59fed8f0eb039c403543477d2ce0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command_8c.html#a3e1d59fed8f0eb039c403543477d2ce0">command_create</a> ()</td></tr>
+<tr class="memdesc:a3e1d59fed8f0eb039c403543477d2ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">It creates a command, defining its atributes to UNKNOWN and ''.  <a href="#a3e1d59fed8f0eb039c403543477d2ce0">More...</a><br /></td></tr>
 <tr class="separator:a3e1d59fed8f0eb039c403543477d2ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19554f0a7e4992cb1c2ebf2a2cef2949"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19554f0a7e4992cb1c2ebf2a2cef2949"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>command_destroy</b> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *com)</td></tr>
+<tr class="memitem:a19554f0a7e4992cb1c2ebf2a2cef2949"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command_8c.html#a19554f0a7e4992cb1c2ebf2a2cef2949">command_destroy</a> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *com)</td></tr>
+<tr class="memdesc:a19554f0a7e4992cb1c2ebf2a2cef2949"><td class="mdescLeft">&#160;</td><td class="mdescRight">It destroys a command, freeing all the memory.  <a href="#a19554f0a7e4992cb1c2ebf2a2cef2949">More...</a><br /></td></tr>
 <tr class="separator:a19554f0a7e4992cb1c2ebf2a2cef2949"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ffebe5a80e84913ef9dd0dc79149476"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ffebe5a80e84913ef9dd0dc79149476"></a>
-T_Command&#160;</td><td class="memItemRight" valign="bottom"><b>command_get_cmd</b> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *com)</td></tr>
+<tr class="memitem:a8ffebe5a80e84913ef9dd0dc79149476"><td class="memItemLeft" align="right" valign="top">T_Command&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command_8c.html#a8ffebe5a80e84913ef9dd0dc79149476">command_get_cmd</a> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *com)</td></tr>
+<tr class="memdesc:a8ffebe5a80e84913ef9dd0dc79149476"><td class="mdescLeft">&#160;</td><td class="mdescRight">It gives the value of the T_Command inside Command.  <a href="#a8ffebe5a80e84913ef9dd0dc79149476">More...</a><br /></td></tr>
 <tr class="separator:a8ffebe5a80e84913ef9dd0dc79149476"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cf1083e88019e1337191e07a095b74a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8cf1083e88019e1337191e07a095b74a"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>command_get_symbol</b> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *com)</td></tr>
+<tr class="memitem:a8cf1083e88019e1337191e07a095b74a"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command_8c.html#a8cf1083e88019e1337191e07a095b74a">command_get_symbol</a> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *com)</td></tr>
+<tr class="memdesc:a8cf1083e88019e1337191e07a095b74a"><td class="mdescLeft">&#160;</td><td class="mdescRight">It gives the value of the symbol inside Command.  <a href="#a8cf1083e88019e1337191e07a095b74a">More...</a><br /></td></tr>
 <tr class="separator:a8cf1083e88019e1337191e07a095b74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a267bec636fbe8ba0187d2debf6c877c2"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command_8c.html#a267bec636fbe8ba0187d2debf6c877c2">command_copy</a> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *to, <a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *from)</td></tr>
 <tr class="memdesc:a267bec636fbe8ba0187d2debf6c877c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies a command to another.  <a href="#a267bec636fbe8ba0187d2debf6c877c2">More...</a><br /></td></tr>
 <tr class="separator:a267bec636fbe8ba0187d2debf6c877c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ef467dee4df7f67e0c10767bc90ea58"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="command_8c.html#a5ef467dee4df7f67e0c10767bc90ea58">command_set_cmd</a> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *cmd, T_Command new)</td></tr>
+<tr class="memdesc:a5ef467dee4df7f67e0c10767bc90ea58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the cmd of a command.  <a href="#a5ef467dee4df7f67e0c10767bc90ea58">More...</a><br /></td></tr>
+<tr class="separator:a5ef467dee4df7f67e0c10767bc90ea58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It implements the command interpreter. </p>
@@ -176,6 +179,189 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>command_get_symbol<
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything worked, ERROR if didnt) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3e1d59fed8f0eb039c403543477d2ce0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a>* command_create </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It creates a command, defining its atributes to UNKNOWN and ''. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">none</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to the created command </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a19554f0a7e4992cb1c2ebf2a2cef2949"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void command_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>com</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It destroys a command, freeing all the memory. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pointer</td><td>to command (to destroy) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8ffebe5a80e84913ef9dd0dc79149476"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">T_Command command_get_cmd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>com</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It gives the value of the T_Command inside Command. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>T_Command (The T_Command inside the given Command) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8cf1083e88019e1337191e07a095b74a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* command_get_symbol </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>com</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It gives the value of the symbol inside Command. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>21/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>char (The symbol inside the given Command) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5ef467dee4df7f67e0c10767bc90ea58"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS command_set_cmd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T_Command&#160;</td>
+          <td class="paramname"><em>new</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the cmd of a command. </p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>20-12-2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Command</td><td>*cmd (The command to modify) </td></tr>
+    <tr><td class="paramname">T_Command</td><td>new (The new cmd) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything worked, ERROR if didnt) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7de113e2fa05f4778e769bc1a7ddcff7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS get_user_input </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>command</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>input</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reads from keyboard in search of a valid command to execute it creates the command inside </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>23/09/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>pointer </td></tr>
+    <tr><td class="paramname">the</td><td>string written by the user </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if command is changed with user's input </dd></dl>
 
 </div>
 </div>

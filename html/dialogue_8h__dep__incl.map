@@ -1,0 +1,13 @@
+<map id="codigo/dialogue/dialogue.h" name="codigo/dialogue/dialogue.h">
+<area shape="rect" id="node2" href="$dialogue_8c.html" title="It implements the dialogue of the game. " alt="" coords="405,87,579,114"/>
+<area shape="rect" id="node3" href="$game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="603,87,746,114"/>
+<area shape="rect" id="node5" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="871,259,1033,300"/>
+<area shape="rect" id="node12" href="$dialogue__test_8c.html" title="Main to test the Dialogue module. " alt="" coords="989,80,1128,121"/>
+<area shape="rect" id="node4" href="$game_8c.html" title="It implements the game interface for each command. " alt="" coords="86,266,229,293"/>
+<area shape="rect" id="node6" href="$game__management_8h_source.html" title="codigo/game_management\l/game_management.h" alt="" coords="5,169,184,211"/>
+<area shape="rect" id="node7" href="$new__game__management_8h_source.html" title="codigo/game_management\l/new_game_management.h" alt="" coords="259,169,442,211"/>
+<area shape="rect" id="node8" href="$old__new__game__management_8h_source.html" title="codigo/game_management\l/old_new_game_management.h" alt="" coords="466,169,673,211"/>
+<area shape="rect" id="node9" href="$game__rules_8h.html" title="Definition of the game rules. " alt="" coords="697,169,863,211"/>
+<area shape="rect" id="node10" href="$game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="498,259,665,300"/>
+<area shape="rect" id="node11" href="$game__rules__test_8c.html" title="Main to test the Game_rules module. " alt="" coords="689,259,847,300"/>
+</map>

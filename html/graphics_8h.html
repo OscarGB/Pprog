@@ -113,13 +113,20 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="graphics_8h__dep__incl.png" border="0" usemap="#codigo_2graphics_2graphics_8hdep" alt=""/></div>
 <map name="codigo_2graphics_2graphics_8hdep" id="codigo_2graphics_2graphics_8hdep">
-<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="269,80,411,107"/>
-<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="322,251,465,278"/>
-<area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="431,155,593,196"/>
-<area shape="rect" id="node8" href="graphics_8c.html" title="Implementation of the graphic interface. " alt="" coords="669,80,846,107"/>
-<area shape="rect" id="node5" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="217,155,356,196"/>
-<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="39,244,177,285"/>
-<area shape="rect" id="node7" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="26,155,193,196"/>
+<area shape="rect" id="node2" href="dialogue_8h.html" title="It defines the dialogue module. " alt="" coords="766,87,940,114"/>
+<area shape="rect" id="node3" href="dialogue_8c.html" title="It implements the dialogue of the game. " alt="" coords="466,177,640,203"/>
+<area shape="rect" id="node4" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="664,177,807,203"/>
+<area shape="rect" id="node5" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="43,355,186,382"/>
+<area shape="rect" id="node6" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="865,348,1028,389"/>
+<area shape="rect" id="node13" href="dialogue__test_8c.html" title="Main to test the Dialogue module. " alt="" coords="890,169,1029,211"/>
+<area shape="rect" id="node14" href="graphics_8c.html" title="Implementation of the graphic interface. " alt="" coords="1104,87,1282,114"/>
+<area shape="rect" id="node15" href="graphics__test_8c.html" title="Main to test the Graphics module. " alt="" coords="1306,80,1445,121"/>
+<area shape="rect" id="node7" href="game__management_8h_source.html" title="codigo/game_management\l/game_management.h" alt="" coords="25,259,204,300"/>
+<area shape="rect" id="node8" href="new__game__management_8h_source.html" title="codigo/game_management\l/new_game_management.h" alt="" coords="470,259,652,300"/>
+<area shape="rect" id="node9" href="old__new__game__management_8h_source.html" title="codigo/game_management\l/old_new_game_management.h" alt="" coords="676,259,883,300"/>
+<area shape="rect" id="node10" href="game__rules_8h.html" title="Definition of the game rules. " alt="" coords="279,259,446,300"/>
+<area shape="rect" id="node11" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="430,348,596,389"/>
+<area shape="rect" id="node12" href="game__rules__test_8c.html" title="Main to test the Game_rules module. " alt="" coords="248,348,405,389"/>
 </map>
 </div>
 </div>
@@ -169,7 +176,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a229876fb9313ee2b55d2835563ebdf23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the borders of dialogue and commands zones.  <a href="#a229876fb9313ee2b55d2835563ebdf23">More...</a><br /></td></tr>
 <tr class="separator:a229876fb9313ee2b55d2835563ebdf23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a771df3175d9f66d0d984b9019361966a"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8h.html#a771df3175d9f66d0d984b9019361966a">graphics_clear</a> (<a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra)</td></tr>
-<tr class="memdesc:a771df3175d9f66d0d984b9019361966a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears a graphics structure.  <a href="#a771df3175d9f66d0d984b9019361966a">More...</a><br /></td></tr>
+<tr class="memdesc:a771df3175d9f66d0d984b9019361966a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears a graphics structure without clearing the dialogue.  <a href="#a771df3175d9f66d0d984b9019361966a">More...</a><br /></td></tr>
 <tr class="separator:a771df3175d9f66d0d984b9019361966a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a591d0de83443c45dbb751e4a27511a94"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8h.html#a591d0de83443c45dbb751e4a27511a94">graphics_clear_zone</a> (<a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra, <a class="el" href="graphics_8h.html#a0073c1262c9d5b72ba2d3093aeb95dba">ZONE</a> zone)</td></tr>
 <tr class="memdesc:a591d0de83443c45dbb751e4a27511a94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears a zone of the graphics structure.  <a href="#a591d0de83443c45dbb751e4a27511a94">More...</a><br /></td></tr>
@@ -374,7 +381,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Clears a graphics structure. </p>
+<p>Clears a graphics structure without clearing the dialogue. </p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>02/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Graphics*</td><td>gra (The graphics to be cleared) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything worked, ERROR if didnt)</dd></dl>
+<p>Clears a graphics structure without clearing the dialogue.</p>
 <dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>02/12/2016 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -439,16 +456,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Creates a graphics structure. </p>
-<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>01/12/2016 </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">none</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Graphics* (The created grapghics)</dd></dl>
-<p>Creates a graphics structure.</p>
 <dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/12/2016 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
