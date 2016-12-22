@@ -2183,12 +2183,16 @@ STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
 	if(!game || !dia || !gra || !cmd) return ERROR;
 
-  	if(!game || !cmd)
-  			return ERROR;
+  if(!game || !cmd)
+  		return ERROR;
 
-  	symbol = command_get_symbol(cmd);
-  	strcat(path, symbol); 
-  	strcat(path, ".s");
+	symbol = command_get_symbol(cmd);
+  if(symbol[0] == '\0'){
+    dialogue_print(gra, "Unable to save a game without a name");
+    return ERROR;
+  }
+	strcat(path, symbol); 
+	strcat(path, ".s");
 
 	strcat(str, path);
 	strcat(str, "\n");
