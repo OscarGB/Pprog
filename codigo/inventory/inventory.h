@@ -66,7 +66,8 @@ STATUS inventory_add_item(Inventory* bag, Id id);
 * @brief Deletes an item from the inventory
 * @author José Ignacio Gómez
 * @date 5/11/2016
-* @param Inventory*, Id (item Id)
+* @param Inventory*
+* @param Id (item Id)
 * @return STATUS
 */
 STATUS inventory_delete_item(Inventory* bag, Id id);
@@ -75,7 +76,8 @@ STATUS inventory_delete_item(Inventory* bag, Id id);
 * @brief Sets the set of items of the inventory
 * @author José Ignacio Gómez
 * @date 5/11/2016
-* @param Inventory*, Set*
+* @param Inventory*
+* @param Set*
 * @return STATUS
 */
 STATUS inventory_set_set(Inventory* bag, Set* set);
@@ -102,7 +104,8 @@ int inventory_get_size(Inventory* bag);
 * @brief Sets the size of the inventory
 * @author José Ignacio Gómez
 * @date 5/11/2016
-* @param Inventory*, int size
+* @param Inventory*
+* @param int size
 * @return STATUS
 */
 STATUS inventory_set_size(Inventory* bag, int size);
@@ -120,7 +123,8 @@ int inventory_get_num_items(Inventory* bag);
 * @brief Search for an item in the inventory
 * @author José Ignacio Gómez
 * @date 9/12/2016
-* @param Inventory*, bag
+* @param Inventory*
+* @param bag
 * @return BOOL
 */
 BOOL inventory_is_in(Inventory* bag, Id id);
