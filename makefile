@@ -109,9 +109,9 @@ graphics_test.o: codigo/test/graphics_test.c
 	@echo "--->Generating graphics_test.o"
 	@gcc $(CFLAGS) -c codigo/test/graphics_test.c $(NCURSES)
 
-game_rules_test.o: codigo/test/game_rules_test.c
-	@echo "--->Generating game_rules_test.o"
-	@gcc $(CFLAGS) -c codigo/test/game_rules_test.c
+game_management_test.o: codigo/test/game_management_test.c
+	@echo "--->Generating game_management_test.o"
+	@gcc $(CFLAGS) -c codigo/test/game_management_test.c
 
 JuegoConv: game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creating executable JuegoConv"

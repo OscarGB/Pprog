@@ -218,8 +218,8 @@ int main(int argc, char* argv[]){
 	if(todas || test == 6) test_game_rules6();
 	if(todas || test == 7) test_game_rules7();
 	if(todas || test == 8) test_game_rules8();
-	if(todas || test == 8) test_game_rules9();
-	if(todas || test == 8) test_game_rules10();
+	if(todas || test == 9) test_game_rules9();
+	if(todas || test == 10) test_game_rules10();
 
 	PRINT_RESULTS();
 
