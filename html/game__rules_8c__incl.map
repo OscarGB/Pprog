@@ -1,13 +1,15 @@
 <map id="codigo/game_rules/game_rules.c" name="codigo/game_rules/game_rules.c">
-<area shape="rect" id="node5" href="$game__rules_8h.html" title="Definition of the game rules. " alt="" coords="239,95,339,121"/>
-<area shape="rect" id="node6" href="$game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="363,95,429,121"/>
-<area shape="rect" id="node7" href="$command_8h.html" title="It defines the command interpreter. " alt="" coords="569,244,660,271"/>
-<area shape="rect" id="node9" href="$space_8h.html" title="It defines the game spaces. " alt="" coords="362,169,430,196"/>
-<area shape="rect" id="node10" href="$set_8h.html" title="It defines the capability of store sets of things. " alt="" coords="316,244,367,271"/>
-<area shape="rect" id="node11" href="$player_8h.html" title="It defines the functionality of the player. " alt="" coords="167,169,235,196"/>
-<area shape="rect" id="node12" href="$object_8h.html" title="It defines the functionality of the objects. " alt="" coords="223,244,291,271"/>
-<area shape="rect" id="node13" href="$die_8h.html" title="It defines the die&#39;s commands. " alt="" coords="92,169,143,196"/>
-<area shape="rect" id="node14" href="$link_8h.html" title="Definition of the link module. " alt="" coords="441,244,495,271"/>
-<area shape="rect" id="node15" href="$graphics_8h.html" title="Definition of the graphic interface. " alt="" coords="505,169,588,196"/>
-<area shape="rect" id="node8" href="$types_8h.html" title="It defines common types. " alt="" coords="339,319,405,345"/>
+<area shape="rect" id="node6" href="$game__rules_8h.html" title="Definition of the game rules. " alt="" coords="397,95,497,121"/>
+<area shape="rect" id="node7" href="$game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="325,169,390,196"/>
+<area shape="rect" id="node8" href="$command_8h.html" title="It defines the command interpreter. " alt="" coords="119,393,209,420"/>
+<area shape="rect" id="node10" href="$space_8h.html" title="It defines the game spaces. " alt="" coords="214,319,282,345"/>
+<area shape="rect" id="node11" href="$set_8h.html" title="It defines the capability of store sets of things. " alt="" coords="305,393,356,420"/>
+<area shape="rect" id="node12" href="$player_8h.html" title="It defines the functionality of the player. " alt="" coords="441,244,509,271"/>
+<area shape="rect" id="node13" href="$object_8h.html" title="It defines the functionality of the objects. " alt="" coords="595,319,663,345"/>
+<area shape="rect" id="node15" href="$die_8h.html" title="It defines the die&#39;s commands. " alt="" coords="469,319,520,345"/>
+<area shape="rect" id="node16" href="$link_8h.html" title="Definition of the link module. " alt="" coords="605,244,659,271"/>
+<area shape="rect" id="node17" href="$graphics_8h.html" title="Definition of the graphic interface. " alt="" coords="5,319,88,345"/>
+<area shape="rect" id="node18" href="$dialogue_8h.html" title="It defines the dialogue module. " alt="" coords="71,244,153,271"/>
+<area shape="rect" id="node9" href="$types_8h.html" title="It defines common types. " alt="" coords="369,468,434,495"/>
+<area shape="rect" id="node14" href="$inventory_8h.html" title="It defines the inventory. " alt="" coords="358,319,445,345"/>
 </map>

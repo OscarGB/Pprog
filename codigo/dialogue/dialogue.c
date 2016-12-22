@@ -319,64 +319,6 @@ STATUS dialogue_open(Graphics* gra, Dialogue* dialogue, char** objects, STATUS c
 	return dialogue_standard(gra, dialogue, objects, string);
 }
 
-/**
-* @brief prints the load_show dialogue
-* @author José Ignacio Gómez
-* @date 20/12/16
-* @param Graphics* gra (The graphics where it prints)
-* @param Dialogue* dialogue
-* @param char** objects
-* @param STATUS (checks if the callback was successful)
-* @return STATUS (OK if everything went well, ERROR if it didn't)
-*/
-STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
-	char string[MAX_DIALOGUE]; /*!< string for print*/
-
-	if(!gra || !dialogue) return ERROR;
-
-	if(!str) return ERROR;
-
-	if(check == OK){
-		strcpy(string, "Saved games: \n");
-		strcat(string, str);
-	}else{
-		strcpy(string, "Something went wrong\n");
-	}
-
-	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
-
-	return dialogue_print(gra, string);
-}
-
-/**
-* @brief prints the load dialogue
-* @author José Ignacio Gómez
-* @date 20/12/16
-* @param Graphics* gra (The graphics where it prints)
-* @param Dialogue* dialogue
-* @param char** objects
-* @param STATUS (checks if the callback was successful)
-* @return STATUS (OK if everything went well, ERROR if it didn't)
-*/
-STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
-	char string[MAX_DIALOGUE]; /*!< string for print*/
-
-	if(!gra || !dialogue) return ERROR;
-
-	if(!str) return ERROR;
-
-	if(check == OK){
-		strcpy(string, "Game loaded from file: ");
-		strcat(string, str);
-		strcat(string, "\n");
-	}else{
-		strcpy(string, "Something went wrong\n");
-	}
-
-	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
-
-	return dialogue_print(gra, string);
-}
 
 /**
 * @brief prints the inspect_space dialogue
@@ -525,7 +467,6 @@ void dialogue_destroy(Dialogue* dialogue){
 * @date 16/12/2016
 * @param Graphics*
 * @param Dialogue*
-* @param STATUS
 * @param char** objects
 * @param char string
 * @return OK if it worked
@@ -559,7 +500,6 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 * @param STATUS
 * @param char** objects
 * @param Graphics*
-* @param char string
 * @return OK if it worked
 */
 STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphics* gra){
@@ -611,7 +551,6 @@ STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphi
 * @param char** inventory
 * @param Graphics*
 * @param DIALOGUE_INSPECT type
-* @param char string
 * @return OK if it worked
 */
 STATUS dialogue_inspect(Dialogue* dialogue, STATUS check, char** inventory, Graphics* gra, DIALOGUE_INSPECT type){
@@ -670,4 +609,63 @@ STATUS dialogue_start_game(Graphics* gra){
 	graphics_refresh(gra);
 
 	return result;
+}
+
+/**
+* @brief prints the load dialogue
+* @author Óscar Pinto Santamaría
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char* string
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
+STATUS dialogue_load_show(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
+	char string[MAX_DIALOGUE]; /*!< string for print*/
+
+	if(!gra || !dialogue) return ERROR;
+
+	if(!str) return ERROR;
+
+	if(check == OK){
+		strcpy(string, "Saved games: \n");
+		strcat(string, str);
+	}else{
+		strcpy(string, "Something went wrong\n");
+	}
+
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
+
+	return dialogue_print(gra, string);
+}
+
+/**
+* @brief prints the load dialogue
+* @author Óscar Pinto Santamaría
+* @date 20/12/16
+* @param Graphics* gra (The graphics where it prints)
+* @param Dialogue* dialogue
+* @param char* string
+* @param STATUS (checks if the callback was successful)
+* @return STATUS (OK if everything went well, ERROR if it didn't)
+*/
+STATUS dialogue_load(Graphics* gra, Dialogue* dialogue, char* str, STATUS check){
+	char string[MAX_DIALOGUE]; /*!< string for print*/
+
+	if(!gra || !dialogue) return ERROR;
+
+	if(!str) return ERROR;
+
+	if(check == OK){
+		strcpy(string, "Game loaded from file: ");
+		strcat(string, str);
+		strcat(string, "\n");
+	}else{
+		strcpy(string, "Something went wrong\n");
+	}
+
+	if(command_copy(dialogue->prev, dialogue->current) == ERROR) return ERROR;
+
+	return dialogue_print(gra, string);
 }

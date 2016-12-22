@@ -22,7 +22,8 @@
 * @brief prints a given space to a file
 * @author Óscar Pinto Santamaría
 * @date 16/12/2016
-* @param FILE* file, Space* space
+* @param FILE* file
+* @param Space* space
 * @return OK if the space was succesfully printed
 */
 
@@ -70,7 +71,8 @@ STATUS print_space_save(FILE *f, Space* space){
 * @brief prints a given link to a file
 * @author Óscar Pinto Santamaría
 * @date 16/12/2016
-* @param FILE* file, Link* link
+* @param FILE* file
+* @param Link* link
 * @return OK if the link was succesfully printed
 */
 
@@ -102,11 +104,12 @@ STATUS print_link_save(FILE *f, Link *link){
   return OK;
   }
 
-  /**
+/**
 * @brief prints a given object to a file
 * @author Óscar Pinto Santamaría
 * @date 16/12/2016
-* @param FILE* file, Object* object
+* @param FILE* file
+* @param Object* object
 * @return OK if the object was succesfully printed
 */
 
@@ -178,7 +181,8 @@ STATUS print_object_save(FILE *f, Object *object){
 * @brief prints a given player to a file
 * @author Óscar Pinto Santamaría
 * @date 16/12/2016
-* @param FILE* file, Player* player
+* @param FILE* file
+* @param Player* player
 * @return OK if the player was succesfully printed
 */
 
@@ -202,7 +206,8 @@ STATUS print_player_save(FILE *f, Player *player){
 * @brief saves a game in the given file
 * @author Óscar Pinto Santamaría
 * @date 16/12/2016
-* @param Game* game, char* savepath
+* @param Game* game
+* @param char* savepath
 * @return OK or ERROR
 */
 
@@ -238,7 +243,8 @@ STATUS game_save(Game* game, char* savepath){
 * @brief loads a game from the given file
 * @author Óscar Pinto Santamaría
 * @date 16/12/2016
-* @param Game* game, char* savepath
+* @param Game* game
+* @param char* savepath
 * @return OK or ERROR
 */
 
@@ -282,6 +288,14 @@ STATUS game_load(Game* game, char* path){
   return ERROR;
 }
 
+/**
+* @brief inserts a object in game
+* @author Óscar Pinto Santamaría
+* @date 18/12/2016
+* @param Game*
+* @param char* (line)
+* @return OK if the object was succesfully inserted
+*/
 STATUS game_load_object(Game* game, char* line) {
 
   char *toks = NULL;
@@ -354,6 +368,14 @@ STATUS game_load_object(Game* game, char* line) {
 return status;
 }
 
+/**
+* @brief inserts a player in game
+* @author Óscar Pinto Santamaría
+* @date 18/12/2016
+* @param Game*
+* @param char* (line)
+* @return OK if the player was succesfully inserted
+*/
 STATUS game_load_player(Game* game, char* line) {
 
   char *toks = NULL;
@@ -380,6 +402,14 @@ STATUS game_load_player(Game* game, char* line) {
 return status;
 }
 
+/**
+* @brief inserts a link in game
+* @author Óscar Pinto Santamaría
+* @date 18/12/2016
+* @param Game*
+* @param char* (line)
+* @return OK if the link was succesfully inserted
+*/
 STATUS game_load_link(Game* game, char* line) {
 
   char *toks = NULL;
@@ -414,6 +444,14 @@ STATUS game_load_link(Game* game, char* line) {
 return status;
 }
 
+/**
+* @brief inserts a space in game
+* @author Óscar Pinto Santamaría
+* @date 18/12/2016
+* @param Game* 
+* @param char* (line)
+* @return OK if the space was succesfully inserted
+*/
 STATUS game_load_space(Game* game, char* line) {
 
   char *toks = NULL;
@@ -428,7 +466,6 @@ STATUS game_load_space(Game* game, char* line) {
   Id up; 
   Id down; 
   char gdesc[MAX_GDESC];
-  /*char *toks=NULL; */
   BOOL light = FALSE;
   char adesc[MAX_ADESC];
 

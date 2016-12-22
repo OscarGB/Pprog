@@ -18,9 +18,8 @@ struct _Command{
 };/*!<Command structure*/
 
 
-/*
-* @brief reads from keyboard in search of a valid command to execute
-* it creates the command inside
+/**
+* @brief reads from keyboard in search of a valid command to execute it creates the command inside
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 23/09/2016
 * @param command pointer
@@ -30,7 +29,6 @@ struct _Command{
 
 STATUS get_user_input(Command* command, char* input){
 	char action[CMD_LENGHT]; /*The action written*/
-	/*char input[CMD_LENGHT];*/ /*The real input*/
 	char symbol[50]; /*The character for TAKE and DROP*/
 	char* toks = NULL; /*String for tokenization*/
 
@@ -134,7 +132,7 @@ STATUS get_user_input(Command* command, char* input){
 }
 
 
-/*
+/**
 * @brief It creates a command, defining its atributes to UNKNOWN and ''
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 21/10/2016
@@ -154,12 +152,12 @@ Command* command_create(){
 	return newcom;
 }
 
-/*
+/**
 * @brief It destroys a command, freeing all the memory
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 21/10/2016
 * @param pointer to command (to destroy)
-* @return none
+* @return void
 */
 
 void command_destroy(Command *com){
@@ -171,7 +169,7 @@ void command_destroy(Command *com){
 }
 
 
-/*
+/**
 * @brief It gives the value of the T_Command inside Command
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 21/10/2016
@@ -187,7 +185,7 @@ T_Command command_get_cmd(Command *com){
 }
 
 
-/*
+/**
 * @brief It gives the value of the symbol inside Command
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 21/10/2016

@@ -112,15 +112,18 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="space_8h__dep__incl.png" border="0" usemap="#codigo_2space_2space_8hdep" alt=""/></div>
 <map name="codigo_2space_2space_8hdep" id="codigo_2space_2space_8hdep">
-<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="311,80,454,107"/>
-<area shape="rect" id="node5" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="541,155,680,196"/>
-<area shape="rect" id="node6" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="5,244,144,285"/>
-<area shape="rect" id="node8" href="link_8c.html" title="Implementation of the link module. " alt="" coords="530,80,649,107"/>
-<area shape="rect" id="node9" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="672,80,821,107"/>
-<area shape="rect" id="node10" href="space_8c.html" title="It implements the game spaces. " alt="" coords="845,80,995,107"/>
-<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="486,251,629,278"/>
-<area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="112,155,275,196"/>
-<area shape="rect" id="node7" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="299,155,466,196"/>
+<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="322,80,465,107"/>
+<area shape="rect" id="node5" href="game__management_8h_source.html" title="codigo/game_management\l/game_management.h" alt="" coords="5,155,184,196"/>
+<area shape="rect" id="node6" href="new__game__management_8h_source.html" title="codigo/game_management\l/new_game_management.h" alt="" coords="501,155,683,196"/>
+<area shape="rect" id="node7" href="old__new__game__management_8h_source.html" title="codigo/game_management\l/old_new_game_management.h" alt="" coords="707,155,914,196"/>
+<area shape="rect" id="node11" href="link_8c.html" title="Implementation of the link module. " alt="" coords="635,80,754,107"/>
+<area shape="rect" id="node12" href="player_8c.html" title="It implements the functionality of the player. " alt="" coords="777,80,927,107"/>
+<area shape="rect" id="node13" href="space_8c.html" title="It implements the game spaces. " alt="" coords="951,80,1100,107"/>
+<area shape="rect" id="node3" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="23,251,166,278"/>
+<area shape="rect" id="node4" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="191,244,353,285"/>
+<area shape="rect" id="node8" href="game__rules_8h.html" title="Definition of the game rules. " alt="" coords="310,155,477,196"/>
+<area shape="rect" id="node9" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="378,244,545,285"/>
+<area shape="rect" id="node10" href="game__rules__test_8c.html" title="Main to test the Game_rules module. " alt="" coords="569,244,727,285"/>
 </map>
 </div>
 </div>
@@ -136,6 +139,8 @@ Macros</h2></td></tr>
 <tr class="separator:ad5e6bf0470b64b198a22be7c9dc06181"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abad832479032ea984323a420633dc7ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#abad832479032ea984323a420633dc7ed">MAX_ADESC</a>&#160;&#160;&#160;100</td></tr>
 <tr class="separator:abad832479032ea984323a420633dc7ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62c215bd434f436dfd4276fd7730dbba"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a62c215bd434f436dfd4276fd7730dbba">MAX_OBS_PER_SPA</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a62c215bd434f436dfd4276fd7730dbba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -231,6 +236,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a2dd9b387c7aa145492ff084a78e6620e"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a2dd9b387c7aa145492ff084a78e6620e">space_close_door</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *space, DIRECTION dir)</td></tr>
 <tr class="memdesc:a2dd9b387c7aa145492ff084a78e6620e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the gdesc to show a closed door.  <a href="#a2dd9b387c7aa145492ff084a78e6620e">More...</a><br /></td></tr>
 <tr class="separator:a2dd9b387c7aa145492ff084a78e6620e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ff5ca6a7e9cd5338c1b337ad656b0fb"><td class="memItemLeft" align="right" valign="top">DIRECTION&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="space_8h.html#a9ff5ca6a7e9cd5338c1b337ad656b0fb">space_get_link_direction</a> (<a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *spa, Id link_id)</td></tr>
+<tr class="memdesc:a9ff5ca6a7e9cd5338c1b337ad656b0fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets where is that link.  <a href="#a9ff5ca6a7e9cd5338c1b337ad656b0fb">More...</a><br /></td></tr>
+<tr class="separator:a9ff5ca6a7e9cd5338c1b337ad656b0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It defines the game spaces. </p>
@@ -274,6 +282,19 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Max number of characters in gdesc </p>
+
+</div>
+</div>
+<a class="anchor" id="a62c215bd434f436dfd4276fd7730dbba"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_OBS_PER_SPA&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Max number of objects per space </p>
 
 </div>
 </div>
@@ -604,6 +625,44 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL (TRUE if illuminated, FALSE if not) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9ff5ca6a7e9cd5338c1b337ad656b0fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DIRECTION space_get_link_direction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="space_8h.html#a67533ffc2b70463baecc38fb0629bbfc">Space</a> *&#160;</td>
+          <td class="paramname"><em>spa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Id&#160;</td>
+          <td class="paramname"><em>link_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets where is that link. </p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>20/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Space*</td><td>space (The space to modify) </td></tr>
+    <tr><td class="paramname">Id</td><td>link_id (The link to search) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>DIRECTION (where the link is) </dd></dl>
 
 </div>
 </div>

@@ -20,7 +20,7 @@
 #include "game_rules.h"
 
 
-/*
+/**
 * @brief function for checking flags.
 * checks the arguments and set flags
 * @author José Ignacio Gómez
@@ -278,13 +278,13 @@ STATUS load(Command* cmd, Dialogue* dia, Graphics* gra){
 	return OK;
 }
 
-/*
+/**
 * @brief function main for the program, runs the game.
 * it creates the command inside
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 23/09/2016
 * @param int argc (number of arguments)
-         char *[argv] (number of arguments)
+* @param char *[argv] (number of arguments)
 * @return int 1 if ERROR, 0 if OK
 */
 int main(int argc, char *argv[]){

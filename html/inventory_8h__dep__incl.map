@@ -1,5 +1,16 @@
 <map id="codigo/inventory/inventory.h" name="codigo/inventory/inventory.h">
-<area shape="rect" id="node2" href="$inventory_8c.html" title="It implements the inventory. " alt="" coords="5,87,191,114"/>
-<area shape="rect" id="node3" href="$player_8c.html" title="It implements the functionality of the player. " alt="" coords="215,87,365,114"/>
-<area shape="rect" id="node4" href="$inventory__test_8c.html" title="Main to test the Inventory module. " alt="" coords="388,80,531,121"/>
+<area shape="rect" id="node2" href="$inventory_8c.html" title="It implements the inventory. " alt="" coords="84,87,270,114"/>
+<area shape="rect" id="node3" href="$player_8h.html" title="It defines the functionality of the player. " alt="" coords="294,87,444,114"/>
+<area shape="rect" id="node13" href="$player_8c.html" title="It implements the functionality of the player. " alt="" coords="464,177,613,203"/>
+<area shape="rect" id="node15" href="$inventory__test_8c.html" title="Main to test the Inventory module. " alt="" coords="519,80,662,121"/>
+<area shape="rect" id="node4" href="$game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="298,177,440,203"/>
+<area shape="rect" id="node5" href="$game_8c.html" title="It implements the game interface for each command. " alt="" coords="42,355,184,382"/>
+<area shape="rect" id="node14" href="$player__test_8c.html" title="Main to test the Player module. " alt="" coords="148,169,273,211"/>
+<area shape="rect" id="node6" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="630,348,793,389"/>
+<area shape="rect" id="node7" href="$game__management_8h_source.html" title="codigo/game_management\l/game_management.h" alt="" coords="24,259,202,300"/>
+<area shape="rect" id="node8" href="$new__game__management_8h_source.html" title="codigo/game_management\l/new_game_management.h" alt="" coords="278,259,460,300"/>
+<area shape="rect" id="node9" href="$old__new__game__management_8h_source.html" title="codigo/game_management\l/old_new_game_management.h" alt="" coords="484,259,691,300"/>
+<area shape="rect" id="node10" href="$game__rules_8h.html" title="Definition of the game rules. " alt="" coords="800,259,967,300"/>
+<area shape="rect" id="node11" href="$game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="818,348,984,389"/>
+<area shape="rect" id="node12" href="$game__rules__test_8c.html" title="Main to test the Game_rules module. " alt="" coords="1009,348,1166,389"/>
 </map>

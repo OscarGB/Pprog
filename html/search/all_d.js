@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['object',['object',['../struct___game.html#ac0820020da9b55ca661269dc121b1c7f',1,'_Game::object()'],['../struct___space.html#a7508e23676f822b2f3133444739a66d3',1,'_Space::object()']]],
-  ['object_2ec',['object.c',['../object_8c.html',1,'']]],
-  ['object_2eh',['object.h',['../object_8h.html',1,'']]],
-  ['on_5foff',['on_off',['../struct___object.html#a1e2481e0ad2780237865e4d2f6da852c',1,'_Object']]],
-  ['open',['open',['../struct___object.html#ad3aab86e69761da367c730f0c683cba7',1,'_Object']]]
+  ['name',['name',['../struct___link.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Link::name()'],['../struct___object.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Object::name()'],['../struct___player.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Player::name()'],['../struct___space.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Space::name()']]],
+  ['no_5fid',['NO_ID',['../types_8h.html#a642e16f35aa1e585c25e405ede76e115',1,'types.h']]],
+  ['north',['north',['../struct___space.html#a8c9fe9c5953834f6bf21b2c0aa9c232c',1,'_Space']]],
+  ['not_5frolled',['NOT_ROLLED',['../die_8h.html#ab8878206956847f615ba9028f11b61cf',1,'die.h']]],
+  ['num_5fids',['num_ids',['../struct___set.html#aea3b1b8a5e34c35cb4b6073752495a1a',1,'_Set']]],
+  ['num_5flinks',['num_links',['../struct___game.html#af5a22821f47f54f5185fa61bf40c0361',1,'_Game']]],
+  ['num_5fobjects',['num_objects',['../struct___game.html#ab000eabbed09cacdd40b5585dd784e55',1,'_Game']]]
 ];
