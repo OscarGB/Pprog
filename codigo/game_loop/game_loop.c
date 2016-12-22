@@ -253,7 +253,7 @@ STATUS load(Command* cmd, Dialogue* dia, Graphics* gra){
 	/*This if only shows available files for load*/
 	symbol = command_get_symbol(cmd);
 	if(!strcmp(symbol, "show")){
-		if ((dir = opendir ("codigo/Saves")) != NULL) {
+		if ((dir = opendir ("Saves")) != NULL) {
 		  while ((ent = readdir (dir)) != NULL && i<=7) {
 			if ( !strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") ){
     			 continue;
@@ -375,7 +375,7 @@ int main(int argc, char *argv[]){
 				log = load(command, dialogue, gra);
 			}
 			else{
-				strcpy(path, "codigo/Saves/");
+				strcpy(path, "Saves/");
 				strcat(path, command_get_symbol(command));
 				strcat(path, ".s");
 
