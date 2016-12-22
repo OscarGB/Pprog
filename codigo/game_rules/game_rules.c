@@ -36,8 +36,6 @@ STATUS pick_aleat_function(Game * game, Graphics * g){
 	roll = die_roll(die);
 	free(die);
 
-			return change_link_state(game, g);
-
 	switch(roll){
 		case 1:
 			return change_light_space(game, g);

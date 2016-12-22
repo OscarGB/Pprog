@@ -504,30 +504,61 @@ STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char
 */
 STATUS dialogue_generic(Dialogue* dialogue, STATUS check, char** objects, Graphics* gra){
 	T_Command cmd; /*!< Command for switch*/
+	T_Command cmdp; /*!< Previous command */
 
 	if(!dialogue || !gra) return ERROR;
 
 	cmd = command_get_cmd(dialogue->current);
+	cmdp = command_get_cmd(dialogue->prev);
+
 	switch (cmd){
 		case NO_CMD:
+			if(cmd == cmdp){
+				dialogue_print(gra, "You should try typing something...\nTry again or ask for'help'");
+				sleep(3);
+			}
 			return dialogue_error(gra, dialogue, objects);
 		case UNKNOWN:
+			if(cmd == cmdp){
+				dialogue_print(gra, "You have tried that before and it\ndoesn't even exist\nTry something different or ask for\n'help'");
+				sleep(3);
+			}
 			return dialogue_error(gra, dialogue, objects);
 		case QUIT:
 			return dialogue_quit(gra, dialogue);
 		case WIN:
 			return dialogue_win(gra, dialogue);
 		case PICK:
+			if(cmd == cmdp){
+				dialogue_print(gra, "You have tried to pick that before.\nDid you suceed?");
+				sleep(3);
+			}
 			return dialogue_pick(gra, dialogue, objects, check);
 		case DROP:
+			if(cmd == cmdp){
+				dialogue_print(gra, "You have tried to drop that before.\nDid you suceed?");
+				sleep(3);
+			}
 			return dialogue_drop(gra, dialogue, objects, check);
 		case GO:
 			return dialogue_go(gra, dialogue, objects, check);
 		case TURNON:
+			if(cmd == cmdp){
+				dialogue_print(gra, "You have tried to turn on that\nbefore.\nDid you suceed?");
+				sleep(3);
+			}
 			return dialogue_turnon(gra, dialogue, objects, check);
 		case TURNOFF:
+			if(cmd == cmdp){
+				dialogue_print(gra, "You have tried to turn off that\nbefore.\nDid you suceed?");
+				sleep(3);
+			}
 			return dialogue_turnoff(gra, dialogue, objects, check);
 		case OPEN:
+			if(cmd == cmdp){
+				dialogue_print(gra, "You have tried to open that before.\nDid you suceed?");
+				sleep(3);
+			}
 			return dialogue_open(gra, dialogue, objects, check);
 		case HELP:
 			return dialogue_help(gra);
