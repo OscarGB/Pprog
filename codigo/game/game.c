@@ -2201,7 +2201,7 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   char error[WORD_SIZE];
   Space* spa = NULL;
 
-  strcpy(error, "error");
+  strcpy(error, "");
   strcpy(syntax, "syntax");
   string = command_get_symbol(cmd);
 

@@ -21,87 +21,6 @@
 
 
 /**
-* @brief function for checking flags.
-* checks the arguments and set flags
-* @author José Ignacio Gómez
-* @date 18/11/2016
-* @param int argc (number of arguments)
-* @param char **[argv] (number of arguments)
-* @param int *flag (log flag)
-* @param int *nvflag (no verbose flag)
-* @return int -1 if ERROR, the position of the log file if OK
-*/
-int check_flags(int argc, char **argv, int *flag, int *nvflag) {
-	int position = 0;
-
-	if (argc < 2){
-		fprintf(stderr, "Use: %s <game_data_file>\n", argv[0]);
-		return -1;
-	}
-
-	/*Log mode*/
-	if(argc >= 3){
-		if(strcmp(argv[2], "NO_RULES") == 0)
-			return position;
-		if(strcmp(argv[2], "-l") == 0){
-			if(argc >= 4 && argv[3][0] != '-'){	
-				*flag = 1; /*Activating log mode*/
-
-				if(argc == 5){
-					if(strcmp(argv[4], "-nv") == 0){
-						*nvflag = 1; /*Activating no verbose mode*/
-					}
-					else {
-						printf("Use: %s <game_data_file> -l <log_file> [-nv]\n", argv[0]);
-						return -1;
-					}
-
-				}
-				position = 3; /*Number of the argument of the log*/
-			}
-			else {
-				printf("Use: %s <game_data_file> -l <log_file> [-nv]\n", argv[0]);
-				return -1;
-			}
-		}
-
-		else if(strcmp(argv[2], "-nv") == 0){
-			*nvflag = 1;
-
-			if(argc == 5){
-				if(strcmp(argv[3], "-l") == 0){
-					if(argv[4][0] != '-'){
-						*flag = 1;
-						position = 4; /*Number of the argument of the log file*/
-					}
-					else {
-						printf("Use: %s <game_data_file> -nv [-l <log_file>]\n", argv[0]);
-						return -1;
-					}
-
-				}
-
-				else {
-					printf("Use: %s <game_data_file> -nv [-l <log_file>]\n", argv[0]);
-					return -1;
-				}
-			}
-			else if(argc == 4){
-				printf("Use: %s <game_data_file> -nv [-l <log_file>]\n", argv[0]);
-				return -1;
-			}
-		}
-
-		else {
-			printf("Use: %s <game_data_file> [-nv] [ -l <log_file> ]\n", argv[0]);
-			return -1;
-		}
-	}
-
-	return position;
-}
-
-/**
 * @brief Prints the file for the log
 * @author Óscar Gómez
 * @date 25/11/2016
@@ -301,16 +220,30 @@ int main(int argc, char *argv[]){
 	char path[256];
 	int rflag = 1; /*Flag for game_rules deactivation*/
 	int i;
-
-	file_pos = check_flags(argc, argv, &flag, &nvflag);
 	
 	for(i=2; i<argc; i++){
-		if(strcmp(argv[i], "NO_RULES") == 0)
+		if(strcmp(argv[i], "-nr") == 0)
 			rflag = 0;
-	}	
+	}
+	for(i=2; i<argc; i++){
+		if(strcmp(argv[i], "-l") == 0){
+			flag = 1;
+			if(argv[i+1][0] == '-'){
+				printf("Use: %s <game_data_file> [-nv] [ -l <log_file> ] [-nr]\n", argv[0]);
+				return 0;
+			}
+			file_pos = i + 1;
+		}
+	}
+	for(i=2; i<argc; i++){
+		if(strcmp(argv[i], "-nv") == 0){
+			nvflag = 1;
+		}
+	}
 
-	if(file_pos == -1){
-		return -1;
+	if(argc > 2 && flag != 1 && nvflag != 1 && rflag != 0){
+		printf("Use: %s <game_data_file> [-nv] [ -l <log_file> ] [-nr]\n", argv[0]);
+		return 0;
 	}
 
 	if(flag == 1){
