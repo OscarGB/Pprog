@@ -1547,7 +1547,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
       if(symbol[0] == 's' || symbol[0] == 'S'){ /*!< Inspecting space */
           	for(i=0; i < MAX_SPACES; i++){
           		if(player_location == space_get_id(game->spaces[i])){
-                if(space_get_light(game->spaces[i]) != FALSE){
+                if(space_get_light(game->spaces[i]) != FALSE || game_player_has_light_object(game) == TRUE){
           		    strcpy(invobjs[0], space_get_adesc(game->spaces[i]));
           		    dialogue_inspect(dia, OK, invobjs, gra, SPACE);
                   free_invobjs(invobjs);
@@ -1581,7 +1581,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
     		  space = game_get_space(game, player_location); /*Get the space where the object is*/
 
-		      if(space_get_light(space) == FALSE){
+		      if(space_get_light(space) == FALSE && game_player_has_light_object(game) != TRUE){
 		        dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
             free_invobjs(invobjs);
             return ERROR;
@@ -1597,7 +1597,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
       if(strcmp(symbol, "space") == 0 || strcmp(symbol, "Space") == 0){ /*!< Inspecting space */
         for(i=0; i < MAX_SPACES; i++){
             if(player_location == space_get_id(game->spaces[i])){
-              if(space_get_light(game->spaces[i]) != FALSE){
+              if(space_get_light(game->spaces[i]) != FALSE || game_player_has_light_object(game) == TRUE){
                 strcpy(invobjs[0], space_get_adesc(game->spaces[i]));
                 dialogue_inspect(dia, OK, invobjs, gra, SPACE);
                 free_invobjs(invobjs);
@@ -1653,7 +1653,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	
 		      space = game_get_space(game, player_location); /*Get the space where the object is*/
 
-    		  if(space_get_light(space) == FALSE){
+    		  if(space_get_light(space) == FALSE && game_player_has_light_object(game) != TRUE){
             dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
             free_invobjs(invobjs);
             return ERROR;
