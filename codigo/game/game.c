@@ -12,7 +12,6 @@
 #include <string.h>
 #include <dirent.h>
 #include <unistd.h>
-#include <alloca.h>
 #include "game.h"
 #include "player.h"
 #include "object.h"
@@ -142,12 +141,12 @@ Game* game_init(Game* game) {
 * @return OK if it was successfuly initialized
 */
 STATUS game_init_from_file(Game* game, char* filename) {
-  if(!game){
+  if(!game || !filename){
     return ERROR;
   }
 
   /*Load objects from file*/
-  if (game_load(game, filename)==OK)
+  if (game_load(game, filename) == OK)
     return OK;
   return ERROR;
 }
@@ -540,7 +539,7 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
     game->turns--;
     result = callback_SAVE(game, cmd, dia, gra);
     break;
-  case LOAD:
+  case LOAD: /*Should never arrive here*/
     result = callback_LOAD(game, cmd, dia, gra);
     break;
   case HELP:
@@ -2175,7 +2174,6 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @param Command* cmd
 * @param Dialogue* dia
 * @param Graphics* gra
-* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
@@ -2185,12 +2183,16 @@ STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
 	if(!game || !dia || !gra || !cmd) return ERROR;
 
-  	if(!game || !cmd)
-  			return ERROR;
+  if(!game || !cmd)
+  		return ERROR;
 
-  	symbol = command_get_symbol(cmd);
-  	strcat(path, symbol); 
-  	strcat(path, ".s");
+	symbol = command_get_symbol(cmd);
+  if(symbol[0] == '\0'){
+    dialogue_print(gra, "Unable to save a game without a name");
+    return ERROR;
+  }
+	strcat(path, symbol); 
+	strcat(path, ".s");
 
 	strcat(str, path);
 	strcat(str, "\n");
@@ -2207,69 +2209,10 @@ STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 * @param Command* cmd
 * @param Dialogue* dia
 * @param Graphics* gra
-* @param char** objects (the objects in the space)
-* @return OK if it went ok
+* @return OK
 */
 STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
-
-	int i=0;
-	DIR *dir;
-	struct dirent *ent;
-	char savegames[256]="";
-	char *symbol = NULL;
-	char path[256] = "codigo/Saves/";
-	STATUS status = ERROR;
-
-	if(!game || !dia || !gra || !cmd)
-		return ERROR;
-
-	/*This if only shows available files for load*/
-	symbol = command_get_symbol(cmd);
-	if(!strcmp(symbol, "show")){
-		if ((dir = opendir ("codigo/Saves")) != NULL) {
-		  while ((ent = readdir (dir)) != NULL && i<=7) {
-			if ( !strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") ){
-    			 continue;
-			} else {
-		    		strcat(savegames, ent->d_name);
-		    		strcat(savegames, "\n");
-		    		i++;
-			}
-		 }
-		  if(!strcmp(savegames, "")){
-			dialogue_load_show(gra, dia, "No saved files\n", OK);
-		  }else{
-		  	dialogue_load_show(gra, dia, savegames, OK);
-		  }
-		  closedir (dir);
-		  return OK;
-		} else{
-			dialogue_load_show(gra, dia, savegames, ERROR);
-		  	return ERROR;
-		}
-	}
-
-	/*This loads a file to the game*/
-	strcat(path, symbol);
-  /*Checks if the file exists*/
-  if(access(path, F_OK) == -1){
-    dialogue_load(gra, dia, symbol, ERROR);
-    return ERROR;
-  }
-	
-	game_destroy(game);
-
-  game = game_init(game);
-
-  if(game){
-	 status = game_init_from_file(game, path);
-   dialogue_load(gra, dia, symbol, status);
-   return status;
-  }
-
-	dialogue_load(gra, dia, symbol, ERROR);
-
-	return ERROR;
+  return OK;
 }
 
 /**
