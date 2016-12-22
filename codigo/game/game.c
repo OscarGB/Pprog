@@ -555,7 +555,9 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
     return ERROR;
   }
   if(game_won_game(game) == TRUE){
-    return callback_WIN(game, cmd, dia, gra);
+  	result = callback_WIN(game, cmd, dia, gra);
+  	system("aplay -q Music/WinTune.wav");
+    return result;
   }
   for(i = 0; i<game->num_objects; i++){
     object_decrease_duration(game->object[i]);
