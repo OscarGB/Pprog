@@ -13,7 +13,7 @@ NCURSES = -lncurses
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
 
 ALL = JuegoConv 	#Executables to make with a make call
-TEST = object_test link_test die_test player_test inventory_test space_test set_test graphics_test dialogue_test game_rules_test	#Executables to make with make test or make debug
+TEST = object_test link_test die_test player_test inventory_test space_test set_test graphics_test dialogue_test game_rules_test game_management_test	#Executables to make with make test or make debug
 ALL_DEBUG = $(ALL) $(TEST) #Executables to make with make debug
 
 all: $(ALL) #Generates only the main game
@@ -30,6 +30,12 @@ debug: $(ALL_DEBUG) #Generates the tests and the main game
 game_rules_test: game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphics.o game_management.o die.o
 	@echo "--->Creating executable game_rules_test"
 	@gcc $(CFLAGS) -o game_rules_test game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphics.o game_management.o die.o $(NCURSES)
+
+game_management_test: game_management_test.o game_management.o game.o space.o player.o object.o link.o command.o dialogue.o graphics.o die.o
+	@echo "--->Creating executable game_rules_test"
+	@gcc $(CFLAGS) -o game_management_test game_management_test.o game_management.o game.o space.o player.o object.o link.o command.o dialogue.o graphics.o die.o $(NCURSES)
+
+
 
 dialogue_test: dialogue_test.o dialogue.o
 	@echo "--->Creating executable dialogue_test"
