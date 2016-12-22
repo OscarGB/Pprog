@@ -35,7 +35,7 @@ STATUS pick_aleat_function(Game * game){
 	if(!game)
 		return ERROR;
 
-	die = die_create(2710, 6);
+	die = die_create(2710, 50);
 	if(!die)
 		return ERROR;
 

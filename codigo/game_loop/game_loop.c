@@ -20,7 +20,7 @@
 #include "game_rules.h"
 
 
-/*
+/**
 * @brief function for checking flags.
 * checks the arguments and set flags
 * @author José Ignacio Gómez
@@ -41,6 +41,8 @@ int check_flags(int argc, char **argv, int *flag, int *nvflag) {
 
 	/*Log mode*/
 	if(argc >= 3){
+		if(strcmp(argv[2], "NO_RULES") == 0)
+			return position;
 		if(strcmp(argv[2], "-l") == 0){
 			if(argc >= 4 && argv[3][0] != '-'){	
 				*flag = 1; /*Activating log mode*/
@@ -276,13 +278,13 @@ STATUS load(Command* cmd, Dialogue* dia, Graphics* gra){
 	return OK;
 }
 
-/*
+/**
 * @brief function main for the program, runs the game.
 * it creates the command inside
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 23/09/2016
 * @param int argc (number of arguments)
-         char *[argv] (number of arguments)
+* @param char *[argv] (number of arguments)
 * @return int 1 if ERROR, 0 if OK
 */
 int main(int argc, char *argv[]){
@@ -297,8 +299,16 @@ int main(int argc, char *argv[]){
 	int file_pos = 0; /*In case we use a log file, this is its argument-position*/
 	char input[CMD_LENGHT];
 	char path[256];
+	int rflag = 1; /*Flag for game_rules deactivation*/
+	int i;
 
 	file_pos = check_flags(argc, argv, &flag, &nvflag);
+	
+	for(i=2; i<argc; i++){
+		if(strcmp(argv[i], "NO_RULES") == 0)
+			rflag = 0;
+	}	
+
 	if(file_pos == -1){
 		return -1;
 	}
@@ -348,6 +358,8 @@ int main(int argc, char *argv[]){
 	dialogue_start_game(gra);
 
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
+		if(rflag == 1)
+			pick_aleat_function(game);
 		if(nvflag != 1){ 
 			game_print_screen(game, gra);
 			scan_from_screen(gra, command);

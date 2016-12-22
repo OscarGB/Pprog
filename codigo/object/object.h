@@ -50,7 +50,7 @@ STATUS object_destroy(Object* object);
 * @author Óscar Gómez, Jose Ignacio Gómez.
 * @date 30/09/2016
 * @param Object* object(the object to change)
-	 char* name(the name of the object)
+* @param char* name(the name of the object)
 * @return STATUS (OK if everything went well, ERROR if didn't)
 */
 
@@ -62,7 +62,7 @@ STATUS object_set_name(Object* object, char* name);
 * @author Óscar Gómez, Jose Ignacio Gómez.
 * @date 30/09/2016
 * @param Object* object(the object to change)
-	 char symbol(the symbol of the object)
+* @param char symbol(the symbol of the object)
 * @return STATUS (OK if everything went well, ERROR if didn't)
 */
 
@@ -74,7 +74,7 @@ STATUS object_set_symbol(Object* object, char symbol);
 * @author Óscar Gómez, Jose Ignacio Gómez.
 * @date 30/09/2016
 * @param Object* object(the object to change)
-	 Id id(the location of the object)
+* @param Id id(the location of the object)
 * @return STATUS (OK if everything went well, ERROR if didn't)
 */
 STATUS object_set_location(Object* object, Id id);
@@ -128,6 +128,7 @@ Id object_get_location(Object* object);
 * @brief It prints the atributes of the given object
 * @author Óscar Gómez, Jose Ignacio Gómez.
 * @date 30/09/2016
+* @param FILE *f
 * @param Object pointer
 * @return STATUS (OK if everything went well, ERROR if didn't)
 */
@@ -143,10 +144,12 @@ STATUS object_print(FILE *f, Object* object);
 */
 
 BOOL object_get_movable(Object* object);
+
 /*
 * @brief It sets the movable field of the given object
 * @author Óscar Pinto.
 * @date 09/12/2016
+* @param Object* object
 * @param Object pointer
 * @return BOOL (the moved field of the object)
 */
@@ -353,7 +356,7 @@ char* object_get_desc(Object* object);
 * @author Óscar Pinto
 * @date 15/12/2016
 * @param Object* object(the object to change)
-	 char* name(the new mdesc of the object)
+* @param char* name(the new mdesc of the object)
 * @return STATUS (OK if everything went well, ERROR if didn't)
 */
 
@@ -364,7 +367,7 @@ STATUS object_set_mdesc(Object* object, char* mdesc);
 * @author Óscar Pinto
 * @date 15/12/2016
 * @param Object* object(the object to change)
-	 char* desc(the desc of the object)
+* @param char* desc(the desc of the object)
 * @return STATUS (OK if everything went well, ERROR if didn't)
 */
 
