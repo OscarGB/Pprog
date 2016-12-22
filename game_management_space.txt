@@ -1,0 +1,1 @@
+#s:5|Wall_south|2|-1|6|5|-1|-1|FALSE|There's a wall at the north.|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+/
