@@ -111,14 +111,17 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="die_8h__dep__incl.png" border="0" usemap="#codigo_2die_2die_8hdep" alt=""/></div>
 <map name="codigo_2die_2die_8hdep" id="codigo_2die_2die_8hdep">
-<area shape="rect" id="node2" href="die_8c.html" title="It implements the die&#39;s commands. " alt="" coords="281,80,394,107"/>
-<area shape="rect" id="node3" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="418,80,561,107"/>
-<area shape="rect" id="node4" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="539,251,682,278"/>
-<area shape="rect" id="node9" href="die__test_8c.html" title="Main to test the Die module. " alt="" coords="699,80,845,107"/>
-<area shape="rect" id="node5" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="5,155,168,196"/>
-<area shape="rect" id="node6" href="game__reader_8h.html" title="It defines the rutine that reads a file to prepare the game. " alt="" coords="243,155,381,196"/>
-<area shape="rect" id="node7" href="game__reader_8c.html" title="It implements the rutine that reads a file to prepare the game. " alt="" coords="189,244,328,285"/>
-<area shape="rect" id="node8" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="406,155,573,196"/>
+<area shape="rect" id="node2" href="die_8c.html" title="It implements the die&#39;s commands. " alt="" coords="5,80,119,107"/>
+<area shape="rect" id="node3" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="327,80,469,107"/>
+<area shape="rect" id="node4" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="136,251,279,278"/>
+<area shape="rect" id="node12" href="die__test_8c.html" title="Main to test the Die module. " alt="" coords="494,80,641,107"/>
+<area shape="rect" id="node5" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="345,244,507,285"/>
+<area shape="rect" id="node6" href="game__management_8h_source.html" title="codigo/game_management\l/game_management.h" alt="" coords="245,155,423,196"/>
+<area shape="rect" id="node7" href="new__game__management_8h_source.html" title="codigo/game_management\l/new_game_management.h" alt="" coords="689,155,872,196"/>
+<area shape="rect" id="node8" href="old__new__game__management_8h_source.html" title="codigo/game_management\l/old_new_game_management.h" alt="" coords="896,155,1103,196"/>
+<area shape="rect" id="node9" href="game__rules_8h.html" title="Definition of the game rules. " alt="" coords="499,155,665,196"/>
+<area shape="rect" id="node10" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="532,244,699,285"/>
+<area shape="rect" id="node11" href="game__rules__test_8c.html" title="Main to test the Game_rules module. " alt="" coords="723,244,881,285"/>
 </map>
 </div>
 </div>
@@ -136,26 +139,26 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a06289514edbedf660c4b043f78e859fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a06289514edbedf660c4b043f78e859fc"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>die_roll</b> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memitem:a06289514edbedf660c4b043f78e859fc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="die_8h.html#a06289514edbedf660c4b043f78e859fc">die_roll</a> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memdesc:a06289514edbedf660c4b043f78e859fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">It return a random value between inf and sup.  <a href="#a06289514edbedf660c4b043f78e859fc">More...</a><br /></td></tr>
 <tr class="separator:a06289514edbedf660c4b043f78e859fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0aa212b27b55ef1b6de2b590e26f9ce8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0aa212b27b55ef1b6de2b590e26f9ce8"></a>
-<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>die_create</b> (Id id, int faces)</td></tr>
+<tr class="memitem:a0aa212b27b55ef1b6de2b590e26f9ce8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="die_8h.html#a0aa212b27b55ef1b6de2b590e26f9ce8">die_create</a> (Id id, int faces)</td></tr>
+<tr class="memdesc:a0aa212b27b55ef1b6de2b590e26f9ce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">It creates a die without any information inside.  <a href="#a0aa212b27b55ef1b6de2b590e26f9ce8">More...</a><br /></td></tr>
 <tr class="separator:a0aa212b27b55ef1b6de2b590e26f9ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2115999335e58f733d846be485cfb783"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2115999335e58f733d846be485cfb783"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>die_destroy</b> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memitem:a2115999335e58f733d846be485cfb783"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="die_8h.html#a2115999335e58f733d846be485cfb783">die_destroy</a> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memdesc:a2115999335e58f733d846be485cfb783"><td class="mdescLeft">&#160;</td><td class="mdescRight">It destroy a dice, freeing all the memory blocks.  <a href="#a2115999335e58f733d846be485cfb783">More...</a><br /></td></tr>
 <tr class="separator:a2115999335e58f733d846be485cfb783"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ab2e5a9dcbd7ba3bf9ac6ebb183ac97"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ab2e5a9dcbd7ba3bf9ac6ebb183ac97"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>die_print</b> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memitem:a6ab2e5a9dcbd7ba3bf9ac6ebb183ac97"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="die_8h.html#a6ab2e5a9dcbd7ba3bf9ac6ebb183ac97">die_print</a> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memdesc:a6ab2e5a9dcbd7ba3bf9ac6ebb183ac97"><td class="mdescLeft">&#160;</td><td class="mdescRight">It prints the data of a die.  <a href="#a6ab2e5a9dcbd7ba3bf9ac6ebb183ac97">More...</a><br /></td></tr>
 <tr class="separator:a6ab2e5a9dcbd7ba3bf9ac6ebb183ac97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9347ed79daba7e8078611d67a52e1bfb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9347ed79daba7e8078611d67a52e1bfb"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>die_get_last_roll</b> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memitem:a9347ed79daba7e8078611d67a52e1bfb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="die_8h.html#a9347ed79daba7e8078611d67a52e1bfb">die_get_last_roll</a> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memdesc:a9347ed79daba7e8078611d67a52e1bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">It returns the value of the last roll.  <a href="#a9347ed79daba7e8078611d67a52e1bfb">More...</a><br /></td></tr>
 <tr class="separator:a9347ed79daba7e8078611d67a52e1bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57c9a2627bb3a1ca04fe55d72bd6a5ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57c9a2627bb3a1ca04fe55d72bd6a5ea"></a>
-Id&#160;</td><td class="memItemRight" valign="bottom"><b>die_get_id</b> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memitem:a57c9a2627bb3a1ca04fe55d72bd6a5ea"><td class="memItemLeft" align="right" valign="top">Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="die_8h.html#a57c9a2627bb3a1ca04fe55d72bd6a5ea">die_get_id</a> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memdesc:a57c9a2627bb3a1ca04fe55d72bd6a5ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">It returns the Id of the Die.  <a href="#a57c9a2627bb3a1ca04fe55d72bd6a5ea">More...</a><br /></td></tr>
 <tr class="separator:a57c9a2627bb3a1ca04fe55d72bd6a5ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9500791d305826659f8669c00a9868a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9500791d305826659f8669c00a9868a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>die_get_faces</b> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memitem:ac9500791d305826659f8669c00a9868a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="die_8h.html#ac9500791d305826659f8669c00a9868a">die_get_faces</a> (<a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *die)</td></tr>
+<tr class="memdesc:ac9500791d305826659f8669c00a9868a"><td class="mdescLeft">&#160;</td><td class="mdescRight">It returns the number of faces the die has.  <a href="#ac9500791d305826659f8669c00a9868a">More...</a><br /></td></tr>
 <tr class="separator:ac9500791d305826659f8669c00a9868a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -188,6 +191,207 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>die_get_faces</b> (<a 
       </table>
 </div><div class="memdoc">
 <p>Definition of the Die structure </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a0aa212b27b55ef1b6de2b590e26f9ce8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a>* die_create </td>
+          <td>(</td>
+          <td class="paramtype">Id&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>faces</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It creates a die without any information inside. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>07/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>of the die to create </td></tr>
+    <tr><td class="paramname">int</td><td>(the number of faces of the die) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>die pointer (of the created one) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2115999335e58f733d846be485cfb783"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS die_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *&#160;</td>
+          <td class="paramname"><em>die</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It destroy a dice, freeing all the memory blocks. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>07/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Die*</td><td>(The die to destroy) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well, ERROR if didn't) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac9500791d305826659f8669c00a9868a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int die_get_faces </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *&#160;</td>
+          <td class="paramname"><em>die</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It returns the number of faces the die has. </p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>25/11/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Die*</td><td>(The die we want to get the Id) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int (The faces of the die) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a57c9a2627bb3a1ca04fe55d72bd6a5ea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Id die_get_id </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *&#160;</td>
+          <td class="paramname"><em>die</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It returns the Id of the Die. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>07/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Die*</td><td>(The die we want to get the Id) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int (The id of the die) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9347ed79daba7e8078611d67a52e1bfb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int die_get_last_roll </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *&#160;</td>
+          <td class="paramname"><em>die</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It returns the value of the last roll. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>07/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Die*</td><td>(The die we want to get the value) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int (The value of the last roll) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6ab2e5a9dcbd7ba3bf9ac6ebb183ac97"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS die_print </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *&#160;</td>
+          <td class="paramname"><em>die</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It prints the data of a die. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>04/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Die*</td><td>(The die to print) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well, ERROR if didn't) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a06289514edbedf660c4b043f78e859fc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int die_roll </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="die_8h.html#a892f0b0bf81d69a1f7a14ea238e36dd3">Die</a> *&#160;</td>
+          <td class="paramname"><em>die</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>It return a random value between inf and sup. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez, Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>07/10/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">die</td><td>pointer, int inf, int sup </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int (the random number) </dd></dl>
 
 </div>
 </div>

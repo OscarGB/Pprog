@@ -158,6 +158,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a743c75fdb978c128a85fb2629acc48a1"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8c.html#a743c75fdb978c128a85fb2629acc48a1">inventory_is_in</a> (<a class="el" href="struct___inventory.html">Inventory</a> *bag, Id id)</td></tr>
 <tr class="memdesc:a743c75fdb978c128a85fb2629acc48a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for an item in the inventory.  <a href="#a743c75fdb978c128a85fb2629acc48a1">More...</a><br /></td></tr>
 <tr class="separator:a743c75fdb978c128a85fb2629acc48a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c2d7461298a634a071408d685d359ba"><td class="memItemLeft" align="right" valign="top">long *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inventory_8c.html#a5c2d7461298a634a071408d685d359ba">inventory_get_ids</a> (<a class="el" href="struct___inventory.html">Inventory</a> *bag)</td></tr>
+<tr class="memdesc:a5c2d7461298a634a071408d685d359ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a string with the names of the objects, for the dialogue.  <a href="#a5c2d7461298a634a071408d685d359ba">More...</a><br /></td></tr>
+<tr class="separator:a5c2d7461298a634a071408d685d359ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It implements the inventory. </p>
@@ -258,7 +261,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>5/11/2016 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Inventory*,Id</td><td>(item Id) </td></tr>
+    <tr><td class="paramname">Inventory*</td><td></td></tr>
+    <tr><td class="paramname">Id</td><td>(item Id) </td></tr>
   </table>
   </dd>
 </dl>
@@ -290,6 +294,33 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>STATUS </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5c2d7461298a634a071408d685d359ba"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long* inventory_get_ids </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___inventory.html">Inventory</a> *&#160;</td>
+          <td class="paramname"><em>bag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a string with the names of the objects, for the dialogue. </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Inventory*</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>char* string </dd></dl>
 
 </div>
 </div>
@@ -457,7 +488,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>9/12/2016 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Inventory*,bag</td><td></td></tr>
+    <tr><td class="paramname">Inventory*</td><td></td></tr>
+    <tr><td class="paramname">bag</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -521,7 +553,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>5/11/2016 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Inventory*,Set*</td><td></td></tr>
+    <tr><td class="paramname">Inventory*</td><td></td></tr>
+    <tr><td class="paramname">Set*</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -558,7 +591,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>5/11/2016 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Inventory*,int</td><td>size </td></tr>
+    <tr><td class="paramname">Inventory*</td><td></td></tr>
+    <tr><td class="paramname">int</td><td>size </td></tr>
   </table>
   </dd>
 </dl>

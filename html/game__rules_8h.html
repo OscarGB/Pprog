@@ -87,7 +87,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">game_rules.h File Reference</div>  </div>
@@ -96,12 +95,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Definition of the game rules.  
 <a href="#details">More...</a></p>
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &quot;<a class="el" href="game_8h_source.html">game.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for game_rules.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="game__rules_8h__incl.png" border="0" usemap="#codigo_2game__rules_2game__rules_8h" alt=""/></div>
+<map name="codigo_2game__rules_2game__rules_8h" id="codigo_2game__rules_2game__rules_8h">
+<area shape="rect" id="node2" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="381,95,447,121"/>
+<area shape="rect" id="node3" href="command_8h.html" title="It defines the command interpreter. " alt="" coords="638,319,729,345"/>
+<area shape="rect" id="node5" href="space_8h.html" title="It defines the game spaces. " alt="" coords="5,244,73,271"/>
+<area shape="rect" id="node6" href="set_8h.html" title="It defines the capability of store sets of things. " alt="" coords="86,319,137,345"/>
+<area shape="rect" id="node7" href="player_8h.html" title="It defines the functionality of the player. " alt="" coords="240,169,308,196"/>
+<area shape="rect" id="node8" href="object_8h.html" title="It defines the functionality of the objects. " alt="" coords="312,244,380,271"/>
+<area shape="rect" id="node12" href="die_8h.html" title="It defines the die&#39;s commands. " alt="" coords="406,244,457,271"/>
+<area shape="rect" id="node13" href="link_8h.html" title="Definition of the link module. " alt="" coords="451,169,505,196"/>
+<area shape="rect" id="node14" href="graphics_8h.html" title="Definition of the graphic interface. " alt="" coords="563,244,646,271"/>
+<area shape="rect" id="node15" href="dialogue_8h.html" title="It defines the dialogue module. " alt="" coords="580,169,661,196"/>
+<area shape="rect" id="node4" href="types_8h.html" title="It defines common types. " alt="" coords="243,393,308,420"/>
+<area shape="rect" id="node11" href="inventory_8h.html" title="It defines the inventory. " alt="" coords="149,244,236,271"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="game__rules_8h__dep__incl.png" border="0" usemap="#codigo_2game__rules_2game__rules_8hdep" alt=""/></div>
 <map name="codigo_2game__rules_2game__rules_8hdep" id="codigo_2game__rules_2game__rules_8hdep">
-<area shape="rect" id="node2" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="5,95,172,136"/>
+<area shape="rect" id="node2" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="5,95,168,136"/>
+<area shape="rect" id="node3" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="193,95,359,136"/>
+<area shape="rect" id="node4" href="game__rules__test_8c.html" title="Main to test the Game_rules module. " alt="" coords="384,95,541,136"/>
 </map>
 </div>
 </div>
@@ -112,33 +133,227 @@ Typedefs</h2></td></tr>
 <tr class="memitem:af2995174acd94634150aa6494405a94f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af2995174acd94634150aa6494405a94f"></a>
 typedef struct _Game_rules&#160;</td><td class="memItemRight" valign="bottom"><b>Game_rules</b></td></tr>
 <tr class="separator:af2995174acd94634150aa6494405a94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdabeea3669650d824b276ad991fb5e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acdabeea3669650d824b276ad991fb5e6"></a>
-typedef enum enum_Game_rules&#160;</td><td class="memItemRight" valign="bottom"><b>E_Game_rules</b></td></tr>
-<tr class="separator:acdabeea3669650d824b276ad991fb5e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a761450ab5664a1b79523ed35c2a5d169"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a761450ab5664a1b79523ed35c2a5d169"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>enum_Game_rules</b> </td></tr>
-<tr class="separator:a761450ab5664a1b79523ed35c2a5d169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a39bcbc00238951ae9fd7819dad961a72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a39bcbc00238951ae9fd7819dad961a72"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>change_light_space</b> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memitem:a53aabb5cecb0bf1b9b486cd0483f158d"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__rules_8h.html#a53aabb5cecb0bf1b9b486cd0483f158d">pick_aleat_function</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a53aabb5cecb0bf1b9b486cd0483f158d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Throws an internal die to pick a random function.  <a href="#a53aabb5cecb0bf1b9b486cd0483f158d">More...</a><br /></td></tr>
+<tr class="separator:a53aabb5cecb0bf1b9b486cd0483f158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39bcbc00238951ae9fd7819dad961a72"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__rules_8h.html#a39bcbc00238951ae9fd7819dad961a72">change_light_space</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a39bcbc00238951ae9fd7819dad961a72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes (or not) the light of an space.  <a href="#a39bcbc00238951ae9fd7819dad961a72">More...</a><br /></td></tr>
 <tr class="separator:a39bcbc00238951ae9fd7819dad961a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a772c107b44de05fbd3e20e6b65c8aa5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a772c107b44de05fbd3e20e6b65c8aa5b"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>change_link_status</b> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
-<tr class="separator:a772c107b44de05fbd3e20e6b65c8aa5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bdd3729e5de02a1f3eebb14cd15a4c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2bdd3729e5de02a1f3eebb14cd15a4c7"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>change_object_location</b> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memitem:a84cc4164f20cf80bd67ac08814878c5b"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__rules_8h.html#a84cc4164f20cf80bd67ac08814878c5b">change_link_state</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a84cc4164f20cf80bd67ac08814878c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes (or not) the state of a link.  <a href="#a84cc4164f20cf80bd67ac08814878c5b">More...</a><br /></td></tr>
+<tr class="separator:a84cc4164f20cf80bd67ac08814878c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bdd3729e5de02a1f3eebb14cd15a4c7"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__rules_8h.html#a2bdd3729e5de02a1f3eebb14cd15a4c7">change_object_location</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a2bdd3729e5de02a1f3eebb14cd15a4c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes (or not) the location of an object.  <a href="#a2bdd3729e5de02a1f3eebb14cd15a4c7">More...</a><br /></td></tr>
 <tr class="separator:a2bdd3729e5de02a1f3eebb14cd15a4c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e5ccac8b8cf588836aa278167a7734d"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__rules_8h.html#a3e5ccac8b8cf588836aa278167a7734d">kill_player</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a3e5ccac8b8cf588836aa278167a7734d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kills a player (game over)  <a href="#a3e5ccac8b8cf588836aa278167a7734d">More...</a><br /></td></tr>
+<tr class="separator:a3e5ccac8b8cf588836aa278167a7734d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38e79b7cf4a12bdba361c2addfcfc4f0"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__rules_8h.html#a38e79b7cf4a12bdba361c2addfcfc4f0">useless_player_deserves_death</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a38e79b7cf4a12bdba361c2addfcfc4f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kills a player if it has played too many turns.  <a href="#a38e79b7cf4a12bdba361c2addfcfc4f0">More...</a><br /></td></tr>
+<tr class="separator:a38e79b7cf4a12bdba361c2addfcfc4f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa965f3e159748a2657ffe0404735a548"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game__rules_8h.html#aa965f3e159748a2657ffe0404735a548">turn_object_light_off</a> (<a class="el" href="struct___game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:aa965f3e159748a2657ffe0404735a548"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns off (or not) an object.  <a href="#aa965f3e159748a2657ffe0404735a548">More...</a><br /></td></tr>
+<tr class="separator:aa965f3e159748a2657ffe0404735a548"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definition of the game rules. </p>
 <dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a39bcbc00238951ae9fd7819dad961a72"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS change_light_space </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes (or not) the light of an space. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well), ERROR if not </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a84cc4164f20cf80bd67ac08814878c5b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS change_link_state </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes (or not) the state of a link. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well), ERROR if not </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2bdd3729e5de02a1f3eebb14cd15a4c7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS change_object_location </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes (or not) the location of an object. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well), ERROR if not </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3e5ccac8b8cf588836aa278167a7734d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS kill_player </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kills a player (game over) </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well), ERROR if not </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a53aabb5cecb0bf1b9b486cd0483f158d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS pick_aleat_function </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Throws an internal die to pick a random function. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well), ERROR if not </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa965f3e159748a2657ffe0404735a548"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS turn_object_light_off </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Turns off (or not) an object. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well), ERROR if not </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a38e79b7cf4a12bdba361c2addfcfc4f0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS useless_player_deserves_death </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct___game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kills a player if it has played too many turns. </p>
+<dl class="section author"><dt>Author</dt><dd>Andrea Ruiz </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Game</td><td>*game </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well), ERROR if not </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

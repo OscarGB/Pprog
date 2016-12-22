@@ -16,7 +16,7 @@
 
 typedef struct _Set Set; /*!<Definition of the Set structure*/
 
-/*
+/**
 * @brief creates a new set
 * @author Óscar Gómez, Jose Ignacio Gómez
 * @date 07/10/2016
@@ -27,7 +27,7 @@ typedef struct _Set Set; /*!<Definition of the Set structure*/
 Set* set_create();
 
 
-/*
+/**
 * @brief destroys a set
 * @author Óscar Gómez, Jose Ignacio Gómez
 * @date 07/10/2016
@@ -38,29 +38,31 @@ Set* set_create();
 STATUS set_destroy(Set* set);
 
 
-/*
+/**
 * @brief adds something to a given set
 * @author Óscar Gómez, Jose Ignacio Gómez
 * @date 07/10/2016
-* @param Set* , Id (the id of the thing we want to add)
+* @param Set* 
+* @param Id (the id of the thing we want to add)
 * @return STATUS (OK if it was successfuly added)
 */
 
 STATUS set_add(Set* set, Id id);
 
 
-/*
+/**
 * @brief deletes the id from the set if it's inside
 * @author Óscar Gómez, Jose Ignacio Gómez
 * @date 07/10/2016
-* @param Set* , Id (the id of the thing we want to delete)
+* @param Set*
+* @param Id (the id of the thing we want to delete)
 * @return STATUS (OK if it was successfuly deleted)
 */
 
 STATUS set_delete(Set* set, Id id);
 
 
-/*
+/**
 * @brief prints the set's array
 * @author Óscar Gómez, Jose Ignacio Gómez
 * @date 07/10/2016
@@ -71,7 +73,7 @@ STATUS set_delete(Set* set, Id id);
 STATUS set_print(Set* set);
 
 
-/*
+/**
 * @brief gives the number of stored ids
 * @author Óscar Gómez, Jose Ignacio Gómez
 * @date 07/10/2016
@@ -93,7 +95,7 @@ int set_get_num_ids(Set* set);
 BOOL set_is_full(Set* set);
 
 
-/*
+/**
 * @brief checks if the set is empty
 * @author Óscar Gómez, Jose Ignacio Gómez
 * @date 14/10/2016
@@ -104,17 +106,18 @@ BOOL set_is_full(Set* set);
 BOOL set_is_empty(Set* set);
 
 
-/*
+/**
 * @brief Checks if id is in the set
 * @author Óscar Gómez, Jose Ignacio Gómez
 * @date 14/10/2016
-* @param set pointer, id
+* @param set pointer
+* @param Id id
 * @return BOOL (returns TRUE if the id is inside the set)
 */
 
 BOOL set_is_id(Set* set, Id id);
 
-/*
+/**
 * @brief Gets the array of ids
 * @author Jose Ignacio Gómez
 * @date 16/12/2016
