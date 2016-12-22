@@ -18,7 +18,7 @@
 #include "game_management.h"
 #include "die.h"
 #include "link.h"
-#include "graphics.h"
+#include "graphic_engine.h"
 
 #ifdef __WINDOWS_BUILD__ /*In case we are working on Windows*/
 #define CLEAR "cls"

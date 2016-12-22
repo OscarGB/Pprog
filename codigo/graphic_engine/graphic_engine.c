@@ -6,7 +6,7 @@
  * @date 01/12/2016
  */
 
-#include "graphics.h"
+#include "graphic_engine.h"
 #include "command.h"
 #include <unistd.h>
 #include <ncurses.h>

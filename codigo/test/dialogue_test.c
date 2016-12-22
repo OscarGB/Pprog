@@ -8,7 +8,7 @@
 
 #include "dialogue.h"
 #include "command.h"
-#include "graphics.h"
+#include "graphic_engine.h"
 #include <string.h>
 #include "test.h"
 #include "types.h"

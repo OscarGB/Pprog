@@ -1,0 +1,1 @@
+#o:5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|

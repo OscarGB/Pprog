@@ -16,7 +16,7 @@
 #include "set.h"
 #include "die.h"
 #include "link.h"
-#include "graphics.h"
+#include "graphic_engine.h"
 #include "dialogue.h"
 
 #define PLAYER_OBJ -2 /*!< Id for an object into the player's bag*/
