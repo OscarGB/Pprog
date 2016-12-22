@@ -378,6 +378,7 @@ int main(int argc, char *argv[]){
 			else{
 				strcpy(path, "codigo/Saves/");
 				strcat(path, command_get_symbol(command));
+				strcat(path, ".s");
 
 				if(access(path, F_OK) != -1){
 		    	game_destroy(game);      
