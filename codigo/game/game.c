@@ -1418,7 +1418,7 @@ STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 
         if(object_get_movable(object) == FALSE){
           objects = game_get_objects_name(game, objects);
-          dialogue_generic(dia, ERROR, objects, gra);
+          dialogue_print(gra, "That object is too heavy");
           return ERROR;
         }
         if(player_pick_object(game->player, object_get_id(object)) != FALSE){
@@ -1438,7 +1438,7 @@ STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
         object = game->object[i];
 		if(object_get_movable(object) == FALSE){
          	objects = game_get_objects_name(game, objects);
-          	dialogue_generic(dia, ERROR, objects, gra);
+          	dialogue_print(gra, "That object is too heavy");
           	return ERROR;
         }
 	    if(player_pick_object(game->player, object_get_id(object)) != FALSE){

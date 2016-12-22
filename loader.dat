@@ -9,7 +9,7 @@
 #o:7|2|Stone|This is a heavy stone|This is a moved stone|s|FALSE|2|FALSE|FALSE|FALSE|-1|-1|
 #o:8|2|Ladder|This is a ladder|Try to open the uncomplete_ladder with it|=|TRUE|2|FALSE|FALSE|FALSE|10|-1|
 #o:9|3|Minus|This is a negative minus|This is a moved negative minus|-|FALSE|3|FALSE|FALSE|FALSE|-1|-1|
-#o:10|5|Lobster|This is a lobster|This is a moved lobster (And may be THE key)|l|TRUE|5|FALSE|FALSE|FALSE|9|-1|
+#o:10|5|Lobster|This is a lobster|This is a moved lobster (And may be THE key)|l|TRUE|5|FALSE|TRUE|FALSE|9|100|
 #o:11|5|Important thing|This is an important thing (not SO important)|This is a moved important thing|i|FALSE|5|FALSE|FALSE|FALSE|-1|-1|
 #o:12|6|Non important thing|This is a non important thing|Why have you picked that?|n|TRUE|6|FALSE|FALSE|FALSE|-1|-1|
 #o:13|8|Most important key|This is the MOST IMPORTANT KEY|It seems to be broken...|m|TRUE|8|FALSE|FALSE|FALSE|-1|-1|
