@@ -152,10 +152,39 @@ BOOL test_game_rules7(){ /*Test for pick_aleat_function with valid game*/
 	return FALSE;
 }
 
-BOOL test_game_rules8(){ /*Test for pick_aleat_function with non valid game*/
+BOOL test_game_rules8(){ /*Test for pick_aleat_function with non valid game and non valid graphics*/
 	Game *game = NULL;
 	STATUS s;
 	Graphics * graphics = NULL;
+	s = pick_aleat_function(game, graphics);
+	if(s == OK){
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+BOOL test_game_rules9(){ /*Test for pick_aleat_function with non valid game and valid graphics*/
+	Game *game = NULL;
+	STATUS s;
+	Graphics * graphics = NULL;
+	graphics = graphics_create(0);
+	s = pick_aleat_function(game, graphics);
+	if(s == OK){
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+BOOL test_game_rules10(){ /*Test for pick_aleat_function with valid game and non valid graphics*/
+	Game *game = NULL;
+	STATUS s;
+	Graphics * graphics = NULL;
+	game = game_init(game);
+	game_init_from_file(game, "loader.dat");
 	s = pick_aleat_function(game, graphics);
 	if(s == OK){
 		TEST_PRINT(FALSE);
@@ -189,6 +218,8 @@ int main(int argc, char* argv[]){
 	if(todas || test == 6) test_game_rules6();
 	if(todas || test == 7) test_game_rules7();
 	if(todas || test == 8) test_game_rules8();
+	if(todas || test == 8) test_game_rules9();
+	if(todas || test == 8) test_game_rules10();
 
 	PRINT_RESULTS();
 
