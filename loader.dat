@@ -21,15 +21,15 @@
 #o:19|4|federal cop|He's looking you in a suspicious way...|He's looking you in a suspicious way...|f|FALSE|4|FALSE|FALSE|FALSE|-1|-1|
 #o:20|4|Pprog|Best subject ever!|Muajajajaja|P|FALSE|4|FALSE|FALSE|FALSE|-1|-1|
 #s:1|Entrance|-1|1|3|-1|-1|-1|TRUE|This is the beginning of your adventure. There's a door at the east.|+------------+|            |+--+         |   |         (   |         (   |         |   +|  |-----+
-#s:2|Closed_space|-1|-1|2|1|-1|-1|FALSE|This space was closed and dark...|+------------+|            ||            |)            |)            ||            |+---|**|-----+
-#s:3|Casilla|-1|4|-1|-1|-1|-1|FALSE|There's an uncomplete ladder...|+---+         |   +--------+|            ||            -|            _|            |+------------+
-#s:4|Casilla|3|5|-1|4|10|-1|FALSE|There's an uncomplete_ladder...|+---|  |-----+|            ||         =  |-        =   -_            _|            |+------------+
-#s:5|Casilla|2|-1|6|5|-1|-1|FALSE|5|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+
-#s:6|Casilla|-1|-1|-1|-1|-1|8|FALSE|6|+------------+|            ||        =   ||         =  ||            ||            |+------------+
-#s:7|Casilla|6|-1|-1|7|-1|-1|FALSE|7|+---|  |-----+|            ||            |-            |_            |+------------+              
-#s:8|Casilla|-1|7|8|-1|-1|-1|FALSE|8|                               +---------+   |         -   |         _   |         |   +|  |-----+
-#s:9|Casilla|-1|9|-1|-1|-1|-1|FALSE|9|+------------+|            |+--+   EXIT  |   |         (   |         (   |         |   +---------+
-#s:10|Casilla|8|-1|-1|9|-1|-1|FALSE|10|+---|  |-----+|            ||            |)            |)            ||      +-----++------+      
+#s:2|Closed_space|-1|-1|2|1|-1|-1|FALSE|This space was closed and dark... There's a door at the west.|+------------+|            ||            |)            |)            ||            |+---|**|-----+
+#s:3|Objects|-1|4|-1|-1|-1|-1|FALSE|There are some objects on the ground...|+---+         |   +--------+|            ||            -|            _|            |+------------+
+#s:4|Ladder|3|5|-1|4|10|-1|FALSE|There's an uncomplete_ladder...|+---|  |-----+|            ||         =  |-        =   -_            _|            |+------------+
+#s:5|Wall_south|2|-1|6|5|-1|-1|FALSE|There's a wall at the north.|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+
+#s:6|Casilla|-1|-1|-1|-1|-1|8|FALSE|There's a ladder|+------------+|            ||        =   ||         =  ||            ||            |+------------+
+#s:7|Casilla|6|-1|-1|7|-1|-1|FALSE|You can see... A penguin!|+---|  |-----+|            ||            |-            |_            |+------------+              
+#s:8|Casilla|-1|7|8|-1|-1|-1|FALSE|The exit is near...|                               +---------+   |         -   |         _   |         |   +|  |-----+
+#s:9|Casilla|-1|9|-1|-1|-1|-1|FALSE|EXIT|+------------+|            |+--+   EXIT  |   |         (   |         (   |         |   +---------+
+#s:10|Casilla|8|-1|-1|9|-1|-1|FALSE|The exit is behind a door with a lobster image...|+---|  |-----+|            ||            |)            |)            ||      +-----++------+      
 #l:1|1|2|door|CLOSEDL|
 #l:2|2|5|wall|CLOSEDL|
 #l:3|1|4|Door3|OPENL|
