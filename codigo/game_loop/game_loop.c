@@ -41,6 +41,8 @@ int check_flags(int argc, char **argv, int *flag, int *nvflag) {
 
 	/*Log mode*/
 	if(argc >= 3){
+		if(strcmp(argv[2], "NO_RULES") == 0)
+			return position;
 		if(strcmp(argv[2], "-l") == 0){
 			if(argc >= 4 && argv[3][0] != '-'){	
 				*flag = 1; /*Activating log mode*/
@@ -297,8 +299,16 @@ int main(int argc, char *argv[]){
 	int file_pos = 0; /*In case we use a log file, this is its argument-position*/
 	char input[CMD_LENGHT];
 	char path[256];
+	int rflag = 1; /*Flag for game_rules deactivation*/
+	int i;
 
 	file_pos = check_flags(argc, argv, &flag, &nvflag);
+	
+	for(i=2; i<argc; i++){
+		if(strcmp(argv[i], "NO_RULES") == 0)
+			rflag = 0;
+	}	
+
 	if(file_pos == -1){
 		return -1;
 	}
@@ -348,6 +358,8 @@ int main(int argc, char *argv[]){
 	dialogue_start_game(gra);
 
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
+		if(rflag == 1)
+			pick_aleat_function(game);
 		if(nvflag != 1){ 
 			game_print_screen(game, gra);
 			scan_from_screen(gra, command);
