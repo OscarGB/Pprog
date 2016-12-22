@@ -963,7 +963,7 @@ BOOL test_dialogue25(){
 	return TRUE;
 }
 
-/*Test for dialogue_load_show with NULL dialogue*/
+/*Test for dialogue_load with NULL dialogue*/
 BOOL test_dialogue26(){
 	Dialogue* dia = NULL;
 	char str[200] = "Testing string";
