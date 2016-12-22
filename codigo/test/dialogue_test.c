@@ -107,6 +107,8 @@ BOOL test_dialogue6(){
 
 	gra = graphics_create();
 
+	strcpy(string, "");
+
 	objects = (char**) malloc (3 * sizeof(char*));
 	if(!objects){
 		command_destroy(cmd);
@@ -117,16 +119,16 @@ BOOL test_dialogue6(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		objects[i] = (char*)malloc(100 * sizeof(char));
 	}
 
 	strcpy(objects[0], "OBJ1\n");
 	strcpy(objects[1], "OBJ2\n");
-	objects[2][0] = '\0';
+	objects[2] = NULL;
 
 	if(dialogue_standard(gra, dia, objects, string) == ERROR){
-		for(i = 0; i < 3; i++){
+		for(i = 0; i < 2; i++){
 			free(objects[i]);
 		}	
 
@@ -139,7 +141,7 @@ BOOL test_dialogue6(){
 		return FALSE;
 	}
 
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 2; i++){
 		free(objects[i]);
 	}
 	free(objects);
@@ -1739,121 +1741,6 @@ BOOL test_dialogue42(){
 	return TRUE;
 }
 
-/*Test for dialogue_generic with SAVE*/
-/*BOOL test_dialogue43(){
-	Dialogue* dia = NULL;
-	char** objects = NULL;
-	Graphics* gra = NULL;
-	Command* cmd = NULL;
-	int i;
-
-	cmd = command_create();
-	command_set_cmd(cmd, SAVE);
-
-	dia = dialogue_create(cmd);
-
-	gra = graphics_create();
-
-	objects = (char**) malloc (3 * sizeof(char*));
-	if(!objects){
-		command_destroy(cmd);
-		dialogue_destroy(dia);
-		graphics_destroy(gra);
-
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-
-	for(i = 0; i < 3; i++){
-		objects[i] = (char*)malloc(100 * sizeof(char));
-	}
-
-	strcpy(objects[0], "OBJ1\n");
-	strcpy(objects[1], "OBJ2\n");
-	objects[2] = NULL;
-
-	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
-		for(i = 0; i < 3; i++){
-			free(objects[i]);
-		}
-		free(objects);
-		command_destroy(cmd);
-		dialogue_destroy(dia);
-		graphics_destroy(gra);
-
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-
-	for(i = 0; i < 3; i++){
-		free(objects[i]);
-	}
-	free(objects);
-	command_destroy(cmd);
-	dialogue_destroy(dia);
-	graphics_destroy(gra);
-
-	TEST_PRINT(TRUE);
-	return TRUE;
-}*/
-
-/*Test for dialogue_generic with LOAD*/
-/*BOOL test_dialogue44(){
-	Dialogue* dia = NULL;
-	char** objects = NULL;
-	Graphics* gra = NULL;
-	Command* cmd = NULL;
-	int i;
-
-	cmd = command_create();
-	command_set_cmd(cmd, LOAD);
-
-	dia = dialogue_create(cmd);
-
-	gra = graphics_create();
-
-	objects = (char**) malloc (3 * sizeof(char*));
-	if(!objects){
-		command_destroy(cmd);
-		dialogue_destroy(dia);
-		graphics_destroy(gra);
-
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-
-	for(i = 0; i < 3; i++){
-		objects[i] = (char*)malloc(100 * sizeof(char));
-	}
-
-	strcpy(objects[0], "OBJ1\n");
-	strcpy(objects[1], "OBJ2\n");
-	objects[2] = NULL;
-
-	if(dialogue_generic(dia, OK, objects, gra) == ERROR){
-		for(i = 0; i < 3; i++){
-			free(objects[i]);
-		}
-		free(objects);
-		command_destroy(cmd);
-		dialogue_destroy(dia);
-		graphics_destroy(gra);
-
-		TEST_PRINT(FALSE);
-		return FALSE;
-	}
-
-	for(i = 0; i < 3; i++){
-		free(objects[i]);
-	}
-	free(objects);
-	command_destroy(cmd);
-	dialogue_destroy(dia);
-	graphics_destroy(gra);
-
-	TEST_PRINT(TRUE);
-	return TRUE;
-}*/
 
 int main(int argc, char* argv[]){
 	int test = 0;
@@ -1913,8 +1800,7 @@ int main(int argc, char* argv[]){
 	if(todas || test == 40) test_dialogue40();
 	if(todas || test == 41) test_dialogue41();
 	if(todas || test == 42) test_dialogue42();
-	/*if(todas || test == 43) test_dialogue43();
-	if(todas || test == 44) test_dialogue44();*/
+
 	PRINT_RESULTS();
 
 	return 0;

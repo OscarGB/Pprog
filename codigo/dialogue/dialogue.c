@@ -474,7 +474,7 @@ void dialogue_destroy(Dialogue* dialogue){
 STATUS dialogue_standard(Graphics* gra, Dialogue* dialogue, char** objects, char* string){
 	int i; /*!< Counter*/
 
-	if(!dialogue || !objects || !gra){
+	if(!dialogue || !objects || !gra || !string){
 		return ERROR;
 	}
 
