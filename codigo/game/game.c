@@ -110,6 +110,8 @@ Game* game_init(Game* game) {
     game->object[i] = NULL;
   }
 
+  game->player = NULL;
+
   game->num_objects = 0;
   game->num_links = 0;
   game->turns = 0;

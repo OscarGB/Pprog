@@ -120,9 +120,10 @@ BOOL test_game_management5(){ /*Test for game_save*/
 BOOL test_game_management6(){ /*Test for game_load_player*/
 	Game *game = NULL;
 	STATUS s;
+	char line[WORD_SIZE] = "1|Player|1|";
 	game = game_init(game);
 	
-	s = game_load_player(game, "1|Player|1|");
+	s = game_load_player(game, line);
 	
 	if(s == OK){
 		game_destroy(game);
@@ -137,9 +138,10 @@ BOOL test_game_management6(){ /*Test for game_load_player*/
 BOOL test_game_management7(){ /*Test for game_load_object*/
 	Game *game = NULL;
 	STATUS s;
+	char line[WORD_SIZE] = "5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|";
 	game = game_init(game);
 
-	s = game_load_object(game, "5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|");
+	s = game_load_object(game, line);
 	
 	if(s == OK){
 		game_destroy(game);
@@ -155,9 +157,10 @@ BOOL test_game_management7(){ /*Test for game_load_object*/
 BOOL test_game_management8(){ /*Test for game_load_link*/
 	Game *game = NULL;
 	STATUS s;
+	char line[WORD_SIZE] = "3|1|4|Door3|OPENL|";
 	game = game_init(game);
 	
-	s = game_load_link(game, "3|1|4|Door3|OPENL|\n");
+	s = game_load_link(game, line);
 	
 	if(s == OK){
 		game_destroy(game);
@@ -172,9 +175,10 @@ BOOL test_game_management8(){ /*Test for game_load_link*/
 BOOL test_game_management9(){ /*Test for game_load_space*/
 	Game *game = NULL;
 	STATUS s;
+	char line[WORD_SIZE] = "9|Casilla|-1|9|-1|-1|-1|-1|FALSE|EXIT|+------------+|            |+--+   EXIT  |   |         (   |         (   |         |   +---------+/";
 	game = game_init(game);
 	
-	s = game_load_space(game, "9|Casilla|-1|9|-1|-1|-1|-1|FALSE|EXIT|+------------+|            |+--+   EXIT  |   |         (   |         (   |         |   +---------+/");
+	s = game_load_space(game, line);
 	
 	if(s == OK){
 		game_destroy(game);
@@ -209,7 +213,7 @@ int main(int argc, char* argv[]){
 	int todas = 1;
 
 	if(argc < 2){
-		printf("Pasando todas las pruebas al modulo Game:\n");
+		printf("Pasando todas las pruebas al modulo Game_Management:\n");
 	}else{
 		test = atoi(argv[1]);
 		todas = 0;
