@@ -1436,13 +1436,17 @@ STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 
       if(strcmp(object_get_name(game->object[i]), symbol) == 0){
         object = game->object[i];
-
-        if(player_pick_object(game->player, object_get_id(object)) != FALSE){
-          object_set_location(object, PLAYER_OBJ); 
-          objects = game_get_objects_name(game, objects);
-          dialogue_generic(dia, OK, objects, gra);
-          return OK;
+		if(object_get_movable(object) == FALSE){
+         	objects = game_get_objects_name(game, objects);
+          	dialogue_generic(dia, ERROR, objects, gra);
+          	return ERROR;
         }
+	    if(player_pick_object(game->player, object_get_id(object)) != FALSE){
+	    object_set_location(object, PLAYER_OBJ); 
+	    objects = game_get_objects_name(game, objects);
+	    dialogue_generic(dia, OK, objects, gra);
+	    return OK;
+	    }
       }  
     }
   }
