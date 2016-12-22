@@ -332,7 +332,7 @@ BOOL test_space17(){ /*Test space_get_gdesc with alloc'd space*/
 		return result;
 	}
 
-	if(strcmp(space_get_gdesc(space), "") == 0){
+	if(strcmp(space_get_gdesc(space), " ") == 0){
 		result = TRUE;
 		space_destroy(space);
 		TEST_PRINT(result);
@@ -454,7 +454,7 @@ BOOL test_space23(){ /*Test space_get_adesc with alloc'd space*/
 		return result;
 	}
 
-	if(strcmp(space_get_adesc(space), "") == 0){
+	if(strcmp(space_get_adesc(space), " ") == 0){
 		result = TRUE;
 		space_destroy(space);
 		TEST_PRINT(result);
@@ -677,11 +677,11 @@ BOOL test_space38(){
 	Space* space = NULL;
 	space = space_create(ID);
 	if(space_open_door(space, 5000) != ERROR){
-		TEST_PRINT(FALSE);
+		TEST_PRINT(TRUE);
 		space_destroy(space);
 		return FALSE;
 	}
-	TEST_PRINT(TRUE);
+	TEST_PRINT(FALSE);
 	space_destroy(space);
 	return FALSE;
 }

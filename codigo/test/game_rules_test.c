@@ -123,6 +123,19 @@ BOOL test_game_rules7(){ /*Test for pick_aleat_function with valid game*/
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
+
+BOOL test_game_rules8(){ /*Test for pick_aleat_function with non valid game*/
+	Game *game = NULL;
+	STATUS s;
+	s = pick_aleat_function(game);
+	if(s == OK){
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
 int main(int argc, char* argv[]){
 	int test = 0;
 	int todas = 1;
@@ -146,6 +159,7 @@ int main(int argc, char* argv[]){
 	if(todas || test == 5) test_game_rules5();
 	if(todas || test == 6) test_game_rules6();
 	if(todas || test == 7) test_game_rules7();
+	if(todas || test == 8) test_game_rules8();
 
 	PRINT_RESULTS();
 
