@@ -522,7 +522,7 @@ BOOL test_space26(){ /*!< Test space_set_light with alloc'd space*/
 	return result;
 }
 
-BOOL test_space27(){
+BOOL test_space27(){ /*!< Test space_open_door north*/
 
 	Space* space = NULL;
 	space = space_create(ID);
@@ -537,7 +537,7 @@ BOOL test_space27(){
 	return FALSE;
 }
 
-BOOL test_space28(){
+BOOL test_space28(){ /*!< Test space_open_door east*/
 
 	Space* space = NULL;
 	space = space_create(ID);
@@ -552,7 +552,7 @@ BOOL test_space28(){
 	return FALSE;
 }
 
-BOOL test_space29(){
+BOOL test_space29(){ /*!< Test space_open_door south*/
 
 	Space* space = NULL;
 	space = space_create(ID);
@@ -567,7 +567,7 @@ BOOL test_space29(){
 	return FALSE;
 }
 
-BOOL test_space30(){
+BOOL test_space30(){ /*!< Test space_open_door west*/
 
 	Space* space = NULL;
 	space = space_create(ID);
@@ -582,7 +582,7 @@ BOOL test_space30(){
 	return FALSE;
 }
 
-BOOL test_space31(){
+BOOL test_space31(){  /*!< Test space_close_door north*/
 
 	Space* space = NULL;
 	space = space_create(ID);
@@ -597,7 +597,7 @@ BOOL test_space31(){
 	return FALSE;
 }
 
-BOOL test_space32(){
+BOOL test_space32(){ /*!< Test space_close_door east*/
 
 	Space* space = NULL;
 	space = space_create(ID);
@@ -612,7 +612,7 @@ BOOL test_space32(){
 	return FALSE;
 }
 
-BOOL test_space33(){
+BOOL test_space33(){  /*!< Test space_close_door south*/
 
 	Space* space = NULL;
 	space = space_create(ID);
@@ -627,7 +627,7 @@ BOOL test_space33(){
 	return FALSE;
 }
 
-BOOL test_space34(){
+BOOL test_space34(){ /*!< Test space_close_door west*/
 
 	Space* space = NULL;
 	space = space_create(ID);
@@ -642,7 +642,7 @@ BOOL test_space34(){
 	return FALSE;
 }
 
-BOOL test_space35(){
+BOOL test_space35(){  /*!< Test space_close_door with NULL space*/
 	if(space_close_door(NULL, 0) != ERROR){
 		TEST_PRINT(FALSE);
 		return FALSE;
@@ -651,7 +651,7 @@ BOOL test_space35(){
 	return FALSE;
 }
 
-BOOL test_space36(){
+BOOL test_space36(){ /*!< Test space_open_door with NULL space*/
 	if(space_open_door(NULL, 0) != ERROR){
 		TEST_PRINT(FALSE);
 		return FALSE;
@@ -660,7 +660,7 @@ BOOL test_space36(){
 	return FALSE;
 }
 
-BOOL test_space37(){
+BOOL test_space37(){ /*!< Test space_close_door with invalid direction*/
 	Space* space = NULL;
 	space = space_create(ID);
 	if(space_close_door(space, 5000) != ERROR){
@@ -673,7 +673,7 @@ BOOL test_space37(){
 	return FALSE;
 }
 
-BOOL test_space38(){
+BOOL test_space38(){ /*!< Test space_open_door with invalid direction*/
 	Space* space = NULL;
 	space = space_create(ID);
 	if(space_open_door(space, 5000) != ERROR){
