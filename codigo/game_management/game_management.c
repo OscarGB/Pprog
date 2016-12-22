@@ -36,7 +36,6 @@ STATUS print_space_save(FILE *f, Space* space){
   Id up; 
   Id down; 
   char buff[MAX_GDESC];
-  /*char *toks=NULL; */
   BOOL light;
   char lux[100];
   char adesc[MAX_ADESC];
@@ -59,13 +58,6 @@ STATUS print_space_save(FILE *f, Space* space){
   }else{
     strcpy(lux, "FALSE");
   }
-
-  /*toks = strtok(buff, "\n");
-  strcat(gdesc, toks);
-  toks = strtok(NULL, "\n");
-  strcat(gdesc, toks);
-  toks = strtok(NULL, "\n");
-  strcat(gdesc, toks);*/
 
   fprintf(f, "#s:%ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%s|%s|%s/\n", 
       id, name, north, east, south, west, up, down,
@@ -201,7 +193,7 @@ STATUS print_player_save(FILE *f, Player *player){
   strcpy(name, player_get_name(player));
   location = player_get_location(player);
 
-  fprintf(f, "#p:%ld|%ld|%s|\n", id, location, name); 
+  fprintf(f, "#p:%ld|%s|%ld|\n", id, name, location); 
 
   return OK;
 }

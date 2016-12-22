@@ -539,7 +539,7 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
     game->turns--;
     result = callback_SAVE(game, cmd, dia, gra);
     break;
-  case LOAD:
+  case LOAD: /*Should never arrive here*/
     result = callback_LOAD(game, cmd, dia, gra);
     break;
   case HELP:
@@ -2174,7 +2174,6 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @param Command* cmd
 * @param Dialogue* dia
 * @param Graphics* gra
-* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
@@ -2206,70 +2205,10 @@ STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 * @param Command* cmd
 * @param Dialogue* dia
 * @param Graphics* gra
-* @param char** objects (the objects in the space)
-* @return OK if it went ok
+* @return OK
 */
 STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
-
-	int i=0;
-	DIR *dir;
-	struct dirent *ent;
-	char savegames[256]="";
-	char *symbol = NULL;
-	char path[256] = "codigo/Saves/";
-	STATUS status = ERROR;
-
-	if(!game || !dia || !gra || !cmd)
-		return ERROR;
-
-	/*This if only shows available files for load*/
-	symbol = command_get_symbol(cmd);
-	if(!strcmp(symbol, "show")){
-		if ((dir = opendir ("codigo/Saves")) != NULL) {
-		  while ((ent = readdir (dir)) != NULL && i<=7) {
-			if ( !strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") ){
-    			 continue;
-			} else {
-		    		strcat(savegames, ent->d_name);
-		    		strcat(savegames, "\n");
-		    		i++;
-			}
-		 }
-		  if(!strcmp(savegames, "")){
-			dialogue_load_show(gra, dia, "No saved files\n", OK);
-		  }else{
-		  	dialogue_load_show(gra, dia, savegames, OK);
-		  }
-		  closedir (dir);
-		  return OK;
-		} else{
-			dialogue_load_show(gra, dia, savegames, ERROR);
-		  	return ERROR;
-		}
-	}
-
-	/*This loads a file to the game*/
-	strcat(path, symbol);
-  /*Checks if the file exists*/
-  if(access(path, F_OK) == -1){
-    dialogue_load(gra, dia, symbol, ERROR);
-    return ERROR;
-  }
-	
-	
-  game_destroy(game);      
-
-  game = game_init(game);
-
-  if(game){
-   status = game_init_from_file(game, path);
-   dialogue_load(gra, dia, symbol, status);
-   return status;
-  }
-
-	dialogue_load(gra, dia, symbol, ERROR);
-
-	return ERROR;
+  return OK;
 }
 
 /**

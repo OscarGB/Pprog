@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <dirent.h>
 #include "game.h"
 #include "command.h"
 #include "types.h"
@@ -225,6 +227,54 @@ void print_log(Command* command, STATUS log, FILE* l){
 	return;
 }
 
+/**
+* @brief load function
+* @author Óscar Gómez
+* @date 22/12/2016
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @return OK
+*/
+STATUS load(Command* cmd, Dialogue* dia, Graphics* gra){
+
+	int i=0;
+	DIR *dir;
+	struct dirent *ent;
+	char savegames[256]="";
+	char *symbol = NULL;
+
+	if(!dia || !gra || !cmd)
+		return ERROR;
+
+	/*This if only shows available files for load*/
+	symbol = command_get_symbol(cmd);
+	if(!strcmp(symbol, "show")){
+		if ((dir = opendir ("codigo/Saves")) != NULL) {
+		  while ((ent = readdir (dir)) != NULL && i<=7) {
+			if ( !strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") ){
+    			 continue;
+			} else {
+		    		strcat(savegames, ent->d_name);
+		    		strcat(savegames, "\n");
+		    		i++;
+			}
+		 }
+		  if(!strcmp(savegames, "")){
+			dialogue_load_show(gra, dia, "No saved files\n", OK);
+		  }else{
+		  	dialogue_load_show(gra, dia, savegames, OK);
+		  }
+		  closedir (dir);
+		  return OK;
+		} else{
+			dialogue_load_show(gra, dia, savegames, ERROR);
+		  	return ERROR;
+		}
+	}
+	return OK;
+}
+
 /*
 * @brief function main for the program, runs the game.
 * it creates the command inside
@@ -236,15 +286,16 @@ void print_log(Command* command, STATUS log, FILE* l){
 */
 int main(int argc, char *argv[]){
 	Graphics* gra = NULL;
-  	Game * game = NULL; /*Game pointer*/
-  	Command *command = NULL; /*Command pointer*/
-  	Dialogue * dialogue = NULL; /*Dialogue pointer*/
-  	FILE *l = NULL; /*Log file*/
-  	int flag = 0; /*Flag if its on log mode*/
-  	STATUS log; /*Variable for the creation of log file*/
-  	int nvflag = 0; /*Variable for the -nv flag*/
+	Game * game = NULL; /*Game pointer*/
+	Command *command = NULL; /*Command pointer*/
+	Dialogue * dialogue = NULL; /*Dialogue pointer*/
+	FILE *l = NULL; /*Log file*/
+	int flag = 0; /*Flag if its on log mode*/
+	STATUS log; /*Variable for the creation of log file*/
+	int nvflag = 0; /*Variable for the -nv flag*/
 	int file_pos = 0; /*In case we use a log file, this is its argument-position*/
 	char input[CMD_LENGHT];
+	char path[256];
 
 	file_pos = check_flags(argc, argv, &flag, &nvflag);
 	if(file_pos == -1){
@@ -304,7 +355,39 @@ int main(int argc, char *argv[]){
 			fgets(input, CMD_LENGHT, stdin);
 			get_user_input(command, input);
 		}
-		log = game_update(game, command, dialogue, gra);
+		if(command_get_cmd(command) != LOAD){
+			log = game_update(game, command, dialogue, gra);
+		}
+		else{
+			if(strcmp(command_get_symbol(command), "show") == 0){
+				log = load(command, dialogue, gra);
+			}
+			else{
+				strcpy(path, "codigo/Saves/");
+				strcat(path, command_get_symbol(command));
+
+				if(access(path, F_OK) != -1){
+		    	game_destroy(game);      
+
+					game = game_init(game);
+
+					if(game){
+						log = game_init_from_file(game, path);
+						dialogue_load(gra, dialogue, command_get_symbol(command), log);
+					}else{
+
+						dialogue_load(gra, dialogue, command_get_symbol(command), ERROR);
+
+						log = ERROR;
+					}
+	  		}
+	  		else{
+	  			dialogue_load(gra, dialogue, command_get_symbol(command), ERROR);
+
+					log = ERROR;
+	  		}
+			}
+		}
 		/*Log mode*/
 		if(flag == 1){
 			print_log(command, log, l); 	
