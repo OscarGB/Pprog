@@ -12,7 +12,6 @@
 #include <string.h>
 #include <dirent.h>
 #include <unistd.h>
-#include <alloca.h>
 #include "game.h"
 #include "player.h"
 #include "object.h"
@@ -37,6 +36,7 @@ struct _Game {
   int num_links; /*!<Number of links */
   char desc[WORD_SIZE+1]; /* !< For inspect command*/
   int turns; /* !<Number of turns passed */
+  BOOL endgame; /* !<Flag to end game */
 };/*!< Game structure*/
 
 /*
@@ -69,8 +69,6 @@ STATUS callback_WIN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra);
 STATUS game_load_spaces(Game* game, char* filename);
 STATUS game_add_space(Game* game, Space* space);
 Id     game_get_space_id_at(Game* game, int position);
-
-STATUS game_set_player_location(Game* game, Id id);
 
 STATUS game_add_object(Game* game, Object* object);
 STATUS game_set_object_location(Game* game, Id id_s, Id id_o);
@@ -117,6 +115,7 @@ Game* game_init(Game* game) {
   game->num_objects = 0;
   game->num_links = 0;
   game->turns = 0;
+  game->endgame = FALSE;
 
   /*Creating die*/
   game->die = die_create(1, DIE_FACES);
@@ -142,13 +141,12 @@ Game* game_init(Game* game) {
 * @return OK if it was successfuly initialized
 */
 STATUS game_init_from_file(Game* game, char* filename) {
-  /*Init the game*/
-  /*if (game_init(game) == ERROR){
+  if(!game || !filename){
     return ERROR;
-  }*/
+  }
 
   /*Load objects from file*/
-  if (game_load(game, filename)==OK)
+  if (game_load(game, filename) == OK)
     return OK;
   return ERROR;
 }
@@ -504,6 +502,7 @@ char** game_get_objects_name(Game* game, char** objects){
 STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   char *objects[MAX_IDS];
   STATUS result;
+  int i;
 
   game->turns++;
   switch (command_get_cmd(cmd)) { /*Switch for the command value*/
@@ -541,8 +540,8 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
     game->turns--;
     result = callback_SAVE(game, cmd, dia, gra);
     break;
-  case LOAD:
-  	result = callback_LOAD(game, cmd, dia, gra);
+  case LOAD: /*Should never arrive here*/
+    result = callback_LOAD(game, cmd, dia, gra);
     break;
   case HELP:
     result = dialogue_generic(dia, OK, objects, gra);
@@ -556,6 +555,9 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   if(game_won_game(game) == TRUE){
     return callback_WIN(game, cmd, dia, gra);
   }
+  for(i = 0; i<game->num_objects; i++){
+    object_decrease_duration(game->object[i]);
+  } 
   return result;
 }
 
@@ -946,7 +948,9 @@ void game_print_screen(Game* game, Graphics* gra){
 * @return FALSE
 */
 BOOL game_is_over(Game* game) {
-  return FALSE;
+	if(game->endgame == TRUE)
+		return TRUE;
+	return FALSE;
 }
 
 
@@ -959,6 +963,8 @@ BOOL game_is_over(Game* game) {
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
+* @param Dialogue* dia
+* @param Graphics* gra
 * @return OK if it went ok
 */
 STATUS callback_UNKNOWN(Game* game, Dialogue* dia, Graphics* gra) {
@@ -973,6 +979,8 @@ STATUS callback_UNKNOWN(Game* game, Dialogue* dia, Graphics* gra) {
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
+* @param Dialogue* dia
+* @param Graphics* gra
 * @return OK if it went ok
 */
 STATUS callback_QUIT(Game* game, Dialogue* dia, Graphics* gra) {
@@ -988,6 +996,10 @@ STATUS callback_QUIT(Game* game, Dialogue* dia, Graphics* gra) {
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_NEXT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects) {
@@ -1044,6 +1056,10 @@ STATUS callback_NEXT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects) {
@@ -1098,6 +1114,10 @@ STATUS callback_BACK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @author Andrea Ruiz
 * @date 2/12/2016
 * @param game pointer
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_UP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
@@ -1154,6 +1174,10 @@ STATUS callback_UP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 * @author Andrea Ruiz
 * @date 2/12/2016
 * @param game pointer
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_DOWN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
@@ -1208,6 +1232,10 @@ STATUS callback_DOWN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_JUMP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
@@ -1263,7 +1291,10 @@ STATUS callback_JUMP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @author José Ignacio Gómez, Óscar Gómez, Andrea Ruiz
 * @date 29/09/2016
 * @param game pointer
-* @param char symbol to drop
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
@@ -1346,7 +1377,10 @@ STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @author José Ignacio Gómez, Óscar Gómez, Andrea Ruiz
 * @date 29/09/2016
 * @param game pointer
-* @param the symbol to pick
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
@@ -1454,10 +1488,13 @@ void free_invobjs(char **invobjs){
 
 /**
 * @brief callback for "inspect" instruction
-* @author Óscar Pinto, Andrea Ruiz
+* @author Óscar Pinto, Andrea Ruiz, Óscar Gómez
 * @date 04/11/2016
 * @param game pointer
-* @param symbol to inspect
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
@@ -1510,7 +1547,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
       if(symbol[0] == 's' || symbol[0] == 'S'){ /*!< Inspecting space */
           	for(i=0; i < MAX_SPACES; i++){
           		if(player_location == space_get_id(game->spaces[i])){
-                if(space_get_light(game->spaces[i]) != FALSE){
+                if(space_get_light(game->spaces[i]) != FALSE || game_player_has_light_object(game) == TRUE){
           		    strcpy(invobjs[0], space_get_adesc(game->spaces[i]));
           		    dialogue_inspect(dia, OK, invobjs, gra, SPACE);
                   free_invobjs(invobjs);
@@ -1544,7 +1581,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
     		  space = game_get_space(game, player_location); /*Get the space where the object is*/
 
-		      if(space_get_light(space) == FALSE){
+		      if(space_get_light(space) == FALSE && game_player_has_light_object(game) != TRUE){
 		        dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
             free_invobjs(invobjs);
             return ERROR;
@@ -1560,7 +1597,7 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
       if(strcmp(symbol, "space") == 0 || strcmp(symbol, "Space") == 0){ /*!< Inspecting space */
         for(i=0; i < MAX_SPACES; i++){
             if(player_location == space_get_id(game->spaces[i])){
-              if(space_get_light(game->spaces[i]) != FALSE){
+              if(space_get_light(game->spaces[i]) != FALSE || game_player_has_light_object(game) == TRUE){
                 strcpy(invobjs[0], space_get_adesc(game->spaces[i]));
                 dialogue_inspect(dia, OK, invobjs, gra, SPACE);
                 free_invobjs(invobjs);
@@ -1616,12 +1653,12 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	
 		      space = game_get_space(game, player_location); /*Get the space where the object is*/
 
-    		  if(space_get_light(space) == FALSE){
+    		  if(space_get_light(space) == FALSE && game_player_has_light_object(game) != TRUE){
             dialogue_inspect(dia, ERROR, invobjs, gra, OBJECT);
             free_invobjs(invobjs);
             return ERROR;
           }
-          strcpy(game->desc, space_get_adesc(space));
+          strcpy(game->desc, object_get_description(obj));
           strcpy(invobjs[0], game->desc);
           dialogue_inspect(dia, OK, invobjs, gra, OBJECT);
           free_invobjs(invobjs);
@@ -1639,7 +1676,10 @@ STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 * @author Andrea Ruiz
 * @date 08/11/2016
 * @param game pointer
-* @param symbol to inspect (direction)
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
@@ -1843,6 +1883,17 @@ dialogue_generic(dia, ERROR, objects, gra);
 return ERROR;
 }
 
+/**
+* @brief callback for "turnon" instruction
+* @author José Ignacio Gómez García
+* @date 21/12/2016
+* @param game pointer
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
+* @return OK if it went ok
+*/
 STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
   Object* object; /* !< Object that will be picked*/
   Id player_id, object_id; /* !< Ids of the player and object*/
@@ -1850,6 +1901,7 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
   char *symbol = NULL; /*!< Variable used for storing the command*/
 
   if(!game || !dia || !gra || !cmd) return ERROR;
+
 
   symbol = command_get_symbol(cmd);
 
@@ -1864,7 +1916,7 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
 
   object_id = game_get_object_location(game, symbol);
 
-  if(player_id != object_id || object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
+  if(object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
     objects = game_get_objects_name(game, objects);
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
@@ -1873,25 +1925,25 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
 
   if(strlen(symbol) == 1){
     for(i = 0; i < game->num_objects; i++){
-
+      /*Finds the object inside the game*/
       if(object_get_symbol(game->object[i]) == symbol[0]){
         object = game->object[i];
 
+        /*Checks if the object is inside the inventory*/
         if(player_has_object(game->player, object_get_id(object)) == TRUE){
+          /*Turns the object ON*/
           if(object_turnon(object) == OK){
             objects = game_get_objects_name(game, objects);
             dialogue_generic(dia, OK, objects, gra);
             return OK;
           }
           else{
-            strcpy(game->desc, "I think it cannot be lighted.");
             objects = game_get_objects_name(game, objects);
             dialogue_generic(dia, ERROR, objects, gra);
             return ERROR;
           }
         }
         else{
-          strcpy(game->desc, "Is this object in your bag?");
           objects = game_get_objects_name(game, objects);
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;
@@ -1913,14 +1965,12 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
             return OK;
           }
           else{
-            strcpy(game->desc, "I think it cannot be lighted.");
             objects = game_get_objects_name(game, objects);
             dialogue_generic(dia, ERROR, objects, gra);
             return ERROR;
           }
         }
         else{
-          strcpy(game->desc, "Is this object in your bag?");
           objects = game_get_objects_name(game, objects);
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;
@@ -1934,7 +1984,17 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
   return ERROR;
 }
 
-
+/**
+* @brief callback for "turnoff" instruction
+* @author José Ignacio Gómez García
+* @date 21/12/2016
+* @param game pointer
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
+* @return OK if it went ok
+*/
 STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
   Object* object; /* !< Object that will be picked*/
   Id player_id, object_id; /* !< Ids of the player and object*/
@@ -1958,7 +2018,7 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
 
   object_id = game_get_object_location(game, symbol);
 
-  if(player_id != object_id || object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
+  if(object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
     objects = game_get_objects_name(game, objects);objects = game_get_objects_name(game, objects);
 
     dialogue_generic(dia, ERROR, objects, gra);
@@ -1981,7 +2041,6 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
           return result;
         }
         else{
-          strcpy(game->desc, "Is this object in your bag?");
           objects = game_get_objects_name(game, objects);objects = game_get_objects_name(game, objects);
 
           dialogue_generic(dia, ERROR, objects, gra);
@@ -2005,7 +2064,6 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
           return result;
         }
         else{
-          strcpy(game->desc, "Is this object in your bag?");
           objects = game_get_objects_name(game, objects);
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;
@@ -2019,6 +2077,17 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
   return ERROR;
 }
 
+/**
+* @brief callback for "open with" instruction
+* @author José Ignacio Gómez García
+* @date 21/12/2016
+* @param game pointer
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @param char** objects (the objects in the space)
+* @return OK if it went ok
+*/
 STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char** objects){
   char link_name[WORD_SIZE];
   char object_name[WORD_SIZE];
@@ -2100,6 +2169,16 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   return ERROR;
 }
 
+/**
+* @brief callback for "save" instruction
+* @author Óscar Pinto
+* @date 21/12/2016
+* @param game pointer
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @return OK if it went ok
+*/
 STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
   char path[256] = "codigo/Saves/";
   char *symbol = NULL;
@@ -2107,12 +2186,16 @@ STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 
 	if(!game || !dia || !gra || !cmd) return ERROR;
 
-  	if(!game || !cmd)
-  			return ERROR;
+  if(!game || !cmd)
+  		return ERROR;
 
-  	symbol = command_get_symbol(cmd);
-  	strcat(path, symbol); 
-  	strcat(path, ".s");
+	symbol = command_get_symbol(cmd);
+  if(symbol[0] == '\0'){
+    dialogue_print(gra, "Unable to save a game without a name");
+    return ERROR;
+  }
+	strcat(path, symbol); 
+	strcat(path, ".s");
 
 	strcat(str, path);
 	strcat(str, "\n");
@@ -2121,56 +2204,18 @@ STATUS callback_SAVE(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
 	return game_save(game, path);
 }
 
+/**
+* @brief callback for "load" instruction
+* @author Óscar Pinto
+* @date 21/12/2016
+* @param game pointer
+* @param Command* cmd
+* @param Dialogue* dia
+* @param Graphics* gra
+* @return OK
+*/
 STATUS callback_LOAD(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
-
-	int i=0;
-	DIR *dir;
-	struct dirent *ent;
-	char savegames[256]="";
-	char *symbol = NULL;
-	char path[256] = "codigo/Saves/";
-	STATUS status = ERROR;
-
-	if(!game || !dia || !gra || !cmd)
-		return ERROR;
-
-	/*This if only shows available files for load*/
-	symbol = command_get_symbol(cmd);
-	if(!strcmp(symbol, "show")){
-		if ((dir = opendir ("codigo/Saves")) != NULL) {
-		  while ((ent = readdir (dir)) != NULL && i<=7) {
-			if ( !strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") ){
-    			 continue;
-			} else {
-		    		strcat(savegames, ent->d_name);
-		    		strcat(savegames, "\n");
-		    		i++;
-			}
-		 }
-		  if(!strcmp(savegames, "")){
-			dialogue_load_show(gra, dia, "No saved files\n", OK);
-		  }else{
-		  	dialogue_load_show(gra, dia, savegames, OK);
-		  }
-		  closedir (dir);
-		  return OK;
-		} else{
-			dialogue_load_show(gra, dia, savegames, ERROR);
-		  	return ERROR;
-		}
-	}
-
-	/*This loads a file to the game*/
-	strcat(path, symbol);
-	
-	game_destroy(game);
-	if(game) system("gnome-terminal");
-	game = game_init(game);
-	status = game_init_from_file(game, path);
-
-	dialogue_load(gra, dia, symbol, status);
-
-	return status;
+  return OK;
 }
 
 /**
@@ -2373,3 +2418,38 @@ BOOL game_player_has_light_object(Game* game){
   }
   return FALSE;
 }
+
+
+/**
+* @brief It sets the flag "endgame" of game structure
+* @author Andrea Ruiz
+* @date 20/12/2016
+* @param game pointer
+* @param BOOL value (to be set)
+* @return STATUS (OK if everything went well, ERROR if not)
+*/
+STATUS game_set_endgame(Game * game, BOOL value){
+	if(!game || (value != TRUE && value != FALSE))
+		return ERROR;
+	game->endgame = value;
+	return OK;
+}
+
+/**
+* @brief It gets the flag "endgame" of game structure
+* @author Andrea Ruiz
+* @date 20/12/2016
+* @param game pointer
+* @return BOOL (flag value)
+*/
+BOOL game_get_endgame(Game * game){
+	if(!game)
+		return FALSE;
+	return game->endgame;
+}
+
+
+
+
+
+

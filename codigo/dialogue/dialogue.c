@@ -23,7 +23,9 @@ struct _Dialogue {
 
 }; /*!< Dialogue structure*/
 
-/*PRIVATE FUNCTIONS*/
+/*
+* @brief Private functions
+*/
 
 /**
 * @brief prints the quit dialogue
@@ -427,7 +429,7 @@ STATUS dialogue_inspect_inventory(Graphics* gra, Dialogue* dialogue, char** inve
 			i++;
 		}
 		if(inventory[0][0] == '\0'){
-			strcpy(string, "Uups, it seems that you inventory is empty!");
+			strcpy(string, "Uups, it seems that you inventory is empty!\n");
 		}
 	}
 	else{
@@ -472,7 +474,9 @@ STATUS dialogue_inspect_object(Graphics* gra, Dialogue* dialogue, char* inventor
 
 
 
-/*PUBLIC FUNCTIONS*/
+/*
+* @brief Public functions
+*/
 
 /**
 * @brief creates a new dialogue

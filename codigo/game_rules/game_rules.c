@@ -35,7 +35,7 @@ STATUS pick_aleat_function(Game * game){
 	if(!game)
 		return ERROR;
 
-	die = die_create(2710, 6);
+	die = die_create(2710, 50);
 	if(!die)
 		return ERROR;
 
@@ -95,7 +95,7 @@ STATUS change_light_space(Game *game){
 	if(!die)
 		return ERROR;
 
-	roll = die_get_last_roll(die);
+	roll = die_roll(die);
 	if(roll <= 0 || roll > die_get_faces(die))
 		return ERROR;
 
@@ -139,18 +139,19 @@ STATUS change_link_state(Game * game){
 	aleat = rand() % nlinks;
 	if(aleat < 0 || aleat >= nlinks)
 		return ERROR;
+	printf("2");
 
 	link = game_get_link_n(game, aleat);
 	if(!link)
 		return ERROR;
 
 	state = link_get_state(link);
-
+	printf("3");
 	die = game_get_die(game);
 	if(!die)
 		return ERROR;
 
-	roll = die_get_last_roll(game_get_die(game));
+	roll = die_roll(die);
 	if(roll <= 0 || roll > die_get_faces(die))
 		return ERROR;
 
@@ -198,7 +199,7 @@ STATUS change_object_location(Game * game){
 	if(!die)
 		return ERROR;
 
-	roll = die_get_last_roll(die);
+	roll = die_roll(die);
 	if(roll <= 0 || roll > die_get_faces(die))
 		return ERROR;
 
@@ -241,12 +242,14 @@ STATUS kill_player(Game * game){
 	if(!die)
 		return ERROR;
 
-	roll = die_get_last_roll(die);
+	roll = die_roll(die);
 	if(roll <= 0 || roll > die_get_faces(die))
 		return ERROR;
 
-	if(roll == 1)
+	if(roll == 1){
+		game_set_endgame(game, TRUE);
 		game_is_over(game);
+	}	
 
 	return OK;
 
@@ -267,8 +270,10 @@ STATUS useless_player_deserves_death(Game * game){
 
 	turns = game_get_turns(game);
 
-	if(turns >= DEATH_DESERVED)
+	if(turns >= DEATH_DESERVED){
+		game_set_endgame(game, TRUE);
 		game_is_over(game);
+	}
 
 	return OK; 
 }

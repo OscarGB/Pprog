@@ -376,7 +376,10 @@ BOOL object_get_on_off(Object* object){
 	if(!object){
 		return FALSE;
 	}
-	return object->on_off;
+	if(object->on_off == TRUE && object->duration > 0){
+		return TRUE;
+	}
+	return FALSE;
 }
 
 /*

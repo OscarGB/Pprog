@@ -389,6 +389,7 @@ BOOL test_object26(){ /*!< Test object_set_on_off*/
 	STATUS res = ERROR;
 	Object* object = NULL;
 	object = object_create(ID);
+	object_set_duration(object, 100);
 	res = object_set_on_off(object, TRUE);
 	if(object_get_on_off(object) == TRUE && res == OK){
 		object_destroy(object);
@@ -549,8 +550,9 @@ BOOL test_object36(){ /* Test object_decrease_duration with object with light ==
 	object = object_create(ID);
 	object_set_light(object, TRUE);
 	object_set_on_off(object, TRUE);
+	object_set_duration(object, 100);
 	object_decrease_duration(object);
-	if(object_get_duration(object) == -1){
+	if(object_get_duration(object) == 99){
 		object_destroy(object);
 		TEST_PRINT(TRUE);
 		return TRUE;
