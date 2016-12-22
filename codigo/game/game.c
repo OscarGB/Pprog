@@ -502,6 +502,7 @@ char** game_get_objects_name(Game* game, char** objects){
 STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   char *objects[MAX_IDS];
   STATUS result;
+  int i;
 
   game->turns++;
   switch (command_get_cmd(cmd)) { /*Switch for the command value*/
@@ -554,7 +555,9 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   if(game_won_game(game) == TRUE){
     return callback_WIN(game, cmd, dia, gra);
   }
-  
+  for(i = 0; i<game->num_objects; i++){
+    object_decrease_duration(game->object[i]);
+  } 
   return result;
 }
 
