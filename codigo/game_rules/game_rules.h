@@ -32,7 +32,7 @@ STATUS pick_aleat_function(Game * game, Graphics * gra);
 * @param Game *game
 * @return STATUS (OK if everything went well), ERROR if not
 */
-STATUS change_light_space(Game *game);
+STATUS change_light_space(Game *game, Graphics * gra);
 
 /**
 * @brief Changes (or not) the state of a link
@@ -41,7 +41,7 @@ STATUS change_light_space(Game *game);
 * @param Game *game
 * @return STATUS (OK if everything went well), ERROR if not
 */
-STATUS change_link_state(Game * game);
+STATUS change_link_state(Game * game, Graphics * gra);
 
 /**
 * @brief Changes (or not) the location of an object
@@ -50,7 +50,7 @@ STATUS change_link_state(Game * game);
 * @param Game *game
 * @return STATUS (OK if everything went well), ERROR if not
 */
-STATUS change_object_location(Game * game);
+STATUS change_object_location(Game * game, Graphics * gra);
 
 /**
 * @brief Kills a player (game over)
@@ -59,7 +59,7 @@ STATUS change_object_location(Game * game);
 * @param Game *game
 * @return STATUS (OK if everything went well), ERROR if not
 */
-STATUS kill_player(Game * game);
+STATUS kill_player(Game * game, Graphics * gra);
 
 /**
 * @brief Kills a player if it has played too many turns
@@ -68,7 +68,7 @@ STATUS kill_player(Game * game);
 * @param Game *game
 * @return STATUS (OK if everything went well), ERROR if not
 */
-STATUS useless_player_deserves_death(Game * game);
+STATUS useless_player_deserves_death(Game * game, Graphics * gra);
 
 /**
 * @brief Turns off (or not) an object
@@ -77,7 +77,7 @@ STATUS useless_player_deserves_death(Game * game);
 * @param Game *game
 * @return STATUS (OK if everything went well), ERROR if not
 */
-STATUS turn_object_light_off(Game * game);
+STATUS turn_object_light_off(Game * game, Graphics * gra);
 
 
 
