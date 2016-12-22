@@ -212,7 +212,7 @@ BOOL test_object14(){ /*!< Test object_get_open with default location*/
 	return FALSE;
 }
 
-BOOL test_object15(){ /*!< Test object_get_open with default location*/
+BOOL test_object15(){ /*!< Test object_get_duration with default location*/
 
 	Object* object = NULL;
 	object = object_create(ID);
@@ -621,7 +621,7 @@ BOOL test_object40(){ /* Test object_can_open with correct Id*/
 	return FALSE;
 }
 
-BOOL test_object41(){ /* Test object_can_open with correct Id*/
+BOOL test_object41(){ /* Test object_print with correct Id*/
 	
 	Object* object = NULL;
 	object = object_create(ID);
