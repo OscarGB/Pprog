@@ -15,6 +15,7 @@
 #include "types.h"
 #include "graphics.h"
 #include "dialogue.h"
+#include "game_rules.h"
 
 
 /*
