@@ -354,8 +354,9 @@ int main(int argc, char *argv[]){
 		graphics_destroy(gra);
 		return 1;
 	}
-
 	dialogue_start_game(gra);
+	system("aplay -q Music/StartTune.wav");
+
 
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
 		if(nvflag != 1){ 
