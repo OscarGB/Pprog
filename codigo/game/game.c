@@ -110,6 +110,8 @@ Game* game_init(Game* game) {
     game->object[i] = NULL;
   }
 
+  game->player = NULL;
+
   game->num_objects = 0;
   game->num_links = 0;
   game->turns = 0;
@@ -506,6 +508,10 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   STATUS result;
   int i;
 
+  for(i = 0; i < MAX_IDS; i++){
+    objects[i] = NULL;
+  }
+
   game->turns++;
   switch (command_get_cmd(cmd)) { /*Switch for the command value*/
   case UNKNOWN:
@@ -555,7 +561,9 @@ STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
     return ERROR;
   }
   if(game_won_game(game) == TRUE){
-    return callback_WIN(game, cmd, dia, gra);
+  	result = callback_WIN(game, cmd, dia, gra);
+  	system("aplay -q Music/WinTune.wav");
+    return result;
   }
   for(i = 0; i<game->num_objects; i++){
     object_decrease_duration(game->object[i]);
@@ -1309,7 +1317,9 @@ STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   if(!game || !dia || !gra || !cmd) return ERROR;
 
   if(game_get_objects_at_space(game, current_id) >= MAX_OBS_PER_SPA){
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
@@ -1334,13 +1344,17 @@ STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   }
 
   if(object_id == NO_ID || !object){
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
 
   if(player_drop_object(game->player, object_id) == FALSE){
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
@@ -1348,7 +1362,9 @@ STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   if(strlen(symbol) == 1){
     if(object_get_symbol(object) != symbol[0]){
       player_pick_object(game->player, object_id);
-      objects = game_get_objects_name(game, objects);
+      if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+        objects = game_get_objects_name(game, objects);
+      }
       dialogue_generic(dia, ERROR, objects, gra);
       return ERROR;
     }
@@ -1356,14 +1372,18 @@ STATUS callback_DROP(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   else if(strlen(symbol) > 1){
     if(strcmp(object_get_name(object), symbol) != 0){
       player_pick_object(game->player, object_id);
-      objects = game_get_objects_name(game, objects);
+      if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+        objects = game_get_objects_name(game, objects);
+      }
       dialogue_generic(dia, ERROR, objects, gra);
       return ERROR;
     }
   }
 
   result = game_set_object_location(game, current_id, object_get_id(object));
-  objects = game_get_objects_name(game, objects);
+  if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+    objects = game_get_objects_name(game, objects);
+  }
   dialogue_generic(dia, result, objects, gra);
 
   return result;
@@ -1392,7 +1412,9 @@ STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   symbol = command_get_symbol(cmd);
 
   if(strcmp(symbol, "\0") == 0){
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
@@ -1403,7 +1425,9 @@ STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   object_id = game_get_object_location(game, symbol);
 
   if(player_id != object_id || player_id == NO_ID || object_id == NO_ID){
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
@@ -1415,13 +1439,17 @@ STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
         object = game->object[i];
 
         if(object_get_movable(object) == FALSE){
-          objects = game_get_objects_name(game, objects);
+          if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }
           dialogue_print(gra, "That object is too heavy");
           return ERROR;
         }
         if(player_pick_object(game->player, object_get_id(object)) != FALSE){
           object_set_location(object, PLAYER_OBJ);
-          objects = game_get_objects_name(game, objects);
+          if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }
           dialogue_generic(dia, OK, objects, gra); 
           return OK;
         }
@@ -1434,22 +1462,28 @@ STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 
       if(strcmp(object_get_name(game->object[i]), symbol) == 0){
         object = game->object[i];
-		if(object_get_movable(object) == FALSE){
-         	objects = game_get_objects_name(game, objects);
-          	dialogue_print(gra, "That object is too heavy");
-          	return ERROR;
+		    if(object_get_movable(object) == FALSE){
+         	if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }
+          dialogue_print(gra, "That object is too heavy");
+          return ERROR;
         }
-	    if(player_pick_object(game->player, object_get_id(object)) != FALSE){
-	    object_set_location(object, PLAYER_OBJ); 
-	    objects = game_get_objects_name(game, objects);
-	    dialogue_generic(dia, OK, objects, gra);
-	    return OK;
-	    }
+        if(player_pick_object(game->player, object_get_id(object)) != FALSE){
+          object_set_location(object, PLAYER_OBJ); 
+          if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }
+          dialogue_generic(dia, OK, objects, gra);
+          return OK;
+        }
       }  
     }
   }
 
-  objects = game_get_objects_name(game, objects);
+  if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+    objects = game_get_objects_name(game, objects);
+  }
   dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
@@ -1695,17 +1729,17 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
   Link* link = NULL;
 
   if(!game || !dia || !gra || !cmd){
-    objects = game_get_objects_name(game, objects);
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
 
   symbol = command_get_symbol(cmd);
-
-
+  
   space_id = game_get_player_location(game);
   if (space_id == NO_ID) {
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    } 
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
@@ -1713,7 +1747,10 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
   if(strlen(symbol) == 1){
     if(symbol[0] == 'n'){ /* Go north */ 
 	   result = callback_BACK(game, cmd, dia, gra, objects);
-     objects = game_get_objects_name(game, objects);
+
+     if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+       objects = game_get_objects_name(game, objects);
+     }
      dialogue_generic(dia, result, objects, gra);
 
      return result;
@@ -1721,7 +1758,9 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
     if(symbol[0] == 's'){ /* Go south */ 
 	   result = callback_NEXT(game, cmd, dia, gra, objects);
-     objects = game_get_objects_name(game, objects);
+     if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+        objects = game_get_objects_name(game, objects);
+     }
      dialogue_generic(dia, result, objects, gra);
 
      return result;
@@ -1729,7 +1768,9 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
   if(symbol[0] == 'u'){ /* Go up */
    result = callback_UP(game, cmd, dia, gra, objects);
-   objects = game_get_objects_name(game, objects);
+   if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+     objects = game_get_objects_name(game, objects);
+   }
    dialogue_generic(dia, result, objects, gra);
 
      return result; 
@@ -1737,7 +1778,9 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
   if(symbol[0] == 'd'){ /* Go down */
    result = callback_DOWN(game, cmd, dia, gra, objects);
-   objects = game_get_objects_name(game, objects);
+   if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+     objects = game_get_objects_name(game, objects);
+   }
    dialogue_generic(dia, result, objects, gra);
 
      return result;
@@ -1745,7 +1788,9 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
   if(symbol[0] == 'e'){ /* Go east */ 
    result = callback_JUMP(game, cmd, dia, gra, objects);
-   objects = game_get_objects_name(game, objects);
+   if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+     objects = game_get_objects_name(game, objects);
+   }
    dialogue_generic(dia, result, objects, gra);
 
    return result;
@@ -1776,13 +1821,17 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
     	      		if (west_id != NO_ID && link_get_state(link) == OPENL) {
 
     			        result = game_set_player_location(game, west_id);
-                  objects = game_get_objects_name(game, objects);
+                  if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+                    objects = game_get_objects_name(game, objects);
+                  }
                   dialogue_generic(dia, result, objects, gra);
 
                   return result;
           			}
     			      else{
-                  objects = game_get_objects_name(game, objects);
+                  if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+                    objects = game_get_objects_name(game, objects);
+                  }
                   dialogue_generic(dia, ERROR, objects, gra);
     			        return ERROR;
           			}
@@ -1791,7 +1840,9 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
       }
 
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
@@ -1799,7 +1850,9 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
   else if(strlen(symbol) > 1){
       if(strcmp(symbol, "north") == 0){ /* Go north */ 
        result = callback_BACK(game, cmd, dia, gra, objects);
-       objects = game_get_objects_name(game, objects);
+       if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+        objects = game_get_objects_name(game, objects);
+        }
        dialogue_generic(dia, result, objects, gra);
 
        return result;
@@ -1807,7 +1860,9 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
       if(strcmp(symbol, "south") == 0){ /* Go south */ 
        result = callback_NEXT(game, cmd, dia, gra, objects);
-       objects = game_get_objects_name(game, objects);
+       if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+         objects = game_get_objects_name(game, objects);
+        }
        dialogue_generic(dia, result, objects, gra);
 
        return result;
@@ -1815,7 +1870,9 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
 	  if(strcmp(symbol, "up") == 0){ /* Go up */ 
        result = callback_UP(game, cmd, dia, gra, objects);
-       objects = game_get_objects_name(game, objects);
+       if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+         objects = game_get_objects_name(game, objects);
+       }
        dialogue_generic(dia, result, objects, gra);
 
        return result;
@@ -1823,7 +1880,9 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
 	  if(strcmp(symbol, "down") == 0){ /* Go down */ 
        result = callback_DOWN(game, cmd, dia, gra, objects);
-       objects = game_get_objects_name(game, objects);
+       if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+        objects = game_get_objects_name(game, objects);
+       }
        dialogue_generic(dia, result, objects, gra);
 
        return result;
@@ -1831,7 +1890,9 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
 
     if(strcmp(symbol, "east") == 0){ /* Go east */ 
      result = callback_JUMP(game, cmd, dia, gra, objects);
-     objects = game_get_objects_name(game, objects);
+     if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+     }
      dialogue_generic(dia, result, objects, gra);
 
      return result;
@@ -1861,13 +1922,17 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
                   } 
                   if (west_id != NO_ID && link_get_state(link) == OPENL) {
                     result = game_set_player_location(game, west_id);
-                    objects = game_get_objects_name(game, objects);
+                    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+                      objects = game_get_objects_name(game, objects);
+                    }
                     dialogue_generic(dia, result, objects, gra);
 
                     return result;
                   }
                   else{
-                    objects = game_get_objects_name(game, objects);
+                    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+                      objects = game_get_objects_name(game, objects);
+                    }
                     dialogue_generic(dia, ERROR, objects, gra);
                     return ERROR;
                   }
@@ -1875,14 +1940,18 @@ STATUS callback_GO(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, char*
           } 
 
     }
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
 
-objects = game_get_objects_name(game, objects);
-dialogue_generic(dia, ERROR, objects, gra);
-return ERROR;
+  if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+    objects = game_get_objects_name(game, objects);
+  }
+  dialogue_generic(dia, ERROR, objects, gra);
+  return ERROR;
 }
 
 /**
@@ -1908,7 +1977,9 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
   symbol = command_get_symbol(cmd);
 
   if(strcmp(symbol, "\0") == 0){
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
@@ -1919,7 +1990,9 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
   object_id = game_get_object_location(game, symbol);
 
   if(object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
@@ -1935,18 +2008,24 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
         if(player_has_object(game->player, object_get_id(object)) == TRUE){
           /*Turns the object ON*/
           if(object_turnon(object) == OK){
-            objects = game_get_objects_name(game, objects);
+            if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+              objects = game_get_objects_name(game, objects);
+            }
             dialogue_generic(dia, OK, objects, gra);
             return OK;
           }
           else{
-            objects = game_get_objects_name(game, objects);
+            if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+              objects = game_get_objects_name(game, objects);
+            }
             dialogue_generic(dia, ERROR, objects, gra);
             return ERROR;
           }
         }
         else{
-          objects = game_get_objects_name(game, objects);
+          if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;
         }
@@ -1962,18 +2041,24 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
 
         if(player_has_object(game->player, object_get_id(object)) == TRUE){
           if(object_turnon(object) == OK){
-            objects = game_get_objects_name(game, objects);
+            if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+              objects = game_get_objects_name(game, objects);
+            }
             dialogue_generic(dia, OK, objects, gra);
             return OK;
           }
           else{
-            objects = game_get_objects_name(game, objects);
+            if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+              objects = game_get_objects_name(game, objects);
+            }
             dialogue_generic(dia, ERROR, objects, gra);
             return ERROR;
           }
         }
         else{
-          objects = game_get_objects_name(game, objects);
+          if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;
         }
@@ -1981,7 +2066,9 @@ STATUS callback_TURNON(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, c
     }
   }
 
-  objects = game_get_objects_name(game, objects);
+  if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+    objects = game_get_objects_name(game, objects);
+  }
   dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
@@ -2009,8 +2096,9 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
   symbol = command_get_symbol(cmd);
 
   if(strcmp(symbol, "\0") == 0){
-    objects = game_get_objects_name(game, objects);objects = game_get_objects_name(game, objects);
-
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
@@ -2021,8 +2109,9 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
   object_id = game_get_object_location(game, symbol);
 
   if(object_id != PLAYER_OBJ || player_id == NO_ID || object_id == NO_ID){
-    objects = game_get_objects_name(game, objects);objects = game_get_objects_name(game, objects);
-
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }
     dialogue_generic(dia, ERROR, objects, gra);
     return ERROR;
   }
@@ -2036,15 +2125,17 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
 
         if(player_has_object(game->player, object_get_id(object)) == TRUE){
           result = object_turnoff(object);
-          objects = game_get_objects_name(game, objects);objects = game_get_objects_name(game, objects);
-
+          if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }
           dialogue_generic(dia, result, objects, gra);
 
           return result;
         }
         else{
-          objects = game_get_objects_name(game, objects);objects = game_get_objects_name(game, objects);
-
+          if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;
         }
@@ -2060,13 +2151,17 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
 
         if(player_has_object(game->player, object_get_id(object)) == TRUE){
           result = object_turnoff(object);
-          objects = game_get_objects_name(game, objects);
+          if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }
           dialogue_generic(dia, result, objects, gra);
 
           return result;
         }
         else{
-          objects = game_get_objects_name(game, objects);
+          if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;
         }
@@ -2074,7 +2169,9 @@ STATUS callback_TURNOFF(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, 
     }
   }
 
-  objects = game_get_objects_name(game, objects);
+  if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+    objects = game_get_objects_name(game, objects);
+  }
   dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
@@ -2101,8 +2198,10 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   STATUS result;
   char *string = NULL;
   char syntax[WORD_SIZE];
+  char error[WORD_SIZE];
   Space* spa = NULL;
 
+  strcpy(error, "error");
   strcpy(syntax, "syntax");
   string = command_get_symbol(cmd);
 
@@ -2133,7 +2232,11 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
         object = game->object[i];
 
         if(player_has_object(game->player, object_get_id(object)) == FALSE){
-          objects = game_get_objects_name(game, objects);
+          if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+            objects = game_get_objects_name(game, objects);
+          }else{
+            objects[0] = error;
+          }
           dialogue_generic(dia, ERROR, objects, gra);
           return ERROR;
         
@@ -2155,7 +2258,11 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
   /*Can the object open the link?*/
   if(object_can_open(object, link_id) == TRUE){
     result = link_open(link);
-    objects = game_get_objects_name(game, objects);
+    if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+      objects = game_get_objects_name(game, objects);
+    }else{
+      objects[0] = error;
+    }
     dialogue_generic(dia, result, objects, gra);
     if(result == OK){
       spa = game_get_space(game, link_get_conection1(link));
@@ -2166,7 +2273,11 @@ STATUS callback_OPEN(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
     return result;
   }
 
-  objects = game_get_objects_name(game, objects);
+  if(space_get_light(game_get_space(game, game_get_player_location(game))) == TRUE || game_player_has_light_object(game) == TRUE){
+    objects = game_get_objects_name(game, objects);
+  }else{
+     objects[0] = error;
+  }
   dialogue_generic(dia, ERROR, objects, gra);
   return ERROR;
 }
