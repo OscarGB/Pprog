@@ -358,8 +358,6 @@ int main(int argc, char *argv[]){
 	dialogue_start_game(gra);
 
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
-		if(rflag == 1)
-			pick_aleat_function(game);
 		if(nvflag != 1){ 
 			game_print_screen(game, gra);
 			scan_from_screen(gra, command);
@@ -406,6 +404,8 @@ int main(int argc, char *argv[]){
 		if(flag == 1){
 			print_log(command, log, l); 	
 		}
+		if(rflag == 1)
+			pick_aleat_function(game, gra);
 	}
 	graphics_destroy(gra);
 	game_destroy(game);

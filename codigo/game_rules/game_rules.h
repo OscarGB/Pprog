@@ -22,15 +22,15 @@ typedef struct _Game_rules Game_rules;
 * @return STATUS (OK if everything went well), ERROR if not
 */
 
-STATUS pick_aleat_function(Game * game);
+STATUS pick_aleat_function(Game * game, Graphics * gra);
 
 
-STATUS change_light_space(Game *game);
-STATUS change_link_state(Game * game);
-STATUS change_object_location(Game * game);
-STATUS kill_player(Game * game);
-STATUS useless_player_deserves_death(Game * game);
-STATUS turn_object_light_off(Game * game);
+STATUS change_light_space(Game *game, Graphics * gra);
+STATUS change_link_state(Game * game, Graphics * gra);
+STATUS change_object_location(Game * game, Graphics * gra);
+STATUS kill_player(Game * game, Graphics * gra);
+STATUS useless_player_deserves_death(Game * game, Graphics * gra);
+STATUS turn_object_light_off(Game * game, Graphics * gra);
 
 
 #endif
