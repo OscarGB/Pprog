@@ -14,120 +14,178 @@
 
 BOOL test_game_rules1(){ /*Test for change_light_space with valid game*/
 	Game *game = NULL;
+	Graphics * graphics = NULL;
 	STATUS s;
 	game = game_init(game);
 	game_init_from_file(game, "loader.dat");
-	s = change_light_space(game);
+	graphics = graphics_create(0);
+	s = change_light_space(game, graphics);
 	if(s == OK){
 		game_destroy(game);
+		graphics_destroy(graphics);
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 	game_destroy(game);
+	graphics_destroy(graphics);
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
 BOOL test_game_rules2(){ /*Test for change_link_state with valid game*/
  	Game *game = NULL;
+	Graphics * graphics = NULL;
 	STATUS s;
 	game = game_init(game);
 	game_init_from_file(game, "loader.dat");
-	s = change_link_state(game);
+	graphics = graphics_create(0);
+	s = change_link_state(game, graphics);
 	if(s == OK){
 		game_destroy(game);
+		graphics_destroy(graphics);
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 	game_destroy(game);
+	graphics_destroy(graphics);
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
 BOOL test_game_rules3(){ /*Test for change_object_location with valid game*/
 	Game *game = NULL;
+	Graphics * graphics = NULL;
 	STATUS s;
 	game = game_init(game);
 	game_init_from_file(game, "loader.dat");
-	s = change_object_location(game);
+	graphics = graphics_create(0);
+	s = change_object_location(game, graphics);
 	if(s == OK){
 		game_destroy(game);
+		graphics_destroy(graphics);
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 	game_destroy(game);
+	graphics_destroy(graphics);
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
 BOOL test_game_rules4(){ /*Test for kill_player with valid game*/ 
 	Game *game = NULL;
+	Graphics * graphics = NULL;
 	STATUS s;
 	game = game_init(game);
 	game_init_from_file(game, "loader.dat");
-	s = kill_player(game);
+	graphics = graphics_create(0);
+	s = kill_player(game, graphics);
 	if(s == OK){
 		game_destroy(game);
+		graphics_destroy(graphics);
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 	game_destroy(game);
+	graphics_destroy(graphics);
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
 BOOL test_game_rules5(){ /*Test for useless_player_deserves_death with valid game*/  
 	Game *game = NULL;
+	Graphics * graphics = NULL;
 	STATUS s;
 	game = game_init(game);
 	game_init_from_file(game, "loader.dat");
-	s = useless_player_deserves_death(game);
+	graphics = graphics_create(0);
+	s = useless_player_deserves_death(game, graphics);
 	if(s == OK){
 		game_destroy(game);
+		graphics_destroy(graphics);
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 	game_destroy(game);
+	graphics_destroy(graphics);
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
 BOOL test_game_rules6(){ /*Test for turn_object_light_off with valid game*/ 
 	Game *game = NULL;
+	Graphics * graphics = NULL;
 	STATUS s;
 	game = game_init(game);
 	game_init_from_file(game, "loader.dat");
-	s = turn_object_light_off(game);
+	graphics = graphics_create(0);
+	s = turn_object_light_off(game, graphics);
 	if(s == OK){
 		game_destroy(game);
+		graphics_destroy(graphics);
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 	game_destroy(game);
+	graphics_destroy(graphics);
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
 BOOL test_game_rules7(){ /*Test for pick_aleat_function with valid game*/
 	Game *game = NULL;
+	Graphics * graphics = NULL;
 	STATUS s;
 	game = game_init(game);
 	game_init_from_file(game, "loader.dat");
-	s = pick_aleat_function(game);
+	graphics = graphics_create(0);
+	s = pick_aleat_function(game, graphics);
 	if(s == OK){
 		game_destroy(game);
+		graphics_destroy(graphics);
 		TEST_PRINT(TRUE);
 		return TRUE;
 	}
 	game_destroy(game);
+	graphics_destroy(graphics);
 	TEST_PRINT(FALSE);
 	return FALSE;
 }
 
-BOOL test_game_rules8(){ /*Test for pick_aleat_function with non valid game*/
+BOOL test_game_rules8(){ /*Test for pick_aleat_function with non valid game and non valid graphics*/
 	Game *game = NULL;
 	STATUS s;
-	s = pick_aleat_function(game);
+	Graphics * graphics = NULL;
+	s = pick_aleat_function(game, graphics);
+	if(s == OK){
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+BOOL test_game_rules9(){ /*Test for pick_aleat_function with non valid game and valid graphics*/
+	Game *game = NULL;
+	STATUS s;
+	Graphics * graphics = NULL;
+	graphics = graphics_create(0);
+	s = pick_aleat_function(game, graphics);
+	if(s == OK){
+		TEST_PRINT(FALSE);
+		return FALSE;
+	}
+	TEST_PRINT(TRUE);
+	return TRUE;
+}
+
+BOOL test_game_rules10(){ /*Test for pick_aleat_function with valid game and non valid graphics*/
+	Game *game = NULL;
+	STATUS s;
+	Graphics * graphics = NULL;
+	game = game_init(game);
+	game_init_from_file(game, "loader.dat");
+	s = pick_aleat_function(game, graphics);
 	if(s == OK){
 		TEST_PRINT(FALSE);
 		return FALSE;
@@ -160,6 +218,8 @@ int main(int argc, char* argv[]){
 	if(todas || test == 6) test_game_rules6();
 	if(todas || test == 7) test_game_rules7();
 	if(todas || test == 8) test_game_rules8();
+	if(todas || test == 9) test_game_rules9();
+	if(todas || test == 10) test_game_rules10();
 
 	PRINT_RESULTS();
 

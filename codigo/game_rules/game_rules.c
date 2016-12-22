@@ -2,7 +2,7 @@
  * @brief Implementation of the game rules
  * @file game_rules.c
  * @author Andrea Ruiz
- * @version 1.0
+ * @version 2.0 (dialogues added)
  * @date 16/12/2016
  */
 
@@ -10,15 +10,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 #include "game_rules.h"
 
-/*<! Private functions */
-STATUS change_light_space(Game *game);
-STATUS change_link_state(Game * game);
-STATUS change_object_location(Game * game);
-STATUS kill_player(Game * game);
-STATUS useless_player_deserves_death(Game * game);
-STATUS turn_object_light_off(Game * game);
 
 /**
 * @brief Throws an internal die to pick a random function
@@ -28,11 +22,11 @@ STATUS turn_object_light_off(Game * game);
 * @return STATUS (OK if everything went well), ERROR if not
 */
 
-STATUS pick_aleat_function(Game * game){
+STATUS pick_aleat_function(Game * game, Graphics * g){
 	Die * die;
 	int roll;
 
-	if(!game)
+	if(!game || !g)
 		return ERROR;
 
 	die = die_create(2710, 50);
@@ -44,19 +38,19 @@ STATUS pick_aleat_function(Game * game){
 
 	switch(roll){
 		case 1:
-			return change_light_space(game);
+			return change_light_space(game, g);
 		case 2:
-			return change_link_state(game);
+			return change_link_state(game, g);
 		case 3:
-			return change_link_state(game);
+			return change_object_location(game, g);
 		case 4:
-			return turn_object_light_off(game);
+			return turn_object_light_off(game, g);
 		case 5:
-			return useless_player_deserves_death(game);
+			return useless_player_deserves_death(game, g);
 		case 6:
-			return kill_player(game);
+			return kill_player(game, g);
 		default:
-			return ERROR;
+			return OK;
 	}
 
 	return ERROR;
@@ -71,14 +65,14 @@ STATUS pick_aleat_function(Game * game){
 * @return STATUS (OK if everything went well), ERROR if not
 */
 
-STATUS change_light_space(Game *game){
+STATUS change_light_space(Game *game, Graphics * g){
 	Id current_id = NO_ID;
 	Die * die = NULL;
 	Space *current_space = NULL;
 	BOOL space_light;
 	int roll;
 
-	if(!game)
+	if(!game || !g)
 		return ERROR;
 
 	current_id = game_get_player_location(game);
@@ -99,15 +93,31 @@ STATUS change_light_space(Game *game){
 	if(roll <= 0 || roll > die_get_faces(die))
 		return ERROR;
 
+	sleep(2);
+	dialogue_print(g, "We are going to play with light :)");
+	sleep(2);
+
 	if(roll < (die_get_faces(die) / 2) && space_light == TRUE){
 		space_set_light(current_space, FALSE);
-		if(space_get_light(current_space) != FALSE)
+		if(space_get_light(current_space) == FALSE){
+			dialogue_print(g, "Ops, it's so dark now\nTry using a lantern or similar ^^");
+			sleep(2);
+			return OK;
+		}else
 			return ERROR;
+
 	} else if(roll > (die_get_faces(die) / 2) && space_light == FALSE){
 		space_set_light(current_space, TRUE);
-		if(space_get_light(current_space) != TRUE)
+		if(space_get_light(current_space) == TRUE){
+			dialogue_print(g, "You are not a big player,\nso now you can try with more light...");
+			sleep(2);
+			return OK;
+		}else
 			return ERROR;
 	}
+
+	dialogue_print(g, "Nothing has happened\nYou are so lucky");
+	sleep(2);
 
 	return OK;
 
@@ -121,7 +131,7 @@ STATUS change_light_space(Game *game){
 * @return STATUS (OK if everything went well), ERROR if not
 */
 
-STATUS change_link_state(Game * game){
+STATUS change_link_state(Game * game, Graphics * g){
 	Link * link = NULL;
 	Die * die = NULL;
 	int aleat;
@@ -129,7 +139,7 @@ STATUS change_link_state(Game * game){
 	int roll;
 	State state;
 
-	if(!game)
+	if(!game || !g)
 		return ERROR;
 
 	srand(time(NULL)+clock());
@@ -139,14 +149,14 @@ STATUS change_link_state(Game * game){
 	aleat = rand() % nlinks;
 	if(aleat < 0 || aleat >= nlinks)
 		return ERROR;
-	printf("2");
+
 
 	link = game_get_link_n(game, aleat);
 	if(!link)
 		return ERROR;
 
 	state = link_get_state(link);
-	printf("3");
+
 	die = game_get_die(game);
 	if(!die)
 		return ERROR;
@@ -155,15 +165,31 @@ STATUS change_link_state(Game * game){
 	if(roll <= 0 || roll > die_get_faces(die))
 		return ERROR;
 
+	sleep(2);
+	dialogue_print(g, "It's time to play with links :)");
+	sleep(2);
+
 	if(roll < (die_get_faces(die) / 2) && state == OPENL){
 		link_set_state(link, CLOSEDL);
-		if(link_get_state(link) != CLOSEDL)
+		if(link_get_state(link) == CLOSEDL){
+			dialogue_print(g, "A random link has been closed\nGood luck trying to escape ;)");
+			sleep(2);
+			return OK;
+		}else
 			return ERROR;
 	} else if (roll > (die_get_faces(die) / 2) && state == CLOSEDL){
 		link_set_state(link, OPENL);
-		if(link_get_state(link) != OPENL)
+		if(link_get_state(link) == OPENL){
+			dialogue_print(g, "A random link has been opened\nIt's your oportunity!\nRUN!");
+			sleep(2);
+			return OK;
+		}else
 			return ERROR;
 	}
+
+	sleep(2);
+	dialogue_print(g, "Nothing has happened\nYou're so lucky (or not) ;)");
+	sleep(2);
 
 	return OK;
 }
@@ -176,7 +202,7 @@ STATUS change_link_state(Game * game){
 * @return STATUS (OK if everything went well), ERROR if not
 */
 
-STATUS change_object_location(Game * game){
+STATUS change_object_location(Game * game, Graphics * g){
 	Id current_id;
 	Die * die = NULL;
 	Space *current_space = NULL;
@@ -184,7 +210,7 @@ STATUS change_object_location(Game * game){
 	Object * object = NULL;
 	int roll, i;
 
-	if(!game)
+	if(!game || !g)
 		return ERROR;
 
 	current_id = game_get_player_location(game);
@@ -216,8 +242,17 @@ STATUS change_object_location(Game * game){
 	
 	if(!object) /* There are no movable objects in space */
 		return OK;
-	if(roll < die_get_faces(die)/2)
-		object_set_location(object, current_id + 1);
+	if(roll < die_get_faces(die)/2){
+		if(current_id >1){
+			object_set_location(object, current_id -1);
+			sleep(2);
+			dialogue_print(g, "Can you hear that?\nHA!\nAn object has been taken to another space");
+			sleep(2);
+			return OK;
+		}
+	}
+	sleep(2);
+	dialogue_print(g, "You are so lucky\nHave you considered using your luck\nin something better?");
 
 	return OK;
 	
@@ -231,11 +266,11 @@ STATUS change_object_location(Game * game){
 * @return STATUS (OK if everything went well), ERROR if not
 */
 
-STATUS kill_player(Game * game){
+STATUS kill_player(Game * game, Graphics * g){
 	Die * die = NULL;
 	int roll;
 
-	if(!game)
+	if(!game || !g)
 		return ERROR;
 
 	die = game_get_die(game);
@@ -248,8 +283,20 @@ STATUS kill_player(Game * game){
 
 	if(roll == 1){
 		game_set_endgame(game, TRUE);
+		sleep(2);
+		dialogue_print(g, "Sorry, the rules have decided to\nkill you");
+		sleep(2);
+		dialogue_print(g, "You can try loading a previous game ;)\nOr starting a new one");
+		sleep(2);
+		dialogue_print(g, "Bye :)");
+		sleep(2);
 		game_is_over(game);
-	}	
+		return OK;
+	}
+
+	sleep(2);
+	dialogue_print(g, "Death is coming for you\nYou should hurry up");
+	sleep(2);	
 
 	return OK;
 
@@ -263,17 +310,29 @@ STATUS kill_player(Game * game){
 * @return STATUS (OK if everything went well), ERROR if not
 */
 
-STATUS useless_player_deserves_death(Game * game){
+STATUS useless_player_deserves_death(Game * game, Graphics * g){
 	int turns;
-	if(!game)
+	if(!game || !g)
 		return ERROR;
 
 	turns = game_get_turns(game);
+	
 
 	if(turns >= DEATH_DESERVED){
 		game_set_endgame(game, TRUE);
+		sleep(2);
+		dialogue_print(g, "The map is not that big\nYou have played way too much");
+		sleep(2);
+		dialogue_print(g, "You don't deserve our game");
+		sleep(2);
+		dialogue_print(g, "GAME OVER");
+		sleep(2);
 		game_is_over(game);
+		return OK;
 	}
+	sleep(2);
+	dialogue_print(g, "Death is coming for you\nBe careful, may the odds be ever in your favor");
+	sleep(2);
 
 	return OK; 
 }
@@ -286,13 +345,13 @@ STATUS useless_player_deserves_death(Game * game){
 * @return STATUS (OK if everything went well), ERROR if not
 */
 
-STATUS turn_object_light_off(Game * game){
+STATUS turn_object_light_off(Game * game, Graphics * g){
 	Player * player = NULL;
 	Inventory * bag = NULL;
 	Object * object[MAX_IDS+1];
 	long * ids, i;
 
-	if(!game)
+	if(!game || !g)
 		return ERROR;
 
 	player = game_get_player(game);
@@ -310,14 +369,18 @@ STATUS turn_object_light_off(Game * game){
 		object[i] = game_get_object(game, ids[i]);
 		if(object_get_on_off(object[i]) == TRUE){
 			object_turnoff(object[i]);
-			if(object_get_on_off(object[i]) == FALSE)
+			if(object_get_on_off(object[i]) == FALSE){
+				sleep(2);
+				dialogue_print(g, "Ops, it's so dark now.\nWhat could have happened? ¬¬");
+				sleep(2);
 				return OK;
-			return ERROR;
+			}
 		}
 
 	}
-	
-	/* Player has no objects turned on */
+	sleep(2);
+	dialogue_print(g, "You don't have any object turned on\nWhat a pity :(,\nIt was going to be turned off\n'magically'...");
+	sleep(2);
 
 	return OK;
 }

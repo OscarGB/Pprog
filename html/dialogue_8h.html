@@ -88,6 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">dialogue.h File Reference</div>  </div>
@@ -97,13 +98,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>It defines the dialogue module.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="command_8h_source.html">command.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="graphics_8h_source.html">graphics.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for dialogue.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="dialogue_8h__incl.png" border="0" usemap="#codigo_2dialogue_2dialogue_8h" alt=""/></div>
 <map name="codigo_2dialogue_2dialogue_8h" id="codigo_2dialogue_2dialogue_8h">
-<area shape="rect" id="node2" href="command_8h.html" title="It defines the command interpreter. " alt="" coords="47,80,138,107"/>
-<area shape="rect" id="node3" href="types_8h.html" title="It defines common types. " alt="" coords="60,155,125,181"/>
+<area shape="rect" id="node2" href="command_8h.html" title="It defines the command interpreter. " alt="" coords="9,155,99,181"/>
+<area shape="rect" id="node4" href="graphics_8h.html" title="Definition of the graphic interface. " alt="" coords="91,80,174,107"/>
+<area shape="rect" id="node3" href="types_8h.html" title="It defines common types. " alt="" coords="63,229,128,256"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="dialogue_8h__dep__incl.png" border="0" usemap="#codigo_2dialogue_2dialogue_8hdep" alt=""/></div>
+<map name="codigo_2dialogue_2dialogue_8hdep" id="codigo_2dialogue_2dialogue_8hdep">
+<area shape="rect" id="node2" href="dialogue_8c.html" title="It implements the dialogue of the game. " alt="" coords="405,87,579,114"/>
+<area shape="rect" id="node3" href="game_8h.html" title="Declaration of struct game and functions in game.c. " alt="" coords="603,87,746,114"/>
+<area shape="rect" id="node5" href="game__loop_8c.html" title="It defines the game loop. " alt="" coords="871,259,1033,300"/>
+<area shape="rect" id="node12" href="dialogue__test_8c.html" title="Main to test the Dialogue module. " alt="" coords="989,80,1128,121"/>
+<area shape="rect" id="node4" href="game_8c.html" title="It implements the game interface for each command. " alt="" coords="86,266,229,293"/>
+<area shape="rect" id="node6" href="game__management_8h_source.html" title="codigo/game_management\l/game_management.h" alt="" coords="5,169,184,211"/>
+<area shape="rect" id="node7" href="new__game__management_8h_source.html" title="codigo/game_management\l/new_game_management.h" alt="" coords="259,169,442,211"/>
+<area shape="rect" id="node8" href="old__new__game__management_8h_source.html" title="codigo/game_management\l/old_new_game_management.h" alt="" coords="466,169,673,211"/>
+<area shape="rect" id="node9" href="game__rules_8h.html" title="Definition of the game rules. " alt="" coords="697,169,863,211"/>
+<area shape="rect" id="node10" href="game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="498,259,665,300"/>
+<area shape="rect" id="node11" href="game__rules__test_8c.html" title="Main to test the Game_rules module. " alt="" coords="689,259,847,300"/>
 </map>
 </div>
 </div>
@@ -112,7 +133,7 @@ Include dependency graph for dialogue.h:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ab51035249bec1a1457a3cb4f5fc1a0e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab51035249bec1a1457a3cb4f5fc1a0e3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_DIALOGUE</b>&#160;&#160;&#160;180;</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_DIALOGUE</b>&#160;&#160;&#160;180</td></tr>
 <tr class="separator:ab51035249bec1a1457a3cb4f5fc1a0e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -120,14 +141,43 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ad25e8d75177dc0ecfaaf97610765d318"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct___dialogue.html">_Dialogue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a></td></tr>
 <tr class="separator:ad25e8d75177dc0ecfaaf97610765d318"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a3b202eba0a2c34eaf84f7353be8c61c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b202eba0a2c34eaf84f7353be8c61c9"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>DIALOGUE_INSPECT</b> { <b>SPACE</b> = 0, 
+<b>INVENTORY</b>, 
+<b>OBJECT</b>
+ }</td></tr>
+<tr class="separator:a3b202eba0a2c34eaf84f7353be8c61c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acb150833c6f301d0311c2af653a56464"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb150833c6f301d0311c2af653a56464"></a>
-<a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>dialogue_create</b> ()</td></tr>
-<tr class="separator:acb150833c6f301d0311c2af653a56464"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4043f1e971b702b32a8328af7be9df5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa4043f1e971b702b32a8328af7be9df5"></a>
-STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>dialogue_destroy</b> (<a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *dialogue)</td></tr>
-<tr class="separator:aa4043f1e971b702b32a8328af7be9df5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e940ee292b3b71a8431800544c65364"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dialogue_8h.html#a2e940ee292b3b71a8431800544c65364">dialogue_create</a> (<a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *current)</td></tr>
+<tr class="memdesc:a2e940ee292b3b71a8431800544c65364"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates a new dialogue  <a href="#a2e940ee292b3b71a8431800544c65364">More...</a><br /></td></tr>
+<tr class="separator:a2e940ee292b3b71a8431800544c65364"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a687b0bbf3fb541f0b42b6a4154cd378c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dialogue_8h.html#a687b0bbf3fb541f0b42b6a4154cd378c">dialogue_destroy</a> (<a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *dialogue)</td></tr>
+<tr class="memdesc:a687b0bbf3fb541f0b42b6a4154cd378c"><td class="mdescLeft">&#160;</td><td class="mdescRight">destroys a dialogue  <a href="#a687b0bbf3fb541f0b42b6a4154cd378c">More...</a><br /></td></tr>
+<tr class="separator:a687b0bbf3fb541f0b42b6a4154cd378c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e333c25410f2c91a25aa0072cd81ca4"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dialogue_8h.html#a9e333c25410f2c91a25aa0072cd81ca4">dialogue_standard</a> (<a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra, <a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *dialogue, char **objects, char *string)</td></tr>
+<tr class="memdesc:a9e333c25410f2c91a25aa0072cd81ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the standard dialogue (objects in the space)  <a href="#a9e333c25410f2c91a25aa0072cd81ca4">More...</a><br /></td></tr>
+<tr class="separator:a9e333c25410f2c91a25aa0072cd81ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07125e77dc14e4bf660e3c049c9c5583"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dialogue_8h.html#a07125e77dc14e4bf660e3c049c9c5583">dialogue_generic</a> (<a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *dialogue, STATUS check, char **objects, <a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra)</td></tr>
+<tr class="memdesc:a07125e77dc14e4bf660e3c049c9c5583"><td class="mdescLeft">&#160;</td><td class="mdescRight">generic dialogue engine  <a href="#a07125e77dc14e4bf660e3c049c9c5583">More...</a><br /></td></tr>
+<tr class="separator:a07125e77dc14e4bf660e3c049c9c5583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06d44fa63e559a37d2573bef27c71c79"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dialogue_8h.html#a06d44fa63e559a37d2573bef27c71c79">dialogue_inspect</a> (<a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *dialogue, STATUS check, char **inventory, <a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra, DIALOGUE_INSPECT type)</td></tr>
+<tr class="memdesc:a06d44fa63e559a37d2573bef27c71c79"><td class="mdescLeft">&#160;</td><td class="mdescRight">dialogue engine for inspect  <a href="#a06d44fa63e559a37d2573bef27c71c79">More...</a><br /></td></tr>
+<tr class="separator:a06d44fa63e559a37d2573bef27c71c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad466da93c086765365a60ca01c6c74e9"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dialogue_8h.html#ad466da93c086765365a60ca01c6c74e9">dialogue_load_show</a> (<a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra, <a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *dialogue, char *str, STATUS check)</td></tr>
+<tr class="memdesc:ad466da93c086765365a60ca01c6c74e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the load dialogue  <a href="#ad466da93c086765365a60ca01c6c74e9">More...</a><br /></td></tr>
+<tr class="separator:ad466da93c086765365a60ca01c6c74e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa40abf312f6ad8118848732c2f242d5"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dialogue_8h.html#afa40abf312f6ad8118848732c2f242d5">dialogue_load</a> (<a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra, <a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *dialogue, char *str, STATUS check)</td></tr>
+<tr class="memdesc:afa40abf312f6ad8118848732c2f242d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the load dialogue  <a href="#afa40abf312f6ad8118848732c2f242d5">More...</a><br /></td></tr>
+<tr class="separator:afa40abf312f6ad8118848732c2f242d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adab0c722ead15cb5849fbf9e216d8cf4"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dialogue_8h.html#adab0c722ead15cb5849fbf9e216d8cf4">dialogue_print</a> (<a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra, char *string)</td></tr>
+<tr class="memdesc:adab0c722ead15cb5849fbf9e216d8cf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints on screen the dialogue  <a href="#adab0c722ead15cb5849fbf9e216d8cf4">More...</a><br /></td></tr>
+<tr class="separator:adab0c722ead15cb5849fbf9e216d8cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ed4e136a0f98d1a55358cc224f68ded"><td class="memItemLeft" align="right" valign="top">STATUS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dialogue_8h.html#a0ed4e136a0f98d1a55358cc224f68ded">dialogue_start_game</a> (<a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *gra)</td></tr>
+<tr class="memdesc:a0ed4e136a0f98d1a55358cc224f68ded"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints on screen the dialogue the default starting string  <a href="#a0ed4e136a0f98d1a55358cc224f68ded">More...</a><br /></td></tr>
+<tr class="separator:a0ed4e136a0f98d1a55358cc224f68ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>It defines the dialogue module. </p>
@@ -145,6 +195,403 @@ STATUS&#160;</td><td class="memItemRight" valign="bottom"><b>dialogue_destroy</b
       </table>
 </div><div class="memdoc">
 <p>Definition of struct Dialogue </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a2e940ee292b3b71a8431800544c65364"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a>* dialogue_create </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="command_8h.html#a7d2935971c252377cb0fc1c8545dc2bc">Command</a> *&#160;</td>
+          <td class="paramname"><em>current</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>creates a new dialogue </p>
+<dl class="section author"><dt>Author</dt><dd>Jose Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/16 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Command*</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Dialogue* (created dialogue)</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Jose Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/16 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Dialogue* (created dialogue) </dd></dl>
+<p>&lt; Dialogue </p>
+
+</div>
+</div>
+<a class="anchor" id="a687b0bbf3fb541f0b42b6a4154cd378c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dialogue_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *&#160;</td>
+          <td class="paramname"><em>dialogue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>destroys a dialogue </p>
+<dl class="section author"><dt>Author</dt><dd>Jose Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/16 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Dialogue*</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if it was destroyed </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a07125e77dc14e4bf660e3c049c9c5583"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS dialogue_generic </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *&#160;</td>
+          <td class="paramname"><em>dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">STATUS&#160;</td>
+          <td class="paramname"><em>check</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>objects</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *&#160;</td>
+          <td class="paramname"><em>gra</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>generic dialogue engine </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Dialogue*</td><td></td></tr>
+    <tr><td class="paramname">STATUS</td><td></td></tr>
+    <tr><td class="paramname">char**</td><td>objects </td></tr>
+    <tr><td class="paramname">Graphics*</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if it worked </dd></dl>
+<p>&lt; Command for switch </p>
+
+</div>
+</div>
+<a class="anchor" id="a06d44fa63e559a37d2573bef27c71c79"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS dialogue_inspect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *&#160;</td>
+          <td class="paramname"><em>dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">STATUS&#160;</td>
+          <td class="paramname"><em>check</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>inventory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *&#160;</td>
+          <td class="paramname"><em>gra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DIALOGUE_INSPECT&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>dialogue engine for inspect </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Dialogue*</td><td></td></tr>
+    <tr><td class="paramname">STATUS</td><td></td></tr>
+    <tr><td class="paramname">char**</td><td>inventory </td></tr>
+    <tr><td class="paramname">Graphics*</td><td></td></tr>
+    <tr><td class="paramname">DIALOGUE_INSPECT</td><td>type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if it worked </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afa40abf312f6ad8118848732c2f242d5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS dialogue_load </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *&#160;</td>
+          <td class="paramname"><em>gra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *&#160;</td>
+          <td class="paramname"><em>dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">STATUS&#160;</td>
+          <td class="paramname"><em>check</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>prints the load dialogue </p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Pinto Santamaría </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>20/12/16 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Graphics*</td><td>gra (The graphics where it prints) </td></tr>
+    <tr><td class="paramname">Dialogue*</td><td>dialogue </td></tr>
+    <tr><td class="paramname">char*</td><td>string </td></tr>
+    <tr><td class="paramname">STATUS</td><td>(checks if the callback was successful) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well, ERROR if it didn't) </dd></dl>
+<p>&lt; string for print </p>
+
+</div>
+</div>
+<a class="anchor" id="ad466da93c086765365a60ca01c6c74e9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS dialogue_load_show </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *&#160;</td>
+          <td class="paramname"><em>gra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *&#160;</td>
+          <td class="paramname"><em>dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">STATUS&#160;</td>
+          <td class="paramname"><em>check</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>prints the load dialogue </p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Pinto Santamaría </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>20/12/16 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Graphics*</td><td>gra (The graphics where it prints) </td></tr>
+    <tr><td class="paramname">Dialogue*</td><td>dialogue </td></tr>
+    <tr><td class="paramname">char*</td><td>string </td></tr>
+    <tr><td class="paramname">STATUS</td><td>(checks if the callback was successful) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>STATUS (OK if everything went well, ERROR if it didn't) </dd></dl>
+<p>&lt; string for print </p>
+
+</div>
+</div>
+<a class="anchor" id="adab0c722ead15cb5849fbf9e216d8cf4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS dialogue_print </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *&#160;</td>
+          <td class="paramname"><em>gra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>string</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>prints on screen the dialogue </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Graphics*</td><td></td></tr>
+    <tr><td class="paramname">char</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if it was printed successfuly </dd></dl>
+<p>&lt; STATUS for the result </p>
+
+</div>
+</div>
+<a class="anchor" id="a9e333c25410f2c91a25aa0072cd81ca4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS dialogue_standard </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *&#160;</td>
+          <td class="paramname"><em>gra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318">Dialogue</a> *&#160;</td>
+          <td class="paramname"><em>dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>objects</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>string</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print the standard dialogue (objects in the space) </p>
+<dl class="section author"><dt>Author</dt><dd>José Ignacio Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Graphics*</td><td></td></tr>
+    <tr><td class="paramname">Dialogue*</td><td></td></tr>
+    <tr><td class="paramname">char**</td><td>objects </td></tr>
+    <tr><td class="paramname">char</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if it worked </dd></dl>
+<p>&lt; Counter </p>
+
+</div>
+</div>
+<a class="anchor" id="a0ed4e136a0f98d1a55358cc224f68ded"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STATUS dialogue_start_game </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="graphics_8h.html#ad9f77e9a74d222dc21e949779da88654">Graphics</a> *&#160;</td>
+          <td class="paramname"><em>gra</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>prints on screen the dialogue the default starting string </p>
+<dl class="section author"><dt>Author</dt><dd>Óscar Gómez </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>19/12/2016 </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Graphics*</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>OK if it was printed successfuly </dd></dl>
+<p>&lt; STATUS for the result </p>
 
 </div>
 </div>

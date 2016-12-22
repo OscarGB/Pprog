@@ -1,0 +1,32 @@
+#s:5|Wall_south|2|-1|6|5|-1|-1|FALSE|There's a wall at the north.|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+/
+#l:3|1|4|Door3|OPENL|
+#o:5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|
+#p:1|Player|1|
+#s:5|Wall_south|2|-1|6|5|-1|-1|FALSE|There's a wall at the north.|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+/
+#l:3|1|4|Door3|OPENL|
+#o:5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|
+#p:1|Player|1|
+#s:5|Wall_south|2|-1|6|5|-1|-1|FALSE|There's a wall at the north.|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+/
+#l:3|1|4|Door3|OPENL|
+#o:5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|
+#p:1|Player|1|
+#s:5|Wall_south|2|-1|6|5|-1|-1|FALSE|There's a wall at the north.|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+/
+#l:3|1|4|Door3|OPENL|
+#o:5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|
+#p:1|Player|1|
+#s:5|Wall_south|2|-1|6|5|-1|-1|FALSE|There's a wall at the north.|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+/
+#l:3|1|4|Door3|OPENL|
+#o:5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|
+#p:1|Player|1|
+#s:5|Wall_south|2|-1|6|5|-1|-1|FALSE|There's a wall at the north.|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+/
+#l:3|1|4|Door3|OPENL|
+#o:5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|
+#p:1|Player|1|
+#s:5|Wall_south|2|-1|6|5|-1|-1|FALSE|There's a wall at the north.|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+/
+#l:3|1|4|Door3|OPENL|
+#o:5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|
+#p:1|Player|1|
+#s:5|Wall_south|2|-1|6|5|-1|-1|FALSE|There's a wall at the north.|+---|**|-+    |        |    |        +---+-            |_            ||            |+---|  |-----+/
+#l:3|1|4|Door3|OPENL|
+#o:5|2|Key|This is a key|Try to open a door with it|K|TRUE|2|FALSE|FALSE|FALSE|1|-1|
+#p:1|Player|1|

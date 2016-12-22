@@ -15,7 +15,7 @@
 #include "game.h"
 #include "command.h"
 #include "types.h"
-#include "graphics.h"
+#include "graphic_engine.h"
 #include "dialogue.h"
 #include "game_rules.h"
 
@@ -253,7 +253,7 @@ STATUS load(Command* cmd, Dialogue* dia, Graphics* gra){
 	/*This if only shows available files for load*/
 	symbol = command_get_symbol(cmd);
 	if(!strcmp(symbol, "show")){
-		if ((dir = opendir ("codigo/Saves")) != NULL) {
+		if ((dir = opendir ("Saves")) != NULL) {
 		  while ((ent = readdir (dir)) != NULL && i<=7) {
 			if ( !strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") ){
     			 continue;
@@ -354,12 +354,11 @@ int main(int argc, char *argv[]){
 		graphics_destroy(gra);
 		return 1;
 	}
-
 	dialogue_start_game(gra);
+	system("aplay -q Music/StartTune.wav");
+
 
 	while ((command_get_cmd(command) != QUIT) && !game_is_over(game)){
-		if(rflag == 1)
-			pick_aleat_function(game);
 		if(nvflag != 1){ 
 			game_print_screen(game, gra);
 			scan_from_screen(gra, command);
@@ -376,7 +375,7 @@ int main(int argc, char *argv[]){
 				log = load(command, dialogue, gra);
 			}
 			else{
-				strcpy(path, "codigo/Saves/");
+				strcpy(path, "Saves/");
 				strcat(path, command_get_symbol(command));
 				strcat(path, ".s");
 
@@ -406,6 +405,8 @@ int main(int argc, char *argv[]){
 		if(flag == 1){
 			print_log(command, log, l); 	
 		}
+		if(rflag == 1 && game_get_endgame(game)!=TRUE && command_get_cmd(command)!=QUIT)
+			pick_aleat_function(game, gra);
 	}
 	graphics_destroy(gra);
 	game_destroy(game);

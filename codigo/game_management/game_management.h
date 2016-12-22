@@ -10,6 +10,10 @@
 #ifndef GAME_MANAGEMENT_H
 #define GAME_MANAGEMENT_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "space.h"
 #include "object.h"
 #include "game.h"

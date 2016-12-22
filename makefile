@@ -4,7 +4,7 @@
 #--------------------------------------------#
 
 
-DEPS = game command generic space set player object die game_management link inventory test graphics game_rules dialogue	#Name of the module's folders
+DEPS = game command generic space set player object die game_management link inventory test graphic_engine game_rules dialogue	#Name of the module's folders
 
 IDEPS = $(addprefix -Icodigo/, $(DEPS))	#Prefix -I for the compilation with headers
 
@@ -13,7 +13,7 @@ NCURSES = -lncurses
 CFLAGS = -g -Wall -pedantic -ansi $(IDEPS)	#Flags for standard compilation
 
 ALL = JuegoConv 	#Executables to make with a make call
-TEST = object_test link_test die_test player_test inventory_test space_test set_test graphics_test dialogue_test game_rules_test	#Executables to make with make test or make debug
+TEST = object_test link_test die_test player_test inventory_test space_test set_test graphic_engine_test dialogue_test game_rules_test game_management_test	#Executables to make with make test or make debug
 ALL_DEBUG = $(ALL) $(TEST) #Executables to make with make debug
 
 all: $(ALL) #Generates only the main game
@@ -27,13 +27,17 @@ nocolors: $(ALL_DEBUG) #Generates the tests and the main game without colors
 debug: CFLAGS += -DDEBUG	#Adition of DEBUG macro
 debug: $(ALL_DEBUG) #Generates the tests and the main game
 
-game_rules_test: game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphics.o game_management.o die.o
+game_rules_test: game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphic_engine.o game_management.o die.o
 	@echo "--->Creating executable game_rules_test"
-	@gcc $(CFLAGS) -o game_rules_test game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphics.o game_management.o die.o $(NCURSES)
+	@gcc $(CFLAGS) -o game_rules_test game_rules_test.o game_rules.o game.o space.o player.o object.o link.o inventory.o set.o command.o dialogue.o graphic_engine.o game_management.o die.o $(NCURSES)
+
+game_management_test: game_management_test.o game_management.o inventory.o set.o game.o space.o player.o object.o link.o command.o dialogue.o graphic_engine.o die.o
+	@echo "--->Creating executable game_management_test"
+	@gcc $(CFLAGS) -o game_management_test game_management_test.o game_management.o inventory.o set.o game.o space.o player.o object.o link.o command.o dialogue.o graphic_engine.o die.o $(NCURSES)
 
 dialogue_test: dialogue_test.o dialogue.o
 	@echo "--->Creating executable dialogue_test"
-	@gcc $(CFLAGS) -o dialogue_test dialogue_test.o dialogue.o command.o graphics.o $(NCURSES)
+	@gcc $(CFLAGS) -o dialogue_test dialogue_test.o dialogue.o command.o graphic_engine.o $(NCURSES)
 
 die_test: die_test.o die.o 
 	@echo "--->Creating executable die_test"
@@ -63,9 +67,9 @@ space_test: space_test.o space.o set.o
 	@echo "--->Creating executable space_test"
 	@gcc $(CFLAGS) -o space_test space_test.o space.o set.o
 
-graphics_test: graphics_test.o graphics.o command.o
-	@echo "--->Creating executable graphics_test"
-	@gcc $(CFLAGS) -o graphics_test graphics_test.o graphics.o command.o $(NCURSES)
+graphic_engine_test: graphic_engine_test.o graphic_engine.o command.o
+	@echo "--->Creating executable graphic_engine_test"
+	@gcc $(CFLAGS) -o graphic_engine_test graphic_engine_test.o graphic_engine.o command.o $(NCURSES)
 
 dialogue_test.o: codigo/test/dialogue_test.c 
 	@echo "--->Generating dialogue_test.o"
@@ -99,21 +103,25 @@ space_test.o: codigo/test/space_test.c
 	@echo "--->Generating space_test.o"
 	@gcc $(CFLAGS) -c codigo/test/space_test.c
 
-graphics_test.o: codigo/test/graphics_test.c
-	@echo "--->Generating graphics_test.o"
-	@gcc $(CFLAGS) -c codigo/test/graphics_test.c $(NCURSES)
+graphic_engine_test.o: codigo/test/graphic_engine_test.c
+	@echo "--->Generating graphic_engine_test.o"
+	@gcc $(CFLAGS) -c codigo/test/graphic_engine_test.c $(NCURSES)
+
+game_management_test.o: codigo/test/game_management_test.c
+	@echo "--->Generating game_management_test.o"
+	@gcc $(CFLAGS) -c codigo/test/game_management_test.c
 
 game_rules_test.o: codigo/test/game_rules_test.c
 	@echo "--->Generating game_rules_test.o"
-	@gcc $(CFLAGS) -c codigo/test/game_rules_test.c
+	@gcc $(CFLAGS) -c codigo/test/game_rules_test.c $(NCURSES)
 
-JuegoConv: game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o
+JuegoConv: game_loop.o dialogue.o game_rules.o graphic_engine.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o
 	@echo "--->Creating executable JuegoConv"
-	@gcc $(CFLAGS) -o JuegoConv game_loop.o dialogue.o game_rules.o graphics.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o $(NCURSES)
+	@gcc $(CFLAGS) -o JuegoConv game_loop.o dialogue.o game_rules.o graphic_engine.o game.o space.o command.o game_management.o player.o object.o set.o die.o link.o inventory.o $(NCURSES)
 
-graphics.o: codigo/graphics/graphics.c
-	@echo "--->Generating graphics.o"
-	@gcc $(CFLAGS) -c codigo/graphics/graphics.c $(NCURSES)
+graphic_engine.o: codigo/graphic_engine/graphic_engine.c
+	@echo "--->Generating graphic_engine.o"
+	@gcc $(CFLAGS) -c codigo/graphic_engine/graphic_engine.c $(NCURSES)
 
 command.o: codigo/command/command.c 
 	@echo "--->Generating command.o"
@@ -175,7 +183,7 @@ dist: #Command to make the distributable file
 	@echo "--->Generating documentation with Doxygen"
 	@nohup doxygen Doxyfile
 	@echo "--->Creating tgz for program's distribution"
-	@tar cvzf s1-cod_JuegoConv-v4.0.tgz codigo/ informes_pruebas/ comentarios.txt reuniones/ html/ makefile *.dat Doxyfile *.oca
+	@tar cvzf s1-cod_JuegoConv-v4.0.tgz codigo/ informes_pruebas/ comentarios.txt reuniones/ html/ makefile *.dat Doxyfile *.oca Music/
 
 doc: #Command to generate the documentation
 	@echo "--->Generating documentation with Doxygen"

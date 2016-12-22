@@ -12,7 +12,7 @@
 #define DIALOGUE_H
 
 #include "command.h"
-#include "graphics.h"
+#include "graphic_engine.h"
 
 #define MAX_DIALOGUE 180
 

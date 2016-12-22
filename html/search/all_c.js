@@ -1,9 +1,14 @@
 var searchData=
 [
-  ['name',['name',['../struct___link.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Link::name()'],['../struct___object.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Object::name()'],['../struct___player.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Player::name()'],['../struct___space.html#a2b7341aac5f9360a8e88ae1061f497d2',1,'_Space::name()']]],
-  ['no_5fid',['NO_ID',['../types_8h.html#a642e16f35aa1e585c25e405ede76e115',1,'types.h']]],
-  ['north',['north',['../struct___space.html#a8c9fe9c5953834f6bf21b2c0aa9c232c',1,'_Space']]],
-  ['not_5frolled',['NOT_ROLLED',['../die_8h.html#ab8878206956847f615ba9028f11b61cf',1,'die.h']]],
-  ['num_5fids',['num_ids',['../struct___set.html#aea3b1b8a5e34c35cb4b6073752495a1a',1,'_Set']]],
-  ['num_5fobjects',['num_objects',['../struct___game.html#ab000eabbed09cacdd40b5585dd784e55',1,'_Game']]]
+  ['main',['main',['../game__loop_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'game_loop.c']]],
+  ['max',['max',['../struct___die.html#ae1e1dde676c120fa6d10f3bb2c14059e',1,'_Die']]],
+  ['max_5fadesc',['MAX_ADESC',['../space_8h.html#abad832479032ea984323a420633dc7ed',1,'space.h']]],
+  ['max_5fgdesc',['MAX_GDESC',['../space_8h.html#ad5e6bf0470b64b198a22be7c9dc06181',1,'space.h']]],
+  ['max_5fids',['MAX_IDS',['../set_8h.html#a2e3f9972e68ab0fc8975493f49d7c5f0',1,'set.h']]],
+  ['max_5flinks',['MAX_LINKS',['../link_8h.html#a660ed1ec8604982002a0d6eced0e0367',1,'link.h']]],
+  ['max_5fobjects',['MAX_OBJECTS',['../player_8h.html#acdc7844fbd4d45737d4aa56834d37829',1,'player.h']]],
+  ['max_5fobs_5fper_5fspa',['MAX_OBS_PER_SPA',['../space_8h.html#a62c215bd434f436dfd4276fd7730dbba',1,'space.h']]],
+  ['max_5fspaces',['MAX_SPACES',['../space_8h.html#a5f54fd55f983a2e33ce076cd9f587e82',1,'space.h']]],
+  ['mdesc',['mdesc',['../struct___object.html#ad64ba6f17252854ffe5c9ee1c1bb9085',1,'_Object']]],
+  ['movable',['movable',['../struct___object.html#a95316b8952c59a32e9a9301280ce0fdc',1,'_Object']]]
 ];
