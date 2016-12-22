@@ -20,7 +20,7 @@ struct _Die{
 	int max; /*!<Maximum value to roll*/
 };/*!<Die structure*/
 
-/*
+/**
 * @brief It return a random value between inf and sup
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 07/10/2016
@@ -52,11 +52,12 @@ int die_roll(Die* die){
 }
 
 
-/*
+/**
 * @brief It creates a die without any information inside
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 07/10/2016
 * @param id of the die to create
+* @param int (the number of faces of the die)
 * @return die pointer (of the created one)
 */
 
@@ -82,7 +83,7 @@ Die* die_create(Id id, int faces){
 }
 
 
-/*
+/**
 * @brief It destroy a dice, freeing all the memory blocks
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 07/10/2016
@@ -103,7 +104,7 @@ STATUS die_destroy(Die* die){
 }
 
 
-/*
+/**
 * @brief It prints the data of a die
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 04/10/2016
@@ -125,7 +126,7 @@ STATUS die_print(Die* die){
 }
 
 
-/*
+/**
 * @brief It returns the value of the last roll
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 07/10/2016
@@ -142,7 +143,7 @@ int die_get_last_roll(Die* die){
 }
 
 
-/*
+/**
 * @brief It returns the Id of the Die
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 07/10/2016
@@ -158,7 +159,7 @@ Id die_get_id(Die* die){
 	return die->id;
 }
 
-/*
+/**
 * @brief It returns the number of faces the die has
 * @author Óscar Gómez
 * @date 25/11/2016

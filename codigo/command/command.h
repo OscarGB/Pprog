@@ -41,8 +41,7 @@ typedef struct _Command Command; /*!< Definition of Command structure */
 
 
 /**
-* @brief reads from keyboard in search of a valid command to execute
-* it creates the command inside
+* @brief reads from keyboard in search of a valid command to execute it creates the command inside
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 23/09/2016
 * @param command pointer

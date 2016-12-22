@@ -83,18 +83,16 @@ int game_get_objects_at_space(Game *game, Id id);
 BOOL game_won_game(Game* game);
 BOOL game_player_has_light_object(Game* game);
 
-/**
- * @brief Game interface implementation
- */
+/*
+* Public functions
+*/
 
 /**
 * @brief it creates an empty game table with no player/object location
-* if the game pointer has been already initialized, we have decided to destroy 
-* the previous game
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
-* @return OK if it was successfuly initialized
+* @return Game* of the created game
 */
 Game* game_init(Game* game) {
   int i; /* !< Variable used for loops*/
@@ -137,7 +135,8 @@ Game* game_init(Game* game) {
 * @brief it creates a game table loading spaces from a file
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
-* @param game pointer and a filename
+* @param game pointer
+* @param char* filename
 * @return OK if it was successfuly initialized
 */
 STATUS game_init_from_file(Game* game, char* filename) {
@@ -421,8 +420,9 @@ Id game_get_player_location(Game* game) {
 * @brief Adds a player pointer to the gme Player field
 * @author Óscar Pinto Santamaría
 * @date 16/12/2016
-* @param Game* game, Player* player
-* @return OK or ERROR
+* @param Game* game
+* @param Player* player
+* @return STATUS OK or ERROR
 */
 
 STATUS game_add_player(Game* game, Player* player){
@@ -472,6 +472,7 @@ Id game_get_object_location(Game* game, char *symbol) {
 * @author José Ignacio Gómez
 * @date 18/12/2016
 * @param game pointer
+* @param char** objects
 * @return string with the name of the objects
 */
 char** game_get_objects_name(Game* game, char** objects){
@@ -496,9 +497,10 @@ char** game_get_objects_name(Game* game, char** objects){
 * @date 29/09/2016
 * @param game pointer
 * @param Command cmd
+* @param Dialogue dia
+* @param Graphics gra
 * @return OK if it was updated
 */
-
 STATUS game_update(Game* game, Command *cmd, Dialogue* dia, Graphics* gra) {
   char *objects[MAX_IDS];
   STATUS result;
@@ -604,10 +606,11 @@ void game_print_data(Game* game) {
 
 
 /**
-* @brief prints on screen the data of the game
+* @brief prints on screen the game
 * @author José Ignacio Gómez, Óscar Gómez, Andrea Ruiz
 * @date 29/09/2016
 * @param game pointer
+* @param Graphics pointer
 * @return void
 */
 void game_print_screen(Game* game, Graphics* gra){
@@ -941,7 +944,7 @@ void game_print_screen(Game* game, Graphics* gra){
 
 
 /**
-* @brief ends the game
+* @brief check if the game has ended
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
@@ -952,11 +955,6 @@ BOOL game_is_over(Game* game) {
 		return TRUE;
 	return FALSE;
 }
-
-
-/*
-* @brief Private callbacks
-*/
 
 /**
 * @brief callback for an unknown parameter
@@ -1458,6 +1456,7 @@ STATUS callback_PICK(Game* game, Command* cmd, Dialogue* dia, Graphics* gra, cha
 * @author José Ignacio Gómez, Óscar Gómez
 * @date 29/09/2016
 * @param game pointer
+* @param Command pointer
 * @return OK if it went ok
 */
 STATUS callback_ROLL(Game* game, Command* cmd){
@@ -1494,7 +1493,6 @@ void free_invobjs(char **invobjs){
 * @param Command* cmd
 * @param Dialogue* dia
 * @param Graphics* gra
-* @param char** objects (the objects in the space)
 * @return OK if it went ok
 */
 STATUS callback_INSPECT(Game* game, Command* cmd, Dialogue* dia, Graphics* gra){
@@ -2257,6 +2255,7 @@ Die * game_get_die(Game * game){
 * @author Andrea Ruiz
 * @date 16/12/2016
 * @param Game *game
+* @param int (the position of the link)
 * @return Link pointer
 */
 Link * game_get_link_n(Game * game, int n){
@@ -2286,7 +2285,7 @@ int game_get_num_links(Game * game){
 * @param Object ** object
 * @return pointer to the array of objects
 */	
-Object ** game_get_objects(Game * game){
+Object** game_get_objects(Game * game){
 	if(!game)
 		return NULL;
 	return game->object;
@@ -2313,7 +2312,6 @@ int game_get_num_objects(Game * game){
 * @param Game *game
 * @return int (number of objects)
 */
-
 int game_get_turns(Game * game){
 	if(!game)
 		return -1;
@@ -2328,7 +2326,6 @@ int game_get_turns(Game * game){
 * @param Game *game
 * @return player pointer
 */
-
 Player * game_get_player(Game * game){
 	if(!game)
 		return NULL;
@@ -2341,7 +2338,7 @@ Player * game_get_player(Game * game){
 * @author Andrea Ruiz
 * @date 17/12/2016
 * @param game pointer
-* @param Id space id
+* @param int position
 * @return Space pointer in that position
 */
 Space* game_get_space_at(Game* game, int pos){
@@ -2447,9 +2444,3 @@ BOOL game_get_endgame(Game * game){
 		return FALSE;
 	return game->endgame;
 }
-
-
-
-
-
-
