@@ -404,7 +404,7 @@ int main(int argc, char *argv[]){
 		if(flag == 1){
 			print_log(command, log, l); 	
 		}
-		if(rflag == 1)
+		if(rflag == 1 && game_get_endgame(game)!=TRUE && command_get_cmd(command)!=QUIT)
 			pick_aleat_function(game, gra);
 	}
 	graphics_destroy(gra);
