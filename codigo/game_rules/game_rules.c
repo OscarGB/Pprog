@@ -93,6 +93,7 @@ STATUS change_light_space(Game *game, Graphics * g){
 	if(roll <= 0 || roll > die_get_faces(die))
 		return ERROR;
 
+	sleep(2);
 	dialogue_print(g, "We are going to play with light :)");
 	sleep(2);
 
@@ -164,6 +165,7 @@ STATUS change_link_state(Game * game, Graphics * g){
 	if(roll <= 0 || roll > die_get_faces(die))
 		return ERROR;
 
+	sleep(2);
 	dialogue_print(g, "It's time to play with links :)");
 	sleep(2);
 
@@ -185,6 +187,7 @@ STATUS change_link_state(Game * game, Graphics * g){
 			return ERROR;
 	}
 
+	sleep(2);
 	dialogue_print(g, "Nothing has happened\nYou're so lucky (or not) ;)");
 	sleep(2);
 
@@ -242,12 +245,13 @@ STATUS change_object_location(Game * game, Graphics * g){
 	if(roll < die_get_faces(die)/2){
 		if(current_id >1){
 			object_set_location(object, current_id -1);
+			sleep(2);
 			dialogue_print(g, "Can you hear that?\nHA!\nAn object has been taken to another space");
 			sleep(2);
 			return OK;
 		}
 	}
-	
+	sleep(2);
 	dialogue_print(g, "You are so lucky\nHave you considered using your luck\nin something better?");
 
 	return OK;
@@ -279,6 +283,7 @@ STATUS kill_player(Game * game, Graphics * g){
 
 	if(roll == 1){
 		game_set_endgame(game, TRUE);
+		sleep(2);
 		dialogue_print(g, "Sorry, the rules have decided to\nkill you");
 		sleep(2);
 		dialogue_print(g, "You can try loading a previous game ;)\nOr starting a new one");
@@ -289,6 +294,7 @@ STATUS kill_player(Game * game, Graphics * g){
 		return OK;
 	}
 
+	sleep(2);
 	dialogue_print(g, "Death is coming for you\nYou should hurry up");
 	sleep(2);	
 
@@ -314,6 +320,7 @@ STATUS useless_player_deserves_death(Game * game, Graphics * g){
 
 	if(turns >= DEATH_DESERVED){
 		game_set_endgame(game, TRUE);
+		sleep(2);
 		dialogue_print(g, "The map is not that big\nYou have played way too much");
 		sleep(2);
 		dialogue_print(g, "You don't deserve our game");
@@ -323,7 +330,7 @@ STATUS useless_player_deserves_death(Game * game, Graphics * g){
 		game_is_over(game);
 		return OK;
 	}
-
+	sleep(2);
 	dialogue_print(g, "Death is coming for you\nBe careful, may the odds be ever in your favor");
 	sleep(2);
 
@@ -363,6 +370,7 @@ STATUS turn_object_light_off(Game * game, Graphics * g){
 		if(object_get_on_off(object[i]) == TRUE){
 			object_turnoff(object[i]);
 			if(object_get_on_off(object[i]) == FALSE){
+				sleep(2);
 				dialogue_print(g, "Ops, it's so dark now.\nWhat could have happened? ¬¬");
 				sleep(2);
 				return OK;
@@ -370,7 +378,7 @@ STATUS turn_object_light_off(Game * game, Graphics * g){
 		}
 
 	}
-
+	sleep(2);
 	dialogue_print(g, "You don't have any object turned on\nWhat a pity :(,\nIt was going to be turned off\n'magically'...");
 	sleep(2);
 

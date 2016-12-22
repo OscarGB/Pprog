@@ -6,8 +6,8 @@
  * @date 01/12/2016
  */
 
-#ifndef GRAPHICS_H
-#define GRAPHICS_H
+#ifndef GRAPHIC_ENGINE_H
+#define GRAPHIC_ENGINE_H
 
 #include "types.h"
 #include "command.h"

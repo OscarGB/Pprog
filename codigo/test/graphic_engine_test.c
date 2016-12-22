@@ -6,7 +6,7 @@
  * @date 02/12/2016
  */
 
-#include "graphics.h"
+#include "graphic_engine.h"
 #include "test.h"
 #include "types.h"
 #include <unistd.h>
@@ -799,7 +799,7 @@ int main(int argc, char* argv[]){
 			printf("Error, prueba no reconocida\n");
 			exit(EXIT_SUCCESS);
 		}
-		printf("Pasando la prueba numero %d al modulo Graphics: \n", test);
+		printf("Pasando la prueba numero %d al modulo graphic_engine: \n", test);
 	}
 
 	if(todas || test == 1) test_graphics1();

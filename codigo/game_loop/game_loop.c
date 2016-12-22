@@ -15,7 +15,7 @@
 #include "game.h"
 #include "command.h"
 #include "types.h"
-#include "graphics.h"
+#include "graphic_engine.h"
 #include "dialogue.h"
 #include "game_rules.h"
 

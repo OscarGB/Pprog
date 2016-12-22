@@ -12,7 +12,7 @@
 #include <string.h>
 #include "types.h"
 #include "dialogue.h"
-#include "graphics.h"
+#include "graphic_engine.h"
 #include "command.h"
 #include <unistd.h>
 
