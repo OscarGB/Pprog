@@ -2,11 +2,14 @@
 
 //PASO DE ARGUMENTOS
 
-	- Para el paso de argumentos como -l y -nv, el orden en que se pasen al programa es indistinto. 
+	- Para el paso de argumentos como -nr, -l y -nv, el orden en que se pasen al programa es indistinto. 
 
 	- Los archivos log para ejecutar con el comando -l deben acabar en .log, en caso contrario no serán eliminados por el Makefile.
 
-	- Un ejemplo de ejecución sería: ./JuegoOcaPlus loader.dat -nv -l check.log < entrada.oca
+	- Un ejemplo de ejecución sería: ./JuegoOcaPlus loader.dat -nv -l check.log
+	- Para pasarse el juego utiliza:
+		chmod 777 script.sh
+		./script.sh
 
 //FICHEROS DE DATOS
 
@@ -22,7 +25,3 @@
 	- make doc: Genera la documentación mediante Doxygen.
 	- make opendoc: Abre la documentación.
 
-//TEST_GAMES
-
-	- Nuestro ejecutable, pese a funcionar correctamente, da ERROR con los ficheros de pruebas proporcionados por el equipo docente, debido a que el formato de los ficheros de carga son diferentes.
-	- Para correr graphics_test debes enviar la salida a un fichero de texto y leerlo con cat

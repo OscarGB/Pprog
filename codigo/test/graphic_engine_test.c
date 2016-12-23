@@ -1,6 +1,6 @@
 /**
  * @brief Main to test the Graphics module
- * @file graphics_test.c
+ * @file graphic_engine_test.c
  * @author Óscar Gómez
  * @version 1.0
  * @date 02/12/2016

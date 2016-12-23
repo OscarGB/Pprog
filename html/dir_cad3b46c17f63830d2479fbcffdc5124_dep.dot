@@ -1,0 +1,20 @@
+digraph "codigo/player" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_4d7be947362df13686123d6563352e9b {
+    graph [ bgcolor="#ddddee", pencolor="black", label="codigo" fontname="Helvetica", fontsize="10", URL="dir_4d7be947362df13686123d6563352e9b.html"]
+  dir_cad3b46c17f63830d2479fbcffdc5124 [shape=box, label="player", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_cad3b46c17f63830d2479fbcffdc5124.html"];
+  }
+  dir_ee881082ab34f410105dd7ba0e1d0100 [shape=box label="space" URL="dir_ee881082ab34f410105dd7ba0e1d0100.html"];
+  dir_7bbe484719f2c6a4e16ef46eb4ab0b13 [shape=box label="inventory" URL="dir_7bbe484719f2c6a4e16ef46eb4ab0b13.html"];
+  dir_051e70958e5671730c87e7dc760cedd8 [shape=box label="generic" URL="dir_051e70958e5671730c87e7dc760cedd8.html"];
+  dir_06dd021dbc17d4a60f5b3079ad96acb2 [shape=box label="object" URL="dir_06dd021dbc17d4a60f5b3079ad96acb2.html"];
+  dir_ee881082ab34f410105dd7ba0e1d0100->dir_051e70958e5671730c87e7dc760cedd8 [headlabel="2", labeldistance=1.5 headhref="dir_000015_000008.html"];
+  dir_cad3b46c17f63830d2479fbcffdc5124->dir_ee881082ab34f410105dd7ba0e1d0100 [headlabel="1", labeldistance=1.5 headhref="dir_000013_000015.html"];
+  dir_cad3b46c17f63830d2479fbcffdc5124->dir_7bbe484719f2c6a4e16ef46eb4ab0b13 [headlabel="2", labeldistance=1.5 headhref="dir_000013_000010.html"];
+  dir_cad3b46c17f63830d2479fbcffdc5124->dir_051e70958e5671730c87e7dc760cedd8 [headlabel="2", labeldistance=1.5 headhref="dir_000013_000008.html"];
+  dir_cad3b46c17f63830d2479fbcffdc5124->dir_06dd021dbc17d4a60f5b3079ad96acb2 [headlabel="2", labeldistance=1.5 headhref="dir_000013_000012.html"];
+  dir_7bbe484719f2c6a4e16ef46eb4ab0b13->dir_051e70958e5671730c87e7dc760cedd8 [headlabel="2", labeldistance=1.5 headhref="dir_000010_000008.html"];
+  dir_06dd021dbc17d4a60f5b3079ad96acb2->dir_051e70958e5671730c87e7dc760cedd8 [headlabel="2", labeldistance=1.5 headhref="dir_000012_000008.html"];
+}

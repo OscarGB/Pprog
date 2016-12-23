@@ -3,7 +3,7 @@ var searchData=
   ['death_5fdeserved',['DEATH_DESERVED',['../game_8h.html#ae1fa3edba2149bed5f9ffc246ad8266d',1,'game.h']]],
   ['desc',['desc',['../struct___object.html#ab13e9dba2d330b54cd11d93cef3a7deb',1,'_Object']]],
   ['dia',['dia',['../struct___graphics.html#af0bddc4517a4c20d5394b95506c45e99',1,'_Graphics']]],
-  ['dialogue',['dialogue',['../struct___graphics.html#abea60bfa3ca7f5e303468985e7127636',1,'_Graphics::dialogue()'],['../graphics_8h.html#a0073c1262c9d5b72ba2d3093aeb95dbaa8a9bd328d76805021862fcc265471995',1,'DIALOGUE():&#160;graphics.h'],['../dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318',1,'Dialogue():&#160;dialogue.h']]],
+  ['dialogue',['dialogue',['../struct___graphics.html#abea60bfa3ca7f5e303468985e7127636',1,'_Graphics::dialogue()'],['../graphic__engine_8h.html#a0073c1262c9d5b72ba2d3093aeb95dbaa8a9bd328d76805021862fcc265471995',1,'DIALOGUE():&#160;graphic_engine.h'],['../dialogue_8h.html#ad25e8d75177dc0ecfaaf97610765d318',1,'Dialogue():&#160;dialogue.h']]],
   ['dialogue_2ec',['dialogue.c',['../dialogue_8c.html',1,'']]],
   ['dialogue_2eh',['dialogue.h',['../dialogue_8h.html',1,'']]],
   ['dialogue_5fcreate',['dialogue_create',['../dialogue_8c.html#a2e940ee292b3b71a8431800544c65364',1,'dialogue_create(Command *current):&#160;dialogue.c'],['../dialogue_8h.html#a2e940ee292b3b71a8431800544c65364',1,'dialogue_create(Command *current):&#160;dialogue.c']]],
@@ -42,6 +42,6 @@ var searchData=
   ['die_5froll',['die_roll',['../die_8c.html#a06289514edbedf660c4b043f78e859fc',1,'die_roll(Die *die):&#160;die.c'],['../die_8h.html#a06289514edbedf660c4b043f78e859fc',1,'die_roll(Die *die):&#160;die.c']]],
   ['die_5ftest_2ec',['die_test.c',['../die__test_8c.html',1,'']]],
   ['down',['down',['../struct___space.html#aa3463207bb8fc71e226ecd0477adbca5',1,'_Space']]],
-  ['draw_5fborders',['draw_borders',['../graphics_8c.html#a229876fb9313ee2b55d2835563ebdf23',1,'draw_borders(Graphics *gra):&#160;graphics.c'],['../graphics_8h.html#a229876fb9313ee2b55d2835563ebdf23',1,'draw_borders(Graphics *gra):&#160;graphics.c']]],
+  ['draw_5fborders',['draw_borders',['../graphic__engine_8c.html#a229876fb9313ee2b55d2835563ebdf23',1,'draw_borders(Graphics *gra):&#160;graphic_engine.c'],['../graphic__engine_8h.html#a229876fb9313ee2b55d2835563ebdf23',1,'draw_borders(Graphics *gra):&#160;graphic_engine.c']]],
   ['duration',['duration',['../struct___object.html#ac6e4b2a3cf932b33832d4e4e4e7cd0de',1,'_Object']]]
 ];

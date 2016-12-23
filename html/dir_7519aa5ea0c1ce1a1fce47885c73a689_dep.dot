@@ -1,0 +1,11 @@
+digraph "codigo/command" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_4d7be947362df13686123d6563352e9b {
+    graph [ bgcolor="#ddddee", pencolor="black", label="codigo" fontname="Helvetica", fontsize="10", URL="dir_4d7be947362df13686123d6563352e9b.html"]
+  dir_7519aa5ea0c1ce1a1fce47885c73a689 [shape=box, label="command", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_7519aa5ea0c1ce1a1fce47885c73a689.html"];
+  }
+  dir_051e70958e5671730c87e7dc760cedd8 [shape=box label="generic" URL="dir_051e70958e5671730c87e7dc760cedd8.html"];
+  dir_7519aa5ea0c1ce1a1fce47885c73a689->dir_051e70958e5671730c87e7dc760cedd8 [headlabel="1", labeldistance=1.5 headhref="dir_000001_000008.html"];
+}

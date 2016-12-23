@@ -1,6 +1,6 @@
 /**
  * @brief Implementation of the graphic interface
- * @file graphics.c
+ * @file graphic_engine.c
  * @author Óscar Gómez, José Ignacio Gómez
  * @version 1.0
  * @date 01/12/2016

@@ -1,0 +1,21 @@
+digraph "_Game"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="_Game",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" links" ,fontname="Helvetica"];
+  Node2 [label="_Link",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct___link.html"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" die" ,fontname="Helvetica"];
+  Node3 [label="_Die",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct___die.html"];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" spaces" ,fontname="Helvetica"];
+  Node4 [label="_Space",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct___space.html"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" object" ,fontname="Helvetica"];
+  Node5 [label="_Set",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct___set.html"];
+  Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" object" ,fontname="Helvetica"];
+  Node6 [label="_Object",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct___object.html"];
+  Node7 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" player" ,fontname="Helvetica"];
+  Node7 [label="_Player",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct___player.html"];
+  Node8 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" bag" ,fontname="Helvetica"];
+  Node8 [label="_Inventory",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct___inventory.html"];
+  Node5 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" set" ,fontname="Helvetica"];
+}

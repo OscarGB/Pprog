@@ -177,13 +177,13 @@ inventory.o: codigo/inventory/inventory.c
 
 clean: #Command to clean the root
 	@echo "--->Deleting all executables, distributing  files, tests, saved games and logs"
-	@rm -rf *.exe  *.o *.tgz *.log $(ALL_DEBUG) *.out codigo/Saves/*
+	@rm -rf *.exe  *.o *.tgz *.log $(ALL_DEBUG) *.out Saves/*
 
 dist: #Command to make the distributable file
 	@echo "--->Generating documentation with Doxygen"
 	@nohup doxygen Doxyfile
 	@echo "--->Creating tgz for program's distribution"
-	@tar cvzf s1-cod_JuegoConv-v4.0.tgz codigo/ informes_pruebas/ comentarios.txt reuniones/ html/ makefile *.dat Doxyfile *.oca Music/
+	@tar cvzf s1-cod_JuegoConv-v4.0.tgz codigo/ informes_pruebas/ guia_juego/ Saves/ script.sh comentarios.txt reuniones/ html/ makefile *.dat Doxyfile Music/
 
 doc: #Command to generate the documentation
 	@echo "--->Generating documentation with Doxygen"

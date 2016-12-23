@@ -1,5 +1,0 @@
-<map id="codigo/game_rules/game_rules.h" name="codigo/game_rules/game_rules.h">
-<area shape="rect" id="node2" href="$game__loop_8c.html" title="It defines the game loop. " alt="" coords="5,95,168,136"/>
-<area shape="rect" id="node3" href="$game__rules_8c.html" title="Implementation of the game rules. " alt="" coords="193,95,359,136"/>
-<area shape="rect" id="node4" href="$game__rules__test_8c.html" title="Main to test the Game_rules module. " alt="" coords="384,95,541,136"/>
-</map>

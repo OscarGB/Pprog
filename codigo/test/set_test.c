@@ -1,3 +1,11 @@
+/**
+ * @brief Main to test the Set module
+ * @file set_test.c
+ * @author Óscar Pinto
+ * @version 1.0
+ * @date 18/12/2016
+ */
+
 #include "test.h"
 #include "space.h"
 

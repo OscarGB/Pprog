@@ -1,6 +1,6 @@
 /**
  * @brief It implements the rutine that reads a file to prepare the game
- * @file game_reader.c
+ * @file game_management.c
  * @author Óscar Gómez, José Ignacio Gómez
  * @version 2.0
  * @date 22/09/2016

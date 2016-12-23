@@ -1,7 +1,0 @@
-<map id="codigo/test/dialogue_test.c" name="codigo/test/dialogue_test.c">
-<area shape="rect" id="node2" href="$dialogue_8h.html" title="It defines the dialogue module. " alt="" coords="57,95,138,121"/>
-<area shape="rect" id="node3" href="$command_8h.html" title="It defines the command interpreter. " alt="" coords="84,244,175,271"/>
-<area shape="rect" id="node4" href="$types_8h.html" title="It defines common types. " alt="" coords="97,319,162,345"/>
-<area shape="rect" id="node5" href="$graphics_8h.html" title="Definition of the graphic interface. " alt="" coords="5,169,88,196"/>
-<area shape="rect" id="node7" href="$test_8h.html" title="It defines the functions for testing modules. " alt="" coords="315,95,370,121"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="codigo/player/player.c" name="codigo/player/player.c">
-<area shape="rect" id="node5" href="$types_8h.html" title="It defines common types. " alt="" coords="315,304,381,331"/>
-<area shape="rect" id="node6" href="$space_8h.html" title="It defines the game spaces. " alt="" coords="409,155,477,181"/>
-<area shape="rect" id="node8" href="$player_8h.html" title="It defines the functionality of the player. " alt="" coords="247,80,315,107"/>
-<area shape="rect" id="node9" href="$object_8h.html" title="It defines the functionality of the objects. " alt="" coords="87,155,155,181"/>
-<area shape="rect" id="node10" href="$inventory_8h.html" title="It defines the inventory. " alt="" coords="298,155,385,181"/>
-<area shape="rect" id="node7" href="$set_8h.html" title="It defines the capability of store sets of things. " alt="" coords="355,229,405,256"/>
-</map>

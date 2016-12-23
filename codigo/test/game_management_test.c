@@ -1,6 +1,6 @@
 /**
  * @brief Main to test the Game_management module
- * @FILE game_management_test.c
+ * @file game_management_test.c
  * @author Andrea Ruiz
  * @version 1.0
  * @date 20/12/2016

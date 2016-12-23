@@ -1,6 +1,6 @@
 /**
  * @brief Definition of the graphic interface
- * @file graphics.h
+ * @file graphic_engine.h
  * @author Óscar Gómez, José Ignacio Gómez
  * @version 1.0
  * @date 01/12/2016

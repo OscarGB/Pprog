@@ -1,8 +1,0 @@
-<map id="codigo/test/player_test.c" name="codigo/test/player_test.c">
-<area shape="rect" id="node2" href="$test_8h.html" title="It defines the functions for testing modules. " alt="" coords="107,169,161,196"/>
-<area shape="rect" id="node6" href="$player_8h.html" title="It defines the functionality of the player. " alt="" coords="335,95,403,121"/>
-<area shape="rect" id="node7" href="$types_8h.html" title="It defines common types. " alt="" coords="375,319,440,345"/>
-<area shape="rect" id="node8" href="$object_8h.html" title="It defines the functionality of the objects. " alt="" coords="217,169,285,196"/>
-<area shape="rect" id="node9" href="$inventory_8h.html" title="It defines the inventory. " alt="" coords="325,169,412,196"/>
-<area shape="rect" id="node10" href="$set_8h.html" title="It defines the capability of store sets of things. " alt="" coords="319,244,370,271"/>
-</map>
